@@ -3,6 +3,33 @@
 enum States { idle=0, powered, coast, apoge, descent, help_me };
 bool quit = false;
 
+typedef struct { //Euler angle struct (YOST)
+  float pitch;
+  float yaw;
+  float roll;
+} euler_angles;
+
+typedef struct { //Acceleration Struct (YOST)
+  float x;
+  float y;
+  float z;
+} accel;
+
+typedef struct { //YOST struct (belongs to State)
+  euler_angles e_orient;
+  accel r_accel;
+} yost_imu; //
+
+typedef struct { //overall state struct
+  float altitude;
+  float velocity; // velocity to be implemented later (a_1 - a_0) / time_inbetween_readings
+  double latitude;
+  double longitude;
+  yost_imu rocket;
+} state;
+
+
+
 void idle_state (){}
 void powered_state (){}
 void coast_state (){}
@@ -65,4 +92,5 @@ int main(){
     
     return 0;
 }
+
 
