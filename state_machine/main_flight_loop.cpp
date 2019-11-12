@@ -26,10 +26,10 @@ typedef struct { //overall state struct
   double latitude;
   double longitude;
   yost_imu rocket;
-} state;
+} sensor_values;
 
 
-
+// script to execute during the different states
 void idle_state (){}
 void powered_state (){}
 void coast_state (){}
@@ -37,7 +37,7 @@ void apoge_state (){}
 void descent_state (){}
 void help_me_state (){}
 
-
+// event that detect when to switch state
 void event_powered (States *current_state_ptr) {*current_state_ptr = powered;}
 void event_coast (States *current_state_ptr) {*current_state_ptr = coast;}
 void event_apoge (States *current_state_ptr) {*current_state_ptr = apoge;}
@@ -47,10 +47,10 @@ void event_help_me (States *current_state_ptr) {* current_state_ptr = help_me;}
 int main(){
 
     
-    States current_state = idle;
+    States current_state = idle; // current state. Idle at begining of the program
 
-    while (quit == false){
-      switch(current_state){
+    while (quit == false){ //infinite loop
+      switch(current_state){ // execute different functions and event listening according to current state
         case idle:
             std::cout << "idle\n";
             idle_state();
