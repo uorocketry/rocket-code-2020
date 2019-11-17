@@ -1,0 +1,4 @@
+#!/bin/bash
+# Starts raspberry pi image in configuration mode
+ 
+qemu-system-arm -kernel ./qemu-rpi-kernel/kernel-qemu-4.4.34-jessie -cpu arm1176 -m 256 -M versatilepb -no-reboot -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw init=/bin/bash" -hda /dev/mmcblk0
