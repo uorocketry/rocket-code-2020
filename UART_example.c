@@ -1,12 +1,17 @@
-// https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
-
 #include <stdio.h>
 #include <unistd.h>			//Used for UART
 #include <fcntl.h>			//Used for UART
 #include <termios.h>		//Used for UART
 
+// https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
+
+//function prototypes
+void uart_tx_string (string tx_string);
+
+	int main()
+	{
     //-------------------------
-	//----- SETUP UART 0 -----
+	//----- SETUP USART 0 -----
 	//-------------------------
 	//At bootup, pins 8 and 10 are already set to UART0_TXD, UART0_RXD (ie the alt0 function) respectively
 	int uart0_filestream = -1;
@@ -49,8 +54,7 @@
 	tcflush(uart0_filestream, TCIFLUSH);
 	tcsetattr(uart0_filestream, TCSANOW, &options);
 
-
-	//----- TX BYTES -----
+    //----- TX BYTES -----
 	unsigned char tx_buffer[20];
 	unsigned char *p_tx_buffer;
 
@@ -70,14 +74,15 @@
 		}
 	}
 
-	uart_tx_string("Hello2");
+    uart_tx_string("Hello world!");
+    printf("UART tx: 'Hello world!' \n");
 
+    //----- CLOSE THE UART -----
+    close(uart0_filestream);
+    return 0;
+	}
 
-//************************************
-//************************************
 //********** UART TX STRING **********
-//************************************
-//************************************
 void uart_tx_string (string tx_string)
 {
 	if (uart0_filestream != -1)
@@ -85,30 +90,3 @@ void uart_tx_string (string tx_string)
 }
 
 
-	//----- CHECK FOR ANY RX BYTES -----
-	if (uart0_filestream != -1)
-	{
-		// Read up to 255 characters from the port if they are there
-		unsigned char rx_buffer[256];
-		int rx_length = read(uart0_filestream, (void*)rx_buffer, 255);		//Filestream, buffer to store in, number of bytes to read (max)
-		if (rx_length < 0)
-		{
-			//An error occured (will occur if there are no bytes)
-		}
-		else if (rx_length == 0)
-		{
-			//No data waiting
-		}
-		else
-		{
-			//Bytes received
-			rx_buffer[rx_length] = '\0';
-			printf("%i bytes read : %s\n", rx_length, rx_buffer);
-		}
-	}
-<<<<<<< HEAD
-
-	//----- CLOSE THE UART -----
-	close(uart0_filestream);
-=======
->>>>>>> 1f7b10da1f85d0f0e2285818b6976cb247d20322
