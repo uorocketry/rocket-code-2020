@@ -3,7 +3,7 @@
 #include <fcntl.h>			//Used for UART
 #include <termios.h>		//Used for UART
 
-// https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
+//      https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
 
 //function prototypes
 void uart_tx_string (string tx_string);
