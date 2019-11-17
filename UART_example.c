@@ -106,6 +106,9 @@ void uart_tx_string (string tx_string)
 			printf("%i bytes read : %s\n", rx_length, rx_buffer);
 		}
 	}
+<<<<<<< HEAD
 
 	//----- CLOSE THE UART -----
 	close(uart0_filestream);
+=======
+>>>>>>> 1f7b10da1f85d0f0e2285818b6976cb247d20322
