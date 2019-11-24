@@ -213,6 +213,3 @@ void StateMachine::StateEngine(const StateMapRowEx* const pStateMapEx)
 #endif
 	}
 }
-
-
-

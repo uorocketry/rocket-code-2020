@@ -191,6 +191,8 @@ public:
 	/// Gets the maximum number of state machine states.
 	/// @return The maximum state machine states. 
 	BYTE GetMaxStates() { return MAX_STATES; }
+
+	void ExecuteCurrentState();
 	
 protected:
 	/// External state machine event.
