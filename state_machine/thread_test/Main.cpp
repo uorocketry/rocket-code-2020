@@ -1,13 +1,9 @@
 #include<iostream>
 #include<thread>
-#include<vector>
-#include<mutex>
 #include<chrono>
 #include<unordered_map>
 #include"SensorsRead.h"
 
-
-	
 
 int main()
 {
