@@ -1,0 +1,2 @@
+g++ SelfTest.cpp StateMachine.cpp Main.cpp CentrifugeTest.cpp Fault.cpp Player.cpp MotorNM.cpp Motor.cpp -o test1
+
