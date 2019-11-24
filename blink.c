@@ -2,15 +2,15 @@
 #include <wiringPi.h>
 int main (void)
 {
- wiringPiSetupGpio() ;
+ wiringPiSetup() ;
  printf("wiringPi setup\n");
- pinMode(0, OUTPUT) ;
+ pinMode(2, OUTPUT) ;
   for (;;)
   {
     printf("digitalWrite\n");
-    digitalWrite(3, HIGH);
+    digitalWrite(2, HIGH);
     delay (500);
-    digitalWrite(3, LOW);
+    digitalWrite(2, LOW);
     delay (500) ;
   }
   return 0 ;
