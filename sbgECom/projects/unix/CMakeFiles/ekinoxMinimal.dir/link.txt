@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/ekinoxMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o  -o "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/ekinoxMinimal" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/libsbgECom.a" 
