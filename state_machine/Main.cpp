@@ -5,7 +5,7 @@
 #include<thread>
 #include<chrono>
 #include<unordered_map>
-#include"SensorsRead.h"
+#include"ReadSensors.h"
 
 
 
@@ -28,36 +28,48 @@ int main(void)
 
 	bool loop = true;
 
+	int value;
+
+	int old_value = -1;
+
+
 	RocketSM RocketSM;
 	while (loop) {
-		int value = Sensors_read.get_value();
+		value = Sensors_read.get_value();
 
+		if (value != old_value)
+		{
+			std::cout << value << "\n";
+			// Create Rocket object with macro support
+			// RocketSMData* data = new RocketSMData();
+			// data->speed = 100;
+			// RocketSM.Apogee(data);
+			
+
+
+			if (value == 1)
+			{
+				RocketSM.Apogee();
+			}
+
+
+			// if we want to add some data with the event
+			// RocketSMData* data2 = new RocketSMData();
+			// data2->speed = 200;
+			// RocketSM.Apogee(data2);
+
+			if (value == 2)
+			{
+				RocketSM.Touchdown();
+			}
+
+			old_value = value;
+		}
 		
-		// Create Motor object with macro support
-		// RocketSMData* data = new RocketSMData();
-		// data->speed = 100;
-		// RocketSM.Apogee(data);
+		RocketSM.ExecuteCurrentState();
 
 
-		if (value == 2)
-		{
-			RocketSM.Apogee();
-		}
 
-
-		// RocketSMData* data2 = new RocketSMData();
-		// data2->speed = 200;
-		// RocketSM.Apogee(data2);
-
-		if (value == 5)
-		{
-			RocketSM.Touchdown();
-		}
-    	// RocketSM.StateEngine();
-
-		// RocketSM.InvokeEntryAction();
-    	// std::cout << value << std::endl;
-    	// RocketSM.ExecuteCurrentState();
 
     	// when we want to kill the read sensors thread
     	if (false) {

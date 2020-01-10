@@ -12,7 +12,7 @@ public:
 	std::mutex mutex;
 	Sensors();
 	int get_value();
-	void add_value(int money);
+	void add_value(int max_value);
 
 };
 

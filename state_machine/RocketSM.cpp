@@ -9,7 +9,7 @@ RocketSM::RocketSM() :
 {
 }
 	
-// set motor speed external event
+// Apogee external event
 // void RocketSM::Apogee(RocketSMData* data)
 void RocketSM::Apogee()
 {
@@ -33,13 +33,16 @@ void RocketSM::Touchdown()
 	END_TRANSITION_MAP(NULL)
 }
 
-// state machine sits here when motor is not running
+// Code for each state. Do not put while in them. The right function according to the current state
+// will be call in the main loop. 
+
+// code for the flight state
 STATE_DEFINE(RocketSM, Flight, NoEventData)
 {
 	cout << "RocketSM::ST_Flight" << endl;
 }
 
-// Descent
+// code for the Descent state
 STATE_DEFINE(RocketSM, Descent, NoEventData)
 {
 	cout << "RocketSM::ST_Descent" << endl;
@@ -50,8 +53,9 @@ STATE_DEFINE(RocketSM, Descent, NoEventData)
 	// InternalEvent(ST_FLIGHT);
 }
 
-// ground
 // STATE_DEFINE(RocketSM, Ground, RocketSMData)
+
+// code for the ground state
 STATE_DEFINE(RocketSM, Ground, NoEventData)
 {
 	// cout << "RocketSM::ST_Ground : Speed is " << data->speed << endl;

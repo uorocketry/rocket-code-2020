@@ -6,6 +6,7 @@
 #include <typeinfo>
 #include "Fault.h"
 
+
 // If EXTERNAL_EVENT_NO_HEAP_DATA is defined it changes how a client sends data to the
 // state machine. When undefined, the ExternalEvent() pData argument must be created on the heap. 
 // The state machine will automatically delete the EventData pointer during state execution. 
@@ -65,7 +66,8 @@ public:
 		// This next internal event is not valid and causes the assert to fail:
 		//    InternalEvent(ST_MY_STATE_FUNCTION, new OtherEventData());
 		const Data* derivedData = dynamic_cast<const Data*>(data);
-		ASSERT_TRUE(derivedData != NULL);
+		
+		//ASSERT_TRUE(derivedData != NULL);
 
 		// Call the state function
 		(derivedSM->*Func)(derivedData);
@@ -192,7 +194,9 @@ public:
 	/// @return The maximum state machine states. 
 	BYTE GetMaxStates() { return MAX_STATES; }
 
+	// Execute the ST_StateName function according to the current state
 	void ExecuteCurrentState();
+
 	
 protected:
 	/// External state machine event.
@@ -248,6 +252,7 @@ private:
 	void StateEngine(const StateMapRow* const pStateMap);
 	void StateEngine(const StateMapRowEx* const pStateMapEx);
 };
+
 
 #define STATE_DECLARE(stateMachine, stateName, eventData) \
 	void ST_##stateName(const eventData*); \

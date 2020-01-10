@@ -14,6 +14,7 @@ StateMachine::StateMachine(BYTE maxStates, BYTE initialState) :
 	ASSERT_TRUE(MAX_STATES < EVENT_IGNORED);
 }  
 
+
 //----------------------------------------------------------------------------
 // ExternalEvent
 //----------------------------------------------------------------------------
@@ -212,4 +213,27 @@ void StateMachine::StateEngine(const StateMapRowEx* const pStateMapEx)
 		}
 #endif
 	}
+}
+
+
+// Execute the ST_StateName function according to the current state
+void StateMachine::ExecuteCurrentState()
+{
+	// std::cout << (int)GetCurrentState() << "\n";
+
+	const StateMapRowEx* pStateMapEx = GetStateMapEx();
+
+	if (pStateMapEx != NULL)
+	{
+		const EventData* pDataTemp = NULL;
+		
+
+		const StateBase* state = pStateMapEx[m_currentState].State;
+
+		// execute the function of the state
+		state->InvokeStateAction(this, pDataTemp);
+
+	}
+
+	
 }

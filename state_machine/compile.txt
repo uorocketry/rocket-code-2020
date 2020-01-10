@@ -1,2 +1,1 @@
-g++ SelfTest.cpp StateMachine.cpp Main.cpp CentrifugeTest.cpp Fault.cpp Player.cpp MotorNM.cpp Motor.cpp -o test1
-
+g++ Fault.cpp Main.cpp RocketSM.cpp ReadSensors.cpp StateMachine.cpp stdafx.cpp -pthread
