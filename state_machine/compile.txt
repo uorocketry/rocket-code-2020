@@ -1,0 +1,1 @@
+g++ Fault.cpp Main.cpp RocketSM.cpp ReadSensors.cpp StateMachine.cpp stdafx.cpp -pthread
