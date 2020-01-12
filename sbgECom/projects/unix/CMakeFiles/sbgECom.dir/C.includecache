@@ -1,0 +1,716 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../../common/crc/sbgCrc.h
+sbgCommon.h
+-
+
+../../common/interfaces/sbgInterface.h
+sbgCommon.h
+-
+
+../../common/platform/sbgConfig.h
+
+../../common/platform/sbgPlatform.h
+../sbgTypes.h
+../../common/sbgTypes.h
+../sbgErrorCodes.h
+../../common/sbgErrorCodes.h
+../sbgDebug.h
+../../common/sbgDebug.h
+stdbool.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+direct.h
+-
+unistd.h
+-
+assert.h
+-
+
+../../common/sbgCommon.h
+platform/sbgPlatform.h
+../../common/platform/sbgPlatform.h
+platform/sbgConfig.h
+../../common/platform/sbgConfig.h
+sbgTypes.h
+../../common/sbgTypes.h
+sbgErrorCodes.h
+../../common/sbgErrorCodes.h
+sbgDefines.h
+../../common/sbgDefines.h
+sbgDebug.h
+../../common/sbgDebug.h
+version/sbgVersion.h
+../../common/version/sbgVersion.h
+
+../../common/sbgDebug.h
+platform/sbgConfig.h
+../../common/platform/sbgConfig.h
+
+../../common/sbgDefines.h
+
+../../common/sbgErrorCodes.h
+sbgDefines.h
+../../common/sbgDefines.h
+
+../../common/sbgTypes.h
+
+../../common/splitBuffer/sbgSplitBuffer.h
+sbgCommon.h
+-
+
+../../common/streamBuffer/sbgStreamBuffer.h
+sbgStreamBufferLE.h
+../../common/streamBuffer/sbgStreamBufferLE.h
+sbgStreamBufferBE.h
+../../common/streamBuffer/sbgStreamBufferBE.h
+
+../../common/streamBuffer/sbgStreamBufferBE.h
+sbgStreamBufferCommon.h
+../../common/streamBuffer/sbgStreamBufferCommon.h
+
+../../common/streamBuffer/sbgStreamBufferCommon.h
+sbgCommon.h
+-
+
+../../common/streamBuffer/sbgStreamBufferLE.h
+sbgStreamBufferCommon.h
+../../common/streamBuffer/sbgStreamBufferCommon.h
+
+../../common/swap/sbgSwap.h
+sbgCommon.h
+-
+
+../../common/version/sbgVersion.h
+../sbgDefines.h
+../../common/sbgDefines.h
+../sbgErrorCodes.h
+../../common/sbgErrorCodes.h
+../sbgTypes.h
+../../common/sbgTypes.h
+stdbool.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.c
+sbgCrc.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.c
+sbgInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.c
+sbgInterfaceFile.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.h
+sbgInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerial.h
+sbgInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c
+sbgInterfaceSerial.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerial.h
+stdio.h
+-
+string.h
+-
+unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+termios.h
+-
+sys/ioctl.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.c
+sbgInterfaceUdp.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.h
+winsock2.h
+-
+WS2tcpip.h
+-
+stdint.h
+-
+arpa/inet.h
+-
+netinet/in.h
+-
+sys/types.h
+-
+sys/socket.h
+-
+unistd.h
+-
+fcntl.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.h
+sbgInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.c
+sbgNetwork.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.h
+swap/sbgSwap.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgConfig.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.c
+sbgPlatform.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.h
+stdarg.h
+-
+time.h
+-
+windows.h
+-
+mach/mach_time.h
+-
+unistd.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.h
+../sbgTypes.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+../sbgErrorCodes.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+../sbgDebug.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDebug.h
+stdbool.h
+-
+stdlib.h
+-
+stdio.h
+-
+string.h
+-
+direct.h
+-
+unistd.h
+-
+assert.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDebug.h
+platform/sbgConfig.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgConfig.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+sbgDefines.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c
+sbgSplitBuffer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c
+sbgStreamBuffer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.h
+sbgStreamBufferLE.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
+sbgStreamBufferBE.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
+sbgStreamBufferCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
+sbgStreamBufferCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.c
+sbgSwap.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.c
+sbgVersion.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.h
+sbgCommon.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.h
+../sbgDefines.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+../sbgErrorCodes.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+../sbgTypes.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+stdbool.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c
+sbgEComBinaryLogDebug.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+../protocol/sbgEComProtocol.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c
+sbgEComBinaryLogDvl.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c
+sbgEComBinaryLogEkf.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c
+sbgEComBinaryLogEvent.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c
+sbgEComBinaryLogGps.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c
+sbgEComBinaryLogImu.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c
+sbgEComBinaryLogImuRaw.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c
+sbgEComBinaryLogMag.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c
+sbgEComBinaryLogOdometer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c
+sbgEComBinaryLogPressure.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c
+sbgEComBinaryLogShipMotion.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c
+sbgEComBinaryLogStatus.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c
+sbgEComBinaryLogUsbl.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c
+sbgEComBinaryLogUtc.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+sbgCommon.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c
+sbgEComBinaryLogs.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+sbgCommon.h
+-
+../sbgEComIds.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+sbgEComBinaryLogDebug.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+sbgEComBinaryLogDvl.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+sbgEComBinaryLogEkf.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+sbgEComBinaryLogEvent.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+sbgEComBinaryLogGps.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+sbgEComBinaryLogImu.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+sbgEComBinaryLogImuRaw.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+sbgEComBinaryLogMag.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+sbgEComBinaryLogOdometer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+sbgEComBinaryLogPressure.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+sbgEComBinaryLogShipMotion.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+sbgEComBinaryLogStatus.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+sbgEComBinaryLogUsbl.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+sbgEComBinaryLogUtc.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.c
+sbgEComCmd.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.h
+sbgCommon.h
+-
+sbgEComCmdAdvanced.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+sbgEComCmdEthernet.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+sbgEComCmdEvent.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+sbgEComCmdFeatures.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+sbgEComCmdGnss.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+sbgEComCmdInfo.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+sbgEComCmdInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+sbgEComCmdLicense.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+sbgEComCmdMag.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+sbgEComCmdOdo.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+sbgEComCmdOutput.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+sbgEComCmdSensor.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+sbgEComCmdSettings.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.c
+sbgEComCmdAdvanced.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.c
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+../sbgECom.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.c
+sbgEComCmdEthernet.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.c
+sbgEComCmdEvent.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.c
+sbgEComCmdFeatures.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.c
+sbgEComCmdGnss.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+streamBuffer/sbgStreamBuffer.h
+-
+transfer/sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.c
+sbgEComCmdInfo.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.c
+sbgEComCmdInterface.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.c
+sbgEComCmdLicense.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+transfer/sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.c
+sbgEComCmdMag.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+streamBuffer/sbgStreamBuffer.h
+-
+transfer/sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.c
+sbgEComCmdOdo.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.c
+sbgEComCmdOutput.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+../sbgECanId.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECanId.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.c
+sbgEComCmdSensor.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+streamBuffer/sbgStreamBuffer.h
+-
+transfer/sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.c
+sbgEComCmdSettings.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+transfer/sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.c
+sbgEComTransfer.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+../sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+streamBuffer/sbgStreamBuffer.h
+-
+splitBuffer/sbgSplitBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+sbgCommon.h
+-
+../../sbgECom.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.c
+sbgEComProtocol.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+crc/sbgCrc.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+sbgCommon.h
+-
+interfaces/sbgInterface.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECanId.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.c
+sbgECom.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+sbgEComVersion.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComVersion.h
+version/sbgVersion.h
+-
+streamBuffer/sbgStreamBuffer.h
+-
+commands/sbgEComCmdCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+sbgCommon.h
+-
+sbgEComIds.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+protocol/sbgEComProtocol.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+binaryLogs/sbgEComBinaryLogs.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComVersion.h
+sbgCommon.h
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgCommon.h
+

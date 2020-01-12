@@ -1,0 +1,357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{5e93eeb0-e086-4abd-aa1a-dd8005b80cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\protocol">
+      <UniqueIdentifier>{6526a50c-295e-4d3a-9d99-8002473eae21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\binaryLogs">
+      <UniqueIdentifier>{8be210e6-1ffa-4ed4-9e61-23bccbd51f62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\commands">
+      <UniqueIdentifier>{84633fd8-e429-4312-b772-7ea0258be1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\commands\transfer">
+      <UniqueIdentifier>{de209812-8611-4362-a8bf-5787a8e495df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{dd59d4c1-a669-4182-930b-9d3fd6248e02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\crc">
+      <UniqueIdentifier>{be2e333b-22dd-493e-9b0b-38c6c459e7c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\platform">
+      <UniqueIdentifier>{44eeb8eb-fda8-4ba0-91ea-6c3a0fa205a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\splitBuffer">
+      <UniqueIdentifier>{de3b4ac9-5da7-470b-bc71-4cf2e45bc539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\streamBuffer">
+      <UniqueIdentifier>{c38b4a08-0a0d-46a3-a531-20ab65112b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\swap">
+      <UniqueIdentifier>{2fb00e58-ea62-4ec0-a8e5-278534796dbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\interfaces">
+      <UniqueIdentifier>{6d87214e-c9b3-4473-b76f-0b6f0ffa5a36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\network">
+      <UniqueIdentifier>{79539a30-557b-4f76-bbcb-014cf2d19009}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\version">
+      <UniqueIdentifier>{b513f352-cc17-4492-ab36-aec2815d34ac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\sbgECom.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmd.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdAdvanced.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdCommon.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdEvent.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdFeatures.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdGnss.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdInfo.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdInterface.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdLicense.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdMag.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdOdo.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdOutput.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdSensor.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdSettings.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\transfer\sbgEComTransfer.c">
+      <Filter>src\commands\transfer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\protocol\sbgEComProtocol.c">
+      <Filter>src\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogDebug.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogDvl.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogEkf.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogEvent.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogGps.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogImu.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogMag.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogOdometer.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogPressure.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogs.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogShipMotion.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogStatus.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogUsbl.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogUtc.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\interfaces\sbgInterface.c">
+      <Filter>common\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceFile.c">
+      <Filter>common\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceSerialWin.c">
+      <Filter>common\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceUdp.c">
+      <Filter>common\interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\crc\sbgCrc.c">
+      <Filter>common\crc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\platform\sbgPlatform.c">
+      <Filter>common\platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\splitBuffer\sbgSplitBuffer.c">
+      <Filter>common\splitBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\streamBuffer\sbgStreamBuffer.c">
+      <Filter>common\streamBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\swap\sbgSwap.c">
+      <Filter>common\swap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\network\sbgNetwork.c">
+      <Filter>common\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\version\sbgVersion.c">
+      <Filter>common\version</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\commands\sbgEComCmdEthernet.c">
+      <Filter>src\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogImuRaw.c">
+      <Filter>src\binaryLogs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\sbgECom.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sbgEComVersion.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sbgEComLib.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sbgEComIds.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\sbgECanId.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmd.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdAdvanced.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdCommon.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdEvent.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdFeatures.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdGnss.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdInfo.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdInterface.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdLicense.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdMag.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdOdo.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdOutput.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdSensor.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdSettings.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\transfer\sbgEComTransfer.h">
+      <Filter>src\commands\transfer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\protocol\sbgEComProtocol.h">
+      <Filter>src\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogDebug.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogDvl.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogEkf.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogEvent.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogGps.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogImu.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogMag.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogOdometer.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogPressure.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogs.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogShipMotion.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogStatus.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogUsbl.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogUtc.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\interfaces\sbgInterface.h">
+      <Filter>common\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceFile.h">
+      <Filter>common\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceSerial.h">
+      <Filter>common\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceUdp.h">
+      <Filter>common\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\crc\sbgCrc.h">
+      <Filter>common\crc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\platform\sbgConfig.h">
+      <Filter>common\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\platform\sbgPlatform.h">
+      <Filter>common\platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\splitBuffer\sbgSplitBuffer.h">
+      <Filter>common\splitBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBuffer.h">
+      <Filter>common\streamBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferBE.h">
+      <Filter>common\streamBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferCommon.h">
+      <Filter>common\streamBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferLE.h">
+      <Filter>common\streamBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\swap\sbgSwap.h">
+      <Filter>common\swap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgCommon.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgDefines.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgErrorCodes.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgTypes.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgDebug.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\network\sbgNetwork.h">
+      <Filter>common\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\sbgCommonLibVersion.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\version\sbgVersion.h">
+      <Filter>common\version</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\commands\sbgEComCmdEthernet.h">
+      <Filter>src\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogImuRaw.h">
+      <Filter>src\binaryLogs</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

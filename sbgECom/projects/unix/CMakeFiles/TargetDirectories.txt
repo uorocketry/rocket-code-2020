@@ -1,0 +1,6 @@
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/rebuild_cache.dir
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/edit_cache.dir
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/ellipseOnboardMagCalib.dir
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/ekinoxMinimal.dir
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/sbgECom.dir
+/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/ellipseMinimal.dir

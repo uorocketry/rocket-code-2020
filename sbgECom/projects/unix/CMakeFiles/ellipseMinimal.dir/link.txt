@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o  -o "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/ellipseMinimal" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/libsbgECom.a" 
