@@ -15,6 +15,8 @@ By default, mini UART is mapped to the GPIO14 (TX) and GPIO15(RX). While PL011 i
 
 // connect logic analyzer to TX wpi 15 and ground 
 
+//TODO Add error handling 
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
