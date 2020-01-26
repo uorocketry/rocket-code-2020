@@ -48,9 +48,28 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		// Simply display GPS Position in real time
 		//latitude longitude altitude
 		//printf("GPS Position:");
-		printf("latitude longitude altitude: %3.6f\t%3.6f\t%3.6f\t   \r", 
+		printf("latitude longitude altitude: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
 				pLogData->gpsPosData.latitude, pLogData->gpsPosData.longitude, pLogData->gpsPosData.altitude);
 		break;
+
+	// case SBG_ECOM_LOG_EKF_EULER:
+	// 	//
+	// 	// Simply display euler angles in real time
+	// 	//
+	// 	printf("euler Angles: %3.1f\t%3.1f\t%3.1f\tStd Dev:%3.1f\t%3.1f\t%3.1f   \r\n", 
+	// 			sbgRadToDegF(pLogData->ekfEulerData.euler[0]), sbgRadToDegF(pLogData->ekfEulerData.euler[1]), sbgRadToDegF(pLogData->ekfEulerData.euler[2]), 
+	// 			sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]));
+	// 	break;
+
+	case SBG_ECOM_LOG_EKF_NAV:
+		//
+		// Simply display euler angles in real time
+		//
+		
+		printf("Vel x Vel Y Vel Z: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
+				pLogData->ekfNavData.velocity[0], pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
+		break;
+
 	default:
 		break;
 	}
@@ -68,6 +87,11 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
  *	\param[in]	argv		Input arguments as an array of strings.
  *	\return					0 if no error and -1 in case of error.
  */
+
+class hello{
+
+};
+
 int main(int argc, char** argv)
 {
 	SbgEComHandle			comHandle;
@@ -120,11 +144,15 @@ int main(int argc, char** argv)
 			//
 			// Configure some output logs to 25 Hz
 			//
-			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_IMU_DATA, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
+			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_EKF_NAV, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
 			{
 				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_IMU_DATA.\n");
 			}
 			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_EKF_EULER, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
+			{
+				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_EKF_EULER.\n");
+			}
+			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_GPS1_POS, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
 			{
 				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_EKF_EULER.\n");
 			}

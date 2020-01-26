@@ -32,3 +32,7 @@
 *.app
 
 *.bin
+*.make
+*.cmake
+
+sbgECom/projects/unix/
