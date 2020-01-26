@@ -13,6 +13,7 @@
 
 int main ()
 {
+  printf("Hello world!");
   int serial_port ;
   char dat;
   if ((serial_port = serialOpen ("/dev/ttyS0", 9600)) < 0)	/* open serial port */
