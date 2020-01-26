@@ -3,8 +3,10 @@
 	https://www.electronicwings.com/raspberry-pi/raspberry-pi-uart-communication-using-python-and-c
 */
 
-// Now, enter the following command to transmit data from Raspberry Pi terminal.
-// echo “Hello” > /dev/ttyS0
+/*
+Now, enter the following command to transmit data from Raspberry Pi terminal.
+echo “Hello” > /dev/ttyS0
+*/
 
 /*
 This command will output “Hello” string on UART port i.e. Tx pin and will display it on terminal application of PC/Laptop.
