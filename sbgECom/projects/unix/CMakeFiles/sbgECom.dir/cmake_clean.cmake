@@ -46,6 +46,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o"
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o"
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o"
+  "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o"
+  "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o"
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o"
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o"
   "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o"

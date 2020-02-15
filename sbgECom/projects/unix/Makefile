@@ -581,6 +581,60 @@ home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s:
 	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s
 .PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s
 
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s
+
 home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
 
 .PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o
@@ -1612,6 +1666,12 @@ help:
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.o"
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.i"
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.s"
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o"
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i"
 	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s"

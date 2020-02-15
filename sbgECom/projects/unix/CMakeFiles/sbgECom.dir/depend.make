@@ -1018,6 +1018,12 @@ CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Roc
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.h
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.h
 
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/Sensor.h
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.h
+
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/DataTypes.h
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.h

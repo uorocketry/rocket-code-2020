@@ -1185,9 +1185,57 @@ CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Roc
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o.provides.build: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o
 
 
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o: CMakeFiles/sbgECom.dir/flags.make
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp > CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.i
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.s
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.requires:
+
+.PHONY : CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.requires
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.provides: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.provides.build
+.PHONY : CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.provides
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.provides.build: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o
+
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o: CMakeFiles/sbgECom.dir/flags.make
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp > CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.i
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.s
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.requires:
+
+.PHONY : CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.requires
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.provides: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.requires
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.provides.build
+.PHONY : CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.provides
+
+CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.provides.build: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o
+
+
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o: CMakeFiles/sbgECom.dir/flags.make
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp
 
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.i: cmake_force
@@ -1211,7 +1259,7 @@ CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sta
 
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o: CMakeFiles/sbgECom.dir/flags.make
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp
 
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.i: cmake_force
@@ -1235,7 +1283,7 @@ CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sta
 
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o: CMakeFiles/sbgECom.dir/flags.make
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o"
 	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp
 
 CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.i: cmake_force
@@ -1306,6 +1354,8 @@ sbgECom_OBJECTS = \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o" \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o" \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o" \
+"CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o" \
+"CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o" \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o" \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o" \
 "CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o"
@@ -1360,12 +1410,14 @@ sbgECom_EXTERNAL_OBJECTS =
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/build.make
 /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a: CMakeFiles/sbgECom.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Linking CXX static library /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Linking CXX static library /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/sbgECom.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sbgECom.dir/link.txt --verbose=$(VERBOSE)
 
@@ -1421,6 +1473,8 @@ CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o.requires
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o.requires
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o.requires
+CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/SBGSensor.cpp.o.requires
+CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Sensor/TestSensor.cpp.o.requires
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o.requires
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o.requires
 CMakeFiles/sbgECom.dir/requires: CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o.requires
