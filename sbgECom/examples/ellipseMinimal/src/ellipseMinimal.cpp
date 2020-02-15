@@ -88,9 +88,6 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
  *	\return					0 if no error and -1 in case of error.
  */
 
-class hello{
-
-};
 
 int main(int argc, char** argv)
 {

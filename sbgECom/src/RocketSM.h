@@ -1,7 +1,7 @@
 #ifndef _MOTOR_H
 #define _MOTOR_H
 
-#include "StateMachine.h"
+#include "stateMachine/StateMachine.h"
 
 class RocketSMData : public EventData
 {

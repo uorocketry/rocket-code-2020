@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stateMachine/stdafx.h"
 #include "RocketSM.h"
 
 

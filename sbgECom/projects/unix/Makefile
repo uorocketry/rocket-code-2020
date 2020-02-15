@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_SOURCE_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_BINARY_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/progress.marks"
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,30 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ellipseOnboardMagCalib
+# Target rules for targets named test_hello
 
 # Build rule for target.
-ellipseOnboardMagCalib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ellipseOnboardMagCalib
-.PHONY : ellipseOnboardMagCalib
+test_hello: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_hello
+.PHONY : test_hello
 
 # fast build rule for target.
-ellipseOnboardMagCalib/fast:
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/build
-.PHONY : ellipseOnboardMagCalib/fast
-
-#=============================================================================
-# Target rules for targets named ekinoxMinimal
-
-# Build rule for target.
-ekinoxMinimal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ekinoxMinimal
-.PHONY : ekinoxMinimal
-
-# fast build rule for target.
-ekinoxMinimal/fast:
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/build
-.PHONY : ekinoxMinimal/fast
+test_hello/fast:
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/build
+.PHONY : test_hello/fast
 
 #=============================================================================
 # Target rules for targets named sbgECom
@@ -162,1274 +149,1409 @@ ellipseMinimal/fast:
 	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/build
 .PHONY : ellipseMinimal/fast
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.o
-
-# target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.o
-
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.i
-
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.i
-
-# target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.i
-
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.s
-
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.s
-
-# target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.c.s
-
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.o
-
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.o: home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o:
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.i: home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.i:
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.s: home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.s:
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o:
-	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o:
+	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i:
-	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i:
+	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s:
-	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s:
+	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.o: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.o:
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.o:
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.i: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.i:
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.i:
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.s: home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.s:
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.s:
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.cpp.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.cpp.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.cpp.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.cpp.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c.s
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.o: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.o
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.o
 
 # target to build an object file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.o:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.o
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.o
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.o
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.i: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.i
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.i
 
 # target to preprocess a source file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.i:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.i
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.i
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.i
 
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.s: home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.s
 
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.s
 
 # target to generate assembly for a file
-home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.s:
-	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.s
-.PHONY : home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.c.s
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.cpp.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.cpp.s
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.o: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.o
+
+# target to build an object file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.o
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.i: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.i
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.i
+
+# target to preprocess a source file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.i:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.i
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.i
+
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.s: home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.s
+
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.s
+
+# target to generate assembly for a file
+home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.s:
+	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.s
+.PHONY : home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.cpp.s
 
 # Help Target
 help:
@@ -1439,151 +1561,165 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... ellipseOnboardMagCalib"
-	@echo "... ekinoxMinimal"
+	@echo "... test_hello"
 	@echo "... sbgECom"
 	@echo "... ellipseMinimal"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/crc/sbgCrc.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterface.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceFile.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/interfaces/sbgInterfaceUdp.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/network/sbgNetwork.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/platform/sbgPlatform.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/splitBuffer/sbgSplitBuffer.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/streamBuffer/sbgStreamBuffer.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/swap/sbgSwap.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/common/version/sbgVersion.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmd.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdAdvanced.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdCommon.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEthernet.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdEvent.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdFeatures.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdGnss.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInfo.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdInterface.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdLicense.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdMag.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOdo.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdOutput.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSensor.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/sbgEComCmdSettings.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/commands/transfer/sbgEComTransfer.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/protocol/sbgEComProtocol.s"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.o"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.i"
-	@echo "... home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/src/sbgECom.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/test_hello.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/Interface.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/ReadSensors.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/RocketSM.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/Fault.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/StateMachine.s"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.o"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.i"
+	@echo "... home/sebastien/Documents/rocket-code-2020/sbgECom/src/stateMachine/stdafx.s"
 .PHONY : help
 
 

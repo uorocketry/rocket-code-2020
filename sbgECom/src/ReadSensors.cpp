@@ -4,7 +4,10 @@
 
 
 Sensors::Sensors(){}
-int Sensors:: get_value(){return sensor_value; }
+int Sensors:: get_value(){
+	
+	return sensor_value; 
+}
 void Sensors::add_value(int max_value)
 {
 	std::lock_guard<std::mutex> lockGuard(mutex);

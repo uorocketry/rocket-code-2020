@@ -32,5 +32,3 @@
 *.app
 
 *.bin
-*.make
-*.cmake

@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/libsbgECom.a"
+  "/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a"
 )

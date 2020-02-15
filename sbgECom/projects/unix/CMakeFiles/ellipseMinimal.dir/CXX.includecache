@@ -386,7 +386,7 @@ sbgEComVersion.h
 sbgCommon.h
 ../../src/sbgCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp
 sbgEComLib.h
 -
 time.h

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_SOURCE_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_BINARY_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 # Include any dependencies generated for this target.
 include CMakeFiles/ellipseMinimal.dir/depend.make
@@ -57,50 +57,50 @@ include CMakeFiles/ellipseMinimal.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ellipseMinimal.dir/flags.make
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o: CMakeFiles/ellipseMinimal.dir/flags.make
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o: /home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o   -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c"
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o: CMakeFiles/ellipseMinimal.dir/flags.make
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o: /home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c" > CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.i
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp > CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.i
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c" -o CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.s
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp -o CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.s
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.requires:
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.requires:
 
-.PHONY : CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.requires
+.PHONY : CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.requires
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.provides: CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.requires
-	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.provides.build
-.PHONY : CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.provides
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.provides: CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.provides.build
+.PHONY : CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.provides
 
-CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.provides.build: CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o
+CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.provides.build: CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o
 
 
 # Object files for target ellipseMinimal
 ellipseMinimal_OBJECTS = \
-"CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o"
+"CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o"
 
 # External object files for target ellipseMinimal
 ellipseMinimal_EXTERNAL_OBJECTS =
 
-/home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o
-/home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/build.make
-/home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/ellipseMinimal: /home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/libsbgECom.a
-/home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable \"/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/ellipseMinimal\""
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/build.make
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal: /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a
+/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal: CMakeFiles/ellipseMinimal.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ellipseMinimal.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/ellipseMinimal.dir/build: /home/fjtheknight/git/uorocketry/SBG\ usb/Software\ Development/sbgECom/bin/ellipseMinimal
+CMakeFiles/ellipseMinimal.dir/build: /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal
 
 .PHONY : CMakeFiles/ellipseMinimal.dir/build
 
-CMakeFiles/ellipseMinimal.dir/requires: CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o.requires
+CMakeFiles/ellipseMinimal.dir/requires: CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o.requires
 
 .PHONY : CMakeFiles/ellipseMinimal.dir/requires
 
@@ -109,6 +109,6 @@ CMakeFiles/ellipseMinimal.dir/clean:
 .PHONY : CMakeFiles/ellipseMinimal.dir/clean
 
 CMakeFiles/ellipseMinimal.dir/depend:
-	cd "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix" "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/ellipseMinimal.dir/DependInfo.cmake" --color=$(COLOR)
+	cd /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/ellipseMinimal.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ellipseMinimal.dir/depend
 

@@ -1,6 +1,6 @@
-The system is: Linux - 5.0.0-31-generic - x86_64
+The system is: Linux - 4.15.0-76-generic - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: /usr/bin/cc 
+Compiler: /usr/bin/gcc 
 Build flags: 
 Id flags:  
 
@@ -10,10 +10,10 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
 
-The C compiler identification is GNU, found in "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/3.10.2/CompilerIdC/a.out"
+The C compiler identification is GNU, found in "/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/3.10.2/CompilerIdC/a.out"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /usr/bin/c++ 
+Compiler: /usr/bin/g++ 
 Build flags: 
 Id flags:  
 
@@ -23,35 +23,35 @@ The output was:
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
 
-The CXX compiler identification is GNU, found in "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/3.10.2/CompilerIdCXX/a.out"
+The CXX compiler identification is GNU, found in "/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/3.10.2/CompilerIdCXX/a.out"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8bc98/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8bc98.dir/build.make CMakeFiles/cmTC_8bc98.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_8bc98.dir/testCCompiler.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_8bc98.dir/testCCompiler.c.o   -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp/testCCompiler.c"
-Linking C executable cmTC_8bc98
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8bc98.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_8bc98.dir/testCCompiler.c.o  -o cmTC_8bc98 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_4d64e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4d64e.dir/build.make CMakeFiles/cmTC_4d64e.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d64e.dir/testCCompiler.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTC_4d64e.dir/testCCompiler.c.o   -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_4d64e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d64e.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_4d64e.dir/testCCompiler.c.o  -o cmTC_4d64e 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_6ec53/fast"
-/usr/bin/make -f CMakeFiles/cmTC_6ec53.dir/build.make CMakeFiles/cmTC_6ec53.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
-Linking C executable cmTC_6ec53
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ec53.dir/link.txt --verbose=1
-/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o  -o cmTC_6ec53 
+Run Build Command:"/usr/bin/make" "cmTC_0efc1/fast"
+/usr/bin/make -f CMakeFiles/cmTC_0efc1.dir/build.make CMakeFiles/cmTC_0efc1.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_0efc1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0efc1.dir/link.txt --verbose=1
+/usr/bin/gcc     -v -rdynamic CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o  -o cmTC_0efc1 
 Using built-in specs.
-COLLECT_GCC=/usr/bin/cc
+COLLECT_GCC=/usr/bin/gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
 OFFLOAD_TARGET_NAMES=nvptx-none
 OFFLOAD_TARGET_DEFAULT=1
@@ -61,26 +61,26 @@ Thread model: posix
 gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_6ec53' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJsLvxS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_6ec53 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_6ec53' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0efc1' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccbXl7cS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0efc1 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0efc1' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_6ec53/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_6ec53.dir/build.make CMakeFiles/cmTC_6ec53.dir/build]
-  ignore line: [make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/bin/cc    -o CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
-  ignore line: [Linking C executable cmTC_6ec53]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6ec53.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/cc     -v -rdynamic CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o  -o cmTC_6ec53 ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_0efc1/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_0efc1.dir/build.make CMakeFiles/cmTC_0efc1.dir/build]
+  ignore line: [make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/gcc    -o CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_0efc1]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0efc1.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/gcc     -v -rdynamic CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o  -o cmTC_0efc1 ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_GCC=/usr/bin/gcc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper]
   ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
   ignore line: [OFFLOAD_TARGET_DEFAULT=1]
@@ -90,13 +90,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_6ec53' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccJsLvxS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_6ec53 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_0efc1' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccbXl7cS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_0efc1 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccJsLvxS.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccbXl7cS.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -116,7 +116,7 @@ Parsed C implicit link information from above output:
     arg [-znow] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_6ec53] ==> ignore
+    arg [cmTC_0efc1] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o] ==> ignore
@@ -128,7 +128,7 @@ Parsed C implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/7/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/7/../../..]
-    arg [CMakeFiles/cmTC_6ec53.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_0efc1.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--push-state] ==> ignore
     arg [--as-needed] ==> ignore
@@ -158,17 +158,17 @@ Parsed C implicit link information from above output:
 
 
 Detecting C [-std=c11] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f80ca/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f80ca.dir/build.make CMakeFiles/cmTC_f80ca.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f80ca.dir/feature_tests.c.o
-/usr/bin/cc   -std=c11 -o CMakeFiles/cmTC_f80ca.dir/feature_tests.c.o   -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_f80ca
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f80ca.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_f80ca.dir/feature_tests.c.o  -o cmTC_f80ca 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_64a76/fast"
+/usr/bin/make -f CMakeFiles/cmTC_64a76.dir/build.make CMakeFiles/cmTC_64a76.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_64a76.dir/feature_tests.c.o
+/usr/bin/gcc   -std=c11 -o CMakeFiles/cmTC_64a76.dir/feature_tests.c.o   -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.c
+Linking C executable cmTC_64a76
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_64a76.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_64a76.dir/feature_tests.c.o  -o cmTC_64a76 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -178,17 +178,17 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
 
 
 Detecting C [-std=c99] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_45728/fast"
-/usr/bin/make -f CMakeFiles/cmTC_45728.dir/build.make CMakeFiles/cmTC_45728.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_45728.dir/feature_tests.c.o
-/usr/bin/cc   -std=c99 -o CMakeFiles/cmTC_45728.dir/feature_tests.c.o   -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_45728
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_45728.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_45728.dir/feature_tests.c.o  -o cmTC_45728 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_728f3/fast"
+/usr/bin/make -f CMakeFiles/cmTC_728f3.dir/build.make CMakeFiles/cmTC_728f3.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_728f3.dir/feature_tests.c.o
+/usr/bin/gcc   -std=c99 -o CMakeFiles/cmTC_728f3.dir/feature_tests.c.o   -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.c
+Linking C executable cmTC_728f3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_728f3.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_728f3.dir/feature_tests.c.o  -o cmTC_728f3 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -198,17 +198,17 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
 
 
 Detecting C [-std=c90] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_28b70/fast"
-/usr/bin/make -f CMakeFiles/cmTC_28b70.dir/build.make CMakeFiles/cmTC_28b70.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_28b70.dir/feature_tests.c.o
-/usr/bin/cc   -std=c90 -o CMakeFiles/cmTC_28b70.dir/feature_tests.c.o   -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.c"
-Linking C executable cmTC_28b70
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_28b70.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_28b70.dir/feature_tests.c.o  -o cmTC_28b70 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_fcd21/fast"
+/usr/bin/make -f CMakeFiles/cmTC_fcd21.dir/build.make CMakeFiles/cmTC_fcd21.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fcd21.dir/feature_tests.c.o
+/usr/bin/gcc   -std=c90 -o CMakeFiles/cmTC_fcd21.dir/feature_tests.c.o   -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.c
+Linking C executable cmTC_fcd21
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcd21.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_fcd21.dir/feature_tests.c.o  -o cmTC_fcd21 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -216,32 +216,32 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
 Determining if the CXX compiler works passed with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_55699/fast"
-/usr/bin/make -f CMakeFiles/cmTC_55699.dir/build.make CMakeFiles/cmTC_55699.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_55699.dir/testCXXCompiler.cxx.o
-/usr/bin/c++     -o CMakeFiles/cmTC_55699.dir/testCXXCompiler.cxx.o -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp/testCXXCompiler.cxx"
-Linking CXX executable cmTC_55699
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_55699.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_55699.dir/testCXXCompiler.cxx.o  -o cmTC_55699 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_63a8e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_63a8e.dir/build.make CMakeFiles/cmTC_63a8e.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_63a8e.dir/testCXXCompiler.cxx.o
+/usr/bin/g++     -o CMakeFiles/cmTC_63a8e.dir/testCXXCompiler.cxx.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_63a8e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_63a8e.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_63a8e.dir/testCXXCompiler.cxx.o  -o cmTC_63a8e 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_457c8/fast"
-/usr/bin/make -f CMakeFiles/cmTC_457c8.dir/build.make CMakeFiles/cmTC_457c8.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/c++     -o CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_457c8
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_457c8.dir/link.txt --verbose=1
-/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_457c8 
+Run Build Command:"/usr/bin/make" "cmTC_7334b/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7334b.dir/build.make CMakeFiles/cmTC_7334b.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++     -o CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_7334b
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7334b.dir/link.txt --verbose=1
+/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7334b 
 Using built-in specs.
-COLLECT_GCC=/usr/bin/c++
+COLLECT_GCC=/usr/bin/g++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
 OFFLOAD_TARGET_NAMES=nvptx-none
 OFFLOAD_TARGET_DEFAULT=1
@@ -251,26 +251,26 @@ Thread model: posix
 gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_457c8' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccf8AdEn.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_457c8 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_457c8' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7334b' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccHX1Srj.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_7334b /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7334b' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp]
+  ignore line: [Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_457c8/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_457c8.dir/build.make CMakeFiles/cmTC_457c8.dir/build]
-  ignore line: [make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/c++     -o CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_457c8]
-  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_457c8.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/c++      -v -rdynamic CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_457c8 ]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_7334b/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_7334b.dir/build.make CMakeFiles/cmTC_7334b.dir/build]
+  ignore line: [make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++     -o CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake-3.10/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_7334b]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7334b.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7334b ]
   ignore line: [Using built-in specs.]
-  ignore line: [COLLECT_GCC=/usr/bin/c++]
+  ignore line: [COLLECT_GCC=/usr/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper]
   ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
   ignore line: [OFFLOAD_TARGET_DEFAULT=1]
@@ -280,13 +280,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 7.4.0 (Ubuntu 7.4.0-1ubuntu1~18.04.1) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_457c8' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccf8AdEn.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_457c8 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_7334b' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccHX1Srj.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -z now -z relro -o cmTC_7334b /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccf8AdEn.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccHX1Srj.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -306,7 +306,7 @@ Parsed CXX implicit link information from above output:
     arg [-znow] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_457c8] ==> ignore
+    arg [cmTC_7334b] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/Scrt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/crtbeginS.o] ==> ignore
@@ -318,7 +318,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/7/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/7/../../..]
-    arg [CMakeFiles/cmTC_457c8.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_7334b.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -344,17 +344,17 @@ Parsed CXX implicit link information from above output:
 
 
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_428a2/fast"
-/usr/bin/make -f CMakeFiles/cmTC_428a2.dir/build.make CMakeFiles/cmTC_428a2.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_428a2.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++1z -o CMakeFiles/cmTC_428a2.dir/feature_tests.cxx.o -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_428a2
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_428a2.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_428a2.dir/feature_tests.cxx.o  -o cmTC_428a2 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_92f3c/fast"
+/usr/bin/make -f CMakeFiles/cmTC_92f3c.dir/build.make CMakeFiles/cmTC_92f3c.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_92f3c.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++1z -o CMakeFiles/cmTC_92f3c.dir/feature_tests.cxx.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_92f3c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_92f3c.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_92f3c.dir/feature_tests.cxx.o  -o cmTC_92f3c 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -417,17 +417,17 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
 
 
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_140ac/fast"
-/usr/bin/make -f CMakeFiles/cmTC_140ac.dir/build.make CMakeFiles/cmTC_140ac.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_140ac.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++14 -o CMakeFiles/cmTC_140ac.dir/feature_tests.cxx.o -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_140ac
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_140ac.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_140ac.dir/feature_tests.cxx.o  -o cmTC_140ac 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_cc944/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cc944.dir/build.make CMakeFiles/cmTC_cc944.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cc944.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++14 -o CMakeFiles/cmTC_cc944.dir/feature_tests.cxx.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_cc944
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cc944.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_cc944.dir/feature_tests.cxx.o  -o cmTC_cc944 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -490,17 +490,17 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
 
 
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_50f43/fast"
-/usr/bin/make -f CMakeFiles/cmTC_50f43.dir/build.make CMakeFiles/cmTC_50f43.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_50f43.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++11 -o CMakeFiles/cmTC_50f43.dir/feature_tests.cxx.o -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_50f43
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50f43.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_50f43.dir/feature_tests.cxx.o  -o cmTC_50f43 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_cbb01/fast"
+/usr/bin/make -f CMakeFiles/cmTC_cbb01.dir/build.make CMakeFiles/cmTC_cbb01.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_cbb01.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++11 -o CMakeFiles/cmTC_cbb01.dir/feature_tests.cxx.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_cbb01
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cbb01.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_cbb01.dir/feature_tests.cxx.o  -o cmTC_cbb01 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -563,17 +563,17 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
 
 
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
-Change Dir: /home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_7e584/fast"
-/usr/bin/make -f CMakeFiles/cmTC_7e584.dir/build.make CMakeFiles/cmTC_7e584.dir/build
-make[1]: Entering directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_7e584.dir/feature_tests.cxx.o
-/usr/bin/c++    -std=c++98 -o CMakeFiles/cmTC_7e584.dir/feature_tests.cxx.o -c "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx"
-Linking CXX executable cmTC_7e584
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7e584.dir/link.txt --verbose=1
-/usr/bin/c++       -rdynamic CMakeFiles/cmTC_7e584.dir/feature_tests.cxx.o  -o cmTC_7e584 
-make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Run Build Command:"/usr/bin/make" "cmTC_2c4be/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2c4be.dir/build.make CMakeFiles/cmTC_2c4be.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2c4be.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++98 -o CMakeFiles/cmTC_2c4be.dir/feature_tests.cxx.o -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_2c4be
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2c4be.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_2c4be.dir/feature_tests.cxx.o  -o cmTC_2c4be 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -633,3 +633,31 @@ make[1]: Leaving directory '/home/fjtheknight/git/uorocketry/SBG usb/Software De
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_72806/fast"
+/usr/bin/make -f CMakeFiles/cmTC_72806.dir/build.make CMakeFiles/cmTC_72806.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_72806.dir/CheckIncludeFile.c.o
+/usr/bin/gcc    -o CMakeFiles/cmTC_72806.dir/CheckIncludeFile.c.o   -c /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_72806
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_72806.dir/link.txt --verbose=1
+/usr/bin/gcc      -rdynamic CMakeFiles/cmTC_72806.dir/CheckIncludeFile.c.o  -o cmTC_72806 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_23877/fast"
+/usr/bin/make -f CMakeFiles/cmTC_23877.dir/build.make CMakeFiles/cmTC_23877.dir/build
+make[1]: Entering directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_23877.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_23877.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_23877
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_23877.dir/link.txt --verbose=1
+/usr/bin/gcc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_23877.dir/CheckFunctionExists.c.o  -o cmTC_23877 -lpthread 
+make[1]: Leaving directory '/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/CMakeTmp'
+
+

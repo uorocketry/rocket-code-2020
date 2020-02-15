@@ -1,10 +1,10 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ellipseMinimal.dir/home/fjtheknight/git/uorocketry/SBG_usb/Software_Development/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.c.o"
-  "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/ellipseMinimal.pdb"
-  "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/bin/ellipseMinimal"
+  "CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o"
+  "/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal.pdb"
+  "/home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal"
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang C)
+foreach(lang CXX)
   include(CMakeFiles/ellipseMinimal.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

@@ -102,37 +102,37 @@ sbgCommon.h
 stdbool.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.c
 sbgCrc.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/crc/sbgCrc.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/crc/sbgCrc.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.c
 sbgInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.c
 sbgInterfaceFile.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceFile.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceFile.h
 sbgInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerial.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerial.h
 sbgInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c
 sbgInterfaceSerial.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceSerial.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceSerial.h
 stdio.h
 -
 string.h
@@ -148,9 +148,9 @@ termios.h
 sys/ioctl.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.c
 sbgInterfaceUdp.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.h
 winsock2.h
 -
 WS2tcpip.h
@@ -170,25 +170,25 @@ unistd.h
 fcntl.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterfaceUdp.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterfaceUdp.h
 sbgInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/interfaces/sbgInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/interfaces/sbgInterface.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.c
 sbgNetwork.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.h
 swap/sbgSwap.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/network/sbgNetwork.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/network/sbgNetwork.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgConfig.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgConfig.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.c
 sbgPlatform.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.h
 stdarg.h
 -
 time.h
@@ -200,13 +200,13 @@ mach/mach_time.h
 unistd.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgPlatform.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgPlatform.h
 ../sbgTypes.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgTypes.h
 ../sbgErrorCodes.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgErrorCodes.h
 ../sbgDebug.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDebug.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgDebug.h
 stdbool.h
 -
 stdlib.h
@@ -222,461 +222,461 @@ unistd.h
 assert.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDebug.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgDebug.h
 platform/sbgConfig.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/platform/sbgConfig.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/platform/sbgConfig.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgDefines.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgErrorCodes.h
 sbgDefines.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgDefines.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgTypes.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.c
 sbgSplitBuffer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/splitBuffer/sbgSplitBuffer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/splitBuffer/sbgSplitBuffer.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.c
 sbgStreamBuffer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBuffer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBuffer.h
 sbgStreamBufferLE.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
 sbgStreamBufferBE.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferBE.h
 sbgStreamBufferCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferLE.h
 sbgStreamBufferCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/streamBuffer/sbgStreamBufferCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.c
 sbgSwap.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/swap/sbgSwap.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/swap/sbgSwap.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.c
 sbgVersion.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.h
 sbgCommon.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/version/sbgVersion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/version/sbgVersion.h
 ../sbgDefines.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgDefines.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgDefines.h
 ../sbgErrorCodes.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgErrorCodes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgErrorCodes.h
 ../sbgTypes.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/common/sbgTypes.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/common/sbgTypes.h
 stdbool.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.c
 sbgEComBinaryLogDebug.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 ../protocol/sbgEComProtocol.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.c
 sbgEComBinaryLogDvl.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.c
 sbgEComBinaryLogEkf.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.c
 sbgEComBinaryLogEvent.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.c
 sbgEComBinaryLogGps.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.c
 sbgEComBinaryLogImu.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.c
 sbgEComBinaryLogImuRaw.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.c
 sbgEComBinaryLogMag.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.c
 sbgEComBinaryLogOdometer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.c
 sbgEComBinaryLogPressure.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.c
 sbgEComBinaryLogShipMotion.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.c
 sbgEComBinaryLogStatus.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.c
 sbgEComBinaryLogUsbl.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.c
 sbgEComBinaryLogUtc.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
 sbgCommon.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.c
 sbgEComBinaryLogs.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
 sbgCommon.h
 -
 ../sbgEComIds.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgEComIds.h
 sbgEComBinaryLogDebug.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDebug.h
 sbgEComBinaryLogDvl.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogDvl.h
 sbgEComBinaryLogEkf.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEkf.h
 sbgEComBinaryLogEvent.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogEvent.h
 sbgEComBinaryLogGps.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogGps.h
 sbgEComBinaryLogImu.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImu.h
 sbgEComBinaryLogImuRaw.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogImuRaw.h
 sbgEComBinaryLogMag.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogMag.h
 sbgEComBinaryLogOdometer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogOdometer.h
 sbgEComBinaryLogPressure.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogPressure.h
 sbgEComBinaryLogShipMotion.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogShipMotion.h
 sbgEComBinaryLogStatus.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogStatus.h
 sbgEComBinaryLogUsbl.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUsbl.h
 sbgEComBinaryLogUtc.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogUtc.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.c
 sbgEComCmd.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmd.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmd.h
 sbgCommon.h
 -
 sbgEComCmdAdvanced.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.h
 sbgEComCmdEthernet.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.h
 sbgEComCmdEvent.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.h
 sbgEComCmdFeatures.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.h
 sbgEComCmdGnss.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.h
 sbgEComCmdInfo.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.h
 sbgEComCmdInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.h
 sbgEComCmdLicense.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.h
 sbgEComCmdMag.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.h
 sbgEComCmdOdo.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.h
 sbgEComCmdOutput.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.h
 sbgEComCmdSensor.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.h
 sbgEComCmdSettings.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.c
 sbgEComCmdAdvanced.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdAdvanced.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdAdvanced.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.c
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 ../sbgECom.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.c
 sbgEComCmdEthernet.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEthernet.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEthernet.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.c
 sbgEComCmdEvent.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdEvent.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdEvent.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.c
 sbgEComCmdFeatures.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdFeatures.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdFeatures.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.c
 sbgEComCmdGnss.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.h
 streamBuffer/sbgStreamBuffer.h
 -
 transfer/sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdGnss.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdGnss.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.c
 sbgEComCmdInfo.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInfo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInfo.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.c
 sbgEComCmdInterface.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdInterface.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdInterface.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.c
 sbgEComCmdLicense.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.h
 transfer/sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdLicense.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdLicense.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.c
 sbgEComCmdMag.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.h
 streamBuffer/sbgStreamBuffer.h
 -
 transfer/sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdMag.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdMag.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.c
 sbgEComCmdOdo.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOdo.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOdo.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.c
 sbgEComCmdOutput.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdOutput.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdOutput.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 ../sbgECanId.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECanId.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECanId.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.c
 sbgEComCmdSensor.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.h
 streamBuffer/sbgStreamBuffer.h
 -
 transfer/sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSensor.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSensor.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.c
 sbgEComCmdSettings.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.h
 transfer/sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdSettings.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdSettings.h
 sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.c
 sbgEComTransfer.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 ../sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 streamBuffer/sbgStreamBuffer.h
 -
 splitBuffer/sbgSplitBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/transfer/sbgEComTransfer.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/transfer/sbgEComTransfer.h
 sbgCommon.h
 -
 ../../sbgECom.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.c
 sbgEComProtocol.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.h
 crc/sbgCrc.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.h
 sbgCommon.h
 -
 interfaces/sbgInterface.h
@@ -684,33 +684,33 @@ interfaces/sbgInterface.h
 streamBuffer/sbgStreamBuffer.h
 -
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECanId.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECanId.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.c
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.c
 sbgECom.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.h
 sbgEComVersion.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComVersion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgEComVersion.h
 version/sbgVersion.h
 -
 streamBuffer/sbgStreamBuffer.h
 -
 commands/sbgEComCmdCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/commands/sbgEComCmdCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/commands/sbgEComCmdCommon.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgECom.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgECom.h
 sbgCommon.h
 -
 sbgEComIds.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgEComIds.h
 protocol/sbgEComProtocol.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/protocol/sbgEComProtocol.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/protocol/sbgEComProtocol.h
 binaryLogs/sbgEComBinaryLogs.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/binaryLogs/sbgEComBinaryLogs.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComIds.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgEComIds.h
 
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgEComVersion.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgEComVersion.h
 sbgCommon.h
-/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/src/sbgCommon.h
+/home/sebastien/Documents/rocket-code-2020/sbgECom/src/sbgCommon.h
 

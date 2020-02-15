@@ -1,1 +1,0 @@
-/usr/bin/gcc   -rdynamic CMakeFiles/ekinoxMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ekinoxMinimal/src/ekinoxMinimal.c.o  -o /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ekinoxMinimal /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a 

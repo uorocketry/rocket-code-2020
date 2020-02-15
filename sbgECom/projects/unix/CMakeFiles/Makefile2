@@ -54,82 +54,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_SOURCE_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix"
+CMAKE_BINARY_DIR = /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix
 
 #=============================================================================
-# Target rules for target CMakeFiles/ellipseOnboardMagCalib.dir
+# Target rules for target CMakeFiles/test_hello.dir
 
 # All Build rule for target.
-CMakeFiles/ellipseOnboardMagCalib.dir/all: CMakeFiles/sbgECom.dir/all
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/depend
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=5,6 "Built target ellipseOnboardMagCalib"
-.PHONY : CMakeFiles/ellipseOnboardMagCalib.dir/all
+CMakeFiles/test_hello.dir/all: CMakeFiles/sbgECom.dir/all
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/depend
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=54,55 "Built target test_hello"
+.PHONY : CMakeFiles/test_hello.dir/all
 
 # Include target in all.
-all: CMakeFiles/ellipseOnboardMagCalib.dir/all
+all: CMakeFiles/test_hello.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/ellipseOnboardMagCalib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 47
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ellipseOnboardMagCalib.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 0
-.PHONY : CMakeFiles/ellipseOnboardMagCalib.dir/rule
+CMakeFiles/test_hello.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 53
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/test_hello.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 0
+.PHONY : CMakeFiles/test_hello.dir/rule
 
 # Convenience name for target.
-ellipseOnboardMagCalib: CMakeFiles/ellipseOnboardMagCalib.dir/rule
+test_hello: CMakeFiles/test_hello.dir/rule
 
-.PHONY : ellipseOnboardMagCalib
-
-# clean rule for target.
-CMakeFiles/ellipseOnboardMagCalib.dir/clean:
-	$(MAKE) -f CMakeFiles/ellipseOnboardMagCalib.dir/build.make CMakeFiles/ellipseOnboardMagCalib.dir/clean
-.PHONY : CMakeFiles/ellipseOnboardMagCalib.dir/clean
+.PHONY : test_hello
 
 # clean rule for target.
-clean: CMakeFiles/ellipseOnboardMagCalib.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/ekinoxMinimal.dir
-
-# All Build rule for target.
-CMakeFiles/ekinoxMinimal.dir/all: CMakeFiles/sbgECom.dir/all
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/depend
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=1,2 "Built target ekinoxMinimal"
-.PHONY : CMakeFiles/ekinoxMinimal.dir/all
-
-# Include target in all.
-all: CMakeFiles/ekinoxMinimal.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/ekinoxMinimal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 47
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ekinoxMinimal.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 0
-.PHONY : CMakeFiles/ekinoxMinimal.dir/rule
-
-# Convenience name for target.
-ekinoxMinimal: CMakeFiles/ekinoxMinimal.dir/rule
-
-.PHONY : ekinoxMinimal
+CMakeFiles/test_hello.dir/clean:
+	$(MAKE) -f CMakeFiles/test_hello.dir/build.make CMakeFiles/test_hello.dir/clean
+.PHONY : CMakeFiles/test_hello.dir/clean
 
 # clean rule for target.
-CMakeFiles/ekinoxMinimal.dir/clean:
-	$(MAKE) -f CMakeFiles/ekinoxMinimal.dir/build.make CMakeFiles/ekinoxMinimal.dir/clean
-.PHONY : CMakeFiles/ekinoxMinimal.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/ekinoxMinimal.dir/clean
+clean: CMakeFiles/test_hello.dir/clean
 
 .PHONY : clean
 
@@ -140,7 +103,7 @@ clean: CMakeFiles/ekinoxMinimal.dir/clean
 CMakeFiles/sbgECom.dir/all:
 	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/depend
 	$(MAKE) -f CMakeFiles/sbgECom.dir/build.make CMakeFiles/sbgECom.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51 "Built target sbgECom"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53 "Built target sbgECom"
 .PHONY : CMakeFiles/sbgECom.dir/all
 
 # Include target in all.
@@ -150,9 +113,9 @@ all: CMakeFiles/sbgECom.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/sbgECom.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 45
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 51
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/sbgECom.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 0
 .PHONY : CMakeFiles/sbgECom.dir/rule
 
 # Convenience name for target.
@@ -177,7 +140,7 @@ clean: CMakeFiles/sbgECom.dir/clean
 CMakeFiles/ellipseMinimal.dir/all: CMakeFiles/sbgECom.dir/all
 	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/depend
 	$(MAKE) -f CMakeFiles/ellipseMinimal.dir/build.make CMakeFiles/ellipseMinimal.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" --progress-num=3,4 "Built target ellipseMinimal"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles --progress-num=1,2 "Built target ellipseMinimal"
 .PHONY : CMakeFiles/ellipseMinimal.dir/all
 
 # Include target in all.
@@ -187,9 +150,9 @@ all: CMakeFiles/ellipseMinimal.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/ellipseMinimal.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 47
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 53
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ellipseMinimal.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/fjtheknight/git/uorocketry/SBG usb/Software Development/sbgECom/projects/unix/CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles 0
 .PHONY : CMakeFiles/ellipseMinimal.dir/rule
 
 # Convenience name for target.

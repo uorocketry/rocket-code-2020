@@ -1,1 +1,0 @@
-/usr/bin/gcc   -rdynamic CMakeFiles/ellipseOnboardMagCalib.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c.o  -o /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseOnboardMagCalib /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a 
