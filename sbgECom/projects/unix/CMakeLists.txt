@@ -42,6 +42,11 @@ add_executable(test_hello "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/s
 target_link_libraries(test_hello sbgECom)
 add_dependencies(test_hello sbgECom)
 
+add_executable(Main "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/Main.cpp")
+target_link_libraries(Main sbgECom)
+add_dependencies(Main sbgECom)
+
+
 # add_executable(ekinoxMinimal "${PROJECT_SOURCE_DIR}/../../examples/ekinoxMinimal/src/ekinoxMinimal.c")
 # target_link_libraries(ekinoxMinimal sbgECom)
 # add_dependencies(ekinoxMinimal sbgECom)
@@ -51,3 +56,4 @@ add_dependencies(test_hello sbgECom)
 # add_dependencies(ellipseOnboardMagCalib sbgECom)
 
 target_link_libraries (test_hello ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (Main ${CMAKE_THREAD_LIBS_INIT})

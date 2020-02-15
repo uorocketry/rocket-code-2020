@@ -1,5 +1,0 @@
-/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/rebuild_cache.dir
-/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/edit_cache.dir
-/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/test_hello.dir
-/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/sbgECom.dir
-/home/sebastien/Documents/rocket-code-2020/sbgECom/projects/unix/CMakeFiles/ellipseMinimal.dir

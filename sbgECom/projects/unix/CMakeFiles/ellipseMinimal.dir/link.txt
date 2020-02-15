@@ -1,1 +1,0 @@
-/usr/bin/g++    -rdynamic CMakeFiles/ellipseMinimal.dir/home/sebastien/Documents/rocket-code-2020/sbgECom/examples/ellipseMinimal/src/ellipseMinimal.cpp.o  -o /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/ellipseMinimal /home/sebastien/Documents/rocket-code-2020/sbgECom/bin/libsbgECom.a 

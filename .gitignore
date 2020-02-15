@@ -52,4 +52,4 @@ _deps
 # External projects
 *-prefix/
 
-sbgECom/projects/unix/CMakeFiles/sbgECom.dir/*
+sbgECom/projects/unix/CMakeFiles/*
