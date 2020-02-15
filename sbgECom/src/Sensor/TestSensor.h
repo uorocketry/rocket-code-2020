@@ -9,8 +9,10 @@ public:
 	TestSensor();
 	~TestSensor();
 
-	int update();
-
+	void update();
+	int getValue();
+private:
+	int sensorValue = 0;
 };
 
 #endif

@@ -11,7 +11,7 @@ public:
 	std::mutex mutex;
 
 	virtual void initialize();
-	virtual int update();
+	virtual void update();
 	
 };
 
