@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0F6FDF5D-6B63-4CAC-82B9-5A19151C70ED}</ProjectGuid>
+    <RootNamespace>sbgECom</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>sbgECom</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\..\..\bin_$(PlatformTarget)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(PlatformTarget)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\..\..\bin_$(PlatformTarget)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(PlatformTarget)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)d</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <OutDir>$(SolutionDir)\..\..\bin_$(PlatformTarget)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <OutDir>$(SolutionDir)\..\..\bin_$(PlatformTarget)\</OutDir>
+    <IntDir>$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__BASE_FILE__="%(Filename)%(Extension)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;__BASE_FILE__="%(Filename)%(Extension)";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Ws2_32.lib</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;SBG_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <AdditionalDependencies>Ws2_32.lib</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;SBG_NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>CompileAsC</CompileAs>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
+      <AdditionalDependencies>Ws2_32.lib</AdditionalDependencies>
+    </Lib>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\common\crc\sbgCrc.c" />
+    <ClCompile Include="..\..\common\interfaces\sbgInterface.c" />
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceFile.c" />
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceSerialWin.c" />
+    <ClCompile Include="..\..\common\interfaces\sbgInterfaceUdp.c" />
+    <ClCompile Include="..\..\common\network\sbgNetwork.c" />
+    <ClCompile Include="..\..\common\platform\sbgPlatform.c" />
+    <ClCompile Include="..\..\common\splitBuffer\sbgSplitBuffer.c" />
+    <ClCompile Include="..\..\common\streamBuffer\sbgStreamBuffer.c" />
+    <ClCompile Include="..\..\common\swap\sbgSwap.c" />
+    <ClCompile Include="..\..\common\version\sbgVersion.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogDebug.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogDvl.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogEkf.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogEvent.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogGps.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogImu.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogImuRaw.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogMag.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogOdometer.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogPressure.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogs.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogShipMotion.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogStatus.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogUsbl.c" />
+    <ClCompile Include="..\..\src\binaryLogs\sbgEComBinaryLogUtc.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmd.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdAdvanced.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdCommon.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdEthernet.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdEvent.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdFeatures.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdGnss.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdInfo.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdInterface.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdLicense.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdMag.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdOdo.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdOutput.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdSensor.c" />
+    <ClCompile Include="..\..\src\commands\sbgEComCmdSettings.c" />
+    <ClCompile Include="..\..\src\commands\transfer\sbgEComTransfer.c" />
+    <ClCompile Include="..\..\src\protocol\sbgEComProtocol.c" />
+    <ClCompile Include="..\..\src\sbgECom.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\common\crc\sbgCrc.h" />
+    <ClInclude Include="..\..\common\interfaces\sbgInterface.h" />
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceFile.h" />
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceSerial.h" />
+    <ClInclude Include="..\..\common\interfaces\sbgInterfaceUdp.h" />
+    <ClInclude Include="..\..\common\network\sbgNetwork.h" />
+    <ClInclude Include="..\..\common\platform\sbgConfig.h" />
+    <ClInclude Include="..\..\common\platform\sbgPlatform.h" />
+    <ClInclude Include="..\..\common\sbgCommon.h" />
+    <ClInclude Include="..\..\common\sbgCommonLibVersion.h" />
+    <ClInclude Include="..\..\common\sbgDebug.h" />
+    <ClInclude Include="..\..\common\sbgDefines.h" />
+    <ClInclude Include="..\..\common\sbgErrorCodes.h" />
+    <ClInclude Include="..\..\common\sbgTypes.h" />
+    <ClInclude Include="..\..\common\splitBuffer\sbgSplitBuffer.h" />
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBuffer.h" />
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferBE.h" />
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferCommon.h" />
+    <ClInclude Include="..\..\common\streamBuffer\sbgStreamBufferLE.h" />
+    <ClInclude Include="..\..\common\swap\sbgSwap.h" />
+    <ClInclude Include="..\..\common\version\sbgVersion.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogDebug.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogDvl.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogEkf.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogEvent.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogGps.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogImu.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogImuRaw.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogMag.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogOdometer.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogPressure.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogs.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogShipMotion.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogStatus.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogUsbl.h" />
+    <ClInclude Include="..\..\src\binaryLogs\sbgEComBinaryLogUtc.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmd.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdAdvanced.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdCommon.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdEthernet.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdEvent.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdFeatures.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdGnss.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdInfo.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdInterface.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdLicense.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdMag.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdOdo.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdOutput.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdSensor.h" />
+    <ClInclude Include="..\..\src\commands\sbgEComCmdSettings.h" />
+    <ClInclude Include="..\..\src\commands\transfer\sbgEComTransfer.h" />
+    <ClInclude Include="..\..\src\protocol\sbgEComProtocol.h" />
+    <ClInclude Include="..\..\src\sbgECanId.h" />
+    <ClInclude Include="..\..\src\sbgECom.h" />
+    <ClInclude Include="..\..\src\sbgEComIds.h" />
+    <ClInclude Include="..\..\src\sbgEComLib.h" />
+    <ClInclude Include="..\..\src\sbgEComVersion.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

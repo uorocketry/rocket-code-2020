@@ -1,0 +1,27 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../examples/ellipseMinimal/src/ellipseMinimal.c">
+    <Files>
+      <File FileName="../../examples/ellipseMinimal/src/ellipseMinimal.c" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="sbgECom" expanded="True">
+            <Node name="examples" expanded="True">
+              <Node name="ellipseMinimal" expanded="True">
+                <Node name="ellipseMinimal.c" selected="True" />
+              </Node>
+            </Node>
+            <Node name="sbgECom" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|Win32" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
