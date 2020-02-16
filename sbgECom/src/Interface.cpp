@@ -28,9 +28,9 @@ void Interface::initializeSensors() {
 void Interface::update() {
 
 }
-rocketState Interface::getLatest() {
+rocketState* Interface::getLatest() {
 	update();
 	latestState.x = myTestSensor.getValue();
 
-	return rocketState();
+	return &latestState;
 }

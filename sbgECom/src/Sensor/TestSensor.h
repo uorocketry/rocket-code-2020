@@ -10,7 +10,7 @@ public:
 	void initialize();
 	int getValue();
 private:
-	int sensorValue = 0;
+	int sensorValue = 100;
 };
 
 #endif

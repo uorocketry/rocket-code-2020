@@ -15,7 +15,7 @@ public:
 	void initializeSensors();
 
 	// to get the latest rocket state 
-	rocketState getLatest();
+	rocketState* getLatest();
 	void update();
 private:
 	rocketState latestState {0, 0, 0};
