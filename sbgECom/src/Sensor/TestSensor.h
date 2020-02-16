@@ -6,10 +6,8 @@
 class TestSensor : public Sensor
 {
 public:
-	TestSensor();
-	~TestSensor();
-
 	void update();
+	void initialize();
 	int getValue();
 private:
 	int sensorValue = 0;

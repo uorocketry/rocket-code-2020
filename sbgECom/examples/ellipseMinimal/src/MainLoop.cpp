@@ -5,16 +5,18 @@
 #include<thread>
 #include<chrono>
 #include<unordered_map>
-#include "Interface.h"
-
-
+#include"ReadSensors.h"
 
 #include <iostream>
+using namespace std;
+#include "Interface.h"
+
 using namespace std;
 
 int main(void)
 {
-
+	Interface rocketInterface = Interface();
+	
 
 
 	return 0;

@@ -1,7 +1,7 @@
 #include "TestSensor.h"
-#include<thread>
 #include<iostream>
-
+#include<chrono>
+#include<thread>
 
 void TestSensor::update() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
@@ -12,8 +12,11 @@ void TestSensor::update() {
 		
 	}
 }
+void TestSensor::initialize() {
+
+}
 
 int TestSensor::getValue() {
-	std::lock_guard<std::mutex> lockGuard(mutex);
+	// std::lock_guard<std::mutex> lockGuard(mutex);
 	return sensorValue;
 }
