@@ -4,35 +4,37 @@
 #include<thread>
 #include<chrono>
 #include<unordered_map>
+#include<iostream>
 
 
-Interface::Interface() {
 
-}
 Interface::~Interface() {
-	
+	// ThreadMap::const_iterator it = tm.find("testSensorThread");
+	// it->second.std::thread::~thread(); // thread not killed
+	// tm.erase("testSensorThread");
+	// std::cout << "Thread " << "testSensorThread" << " killed:" << std::endl;
+	// delete testSensorThread;
 }
 
 void Interface::initializeSensors() {
-	Sensor* testSensorptr; 
-    TestSensor d; 
+	std::cout << "Initialize all sensors";
+
     testSensorptr = &d; 
 
-	TestSensor testSensor;
+	testSensorThread = new std::thread(&Sensor::update, testSensorptr);
 
-	std::thread thread1 = std::thread(&Sensor::update, testSensorptr);
+    // typedef std::unordered_map<std::string, std::thread> ThreadMap;
+    // ThreadMap tm_;
 
-    typedef std::unordered_map<std::string, std::thread> ThreadMap;
-    ThreadMap tm_;
-
-    thread1.detach();
-    tm_["thread1"] = std::move(thread1);
-
+    testSensorThread->detach();
 }
 
 void Interface::update() {
 
 }
 rocketState Interface::getLatest() {
+	update();
+	// latestState.x = testSensorptr->getValue();
+
 	return rocketState();
 }

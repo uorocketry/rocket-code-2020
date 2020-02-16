@@ -15,7 +15,9 @@ using namespace std;
 
 int main(void)
 {
-	Interface rocketInterface = Interface();
+	Interface myInterface;
+
+	myInterface.initializeSensors();
 	
 
 

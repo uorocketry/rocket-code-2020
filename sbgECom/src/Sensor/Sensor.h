@@ -1,5 +1,5 @@
-#ifndef _SENSORSREAD_H
-#define _SENSORSREAD_H
+#ifndef _SENSOR_H
+#define _SENSOR_H
 
 #include<mutex>
 #include<iostream>
