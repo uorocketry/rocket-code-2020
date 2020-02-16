@@ -1,4 +1,5 @@
 //Orignal Author: Nathan Seidle
+//Port to Raspberry pi 4: jonl40
 /*
  MPL3115A2 Barometric Pressure Sensor Library
  By: Nathan Seidle
@@ -76,6 +77,7 @@ public:
   MPL3115A2();
 
   //Public Functions
+  void begin(uint8_t deviceAddress = MPL3115A2_ADDRESS); // Gets sensor on the I2C bus.
   float readAltitude(); // Returns float with meters above sealevel. Ex: 1638.94
   float readTemp(); // Returns float with current temperature in Celsius. Ex: 23.37
 
