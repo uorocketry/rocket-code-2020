@@ -3,16 +3,22 @@
 
 #include<mutex>
 #include<iostream>
-
+#include<thread>
 
 class Sensor
 {
 public:
-	std::mutex mutex;
+	Sensor();
+	~Sensor();
 
 	virtual void initialize();
 	virtual void update();
+
+protected:
+	std::mutex mutex;
 	
+private:
+	std::thread thisThread;
 };
 
 

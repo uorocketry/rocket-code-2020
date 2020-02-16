@@ -20,10 +20,6 @@ public:
 	void update();
 private:
 	rocketState latestState {0, 0, 0};
-	typedef std::unordered_map<std::string, std::thread> ThreadMap;
-    ThreadMap tm;
-
-    std::thread testSensorThread;
 
     Sensor* testSensorptr; 
     TestSensor myTestSensor;
