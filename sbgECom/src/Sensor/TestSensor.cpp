@@ -13,10 +13,10 @@ void TestSensor::update() {
 	}
 }
 void TestSensor::initialize() {
-
+	update();
 }
 
 int TestSensor::getValue() {
-	std::lock_guard<std::mutex> lockGuard(mutex);
+	// std::lock_guard<std::mutex> lockGuard(mutex);
 	return sensorValue;
 }

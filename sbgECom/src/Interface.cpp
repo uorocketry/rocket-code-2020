@@ -19,7 +19,7 @@ Interface::~Interface() {
 void Interface::initializeSensors() {
 	std::cout << "Initialize all sensors"; 
 
-	testSensorThread = std::thread(&Sensor::update, &myTestSensor);
+	testSensorThread = std::thread(&Sensor::initialize, &myTestSensor);
     testSensorThread.detach();
 
 
@@ -29,7 +29,7 @@ void Interface::update() {
 
 }
 rocketState* Interface::getLatest() {
-	update();
+	// update();
 	latestState.x = myTestSensor.getValue();
 
 	return &latestState;

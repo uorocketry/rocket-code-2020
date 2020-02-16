@@ -13,8 +13,11 @@ int main()
 
 	myInterface.initializeSensors();
 	
-	rocketState *currentState = myInterface.getLatest();
-	cout << currentState->x;
+	while (true) {
+		rocketState *currentState = myInterface.getLatest();
+		cout << currentState->x << "\n";
+
+	}
 
 
 	return 0;
