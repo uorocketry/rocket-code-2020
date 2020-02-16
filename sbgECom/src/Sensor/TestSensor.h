@@ -11,6 +11,7 @@ public:
 	int getValue();
 private:
 	int sensorValue = 100;
+	void increment();
 };
 
 #endif

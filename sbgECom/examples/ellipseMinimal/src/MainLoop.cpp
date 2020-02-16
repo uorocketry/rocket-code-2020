@@ -11,10 +11,13 @@ int main()
 {
 	Interface myInterface;
 
-	myInterface.initializeSensors();
+	// myInterface.initializeSensors();
 	
-	while (true) {
-		rocketState *currentState = myInterface.getLatest();
+	rocketState *currentState;
+	
+	// cout << "after\n"; 
+	for (int i = 0; i < 10; i++) {
+		currentState = myInterface.getLatest();
 		cout << currentState->x << "\n";
 
 	}

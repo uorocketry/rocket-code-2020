@@ -10,6 +10,7 @@
 class Interface
 {
 public:
+	Interface();
 	~Interface();
 
 	void initializeSensors();
