@@ -17,16 +17,12 @@ Interface::~Interface() {
 }
 
 void Interface::initializeSensors() {
-	std::cout << "Initialize all sensors";
+	std::cout << "Initialize all sensors"; 
 
-    testSensorptr = &d; 
+	testSensorThread = std::thread(&Sensor::update, &myTestSensor);
+    testSensorThread.detach();
 
-	testSensorThread = new std::thread(&Sensor::update, testSensorptr);
 
-    // typedef std::unordered_map<std::string, std::thread> ThreadMap;
-    // ThreadMap tm_;
-
-    testSensorThread->detach();
 }
 
 void Interface::update() {
@@ -34,7 +30,7 @@ void Interface::update() {
 }
 rocketState Interface::getLatest() {
 	update();
-	// latestState.x = testSensorptr->getValue();
+	latestState.x = myTestSensor.getValue();
 
 	return rocketState();
 }

@@ -22,10 +22,10 @@ private:
 	typedef std::unordered_map<std::string, std::thread> ThreadMap;
     ThreadMap tm;
 
-    std::thread *testSensorThread;
+    std::thread testSensorThread;
 
     Sensor* testSensorptr; 
-    TestSensor d;
+    TestSensor myTestSensor;
 
 };
 
