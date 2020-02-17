@@ -16,6 +16,7 @@ int main()
 	rocketState *currentState;
 	 
 	while (true) {
+		myInterface.update();
 		currentState = myInterface.getLatest();
 		cout << currentState->x << "\n";
 

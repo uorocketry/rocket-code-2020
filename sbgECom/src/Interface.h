@@ -1,8 +1,6 @@
 #ifndef _INTERFACE_H
 #define _INTERFACE_H
 #include "rocketState.h"
-#include<unordered_map>
-#include<thread>
 #include "Sensor/TestSensor.h"
 #include "Sensor/Sensor.h"
 
@@ -13,15 +11,18 @@ public:
 	Interface();
 	~Interface();
 
+	// not used yet
 	void initializeSensors();
 
-	// to get the latest rocket state 
+	// to get the latest rocket state. return a pointer to latestState
 	rocketState* getLatest();
+
+	// loop over each sensor and update the latestState
 	void update();
 private:
 	rocketState latestState {0, 0, 0};
 
-    Sensor* testSensorptr; 
+    // Sensor* testSensorptr; 
     TestSensor myTestSensor;
 
 };

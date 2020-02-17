@@ -6,7 +6,7 @@ Sensor::Sensor() {
 	// create thread
 	std::cout << "create thread" << std::endl;
 
-	thisThread = std::thread(&Sensor::update, this);
+	thisThread = std::thread(&Sensor::run, this);
     thisThread.detach();
 }
 
@@ -21,6 +21,6 @@ void Sensor::initialize() {
 
 }
 
-void Sensor::update() {
+void Sensor::run() {
 
 }

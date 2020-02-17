@@ -1,9 +1,8 @@
 #include "TestSensor.h"
-#include<iostream>
 #include<chrono>
 #include<thread>
 
-void TestSensor::update() {
+void TestSensor::run() {
 	for(int i = 0; i < 5; ++i)
 	{	
 		std::this_thread::sleep_for (std::chrono::milliseconds(1000));
@@ -17,7 +16,7 @@ void TestSensor::increment() {
 	sensorValue++;
 }
 void TestSensor::initialize() {
-	update();
+	
 }
 
 int TestSensor::getValue() {

@@ -2,7 +2,6 @@
 #define _SENSOR_H
 
 #include<mutex>
-#include<iostream>
 #include<thread>
 
 class Sensor
@@ -12,7 +11,7 @@ public:
 	~Sensor();
 
 	virtual void initialize();
-	virtual void update();
+	virtual void run();
 
 protected:
 	std::mutex mutex;

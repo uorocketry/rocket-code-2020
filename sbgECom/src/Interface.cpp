@@ -1,10 +1,7 @@
 #include "Interface.h"
 #include "Sensor/TestSensor.h"
 #include "Sensor/Sensor.h"
-#include<thread>
-#include<chrono>
-#include<unordered_map>
-#include<iostream>
+
 
 Interface::Interface() {
 
@@ -19,10 +16,9 @@ void Interface::initializeSensors() {
 }
 
 void Interface::update() {
-
+	latestState.x = myTestSensor.getValue();
 }
 rocketState* Interface::getLatest() {
-	latestState.x = myTestSensor.getValue();
-
+	
 	return &latestState;
 }
