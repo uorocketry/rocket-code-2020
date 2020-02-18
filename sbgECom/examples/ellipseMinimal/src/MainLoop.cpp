@@ -18,7 +18,7 @@ int main()
 	while (true) {
 		myInterface.update();
 		currentState = myInterface.getLatest();
-		cout << currentState->x << "\n";
+		cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
 
 	}
 
