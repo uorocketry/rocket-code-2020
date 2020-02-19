@@ -2,11 +2,12 @@
 #define _MOTOR_H
 
 #include "stateMachine/StateMachine.h"
+#include "rocketState.h"
 
 class RocketSMData : public EventData
 {
 public:
-	INT speed;
+	rocketState *data;
 };
 
 class RocketSM : public StateMachine
@@ -33,11 +34,11 @@ private:
 	};
 
 	// Define the state machine state functions with event data type
-	STATE_DECLARE(RocketSM, 	Flight,			NoEventData)
+	STATE_DECLARE(RocketSM, 	Flight,			RocketSMData)
 	EXIT_DECLARE(RocketSM, ExitFlight)
-	STATE_DECLARE(RocketSM, 	Descent,		NoEventData)
+	STATE_DECLARE(RocketSM, 	Descent,		RocketSMData)
 	EXIT_DECLARE(RocketSM, 	ExitDescent)
-	STATE_DECLARE(RocketSM, 	Ground,			NoEventData)
+	STATE_DECLARE(RocketSM, 	Ground,			RocketSMData)
 
 
 	// STATE_DECLARE(RocketSM, 	Ground,			RocketSMData)

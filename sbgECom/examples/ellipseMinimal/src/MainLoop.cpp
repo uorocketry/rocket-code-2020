@@ -1,4 +1,5 @@
 #include "stateMachine/stdafx.h"
+#include "stateMachine/StateMachine.h"
 #include "RocketSM.h"
 #include"ReadSensors.h"
 #include "Interface.h"
@@ -32,8 +33,10 @@ int main()
 			RocketSM.Touchdown();
 		}
 		
-
-		RocketSM.ExecuteCurrentState();
+		RocketSMData data;
+		data.data = currentState;
+		EventData* dataPtr = &data;
+		RocketSM.ExecuteCurrentState(dataPtr);
 	}
 
 
