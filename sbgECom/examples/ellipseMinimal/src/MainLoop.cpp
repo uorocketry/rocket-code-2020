@@ -14,12 +14,26 @@ int main()
 	// myInterface.initializeSensors();
 	
 	rocketState *currentState;
+
+	RocketSM RocketSM;
 	 
 	while (true) {
 		myInterface.update();
 		currentState = myInterface.getLatest();
-		cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
+		// cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
 
+
+		if (currentState->x == 102) {
+			RocketSM.Apogee();
+		}
+
+
+		if (currentState->x == 103) {
+			RocketSM.Touchdown();
+		}
+		
+
+		RocketSM.ExecuteCurrentState();
 	}
 
 
