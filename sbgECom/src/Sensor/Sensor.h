@@ -1,18 +1,23 @@
-#ifndef _SENSORSREAD_H
-#define _SENSORSREAD_H
+#ifndef _SENSOR_H
+#define _SENSOR_H
 
 #include<mutex>
-#include<iostream>
-
+#include<thread>
 
 class Sensor
 {
 public:
-	std::mutex mutex;
+	Sensor();
+	~Sensor();
 
 	virtual void initialize();
-	virtual void update();
+	virtual void run();
+
+protected:
+	std::mutex mutex;
 	
+private:
+	std::thread thisThread;
 };
 
 

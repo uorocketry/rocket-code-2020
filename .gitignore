@@ -51,3 +51,5 @@ _deps
 ### CMake Patch ###
 # External projects
 *-prefix/
+
+sbgECom/projects/unix/CMakeFiles/*

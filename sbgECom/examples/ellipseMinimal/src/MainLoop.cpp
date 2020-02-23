@@ -1,0 +1,44 @@
+#include "stateMachine/stdafx.h"
+#include "stateMachine/StateMachine.h"
+#include "RocketSM.h"
+#include"ReadSensors.h"
+#include "Interface.h"
+#include "rocketState.h"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	Interface myInterface;
+
+	// myInterface.initializeSensors();
+	
+	rocketState *currentState;
+
+	RocketSM RocketSM;
+	 
+	while (true) {
+		myInterface.update();
+		currentState = myInterface.getLatest();
+		// cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
+
+
+		if (currentState->x == 102) {
+			RocketSM.Apogee();
+		}
+
+
+		if (currentState->x == 103) {
+			RocketSM.Touchdown();
+		}
+		
+		RocketSMData data;
+		data.data = currentState;
+		EventData* dataPtr = &data;
+		RocketSM.ExecuteCurrentState(dataPtr);
+	}
+
+
+	return 0;
+}

@@ -193,7 +193,9 @@ void StateMachine::StateEngine(const StateMapRowEx* const pStateMapEx)
 
 			// Execute the state action passing in event data
 			ASSERT_TRUE(state != NULL);
-			state->InvokeStateAction(this, pDataTemp);
+			
+			// we don't want to execute the StateAction because the ExecuteCurrentState method will do it
+			// state->InvokeStateAction(this, pDataTemp);
 		}
 
 		// If event data was used, then delete it
@@ -217,7 +219,7 @@ void StateMachine::StateEngine(const StateMapRowEx* const pStateMapEx)
 
 
 // Execute the ST_StateName function according to the current state
-void StateMachine::ExecuteCurrentState()
+void StateMachine::ExecuteCurrentState(EventData* data)
 {
 	// std::cout << (int)GetCurrentState() << "\n";
 
@@ -225,13 +227,13 @@ void StateMachine::ExecuteCurrentState()
 
 	if (pStateMapEx != NULL)
 	{
-		const EventData* pDataTemp = NULL;
+		// const EventData* pDataTemp = NULL;
 		
 
 		const StateBase* state = pStateMapEx[m_currentState].State;
 
 		// execute the function of the state
-		state->InvokeStateAction(this, pDataTemp);
+		state->InvokeStateAction(this, data);
 
 	}
 

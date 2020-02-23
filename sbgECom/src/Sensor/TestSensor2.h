@@ -1,9 +1,9 @@
-#ifndef _TESTSENSOR_H
-#define _TESTSENSOR_H
+#ifndef _TESTSENSOR2_H
+#define _TESTSENSOR2_H
 
 #include "Sensor.h"
 
-class TestSensor : public Sensor
+class TestSensor2 : public Sensor
 {
 public:
 	void run();
