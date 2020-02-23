@@ -39,13 +39,15 @@ void RocketSM::Touchdown()
 // code for the flight state
 STATE_DEFINE(RocketSM, Flight, RocketSMData)
 {
-	cout << "RocketSM::ST_Flight: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
+	// cout << "RocketSM::ST_Flight: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
+	printf("RocketSM::ST_Flight: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
 }
 
 // code for the Descent state
 STATE_DEFINE(RocketSM, Descent, RocketSMData)
 {
-	cout << "RocketSM::ST_Descent: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
+	// cout << "RocketSM::ST_Descent: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
+	printf("RocketSM::ST_Descent: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
 	// m_currentSpeed = 0; 
 
 	// perform the descent processing here
@@ -59,7 +61,8 @@ STATE_DEFINE(RocketSM, Descent, RocketSMData)
 STATE_DEFINE(RocketSM, Ground, RocketSMData)
 {
 	// cout << "RocketSM::ST_Ground : Speed is " << data->speed << endl;
-	cout << "RocketSM::ST_Ground: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
+	// cout << "RocketSM::ST_Ground: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
+	printf("RocketSM::ST_Ground: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
 
 	// m_currentSpeed = data->speed;
 

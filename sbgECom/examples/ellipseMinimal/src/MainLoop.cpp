@@ -24,12 +24,13 @@ int main()
 		// cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
 
 
-		if (currentState->x == 102) {
+		if (currentState->Xangle >= 30.) {
 			RocketSM.Apogee();
+			// cout << "Apogee";
 		}
 
 
-		if (currentState->x == 103) {
+		if (currentState->Xangle >= 60.) {
 			RocketSM.Touchdown();
 		}
 		

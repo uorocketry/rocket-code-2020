@@ -4,9 +4,10 @@
 
 //all the informations about the rocket that the state machine will need 
 struct rocketState {
-	int x;
-	int y;
-	int z;
+	float Xangle;
+	float Yangle;
+	float Zangle;
+	int testSensor;
 };
 
 #endif

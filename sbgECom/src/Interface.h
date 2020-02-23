@@ -3,6 +3,7 @@
 #include "rocketState.h"
 #include "Sensor/TestSensor.h"
 #include "Sensor/TestSensor2.h"
+#include "Sensor/SBGSensor.h"
 #include "Sensor/Sensor.h"
 
 
@@ -26,6 +27,8 @@ private:
     // Sensor* testSensorptr; 
     TestSensor myTestSensor;
     TestSensor2 myTestSensor2;
+    SBGSensor mySbgSensor;
+
 
 };
 
