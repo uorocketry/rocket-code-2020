@@ -20,9 +20,11 @@
 //Porting Code to Raspberry pi 4 with WiringPi
 //I'll learn to fork later
 
-/*TODO translate toggleOneShot, readAltitude, readTemp from arduino to wiringpi*/
-
+/*TODO translate IIC_Read, IIC_Write, toggleOneShot, readAltitude, readTemp from arduino to wiringpi*/
+#include <wiringPi.h>
 #include <wiringPiI2C.h>
+#include <wiringSerial.h>
+
 #include "SparkFunMPL3115A2.h"
 
 MPL3115A2::MPL3115A2()
@@ -32,9 +34,28 @@ MPL3115A2::MPL3115A2()
 
 void MPL3115A2::begin(uint8_t deviceAddress)
 {
-  // Let's assume that Wire.begin(); has been done elsewhere
   wiringPiSetupGpio (void) ; //use the Broadcom GPIO pin numbers
   _I2Caddress = deviceAddress;
+}
+
+// These are the two I2C functions in this sketch.
+byte MPL3115A2::IIC_Read(byte regAddr)
+{
+  // This function reads one byte over IIC
+  _i2cPort->beginTransmission(_I2Caddress);
+  _i2cPort->write(regAddr);  // Address of CTRL_REG1
+  _i2cPort->endTransmission(false); // Send data to I2C dev with option for a repeated start. THIS IS NECESSARY and not supported before Arduino V1.0.1!
+  _i2cPort->requestFrom(_I2Caddress, 1); // Request the data...
+  return _i2cPort->read();
+}
+
+void MPL3115A2::IIC_Write(byte regAddr, byte value)
+{
+  // This function writes one byto over IIC
+  _i2cPort->beginTransmission(_I2Caddress);
+  _i2cPort->write(regAddr);
+  _i2cPort->write(value);
+  _i2cPort->endTransmission(true);
 }
 
 //Clears then sets the OST bit which causes the sensor to immediately take another reading
