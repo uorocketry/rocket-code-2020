@@ -39,16 +39,24 @@ void RocketSM::Touchdown()
 // code for the flight state
 STATE_DEFINE(RocketSM, Flight, RocketSMData)
 {
-	// cout << "RocketSM::ST_Flight: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
-	printf("RocketSM::ST_Flight: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
+	printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+		data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+		data->data->sbg.barometricAltitude, 
+		data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+		// data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+		);
 }
 
 // code for the Descent state
 STATE_DEFINE(RocketSM, Descent, RocketSMData)
 {
-	// cout << "RocketSM::ST_Descent: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
-	printf("RocketSM::ST_Descent: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
-	// m_currentSpeed = 0; 
+
+	printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+		data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+		data->data->sbg.barometricAltitude, 
+		data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+		// data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+		);
 
 	// perform the descent processing here
 	// transition to Flight via an internal event
@@ -60,11 +68,13 @@ STATE_DEFINE(RocketSM, Descent, RocketSMData)
 // code for the ground state
 STATE_DEFINE(RocketSM, Ground, RocketSMData)
 {
-	// cout << "RocketSM::ST_Ground : Speed is " << data->speed << endl;
-	// cout << "RocketSM::ST_Ground: Sensor 1 " << data->data->Xangle << " Sensor 2 "<< data->data->Yangle << endl;
-	printf("RocketSM::ST_Ground: Sensor 1 %f Sensor 2 %f\n", data->data->Xangle, data->data->Yangle);
 
-	// m_currentSpeed = data->speed;
+	printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+		data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+		data->data->sbg.barometricAltitude, 
+		data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+		// data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+		);
 
 }
 

@@ -3,9 +3,9 @@
 #include<thread>
 
 #include "iostream"
+#include "SBGData.h"
 #include <sbgEComLib.h>
 #include <time.h>
-#include <functional> // for bind()
 
 //----------------------------------------------------------------------//
 //  Call backs                                                          //
@@ -33,9 +33,10 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		//
 		// Simply display GPS Position in real time
 		//latitude longitude altitude
-		//printf("GPS Position:");
-		// printf("latitude longitude altitude: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
-				// pLogData->gpsPosData.latitude, pLogData->gpsPosData.longitude, pLogData->gpsPosData.altitude);
+		sens->data.gpsLatitude = pLogData->gpsPosData.latitude;
+		sens->data.gpsLongitude = pLogData->gpsPosData.longitude;
+		sens->data.gpsAltitude = pLogData->gpsPosData.altitude;
+
 		break;
 
 	case SBG_ECOM_LOG_EKF_EULER:
@@ -46,21 +47,40 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		// 		sbgRadToDegF(pLogData->ekfEulerData.euler[0]), sbgRadToDegF(pLogData->ekfEulerData.euler[1]), sbgRadToDegF(pLogData->ekfEulerData.euler[2]), 
 		// 		sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]));
 		
-		sens->sensorValue = sbgRadToDegF(pLogData->ekfEulerData.euler[0]);
-		// sens->changeValue(sbgRadToDegF(pLogData->ekfEulerData.euler[0]));
+		sens->data.Xangle = sbgRadToDegF(pLogData->ekfEulerData.euler[0]);
+		sens->data.Yangle = sbgRadToDegF(pLogData->ekfEulerData.euler[1]);
+		sens->data.Zangle = sbgRadToDegF(pLogData->ekfEulerData.euler[2]);
+		sens->data.XangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]);
+		sens->data.YangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]);
+		sens->data.YangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]);
 		break;
 
 	case SBG_ECOM_LOG_EKF_NAV:
-		//
-		// Simply display euler angles in real time
-		//
+	// 	//
+	// 	// Speed
+	// 	//
+		sens->data.velocityN = pLogData->ekfNavData.velocity[0];
+		sens->data.velocityE = pLogData->ekfNavData.velocity[1];
+		sens->data.velocityD = pLogData->ekfNavData.velocity[2];
+
 		
-		// printf("Vel x Vel Y Vel Z: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
-				// pLogData->ekfNavData.velocity[0], pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
+	// 	// printf("Vel x Vel Y Vel Z: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
+	// 			// pLogData->ekfNavData.velocity[0], pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
 
 
 		break;
+	case SBG_ECOM_LOG_PRESSURE:
+		sens->data.barometricAltitude = pLogData->pressureData.height;
+		break;
 
+	case SBG_ECOM_LOG_IMU_DATA:
+		// sens->data.filteredXangle = sbgRadToDegF(pLogData->imuData.gyroscopes[0]);
+		// sens->data.filteredYangle = sbgRadToDegF(pLogData->imuData.gyroscopes[1]);
+		// sens->data.filteredZangle = sbgRadToDegF(pLogData->imuData.gyroscopes[2]);
+		sens->data.filteredXacc = pLogData->imuData.accelerometers[0];
+		sens->data.filteredYacc = pLogData->imuData.accelerometers[1];
+		sens->data.filteredZacc = pLogData->imuData.accelerometers[2];
+		break;
 	default:
 		break;
 	}
@@ -129,10 +149,16 @@ void SBGSensor::run()
 				fprintf(stderr, "ellipseMinimal: Unable to get device information.\n");
 			}
 
+			std::cout << sbgEComLogEkfBuildSolutionStatus(SBG_ECOM_SOL_MODE_NAV_POSITION, 0) << "\n";
+
 			//
 			// Configure some output logs to 25 Hz
 			//
 			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_EKF_NAV, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
+			{
+				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_EKF_NAV.\n");
+			}
+			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_IMU_DATA, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
 			{
 				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_IMU_DATA.\n");
 			}
@@ -140,10 +166,14 @@ void SBGSensor::run()
 			{
 				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_EKF_EULER.\n");
 			}
-			if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_GPS1_POS, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
-			{
-				fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_GPS1_POS.\n");
-			}
+			// if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_GPS1_POS, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
+			// {
+			// 	fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_GPS1_POS.\n");
+			// }
+			// if (sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_PRESSURE, SBG_ECOM_OUTPUT_MODE_DIV_8) != SBG_NO_ERROR)
+			// {
+			// 	fprintf(stderr, "ellipseMinimal: Unable to configure output log SBG_ECOM_LOG_PRESSURE.\n");
+			// }
 			
 			//
 			// Display a message for real time data display
@@ -152,13 +182,11 @@ void SBGSensor::run()
 			printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 			printf("Euler Angles display with estimated standard deviation.\n");
 
+
 			//
 			// Define callbacks for received data
 			//
-			using namespace std::placeholders; 
 			sbgEComSetReceiveLogCallback(&comHandle, onLogReceived, this);
-			// sbgEComSetReceiveLogCallback(&comHandle, std::bind(&SBGSensor::onLogReceived, this, _1, _2, _3, _4, _5), NULL);
-
 			//
 			// Loop until the user exist
 			//
@@ -219,17 +247,11 @@ void SBGSensor::run()
 	// return retValue;
 }
 
-void SBGSensor::changeValue(float v){
-	std::lock_guard<std::mutex> lockGuard(mutex);
-	sensorValue = v;
-	// std::cout << "updated to " << sensorValue << std::endl;
-}
-
 void SBGSensor::initialize() {
 	
 }
 
-float SBGSensor::getValue() {
+sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
-	return sensorValue;
+	return data;
 }

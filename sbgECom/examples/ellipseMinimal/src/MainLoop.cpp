@@ -21,16 +21,14 @@ int main()
 	while (true) {
 		myInterface.update();
 		currentState = myInterface.getLatest();
-		// cout << "sensor 1 :" << currentState->x << " sensor 2 : " << currentState->y << "\n";
 
-
-		if (currentState->Xangle >= 30.) {
+		if (currentState->sbg.Xangle >= 30) {
 			RocketSM.Apogee();
 			// cout << "Apogee";
 		}
 
 
-		if (currentState->Xangle >= 60.) {
+		if (currentState->sbg.Xangle >= 60) {
 			RocketSM.Touchdown();
 		}
 		
