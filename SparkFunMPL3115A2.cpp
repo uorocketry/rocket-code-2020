@@ -35,10 +35,17 @@ MPL3115A2::MPL3115A2()
 void MPL3115A2::begin(uint8_t deviceAddress)
 {
   wiringPiSetupGpio (void) ; //use the Broadcom GPIO pin numbers
+  val = int wiringPiI2CSetup (int deviceAddress);
+  // if return value of wiringPiI2CSetup() is negative an error has occured
+  if (val < 0)
+  {
+      printf("wiringPiI2CSetup Error!!\n");
+      return -1;
+  }
   _I2Caddress = deviceAddress;
 }
 
-// These are the two I2C functions in this sketch.
+// These I2C function in this sketch.
 byte MPL3115A2::IIC_Read(byte regAddr)
 {
   // This function reads one byte over IIC
@@ -49,6 +56,7 @@ byte MPL3115A2::IIC_Read(byte regAddr)
   return _i2cPort->read();
 }
 
+// These I2C function in this sketch.
 void MPL3115A2::IIC_Write(byte regAddr, byte value)
 {
   // This function writes one byto over IIC
