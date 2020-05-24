@@ -63,6 +63,7 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		sens->data.velocityE = pLogData->ekfNavData.velocity[1];
 		sens->data.velocityD = pLogData->ekfNavData.velocity[2];
 
+		sens->data.solutionStatus = pLogData->ekfNavData.status;
 		
 	// 	// printf("Vel x Vel Y Vel Z: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
 	// 			// pLogData->ekfNavData.velocity[0], pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
@@ -149,7 +150,7 @@ void SBGSensor::run()
 				fprintf(stderr, "ellipseMinimal: Unable to get device information.\n");
 			}
 
-			std::cout << sbgEComLogEkfBuildSolutionStatus(SBG_ECOM_SOL_MODE_NAV_POSITION, 0) << "\n";
+			// std::cout << sbgEComLogEkfBuildSolutionStatus(SBG_ECOM_SOL_MODE_UNINITIALIZED, 0b0000) << "\n";
 
 			//
 			// Configure some output logs to 25 Hz

@@ -19,6 +19,7 @@ struct sbgData {
 	float filteredXacc;
 	float filteredYacc;
 	float filteredZacc;
+	int solutionStatus;
 };
 
 

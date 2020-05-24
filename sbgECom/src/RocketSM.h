@@ -23,6 +23,8 @@ public:
 private:
 	INT m_currentSpeed; 
 
+	int *get_bits(int n, int bitswanted);
+	void showInfo(const RocketSMData* data);
 	// State enumeration order must match the order of state method entries
 	// in the state map.
 	enum States
@@ -48,7 +50,7 @@ private:
 	// BEGIN_STATE_MAP
 	// 	STATE_MAP_ENTRY(&Flight)
 	// 	STATE_MAP_ENTRY(&Descent)
-	// 	STATE_MAP_ENTRY(&Ground)
+	// 	STATE_MAP_ENintTRY(&Ground)
 	// END_STATE_MAP
 
 	// State map to define state object order. Each state map entry defines a
