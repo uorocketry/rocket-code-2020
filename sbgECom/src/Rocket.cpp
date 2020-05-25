@@ -40,25 +40,12 @@ void Rocket::Touchdown()
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData)
 {
-	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
-	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
-	// 	data->data->sbg.barometricAltitude, 
-	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
-	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
-	// 	);
 	showInfo(data);
 }
 
 // code for the Descent state
 STATE_DEFINE(Rocket, Descent, RocketSMData)
 {
-
-	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
-	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
-	// 	data->data->sbg.barometricAltitude, 
-	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
-	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
-	// 	);
 	
 	showInfo(data);
 	// perform the descent processing here
@@ -72,12 +59,6 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 STATE_DEFINE(Rocket, Ground, RocketSMData)
 {
 
-	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
-	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
-	// 	data->data->sbg.barometricAltitude, 
-	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
-	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
-	// 	);
 	showInfo(data);
 
 }
