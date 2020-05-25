@@ -41,9 +41,7 @@ void StateMachine::ExternalEvent(BYTE newState, const EventData* pData)
 		// Generate the event
 		InternalEvent(newState, pData);
 
-		// Execute the state engine. This function call will only return
-		// when all state machine events are processed.
-		StateEngine();
+
 
 		// TODO - release software lock here 
 	}
@@ -60,6 +58,10 @@ void StateMachine::InternalEvent(BYTE newState, const EventData* pData)
 	m_pEventData = pData;
 	m_eventGenerated = TRUE;
 	m_newState = newState;
+
+	// Execute the state engine. This function call will only return
+	// when all state machine events are processed.
+	StateEngine();
 }
 
 //----------------------------------------------------------------------------
@@ -113,7 +115,9 @@ void StateMachine::StateEngine(const StateMapRow* const pStateMap)
 
 		// Execute the state action passing in event data
 		ASSERT_TRUE(state != NULL);
-		state->InvokeStateAction(this, pDataTemp);
+
+		// we don't want to execute the StateAction because the ExecuteCurrentState method will do it
+		// state->InvokeStateAction(this, pDataTemp);
 
 		// If event data was used, then delete it
 #if EXTERNAL_EVENT_NO_HEAP_DATA

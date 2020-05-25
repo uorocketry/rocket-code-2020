@@ -40,14 +40,18 @@ void Rocket::Touchdown()
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData)
 {
-	showInfo(data);
+	// showInfo(data);
+	std::cout << "Flight \n";
+	InternalEvent(ST_DESCENT);
 }
 
 // code for the Descent state
 STATE_DEFINE(Rocket, Descent, RocketSMData)
 {
-	
-	showInfo(data);
+	// showInfo(data);
+	std::cout << "Descent \n";
+	InternalEvent(ST_GROUND);
+
 	// perform the descent processing here
 	// transition to Flight via an internal event
 	// InternalEvent(ST_FLIGHT);
@@ -58,8 +62,8 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 // code for the ground state
 STATE_DEFINE(Rocket, Ground, RocketSMData)
 {
-
-	showInfo(data);
+	// std::cout << "Ground \n";
+	// showInfo(data);
 
 }
 
@@ -108,6 +112,6 @@ int* Rocket::get_bits(int n, int bitswanted){
 
 
 void Rocket::updateRocket() {
-	std::cout << "Updating!!\n";
-	// ExecuteCurrentState(NULL);
+	
+	ExecuteCurrentState(NULL);
 }
