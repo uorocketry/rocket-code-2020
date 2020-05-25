@@ -23,6 +23,8 @@ public:
 private:
 	INT m_currentSpeed; 
 
+	int *get_bits(int n, int bitswanted);
+	void showInfo(const RocketSMData* data);
 	// State enumeration order must match the order of state method entries
 	// in the state map.
 	enum States

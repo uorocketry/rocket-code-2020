@@ -17,8 +17,8 @@ void Interface::initializeSensors() {
 }
 
 void Interface::update() {
-	latestState.x = myTestSensor.getValue();
-	latestState.y = myTestSensor2.getValue();
+	latestState.sbg = mySbgSensor.getData();
+
 }
 rocketState* Interface::getLatest() {
 	

@@ -53,3 +53,5 @@ _deps
 *-prefix/
 
 sbgECom/projects/unix/CMakeFiles/*
+
+.vscode/

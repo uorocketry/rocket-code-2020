@@ -3,6 +3,8 @@
 #include "rocketState.h"
 #include "Sensor/TestSensor.h"
 #include "Sensor/TestSensor2.h"
+#include "Sensor/SBGData.h"
+#include "Sensor/SBGSensor.h"
 #include "Sensor/Sensor.h"
 
 
@@ -21,11 +23,12 @@ public:
 	// loop over each sensor and update the latestState
 	void update();
 private:
-	rocketState latestState {0, 0, 0};
+	rocketState latestState;
 
     // Sensor* testSensorptr; 
-    TestSensor myTestSensor;
     TestSensor2 myTestSensor2;
+    SBGSensor mySbgSensor;
+
 
 };
 

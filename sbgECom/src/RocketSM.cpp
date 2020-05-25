@@ -1,5 +1,6 @@
 #include "RocketSM.h"
 #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -39,15 +40,27 @@ void RocketSM::Touchdown()
 // code for the flight state
 STATE_DEFINE(RocketSM, Flight, RocketSMData)
 {
-	cout << "RocketSM::ST_Flight: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
+	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+	// 	data->data->sbg.barometricAltitude, 
+	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+	// 	);
+	showInfo(data);
 }
 
 // code for the Descent state
 STATE_DEFINE(RocketSM, Descent, RocketSMData)
 {
-	cout << "RocketSM::ST_Descent: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
-	// m_currentSpeed = 0; 
 
+	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+	// 	data->data->sbg.barometricAltitude, 
+	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+	// 	);
+	
+	showInfo(data);
 	// perform the descent processing here
 	// transition to Flight via an internal event
 	// InternalEvent(ST_FLIGHT);
@@ -58,10 +71,14 @@ STATE_DEFINE(RocketSM, Descent, RocketSMData)
 // code for the ground state
 STATE_DEFINE(RocketSM, Ground, RocketSMData)
 {
-	// cout << "RocketSM::ST_Ground : Speed is " << data->speed << endl;
-	cout << "RocketSM::ST_Ground: Sensor 1 " << data->data->x << " Sensor 2 "<< data->data->y << endl;
 
-	// m_currentSpeed = data->speed;
+	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
+	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
+	// 	data->data->sbg.barometricAltitude, 
+	// 	// data->data->sbg.filteredXacc, data->data->sbg.filteredYacc, data->data->sbg.filteredZacc
+	// 	data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD
+	// 	);
+	showInfo(data);
 
 }
 
@@ -77,5 +94,34 @@ EXIT_DEFINE(RocketSM, ExitDescent)
 {
 	cout << "RocketSM::ExitDescent" << endl;
 
+}
+
+
+void RocketSM::showInfo(const RocketSMData* data) {
+	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\t%d\t%d\t",
+		data->data->sbg.barometricAltitude,
+		data->data->sbg.gpsLatitude, data->data->sbg.gpsLongitude, data->data->sbg.gpsAltitude,
+		data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD,
+		data->data->sbg.solutionStatus,
+		(data->data->sbg.solutionStatus) & 0b1111,
+		(get_bits(data->data->sbg.solutionStatus, 28)[10]),
+		(get_bits(data->data->sbg.solutionStatus, 28)[11])
+		);
+	cout << bitset<32>(data->data->sbg.solutionStatus);
+	printf("\n");
+}
+
+int* RocketSM::get_bits(int n, int bitswanted){
+  int *bits = (int*)malloc(sizeof(int) * bitswanted);
+
+  int k;
+  for(k=0; k<bitswanted; k++){
+    int mask =  1 << k;
+    int masked_n = n & mask;
+    int thebit = masked_n >> k;
+    bits[k] = thebit;
+  }
+
+  return bits;
 }
 
