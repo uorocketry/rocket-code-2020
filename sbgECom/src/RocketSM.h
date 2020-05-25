@@ -50,7 +50,7 @@ private:
 	// BEGIN_STATE_MAP
 	// 	STATE_MAP_ENTRY(&Flight)
 	// 	STATE_MAP_ENTRY(&Descent)
-	// 	STATE_MAP_ENintTRY(&Ground)
+	// 	STATE_MAP_ENTRY(&Ground)
 	// END_STATE_MAP
 
 	// State map to define state object order. Each state map entry defines a
