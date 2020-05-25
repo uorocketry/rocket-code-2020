@@ -1,6 +1,6 @@
 #include "stateMachine/stdafx.h"
 #include "stateMachine/StateMachine.h"
-#include "RocketSM.h"
+#include "Rocket.h"
 #include"ReadSensors.h"
 #include "Interface.h"
 #include "rocketState.h"
@@ -16,26 +16,26 @@ int main()
 	
 	rocketState *currentState;
 
-	RocketSM RocketSM;
+	Rocket Rocket;
 	 
 	while (true) {
 		myInterface.update();
 		currentState = myInterface.getLatest();
 
 		if (currentState->sbg.Xangle >= 30) {
-			RocketSM.Apogee();
+			Rocket.Apogee();
 			// cout << "Apogee";
 		}
 
 
 		if (currentState->sbg.Xangle >= 60) {
-			RocketSM.Touchdown();
+			Rocket.Touchdown();
 		}
 		
 		RocketSMData data;
 		data.data = currentState;
 		EventData* dataPtr = &data;
-		RocketSM.ExecuteCurrentState(dataPtr);
+		Rocket.ExecuteCurrentState(dataPtr);
 	}
 
 

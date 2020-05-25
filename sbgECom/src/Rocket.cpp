@@ -1,18 +1,18 @@
-#include "RocketSM.h"
+#include "Rocket.h"
 #include <iostream>
 #include <bitset>
 
 using namespace std;
 
-RocketSM::RocketSM() :
+Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES),
 	m_currentSpeed(0)
 {
 }
 	
 // Apogee external event
-// void RocketSM::Apogee(RocketSMData* data)
-void RocketSM::Apogee()
+// void Rocket::Apogee(RocketSMData* data)
+void Rocket::Apogee()
 {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
@@ -25,7 +25,7 @@ void RocketSM::Apogee()
 }
 
 // Touchdown external event
-void RocketSM::Touchdown()
+void Rocket::Touchdown()
 {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
@@ -38,7 +38,7 @@ void RocketSM::Touchdown()
 // will be call in the main loop. 
 
 // code for the flight state
-STATE_DEFINE(RocketSM, Flight, RocketSMData)
+STATE_DEFINE(Rocket, Flight, RocketSMData)
 {
 	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
 	// 	data->data->sbg.Xangle, data->data->sbg.Yangle, data->data->sbg.Zangle, 
@@ -50,7 +50,7 @@ STATE_DEFINE(RocketSM, Flight, RocketSMData)
 }
 
 // code for the Descent state
-STATE_DEFINE(RocketSM, Descent, RocketSMData)
+STATE_DEFINE(Rocket, Descent, RocketSMData)
 {
 
 	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
@@ -69,7 +69,7 @@ STATE_DEFINE(RocketSM, Descent, RocketSMData)
 // STATE_DEFINE(RocketSM, Ground, RocketSMData)
 
 // code for the ground state
-STATE_DEFINE(RocketSM, Ground, RocketSMData)
+STATE_DEFINE(Rocket, Ground, RocketSMData)
 {
 
 	// printf("Angle: X %f\tY %f\tZ %f\tbarometerAltitude %f\tvelocityN %f\tvelocityE %f\tvelocityD %f\n", 
@@ -83,21 +83,21 @@ STATE_DEFINE(RocketSM, Ground, RocketSMData)
 }
 
 // Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(RocketSM, ExitFlight)
+EXIT_DEFINE(Rocket, ExitFlight)
 {
 	cout << "RocketSM::ExitFlight" << endl;
 
 }
 
 // Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(RocketSM, ExitDescent)
+EXIT_DEFINE(Rocket, ExitDescent)
 {
 	cout << "RocketSM::ExitDescent" << endl;
 
 }
 
 
-void RocketSM::showInfo(const RocketSMData* data) {
+void Rocket::showInfo(const RocketSMData* data) {
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\t%d\t%d\t",
 		data->data->sbg.barometricAltitude,
 		data->data->sbg.gpsLatitude, data->data->sbg.gpsLongitude, data->data->sbg.gpsAltitude,
@@ -111,7 +111,7 @@ void RocketSM::showInfo(const RocketSMData* data) {
 	printf("\n");
 }
 
-int* RocketSM::get_bits(int n, int bitswanted){
+int* Rocket::get_bits(int n, int bitswanted){
   int *bits = (int*)malloc(sizeof(int) * bitswanted);
 
   int k;
