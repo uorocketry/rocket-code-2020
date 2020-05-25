@@ -3,6 +3,7 @@
 
 #include "stateMachine/StateMachine.h"
 #include "rocketState.h"
+#include "Interface.h"
 
 class RocketSMData : public EventData
 {
@@ -20,8 +21,11 @@ public:
 	void Apogee();
 	void Touchdown();
 
+	void updateRocket();
+
 private:
-	INT m_currentSpeed; 
+	INT m_currentSpeed;
+
 
 	int *get_bits(int n, int bitswanted);
 	void showInfo(const RocketSMData* data);

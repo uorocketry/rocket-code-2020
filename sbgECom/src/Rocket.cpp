@@ -106,3 +106,8 @@ int* Rocket::get_bits(int n, int bitswanted){
   return bits;
 }
 
+
+void Rocket::updateRocket() {
+	std::cout << "Updating!!\n";
+	// ExecuteCurrentState(NULL);
+}
