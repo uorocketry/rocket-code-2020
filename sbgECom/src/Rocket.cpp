@@ -5,8 +5,7 @@
 using namespace std;
 
 Rocket::Rocket() :
-	StateMachine(ST_MAX_STATES),
-	m_currentSpeed(0)
+	StateMachine(ST_MAX_STATES)
 {
 }
 	
@@ -83,33 +82,16 @@ EXIT_DEFINE(Rocket, ExitDescent)
 
 
 void Rocket::showInfo(const RocketSMData* data) {
-	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\t%d\t%d\t",
+	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d",
 		data->data->sbg.barometricAltitude,
 		data->data->sbg.gpsLatitude, data->data->sbg.gpsLongitude, data->data->sbg.gpsAltitude,
 		data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD,
 		data->data->sbg.solutionStatus,
-		(data->data->sbg.solutionStatus) & 0b1111,
-		(get_bits(data->data->sbg.solutionStatus, 28)[10]),
-		(get_bits(data->data->sbg.solutionStatus, 28)[11])
+		(data->data->sbg.solutionStatus) & 0b1111
 		);
 	cout << bitset<32>(data->data->sbg.solutionStatus);
 	printf("\n");
 }
-
-int* Rocket::get_bits(int n, int bitswanted){
-  int *bits = (int*)malloc(sizeof(int) * bitswanted);
-
-  int k;
-  for(k=0; k<bitswanted; k++){
-    int mask =  1 << k;
-    int masked_n = n & mask;
-    int thebit = masked_n >> k;
-    bits[k] = thebit;
-  }
-
-  return bits;
-}
-
 
 void Rocket::updateRocket() {
 	
