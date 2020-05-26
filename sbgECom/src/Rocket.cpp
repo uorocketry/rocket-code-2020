@@ -3,8 +3,6 @@
 #include <bitset>
 #include "rocketState.h"
 
-using namespace std;
-
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES)
 {
@@ -79,14 +77,14 @@ STATE_DEFINE(Rocket, Ground, RocketSMData)
 // Exit action when WaitForDeceleration state exits.
 EXIT_DEFINE(Rocket, ExitFlight)
 {
-	cout << "RocketSM::ExitFlight" << endl;
+	std::cout << "RocketSM::ExitFlight\n";
 
 }
 
 // Exit action when WaitForDeceleration state exits.
 EXIT_DEFINE(Rocket, ExitDescent)
 {
-	cout << "RocketSM::ExitDescent" << endl;
+	std::cout << "RocketSM::ExitDescent\n";
 
 }
 
@@ -99,7 +97,7 @@ void Rocket::showInfo(const rocketState* data) {
 		data->sbg.solutionStatus,
 		(data->sbg.solutionStatus) & 0b1111
 		);
-	cout << "bits " << bitset<32>(data->sbg.solutionStatus) << "\n";
+	std::cout << "bits " << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 
 void Rocket::updateRocket() {
