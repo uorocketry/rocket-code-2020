@@ -27,6 +27,8 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 	//
 	// std::cout << pUserArg;
 	SBGSensor* sens = (SBGSensor*)pUserArg;
+	std::lock_guard<std::mutex> lockGuard(sens->mutex);
+
 	switch (msg)
 	{
 	case SBG_ECOM_LOG_GPS1_POS:

@@ -97,7 +97,7 @@ void Rocket::showInfo(const rocketState* data) {
 		data->sbg.solutionStatus,
 		(data->sbg.solutionStatus) & 0b1111
 		);
-	std::cout << "bits " << std::bitset<32>(data->sbg.solutionStatus) << "\n";
+	// std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 
 void Rocket::updateRocket() {
