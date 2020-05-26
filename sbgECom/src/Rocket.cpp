@@ -1,6 +1,7 @@
 #include "Rocket.h"
 #include <iostream>
 #include <bitset>
+#include "rocketState.h"
 
 using namespace std;
 
@@ -39,9 +40,12 @@ void Rocket::Touchdown()
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData)
 {
-	// showInfo(data);
-	std::cout << "Flight \n";
-	InternalEvent(ST_DESCENT);
+	rocketInterface.update();
+	rocketData = rocketInterface.getLatest();
+	showInfo(rocketData);
+	
+	// std::cout << "Flight \n";
+	// InternalEvent(ST_DESCENT);
 }
 
 // code for the Descent state
@@ -50,6 +54,10 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 	// showInfo(data);
 	std::cout << "Descent \n";
 	InternalEvent(ST_GROUND);
+
+	rocketInterface.update();
+	rocketData = rocketInterface.getLatest();
+	showInfo(rocketData);
 
 	// perform the descent processing here
 	// transition to Flight via an internal event
@@ -62,7 +70,9 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 STATE_DEFINE(Rocket, Ground, RocketSMData)
 {
 	// std::cout << "Ground \n";
-	// showInfo(data);
+	rocketInterface.update();
+	rocketData = rocketInterface.getLatest();
+	showInfo(rocketData);
 
 }
 
@@ -81,16 +91,15 @@ EXIT_DEFINE(Rocket, ExitDescent)
 }
 
 
-void Rocket::showInfo(const RocketSMData* data) {
-	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d",
-		data->data->sbg.barometricAltitude,
-		data->data->sbg.gpsLatitude, data->data->sbg.gpsLongitude, data->data->sbg.gpsAltitude,
-		data->data->sbg.velocityN, data->data->sbg.velocityE, data->data->sbg.velocityD,
-		data->data->sbg.solutionStatus,
-		(data->data->sbg.solutionStatus) & 0b1111
+void Rocket::showInfo(const rocketState* data) {
+	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
+		data->sbg.barometricAltitude,
+		data->sbg.gpsLatitude, data->sbg.gpsLongitude, data->sbg.gpsAltitude,
+		data->sbg.velocityN, data->sbg.velocityE, data->sbg.velocityD,
+		data->sbg.solutionStatus,
+		(data->sbg.solutionStatus) & 0b1111
 		);
-	cout << bitset<32>(data->data->sbg.solutionStatus);
-	printf("\n");
+	cout << "bits " << bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 
 void Rocket::updateRocket() {

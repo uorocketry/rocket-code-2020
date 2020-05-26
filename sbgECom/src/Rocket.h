@@ -7,8 +7,6 @@
 
 class RocketSMData : public EventData
 {
-public:
-	rocketState *data;
 };
 
 class Rocket : public StateMachine
@@ -24,7 +22,11 @@ public:
 	void updateRocket();
 
 private:
-	void showInfo(const RocketSMData* data);
+	void showInfo(const rocketState* data);
+
+	Interface rocketInterface;
+	rocketState* rocketData;
+
 	// State enumeration order must match the order of state method entries
 	// in the state map.
 	enum States
