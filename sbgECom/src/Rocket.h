@@ -1,26 +1,31 @@
-#ifndef _MOTOR_H
-#define _MOTOR_H
+#ifndef _ROCKET_H
+#define _ROCKET_H
 
-#include "StateMachine.h"
+#include "stateMachine/StateMachine.h"
+#include "rocketState.h"
+#include "Interface.h"
 
 class RocketSMData : public EventData
 {
-public:
-	INT speed;
 };
 
-class RocketSM : public StateMachine
+class Rocket : public StateMachine
 {
 public:
-	RocketSM();
+	Rocket();
 
 	// External events taken by this state machine
 	// void Apogee(RocketSMData* data);
 	void Apogee();
 	void Touchdown();
 
+	void updateRocket();
+
 private:
-	INT m_currentSpeed; 
+	void showInfo(const rocketState* data);
+
+	Interface rocketInterface;
+	rocketState* rocketData;
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
@@ -33,14 +38,14 @@ private:
 	};
 
 	// Define the state machine state functions with event data type
-	STATE_DECLARE(RocketSM, 	Flight,			NoEventData)
-	EXIT_DECLARE(RocketSM, ExitFlight)
-	STATE_DECLARE(RocketSM, 	Descent,		NoEventData)
-	EXIT_DECLARE(RocketSM, 	ExitDescent)
-	STATE_DECLARE(RocketSM, 	Ground,			NoEventData)
+	STATE_DECLARE(Rocket, 	Flight,			RocketSMData)
+	EXIT_DECLARE(Rocket, ExitFlight)
+	STATE_DECLARE(Rocket, 	Descent,		RocketSMData)
+	EXIT_DECLARE(Rocket, 	ExitDescent)
+	STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
 
 
-	// STATE_DECLARE(RocketSM, 	Ground,			RocketSMData)
+	// STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
 
 	// State map to define state object order. Each state map entry defines a
 	// state object.
@@ -56,7 +61,7 @@ private:
 		STATE_MAP_ENTRY_ALL_EX(&Flight, 0, 0, &ExitFlight)
 		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, 0, &ExitDescent)
 		STATE_MAP_ENTRY_EX(&Ground)
-	END_STATE_MAP_EX		
+	END_STATE_MAP_EX
 };
 
 #endif

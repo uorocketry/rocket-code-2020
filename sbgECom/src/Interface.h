@@ -1,8 +1,6 @@
 #ifndef _INTERFACE_H
 #define _INTERFACE_H
 #include "rocketState.h"
-#include "Sensor/TestSensor.h"
-#include "Sensor/TestSensor2.h"
 #include "Sensor/SBGData.h"
 #include "Sensor/SBGSensor.h"
 #include "Sensor/Sensor.h"
@@ -25,8 +23,6 @@ public:
 private:
 	rocketState latestState;
 
-    // Sensor* testSensorptr; 
-    TestSensor2 myTestSensor2;
     SBGSensor mySbgSensor;
 
 
