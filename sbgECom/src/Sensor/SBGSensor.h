@@ -22,8 +22,9 @@ private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 	#ifdef TESTING
+	// Used by the random number generator to construct realistic data
 	sbgData minDataRange{ 0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	sbgData maxDataRange{ 0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	sbgData maxDataRange{ 100,100,100,100,100,100,100,100,100,100,100,100,100 };
 	#endif
 
 };

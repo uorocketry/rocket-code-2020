@@ -14,7 +14,7 @@ public:
 	virtual void run();
 
 	#ifdef TESTING
-	/* Generate random data */
+	/* Generate random data. In the future, this can randomly oscillate instead. */
 	virtual void randomRun();
 	#endif
 

@@ -264,7 +264,7 @@ sbgData SBGSensor::getData() {
 #ifdef TESTING
 
 void SBGSensor::randomRun() {
-
+	
 }
 
 #endif

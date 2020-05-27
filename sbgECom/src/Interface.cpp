@@ -15,6 +15,11 @@ void Interface::initializeSensors() {
 }
 
 void Interface::update() {
+	#ifdef TESTING
+	return;
+	#endif
+
+
 	latestState.sbg = mySbgSensor.getData();
 
 }
