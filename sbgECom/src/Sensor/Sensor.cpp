@@ -24,3 +24,12 @@ void Sensor::initialize() {
 void Sensor::run() {
 
 }
+
+//	TESTS	//
+#ifdef TESTING
+
+void Sensor::randomRun() {
+
+}
+
+#endif

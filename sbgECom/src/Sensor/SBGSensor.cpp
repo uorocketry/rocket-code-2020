@@ -258,3 +258,13 @@ sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	return data;
 }
+
+
+//	TESTS	//
+#ifdef TESTING
+
+void SBGSensor::randomRun() {
+
+}
+
+#endif

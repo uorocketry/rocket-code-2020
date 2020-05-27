@@ -13,6 +13,11 @@ public:
 	virtual void initialize();
 	virtual void run();
 
+	#ifdef TESTING
+	/* Generate random data */
+	virtual void randomRun();
+	#endif
+
 protected:
 	std::mutex mutex;
 	

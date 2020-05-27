@@ -14,8 +14,17 @@ public:
 	void initialize();
 	sbgData getData();
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
+
+	#ifdef TESTING
+	virtual void randomRun();
+	#endif
 private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+	#ifdef TESTING
+	sbgData minDataRange{ 0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	sbgData maxDataRange{ 0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	#endif
 
 };
 

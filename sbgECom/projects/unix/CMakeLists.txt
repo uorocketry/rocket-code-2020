@@ -42,6 +42,10 @@ endif()
 # target_link_libraries(test_hello sbgECom)
 # add_dependencies(test_hello sbgECom)
 
+if (TESTING)
+    add_compile_definitions(TESTING)
+endif()
+
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
