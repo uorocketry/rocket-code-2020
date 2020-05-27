@@ -55,3 +55,7 @@ _deps
 sbgECom/projects/unix/CMakeFiles/*
 
 .vscode/
+
+.vs
+sbgECom/projects/unix/CMakeCache.txt
+sbgECom/projects/unix/out
