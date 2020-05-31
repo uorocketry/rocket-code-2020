@@ -7,6 +7,10 @@
 #include <sbgEComLib.h>
 #include <time.h>
 
+#ifdef TESTING
+#include "TestingSensor.h"
+#endif
+
 //----------------------------------------------------------------------//
 //  Call backs                                                          //
 //----------------------------------------------------------------------//
@@ -258,13 +262,3 @@ sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	return data;
 }
-
-
-//	TESTS	//
-#ifdef TESTING
-
-void SBGSensor::randomRun() {
-	
-}
-
-#endif
