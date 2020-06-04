@@ -16,7 +16,8 @@ public:
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
 
 	#ifdef TESTING
-	virtual void randomRun();
+	void setData(int index, const char* data);
+	std::string getDataLabel();
 	#endif
 private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};

@@ -8,7 +8,7 @@
 #include <time.h>
 
 #ifdef TESTING
-#include "TestingSensor.h"
+#include "TestingSBGSensor.h"
 #endif
 
 //----------------------------------------------------------------------//
@@ -262,3 +262,4 @@ sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	return data;
 }
+

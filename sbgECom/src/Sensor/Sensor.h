@@ -14,8 +14,8 @@ public:
 	virtual void run();
 
 	#ifdef TESTING
-	/* Generate random data. In the future, this can randomly oscillate instead. */
-	virtual void randomRun();
+	virtual void setData(int index, const char* dataInput);
+	virtual std::string getDataLabel();
 	#endif
 
 protected:
