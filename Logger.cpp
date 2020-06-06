@@ -33,14 +33,17 @@ Rocket::Rocket(string name)
 
 void Rocket::log(string filename)
 {
-    ofstream myfile;
-    myfile.open(filename.c_str(), std::ios_base::app); //append
-    cout << "Writing sensor1 data: " << this->getSensor1() << " to " << filename << endl;
-    cout << "Writing sensor2 data: " << this->getSensor2() << " to " << filename << endl;
+    ofstream myfile(filename.c_str(), std::ios_base::app); //append;
+    if(myfile.is_open())
+    {
+        cout << "Writing sensor1 data: " << this->getSensor1() << " to " << filename << endl;
+        cout << "Writing sensor2 data: " << this->getSensor2() << " to " << filename << endl;
 
-    myfile << "sensor1: "<< this->getSensor1() << endl;
-    myfile << "sensor2: "<< this->getSensor2() << endl;
-    myfile.close();
+        myfile << "sensor1: "<< this->getSensor1() << endl;
+        myfile << "sensor2: "<< this->getSensor2() << endl;
+        myfile.close();
+    }
+    else cout << "Unable to open " <<filename << endl;
 }
 
 //Rocket deconstructor
