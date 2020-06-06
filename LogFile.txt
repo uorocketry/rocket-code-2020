@@ -1,0 +1,4 @@
+sensor1: 25.83
+sensor2: 3000.44
+sensor1: 199.95
+sensor2: 3.14159
