@@ -2,7 +2,7 @@
 #include "chrono"
 #include "iostream"
 
-#define DELAY 0.005;
+#define DELAYMS 5000 //5000 microseconds = 0.005s = 200 Hz
 
 
 int main()
@@ -11,18 +11,20 @@ int main()
 	Rocket uOttRocket;
 	
 	std::chrono::time_point<std::chrono::high_resolution_clock> start, now; 
-	std::chrono::milliseconds ms;
-
+	std::chrono::microseconds ms;
+	std::chrono::duration<long double> elapsed_seconds;
 	start = std::chrono::system_clock::now();
 
 	
 	while (true) {
 		now = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsed_seconds = now - start;
-		ms = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed_seconds);
+		elapsed_seconds = now - start;
+		ms = std::chrono::duration_cast<std::chrono::microseconds>(elapsed_seconds);
 		std::cout << ms.count() << "\n";
 
-		// uOttRocket.updateRocket();
+
+
+		//uOttRocket.updateRocket();
 	}
 
 
