@@ -1,6 +1,8 @@
 #ifndef _SENSOR_H
 #define _SENSOR_H
 
+#include "testing/SensorType.h"
+
 #include<mutex>
 #include<thread>
 
@@ -16,6 +18,7 @@ public:
 	#ifdef TESTING
 	virtual void setData(int index, const char* dataInput);
 	virtual std::string getDataLabel();
+	virtual SensorType getSensorType();
 	#endif
 
 protected:

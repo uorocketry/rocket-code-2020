@@ -12,5 +12,9 @@ std::string Sensor::getDataLabel() {
 	return nullptr;
 }
 
+SensorType Sensor::getSensorType() {
+	return NONE;
+}
+
 #endif
 #endif

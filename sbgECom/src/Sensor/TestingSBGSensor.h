@@ -35,5 +35,9 @@ std::string SBGSensor::getDataLabel() {
 	return "sbg";
 }
 
+SensorType Sensor::getSensorType() {
+	return SBG_SENSOR;
+}
+
 #endif
 #endif
