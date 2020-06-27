@@ -20,6 +20,11 @@ public:
 
 	// loop over each sensor and update the latestState
 	void update();
+
+	// log sensor data to filename 
+	// if debugState is true print what is logging to terminal
+	void log(std::string filename, bool debugState);
+
 private:
 	rocketState latestState;
 
