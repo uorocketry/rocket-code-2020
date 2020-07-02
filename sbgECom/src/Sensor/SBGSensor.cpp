@@ -7,10 +7,6 @@
 #include <sbgEComLib.h>
 #include <time.h>
 
-#ifdef TESTING
-#include "TestingSBGSensor.h"
-#endif
-
 //----------------------------------------------------------------------//
 //  Call backs                                                          //
 //----------------------------------------------------------------------//

@@ -90,13 +90,13 @@ EXIT_DEFINE(Rocket, ExitDescent)
 
 
 void Rocket::showInfo(const rocketState* data) {
-	/*printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
+	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
 		data->sbg.barometricAltitude,
 		data->sbg.gpsLatitude, data->sbg.gpsLongitude, data->sbg.gpsAltitude,
 		data->sbg.velocityN, data->sbg.velocityE, data->sbg.velocityD,
 		data->sbg.solutionStatus,
 		(data->sbg.solutionStatus) & 0b1111
-		);*/
+	);
 	// std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 

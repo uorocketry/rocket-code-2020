@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
 
 namespace helper {
 	std::vector<std::string> stringSplit(std::string text, char delimiter) {

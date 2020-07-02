@@ -15,19 +15,8 @@ public:
 	sbgData getData();
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
 
-	#ifdef TESTING
-	void setData(int index, const char* data);
-	std::string getDataLabel();
-	#endif
 private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
-
-	#ifdef TESTING
-	// Used by the random number generator to construct realistic data
-	sbgData minDataRange{ 0,0,0,0,0,0,0,0,0,0,0,0,0 };
-	sbgData maxDataRange{ 100,100,100,100,100,100,100,100,100,100,100,100,100 };
-	#endif
-
 };
 
 #endif

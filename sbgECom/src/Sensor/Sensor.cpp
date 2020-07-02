@@ -2,10 +2,6 @@
 #include "iostream"
 #include<thread>
 
-#ifdef TESTING
-#include "TestingSensor.h"
-#endif
-
 Sensor::Sensor() {
 	// create thread
 	std::cout << "create thread" << std::endl;
