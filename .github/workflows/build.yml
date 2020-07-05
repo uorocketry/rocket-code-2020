@@ -16,8 +16,7 @@ jobs:
         with:
             cmake-version: '3.16.x'
             github-api-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: cd ./sbgEcom/projects/unix
       - name: Cmake Makefiles
-        run: cmake -G 'Unix Makefiles'
+        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
       - name: Run make
-        run: ../../bin
+        run: cd ./sbgECom/projects/unix; make
