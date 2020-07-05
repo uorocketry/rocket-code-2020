@@ -20,3 +20,8 @@ jobs:
         run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
       - name: Run make
         run: cd ./sbgECom/projects/unix; make
+      - name: "Upload Binary"
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: ./sbgECom/build
