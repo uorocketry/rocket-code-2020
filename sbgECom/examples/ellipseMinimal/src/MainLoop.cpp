@@ -25,9 +25,6 @@ int main()
 		elapsed_ns = std::chrono::duration<int64_t, std::nano>(now - start);
 		target_ns = std::chrono::duration<int64_t, std::nano>(TARGET_DELAY_NS * count++);		
 		
-		// std::cout << "elapsed " << elapsed_ns.count();
-		// std::cout << " Target " << (target_ns).count() << "\n";
-
 
 		if (target_ns > elapsed_ns) {
 			std::this_thread::sleep_for(target_ns - elapsed_ns);
