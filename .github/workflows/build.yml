@@ -1,0 +1,26 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialization
+      - uses: actions/checkout@v1
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.0
+        with:
+            cmake-version: '3.16.x'
+      - name: Cmake Makefiles
+        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: Run make
+        run: cd ./sbgECom/projects/unix; make
+      - name: "Upload Binary"
+        uses: actions/upload-artifact@v1
+        with:
+          name: bin
+          path: ./sbgECom/bin
