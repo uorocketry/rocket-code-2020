@@ -23,5 +23,5 @@ jobs:
       - name: "Upload Binary"
         uses: actions/upload-artifact@v1
         with:
-          name: build
-          path: ./sbgECom/build
+          name: bin
+          path: ./sbgECom/bin
