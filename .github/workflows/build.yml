@@ -1,0 +1,23 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialization
+      - uses: actions/checkout@v1
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.0
+        with:
+            cmake-version: '3.16.x'
+            github-api-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: cd ./sbgEcom/projects/unix
+      - name: Cmake Makefiles
+        run: cmake -G 'Unix Makefiles'
+      - name: Run make
+        run: ../../bin
