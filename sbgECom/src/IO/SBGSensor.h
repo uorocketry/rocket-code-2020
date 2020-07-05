@@ -1,13 +1,13 @@
 #ifndef _SBGSENSOR_H
 #define _SBGSENSOR_H
 
-#include "Sensor.h"
+#include "IO.h"
 #include "SBGData.h"
 
 #include <sbgEComLib.h>
 #include <time.h>
 
-class SBGSensor : public Sensor
+class SBGSensor : public IO
 {
 public:
 	void run();

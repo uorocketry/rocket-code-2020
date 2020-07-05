@@ -1,14 +1,13 @@
-#ifndef _SENSOR_H
-#define _SENSOR_H
+#pragma once
 
 #include<mutex>
 #include<thread>
 
-class Sensor
+class IO
 {
 public:
-	Sensor();
-	~Sensor();
+	IO();
+	~IO();
 
 	virtual void initialize();
 	virtual void run();
@@ -19,6 +18,3 @@ protected:
 private:
 	std::thread thisThread;
 };
-
-
-#endif

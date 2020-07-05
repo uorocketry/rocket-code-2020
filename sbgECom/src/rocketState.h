@@ -1,7 +1,6 @@
-#ifndef _ROCKETSTATE_H
-#define _ROCKETSTATE_H
+#pragma once
 
-#include "Sensor/SBGData.h"
+#include "IO/SBGData.h"
 
 
 //all the informations about the rocket that the state machine will need 
@@ -9,6 +8,3 @@ struct rocketState {
 	sbgData sbg;
 	int testSensor;
 };
-
-
-#endif
