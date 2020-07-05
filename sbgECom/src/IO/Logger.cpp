@@ -16,6 +16,7 @@ void Logger::run() {
     while (true) {
 
         //timing stuff here
+        //pause the thread
         dequeueToFile("Log.txt");
     }
 }
@@ -27,35 +28,39 @@ void Logger::enqueueSensorData(rocketState curSensorData) {
 
 
 void Logger::dequeueToFile(std::string filename) {
-    std::lock_guard<std::mutex> lockGuard(mutex);
-	while(!logQueue.empty()) {
-		rocketState temp = logQueue.front();
-		logQueue.pop();
+	if (!logQueue.empty()) {
+		rocketState currentState;
+        {
+            std::lock_guard<std::mutex> lockGuard(mutex);
+            currentState = logQueue.front();
+            logQueue.pop();
+        }
+
 		std::ofstream myfile(filename.c_str(), std::ios_base::app); //append
     	if(myfile.is_open()) {
-			myfile << "Xangle: "<< temp.sbg.Xangle << "\n";
-			myfile << "Yangle: "<< temp.sbg.Yangle << "\n";
-			myfile << "Zangle: "<< temp.sbg.Zangle << "\n";
+			myfile << "Xangle: "<< currentState.sbg.Xangle << "\n";
+			myfile << "Yangle: "<< currentState.sbg.Yangle << "\n";
+			myfile << "Zangle: "<< currentState.sbg.Zangle << "\n";
 
-			myfile << "XangleAcc: "<< temp.sbg.XangleAcc << "\n";
-			myfile << "YangleAcc: "<< temp.sbg.YangleAcc << "\n";
-			myfile << "ZangleAcc: "<< temp.sbg.ZangleAcc << "\n";
+			myfile << "XangleAcc: "<< currentState.sbg.XangleAcc << "\n";
+			myfile << "YangleAcc: "<< currentState.sbg.YangleAcc << "\n";
+			myfile << "ZangleAcc: "<< currentState.sbg.ZangleAcc << "\n";
 
-			myfile << "gpsLatitude: "<< temp.sbg.gpsLatitude << "\n";
-			myfile << "gpsLongitude: "<< temp.sbg.gpsLongitude << "\n";
-			myfile << "gpsAltitude: "<< temp.sbg.gpsAltitude << "\n";
+			myfile << "gpsLatitude: "<< currentState.sbg.gpsLatitude << "\n";
+			myfile << "gpsLongitude: "<< currentState.sbg.gpsLongitude << "\n";
+			myfile << "gpsAltitude: "<< currentState.sbg.gpsAltitude << "\n";
 
-			myfile << "barometricAltitude: "<< temp.sbg.barometricAltitude << "\n";
+			myfile << "barometricAltitude: "<< currentState.sbg.barometricAltitude << "\n";
 
-			myfile << "velocityN: "<< temp.sbg.velocityN << "\n";
-			myfile << "velocityE: "<< temp.sbg.velocityE << "\n";
-			myfile << "velocityD: "<< temp.sbg.velocityD << "\n";
+			myfile << "velocityN: "<< currentState.sbg.velocityN << "\n";
+			myfile << "velocityE: "<< currentState.sbg.velocityE << "\n";
+			myfile << "velocityD: "<< currentState.sbg.velocityD << "\n";
 
-			myfile << "filteredXacc: "<< temp.sbg.filteredXacc << "\n";
-			myfile << "filteredYacc: "<< temp.sbg.filteredYacc << "\n";
-			myfile << "filteredZacc: "<< temp.sbg.filteredZacc << "\n";
+			myfile << "filteredXacc: "<< currentState.sbg.filteredXacc << "\n";
+			myfile << "filteredYacc: "<< currentState.sbg.filteredYacc << "\n";
+			myfile << "filteredZacc: "<< currentState.sbg.filteredZacc << "\n";
 
-			myfile << "solutionStatus: "<< temp.sbg.solutionStatus << "\n";
+			myfile << "solutionStatus: "<< currentState.sbg.solutionStatus << "\n";
 
 			myfile.close();
 		}
