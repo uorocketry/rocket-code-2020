@@ -36,6 +36,7 @@ void Rocket::log(string filename)
     ofstream myfile(filename.c_str(), std::ios_base::app); //append;
     if(myfile.is_open())
     {
+        cout << "Name: " << this->name << endl;
         cout << "Writing sensor1 data: " << this->getSensor1() << " to " << filename << endl;
         cout << "Writing sensor2 data: " << this->getSensor2() << " to " << filename << endl;
 

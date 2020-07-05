@@ -4,6 +4,7 @@
 #include "Sensor/SBGData.h"
 #include "Sensor/SBGSensor.h"
 #include "Sensor/Sensor.h"
+#include <queue>
 
 
 class Interface
@@ -22,14 +23,23 @@ public:
 	void update();
 
 	// log sensor data to filename 
-	// if debugState is true print what is logging to terminal
-	void log(std::string filename, bool debugState);
+	void log(std::string filename);
 
 private:
 	rocketState latestState;
 
     SBGSensor mySbgSensor;
 
+	//queue of sensor data to be logged 
+	std::queue<rocketState> myqueue;
+
+	//called by log
+	//write data to rocketState struct and push to queue on main thread
+	void EnqueueSensorData(rocketState cur_sensor_data);
+
+	//called by log 
+	//pop queue and log the data from rocketState on logging thread
+	void DequeueToFile(std::string filename);
 
 };
 

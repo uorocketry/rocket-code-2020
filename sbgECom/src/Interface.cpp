@@ -2,7 +2,7 @@
 #include "Sensor/Sensor.h"
 #include <iostream>
 #include <fstream>
-using namespace std;
+#include <queue>
 
 
 Interface::Interface() {
@@ -22,65 +22,60 @@ void Interface::update() {
 
 }
 
-void Interface::log(string filename, bool debugState)
+void Interface::EnqueueSensorData(rocketState cur_sensor_data)
 {
-    ofstream myfile(filename.c_str(), std::ios_base::app); //append
-    if(myfile.is_open())
-    {
-		if(debugState)
+	this->myqueue.push(cur_sensor_data);
+}
+
+void Interface::DequeueToFile(std::string filename)
+{
+	while(!this->myqueue.empty())
+	{
+		rocketState temp = this->myqueue.front();
+		this->myqueue.pop();
+		std::ofstream myfile(filename.c_str(), std::ios_base::app); //append
+    	if(myfile.is_open())
 		{
-			cout << "Writing Xangle data: " << this->latestState.sbg.Xangle << " to " << filename << endl;
-			cout << "Writing Yangle data: " << this->latestState.sbg.Yangle << " to " << filename << endl;
-			cout << "Writing Zangle data: " << this->latestState.sbg.Zangle << " to " << filename << endl;
+			myfile << "Xangle: "<< temp.sbg.Xangle << "\n";
+			myfile << "Yangle: "<< temp.sbg.Yangle << "\n";
+			myfile << "Zangle: "<< temp.sbg.Zangle << "\n";
 
-			cout << "Writing Xangle data: " << this->latestState.sbg.Xangle << " to " << filename << endl;
-			cout << "Writing Yangle data: " << this->latestState.sbg.Yangle << " to " << filename << endl;
-			cout << "Writing Zangle data: " << this->latestState.sbg.Zangle << " to " << filename << endl;
+			myfile << "XangleAcc: "<< temp.sbg.XangleAcc << "\n";
+			myfile << "YangleAcc: "<< temp.sbg.YangleAcc << "\n";
+			myfile << "ZangleAcc: "<< temp.sbg.ZangleAcc << "\n";
 
-			cout << "Writing gpsLatitude data: " << this->latestState.sbg.gpsLatitude << " to " << filename << endl;
-			cout << "Writing gpsLongitude data: " << this->latestState.sbg.gpsLongitude << " to " << filename << endl;
-			cout << "Writing gpsAltitude data: " << this->latestState.sbg.gpsAltitude << " to " << filename << endl;
+			myfile << "gpsLatitude: "<< temp.sbg.gpsLatitude << "\n";
+			myfile << "gpsLongitude: "<< temp.sbg.gpsLongitude << "\n";
+			myfile << "gpsAltitude: "<< temp.sbg.gpsAltitude << "\n";
 
-			cout << "Writing barometricAltitude data: " << this->latestState.sbg.barometricAltitude << " to " << filename << endl;
-	
-			cout << "Writing velocityN data: " << this->latestState.sbg.velocityN << " to " << filename << endl;
-			cout << "Writing velocityE data: " << this->latestState.sbg.velocityE << " to " << filename << endl;
-			cout << "Writing velocityD data: " << this->latestState.sbg.velocityD << " to " << filename << endl;
+			myfile << "barometricAltitude: "<< temp.sbg.barometricAltitude << "\n";
 
-			cout << "Writing filteredXacc data: " << this->latestState.sbg.filteredXacc << " to " << filename << endl;
-			cout << "Writing filteredYacc data: " << this->latestState.sbg.filteredYacc << " to " << filename << endl;
-			cout << "Writing filteredZacc data: " << this->latestState.sbg.filteredZacc << " to " << filename << endl;
+			myfile << "velocityN: "<< temp.sbg.velocityN << "\n";
+			myfile << "velocityE: "<< temp.sbg.velocityE << "\n";
+			myfile << "velocityD: "<< temp.sbg.velocityD << "\n";
 
-			cout << "Writing solutionStatus data: " << this->latestState.sbg.solutionStatus << " to " << filename << endl;	
+			myfile << "filteredXacc: "<< temp.sbg.filteredXacc << "\n";
+			myfile << "filteredYacc: "<< temp.sbg.filteredYacc << "\n";
+			myfile << "filteredZacc: "<< temp.sbg.filteredZacc << "\n";
+
+			myfile << "solutionStatus: "<< temp.sbg.solutionStatus << "\n";
+
+			myfile.close();
 		}
+		else 
+		{
+			std::cout << "Unable to open " <<filename << "\n";
+		}
+	}
+}
 
-		myfile << "Xangle: "<< this->latestState.sbg.Xangle << endl;
-		myfile << "Yangle: "<< this->latestState.sbg.Yangle << endl;
-		myfile << "Zangle: "<< this->latestState.sbg.Zangle << endl;
+void Interface::log(std::string filename)
+{
+	//enqueue latest sensor data
+	EnqueueSensorData(this->latestState);
 
-		myfile << "XangleAcc: "<< this->latestState.sbg.XangleAcc << endl;
-		myfile << "YangleAcc: "<< this->latestState.sbg.YangleAcc << endl;
-		myfile << "ZangleAcc: "<< this->latestState.sbg.ZangleAcc << endl;
-
-		myfile << "gpsLatitude: "<< this->latestState.sbg.gpsLatitude << endl;
-		myfile << "gpsLongitude: "<< this->latestState.sbg.gpsLongitude << endl;
-		myfile << "gpsAltitude: "<< this->latestState.sbg.gpsAltitude << endl;
-
-		myfile << "barometricAltitude: "<< this->latestState.sbg.barometricAltitude << endl;
-
-		myfile << "velocityN: "<< this->latestState.sbg.velocityN << endl;
-		myfile << "velocityE: "<< this->latestState.sbg.velocityE << endl;
-		myfile << "velocityD: "<< this->latestState.sbg.velocityD << endl;
-
-		myfile << "filteredXacc: "<< this->latestState.sbg.filteredXacc << endl;
-		myfile << "filteredYacc: "<< this->latestState.sbg.filteredYacc << endl;
-		myfile << "filteredZacc: "<< this->latestState.sbg.filteredZacc << endl;
-
-		myfile << "solutionStatus: "<< this->latestState.sbg.solutionStatus << endl;
-
-        myfile.close();
-    }
-    else cout << "Unable to open " <<filename << endl;
+	//write the contents of queue to txt file
+	DequeueToFile(filename);
 }
 
 rocketState* Interface::getLatest() {
