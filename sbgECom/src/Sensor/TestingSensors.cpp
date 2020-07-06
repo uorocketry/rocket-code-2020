@@ -18,7 +18,7 @@ void TestingSensors::run() {
 
 
 void TestingSensors::initialize() {
-	ifstream logFile("/mnt/c/_Projects/rocket-code-2020/sbgECom/bin/data/test.csv");
+	ifstream logFile("./data/test.csv");
 
 	std::cout << "read file" << std::endl;
 

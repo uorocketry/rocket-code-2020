@@ -56,6 +56,8 @@ sbgECom/projects/unix/CMakeFiles/*
 
 .vscode/
 
+/build/
+
 .vs
 sbgECom/projects/visual/.vs
 sbgECom/projects/unix/CMakeCache.txt
