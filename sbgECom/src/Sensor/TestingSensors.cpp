@@ -37,7 +37,26 @@ void TestingSensors::initialize() {
 		std::cout << "current line: " << line << std::endl;
 
 		rocketState rocketState;
-		rocketState.sbg = {processFloat(currentRow[0]), processFloat(currentRow[1]), processFloat(currentRow[2]), processFloat(currentRow[3]), processFloat(currentRow[4]), processFloat(currentRow[5]), processDouble(currentRow[6]), processDouble(currentRow[7]), processDouble(currentRow[8]), processFloat(currentRow[9]), processFloat(currentRow[10]), processFloat(currentRow[11]), processFloat(currentRow[12]), processFloat(currentRow[13]),  processFloat(currentRow[14]), processFloat(currentRow[15]), processInt(currentRow[16])};
+		
+		// SBG:
+		rocketState.sbg.Xangle = processFloat(currentRow[0]);
+		rocketState.sbg.Yangle = processFloat(currentRow[1]);
+		rocketState.sbg.Zangle = processFloat(currentRow[2]);
+		rocketState.sbg.XangleAcc = processFloat(currentRow[3]);
+		rocketState.sbg.YangleAcc = processFloat(currentRow[4]);
+		rocketState.sbg.ZangleAcc = processFloat(currentRow[5]);
+		rocketState.sbg.gpsLatitude = processDouble(currentRow[6]);
+		rocketState.sbg.gpsLongitude = processDouble(currentRow[7]);
+		rocketState.sbg.gpsAltitude = processDouble(currentRow[8]);
+		rocketState.sbg.barometricAltitude = processFloat(currentRow[9]);
+		rocketState.sbg.velocityN = processFloat(currentRow[10]);
+		rocketState.sbg.velocityE = processFloat(currentRow[11]);
+		rocketState.sbg.velocityD = processFloat(currentRow[12]);
+		rocketState.sbg.filteredXacc = processFloat(currentRow[13]);
+		rocketState.sbg.filteredYacc = processFloat(currentRow[14]);
+		rocketState.sbg.filteredZacc = processFloat(currentRow[15]);
+		rocketState.sbg.solutionStatus = processInt(currentRow[16]);
+		
 		data.push(rocketState);
 	}
 
@@ -45,7 +64,7 @@ void TestingSensors::initialize() {
 }
 
 rocketState TestingSensors::getLatest() {
-	// mutex
+	// TODO: Add mutex
 	rocketState currentData = data.front();
 	data.pop();
 
