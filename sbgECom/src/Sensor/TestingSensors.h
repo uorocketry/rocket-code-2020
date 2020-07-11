@@ -5,7 +5,7 @@
 #include "Sensor.h"
 #include "SBGData.h"
 #include <iostream>
-#include <vector>
+#include <queue>
 
 class TestingSensors : public Sensor
 {
@@ -15,7 +15,7 @@ public:
 
 	rocketState getLatest();
 private:
-	std::vector<rocketState> data;
+	std::queue<rocketState> data;
 
 	int processInt(std::string data);
 	float processFloat(std::string data);

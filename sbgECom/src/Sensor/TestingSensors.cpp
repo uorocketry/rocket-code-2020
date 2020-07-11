@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 using namespace std;
 
 
@@ -39,7 +38,7 @@ void TestingSensors::initialize() {
 
 		rocketState rocketState;
 		rocketState.sbg = {processFloat(currentRow[0]), processFloat(currentRow[1]), processFloat(currentRow[2]), processFloat(currentRow[3]), processFloat(currentRow[4]), processFloat(currentRow[5]), processDouble(currentRow[6]), processDouble(currentRow[7]), processDouble(currentRow[8]), processFloat(currentRow[9]), processFloat(currentRow[10]), processFloat(currentRow[11]), processFloat(currentRow[12]), processFloat(currentRow[13]),  processFloat(currentRow[14]), processFloat(currentRow[15]), processInt(currentRow[16])};
-		data.push_back(rocketState);
+		data.push(rocketState);
 	}
 
 	std::cout << "loaded all lines " << std::endl;
@@ -47,10 +46,8 @@ void TestingSensors::initialize() {
 
 rocketState TestingSensors::getLatest() {
 	// mutex
-	rocketState currentData = data[0];
-
-	// TODO: Change this. Right now it is popping the wrong way around
-	data.pop_back();
+	rocketState currentData = data.front();
+	data.pop();
 
 	return currentData;
 }
