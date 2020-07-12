@@ -15,7 +15,7 @@
 void Logger::initialize() {
 	std::string filename = "./data/log.csv";
 	bool shouldWriteHeader = !std::experimental::filesystem::exists(filename);
-	fileStream = std::make_unique<std::ofstream>(filename, std::ios_base::app);
+	fileStream = std::make_shared<std::ofstream>(filename, std::ios_base::app);
 
 	if (shouldWriteHeader) {
 		writeHeader(*fileStream);

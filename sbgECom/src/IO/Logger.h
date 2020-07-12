@@ -34,5 +34,5 @@ private:
     //queue of sensor data to be logged 
 	std::queue<rocketState> logQueue;
 
-	std::unique_ptr<std::ofstream> fileStream = nullptr;
+	std::shared_ptr<std::ofstream> fileStream = nullptr;
 };
