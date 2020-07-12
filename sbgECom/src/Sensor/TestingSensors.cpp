@@ -17,7 +17,7 @@ void TestingSensors::run() {
 
 
 void TestingSensors::initialize() {
-	ifstream logFile("./data/test.csv");
+	ifstream logFile("./data/test-data.csv");
 
 	std::cout << "read file" << std::endl;
 
