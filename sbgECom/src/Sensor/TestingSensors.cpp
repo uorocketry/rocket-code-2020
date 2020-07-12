@@ -19,8 +19,6 @@ void TestingSensors::run() {
 void TestingSensors::initialize() {
 	ifstream logFile("./data/test-data.csv");
 
-	std::cout << "read file" << std::endl;
-
 	string line;
 	bool headerRow = true;
 	while (std::getline(logFile, line)) {
@@ -33,7 +31,6 @@ void TestingSensors::initialize() {
 		string cell;
 
 		vector<std::string> currentRow = helper::stringSplit(line, ',');
-		std::cout << "current line: " << line << std::endl;
 
 		rocketState rocketState;
 		
@@ -58,8 +55,6 @@ void TestingSensors::initialize() {
 		
 		data.push(rocketState);
 	}
-
-	std::cout << "loaded all lines " << std::endl;
 }
 
 rocketState TestingSensors::getLatest() {
