@@ -17,16 +17,16 @@ void Logger::initialize() {
 }
 
 void Logger::run() {
-    while (true) {
+	while (true) {
 
-        //timing stuff here
-        //pause the thread
-        dequeueToFile("Log.csv");
-    }
+		//timing stuff here
+		//pause the thread
+		dequeueToFile("Log.csv");
+	}
 }
 
 void Logger::enqueueSensorData(rocketState curSensorData) {
-    std::lock_guard<std::mutex> lockGuard(mutex);
+	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
 }
 
@@ -34,11 +34,11 @@ void Logger::enqueueSensorData(rocketState curSensorData) {
 void Logger::dequeueToFile(std::string filename) {
 	if (!logQueue.empty()) {
 		rocketState currentState;
-        {
-            std::lock_guard<std::mutex> lockGuard(mutex);
-            currentState = logQueue.front();
-            logQueue.pop();
-        }
+		{
+			std::lock_guard<std::mutex> lockGuard(mutex);
+			currentState = logQueue.front();
+			logQueue.pop();
+		}
 
 		bool shouldWriteHeader = false;
 		if (!headerWritten) {
@@ -47,7 +47,7 @@ void Logger::dequeueToFile(std::string filename) {
 		}
 
 		std::ofstream file(filename.c_str(), std::ios_base::app); //append
-    	if(file.is_open()) {
+		if(file.is_open()) {
 			if (shouldWriteHeader) {
 				writeHeader(file);
 			} else {
