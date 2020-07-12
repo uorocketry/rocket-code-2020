@@ -14,7 +14,7 @@ int main()
 	std::chrono::time_point<std::chrono::high_resolution_clock> start, now; 
 	std::chrono::duration<int64_t, std::nano> target_ns, elapsed_ns;
 	start = std::chrono::high_resolution_clock::now();
-	
+
 	unsigned long int count = 1;
 	while (true) {
 		now = std::chrono::high_resolution_clock::now();

@@ -6,6 +6,7 @@
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES)
 {
+	rocketInterface.initializeSensors();
 }
 	
 // Apogee external event

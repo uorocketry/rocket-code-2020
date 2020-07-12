@@ -12,6 +12,9 @@ Interface::~Interface() {
 
 void Interface::initializeSensors() {
 
+#ifndef NO_LOGS
+	logger.initialize();
+#endif
 }
 
 void Interface::update() {

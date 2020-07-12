@@ -13,7 +13,19 @@
 
 
 void Logger::initialize() {
+	std::string filename = "./data/log.csv";
+	bool shouldWriteHeader = !std::experimental::filesystem::exists(filename);
+	fileStream = new std::ofstream(filename, std::ios_base::app);
 
+	if (shouldWriteHeader) {
+		writeHeader(*fileStream);
+	}
+}
+
+Logger::~Logger() {
+	fileStream->close();
+	delete fileStream;
+	fileStream = nullptr;
 }
 
 void Logger::run() {
@@ -21,7 +33,7 @@ void Logger::run() {
 
 		//timing stuff here
 		//pause the thread
-		dequeueToFile("./data/log.csv");
+		dequeueToFile();
 	}
 }
 
@@ -31,8 +43,8 @@ void Logger::enqueueSensorData(rocketState curSensorData) {
 }
 
 
-void Logger::dequeueToFile(std::string filename) {
-	if (!logQueue.empty()) {
+void Logger::dequeueToFile() {
+	if (fileStream != nullptr && !logQueue.empty()) {
 		rocketState currentState;
 		{
 			std::lock_guard<std::mutex> lockGuard(mutex);
@@ -40,79 +52,72 @@ void Logger::dequeueToFile(std::string filename) {
 			logQueue.pop();
 		}
 
-		bool shouldWriteHeader = false;
-		if (!headerWritten) {
-			shouldWriteHeader = !std::experimental::filesystem::exists(filename);
-			headerWritten = true;
-		}
-
-		std::ofstream file(filename.c_str(), std::ios_base::app); //append
-		if(file.is_open()) {
-			if (shouldWriteHeader) {
-				writeHeader(file);
-			} else {
-				writeData(file, currentState);
-			}
-
-			file.close();
+		if(fileStream->is_open()) {
+			writeData(*fileStream, currentState);
 		} else {
-			std::cout << "Unable to open " << filename.c_str() << "\n";
+			std::cout << "Unable to open log file." << "\n";
 		}
+	} else {
+		// TODO: Add some delay or sleeping here
 	}
 }
 
-void Logger::writeHeader(std::ofstream& file) {
-	file << "Xangle,";
-	file << "Yangle,";
-	file << "Zangle,";
+void Logger::writeHeader(std::ofstream& fileStream) {
+	fileStream << "Xangle,";
+	fileStream << "Yangle,";
+	fileStream << "Zangle,";
 
-	file << "XangleAcc,";
-	file << "YangleAcc,";
-	file << "ZangleAcc,";
+	fileStream << "XangleAcc,";
+	fileStream << "YangleAcc,";
+	fileStream << "ZangleAcc,";
 
-	file << "gpsLatitude,";
-	file << "gpsLongitude,";
-	file << "gpsAltitude,";
+	fileStream << "gpsLatitude,";
+	fileStream << "gpsLongitude,";
+	fileStream << "gpsAltitude,";
 
-	file << "barometricAltitude,";
+	fileStream << "barometricAltitude,";
 
-	file << "velocityN,";
-	file << "velocityE,";
-	file << "velocityD,";
+	fileStream << "velocityN,";
+	fileStream << "velocityE,";
+	fileStream << "velocityD,";
 
-	file << "filteredXacc,";
-	file << "filteredYacc,";
-	file << "filteredZacc,";
+	fileStream << "filteredXacc,";
+	fileStream << "filteredYacc,";
+	fileStream << "filteredZacc,";
 
-	file << "solutionStatus,\n";
+	fileStream << "solutionStatus,\n";
+
+	fileStream.flush();
 }
 
-void Logger::writeData(std::ofstream& file, const rocketState& currentState) {
-	file << currentState.sbg.Xangle << ",";
-	file << currentState.sbg.Yangle << ",";
-	file << currentState.sbg.Zangle << ",";
+void Logger::writeData(std::ofstream& fileStream, const rocketState& currentState) {
+	fileStream << currentState.sbg.Xangle << ",";
+	fileStream << currentState.sbg.Yangle << ",";
+	fileStream << currentState.sbg.Zangle << ",";
 
-	file << currentState.sbg.XangleAcc << ",";
-	file << currentState.sbg.YangleAcc << ",";
-	file << currentState.sbg.ZangleAcc << ",";
+	fileStream << currentState.sbg.XangleAcc << ",";
+	fileStream << currentState.sbg.YangleAcc << ",";
+	fileStream << currentState.sbg.ZangleAcc << ",";
 
-	file << currentState.sbg.gpsLatitude << ",";
-	file << currentState.sbg.gpsLongitude << ",";
-	file << currentState.sbg.gpsAltitude << ",";
+	fileStream << currentState.sbg.gpsLatitude << ",";
+	fileStream << currentState.sbg.gpsLongitude << ",";
+	fileStream << currentState.sbg.gpsAltitude << ",";
 
-	file << currentState.sbg.barometricAltitude << ",";
+	fileStream << currentState.sbg.barometricAltitude << ",";
 
-	file << currentState.sbg.velocityN << ",";
-	file << currentState.sbg.velocityE << ",";
-	file << currentState.sbg.velocityD << ",";
+	fileStream << currentState.sbg.velocityN << ",";
+	fileStream << currentState.sbg.velocityE << ",";
+	fileStream << currentState.sbg.velocityD << ",";
 
-	file << currentState.sbg.filteredXacc << ",";
-	file << currentState.sbg.filteredYacc << ",";
-	file << currentState.sbg.filteredZacc << ",";
+	fileStream << currentState.sbg.filteredXacc << ",";
+	fileStream << currentState.sbg.filteredYacc << ",";
+	fileStream << currentState.sbg.filteredZacc << ",";
 
-	file << currentState.sbg.solutionStatus << ",";
+	fileStream << currentState.sbg.solutionStatus << ",";
 
-	file << "\n";
+	fileStream << "\n";
+
+	fileStream.flush();
 }
 
 #endif

@@ -6,11 +6,12 @@
 #include <queue>
 #include <mutex>
 #include <thread>
-
+#include <iostream>
 
 class Logger : public IO
 {
 public:
+	~Logger();
 
 	virtual void initialize();
 	virtual void run();
@@ -23,7 +24,7 @@ protected:
 
 private:
     //pop queue and log the data from rocketState on logging thread
-	void dequeueToFile(std::string filename);
+	void dequeueToFile();
 
 	void writeHeader(std::ofstream& file);
 	void writeData(std::ofstream& file, const rocketState& currentState);
@@ -33,6 +34,5 @@ private:
     //queue of sensor data to be logged 
 	std::queue<rocketState> logQueue;
 
-	// Has the csv header been written yet
-	bool headerWritten = false;
+	std::ofstream* fileStream = nullptr;
 };
