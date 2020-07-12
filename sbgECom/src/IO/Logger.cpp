@@ -21,7 +21,7 @@ void Logger::run() {
 
 		//timing stuff here
 		//pause the thread
-		dequeueToFile("Log.csv");
+		dequeueToFile("./data/log.csv");
 	}
 }
 
