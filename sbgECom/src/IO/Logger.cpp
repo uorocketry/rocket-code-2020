@@ -1,7 +1,9 @@
 #include "Logger.h"
 #include "rocketState.h"
 
+#include <sys/stat.h>
 #include <iostream>
+#include <experimental/filesystem>
 #include <thread>
 #include <iostream>
 #include <fstream>
@@ -17,7 +19,7 @@ void Logger::run() {
 
         //timing stuff here
         //pause the thread
-        dequeueToFile("Log.txt");
+        dequeueToFile("Log.csv");
     }
 }
 
@@ -36,36 +38,77 @@ void Logger::dequeueToFile(std::string filename) {
             logQueue.pop();
         }
 
-		std::ofstream myfile(filename.c_str(), std::ios_base::app); //append
-    	if(myfile.is_open()) {
-			myfile << "Xangle: "<< currentState.sbg.Xangle << "\n";
-			myfile << "Yangle: "<< currentState.sbg.Yangle << "\n";
-			myfile << "Zangle: "<< currentState.sbg.Zangle << "\n";
-
-			myfile << "XangleAcc: "<< currentState.sbg.XangleAcc << "\n";
-			myfile << "YangleAcc: "<< currentState.sbg.YangleAcc << "\n";
-			myfile << "ZangleAcc: "<< currentState.sbg.ZangleAcc << "\n";
-
-			myfile << "gpsLatitude: "<< currentState.sbg.gpsLatitude << "\n";
-			myfile << "gpsLongitude: "<< currentState.sbg.gpsLongitude << "\n";
-			myfile << "gpsAltitude: "<< currentState.sbg.gpsAltitude << "\n";
-
-			myfile << "barometricAltitude: "<< currentState.sbg.barometricAltitude << "\n";
-
-			myfile << "velocityN: "<< currentState.sbg.velocityN << "\n";
-			myfile << "velocityE: "<< currentState.sbg.velocityE << "\n";
-			myfile << "velocityD: "<< currentState.sbg.velocityD << "\n";
-
-			myfile << "filteredXacc: "<< currentState.sbg.filteredXacc << "\n";
-			myfile << "filteredYacc: "<< currentState.sbg.filteredYacc << "\n";
-			myfile << "filteredZacc: "<< currentState.sbg.filteredZacc << "\n";
-
-			myfile << "solutionStatus: "<< currentState.sbg.solutionStatus << "\n";
-
-			myfile.close();
+		bool shouldWriteHeader = false;
+		if (!headerWritten) {
+			shouldWriteHeader = !std::experimental::filesystem::exists(filename);
+			headerWritten = true;
 		}
-		else {
+
+		std::ofstream file(filename.c_str(), std::ios_base::app); //append
+    	if(file.is_open()) {
+			if (shouldWriteHeader) {
+				writeHeader(file);
+			} else {
+				writeData(file, currentState);
+			}
+
+			file.close();
+		} else {
 			std::cout << "Unable to open " << filename.c_str() << "\n";
 		}
 	}
+}
+
+void Logger::writeHeader(std::ofstream& file) {
+	file << "Xangle,";
+	file << "Yangle,";
+	file << "Zangle,";
+
+	file << "XangleAcc,";
+	file << "YangleAcc,";
+	file << "ZangleAcc,";
+
+	file << "gpsLatitude,";
+	file << "gpsLongitude,";
+	file << "gpsAltitude,";
+
+	file << "barometricAltitude,";
+
+	file << "velocityN,";
+	file << "velocityE,";
+	file << "velocityD,";
+
+	file << "filteredXacc,";
+	file << "filteredYacc,";
+	file << "filteredZacc,";
+
+	file << "solutionStatus,\n";
+}
+
+void Logger::writeData(std::ofstream& file, const rocketState& currentState) {
+	file << currentState.sbg.Xangle << ",";
+	file << currentState.sbg.Yangle << ",";
+	file << currentState.sbg.Zangle << ",";
+
+	file << currentState.sbg.XangleAcc << ",";
+	file << currentState.sbg.YangleAcc << ",";
+	file << currentState.sbg.ZangleAcc << ",";
+
+	file << currentState.sbg.gpsLatitude << ",";
+	file << currentState.sbg.gpsLongitude << ",";
+	file << currentState.sbg.gpsAltitude << ",";
+
+	file << currentState.sbg.barometricAltitude << ",";
+
+	file << currentState.sbg.velocityN << ",";
+	file << currentState.sbg.velocityE << ",";
+	file << currentState.sbg.velocityD << ",";
+
+	file << currentState.sbg.filteredXacc << ",";
+	file << currentState.sbg.filteredYacc << ",";
+	file << currentState.sbg.filteredZacc << ",";
+
+	file << currentState.sbg.solutionStatus << ",";
+
+	file << "\n";
 }

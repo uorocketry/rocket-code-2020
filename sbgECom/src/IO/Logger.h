@@ -25,8 +25,14 @@ private:
     //pop queue and log the data from rocketState on logging thread
 	void dequeueToFile(std::string filename);
 
+	void writeHeader(std::ofstream& file);
+	void writeData(std::ofstream& file, const rocketState& currentState);
+
 	std::thread thisThread;
 
     //queue of sensor data to be logged 
 	std::queue<rocketState> logQueue;
+
+	// Has the csv header been written yet
+	bool headerWritten;
 };
