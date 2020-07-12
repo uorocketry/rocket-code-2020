@@ -64,7 +64,6 @@ void TestingSensors::initialize() {
 }
 
 rocketState TestingSensors::getLatest() {
-	// TODO: Add mutex
 	rocketState currentData = data.front();
 	data.pop();
 
