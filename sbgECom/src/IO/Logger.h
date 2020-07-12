@@ -34,5 +34,5 @@ private:
 	std::queue<rocketState> logQueue;
 
 	// Has the csv header been written yet
-	bool headerWritten;
+	bool headerWritten = false;
 };
