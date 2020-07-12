@@ -28,7 +28,9 @@ private:
 
     SBGSensor mySbgSensor;
 
+#ifndef NO_LOGS
 	Logger logger;
+#endif
 };
 
 

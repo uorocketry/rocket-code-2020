@@ -1,3 +1,5 @@
+#ifndef NO_LOGS
+
 #include "Logger.h"
 #include "rocketState.h"
 
@@ -112,3 +114,5 @@ void Logger::writeData(std::ofstream& file, const rocketState& currentState) {
 
 	file << "\n";
 }
+
+#endif
