@@ -29,7 +29,6 @@ void TestingSensors::initialize() {
 			continue;
 		}
 
-
 		stringstream lineStream(line);
 		string cell;
 
