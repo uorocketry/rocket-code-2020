@@ -1,9 +1,4 @@
 #!/bin/bash
 
-cd ./sbgECom/projects/unix
-cmake -G 'Unix Makefiles'
-make
-
-cd ../../bin
-
-./MainLoop
+./build.sh
+./run.sh
