@@ -7,9 +7,11 @@
 #include "IO/IO.h"
 #include <queue>
 
+#ifdef TESTING
+#include "IO/TestingSensors.h"
+#endif // TESTING
 
-class Interface
-{
+class Interface {
 public:
 	Interface();
 	~Interface();
@@ -26,11 +28,16 @@ public:
 private:
 	rocketState latestState;
 
+#ifdef TESTING
+	TestingSensors testingSensors;
+#else
     SBGSensor mySbgSensor;
+#endif
 
 #ifndef NO_LOGS
 	Logger logger;
 #endif
+
 };
 
 

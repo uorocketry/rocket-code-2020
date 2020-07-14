@@ -8,8 +8,7 @@
 #include <thread>
 #include <iostream>
 
-class Logger : public IO
-{
+class Logger : public IO {
 public:
 	~Logger();
 
