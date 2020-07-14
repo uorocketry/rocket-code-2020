@@ -58,10 +58,15 @@ void TestingSensors::initialize() {
 }
 
 rocketState TestingSensors::getLatest() {
-	rocketState currentData = data.front();
-	data.pop();
+	if (!data.empty()) {
+		rocketState currentData = data.front();
+		data.pop();
 
-	return currentData;
+		return currentData;
+	} else {
+		exit(EXIT_SUCCESS);
+	}
+
 }
 
 int TestingSensors::processInt(std::string data) {
