@@ -96,7 +96,7 @@ void Rocket::showInfo(const rocketState* data) {
 		data->sbg.velocityN, data->sbg.velocityE, data->sbg.velocityD,
 		data->sbg.solutionStatus,
 		(data->sbg.solutionStatus) & 0b1111
-		);
+	);
 	// std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 

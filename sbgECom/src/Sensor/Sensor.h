@@ -1,6 +1,8 @@
 #ifndef _SENSOR_H
 #define _SENSOR_H
 
+#include "simulation/SensorType.h"
+
 #include<mutex>
 #include<thread>
 

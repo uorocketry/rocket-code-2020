@@ -5,6 +5,9 @@
 #include "Sensor/SBGSensor.h"
 #include "Sensor/Sensor.h"
 
+#ifdef TESTING
+#include "Sensor/TestingSensors.h"
+#endif // TESTING
 
 class Interface
 {
@@ -20,10 +23,18 @@ public:
 
 	// loop over each sensor and update the latestState
 	void update();
+
+
 private:
 	rocketState latestState;
 
+#ifdef TESTING
+	TestingSensors testingSensors;
+#else
     SBGSensor mySbgSensor;
+
+#endif
+
 
 
 };
