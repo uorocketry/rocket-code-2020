@@ -13,9 +13,14 @@
 
 
 void Logger::initialize() {
-	std::string filename = "./data/log.csv";
-	bool shouldWriteHeader = !std::experimental::filesystem::exists(filename);
-	fileStream = std::make_shared<std::ofstream>(filename, std::ios_base::app);
+	std::string path = "./data/";
+	std::string filename = "log.csv";
+	if (!std::experimental::filesystem::exists(path)) {
+		std::experimental::filesystem::create_directories(path);
+	}
+
+	bool shouldWriteHeader = !std::experimental::filesystem::exists(path + filename);
+	fileStream = std::make_shared<std::ofstream>(path + filename, std::ios_base::app);
 
 	if (shouldWriteHeader) {
 		writeHeader(*fileStream);
