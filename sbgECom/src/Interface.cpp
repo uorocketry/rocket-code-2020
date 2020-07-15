@@ -1,10 +1,9 @@
 #include "Interface.h"
-#include "Sensor/Sensor.h"
+#include "IO/IO.h"
 
 #ifdef TESTING
-#include "Sensor/TestingSensors.h"
+#include "IO/TestingSensors.h"
 #endif // TESTING
-
 
 Interface::Interface() {
 	initializeSensors();
@@ -17,30 +16,28 @@ Interface::~Interface() {
 void Interface::initializeSensors() {
 #ifdef TESTING
 	testingSensors.initialize();
-
-	return;
 #else
 	// initialize all sensors
-	return;
+	mySbgSensor.initialize();
 #endif
 
+#ifndef NO_LOGS
+	logger.initialize();
+#endif
 }
 
 void Interface::update() {
 #ifdef TESTING
 	latestState = testingSensors.getLatest();
-
-	return;
 #else
-
 	latestState.sbg = mySbgSensor.getData();
-	return;
 #endif
 
-
-
+#ifndef NO_LOGS
+	logger.enqueueSensorData(latestState);
+#endif
 }
+
 rocketState* Interface::getLatest() {
-	
 	return &latestState;
 }

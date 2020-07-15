@@ -8,18 +8,14 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
-
 void TestingSensors::run() {
 	return;
 }
 
-
 void TestingSensors::initialize() {
-	ifstream logFile("./data/test-data.csv");
+	std::ifstream logFile("./data/test-data.csv");
 
-	string line;
+	std::string line;
 	bool headerRow = true;
 	while (std::getline(logFile, line)) {
 		if (headerRow) { 
@@ -27,10 +23,10 @@ void TestingSensors::initialize() {
 			continue;
 		}
 
-		stringstream lineStream(line);
-		string cell;
+		std::stringstream lineStream(line);
+		std::string cell;
 
-		vector<std::string> currentRow = helper::stringSplit(line, ',');
+		std::vector<std::string> currentRow = helper::stringSplit(line, ',');
 
 		rocketState rocketState;
 		

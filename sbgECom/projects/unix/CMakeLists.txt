@@ -42,13 +42,18 @@ endif()
 # target_link_libraries(test_hello sbgECom)
 # add_dependencies(test_hello sbgECom)
 
+if (DEFINED ENV{NO_LOGS} OR NO_LOGS)
+	add_definitions(-D NO_LOGS)
+endif()
+
 if (DEFINED ENV{TESTING} OR TESTING)
-	add_definitions(-DTESTING)
+	add_definitions(-D TESTING)
 endif()
 
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
+target_link_libraries(MainLoop stdc++fs)
 
 
 # add_executable(ekinoxMinimal "${PROJECT_SOURCE_DIR}/../../examples/ekinoxMinimal/src/ekinoxMinimal.c")

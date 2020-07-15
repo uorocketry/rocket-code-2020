@@ -2,13 +2,12 @@
 #ifndef _TESTING_SENSORS_H
 #define _TESTING_SENSORS_H
 
-#include "Sensor.h"
+#include "IO.h"
 #include "SBGData.h"
 #include <iostream>
 #include <queue>
 
-class TestingSensors : public Sensor
-{
+class TestingSensors : public IO {
 public:
 	void run();
 	void initialize();

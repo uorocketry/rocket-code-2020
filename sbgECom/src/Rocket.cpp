@@ -4,14 +4,12 @@
 #include "rocketState.h"
 
 Rocket::Rocket() :
-	StateMachine(ST_MAX_STATES)
-{
+	StateMachine(ST_MAX_STATES) {
 }
 	
 // Apogee external event
 // void Rocket::Apogee(RocketSMData* data)
-void Rocket::Apogee()
-{
+void Rocket::Apogee() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
@@ -23,8 +21,7 @@ void Rocket::Apogee()
 }
 
 // Touchdown external event
-void Rocket::Touchdown()
-{
+void Rocket::Touchdown() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (ST_GROUND)					// ST_DESCENT
@@ -36,8 +33,7 @@ void Rocket::Touchdown()
 // will be call in the main loop. 
 
 // code for the flight state
-STATE_DEFINE(Rocket, Flight, RocketSMData)
-{
+STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
 	showInfo(rocketData);
@@ -47,8 +43,7 @@ STATE_DEFINE(Rocket, Flight, RocketSMData)
 }
 
 // code for the Descent state
-STATE_DEFINE(Rocket, Descent, RocketSMData)
-{
+STATE_DEFINE(Rocket, Descent, RocketSMData) {
 	// showInfo(data);
 	std::cout << "Descent \n";
 	InternalEvent(ST_GROUND);
@@ -65,8 +60,7 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 // STATE_DEFINE(RocketSM, Ground, RocketSMData)
 
 // code for the ground state
-STATE_DEFINE(Rocket, Ground, RocketSMData)
-{
+STATE_DEFINE(Rocket, Ground, RocketSMData) {
 	// std::cout << "Ground \n";
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
@@ -75,15 +69,13 @@ STATE_DEFINE(Rocket, Ground, RocketSMData)
 }
 
 // Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(Rocket, ExitFlight)
-{
+EXIT_DEFINE(Rocket, ExitFlight) {
 	std::cout << "RocketSM::ExitFlight\n";
 
 }
 
 // Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(Rocket, ExitDescent)
-{
+EXIT_DEFINE(Rocket, ExitDescent) {
 	std::cout << "RocketSM::ExitDescent\n";
 
 }
@@ -96,7 +88,7 @@ void Rocket::showInfo(const rocketState* data) {
 		data->sbg.velocityN, data->sbg.velocityE, data->sbg.velocityD,
 		data->sbg.solutionStatus,
 		(data->sbg.solutionStatus) & 0b1111
-	);
+		);
 	// std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 

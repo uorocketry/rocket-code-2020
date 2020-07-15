@@ -1,16 +1,17 @@
 #ifndef _INTERFACE_H
 #define _INTERFACE_H
 #include "rocketState.h"
-#include "Sensor/SBGData.h"
-#include "Sensor/SBGSensor.h"
-#include "Sensor/Sensor.h"
+#include "IO/SBGData.h"
+#include "IO/SBGSensor.h"
+#include "IO/Logger.h"
+#include "IO/IO.h"
+#include <queue>
 
 #ifdef TESTING
-#include "Sensor/TestingSensors.h"
+#include "IO/TestingSensors.h"
 #endif // TESTING
 
-class Interface
-{
+class Interface {
 public:
 	Interface();
 	~Interface();
@@ -24,7 +25,6 @@ public:
 	// loop over each sensor and update the latestState
 	void update();
 
-
 private:
 	rocketState latestState;
 
@@ -32,10 +32,11 @@ private:
 	TestingSensors testingSensors;
 #else
     SBGSensor mySbgSensor;
-
 #endif
 
-
+#ifndef NO_LOGS
+	Logger logger;
+#endif
 
 };
 
