@@ -7,6 +7,7 @@
 #include <mutex>
 #include <thread>
 #include <iostream>
+#include <condition_variable>
 
 class Logger : public IO {
 public:
@@ -33,5 +34,9 @@ private:
     //queue of sensor data to be logged 
 	std::queue<rocketState> logQueue;
 
+	// std::mutex writingMutex;
+	std::unique_lock<std::mutex> writingLock;
+	std::condition_variable writingCondition;
+	
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 };
