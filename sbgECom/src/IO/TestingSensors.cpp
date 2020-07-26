@@ -13,6 +13,8 @@ void TestingSensors::run() {
 }
 
 void TestingSensors::initialize() {
+	createThread = false;
+
 	std::ifstream logFile("./data/test-data.csv");
 
 	std::string line;
@@ -51,7 +53,7 @@ void TestingSensors::initialize() {
 		
 		data.push(rocketState);
 	}
-
+	
 	IO::initialize();
 }
 

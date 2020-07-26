@@ -14,11 +14,13 @@ IO::~IO() {
 }
 
 void IO::initialize() {
-	// create thread
-	std::cout << "create thread" << std::endl;
+	if (createThread) {
+		// create thread
+		std::cout << "create thread" << std::endl;
 
-	thisThread = std::thread(&IO::run, this);
-    thisThread.detach();
+		thisThread = std::thread(&IO::run, this);
+		thisThread.detach();
+	}
 }
 
 void IO::run() {
