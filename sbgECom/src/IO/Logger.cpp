@@ -16,7 +16,6 @@
 
 
 void Logger::initialize() {
-	std::mutex writingMutex;
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	std::string path = "./data/";
@@ -31,6 +30,8 @@ void Logger::initialize() {
 	if (shouldWriteHeader) {
 		writeHeader(*fileStream);
 	}
+
+	IO::initialize();
 }
 
 Logger::~Logger() {
@@ -38,18 +39,12 @@ Logger::~Logger() {
 }
 
 void Logger::run() {
-	
-
 	while (true) {
-
-		//timing stuff here
-		//pause the thread
-
 		if (!logQueue.empty()) {
 			dequeueToFile();
 			
 		} else {
-			writingCondition.wait_for(writingLock, std::chrono::duration<int64_t, std::nano>(1000000000/200));
+			writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
  	}
 }
