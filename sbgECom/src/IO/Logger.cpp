@@ -42,7 +42,6 @@ void Logger::run() {
 	while (true) {
 		if (!logQueue.empty()) {
 			dequeueToFile();
-			
 		} else {
 			writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
@@ -71,9 +70,6 @@ void Logger::dequeueToFile() {
 		} else {
 			std::cout << "Unable to open log file." << "\n";
 		}
-	} else {
-		// TODO: Add some delay or sleeping here
-
 	}
 }
 

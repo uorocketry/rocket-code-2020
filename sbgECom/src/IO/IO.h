@@ -3,8 +3,7 @@
 #include<mutex>
 #include<thread>
 
-class IO
-{
+class IO {
 public:
 	IO();
 	~IO();
@@ -13,8 +12,10 @@ public:
 	virtual void run();
 
 protected:
+	/** Must be set before initialize is called */
+	bool createThread = true;
+
 	std::mutex mutex;
-	
 private:
 	std::thread thisThread;
 };
