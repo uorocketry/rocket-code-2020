@@ -251,7 +251,7 @@ void SBGSensor::run()
 }
 
 void SBGSensor::initialize() {
-	
+	IO::initialize();
 }
 
 sbgData SBGSensor::getData() {

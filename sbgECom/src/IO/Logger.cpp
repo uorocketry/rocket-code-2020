@@ -10,9 +10,14 @@
 #include <iostream>
 #include <fstream>
 #include <queue>
+#include <chrono>
+#include <mutex>
+
 
 
 void Logger::initialize() {
+	writingLock = std::unique_lock<std::mutex>(writingMutex);
+
 	std::string path = "./data/";
 	std::string filename = "log.csv";
 	if (!std::experimental::filesystem::exists(path)) {
@@ -25,6 +30,8 @@ void Logger::initialize() {
 	if (shouldWriteHeader) {
 		writeHeader(*fileStream);
 	}
+
+	IO::initialize();
 }
 
 Logger::~Logger() {
@@ -33,21 +40,25 @@ Logger::~Logger() {
 
 void Logger::run() {
 	while (true) {
-
-		//timing stuff here
-		//pause the thread
-		dequeueToFile();
-	}
+		if (!logQueue.empty()) {
+			dequeueToFile();
+			
+		} else {
+			writingCondition.wait_for(writingLock, ONE_SECOND);
+		}
+ 	}
 }
 
 void Logger::enqueueSensorData(rocketState curSensorData) {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
+
+	writingCondition.notify_one();
 }
 
 
 void Logger::dequeueToFile() {
-	if (fileStream != nullptr && !logQueue.empty()) {
+	if (fileStream != nullptr) {
 		rocketState currentState;
 		{
 			std::lock_guard<std::mutex> lockGuard(mutex);
@@ -62,6 +73,7 @@ void Logger::dequeueToFile() {
 		}
 	} else {
 		// TODO: Add some delay or sleeping here
+
 	}
 }
 

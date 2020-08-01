@@ -51,6 +51,8 @@ void TestingSensors::initialize() {
 		
 		data.push(rocketState);
 	}
+
+	IO::initialize();
 }
 
 rocketState TestingSensors::getLatest() {

@@ -3,11 +3,7 @@
 #include<thread>
 
 IO::IO() {
-	// create thread
-	std::cout << "create thread" << std::endl;
-
-	thisThread = std::thread(&IO::run, this);
-    thisThread.detach();
+	
 }
 
 IO::~IO() {
@@ -18,7 +14,11 @@ IO::~IO() {
 }
 
 void IO::initialize() {
+	// create thread
+	std::cout << "create thread" << std::endl;
 
+	thisThread = std::thread(&IO::run, this);
+    thisThread.detach();
 }
 
 void IO::run() {
