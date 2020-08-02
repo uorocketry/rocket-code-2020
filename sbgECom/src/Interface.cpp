@@ -1,6 +1,7 @@
 #include "Interface.h"
 #include "IO/IO.h"
 
+
 #ifdef TESTING
 #include "IO/TestingSensors.h"
 #endif // TESTING
@@ -19,6 +20,8 @@ void Interface::initializeSensors() {
 #else
 	// initialize all sensors
 	mySbgSensor.initialize();
+
+	input.initialize();
 #endif
 
 #ifndef NO_LOGS
@@ -31,6 +34,12 @@ void Interface::update() {
 	latestState = testingSensors.getLatest();
 #else
 	latestState.sbg = mySbgSensor.getData();
+
+	latestState.inputEventNumber = input.getData();
+
+	if (latestState.inputEventNumber != -1) {
+		std::cout << latestState.inputEventNumber << "\n";
+	}
 #endif
 
 #ifndef NO_LOGS

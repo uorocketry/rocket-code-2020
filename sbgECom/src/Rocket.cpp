@@ -36,7 +36,7 @@ void Rocket::Touchdown() {
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
+	// showInfo(rocketData);
 	
 	// std::cout << "Flight \n";
 	// InternalEvent(ST_DESCENT);
@@ -50,7 +50,7 @@ STATE_DEFINE(Rocket, Descent, RocketSMData) {
 
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
+	// showInfo(rocketData);
 
 	// perform the descent processing here
 	// transition to Flight via an internal event
@@ -64,7 +64,7 @@ STATE_DEFINE(Rocket, Ground, RocketSMData) {
 	// std::cout << "Ground \n";
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
+	// showInfo(rocketData);
 
 }
 

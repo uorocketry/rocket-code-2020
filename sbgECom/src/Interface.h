@@ -4,6 +4,7 @@
 #include "IO/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
+#include "IO/Input.h"
 #include "IO/IO.h"
 #include <queue>
 
@@ -32,6 +33,7 @@ private:
 	TestingSensors testingSensors;
 #else
     SBGSensor mySbgSensor;
+	Input input;
 #endif
 
 #ifndef NO_LOGS
