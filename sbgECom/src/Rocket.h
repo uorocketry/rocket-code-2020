@@ -22,6 +22,7 @@ public:
 	void updateRocket();
 
 private:
+	void detectExternEvent(const rocketState* data);
 	void showInfo(const rocketState* data);
 
 	Interface rocketInterface;

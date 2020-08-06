@@ -36,9 +36,11 @@ void Rocket::Touchdown() {
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
+	detectExternEvent(rocketData);
+
 	// showInfo(rocketData);
 	
-	// std::cout << "Flight \n";
+	std::cout << "Flight \n";
 	// InternalEvent(ST_DESCENT);
 }
 
@@ -46,10 +48,12 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 STATE_DEFINE(Rocket, Descent, RocketSMData) {
 	// showInfo(data);
 	std::cout << "Descent \n";
-	InternalEvent(ST_GROUND);
+	// InternalEvent(ST_GROUND);
 
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
+
+	detectExternEvent(rocketData);
 	// showInfo(rocketData);
 
 	// perform the descent processing here
@@ -61,9 +65,12 @@ STATE_DEFINE(Rocket, Descent, RocketSMData) {
 
 // code for the ground state
 STATE_DEFINE(Rocket, Ground, RocketSMData) {
-	// std::cout << "Ground \n";
+	std::cout << "Ground \n";
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
+	
+	detectExternEvent(rocketData);
+
 	// showInfo(rocketData);
 
 }
@@ -80,6 +87,20 @@ EXIT_DEFINE(Rocket, ExitDescent) {
 
 }
 
+void Rocket::detectExternEvent(const rocketState* data) {
+	int eventNbr = data->inputEventNumber;
+	switch (eventNbr)
+	{
+	case 0:
+		Apogee();
+		break;
+	case 1:
+		Touchdown();
+		break;
+	default:
+		break;
+	}
+}
 
 void Rocket::showInfo(const rocketState* data) {
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",

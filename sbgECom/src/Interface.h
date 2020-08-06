@@ -28,6 +28,7 @@ public:
 
 private:
 	rocketState latestState;
+	
 
 #ifdef TESTING
 	TestingSensors testingSensors;
