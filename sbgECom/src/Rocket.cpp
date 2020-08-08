@@ -40,14 +40,22 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 
 	// showInfo(rocketData);
 	
-	std::cout << "Flight \n";
-	// InternalEvent(ST_DESCENT);
+}
+
+// Exit action when WaitForDeceleration state exits.
+EXIT_DEFINE(Rocket, ExitFlight) {
+	std::cout << "RocketSM::ExitFlight\n";
+
+}
+
+
+ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
+	std::cout << "RocketSM::EnterDescent\n";
+	
 }
 
 // code for the Descent state
 STATE_DEFINE(Rocket, Descent, RocketSMData) {
-	// showInfo(data);
-	std::cout << "Descent \n";
 	// InternalEvent(ST_GROUND);
 
 	rocketInterface.update();
@@ -61,31 +69,26 @@ STATE_DEFINE(Rocket, Descent, RocketSMData) {
 	// InternalEvent(ST_FLIGHT);
 }
 
-// STATE_DEFINE(RocketSM, Ground, RocketSMData)
+// Exit action when ExitDescent state exits.
+EXIT_DEFINE(Rocket, ExitDescent) {
+	std::cout << "RocketSM::ExitDescent\n";
+}
+
+// Entry action when ExitDescent state exits.
+ENTRY_DEFINE(Rocket, EnterGround, RocketSMData) {
+	std::cout << "RocketSM::EnterGround\n";
+}
 
 // code for the ground state
 STATE_DEFINE(Rocket, Ground, RocketSMData) {
-	std::cout << "Ground \n";
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
-	
-	detectExternEvent(rocketData);
 
+	detectExternEvent(rocketData);
 	// showInfo(rocketData);
 
 }
 
-// Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(Rocket, ExitFlight) {
-	std::cout << "RocketSM::ExitFlight\n";
-
-}
-
-// Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(Rocket, ExitDescent) {
-	std::cout << "RocketSM::ExitDescent\n";
-
-}
 
 void Rocket::detectExternEvent(const rocketState* data) {
 	int eventNbr = data->inputEventNumber;

@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "StateMachine.h"
-
 //----------------------------------------------------------------------------
 // StateMachine
 //----------------------------------------------------------------------------
@@ -181,6 +180,7 @@ void StateMachine::StateEngine(const StateMapRowEx* const pStateMapEx)
 			if (m_newState != m_currentState)
 			{
 				// Execute the state exit action on current state before switching to new state
+
 				if (exit != NULL)
 					exit->InvokeExitAction(this);
 

@@ -36,10 +36,6 @@ void Interface::update() {
 	latestState.sbg = mySbgSensor.getData();
 
 	latestState.inputEventNumber = input.getData();
-
-	if (latestState.inputEventNumber != -1) {
-		std::cout << latestState.inputEventNumber << "\n";
-	}
 #endif
 
 #ifndef NO_LOGS
