@@ -98,7 +98,7 @@ public:
 	{
 		SM* derivedSM = static_cast<SM*>(sm);		
 		const Data* derivedData = dynamic_cast<const Data*>(data);
-		ASSERT_TRUE(derivedData != NULL);
+		// ASSERT_TRUE(derivedData != NULL);
 
 		// Call the guard function
 		return (derivedSM->*Func)(derivedData);
@@ -127,7 +127,8 @@ public:
 	{
 		SM* derivedSM = static_cast<SM*>(sm);
 		const Data* derivedData = dynamic_cast<const Data*>(data);
-		ASSERT_TRUE(derivedData != NULL);
+		// ASSERT_TRUE(derivedData != NULL);
+
 
 		// Call the entry function
 		(derivedSM->*Func)(derivedData);

@@ -22,6 +22,7 @@ public:
 	void updateRocket();
 
 private:
+	void detectExternEvent(const rocketState* data);
 	void showInfo(const rocketState* data);
 
 	Interface rocketInterface;
@@ -41,8 +42,10 @@ private:
 	STATE_DECLARE(Rocket, 	Flight,			RocketSMData)
 	EXIT_DECLARE(Rocket, ExitFlight)
 	STATE_DECLARE(Rocket, 	Descent,		RocketSMData)
+	ENTRY_DECLARE(Rocket, EnterDescent, RocketSMData)
 	EXIT_DECLARE(Rocket, 	ExitDescent)
 	STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
+	ENTRY_DECLARE(Rocket, EnterGround, RocketSMData)
 
 
 	// STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
@@ -59,8 +62,8 @@ private:
 	// state object.
 	BEGIN_STATE_MAP_EX
 		STATE_MAP_ENTRY_ALL_EX(&Flight, 0, 0, &ExitFlight)
-		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, 0, &ExitDescent)
-		STATE_MAP_ENTRY_EX(&Ground)
+		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
+		STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
 };
 

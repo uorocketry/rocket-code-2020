@@ -4,6 +4,7 @@
 #include "IO/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
+#include "IO/Input.h"
 #include "IO/IO.h"
 #include <queue>
 
@@ -27,11 +28,13 @@ public:
 
 private:
 	rocketState latestState;
+	
 
 #ifdef TESTING
 	TestingSensors testingSensors;
 #else
     SBGSensor mySbgSensor;
+	Input input;
 #endif
 
 #ifndef NO_LOGS

@@ -36,36 +36,10 @@ void Rocket::Touchdown() {
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update();
 	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
+	detectExternEvent(rocketData);
+
+	// showInfo(rocketData);
 	
-	// std::cout << "Flight \n";
-	// InternalEvent(ST_DESCENT);
-}
-
-// code for the Descent state
-STATE_DEFINE(Rocket, Descent, RocketSMData) {
-	// showInfo(data);
-	std::cout << "Descent \n";
-	InternalEvent(ST_GROUND);
-
-	rocketInterface.update();
-	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
-
-	// perform the descent processing here
-	// transition to Flight via an internal event
-	// InternalEvent(ST_FLIGHT);
-}
-
-// STATE_DEFINE(RocketSM, Ground, RocketSMData)
-
-// code for the ground state
-STATE_DEFINE(Rocket, Ground, RocketSMData) {
-	// std::cout << "Ground \n";
-	rocketInterface.update();
-	rocketData = rocketInterface.getLatest();
-	showInfo(rocketData);
-
 }
 
 // Exit action when WaitForDeceleration state exits.
@@ -74,12 +48,62 @@ EXIT_DEFINE(Rocket, ExitFlight) {
 
 }
 
-// Exit action when WaitForDeceleration state exits.
+
+ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
+	std::cout << "RocketSM::EnterDescent\n";
+	
+}
+
+// code for the Descent state
+STATE_DEFINE(Rocket, Descent, RocketSMData) {
+	// InternalEvent(ST_GROUND);
+
+	rocketInterface.update();
+	rocketData = rocketInterface.getLatest();
+
+	detectExternEvent(rocketData);
+	// showInfo(rocketData);
+
+	// perform the descent processing here
+	// transition to Flight via an internal event
+	// InternalEvent(ST_FLIGHT);
+}
+
+// Exit action when ExitDescent state exits.
 EXIT_DEFINE(Rocket, ExitDescent) {
 	std::cout << "RocketSM::ExitDescent\n";
+}
+
+// Entry action when ExitDescent state exits.
+ENTRY_DEFINE(Rocket, EnterGround, RocketSMData) {
+	std::cout << "RocketSM::EnterGround\n";
+}
+
+// code for the ground state
+STATE_DEFINE(Rocket, Ground, RocketSMData) {
+	rocketInterface.update();
+	rocketData = rocketInterface.getLatest();
+
+	detectExternEvent(rocketData);
+	// showInfo(rocketData);
 
 }
 
+
+void Rocket::detectExternEvent(const rocketState* data) {
+	int eventNbr = data->inputEventNumber;
+	switch (eventNbr)
+	{
+	case 0:
+		Apogee();
+		break;
+	case 1:
+		Touchdown();
+		break;
+	default:
+		break;
+	}
+}
 
 void Rocket::showInfo(const rocketState* data) {
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
