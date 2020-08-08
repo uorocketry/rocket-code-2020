@@ -4,7 +4,7 @@
 #include "iostream"
 #include <thread>
 
-#define TARGET_DELAY_NS 1000000000/200 // in nanoseconds = 5 miliseconds = 200Hz
+#define TARGET_DELAY_NS 1000000000L/200L // in nanoseconds = 5 miliseconds = 200Hz
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
 	std::chrono::duration<int64_t, std::nano> target_ns, elapsed_ns;
 	start = std::chrono::high_resolution_clock::now();
 
-	unsigned long int count = 1;
+	uint64_t count = 1;
 	while (true) {
 		now = std::chrono::high_resolution_clock::now();
 
@@ -24,11 +24,10 @@ int main()
 		elapsed_ns = std::chrono::duration<int64_t, std::nano>(now - start);
 		target_ns = std::chrono::duration<int64_t, std::nano>(TARGET_DELAY_NS * count++);		
 		
-
 		if (target_ns > elapsed_ns) {
 			std::this_thread::sleep_for(target_ns - elapsed_ns);
 		} else {
-			std::cout << "ERROR\n";
+			std::cout << "Timing Error: Update took too long\n";
 		}
 
 		// std::cout.flush();
