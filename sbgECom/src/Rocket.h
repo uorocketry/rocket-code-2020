@@ -65,12 +65,6 @@ private:
 		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
 		STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
-
-	// BEGIN_STATE_MAP_EX
-	// 	STATE_MAP_ENTRY_ALL_EX(&Flight, 0, 0, &ExitFlight)
-	// 	STATE_MAP_ENTRY_ALL_EX(&Descent, 0, 0, &ExitDescent)
-	// 	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, 0, 0)
-	// END_STATE_MAP_EX
 };
 
 #endif
