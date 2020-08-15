@@ -1,7 +1,6 @@
 #include "Interface.h"
 #include "IO/IO.h"
 
-
 #ifdef TESTING
 #include "IO/TestingSensors.h"
 #endif // TESTING

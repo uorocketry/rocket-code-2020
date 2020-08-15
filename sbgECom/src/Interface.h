@@ -1,11 +1,12 @@
-#ifndef _INTERFACE_H
-#define _INTERFACE_H
+#pragma once
+
 #include "rocketState.h"
 #include "IO/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
 #include "IO/IO.h"
+
 #include <queue>
 
 #ifdef TESTING
@@ -43,5 +44,3 @@ private:
 
 };
 
-
-#endif

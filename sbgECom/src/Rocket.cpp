@@ -38,6 +38,8 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketData = rocketInterface.getLatest();
 	detectExternEvent(rocketData);
 
+	
+	std::cout << data->now.time_since_epoch().count() << "\n";
 	// showInfo(rocketData);
 	
 }
@@ -116,7 +118,6 @@ void Rocket::showInfo(const rocketState* data) {
 	// std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 }
 
-void Rocket::updateRocket() {
-	
-	ExecuteCurrentState(NULL);
+void Rocket::updateRocket(RocketSMData* data) {
+	ExecuteCurrentState(data);
 }

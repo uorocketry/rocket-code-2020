@@ -1,12 +1,13 @@
-#ifndef _ROCKET_H
-#define _ROCKET_H
+#pragma once
 
 #include "stateMachine/StateMachine.h"
 #include "rocketState.h"
 #include "Interface.h"
+#include "helpers/Types.h"
 
-class RocketSMData : public EventData
+struct RocketSMData : public EventData
 {
+	time_point now;
 };
 
 class Rocket : public StateMachine
@@ -19,7 +20,7 @@ public:
 	void Apogee();
 	void Touchdown();
 
-	void updateRocket();
+	void updateRocket(RocketSMData* data);
 
 private:
 	void detectExternEvent(const rocketState* data);
@@ -66,5 +67,3 @@ private:
 		STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
 };
-
-#endif
