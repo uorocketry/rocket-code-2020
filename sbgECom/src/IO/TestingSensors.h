@@ -3,7 +3,7 @@
 #define _TESTING_SENSORS_H
 
 #include "IO.h"
-#include "SBGData.h"
+#include "../data/SBGData.h"
 #include <iostream>
 #include <queue>
 

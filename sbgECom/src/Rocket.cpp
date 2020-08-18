@@ -1,7 +1,7 @@
 #include "Rocket.h"
 #include <iostream>
 #include <bitset>
-#include "rocketState.h"
+#include "data/rocketstate.h"
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
@@ -34,7 +34,7 @@ void Rocket::Touchdown() {
 
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
-	rocketInterface.update();
+	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 	detectExternEvent(rocketData);
 
@@ -60,7 +60,7 @@ ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
 STATE_DEFINE(Rocket, Descent, RocketSMData) {
 	// InternalEvent(ST_GROUND);
 
-	rocketInterface.update();
+	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
@@ -83,7 +83,7 @@ ENTRY_DEFINE(Rocket, EnterGround, RocketSMData) {
 
 // code for the ground state
 STATE_DEFINE(Rocket, Ground, RocketSMData) {
-	rocketInterface.update();
+	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);

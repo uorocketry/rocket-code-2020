@@ -18,6 +18,7 @@ int main() {
 
 	uint64_t count = 1;
 	while (true) {
+		// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 		now = std::chrono::steady_clock::now();
 
 		RocketSMData data;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "rocketState.h"
-#include "IO/SBGData.h"
+#include "data/rocketstate.h"
+#include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
@@ -25,7 +25,7 @@ public:
 	rocketState* getLatest();
 
 	// loop over each sensor and update the latestState
-	void update();
+	void update(const RocketSMData* rocketSMData);
 
 private:
 	rocketState latestState;

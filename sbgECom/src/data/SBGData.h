@@ -1,6 +1,4 @@
-#ifndef _SBGDATA_H
-#define _SBGDATA_H
-
+#pragma once
 
 struct sbgData {
 	float Xangle;
@@ -21,6 +19,3 @@ struct sbgData {
 	float filteredZacc;
 	int solutionStatus;
 };
-
-
-#endif

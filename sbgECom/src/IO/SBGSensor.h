@@ -2,7 +2,7 @@
 #define _SBGSENSOR_H
 
 #include "IO.h"
-#include "SBGData.h"
+#include "../data/SBGData.h"
 
 #include <sbgEComLib.h>
 #include <time.h>
