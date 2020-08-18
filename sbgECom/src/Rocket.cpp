@@ -38,8 +38,6 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketData = rocketInterface.getLatest();
 	detectExternEvent(rocketData);
 
-	
-	std::cout << data->now.time_since_epoch().count() << "\n";
 	// showInfo(rocketData);
 	
 }
