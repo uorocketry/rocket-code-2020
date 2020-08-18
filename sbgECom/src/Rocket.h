@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stateMachine/StateMachine.h"
-#include "data/rocketstate.h"
+#include "data/rocketState.h"
 #include "data/RocketSMData.h"
 #include "Interface.h"
 #include "helpers/Types.h"

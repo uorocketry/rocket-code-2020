@@ -1,6 +1,6 @@
 #pragma once
 
-#include "data/rocketstate.h"
+#include "data/rocketState.h"
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"

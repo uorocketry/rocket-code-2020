@@ -1,7 +1,7 @@
 #ifndef NO_LOGS
 
 #include "Logger.h"
-#include "data/rocketstate.h"
+#include "data/rocketState.h"
 
 #include <sys/stat.h>
 #include <iostream>

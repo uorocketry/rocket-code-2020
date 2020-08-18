@@ -1,7 +1,7 @@
 #include "Rocket.h"
 #include <iostream>
 #include <bitset>
-#include "data/rocketstate.h"
+#include "data/rocketState.h"
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
