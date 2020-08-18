@@ -1,6 +1,6 @@
 #pragma once
 
-#include "data/rocketState.h"
+#include "../data/rocketState.h"
 #include "IO.h"
 
 #include <queue>
