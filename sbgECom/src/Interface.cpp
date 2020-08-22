@@ -1,6 +1,7 @@
 #include "Interface.h"
 #include "IO/IO.h"
 #include "data/RocketSMData.h"
+#include <iostream>
 
 #ifdef TESTING
 #include "IO/TestingSensors.h"
@@ -22,6 +23,8 @@ void Interface::initializeSensors() {
 	mySbgSensor.initialize();
 
 	input.initialize();
+
+	client.initialize();
 #endif
 
 #ifndef NO_LOGS
@@ -36,6 +39,7 @@ void Interface::update(const RocketSMData* rocketSMData) {
 	latestState.sbg = mySbgSensor.getData();
 
 	latestState.inputEventNumber = input.getData();
+	latestState.clientEventNumber = client.getData();
 #endif
 
 	latestState.rocketSMData = *rocketSMData;

@@ -8,4 +8,5 @@ struct rocketState {
 	RocketSMData rocketSMData;
 	sbgData sbg;
 	int inputEventNumber = -1;
+	int clientEventNumber = -1;
 };
