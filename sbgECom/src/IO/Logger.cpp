@@ -1,7 +1,7 @@
 #ifndef NO_LOGS
 
 #include "Logger.h"
-#include "rocketState.h"
+#include "data/rocketState.h"
 
 #include <sys/stat.h>
 #include <iostream>
@@ -12,8 +12,6 @@
 #include <queue>
 #include <chrono>
 #include <mutex>
-
-
 
 void Logger::initialize() {
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
@@ -74,6 +72,8 @@ void Logger::dequeueToFile() {
 }
 
 void Logger::writeHeader(std::ofstream& fileStream) {
+	fileStream << "Timestamp (Relative),";
+
 	fileStream << "Xangle,";
 	fileStream << "Yangle,";
 	fileStream << "Zangle,";
@@ -102,6 +102,10 @@ void Logger::writeHeader(std::ofstream& fileStream) {
 }
 
 void Logger::writeData(std::ofstream& fileStream, const rocketState& currentState) {
+
+	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
+	fileStream << currentState.rocketSMData.now.time_since_epoch().count() << ",";
+
 	fileStream << currentState.sbg.Xangle << ",";
 	fileStream << currentState.sbg.Yangle << ",";
 	fileStream << currentState.sbg.Zangle << ",";

@@ -1,6 +1,6 @@
 #ifdef TESTING
 #include "../helpers/Helper.h"
-#include "../rocketState.h"
+#include "../data/rocketState.h"
 #include "TestingSensors.h"
 
 #include <sstream>

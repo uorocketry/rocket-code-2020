@@ -1,11 +1,12 @@
-#ifndef _INTERFACE_H
-#define _INTERFACE_H
-#include "rocketState.h"
-#include "IO/SBGData.h"
+#pragma once
+
+#include "data/rocketState.h"
+#include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
 #include "IO/IO.h"
+
 #include <queue>
 
 #ifdef TESTING
@@ -24,7 +25,7 @@ public:
 	rocketState* getLatest();
 
 	// loop over each sensor and update the latestState
-	void update();
+	void update(const RocketSMData* rocketSMData);
 
 private:
 	rocketState latestState;
@@ -43,5 +44,3 @@ private:
 
 };
 
-
-#endif

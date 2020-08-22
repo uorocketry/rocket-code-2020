@@ -1,6 +1,6 @@
 #include "Interface.h"
 #include "IO/IO.h"
-
+#include "data/RocketSMData.h"
 
 #ifdef TESTING
 #include "IO/TestingSensors.h"
@@ -29,7 +29,7 @@ void Interface::initializeSensors() {
 #endif
 }
 
-void Interface::update() {
+void Interface::update(const RocketSMData* rocketSMData) {
 #ifdef TESTING
 	latestState = testingSensors.getLatest();
 #else
@@ -37,6 +37,8 @@ void Interface::update() {
 
 	latestState.inputEventNumber = input.getData();
 #endif
+
+	latestState.rocketSMData = *rocketSMData;
 
 #ifndef NO_LOGS
 	logger.enqueueSensorData(latestState);

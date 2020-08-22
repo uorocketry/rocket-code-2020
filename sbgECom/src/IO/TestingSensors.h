@@ -1,9 +1,9 @@
+#pragma once
+
 #ifdef TESTING
-#ifndef _TESTING_SENSORS_H
-#define _TESTING_SENSORS_H
 
 #include "IO.h"
-#include "SBGData.h"
+#include "../data/SBGData.h"
 #include <iostream>
 #include <queue>
 
@@ -21,5 +21,4 @@ private:
 	double processDouble(std::string data);
 };
 
-#endif
 #endif

@@ -1,4 +1,6 @@
 #include "Rocket.h"
+#include "helpers/Types.h"
+
 #include <stdio.h>
 #include "chrono"
 #include "iostream"
@@ -6,23 +8,26 @@
 
 #define TARGET_DELAY_NS 1000000000L/200L // in nanoseconds = 5 miliseconds = 200Hz
 
-int main()
-{
+int main() {
 	// create a rocket instance
 	Rocket uOttRocket;
 
-	std::chrono::time_point<std::chrono::high_resolution_clock> start, now; 
-	std::chrono::duration<int64_t, std::nano> target_ns, elapsed_ns;
-	start = std::chrono::high_resolution_clock::now();
+	time_point start, now; 
+	duration_ns target_ns, elapsed_ns;
+	start = std::chrono::steady_clock::now();
 
 	uint64_t count = 1;
 	while (true) {
-		now = std::chrono::high_resolution_clock::now();
+		// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
+		now = std::chrono::steady_clock::now();
 
-		uOttRocket.updateRocket();
+		RocketSMData data;
+		data.now = now;
 
-		elapsed_ns = std::chrono::duration<int64_t, std::nano>(now - start);
-		target_ns = std::chrono::duration<int64_t, std::nano>(TARGET_DELAY_NS * count++);		
+		uOttRocket.updateRocket(&data);
+
+		elapsed_ns = duration_ns(now - start);
+		target_ns = duration_ns(TARGET_DELAY_NS * count++);		
 		
 		if (target_ns > elapsed_ns) {
 			std::this_thread::sleep_for(target_ns - elapsed_ns);
