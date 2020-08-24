@@ -28,11 +28,15 @@ int main(int argc, char const *argv[])
         return -1; 
     } 
    
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
-    { 
-        printf("\nConnection Failed \n"); 
-        return -1; 
-    } 
+    
+    while (1)
+    {
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0) 
+        { 
+            break;
+        } 
+    }
+
     // send(sock , hello , strlen(hello) , 0 ); 
     // printf("Hello message sent\n"); 
     while(true) {

@@ -1,5 +1,6 @@
 import socket
 import serial          
+#from time import sleep
 
 #ttyACM0
 # next create a socket object 
@@ -45,6 +46,8 @@ with serial.Serial('/dev/ttyACM0', 9600, timeout=1) as ser:
                 # print("[RECEIVED] " + data.decode("utf-8"));
                 
                 x = ser.read()          # read one byte
+                #x = b'1'
                 # read serial
                 # if not data: break
                 c.send(x)
+                #sleep(1)
