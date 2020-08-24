@@ -4,6 +4,7 @@
 #include <arpa/inet.h> 
 #include <unistd.h> 
 #include <string.h> 
+#include <iostream>
 #define PORT 8080
    
 int main(int argc, char const *argv[]) 
@@ -40,8 +41,8 @@ int main(int argc, char const *argv[])
     // send(sock , hello , strlen(hello) , 0 ); 
     // printf("Hello message sent\n"); 
     while(true) {
-        valread = read( sock , buffer, 1024);
-        printf("%s\n",buffer ); 
+        valread = read( sock , buffer, 1);
+        std::cout << (int)buffer[0] << "\n"; 
         // buffer = {0};
     }
     return 0; 
