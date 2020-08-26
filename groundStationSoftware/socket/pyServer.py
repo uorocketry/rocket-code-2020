@@ -3,6 +3,26 @@ import serial
 import time   
 import sys
 import glob
+import signal
+from sys import exit
+
+
+def closeConnection():
+    print("\nClosing connection.")
+    try:
+        server.shutdown(socket.SHUT_RDWR) 
+        server.close()
+    except:
+        pass
+    try:
+        ser.close()
+    except:
+        pass
+
+
+def handler(signal_received, frame):
+    closeConnection()
+    exit()
 
 
 def serial_ports():
@@ -26,73 +46,62 @@ def serial_ports():
     result = []
     for port in ports:
         try:
-            s = serial.Serial(port)
-            s.close()
+            serialCom = serial.Serial(port)
+            serialCom.close()
             result.append(port)
         except (OSError, serial.SerialException):
             pass
     return result 
 
-#from time import sleep
 
-#ttyACM0
-# next create a socket object 
-s = socket.socket()
-print("Socket successfully created")
-  
-# reserve a port on your computer in our 
-# case it is 12345 but it can be anything 
-port = 8080
-
-# Next bind to the port 
-# we have not typed any ip in the ip field 
-# instead we have inputted an empty string 
-# this makes the server listen to requests  
-# coming from other computers on the network 
-
-s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-
-s.bind(('127.0.0.1', port))         
-print("socket binded to %s" %(port))
-  
-# put the socket into listening mode 
-s.listen(5)
-print("socket is listening")
-
-
-
-# ser.write(b'hello')     # write a string
-
-# a forever loop until we interrupt it or  
-# an error occurs 
 def openSerial():
     global ser
     valid = False
     while(not valid):
         time.sleep(1)
         try:
-            ser = serial.Serial(serial_ports()[0], 9600, timeout=1)
+            ser = serial.Serial([(port) for port in serial_ports() if 'ACM' in port][0], 9600, timeout=1)
             ser.flush()
             valid = True
+            print("Serial communication established.")
         except:
             valid = False
-            
 
+
+signal.signal(signal.SIGINT, handler) # ctlr + c
+signal.signal(signal.SIGTSTP, handler) # ctlr + z
+
+global server
+# next create a socket object 
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print("Socket successfully created.")
+  
+port = 8080
+
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.bind(('127.0.0.1', port))         
+print("Socket binded to %s." %(port))
+  
+# put the socket into listening mode 
+server.listen(5)
+print("Socket is listening.")
+            
 openSerial()
-# s = ser.read(1)        # read up to ten bytes (timeout)
-# line = ser.readline()   # read a '\n' terminated line
 
 while True:   
     # Establish connection with client. 
-    c, addr = s.accept()
+    try:
+        c, addr = server.accept()
+    except:
+        # server has been closed
+        break
     with c:
         print('Connected by', addr)
         while True:
-            # data = c.recv(1024)
-            # print("[RECEIVED] " + data.decode("utf-8"));
             try:
                 x = ser.read()          # read one byte
             except:
+                print("Serial communication lost.")
                 openSerial()
                 break
 
@@ -100,9 +109,11 @@ while True:
                 c.send(x)
             except:
                 break
-            
             #x = b'1'
             # read serial
             # if not data: break
                 
             #sleep(1)
+        print("Client disconnected.")
+
+          

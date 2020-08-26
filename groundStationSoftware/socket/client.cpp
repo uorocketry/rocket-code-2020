@@ -33,25 +33,24 @@ int main(int argc, char const *argv[])
             printf("\nInvalid address/ Address not supported \n"); 
             continue;
         } 
-        std::cout << "Try to connect\n";
+        std::cout << "Trying to connect...\n";
         if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0) 
         { 
+            std::cout << "Connected\n";
             char buffer[1] = {-1}; 
-            // send(sock , hello , strlen(hello) , 0 ); 
-            // printf("Hello message sent\n"); 
             bool connected = true;
             while(connected) 
             {
-                std::cout << "Before " << (int)buffer[0] << " ";
                 valread = read( sock , buffer, 1);
-                // std::cout << valread << "\n";
 
                 if(valread == 0) {
                     connected = false;
-                } else {
-                    std::cout << (int)buffer[0] << "\n"; 
-                    // buffer[0] = -1;
-                }
+                    close(sock);
+                } 
+
+                std::cout << (int)buffer[0] << "\n";
+                buffer[0] = -1;
+
                 std::this_thread::sleep_for(std::chrono::duration<int64_t, std::nano>(100000000));
             }
         } 
