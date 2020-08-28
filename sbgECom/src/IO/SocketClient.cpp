@@ -39,7 +39,7 @@ void SocketClient::run() {
         serv_addr.sin_port = htons(PORT); 
         
         // Convert IPv4 and IPv6 addresses from text to binary form 
-        if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)  
+        if(inet_pton(AF_INET, "192.168.1.1", &serv_addr.sin_addr)<=0)  
         { 
             printf("\nInvalid address/ Address not supported \n"); 
             continue;
@@ -48,7 +48,7 @@ void SocketClient::run() {
         if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0) 
         { 
             std::cout << "Connected\n";
-            char buffer[1] = {-1}; 
+            char buffer[1] = {(char)-1}; 
             bool connected = true;
             while(connected) 
             {
@@ -60,7 +60,7 @@ void SocketClient::run() {
                 } 
 
                 std::cout << (int)buffer[0] << "\n";
-                buffer[0] = -1;
+                buffer[0] = (char)-1;
 
                 std::this_thread::sleep_for(std::chrono::duration<int64_t, std::nano>(100000000));
             }
