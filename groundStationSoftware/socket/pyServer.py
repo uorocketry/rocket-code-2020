@@ -6,6 +6,9 @@ import glob
 import signal
 from sys import exit
 
+address = '192.168.1.1'
+port = 8080
+
 
 def closeConnection():
     print("\nClosing connection.")
@@ -75,11 +78,9 @@ global server
 # next create a socket object 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Socket successfully created.")
-  
-port = 8080
 
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server.bind(('127.0.0.1', port))         
+server.bind((address, port))         
 print("Socket binded to %s." %(port))
   
 # put the socket into listening mode 
