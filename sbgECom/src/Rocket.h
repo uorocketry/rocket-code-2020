@@ -68,4 +68,6 @@ private:
 	void enterNewState(States state);
 
 	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
+
+	bool switchStatesAfterTime(States state, duration_ms targetTime);
 };

@@ -5,6 +5,9 @@
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
+
+	// There is no state entry function for the first state
+	enterNewState(States(0));
 }
 	
 // Apogee external event
@@ -39,7 +42,6 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
-	
 }
 
 // Exit action when WaitForDeceleration state exits.
@@ -132,4 +134,15 @@ double Rocket::getValueForTime(double minimum, double maximum, duration_ms targe
 	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
 	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
 	return std::min(maximum, minimum + progress * (maximum - minimum));
+}
+
+bool Rocket::switchStatesAfterTime(States state, duration_ms targetTime) {
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	if (timeSinceEntry >= duration_ns(targetTime)) {
+		InternalEvent(state);
+
+		return true;
+	}
+
+	return false;
 }
