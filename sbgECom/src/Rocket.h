@@ -20,6 +20,7 @@ public:
 
 private:
 	void detectExternEvent(const rocketState* data);
+	void detectApogee(const rocketState* data);
 	void showInfo(const rocketState* data);
 
 	Interface rocketInterface;

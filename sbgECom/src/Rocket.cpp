@@ -36,6 +36,8 @@ void Rocket::Touchdown() {
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
+	// move detect Apogee to coast state when new states are added 
+	detectApogee(rocketData);
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
@@ -102,6 +104,17 @@ void Rocket::detectExternEvent(const rocketState* data) {
 		break;
 	default:
 		break;
+	}
+}
+
+void Rocket::detectApogee(const rocketState* data){
+	// trigger appogee if the rocket is horizontal 
+	// Euler angle
+	float Zangle = data->sbg.Zangle;
+	if(Zangle == 0 || Zangle >= 180)
+	{
+		std::cout << "Apogee \n";
+		Apogee();
 	}
 }
 
