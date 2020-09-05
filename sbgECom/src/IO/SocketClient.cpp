@@ -11,9 +11,11 @@
 #include"SocketClient.h"
 #include "chrono"
 #include <thread>
+#include <queue>
+
 
 #define PORT 8080
-#define HOST_IP "192.168.1.1"
+#define HOST_IP "127.0.0.1"
 
 
 SocketClient::SocketClient() {
@@ -59,10 +61,9 @@ void SocketClient::run() {
                     close(sock);
                 } 
 
-                std::cout << (int)buffer[0] << "\n";
-                buffer[0] = (char)-1;
-
-                std::this_thread::sleep_for(std::chrono::duration<int64_t, std::nano>(100000000));
+                eventNumberQueue.push((int)buffer[0]);
+        
+                std::this_thread::sleep_for(std::chrono::duration<int64_t, std::nano>(10000000));
             }
         } 
     }
@@ -76,7 +77,15 @@ void SocketClient::initialize(){
 };
 
 int SocketClient::getData() {
-    return -1;
+    std::lock_guard<std::mutex> lockGuard(mutex);
+
+    if(eventNumberQueue.empty()) {
+        return -1;
+    };
+    int nbr = eventNumberQueue.front();
+    eventNumberQueue.pop();
+    return nbr;
+    
 }
 
 #endif

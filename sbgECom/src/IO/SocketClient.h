@@ -5,6 +5,8 @@
 #include "IO.h"
 #include "../data/SBGData.h"
 #include <iostream>
+#include <queue>
+
 
 class SocketClient : public IO {
 public:
@@ -16,6 +18,9 @@ public:
 
     int getData();
 	// rocketState getLatest();
+
+private:
+    std::queue<int> eventNumberQueue;
 };
 
 #endif

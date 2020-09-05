@@ -6,7 +6,7 @@ import glob
 import signal
 from sys import exit
 
-address = '192.168.1.1'
+address = '127.0.0.1'
 port = 8080
 
 

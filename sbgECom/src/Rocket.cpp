@@ -103,6 +103,19 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	default:
 		break;
 	}
+
+	eventNbr = data->clientEventNumber;
+	switch (eventNbr)
+	{
+	case 0:
+		Apogee();
+		break;
+	case 1:
+		Touchdown();
+		break;
+	default:
+		break;
+	}
 }
 
 void Rocket::showInfo(const rocketState* data) {
