@@ -7,7 +7,7 @@
 #endif // TESTING
 
 Interface::Interface() {
-	initializeSensors();
+	
 }
 
 Interface::~Interface() {

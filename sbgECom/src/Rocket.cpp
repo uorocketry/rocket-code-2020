@@ -46,7 +46,6 @@ void Rocket::Touchdown() {
 
 // code for the initialization state
 STATE_DEFINE(Rocket, Init, RocketSMData) {
-	std::cout << "Initializing sensors...\n";
 	// rocketInterface.initializeSensors();
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
@@ -59,7 +58,7 @@ STATE_DEFINE(Rocket, Init, RocketSMData) {
 
 EXIT_DEFINE(Rocket, ExitInit) {
 	std::cout << "RocketSM::ExitInit\n";
-	
+
 }
 
 // code for the flight state
