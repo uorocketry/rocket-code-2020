@@ -7,10 +7,21 @@ Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
 }
 	
+// Start external event
+void Rocket::Start() {
+	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
+	END_TRANSITION_MAP(NULL)
+}
+
 // Apogee external event
 // void Rocket::Apogee(RocketSMData* data)
 void Rocket::Apogee() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -23,6 +34,7 @@ void Rocket::Apogee() {
 // Touchdown external event
 void Rocket::Touchdown() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (ST_GROUND)					// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -32,13 +44,37 @@ void Rocket::Touchdown() {
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop. 
 
+// code for the initialization state
+STATE_DEFINE(Rocket, Init, RocketSMData) {
+	std::cout << "Initializing sensors...\n";
+	// rocketInterface.initializeSensors();
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
+
+	detectExternEvent(rocketData);
+	
+	// showInfo(rocketData);
+	
+}
+
+EXIT_DEFINE(Rocket, ExitInit) {
+	std::cout << "RocketSM::ExitInit\n";
+	
+}
+
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
+
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
+	
+}
+
+ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
+	std::cout << "RocketSM::EnterFlight\n";
 	
 }
 
@@ -95,9 +131,12 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	switch (eventNbr)
 	{
 	case 0:
-		Apogee();
+		Start();
 		break;
 	case 1:
+		Apogee();
+		break;
+	case 2:
 		Touchdown();
 		break;
 	default:
