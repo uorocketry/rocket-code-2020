@@ -108,15 +108,28 @@ void Rocket::detectExternEvent(const rocketState* data) {
 }
 
 void Rocket::detectApogee(const rocketState* data){
-	// trigger appogee if the rocket is horizontal and falling
+	// TODO: only check for apogee x seconds after launch 
 	// Euler angle
+	static uint8_t consecutiveEvents = 0; 
 	float Zangle = data->sbg.Zangle;
 	float Zacc = data->sbg.filteredZacc;
 	if((Zangle == 0 || Zangle >= 180) && Zacc < 0)
 	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times 
+	// that the rocket is pointing downwards and falling
+	if(consecutiveEvents >= ApogeeThreshold)
+	{
 		std::cout << "Apogee \n";
 		Apogee();
 	}
+	
 }
 
 void Rocket::showInfo(const rocketState* data) {
