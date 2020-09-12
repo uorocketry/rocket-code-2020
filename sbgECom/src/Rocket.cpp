@@ -108,10 +108,11 @@ void Rocket::detectExternEvent(const rocketState* data) {
 }
 
 void Rocket::detectApogee(const rocketState* data){
-	// trigger appogee if the rocket is horizontal 
+	// trigger appogee if the rocket is horizontal and falling
 	// Euler angle
 	float Zangle = data->sbg.Zangle;
-	if(Zangle == 0 || Zangle >= 180)
+	float Zacc = data->sbg.filteredZacc;
+	if((Zangle == 0 || Zangle >= 180) && Zacc < 0)
 	{
 		std::cout << "Apogee \n";
 		Apogee();
