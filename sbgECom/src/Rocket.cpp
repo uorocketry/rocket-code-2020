@@ -46,7 +46,6 @@ void Rocket::Touchdown() {
 
 // code for the initialization state
 STATE_DEFINE(Rocket, Init, RocketSMData) {
-	// rocketInterface.initializeSensors();
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 

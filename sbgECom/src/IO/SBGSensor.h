@@ -12,6 +12,7 @@ class SBGSensor : public IO
 public:
 	void run();
 	void initialize();
+	bool isInitialized();
 	sbgData getData();
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
 

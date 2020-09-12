@@ -10,6 +10,7 @@ public:
 
 	virtual void initialize();
 	virtual void run();
+	virtual bool isInitialized();
 
 protected:
 	/** Must be set before initialize is called */

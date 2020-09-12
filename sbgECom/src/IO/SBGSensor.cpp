@@ -254,6 +254,10 @@ void SBGSensor::initialize() {
 	IO::initialize();
 }
 
+bool SBGSensor::isInitialized() {
+	
+}
+
 sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	return data;
