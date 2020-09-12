@@ -1,3 +1,5 @@
+#define NOMINMAX // Fix issues on Windows with std:min and std:max
+
 #include "Rocket.h"
 #include <iostream>
 #include <bitset>
@@ -133,7 +135,7 @@ void Rocket::enterNewState(States state) {
 double Rocket::getValueForTime(double minimum, double maximum, duration_ms targetTime) {
 	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
 	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
-    return min(maximum, minimum + progress * (maximum - minimum));
+    return std::min(maximum, minimum + progress * (maximum - minimum));
 }
 
 bool Rocket::switchStatesAfterTime(States state, duration_ms targetTime) {
