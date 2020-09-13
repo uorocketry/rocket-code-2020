@@ -24,7 +24,10 @@ void Interface::initializeSensors() {
 
 	input.initialize();
 
+#ifndef NO_SOCKET_CONTROL
 	client.initialize();
+#endif
+
 #endif
 
 #ifndef NO_LOGS
@@ -39,7 +42,11 @@ void Interface::update(const RocketSMData* rocketSMData) {
 	latestState.sbg = mySbgSensor.getData();
 
 	latestState.inputEventNumber = input.getData();
+
+#ifndef NO_SOCKET_CONTROL
 	latestState.clientEventNumber = client.getData();
+#endif
+
 #endif
 
 	latestState.rocketSMData = *rocketSMData;

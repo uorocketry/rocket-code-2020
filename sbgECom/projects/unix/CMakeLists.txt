@@ -46,6 +46,10 @@ if (DEFINED ENV{NO_LOGS} OR NO_LOGS)
 	add_definitions(-D NO_LOGS)
 endif()
 
+if (DEFINED ENV{NO_SOCKET_CONTROL} OR NO_SOCKET_CONTROL)
+	add_definitions(-D NO_SOCKET_CONTROL)
+endif()
+
 if (DEFINED ENV{TESTING} OR TESTING)
 	add_definitions(-D TESTING)
 endif()

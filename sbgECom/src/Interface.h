@@ -36,7 +36,10 @@ private:
 #else
     SBGSensor mySbgSensor;
 	Input input;
+
+#ifndef NO_SOCKET_CONTROL
 	SocketClient client;
+#endif
 
 #endif
 
