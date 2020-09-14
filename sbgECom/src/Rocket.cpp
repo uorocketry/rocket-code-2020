@@ -10,7 +10,8 @@ Rocket::Rocket() :
 // Start external event
 void Rocket::Start() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
-		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -22,6 +23,7 @@ void Rocket::Start() {
 void Rocket::Apogee() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -35,6 +37,7 @@ void Rocket::Apogee() {
 void Rocket::Touchdown() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (ST_GROUND)					// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -46,6 +49,19 @@ void Rocket::Touchdown() {
 
 // code for the initialization state
 STATE_DEFINE(Rocket, Init, RocketSMData) {
+	rocketInterface.initializeSensors();
+
+	InternalEvent(ST_WAIT_FOR_INIT);
+
+}
+
+EXIT_DEFINE(Rocket, ExitInit) {
+	std::cout << "RocketSM::ExitInit\n";
+
+}
+
+// code for the wait for initialization state
+STATE_DEFINE(Rocket, WaitForInit, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
@@ -55,8 +71,13 @@ STATE_DEFINE(Rocket, Init, RocketSMData) {
 	
 }
 
-EXIT_DEFINE(Rocket, ExitInit) {
-	std::cout << "RocketSM::ExitInit\n";
+ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
+	std::cout << "RocketSM::EnterWaitForInit\n";
+	
+}
+
+EXIT_DEFINE(Rocket, ExitWaitForInit) {
+	std::cout << "RocketSM::ExitWaitForInit\n";
 
 }
 
