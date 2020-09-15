@@ -255,7 +255,7 @@ void SBGSensor::initialize() {
 }
 
 bool SBGSensor::isInitialized() {
-	
+	return true;	
 }
 
 sbgData SBGSensor::getData() {

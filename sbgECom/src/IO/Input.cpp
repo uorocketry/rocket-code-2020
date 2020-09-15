@@ -11,8 +11,12 @@ Input::~Input() {
 }
 
 void Input::initialize() {
-        std::cout << "init input thread" << "\n";
+    std::cout << "init input thread" << "\n";
     IO::initialize();
+}
+
+bool Input::isInitialized() {
+    return true;
 }
 
 void Input::run() {
