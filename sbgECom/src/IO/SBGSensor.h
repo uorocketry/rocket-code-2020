@@ -22,7 +22,7 @@ private:
 
 	struct InitFlags
 	{
-		InitStatus fileReady = INIT;
+		
 	};
 	InitFlags status;
 };
