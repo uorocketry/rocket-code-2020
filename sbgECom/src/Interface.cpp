@@ -29,6 +29,16 @@ void Interface::initializeSensors() {
 #endif
 }
 
+bool Interface::sensorsInitialized() {
+#ifndef NO_LOGS
+	if (logger.isInitialized() && mySbgSensor.isInitialized() && input.isInitialized())
+#else
+	if (mySbgSensor.isInitialized() && input.isInitialized())
+#endif
+		return true;
+	return false;
+}	
+
 void Interface::update(const RocketSMData* rocketSMData) {
 #ifdef TESTING
 	latestState = testingSensors.getLatest();

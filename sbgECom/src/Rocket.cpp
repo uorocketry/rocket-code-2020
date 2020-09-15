@@ -65,10 +65,10 @@ STATE_DEFINE(Rocket, WaitForInit, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
-	detectExternEvent(rocketData);
+	if (rocketInterface.sensorsInitialized())
+		detectExternEvent(rocketData);
 	
 	// showInfo(rocketData);
-	
 }
 
 ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
