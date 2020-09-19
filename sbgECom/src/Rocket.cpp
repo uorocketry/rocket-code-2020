@@ -104,6 +104,7 @@ void Rocket::detectExternEvent(const rocketState* data) {
 		break;
 	}
 
+#ifndef NO_SOCKET_CONTROL
 	eventNbr = data->clientEventNumber;
 	switch (eventNbr)
 	{
@@ -116,6 +117,8 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	default:
 		break;
 	}
+#endif
+
 }
 
 void Rocket::showInfo(const rocketState* data) {
