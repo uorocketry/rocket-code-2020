@@ -23,8 +23,7 @@ private:
 	struct InitFlags
 	{
 		
-	};
-	InitFlags status;
+	} status;
 };
 
 #endif

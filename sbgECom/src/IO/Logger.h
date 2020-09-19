@@ -45,8 +45,6 @@ private:
 	struct InitFlags
 	{
 		InitStatus fileStatus = INIT;
-	};
-	InitFlags status;
-
+	} status;
 	
 };
