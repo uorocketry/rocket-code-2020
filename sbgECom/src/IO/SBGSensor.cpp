@@ -244,9 +244,7 @@ void SBGSensor::run()
 		retValue = -1;
 	}
 
-	//
 	// Returns -1 if we have an error
-	//
 	// return retValue;
 }
 

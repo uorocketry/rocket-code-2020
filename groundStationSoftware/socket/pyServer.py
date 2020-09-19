@@ -63,8 +63,8 @@ def openSerial():
     while(not valid):
         time.sleep(1)
         try:
-            ser = serial.Serial([(port) for port in serial_ports() if 'ACM' in port][0], 9600, timeout=1)
-            ser.flush()
+            ser = serial.Serial([(port) for port in serial_ports() if 'USB' in port][0], 9600, timeout=None)
+            ser.reset_input_buffer()
             valid = True
             print("Serial communication established.")
         except:
@@ -100,14 +100,18 @@ while True:
         print('Connected by', addr)
         while True:
             try:
-                x = ser.read()          # read one byte
-            except:
+                x = ser.read(1)          # read one byte
+                # print(type(x))
+                print(int.from_bytes(x, "big"))
+            except Exception as e:
                 print("Serial communication lost.")
+                print(e)
                 openSerial()
                 break
 
             try:
                 c.send(x)
+                # pass
             except:
                 break
             #x = b'1'
