@@ -1,3 +1,5 @@
+#define NOMINMAX // Fix issues on Windows with std:min and std:max
+
 #include "Rocket.h"
 #include <iostream>
 #include <bitset>
@@ -5,6 +7,9 @@
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
+
+	// There is no state entry function for the first state
+	enterNewState(States(0));
 }
 	
 // Start external event
@@ -89,7 +94,6 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
-	
 }
 
 ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
@@ -105,6 +109,8 @@ EXIT_DEFINE(Rocket, ExitFlight) {
 
 
 ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
+	enterNewState(ST_DESCENT);
+
 	std::cout << "RocketSM::EnterDescent\n";
 	
 }
@@ -131,6 +137,8 @@ EXIT_DEFINE(Rocket, ExitDescent) {
 
 // Entry action when ExitDescent state exits.
 ENTRY_DEFINE(Rocket, EnterGround, RocketSMData) {
+	enterNewState(ST_GROUND);
+	
 	std::cout << "RocketSM::EnterGround\n";
 }
 
@@ -161,6 +169,22 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	default:
 		break;
 	}
+
+#ifndef NO_SOCKET_CONTROL
+	eventNbr = data->clientEventNumber;
+	switch (eventNbr)
+	{
+	case 0:
+		Apogee();
+		break;
+	case 1:
+		Touchdown();
+		break;
+	default:
+		break;
+	}
+#endif
+
 }
 
 void Rocket::showInfo(const rocketState* data) {
@@ -176,4 +200,25 @@ void Rocket::showInfo(const rocketState* data) {
 
 void Rocket::updateRocket(RocketSMData* data) {
 	ExecuteCurrentState(data);
+}
+
+void Rocket::enterNewState(States state) {
+	entryTime = std::chrono::steady_clock::now();
+}
+
+double Rocket::getValueForTime(double minimum, double maximum, duration_ms targetTime) {
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
+    return std::min(maximum, minimum + progress * (maximum - minimum));
+}
+
+bool Rocket::switchStatesAfterTime(States state, duration_ms targetTime) {
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	if (timeSinceEntry >= duration_ns(targetTime)) {
+		InternalEvent(state);
+
+		return true;
+	}
+
+	return false;
 }

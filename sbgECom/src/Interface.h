@@ -5,8 +5,8 @@
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
+#include "IO/SocketClient.h"
 #include "IO/IO.h"
-
 #include <queue>
 
 #ifdef TESTING
@@ -36,6 +36,11 @@ private:
 #else
     SBGSensor mySbgSensor;
 	Input input;
+
+#ifndef NO_SOCKET_CONTROL
+	SocketClient client;
+#endif
+
 #endif
 
 #ifndef NO_LOGS
