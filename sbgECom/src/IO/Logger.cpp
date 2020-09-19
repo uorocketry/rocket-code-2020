@@ -23,9 +23,7 @@ void Logger::initialize() {
 }
 
 bool Logger::isInitialized() {
-    if (status.fileStatus == READY)
-		return true;
-	return false;
+    return (status.fileStatus == READY);
 }
 
 void Logger::run() {
