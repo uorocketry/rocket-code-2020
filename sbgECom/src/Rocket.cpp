@@ -110,10 +110,10 @@ void Rocket::detectExternEvent(const rocketState* data) {
 void Rocket::detectApogee(const rocketState* data){
 	// TODO: only check for apogee x seconds after launch 
 	// Euler angle
+	// pitch is Yangle 
 	static uint8_t consecutiveEvents = 0; 
-	float Zangle = data->sbg.Zangle;
-	float Zacc = data->sbg.filteredZacc;
-	if((Zangle == 0 || Zangle >= 180) && Zacc < 0)
+	float Yangle = data->sbg.Yangle;
+	if(Yangle <= 45)
 	{
 		consecutiveEvents++;
 	}
