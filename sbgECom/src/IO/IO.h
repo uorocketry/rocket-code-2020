@@ -11,8 +11,8 @@ public:
 	~IO();
 
 	virtual void initialize();
-	virtual void run();
-	virtual bool isInitialized();
+	virtual void run() = 0;
+	virtual bool isInitialized() = 0;
 	
 
 protected:

@@ -23,10 +23,4 @@ void IO::initialize() {
 	}
 }
 
-void IO::run() {
 
-}
-
-bool IO::isInitialized() {
-
-}
