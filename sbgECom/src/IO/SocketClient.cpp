@@ -95,7 +95,7 @@ int SocketClient::getData() {
 }
 
 bool SocketClient::isInitialized() {
-    return (status.socketCreated == READY && status.socketBinded == READY && status.serverConnection == READY)
+    return (status.socketCreated == READY && status.socketBinded == READY && status.serverConnection == READY);
 }
 
 #endif
