@@ -253,7 +253,7 @@ void SBGSensor::initialize() {
 }
 
 bool SBGSensor::isInitialized() {
-	return ((data.solutionStatus & 0b111) == 4);	
+	return ((data.solutionStatus & 0b1111) == 4);
 }
 
 sbgData SBGSensor::getData() {
