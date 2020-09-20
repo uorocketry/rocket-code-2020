@@ -36,19 +36,18 @@ void Interface::initializeSensors() {
 }
 
 bool Interface::sensorsInitialized() {
+	bool result = 1;
+
 #ifndef NO_LOGS
-	#ifndef NO_SOCKET_CONTROL
-	return (logger.isInitialized() && mySbgSensor.isInitialized() && input.isInitialized() && client.isInitialized());
-	#else
-	return (logger.isInitialized() && mySbgSensor.isInitialized() && input.isInitialized());
-	#endif
-#else
-	#ifndef NO_SOCKET_CONTROL
-	return (mySbgSensor.isInitialized() && input.isInitialized() && client.isInitialized());
-	#else
-	return (mySbgSensor.isInitialized() && input.isInitialized());
-	#endif
+	result &= logger.isInitialized();
 #endif
+#ifndef NO_SOCKET_CONTROL
+	result &= client.isInitialized();
+#endif
+	result &= (mySbgSensor.isInitialized() && input.isInitialized());
+	
+	return result;
+
 }	
 
 void Interface::update(const RocketSMData* rocketSMData) {

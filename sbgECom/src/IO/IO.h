@@ -3,7 +3,6 @@
 #include<mutex>
 #include<thread>
 
-enum InitStatus {INIT, READY};
 
 class IO {
 public:
@@ -13,6 +12,7 @@ public:
 	virtual void initialize();
 	virtual void run() = 0;
 	virtual bool isInitialized() = 0;
+	enum InitStatus {INIT, READY};
 	
 
 protected:

@@ -65,25 +65,30 @@ EXIT_DEFINE(Rocket, ExitInit) {
 
 }
 
+ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
+	std::cout << "RocketSM::EnterWaitForInit\n";
+	
+}
+
 // code for the wait for initialization state
 STATE_DEFINE(Rocket, WaitForInit, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
 	if (rocketInterface.sensorsInitialized())
-		detectExternEvent(rocketData);
+		InternalEvent(ST_FLIGHT);
 	
 	// showInfo(rocketData);
-}
-
-ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
-	std::cout << "RocketSM::EnterWaitForInit\n";
-	
 }
 
 EXIT_DEFINE(Rocket, ExitWaitForInit) {
 	std::cout << "RocketSM::ExitWaitForInit\n";
 
+}
+
+ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
+	std::cout << "RocketSM::EnterFlight\n";
+	
 }
 
 // code for the flight state
@@ -96,17 +101,11 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	// showInfo(rocketData);
 }
 
-ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
-	std::cout << "RocketSM::EnterFlight\n";
-	
-}
-
 // Exit action when WaitForDeceleration state exits.
 EXIT_DEFINE(Rocket, ExitFlight) {
 	std::cout << "RocketSM::ExitFlight\n";
 
 }
-
 
 ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
 	enterNewState(ST_DESCENT);
