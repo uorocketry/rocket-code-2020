@@ -6,6 +6,7 @@
 #include <typeinfo>
 #include "Fault.h"
 
+#include "helpers/Types.h"
 
 // If EXTERNAL_EVENT_NO_HEAP_DATA is defined it changes how a client sends data to the
 // state machine. When undefined, the ExternalEvent() pData argument must be created on the heap. 
@@ -198,6 +199,15 @@ public:
 	// Execute the ST_StateName function according to the current state
 	void ExecuteCurrentState(EventData* data);
 
+	// CUSTOM CODE ADDED BY uORocketry
+	void updateStateMachine(EventData* data);
+
+	void enterNewState(BYTE state);
+
+	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
+
+	bool switchStatesAfterTime(BYTE state, duration_ms targetTime);
+	// END CUSTOM CODE ADDED BY uORocketry
 	
 protected:
 	/// External state machine event.
@@ -252,6 +262,11 @@ private:
 	void StateEngine(void); 	
 	void StateEngine(const StateMapRow* const pStateMap);
 	void StateEngine(const StateMapRowEx* const pStateMapEx);
+
+	// CUSTOM CODE ADDED BY uORocketry
+	time_point entryTime;
+	// END CUSTOM CODE ADDED BY uORocketry
+
 };
 
 
