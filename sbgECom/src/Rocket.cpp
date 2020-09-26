@@ -49,6 +49,31 @@ void Rocket::Touchdown() {
 	END_TRANSITION_MAP(NULL)
 }
 
+// Launch external event
+void Rocket::Launch() {
+	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
+	END_TRANSITION_MAP(NULL)
+}
+
+// Motor Burnout internal event
+void Rocket::MotorBurnout() {
+	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
+	END_TRANSITION_MAP(NULL)
+}
+
+
+
+
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop. 
 
@@ -92,6 +117,8 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
+
+	// place if statment to trigger MotorBurnout here (need acceleration and time)
 
 	// showInfo(rocketData);
 }
@@ -165,6 +192,9 @@ void Rocket::detectExternEvent(const rocketState* data) {
 		break;
 	case 2:
 		Touchdown();
+		break;
+	case 3:
+		Launch();
 		break;
 	default:
 		break;

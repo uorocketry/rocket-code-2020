@@ -16,7 +16,8 @@ public:
 	void Start();
 	void Apogee();
 	void Touchdown();
-
+	void Launch();
+	void MotorBurnout();
 	void updateRocket(RocketSMData* data);
 
 private:
