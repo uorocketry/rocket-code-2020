@@ -21,7 +21,7 @@
 #define __BINARY_LOGS_H__
 
 #include <sbgCommon.h>
-#include "../sbgEComIds.h"
+#include "../common/sbgEComIds.h"
 #include "sbgEComBinaryLogDebug.h"
 #include "sbgEComBinaryLogDvl.h"
 #include "sbgEComBinaryLogEkf.h"

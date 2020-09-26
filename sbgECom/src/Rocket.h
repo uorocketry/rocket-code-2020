@@ -1,6 +1,6 @@
 #pragma once
 
-#include "stateMachine/StateMachine.h"
+#include "stateMachineLib/StateMachine.h"
 #include "data/rocketState.h"
 #include "data/RocketSMData.h"
 #include "Interface.h"

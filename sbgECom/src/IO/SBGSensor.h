@@ -4,7 +4,7 @@
 #include "IO.h"
 #include "../data/SBGData.h"
 
-#include <sbgEComLib.h>
+#include <../common/sbgEComLib.h>
 #include <time.h>
 
 class SBGSensor : public IO
