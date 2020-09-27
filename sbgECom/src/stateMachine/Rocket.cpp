@@ -7,7 +7,7 @@ Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
 
 	// There is no state entry function for the first state
-	enterNewState<States>(States(0));
+	enterNewState(States(0));
 }
 	
 // Apogee external event
