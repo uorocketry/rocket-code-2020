@@ -1,5 +1,5 @@
-#include "Rocket.h"
-#include "helpers/Types.h"
+#include "../stateMachine/Rocket.h"
+#include "../helpers/Types.h"
 
 #include <stdio.h>
 #include "chrono"
@@ -24,7 +24,7 @@ int main() {
 		RocketSMData data;
 		data.now = now;
 
-		uOttRocket.updateRocket(&data);
+		uOttRocket.updateStateMachine(&data);
 
 		elapsed_ns = duration_ns(now - start);
 		target_ns = duration_ns(TARGET_DELAY_NS * count++);		

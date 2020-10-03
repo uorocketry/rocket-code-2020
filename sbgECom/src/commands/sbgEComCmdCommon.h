@@ -20,7 +20,7 @@
 #ifndef __SBG_ECOM_CMD_COMMON_H__
 #define __SBG_ECOM_CMD_COMMON_H__
 
-#include "../sbgECom.h"
+#include "../common/sbgECom.h"
 
 //----------------------------------------------------------------------//
 //- Defintions                                                         -//
