@@ -1,10 +1,10 @@
 #pragma once
 
-#include "stateMachine/StateMachine.h"
-#include "Interface.h"
-#include "helpers/Types.h"
-#include "data/HotFireSMData.h"
-#include "data/hotFireState.h"
+#include "../stateMachineLib/StateMachine.h"
+#include "../Interface.h"
+#include "../helpers/Types.h"
+#include "../data/HotFireSMData.h"
+#include "../data/hotFireState.h"
 
 
 class HotFire : public StateMachine

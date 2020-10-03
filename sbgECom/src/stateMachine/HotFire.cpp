@@ -2,7 +2,7 @@
 
 #include "HotFire.h"
 #include <iostream>
-#include "data/hotFireState.h"
+#include "../data/hotFireState.h"
 
 HotFire::HotFire() :
 	StateMachine(ST_MAX_STATES) {
