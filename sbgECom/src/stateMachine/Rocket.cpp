@@ -7,7 +7,7 @@ Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
 
 	// There is no state entry function for the first state
-	enterNewState(States(0));
+	StateMachine::enterNewState(States(0));
 }
 
 // Start external event
@@ -195,22 +195,4 @@ void Rocket::showInfo(const rocketState* data) {
 
 void Rocket::enterNewState(States state) {
 	StateMachine::enterNewState(state);
-	entryTime = std::chrono::steady_clock::now();
-}
-
-double Rocket::getValueForTime(double minimum, double maximum, duration_ms targetTime) {
-	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
-	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
-    return std::min(maximum, minimum + progress * (maximum - minimum));
-}
-
-bool Rocket::switchStatesAfterTime(States state, duration_ms targetTime) {
-	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
-	if (timeSinceEntry >= duration_ns(targetTime)) {
-		InternalEvent(state);
-
-		return true;
-	}
-
-	return false;
 }

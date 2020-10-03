@@ -35,14 +35,13 @@ private:
 		ST_MAX_STATES
 	};
 
-	void enterNewState(States state);
-
 	// Define the state machine state functions with event data type
 	STATE_DECLARE(Rocket, 	Init,			RocketSMData)
 	EXIT_DECLARE(Rocket, ExitInit)
 	ENTRY_DECLARE(Rocket, EnterWaitForInit, 	RocketSMData)
 	STATE_DECLARE(Rocket, 	WaitForInit,			RocketSMData)
 	EXIT_DECLARE(Rocket, ExitWaitForInit)
+	ENTRY_DECLARE(Rocket, EnterFlight, 	RocketSMData)
 	STATE_DECLARE(Rocket, 	Flight,			RocketSMData)
 	EXIT_DECLARE(Rocket, ExitFlight)
 	STATE_DECLARE(Rocket, 	Descent,		RocketSMData)
