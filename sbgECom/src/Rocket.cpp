@@ -2,6 +2,9 @@
 #include <iostream>
 #include <bitset>
 #include "data/rocketState.h"
+#include <math.h>
+
+#define PI 3.14159265
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
@@ -41,7 +44,7 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
-	
+
 }
 
 // Exit action when WaitForDeceleration state exits.
@@ -112,8 +115,10 @@ void Rocket::detectApogee(const rocketState* data){
 	// Euler angle
 	// pitch is Yangle 
 	static uint8_t consecutiveEvents = 0; 
-	float Yangle = data->sbg.Yangle;
-	if(Yangle <= 45)
+
+	float Yangle = (180/PI)*(acos(cos(data->sbg.Xangle*(PI/180))*cos(data->sbg.Yangle*(PI/180))));
+	
+	if( Yangle >= 45)
 	{
 		consecutiveEvents++;
 	}
