@@ -13,6 +13,7 @@ public:
 
 	// External events taken by this state machine
 	// void Apogee(RocketSMData* data);
+	void Start();
 	void Apogee();
 	void Touchdown();
 
@@ -25,8 +26,9 @@ private:
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
-	enum States
-	{
+	enum States {
+		ST_INIT,
+		ST_WAIT_FOR_INIT,
 		ST_FLIGHT,
 		ST_DESCENT,
 		ST_GROUND,
@@ -36,6 +38,11 @@ private:
 	void enterNewState(States state);
 
 	// Define the state machine state functions with event data type
+	STATE_DECLARE(Rocket, 	Init,			RocketSMData)
+	EXIT_DECLARE(Rocket, ExitInit)
+	ENTRY_DECLARE(Rocket, EnterWaitForInit, 	RocketSMData)
+	STATE_DECLARE(Rocket, 	WaitForInit,			RocketSMData)
+	EXIT_DECLARE(Rocket, ExitWaitForInit)
 	STATE_DECLARE(Rocket, 	Flight,			RocketSMData)
 	EXIT_DECLARE(Rocket, ExitFlight)
 	STATE_DECLARE(Rocket, 	Descent,		RocketSMData)
@@ -58,8 +65,16 @@ private:
 	// State map to define state object order. Each state map entry defines a
 	// state object.
 	BEGIN_STATE_MAP_EX
-		STATE_MAP_ENTRY_ALL_EX(&Flight, 0, 0, &ExitFlight)
+		STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
+		STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
+		STATE_MAP_ENTRY_ALL_EX(&Flight, 0, &EnterFlight, &ExitFlight)
 		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
 		STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
+
+	void enterNewState(States state);
+
+	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
+
+	bool switchStatesAfterTime(States state, duration_ms targetTime);
 };

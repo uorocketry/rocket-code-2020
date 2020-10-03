@@ -9,11 +9,24 @@ Rocket::Rocket() :
 	// There is no state entry function for the first state
 	enterNewState(States(0));
 }
+
+// Start external event
+void Rocket::Start() {
+	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
+	END_TRANSITION_MAP(NULL)
+}
 	
 // Apogee external event
 // void Rocket::Apogee(RocketSMData* data)
 void Rocket::Apogee() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -26,6 +39,8 @@ void Rocket::Apogee() {
 // Touchdown external event
 void Rocket::Touchdown() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (ST_GROUND)					// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -34,6 +49,45 @@ void Rocket::Touchdown() {
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop. 
+
+// code for the initialization state
+STATE_DEFINE(Rocket, Init, RocketSMData) {
+	rocketInterface.initializeSensors();
+
+	InternalEvent(ST_WAIT_FOR_INIT);
+
+}
+
+EXIT_DEFINE(Rocket, ExitInit) {
+	std::cout << "RocketSM::ExitInit\n";
+
+}
+
+ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
+	std::cout << "RocketSM::EnterWaitForInit\n";
+	
+}
+
+// code for the wait for initialization state
+STATE_DEFINE(Rocket, WaitForInit, RocketSMData) {
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
+
+	if (rocketInterface.sensorsInitialized())
+		InternalEvent(ST_FLIGHT);
+	
+	// showInfo(rocketData);
+}
+
+EXIT_DEFINE(Rocket, ExitWaitForInit) {
+	std::cout << "RocketSM::ExitWaitForInit\n";
+
+}
+
+ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
+	std::cout << "RocketSM::EnterFlight\n";
+	
+}
 
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
@@ -98,30 +152,31 @@ STATE_DEFINE(Rocket, Ground, RocketSMData) {
 
 void Rocket::detectExternEvent(const rocketState* data) {
 	int eventNbr = data->inputEventNumber;
-	switch (eventNbr)
-	{
-	case 0:
-		Apogee();
-		break;
-	case 1:
-		Touchdown();
-		break;
-	default:
-		break;
+	switch (eventNbr) {
+		case 0:
+			Start();
+			break;
+		case 1:
+			Apogee();
+			break;
+		case 2:
+			Touchdown();
+			break;
+		default:
+			break;
 	}
 
 #ifndef NO_SOCKET_CONTROL
 	eventNbr = data->clientEventNumber;
-	switch (eventNbr)
-	{
-	case 0:
-		Apogee();
-		break;
-	case 1:
-		Touchdown();
-		break;
-	default:
-		break;
+	switch (eventNbr) {
+		case 0:
+			Apogee();
+			break;
+		case 1:
+			Touchdown();
+			break;
+		default:
+			break;
 	}
 #endif
 
@@ -140,4 +195,22 @@ void Rocket::showInfo(const rocketState* data) {
 
 void Rocket::enterNewState(States state) {
 	StateMachine::enterNewState(state);
+	entryTime = std::chrono::steady_clock::now();
+}
+
+double Rocket::getValueForTime(double minimum, double maximum, duration_ms targetTime) {
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
+    return std::min(maximum, minimum + progress * (maximum - minimum));
+}
+
+bool Rocket::switchStatesAfterTime(States state, duration_ms targetTime) {
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	if (timeSinceEntry >= duration_ns(targetTime)) {
+		InternalEvent(state);
+
+		return true;
+	}
+
+	return false;
 }

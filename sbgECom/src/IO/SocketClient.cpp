@@ -37,7 +37,9 @@ void SocketClient::run() {
             std::cout << "Socket creation error" << "\n"; 
             continue;
         } 
-    
+
+        status.socketCreated = READY;
+
         serv_addr.sin_family = AF_INET; 
         serv_addr.sin_port = htons(PORT); 
         
@@ -47,9 +49,14 @@ void SocketClient::run() {
             continue;
         } 
 
+        status.socketBinded = READY;
+
         std::cout << "Trying to connect..." << "\n";
         if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0) { 
             std::cout << "Connected\n";
+
+            status.serverConnection = READY;
+
             char buffer[1] = {(char)-1}; 
             bool connected = true;
             while (connected) {
@@ -85,6 +92,10 @@ int SocketClient::getData() {
     int nbr = eventNumberQueue.front();
     eventNumberQueue.pop();
     return nbr;
+}
+
+bool SocketClient::isInitialized() {
+    return (status.socketCreated == READY && status.socketBinded == READY && status.serverConnection == READY);
 }
 
 #endif

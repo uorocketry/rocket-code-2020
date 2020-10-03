@@ -2,7 +2,6 @@
 
 #include "../data/rocketState.h"
 #include "IO.h"
-
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -13,8 +12,9 @@ class Logger : public IO {
 public:
 	~Logger();
 
-	virtual void initialize();
-	virtual void run();
+	void initialize();
+	void run();
+	bool isInitialized();
 
 	//write data to rocketState struct and push to queue on main thread
 	void enqueueSensorData(rocketState curSensorData);
@@ -41,4 +41,10 @@ private:
 	std::condition_variable writingCondition;
 
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
+
+	struct InitFlags
+	{
+		InitStatus fileStatus = INIT;
+	} status;
+	
 };
