@@ -26,23 +26,23 @@ jobs:
           path: ./sbgECom/bin
 
       - name: "SKIP_INIT: Cmake Makefiles"
-        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: Run make
+        run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "SKIP_INIT: Run make"
         run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; make
 
       - name: "NO_LOGS: Cmake Makefiles"
-        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: Run make
+        run: export NO_LOGS=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "NO_LOGS: Run make"
         run: export NO_LOGS=1; cd ./sbgECom/projects/unix; make
 
       - name: "NO_SOCKET_CONTROL: Cmake Makefiles"
-        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: Run make
+        run: export NO_SOCKET_CONTROL=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "NO_SOCKET_CONTROL: Run make"
         run: export NO_SOCKET_CONTROL=1; cd ./sbgECom/projects/unix; make
 
       - name: "TESTING: Cmake Makefiles"
-        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: Run make
+        run: export TESTING=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "TESTING: Run make"
         run: export TESTING=1; cd ./sbgECom/projects/unix; make
 
         
