@@ -12,11 +12,18 @@ class SBGSensor : public IO
 public:
 	void run();
 	void initialize();
+	bool isInitialized();
+
 	sbgData getData();
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
 
 private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+	struct InitFlags
+	{
+		
+	} status;
 };
 
 #endif

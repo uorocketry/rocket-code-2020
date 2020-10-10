@@ -23,6 +23,4 @@ void IO::initialize() {
 	}
 }
 
-void IO::run() {
 
-}

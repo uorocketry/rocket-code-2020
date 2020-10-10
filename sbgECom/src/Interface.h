@@ -18,8 +18,8 @@ public:
 	Interface();
 	~Interface();
 
-	// not used yet
 	void initializeSensors();
+	bool sensorsInitialized();
 
 	// to get the latest rocket state. return a pointer to latestState
 	rocketState* getLatest();

@@ -13,7 +13,20 @@
 #include <chrono>
 #include <mutex>
 
+
+Logger::~Logger() {
+	fileStream->close();
+}
+
 void Logger::initialize() {
+	IO::initialize();
+}
+
+bool Logger::isInitialized() {
+    return (status.fileStatus == READY);
+}
+
+void Logger::run() {
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	std::string path = "./data/";
@@ -29,14 +42,8 @@ void Logger::initialize() {
 		writeHeader(*fileStream);
 	}
 
-	IO::initialize();
-}
+	status.fileStatus = READY;
 
-Logger::~Logger() {
-	fileStream->close();
-}
-
-void Logger::run() {
 	while (true) {
 		if (!logQueue.empty()) {
 			dequeueToFile();

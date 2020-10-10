@@ -15,12 +15,20 @@ public:
     
 	void run();
 	void initialize();
+	bool isInitialized();
 
     int getData();
 	// rocketState getLatest();
 
 private:
     std::queue<int> eventNumberQueue;
+
+    struct InitFlags
+	{
+		InitStatus socketCreated = INIT;
+		InitStatus socketBinded = INIT;
+		InitStatus serverConnection = INIT;
+	} status;
 };
 
 #endif

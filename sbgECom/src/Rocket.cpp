@@ -15,10 +15,23 @@ Rocket::Rocket() :
 	enterNewState(States(0));
 }
 	
+// Start external event
+void Rocket::Start() {
+	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (ST_FLIGHT)					// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
+	END_TRANSITION_MAP(NULL)
+}
+
 // Apogee external event
 // void Rocket::Apogee(RocketSMData* data)
 void Rocket::Apogee() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (ST_DESCENT)					// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -31,6 +44,8 @@ void Rocket::Apogee() {
 // Touchdown external event
 void Rocket::Touchdown() {
 	BEGIN_TRANSITION_MAP			              			// - Current State -
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_INIT
+		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_FLIGHT
 		TRANSITION_MAP_ENTRY (ST_GROUND)					// ST_DESCENT
 		TRANSITION_MAP_ENTRY (EVENT_IGNORED)				// ST_GROUND
@@ -40,16 +55,56 @@ void Rocket::Touchdown() {
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop. 
 
+// code for the initialization state
+STATE_DEFINE(Rocket, Init, RocketSMData) {
+	rocketInterface.initializeSensors();
+
+	InternalEvent(ST_WAIT_FOR_INIT);
+
+}
+
+EXIT_DEFINE(Rocket, ExitInit) {
+	std::cout << "RocketSM::ExitInit\n";
+
+}
+
+ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData) {
+	std::cout << "RocketSM::EnterWaitForInit\n";
+	
+}
+
+// code for the wait for initialization state
+STATE_DEFINE(Rocket, WaitForInit, RocketSMData) {
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
+
+	if (rocketInterface.sensorsInitialized())
+		InternalEvent(ST_FLIGHT);
+	
+	// showInfo(rocketData);
+}
+
+EXIT_DEFINE(Rocket, ExitWaitForInit) {
+	std::cout << "RocketSM::ExitWaitForInit\n";
+
+}
+
+ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData) {
+	std::cout << "RocketSM::EnterFlight\n";
+	
+}
+
 // code for the flight state
 STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
-	// move detect Apogee to coast state when new states are added 
+
+	// TODO: move detect Apogee to coast state when new states are added 
 	detectApogee(rocketData);
+
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
-
 }
 
 // Exit action when WaitForDeceleration state exits.
@@ -57,7 +112,6 @@ EXIT_DEFINE(Rocket, ExitFlight) {
 	std::cout << "RocketSM::ExitFlight\n";
 
 }
-
 
 ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData) {
 	enterNewState(ST_DESCENT);
@@ -109,9 +163,12 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	switch (eventNbr)
 	{
 	case 0:
-		Apogee();
+		Start();
 		break;
 	case 1:
+		Apogee();
+		break;
+	case 2:
 		Touchdown();
 		break;
 	default:

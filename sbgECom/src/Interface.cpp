@@ -8,7 +8,7 @@
 #endif // TESTING
 
 Interface::Interface() {
-	initializeSensors();
+	
 }
 
 Interface::~Interface() {
@@ -34,6 +34,25 @@ void Interface::initializeSensors() {
 	logger.initialize();
 #endif
 }
+
+bool Interface::sensorsInitialized() {
+#ifdef SKIP_INIT
+	return true;
+#endif
+
+	bool result = 1;
+
+#ifndef NO_LOGS
+	result &= logger.isInitialized();
+#endif
+#ifndef NO_SOCKET_CONTROL
+	result &= client.isInitialized();
+#endif
+	result &= (mySbgSensor.isInitialized() && input.isInitialized());
+	
+	return result;
+
+}	
 
 void Interface::update(const RocketSMData* rocketSMData) {
 #ifdef TESTING

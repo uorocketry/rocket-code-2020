@@ -9,6 +9,7 @@ public:
 
 	void initialize();
 	void run();
+	bool isInitialized();
 
     int getData();
 
@@ -18,4 +19,5 @@ protected:
 private:
     int eventNumber = -1;
     bool isNumber(const std::string& s);
+
 };
