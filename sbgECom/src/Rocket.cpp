@@ -4,6 +4,9 @@
 #include <iostream>
 #include <bitset>
 #include "data/rocketState.h"
+#include <math.h>
+
+#define PI 3.14159265
 
 Rocket::Rocket() :
 	StateMachine(ST_MAX_STATES) {
@@ -96,6 +99,9 @@ STATE_DEFINE(Rocket, Flight, RocketSMData) {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
+	// TODO: move detect Apogee to coast state when new states are added 
+	detectApogee(rocketData);
+
 	detectExternEvent(rocketData);
 
 	// showInfo(rocketData);
@@ -184,6 +190,33 @@ void Rocket::detectExternEvent(const rocketState* data) {
 	}
 #endif
 
+}
+
+void Rocket::detectApogee(const rocketState* data){
+	// TODO: only check for apogee x seconds after launch 
+	// Euler angle
+	// pitch is Yangle 
+	static uint8_t consecutiveEvents = 0; 
+
+	float Yangle = (180/PI)*(acos(cos(data->sbg.Xangle*(PI/180))*cos(data->sbg.Yangle*(PI/180))));
+	
+	if( Yangle >= 45)
+	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times 
+	// that the rocket is pointing downwards and falling
+	if(consecutiveEvents >= ApogeeThreshold)
+	{
+		std::cout << "Apogee \n";
+		Apogee();
+	}
+	
 }
 
 void Rocket::showInfo(const rocketState* data) {
