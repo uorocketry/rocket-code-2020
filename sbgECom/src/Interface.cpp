@@ -36,9 +36,9 @@ void Interface::initializeSensors() {
 }
 
 bool Interface::sensorsInitialized() {
-#ifdef SKIP_INIT
+#if defined(SKIP_INIT) || defined(TESTING)
 	return true;
-#endif
+#else
 
 	bool result = 1;
 
@@ -52,6 +52,7 @@ bool Interface::sensorsInitialized() {
 	
 	return result;
 
+#endif
 }	
 
 void Interface::update(const RocketSMData* rocketSMData) {

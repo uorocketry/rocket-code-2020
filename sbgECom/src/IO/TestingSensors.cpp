@@ -69,6 +69,11 @@ rocketState TestingSensors::getLatest() {
 
 }
 
+bool TestingSensors::isInitialized() {
+	// Unused when in testing mode
+	return true;
+}
+
 int TestingSensors::processInt(std::string data) {
 	return strtol(data.c_str(), nullptr, 10);
 }
