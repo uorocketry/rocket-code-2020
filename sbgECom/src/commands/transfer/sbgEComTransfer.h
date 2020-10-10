@@ -22,7 +22,7 @@
 #define __SBG_ECOM_TRANSFER_H__
 
 #include <sbgCommon.h>
-#include "../../sbgECom.h"
+#include <sbgECom.h>
 
 //----------------------------------------------------------------------//
 //- Global definitions                                                 -//

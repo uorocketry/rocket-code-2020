@@ -58,7 +58,7 @@ if (DEFINED ENV{TESTING} OR TESTING)
 	add_definitions(-D TESTING)
 endif()
 
-add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/MainLoop.cpp")
+add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../src/init/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
 target_link_libraries(MainLoop stdc++fs)

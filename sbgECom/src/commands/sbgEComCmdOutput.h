@@ -21,7 +21,7 @@
 #define __SBG_ECOM_CMD_OUTPUT_H__
 
 #include "sbgEComCmdCommon.h"
-#include "../sbgECanId.h"
+#include "../common/sbgECanId.h"
 
 //----------------------------------------------------------------------//
 //- Output definitions												   -//
