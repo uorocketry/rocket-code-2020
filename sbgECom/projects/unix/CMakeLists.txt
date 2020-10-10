@@ -42,6 +42,10 @@ endif()
 # target_link_libraries(test_hello sbgECom)
 # add_dependencies(test_hello sbgECom)
 
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	add_definitions(-D HOTFIRE_TEST)
+endif()
+
 if (DEFINED ENV{NO_LOGS} OR NO_LOGS)
 	add_definitions(-D NO_LOGS)
 endif()
