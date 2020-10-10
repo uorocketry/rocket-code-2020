@@ -50,6 +50,10 @@ if (DEFINED ENV{NO_SOCKET_CONTROL} OR NO_SOCKET_CONTROL)
 	add_definitions(-D NO_SOCKET_CONTROL)
 endif()
 
+if (DEFINED ENV{SKIP_INIT} OR SKIP_INIT)
+	add_definitions(-D SKIP_INIT)
+endif()
+
 if (DEFINED ENV{TESTING} OR TESTING)
 	add_definitions(-D TESTING)
 endif()

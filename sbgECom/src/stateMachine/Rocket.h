@@ -19,10 +19,16 @@ public:
 
 private:
 	void detectExternEvent(const rocketState* data);
+	void detectApogee(const rocketState* data);
 	void showInfo(const rocketState* data);
+
+	//number of consecutive readings needed to trigger apogee
+	uint8_t ApogeeThreshold = 5;
 
 	Interface rocketInterface;
 	rocketState* rocketData;
+
+	time_point entryTime;
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
