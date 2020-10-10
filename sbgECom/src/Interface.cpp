@@ -36,6 +36,10 @@ void Interface::initializeSensors() {
 }
 
 bool Interface::sensorsInitialized() {
+#ifdef SKIP_INIT
+	return true;
+#endif
+
 	bool result = 1;
 
 #ifndef NO_LOGS
