@@ -5,6 +5,6 @@
 #include "../helpers/Types.h"
 #include "../stateMachineLib/StateMachine.h"
 
-struct HotFireSMData : public UOSMData {
-
+struct HotFireSMData : public UOSMData
+{
 };

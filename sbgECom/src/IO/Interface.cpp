@@ -8,36 +8,38 @@
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
-Interface::Interface()
+template <class SMData>
+Interface<SMData>::Interface()
 {
 }
 
-Interface::~Interface()
+template <class SMData>
+Interface<SMData>::~Interface()
 {
 }
 
-void Interface::initializeSensors()
+template <class SMData>
+void Interface<SMData>::initializeSensors()
 {
-#ifdef TESTING
+#if TESTING
 	testingSensors.initialize();
-#else
-	// initialize all sensors
+#endif
+#if USE_SBG
 	mySbgSensor.initialize();
-
+#endif
+#if USE_INPUT
 	input.initialize();
-
-#ifndef NO_SOCKET_CONTROL
+#endif
+#if USE_SOCKET_CONTROL
 	client.initialize();
 #endif
-
-#endif
-
-#ifndef NO_LOGS
+#if USE_LOGGER
 	logger.initialize();
 #endif
 }
 
-bool Interface::sensorsInitialized()
+template <class SMData>
+bool Interface<SMData>::sensorsInitialized()
 {
 #ifdef SKIP_INIT
 	return true;
@@ -56,29 +58,31 @@ bool Interface::sensorsInitialized()
 	return result;
 }
 
-void Interface::update(const RocketSMData *rocketSMData)
+template <class SMData>
+void Interface<SMData>::update(const SMData *SMData)
 {
-#ifdef TESTING
+#if TESTING
 	latestState = testingSensors.getLatest();
-#else
+#endif
+#if USE_SBG
 	latestState.sbg = mySbgSensor.getData();
-
+#endif
+#if USE_INPUT
 	latestState.inputEventNumber = input.getData();
-
-#ifndef NO_SOCKET_CONTROL
+#endif
+#if USE_SOCKET_CONTROL
 	latestState.clientEventNumber = client.getData();
 #endif
 
-#endif
-
-	latestState.rocketSMData = *rocketSMData;
+	latestState.SMData = *SMData;
 
 #ifndef NO_LOGS
 	logger.enqueueSensorData(latestState);
 #endif
 }
 
-rocketState *Interface::getLatest()
+template <class SMData>
+sensorsData *Interface<SMData>::getLatest()
 {
 	return &latestState;
 }

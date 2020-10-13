@@ -1,6 +1,7 @@
 #pragma once
 
-#include "data/rocketState.h"
+#include "data/sensorsData.h"
+#include "data/SMData.h"
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
@@ -13,7 +14,9 @@
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
-class Interface {
+template <class SMData>
+class Interface
+{
 public:
 	Interface();
 	~Interface();
@@ -22,19 +25,18 @@ public:
 	bool sensorsInitialized();
 
 	// to get the latest rocket state. return a pointer to latestState
-	rocketState* getLatest();
+	sensorsData *getLatest();
 
 	// loop over each sensor and update the latestState
-	void update(const RocketSMData* rocketSMData);
+	void update(const SMData *SMData);
 
 private:
-	rocketState latestState;
-	
+	sensorsData latestState;
 
 #ifdef TESTING
 	TestingSensors testingSensors;
 #else
-    SBGSensor mySbgSensor;
+	SBGSensor mySbgSensor;
 	Input input;
 
 #ifndef NO_SOCKET_CONTROL
@@ -46,6 +48,4 @@ private:
 #ifndef NO_LOGS
 	Logger logger;
 #endif
-
 };
-

@@ -5,6 +5,6 @@
 #include "../helpers/Types.h"
 #include "../stateMachineLib/StateMachine.h"
 
-struct RocketSMData : public UOSMData {
-
+struct RocketSMData : public UOSMData
+{
 };

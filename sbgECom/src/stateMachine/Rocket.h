@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../stateMachineLib/StateMachine.h"
-#include "../data/rocketState.h"
+#include "../data/sensorsData.h"
 #include "../data/RocketSMData.h"
 #include "../IO/Interface.h"
 #include "../helpers/Types.h"
@@ -22,8 +22,8 @@
 #define USE_INPUT 1
 #endif
 
-#ifndef USE_TESTING_SENSORS
-#define USE_TESTING_SENSORS 0
+#ifndef TESTING
+#define TESTING 0
 #endif
 
 class Rocket : public StateMachine
@@ -38,15 +38,15 @@ public:
 	void Touchdown();
 
 private:
-	void detectExternEvent(const rocketState *data);
-	void detectApogee(const rocketState *data);
-	void showInfo(const rocketState *data);
+	void detectExternEvent(const sensorsData *data);
+	void detectApogee(const sensorsData *data);
+	void showInfo(const sensorsData *data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
 
-	Interface rocketInterface;
-	rocketState *rocketData;
+	Interface<RocketSMData> rocketInterface;
+	sensorsData *rocketData;
 
 	time_point entryTime;
 

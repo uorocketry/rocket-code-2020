@@ -22,8 +22,8 @@
 #define USE_INPUT 1
 #endif
 
-#ifndef USE_TESTING_SENSORS
-#define USE_TESTING_SENSORS 0
+#ifndef TESTING
+#define TESTING 0
 #endif
 
 class HotFire : public StateMachine
@@ -46,7 +46,7 @@ private:
 	void detectExternEvent(const hotFireState *data);
 	void showInfo(const hotFireState *data);
 
-	Interface hotFireInterface;
+	Interface<HotFireSMData> hotFireInterface;
 	hotFireState *hotFireData;
 
 	time_point entryTime;

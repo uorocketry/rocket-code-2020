@@ -2,7 +2,7 @@
 
 #include "HotFire.h"
 #include <iostream>
-#include "../data/hotFireState.h"
+#include "../data/sensorsData.h"
 
 HotFire::HotFire() : StateMachine(ST_MAX_STATES)
 {
@@ -319,13 +319,6 @@ STATE_DEFINE(HotFire, AbortBurn, HotFireSMData)
 	detectExternEvent(hotFireData);
 }
 
-// void StartFillingEXT();
-// void StopFillingEXT();
-// void AbortFillingEXT();
-// void IgnitionEXT();
-// void AbortBurnEXT();
-// void FinalVentingEXT();
-
 void HotFire::detectExternEvent(const hotFireState *data)
 {
 	int eventNbr = data->inputEventNumber;
@@ -356,7 +349,7 @@ void HotFire::detectExternEvent(const hotFireState *data)
 		break;
 	}
 
-#ifndef NO_SOCKET_CONTROL
+#if USE_SOCKET_CONTROL
 	eventNbr = data->clientEventNumber;
 
 	switch (eventNbr)
