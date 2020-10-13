@@ -3,8 +3,28 @@
 #include "../stateMachineLib/StateMachine.h"
 #include "../data/rocketState.h"
 #include "../data/RocketSMData.h"
-#include "../Interface.h"
+#include "../IO/Interface.h"
 #include "../helpers/Types.h"
+
+#ifndef USE_SBG
+#define USE_SBG 1
+#endif
+
+#ifndef USE_SOCKET_CLIENT
+#define USE_SOCKET_CLIENT 0
+#endif
+
+#ifndef USE_LOGGER
+#define USE_LOGGER 1
+#endif
+
+#ifndef USE_INPUT
+#define USE_INPUT 1
+#endif
+
+#ifndef USE_TESTING_SENSORS
+#define USE_TESTING_SENSORS 0
+#endif
 
 class Rocket : public StateMachine
 {
@@ -18,21 +38,22 @@ public:
 	void Touchdown();
 
 private:
-	void detectExternEvent(const rocketState* data);
-	void detectApogee(const rocketState* data);
-	void showInfo(const rocketState* data);
+	void detectExternEvent(const rocketState *data);
+	void detectApogee(const rocketState *data);
+	void showInfo(const rocketState *data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
 
 	Interface rocketInterface;
-	rocketState* rocketData;
+	rocketState *rocketData;
 
 	time_point entryTime;
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
-	enum States {
+	enum States
+	{
 		ST_INIT,
 		ST_WAIT_FOR_INIT,
 		ST_FLIGHT,
@@ -42,20 +63,19 @@ private:
 	};
 
 	// Define the state machine state functions with event data type
-	STATE_DECLARE(Rocket, 	Init,			RocketSMData)
+	STATE_DECLARE(Rocket, Init, RocketSMData)
 	EXIT_DECLARE(Rocket, ExitInit)
-	ENTRY_DECLARE(Rocket, EnterWaitForInit, 	RocketSMData)
-	STATE_DECLARE(Rocket, 	WaitForInit,			RocketSMData)
+	ENTRY_DECLARE(Rocket, EnterWaitForInit, RocketSMData)
+	STATE_DECLARE(Rocket, WaitForInit, RocketSMData)
 	EXIT_DECLARE(Rocket, ExitWaitForInit)
-	ENTRY_DECLARE(Rocket, EnterFlight, 	RocketSMData)
-	STATE_DECLARE(Rocket, 	Flight,			RocketSMData)
+	ENTRY_DECLARE(Rocket, EnterFlight, RocketSMData)
+	STATE_DECLARE(Rocket, Flight, RocketSMData)
 	EXIT_DECLARE(Rocket, ExitFlight)
-	STATE_DECLARE(Rocket, 	Descent,		RocketSMData)
+	STATE_DECLARE(Rocket, Descent, RocketSMData)
 	ENTRY_DECLARE(Rocket, EnterDescent, RocketSMData)
-	EXIT_DECLARE(Rocket, 	ExitDescent)
-	STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
+	EXIT_DECLARE(Rocket, ExitDescent)
+	STATE_DECLARE(Rocket, Ground, RocketSMData)
 	ENTRY_DECLARE(Rocket, EnterGround, RocketSMData)
-
 
 	// STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
 
@@ -70,11 +90,11 @@ private:
 	// State map to define state object order. Each state map entry defines a
 	// state object.
 	BEGIN_STATE_MAP_EX
-		STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
-		STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
-		STATE_MAP_ENTRY_ALL_EX(&Flight, 0, &EnterFlight, &ExitFlight)
-		STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
-		STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
+	STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
+	STATE_MAP_ENTRY_ALL_EX(&Flight, 0, &EnterFlight, &ExitFlight)
+	STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
+	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
 
 	void enterNewState(States state);
