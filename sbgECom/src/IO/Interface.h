@@ -1,20 +1,19 @@
 #pragma once
 
 #include "data/sensorsData.h"
-#include "data/SMData.h"
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
 #include "IO/IO.h"
+#include "data/UOSMData.h"
 #include <queue>
 
 #ifdef TESTING
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
-template <class SMData>
 class Interface
 {
 public:
@@ -28,7 +27,7 @@ public:
 	sensorsData *getLatest();
 
 	// loop over each sensor and update the latestState
-	void update(const SMData *SMData);
+	void update(const UOSMData *smdata);
 
 private:
 	sensorsData latestState;
@@ -39,7 +38,7 @@ private:
 	SBGSensor mySbgSensor;
 	Input input;
 
-#ifndef NO_SOCKET_CONTROL
+#if USE_SOCKET_CONTROL
 	SocketClient client;
 #endif
 

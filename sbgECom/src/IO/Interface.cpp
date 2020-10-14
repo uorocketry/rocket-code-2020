@@ -1,6 +1,5 @@
 #include "Interface.h"
 #include "IO/IO.h"
-#include "data/RocketSMData.h"
 #include "data/UOSMData.h"
 #include <iostream>
 
@@ -8,18 +7,15 @@
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
-template <class SMData>
-Interface<SMData>::Interface()
+Interface::Interface()
 {
 }
 
-template <class SMData>
-Interface<SMData>::~Interface()
+Interface::~Interface()
 {
 }
 
-template <class SMData>
-void Interface<SMData>::initializeSensors()
+void Interface::initializeSensors()
 {
 #if TESTING
 	testingSensors.initialize();
@@ -38,8 +34,7 @@ void Interface<SMData>::initializeSensors()
 #endif
 }
 
-template <class SMData>
-bool Interface<SMData>::sensorsInitialized()
+bool Interface::sensorsInitialized()
 {
 #ifdef SKIP_INIT
 	return true;
@@ -50,39 +45,48 @@ bool Interface<SMData>::sensorsInitialized()
 #ifndef NO_LOGS
 	result &= logger.isInitialized();
 #endif
-#ifndef NO_SOCKET_CONTROL
+
+#if USE_SOCKET_CONTROL
 	result &= client.isInitialized();
 #endif
-	result &= (mySbgSensor.isInitialized() && input.isInitialized());
+
+#if USE_SBG
+	result &= mySbgSensor.isInitialized();
+#endif
+
+#if USE_INPUT
+	result &= input.isInitialized();
+#endif
 
 	return result;
 }
 
-template <class SMData>
-void Interface<SMData>::update(const SMData *SMData)
+void Interface::update(const UOSMData *smdata)
 {
 #if TESTING
 	latestState = testingSensors.getLatest();
 #endif
+
 #if USE_SBG
 	latestState.sbg = mySbgSensor.getData();
 #endif
+
 #if USE_INPUT
 	latestState.inputEventNumber = input.getData();
 #endif
+
 #if USE_SOCKET_CONTROL
 	latestState.clientEventNumber = client.getData();
 #endif
 
-	latestState.SMData = *SMData;
+	latestState.SMData = *smdata;
 
 #ifndef NO_LOGS
 	logger.enqueueSensorData(latestState);
 #endif
 }
 
-template <class SMData>
-sensorsData *Interface<SMData>::getLatest()
+sensorsData *Interface::getLatest()
 {
 	return &latestState;
 }

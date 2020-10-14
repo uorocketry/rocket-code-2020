@@ -1,20 +1,19 @@
-#include "Rocket.h"
 #include <iostream>
 #include <bitset>
-#include "../data/sensorsData.h"
+#include "data/sensorsData.h"
+#include "UOStateMachine.h"
 #include <math.h>
 
 #define PI 3.14159265
 
-Rocket::Rocket() : StateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 {
-
 	// There is no state entry function for the first state
-	StateMachine::enterNewState(States(0));
+	UOStateMachine::enterNewState(States(0));
 }
 
 // Start external event
-void Rocket::Start()
+void UOStateMachine::Start()
 {
 	BEGIN_TRANSITION_MAP					// - Current State -
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
@@ -26,8 +25,8 @@ void Rocket::Start()
 }
 
 // Apogee external event
-// void Rocket::Apogee(RocketSMData* data)
-void Rocket::Apogee()
+// void UOStateMachine::Apogee(UOSMData* data)
+void UOStateMachine::Apogee()
 {
 	BEGIN_TRANSITION_MAP					// - Current State -
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
@@ -42,7 +41,7 @@ void Rocket::Apogee()
 }
 
 // Touchdown external event
-void Rocket::Touchdown(){
+void UOStateMachine::Touchdown(){
 	BEGIN_TRANSITION_MAP					// - Current State -
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
@@ -55,19 +54,19 @@ void Rocket::Touchdown(){
 // will be call in the main loop.
 
 // code for the initialization state
-STATE_DEFINE(Rocket, Init, RocketSMData)
+STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
 	rocketInterface.initializeSensors();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
 
-EXIT_DEFINE(Rocket, ExitInit)
+EXIT_DEFINE(UOStateMachine, ExitInit)
 {
 	std::cout << "RocketSM::ExitInit\n";
 }
 
-ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData)
+ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
 	enterNewState(ST_WAIT_FOR_INIT);
 
@@ -75,7 +74,7 @@ ENTRY_DEFINE(Rocket, EnterWaitForInit, RocketSMData)
 }
 
 // code for the wait for initialization state
-STATE_DEFINE(Rocket, WaitForInit, RocketSMData)
+STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
@@ -86,12 +85,12 @@ STATE_DEFINE(Rocket, WaitForInit, RocketSMData)
 	// showInfo(rocketData);
 }
 
-EXIT_DEFINE(Rocket, ExitWaitForInit)
+EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
 	std::cout << "RocketSM::ExitWaitForInit\n";
 }
 
-ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData)
+ENTRY_DEFINE(UOStateMachine, EnterFlight, UOSMData)
 {
 	enterNewState(ST_FLIGHT);
 
@@ -99,7 +98,7 @@ ENTRY_DEFINE(Rocket, EnterFlight, RocketSMData)
 }
 
 // code for the flight state
-STATE_DEFINE(Rocket, Flight, RocketSMData)
+STATE_DEFINE(UOStateMachine, Flight, UOSMData)
 {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
@@ -113,12 +112,12 @@ STATE_DEFINE(Rocket, Flight, RocketSMData)
 }
 
 // Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(Rocket, ExitFlight)
+EXIT_DEFINE(UOStateMachine, ExitFlight)
 {
 	std::cout << "RocketSM::ExitFlight\n";
 }
 
-ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData)
+ENTRY_DEFINE(UOStateMachine, EnterDescent, UOSMData)
 {
 	enterNewState(ST_DESCENT);
 
@@ -126,7 +125,7 @@ ENTRY_DEFINE(Rocket, EnterDescent, RocketSMData)
 }
 
 // code for the Descent state
-STATE_DEFINE(Rocket, Descent, RocketSMData)
+STATE_DEFINE(UOStateMachine, Descent, UOSMData)
 {
 	// InternalEvent(ST_GROUND);
 
@@ -142,13 +141,13 @@ STATE_DEFINE(Rocket, Descent, RocketSMData)
 }
 
 // Exit action when ExitDescent state exits.
-EXIT_DEFINE(Rocket, ExitDescent)
+EXIT_DEFINE(UOStateMachine, ExitDescent)
 {
 	std::cout << "RocketSM::ExitDescent\n";
 }
 
 // Entry action when ExitDescent state exits.
-ENTRY_DEFINE(Rocket, EnterGround, RocketSMData)
+ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
 	enterNewState(ST_GROUND);
 
@@ -156,7 +155,7 @@ ENTRY_DEFINE(Rocket, EnterGround, RocketSMData)
 }
 
 // code for the ground state
-STATE_DEFINE(Rocket, Ground, RocketSMData)
+STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
@@ -165,7 +164,7 @@ STATE_DEFINE(Rocket, Ground, RocketSMData)
 	// showInfo(rocketData);
 }
 
-void Rocket::detectExternEvent(const sensorsData *data)
+void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
 	int eventNbr = data->inputEventNumber;
 	switch (eventNbr)
@@ -202,7 +201,7 @@ void Rocket::detectExternEvent(const sensorsData *data)
 #endif
 }
 
-void Rocket::detectApogee(const sensorsData *data)
+void UOStateMachine::detectApogee(const sensorsData *data)
 {
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
@@ -229,7 +228,7 @@ void Rocket::detectApogee(const sensorsData *data)
 	}
 }
 
-void Rocket::showInfo(const sensorsData *data)
+void UOStateMachine::showInfo(const sensorsData *data)
 {
 #if USE_SBG
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
@@ -243,7 +242,7 @@ void Rocket::showInfo(const sensorsData *data)
 	return;
 }
 
-void Rocket::enterNewState(States state)
+void UOStateMachine::enterNewState(States state)
 {
 	StateMachine::enterNewState(state);
 }

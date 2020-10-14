@@ -2,37 +2,17 @@
 
 #include "../stateMachineLib/StateMachine.h"
 #include "../data/sensorsData.h"
-#include "../data/RocketSMData.h"
+#include "../data/UOSMData.h"
 #include "../IO/Interface.h"
 #include "../helpers/Types.h"
 
-#ifndef USE_SBG
-#define USE_SBG 1
-#endif
-
-#ifndef USE_SOCKET_CLIENT
-#define USE_SOCKET_CLIENT 0
-#endif
-
-#ifndef USE_LOGGER
-#define USE_LOGGER 1
-#endif
-
-#ifndef USE_INPUT
-#define USE_INPUT 1
-#endif
-
-#ifndef TESTING
-#define TESTING 0
-#endif
-
-class Rocket : public StateMachine
+class UOStateMachine : public StateMachine
 {
 public:
-	Rocket();
+	UOStateMachine();
 
 	// External events taken by this state machine
-	// void Apogee(RocketSMData* data);
+	// void Apogee(UOSMData* data);
 	void Start();
 	void Apogee();
 	void Touchdown();
@@ -45,7 +25,7 @@ private:
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
 
-	Interface<RocketSMData> rocketInterface;
+	Interface rocketInterface;
 	sensorsData *rocketData;
 
 	time_point entryTime;
@@ -63,21 +43,21 @@ private:
 	};
 
 	// Define the state machine state functions with event data type
-	STATE_DECLARE(Rocket, Init, RocketSMData)
-	EXIT_DECLARE(Rocket, ExitInit)
-	ENTRY_DECLARE(Rocket, EnterWaitForInit, RocketSMData)
-	STATE_DECLARE(Rocket, WaitForInit, RocketSMData)
-	EXIT_DECLARE(Rocket, ExitWaitForInit)
-	ENTRY_DECLARE(Rocket, EnterFlight, RocketSMData)
-	STATE_DECLARE(Rocket, Flight, RocketSMData)
-	EXIT_DECLARE(Rocket, ExitFlight)
-	STATE_DECLARE(Rocket, Descent, RocketSMData)
-	ENTRY_DECLARE(Rocket, EnterDescent, RocketSMData)
-	EXIT_DECLARE(Rocket, ExitDescent)
-	STATE_DECLARE(Rocket, Ground, RocketSMData)
-	ENTRY_DECLARE(Rocket, EnterGround, RocketSMData)
+	STATE_DECLARE(UOStateMachine, Init, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitInit)
+	ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
+	STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
+	ENTRY_DECLARE(UOStateMachine, EnterFlight, UOSMData)
+	STATE_DECLARE(UOStateMachine, Flight, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitFlight)
+	STATE_DECLARE(UOStateMachine, Descent, UOSMData)
+	ENTRY_DECLARE(UOStateMachine, EnterDescent, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitDescent)
+	STATE_DECLARE(UOStateMachine, Ground, UOSMData)
+	ENTRY_DECLARE(UOStateMachine, EnterGround, UOSMData)
 
-	// STATE_DECLARE(Rocket, 	Ground,			RocketSMData)
+	// STATE_DECLARE(UOStateMachine, 	Ground,			UOSMData)
 
 	// State map to define state object order. Each state map entry defines a
 	// state object.
