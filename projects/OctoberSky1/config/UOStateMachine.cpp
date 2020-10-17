@@ -1,4 +1,4 @@
-#include "./config.h"
+#include "config/config.h"
 #include <iostream>
 #include <bitset>
 #include "data/sensorsData.h"

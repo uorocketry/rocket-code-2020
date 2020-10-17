@@ -12,11 +12,11 @@ struct sensorsData
     sbgData sbg;
 #endif
 
-    //#if USE_INPUT
+#if USE_INPUT
     int inputEventNumber = -1;
-    //#endif
+#endif
 
-    //#if USE_SOCKET_CONTROL
+#if USE_SOCKET_CLIENT
     int clientEventNumber = -1;
-    //#endif
+#endif
 };

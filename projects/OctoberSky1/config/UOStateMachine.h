@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./config.h"
+#include "config/config.h"
 #include "stateMachineLib/StateMachine.h"
 #include "data/sensorsData.h"
 #include "data/UOSMData.h"

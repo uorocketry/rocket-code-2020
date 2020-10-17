@@ -1,6 +1,6 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
-#include "./config.h"
+#include "config/config.h"
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
@@ -158,12 +158,13 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
-	// if (hotFireInterface.sensorsInitialized())
-	// 	InternalEvent(ST_FLIGHT);
-	InternalEvent(ST_WAIT_FOR_FILLING);
+	if (hotFireInterface.sensorsInitialized())
+	{
+		InternalEvent(ST_WAIT_FOR_FILLING);
+	}
 
 	// showInfo(hotFireData);
 }
@@ -180,8 +181,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -198,8 +199,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -216,8 +217,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -234,8 +235,8 @@ ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -252,8 +253,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -270,8 +271,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -288,8 +289,8 @@ ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	std::cout << "Done.\n";
 }
@@ -301,8 +302,8 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -314,8 +315,8 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 {
-	// hotFireInterface.update(data);
-	// hotFireData = hotFireInterface.getLatest();
+	hotFireInterface.update(data);
+	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
 }
