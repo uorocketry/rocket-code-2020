@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../stateMachineLib/StateMachine.h"
-#include "../data/sensorsData.h"
-#include "../data/UOSMData.h"
-#include "../IO/Interface.h"
-#include "../helpers/Types.h"
+#include "stateMachineLib/StateMachine.h"
+#include "data/sensorsData.h"
+#include "data/UOSMData.h"
+#include "IO/Interface.h"
+#include "helpers/Types.h"
 
 class UOStateMachine : public StateMachine
 {
