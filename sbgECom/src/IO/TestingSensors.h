@@ -12,6 +12,7 @@ class TestingSensors : public IO
 public:
 	void run();
 	void initialize();
+	bool isInitialized();
 
 	rocketState getLatest();
 
