@@ -1,5 +1,6 @@
 #pragma once
 
+#include "./config.h"
 #include "stateMachineLib/StateMachine.h"
 #include "IO/Interface.h"
 #include "helpers/Types.h"

@@ -42,11 +42,11 @@ bool Interface::sensorsInitialized()
 
 	bool result = 1;
 
-#ifndef NO_LOGS
+#if USE_LOGGER
 	result &= logger.isInitialized();
 #endif
 
-#if USE_SOCKET_CONTROL
+#if USE_SOCKET_CLIENT
 	result &= client.isInitialized();
 #endif
 
@@ -75,13 +75,13 @@ void Interface::update(const UOSMData *smdata)
 	latestState.inputEventNumber = input.getData();
 #endif
 
-#if USE_SOCKET_CONTROL
+#if USE_SOCKET_CLIENT
 	latestState.clientEventNumber = client.getData();
 #endif
 
 	latestState.SMData = *smdata;
 
-#ifndef NO_LOGS
+#if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
 }

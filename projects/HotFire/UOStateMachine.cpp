@@ -1,5 +1,6 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
+#include "./config.h"
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
@@ -349,7 +350,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 		break;
 	}
 
-#if USE_SOCKET_CONTROL
+#if USE_SOCKET_CLIENT
 	eventNbr = data->clientEventNumber;
 
 	switch (eventNbr)

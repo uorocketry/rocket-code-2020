@@ -1,3 +1,4 @@
+#include "./config.h"
 #include <iostream>
 #include <bitset>
 #include "data/sensorsData.h"
@@ -182,7 +183,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 		break;
 	}
 
-#if USE_SOCKET_CONTROL
+#if USE_SOCKET_CLIENT
 	eventNbr = data->clientEventNumber;
 	switch (eventNbr)
 	{
@@ -203,6 +204,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 
 void UOStateMachine::detectApogee(const sensorsData *data)
 {
+#if USE_SBG
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
 	// pitch is Yangle
@@ -226,6 +228,7 @@ void UOStateMachine::detectApogee(const sensorsData *data)
 		std::cout << "Apogee \n";
 		Apogee();
 	}
+#endif
 }
 
 void UOStateMachine::showInfo(const sensorsData *data)

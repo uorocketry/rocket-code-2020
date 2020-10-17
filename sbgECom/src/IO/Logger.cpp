@@ -1,4 +1,4 @@
-#ifndef NO_LOGS
+#if USE_LOGGER
 
 #include "Logger.h"
 #include "data/sensorsData.h"

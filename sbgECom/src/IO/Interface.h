@@ -10,7 +10,7 @@
 #include "data/UOSMData.h"
 #include <queue>
 
-#ifdef TESTING
+#if TESTING
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
@@ -32,19 +32,23 @@ public:
 private:
 	sensorsData latestState;
 
-#ifdef TESTING
+#if TESTING
 	TestingSensors testingSensors;
-#else
-	SBGSensor mySbgSensor;
-	Input input;
+#endif
 
-#if USE_SOCKET_CONTROL
+#if USE_SBG
+	SBGSensor mySbgSensor;
+#endif
+
+#if USE_INPUT
+	Input input;
+#endif
+
+#if USE_SOCKET_CLIENT
 	SocketClient client;
 #endif
 
-#endif
-
-#ifndef NO_LOGS
+#if USE_LOGGER
 	Logger logger;
 #endif
 };
