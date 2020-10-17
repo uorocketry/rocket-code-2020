@@ -249,3 +249,23 @@ void UOStateMachine::enterNewState(States state)
 {
 	StateMachine::enterNewState(state);
 }
+
+double UOStateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime)
+{
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	double progress = ((double)timeSinceEntry.count()) / duration_ns(targetTime).count();
+	return std::min(maximum, minimum + progress * (maximum - minimum));
+}
+
+bool UOStateMachine::switchStatesAfterTime(States state, duration_ms targetTime)
+{
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	if (timeSinceEntry >= duration_ns(targetTime))
+	{
+		InternalEvent(state);
+
+		return true;
+	}
+
+	return false;
+}

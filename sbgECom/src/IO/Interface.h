@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config/config.h"
 #include "data/sensorsData.h"
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"

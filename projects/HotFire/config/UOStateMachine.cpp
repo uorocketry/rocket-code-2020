@@ -231,6 +231,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
 ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 {
 	std::cout << "HotFireSM::EnterIgnition\n";
+	enterNewState(ST_IGNITION);
 }
 
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
@@ -239,6 +240,7 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
+	switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000));
 }
 
 EXIT_DEFINE(UOStateMachine, ExitIgnition)
@@ -285,14 +287,13 @@ EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
 ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 {
 	std::cout << "HotFireSM::EnterDone\n";
+	std::cout << "Done.\n";
 }
 
 STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
 	hotFireInterface.update(data);
 	hotFireData = hotFireInterface.getLatest();
-
-	std::cout << "Done.\n";
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
@@ -394,4 +395,24 @@ void UOStateMachine::updateHotFire(UOSMData *data)
 void UOStateMachine::enterNewState(States state)
 {
 	entryTime = std::chrono::steady_clock::now();
+}
+
+double UOStateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime)
+{
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	double progress = ((double)timeSinceEntry.count()) / duration_ns(targetTime).count();
+	return std::min(maximum, minimum + progress * (maximum - minimum));
+}
+
+bool UOStateMachine::switchStatesAfterTime(States state, duration_ms targetTime)
+{
+	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
+	if (timeSinceEntry >= duration_ns(targetTime))
+	{
+		InternalEvent(state);
+
+		return true;
+	}
+
+	return false;
 }

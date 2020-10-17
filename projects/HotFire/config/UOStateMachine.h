@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./config.h"
+#include "config/config.h"
 #include "stateMachineLib/StateMachine.h"
 #include "IO/Interface.h"
 #include "helpers/Types.h"
@@ -107,4 +107,8 @@ private:
 	END_STATE_MAP_EX
 
 	void enterNewState(States state);
+
+	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
+
+	bool switchStatesAfterTime(States state, duration_ms targetTime);
 };
