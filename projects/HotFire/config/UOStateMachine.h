@@ -105,10 +105,4 @@ private:
 	STATE_MAP_ENTRY_ALL_EX(&AbortFilling, 0, &EnterAbortFilling, 0)
 	STATE_MAP_ENTRY_ALL_EX(&AbortBurn, 0, &EnterAbortBurn, 0)
 	END_STATE_MAP_EX
-
-	void enterNewState(States state);
-
-	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
-
-	bool switchStatesAfterTime(States state, duration_ms targetTime);
 };

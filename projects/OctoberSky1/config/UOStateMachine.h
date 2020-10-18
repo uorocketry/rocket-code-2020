@@ -77,10 +77,4 @@ private:
 	STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
 	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
-
-	void enterNewState(States state);
-
-	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
-
-	bool switchStatesAfterTime(States state, duration_ms targetTime);
 };
