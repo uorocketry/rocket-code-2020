@@ -1,19 +1,21 @@
 #pragma once
 
-#ifdef TESTING
+#if TESTING
 
 #include "IO.h"
 #include "../data/SBGData.h"
 #include <iostream>
 #include <queue>
 
-class TestingSensors : public IO {
+class TestingSensors : public IO
+{
 public:
 	void run();
 	void initialize();
 	bool isInitialized();
 
 	rocketState getLatest();
+
 private:
 	std::queue<rocketState> data;
 

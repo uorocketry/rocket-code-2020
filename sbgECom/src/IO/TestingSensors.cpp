@@ -1,4 +1,5 @@
-#ifdef TESTING
+#if TESTING
+
 #include "../helpers/Helper.h"
 #include "../data/rocketState.h"
 #include "TestingSensors.h"
@@ -8,19 +9,23 @@
 #include <string>
 #include <vector>
 
-void TestingSensors::run() {
+void TestingSensors::run()
+{
 	return;
 }
 
-void TestingSensors::initialize() {
+void TestingSensors::initialize()
+{
 	createThread = false;
 
 	std::ifstream logFile("./data/test-data.csv");
 
 	std::string line;
 	bool headerRow = true;
-	while (std::getline(logFile, line)) {
-		if (headerRow) { 
+	while (std::getline(logFile, line))
+	{
+		if (headerRow)
+		{
 			headerRow = false;
 			continue;
 		}
@@ -31,7 +36,7 @@ void TestingSensors::initialize() {
 		std::vector<std::string> currentRow = helper::stringSplit(line, ',');
 
 		rocketState rocketState;
-		
+
 		// SBG:
 		rocketState.sbg.Xangle = processFloat(currentRow[0]);
 		rocketState.sbg.Yangle = processFloat(currentRow[1]);
@@ -50,39 +55,46 @@ void TestingSensors::initialize() {
 		rocketState.sbg.filteredYacc = processFloat(currentRow[14]);
 		rocketState.sbg.filteredZacc = processFloat(currentRow[15]);
 		rocketState.sbg.solutionStatus = processInt(currentRow[16]);
-		
+
 		data.push(rocketState);
 	}
-	
+
 	IO::initialize();
 }
 
-rocketState TestingSensors::getLatest() {
-	if (!data.empty()) {
+rocketState TestingSensors::getLatest()
+{
+	if (!data.empty())
+	{
 		rocketState currentData = data.front();
 		data.pop();
 
 		return currentData;
-	} else {
+	}
+	else
+	{
 		exit(EXIT_SUCCESS);
 	}
-
 }
 
-bool TestingSensors::isInitialized() {
+bool TestingSensors::isInitialized()
+{
 	// Unused when in testing mode
 	return true;
 }
 
-int TestingSensors::processInt(std::string data) {
+int TestingSensors::processInt(std::string data)
+{
 	return strtol(data.c_str(), nullptr, 10);
 }
 
-float TestingSensors::processFloat(std::string data) {
+float TestingSensors::processFloat(std::string data)
+{
 	return strtof(data.c_str(), nullptr);
 }
 
-double TestingSensors::processDouble(std::string data) {
+double TestingSensors::processDouble(std::string data)
+{
 	return strtod(data.c_str(), nullptr);
 }
 

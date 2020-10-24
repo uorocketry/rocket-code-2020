@@ -1,7 +1,7 @@
-#ifndef NO_LOGS
+#if USE_LOGGER
 
 #include "Logger.h"
-#include "data/rocketState.h"
+#include "data/sensorsData.h"
 
 #include <sys/stat.h>
 #include <iostream>
@@ -13,72 +13,88 @@
 #include <chrono>
 #include <mutex>
 
-
-Logger::~Logger() {
+Logger::~Logger()
+{
 	fileStream->close();
 }
 
-void Logger::initialize() {
+void Logger::initialize()
+{
 	IO::initialize();
 }
 
-bool Logger::isInitialized() {
-    return (status.fileStatus == READY);
+bool Logger::isInitialized()
+{
+	return (status.fileStatus == READY);
 }
 
-void Logger::run() {
+void Logger::run()
+{
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	std::string path = "./data/";
 	std::string filename = "log.csv";
-	if (!std::experimental::filesystem::exists(path)) {
+	if (!std::experimental::filesystem::exists(path))
+	{
 		std::experimental::filesystem::create_directories(path);
 	}
 
 	bool shouldWriteHeader = !std::experimental::filesystem::exists(path + filename);
 	fileStream = std::make_shared<std::ofstream>(path + filename, std::ios_base::app);
 
-	if (shouldWriteHeader) {
+	if (shouldWriteHeader)
+	{
 		writeHeader(*fileStream);
 	}
 
 	status.fileStatus = READY;
 
-	while (true) {
-		if (!logQueue.empty()) {
+	while (true)
+	{
+		if (!logQueue.empty())
+		{
 			dequeueToFile();
-		} else {
+		}
+		else
+		{
 			writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
- 	}
+	}
 }
 
-void Logger::enqueueSensorData(rocketState curSensorData) {
+void Logger::enqueueSensorData(sensorsData curSensorData)
+{
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
 
 	writingCondition.notify_one();
 }
 
-
-void Logger::dequeueToFile() {
-	if (fileStream != nullptr) {
-		rocketState currentState;
+void Logger::dequeueToFile()
+{
+	if (fileStream != nullptr)
+	{
+		sensorsData currentState;
 		{
 			std::lock_guard<std::mutex> lockGuard(mutex);
 			currentState = logQueue.front();
 			logQueue.pop();
 		}
 
-		if(fileStream->is_open()) {
+		if (fileStream->is_open())
+		{
 			writeData(*fileStream, currentState);
-		} else {
-			std::cout << "Unable to open log file." << "\n";
+		}
+		else
+		{
+			std::cout << "Unable to open log file."
+					  << "\n";
 		}
 	}
 }
 
-void Logger::writeHeader(std::ofstream& fileStream) {
+void Logger::writeHeader(std::ofstream &fileStream)
+{
 	fileStream << "Timestamp (Relative),";
 
 	fileStream << "Xangle,";
@@ -108,11 +124,13 @@ void Logger::writeHeader(std::ofstream& fileStream) {
 	fileStream.flush();
 }
 
-void Logger::writeData(std::ofstream& fileStream, const rocketState& currentState) {
+void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
+{
 
 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
-	fileStream << currentState.rocketSMData.now.time_since_epoch().count() << ",";
+	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
 
+#if USE_SBG
 	fileStream << currentState.sbg.Xangle << ",";
 	fileStream << currentState.sbg.Yangle << ",";
 	fileStream << currentState.sbg.Zangle << ",";
@@ -136,7 +154,7 @@ void Logger::writeData(std::ofstream& fileStream, const rocketState& currentStat
 	fileStream << currentState.sbg.filteredZacc << ",";
 
 	fileStream << currentState.sbg.solutionStatus << ",";
-
+#endif
 	fileStream << "\n";
 
 	fileStream.flush();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../data/rocketState.h"
+#include "../data/sensorsData.h"
 #include "IO.h"
 #include <queue>
 #include <mutex>
@@ -8,7 +8,8 @@
 #include <iostream>
 #include <condition_variable>
 
-class Logger : public IO {
+class Logger : public IO
+{
 public:
 	~Logger();
 
@@ -16,25 +17,25 @@ public:
 	void run();
 	bool isInitialized();
 
-	//write data to rocketState struct and push to queue on main thread
-	void enqueueSensorData(rocketState curSensorData);
+	//write data to sensorsData struct and push to queue on main thread
+	void enqueueSensorData(sensorsData curSensorData);
 
 protected:
 	std::mutex mutex;
 
 private:
-    //pop queue and log the data from rocketState on logging thread
+	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToFile();
 
-	void writeHeader(std::ofstream& file);
-	void writeData(std::ofstream& file, const rocketState& currentState);
+	void writeHeader(std::ofstream &file);
+	void writeData(std::ofstream &file, const sensorsData &currentState);
 
-	const std::chrono::duration<int64_t, std::ratio<1,1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1,1>>(1);
+	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 
 	std::thread thisThread;
 
-    //queue of sensor data to be logged 
-	std::queue<rocketState> logQueue;
+	//queue of sensor data to be logged
+	std::queue<sensorsData> logQueue;
 
 	std::mutex writingMutex;
 	std::unique_lock<std::mutex> writingLock;
@@ -46,5 +47,4 @@ private:
 	{
 		InitStatus fileStatus = INIT;
 	} status;
-	
 };
