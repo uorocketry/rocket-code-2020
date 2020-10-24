@@ -1,29 +1,29 @@
 #pragma once
 
-#ifndef TESTING
+#if !TESTING
 
 #include "IO.h"
 #include "../data/SBGData.h"
 #include <iostream>
 #include <queue>
 
-
-class SocketClient : public IO {
+class SocketClient : public IO
+{
 public:
-    SocketClient();
-    ~SocketClient();
-    
+	SocketClient();
+	~SocketClient();
+
 	void run();
 	void initialize();
 	bool isInitialized();
 
-    int getData();
+	int getData();
 	// rocketState getLatest();
 
 private:
-    std::queue<int> eventNumberQueue;
+	std::queue<int> eventNumberQueue;
 
-    struct InitFlags
+	struct InitFlags
 	{
 		InitStatus socketCreated = INIT;
 		InitStatus socketBinded = INIT;

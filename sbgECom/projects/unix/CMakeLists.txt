@@ -7,6 +7,17 @@ include_directories(
 	${PROJECT_SOURCE_DIR}/../../common/
 )
 
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	include_directories(
+		${PROJECT_SOURCE_DIR}/../../../projects/HotFire/
+	)
+else()
+	include_directories(
+		${PROJECT_SOURCE_DIR}/../../../projects/OctoberSky1/
+	)
+endif()
+
+
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../../bin/)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../../bin/)
 
@@ -16,6 +27,13 @@ file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/../../common/*.c)
 
 file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/../../src/*.cpp)
 #file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/../../common/*.cpp)
+
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/../../../projects/HotFire/*.cpp)
+else()
+	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/../../../projects/OctoberSky1/*.cpp)
+endif()
+
 
 find_package (Threads)
 
@@ -28,7 +46,7 @@ else ()
 	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/../../common/interfaces/sbgInterfaceSerialUnix.c")
 endif()
 
-add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC})
+add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC} ${SM_CONFIG_SRC})
 
 if (MSVC)
 	target_link_libraries(sbgECom Ws2_32)
@@ -41,6 +59,10 @@ endif()
 # add_executable(test_hello "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/test_hello.cpp")
 # target_link_libraries(test_hello sbgECom)
 # add_dependencies(test_hello sbgECom)
+
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	add_definitions(-D HOTFIRE_TEST)
+endif()
 
 if (DEFINED ENV{NO_LOGS} OR NO_LOGS)
 	add_definitions(-D NO_LOGS)

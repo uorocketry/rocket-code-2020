@@ -1,19 +1,22 @@
 #pragma once
 
-#include "data/rocketState.h"
+#include "config/config.h"
+#include "data/sensorsData.h"
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
 #include "IO/IO.h"
+#include "data/UOSMData.h"
 #include <queue>
 
-#ifdef TESTING
+#if TESTING
 #include "IO/TestingSensors.h"
 #endif // TESTING
 
-class Interface {
+class Interface
+{
 public:
 	Interface();
 	~Interface();
@@ -22,30 +25,31 @@ public:
 	bool sensorsInitialized();
 
 	// to get the latest rocket state. return a pointer to latestState
-	rocketState* getLatest();
+	sensorsData *getLatest();
 
 	// loop over each sensor and update the latestState
-	void update(const RocketSMData* rocketSMData);
+	void update(const UOSMData *smdata);
 
 private:
-	rocketState latestState;
-	
+	sensorsData latestState;
 
-#ifdef TESTING
+#if TESTING
 	TestingSensors testingSensors;
-#else
-    SBGSensor mySbgSensor;
-	Input input;
+#endif
 
-#ifndef NO_SOCKET_CONTROL
+#if USE_SBG
+	SBGSensor mySbgSensor;
+#endif
+
+#if USE_INPUT
+	Input input;
+#endif
+
+#if USE_SOCKET_CLIENT
 	SocketClient client;
 #endif
 
-#endif
-
-#ifndef NO_LOGS
+#if USE_LOGGER
 	Logger logger;
 #endif
-
 };
-

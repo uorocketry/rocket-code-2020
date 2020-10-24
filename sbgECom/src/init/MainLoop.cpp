@@ -1,43 +1,47 @@
-#include "../stateMachine/Rocket.h"
 #include "../helpers/Types.h"
+#include "config/UOStateMachine.h"
 
 #include <stdio.h>
 #include "chrono"
 #include "iostream"
 #include <thread>
 
-#define TARGET_DELAY_NS 1000000000L/200L // in nanoseconds = 5 miliseconds = 200Hz
+#define TARGET_DELAY_NS 1000000000L / 200L // in nanoseconds = 5 miliseconds = 200Hz
 
-int main() {
-	// create a rocket instance
-	Rocket uOttRocket;
+int main()
+{
+	// create a state machine instance
+	UOStateMachine uOttSM;
 
-	time_point start, now; 
+	time_point start, now;
 	duration_ns target_ns, elapsed_ns;
 	start = std::chrono::steady_clock::now();
 
 	uint64_t count = 1;
-	while (true) {
+	while (true)
+	{
 		// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 		now = std::chrono::steady_clock::now();
 
-		RocketSMData data;
+		UOSMData data = UOSMData();
 		data.now = now;
 
-		uOttRocket.updateStateMachine(&data);
+		uOttSM.updateStateMachine(&data);
 
 		elapsed_ns = duration_ns(now - start);
-		target_ns = duration_ns(TARGET_DELAY_NS * count++);		
-		
-		if (target_ns > elapsed_ns) {
+		target_ns = duration_ns(TARGET_DELAY_NS * count++);
+
+		if (target_ns > elapsed_ns)
+		{
 			std::this_thread::sleep_for(target_ns - elapsed_ns);
-		} else {
+		}
+		else
+		{
 			std::cout << "Timing Error: Update took too long\n";
 		}
 
 		// std::cout.flush();
 	}
-
 
 	return 0;
 }
