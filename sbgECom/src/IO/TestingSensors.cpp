@@ -1,7 +1,7 @@
 #if TESTING
 
 #include "../helpers/Helper.h"
-#include "../data/rocketState.h"
+#include "../data/sensorsData.h"
 #include "TestingSensors.h"
 
 #include <sstream>
@@ -35,38 +35,40 @@ void TestingSensors::initialize()
 
 		std::vector<std::string> currentRow = helper::stringSplit(line, ',');
 
-		rocketState rocketState;
+		sensorsData currentData;
 
+#if USE_SBG
 		// SBG:
-		rocketState.sbg.Xangle = processFloat(currentRow[0]);
-		rocketState.sbg.Yangle = processFloat(currentRow[1]);
-		rocketState.sbg.Zangle = processFloat(currentRow[2]);
-		rocketState.sbg.XangleAcc = processFloat(currentRow[3]);
-		rocketState.sbg.YangleAcc = processFloat(currentRow[4]);
-		rocketState.sbg.ZangleAcc = processFloat(currentRow[5]);
-		rocketState.sbg.gpsLatitude = processDouble(currentRow[6]);
-		rocketState.sbg.gpsLongitude = processDouble(currentRow[7]);
-		rocketState.sbg.gpsAltitude = processDouble(currentRow[8]);
-		rocketState.sbg.barometricAltitude = processFloat(currentRow[9]);
-		rocketState.sbg.velocityN = processFloat(currentRow[10]);
-		rocketState.sbg.velocityE = processFloat(currentRow[11]);
-		rocketState.sbg.velocityD = processFloat(currentRow[12]);
-		rocketState.sbg.filteredXacc = processFloat(currentRow[13]);
-		rocketState.sbg.filteredYacc = processFloat(currentRow[14]);
-		rocketState.sbg.filteredZacc = processFloat(currentRow[15]);
-		rocketState.sbg.solutionStatus = processInt(currentRow[16]);
+		currentData.sbg.Xangle = processFloat(currentRow[0]);
+		currentData.sbg.Yangle = processFloat(currentRow[1]);
+		currentData.sbg.Zangle = processFloat(currentRow[2]);
+		currentData.sbg.XangleAcc = processFloat(currentRow[3]);
+		currentData.sbg.YangleAcc = processFloat(currentRow[4]);
+		currentData.sbg.ZangleAcc = processFloat(currentRow[5]);
+		currentData.sbg.gpsLatitude = processDouble(currentRow[6]);
+		currentData.sbg.gpsLongitude = processDouble(currentRow[7]);
+		currentData.sbg.gpsAltitude = processDouble(currentRow[8]);
+		currentData.sbg.barometricAltitude = processFloat(currentRow[9]);
+		currentData.sbg.velocityN = processFloat(currentRow[10]);
+		currentData.sbg.velocityE = processFloat(currentRow[11]);
+		currentData.sbg.velocityD = processFloat(currentRow[12]);
+		currentData.sbg.filteredXacc = processFloat(currentRow[13]);
+		currentData.sbg.filteredYacc = processFloat(currentRow[14]);
+		currentData.sbg.filteredZacc = processFloat(currentRow[15]);
+		currentData.sbg.solutionStatus = processInt(currentRow[16]);
+#endif
 
-		data.push(rocketState);
+		data.push(currentData);
 	}
 
 	IO::initialize();
 }
 
-rocketState TestingSensors::getLatest()
+sensorsData TestingSensors::getLatest()
 {
 	if (!data.empty())
 	{
-		rocketState currentData = data.front();
+		sensorsData currentData = data.front();
 		data.pop();
 
 		return currentData;
