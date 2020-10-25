@@ -1,5 +1,6 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
+#include <wiringPi.h>
 #include "config/config.h"
 #include "UOStateMachine.h"
 #include <iostream>
