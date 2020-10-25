@@ -14,10 +14,10 @@ public:
 	void initialize();
 	bool isInitialized();
 
-	rocketState getLatest();
+	sensorsData getLatest();
 
 private:
-	std::queue<rocketState> data;
+	std::queue<sensorsData> data;
 
 	int processInt(std::string data);
 	float processFloat(std::string data);
