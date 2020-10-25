@@ -36,6 +36,7 @@ private:
 	enum States
 	{
 		ST_INIT,
+		ST_WAIT_FOR_INIT,
 		ST_WAIT_FOR_LAUNCH,
 		ST_POWERED_FLIGHT,
 		ST_COAST,
@@ -48,6 +49,10 @@ private:
 	// Define the state machine state functions with event data type
 	STATE_DECLARE(UOStateMachine, Init, UOSMData)
 	EXIT_DECLARE(UOStateMachine, ExitInit)
+
+	ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
+	STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
 
 	ENTRY_DECLARE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 	STATE_DECLARE(UOStateMachine, WaitForLaunch, UOSMData)
@@ -76,6 +81,7 @@ private:
 	// state object.
 	BEGIN_STATE_MAP_EX
 	STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
 	STATE_MAP_ENTRY_ALL_EX(&WaitForLaunch, 0, &EnterWaitForLaunch, &ExitWaitForLaunch)
 	STATE_MAP_ENTRY_ALL_EX(&PoweredFlight, 0, &EnterPoweredFlight, &ExitPoweredFlight)
 	STATE_MAP_ENTRY_ALL_EX(&Coast, 0, &EnterCoast, &ExitCoast)

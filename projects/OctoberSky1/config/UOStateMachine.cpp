@@ -16,12 +16,15 @@ UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 // Start external event
 void UOStateMachine::Start()
 {
-	BEGIN_TRANSITION_MAP					// - Current State -
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-		TRANSITION_MAP_ENTRY(ST_FLIGHT)		// ST_WAIT_FOR_INIT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FLIGHT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DESCENT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_GROUND
+	BEGIN_TRANSITION_MAP						// - Current State -
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY(ST_POWERED_FLIGHT) // ST_WAIT_FOR_LAUNCH
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_POWERED_FLIGHT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_COAST
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
 		END_TRANSITION_MAP(NULL)
 }
 
@@ -29,16 +32,16 @@ void UOStateMachine::Start()
 // void UOStateMachine::Apogee(UOSMData* data)
 void UOStateMachine::Apogee()
 {
-	BEGIN_TRANSITION_MAP					// - Current State -
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-		TRANSITION_MAP_ENTRY(ST_DESCENT)	// ST_FLIGHT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DESCENT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_GROUND
+	BEGIN_TRANSITION_MAP						 // - Current State -
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_LAUNCH
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_POWERED_FLIGHT
+		TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_COAST
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_1
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_2
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_GROUND
 		END_TRANSITION_MAP(NULL)
-	// END_TRANSITION_MAP(data)
-
-	// CANNOT_HAPPEN
 }
 
 // Touchdown external event
@@ -46,15 +49,17 @@ void UOStateMachine::Touchdown(){
 	BEGIN_TRANSITION_MAP					// - Current State -
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
-	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_FLIGHT
-	TRANSITION_MAP_ENTRY(ST_GROUND)			// ST_DESCENT
+	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_LAUNCH
+	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_POWERED_FLIGHT
+	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_COAST
+	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
+	TRANSITION_MAP_ENTRY(ST_GROUND)			// ST_DESCENT_PHASE_2
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
 	END_TRANSITION_MAP(NULL)}
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
 
-// code for the initialization state
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
 	rocketInterface.initializeSensors();
@@ -69,21 +74,15 @@ EXIT_DEFINE(UOStateMachine, ExitInit)
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	enterNewState(ST_WAIT_FOR_INIT);
-
 	std::cout << "RocketSM::EnterWaitForInit\n";
 }
 
-// code for the wait for initialization state
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	rocketInterface.update(data);
-	rocketData = rocketInterface.getLatest();
-
 	if (rocketInterface.sensorsInitialized())
-		InternalEvent(ST_FLIGHT);
-
-	// showInfo(rocketData);
+	{
+		InternalEvent(ST_WAIT_FOR_LAUNCH);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
@@ -91,67 +90,104 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 	std::cout << "RocketSM::ExitWaitForInit\n";
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterFlight, UOSMData)
+ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
-	enterNewState(ST_FLIGHT);
+	std::cout << "RocketSM::EnterWaitForLaunch\n";
+}
 
-	std::cout << "RocketSM::EnterFlight\n";
+STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
+{
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
+
+	detectExternEvent(rocketData);
+}
+
+EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
+{
+	std::cout << "RocketSM::ExitWaitForLaunch\n";
+}
+
+ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
+{
+	std::cout << "RocketSM::EnterPoweredFlight\n";
 }
 
 // code for the flight state
-STATE_DEFINE(UOStateMachine, Flight, UOSMData)
+STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 {
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
-	// TODO: move detect Apogee to coast state when new states are added
-	detectApogee(rocketData);
+	InternalEvent(ST_COAST);
+	// detectExternEvent(rocketData);
+}
+
+EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
+{
+	std::cout << "RocketSM::ExitPoweredFlight\n";
+}
+
+ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
+{
+	std::cout << "RocketSM::EnterCoast\n";
+}
+
+STATE_DEFINE(UOStateMachine, Coast, UOSMData)
+{
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
+
+	// detectApogee(rocketData);
 
 	detectExternEvent(rocketData);
-
-	// showInfo(rocketData);
 }
 
-// Exit action when WaitForDeceleration state exits.
-EXIT_DEFINE(UOStateMachine, ExitFlight)
+EXIT_DEFINE(UOStateMachine, ExitCoast)
 {
-	std::cout << "RocketSM::ExitFlight\n";
+	std::cout << "RocketSM::ExitCoast\n";
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterDescent, UOSMData)
+ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 {
-	enterNewState(ST_DESCENT);
-
-	std::cout << "RocketSM::EnterDescent\n";
+	std::cout << "RocketSM::EnterDescentPhase1\n";
 }
 
-// code for the Descent state
-STATE_DEFINE(UOStateMachine, Descent, UOSMData)
+// code for the DescentPhase1 state
+STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
-	// InternalEvent(ST_GROUND);
+	rocketInterface.update(data);
+	rocketData = rocketInterface.getLatest();
 
+	InternalEvent(ST_DESCENT_PHASE_2);
+	// detectExternEvent(rocketData);
+}
+
+EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
+{
+	std::cout << "RocketSM::ExitDescentPhase1\n";
+}
+
+ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
+{
+	std::cout << "RocketSM::EnterDescentPhase2\n";
+}
+
+STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
+{
 	rocketInterface.update(data);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
-	// showInfo(rocketData);
-
-	// perform the descent processing here
-	// transition to Flight via an internal event
-	// InternalEvent(ST_FLIGHT);
 }
 
-// Exit action when ExitDescent state exits.
-EXIT_DEFINE(UOStateMachine, ExitDescent)
+EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
 {
-	std::cout << "RocketSM::ExitDescent\n";
+	std::cout << "RocketSM::ExitDescentPhase2\n";
 }
 
-// Entry action when ExitDescent state exits.
 ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
-	enterNewState(ST_GROUND);
-
 	std::cout << "RocketSM::EnterGround\n";
 }
 
@@ -162,7 +198,6 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
-	// showInfo(rocketData);
 }
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
@@ -182,24 +217,6 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	default:
 		break;
 	}
-
-#if USE_SOCKET_CLIENT
-	eventNbr = data->clientEventNumber;
-	switch (eventNbr)
-	{
-	case 0:
-		Start();
-		break;
-	case 1:
-		Apogee();
-		break;
-	case 2:
-		Touchdown();
-		break;
-	default:
-		break;
-	}
-#endif
 }
 
 void UOStateMachine::detectApogee(const sensorsData *data)
