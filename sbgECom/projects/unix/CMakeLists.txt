@@ -64,12 +64,16 @@ if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	add_definitions(-D HOTFIRE_TEST)
 endif()
 
-if (DEFINED ENV{NO_LOGS} OR NO_LOGS)
-	add_definitions(-D NO_LOGS)
+if (DEFINED ENV{USE_LOGGER} OR USE_LOGGER)
+	add_definitions(-D USE_LOGGER)
 endif()
 
-if (DEFINED ENV{NO_SOCKET_CONTROL} OR NO_SOCKET_CONTROL)
-	add_definitions(-D NO_SOCKET_CONTROL)
+if (DEFINED ENV{USE_SOCKET_CLIENT} OR USE_SOCKET_CLIENT)
+	add_definitions(-D USE_SOCKET_CLIENT)
+endif()
+
+if (DEFINED ENV{USE_INPUT} OR USE_INPUT)
+	add_definitions(-D USE_INPUT)
 endif()
 
 if (DEFINED ENV{SKIP_INIT} OR SKIP_INIT)
@@ -78,6 +82,12 @@ endif()
 
 if (DEFINED ENV{TESTING} OR TESTING)
 	add_definitions(-D TESTING)
+endif()
+
+# Sensors
+
+if (DEFINED ENV{USE_SBG} OR USE_SBG)
+	add_definitions(-D USE_SBG)
 endif()
 
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../src/init/MainLoop.cpp")
