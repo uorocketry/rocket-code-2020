@@ -37,8 +37,11 @@ private:
 	{
 		ST_INIT,
 		ST_WAIT_FOR_INIT,
-		ST_FLIGHT,
-		ST_DESCENT,
+		ST_WAIT_FOR_LAUNCH,
+		ST_POWERED_FLIGHT,
+		ST_COAST,
+		ST_DESCENT_PHASE_1,
+		ST_DESCENT_PHASE_2,
 		ST_GROUND,
 		ST_MAX_STATES
 	};
@@ -46,35 +49,44 @@ private:
 	// Define the state machine state functions with event data type
 	STATE_DECLARE(UOStateMachine, Init, UOSMData)
 	EXIT_DECLARE(UOStateMachine, ExitInit)
+
 	ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
 	STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
 	EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
-	ENTRY_DECLARE(UOStateMachine, EnterFlight, UOSMData)
-	STATE_DECLARE(UOStateMachine, Flight, UOSMData)
-	EXIT_DECLARE(UOStateMachine, ExitFlight)
-	STATE_DECLARE(UOStateMachine, Descent, UOSMData)
-	ENTRY_DECLARE(UOStateMachine, EnterDescent, UOSMData)
-	EXIT_DECLARE(UOStateMachine, ExitDescent)
+
+	ENTRY_DECLARE(UOStateMachine, EnterWaitForLaunch, UOSMData)
+	STATE_DECLARE(UOStateMachine, WaitForLaunch, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitWaitForLaunch)
+
+	ENTRY_DECLARE(UOStateMachine, EnterPoweredFlight, UOSMData)
+	STATE_DECLARE(UOStateMachine, PoweredFlight, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitPoweredFlight)
+
+	STATE_DECLARE(UOStateMachine, Coast, UOSMData)
+	ENTRY_DECLARE(UOStateMachine, EnterCoast, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitCoast)
+
+	STATE_DECLARE(UOStateMachine, DescentPhase1, UOSMData)
+	ENTRY_DECLARE(UOStateMachine, EnterDescentPhase1, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitDescentPhase1)
+
+	STATE_DECLARE(UOStateMachine, DescentPhase2, UOSMData)
+	ENTRY_DECLARE(UOStateMachine, EnterDescentPhase2, UOSMData)
+	EXIT_DECLARE(UOStateMachine, ExitDescentPhase2)
+
 	STATE_DECLARE(UOStateMachine, Ground, UOSMData)
 	ENTRY_DECLARE(UOStateMachine, EnterGround, UOSMData)
-
-	// STATE_DECLARE(UOStateMachine, 	Ground,			UOSMData)
-
-	// State map to define state object order. Each state map entry defines a
-	// state object.
-	// BEGIN_STATE_MAP
-	// 	STATE_MAP_ENTRY(&Flight)
-	// 	STATE_MAP_ENTRY(&Descent)
-	// 	STATE_MAP_ENTRY(&Ground)
-	// END_STATE_MAP
 
 	// State map to define state object order. Each state map entry defines a
 	// state object.
 	BEGIN_STATE_MAP_EX
 	STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
 	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
-	STATE_MAP_ENTRY_ALL_EX(&Flight, 0, &EnterFlight, &ExitFlight)
-	STATE_MAP_ENTRY_ALL_EX(&Descent, 0, &EnterDescent, &ExitDescent)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForLaunch, 0, &EnterWaitForLaunch, &ExitWaitForLaunch)
+	STATE_MAP_ENTRY_ALL_EX(&PoweredFlight, 0, &EnterPoweredFlight, &ExitPoweredFlight)
+	STATE_MAP_ENTRY_ALL_EX(&Coast, 0, &EnterCoast, &ExitCoast)
+	STATE_MAP_ENTRY_ALL_EX(&DescentPhase1, 0, &EnterDescentPhase1, &ExitDescentPhase1)
+	STATE_MAP_ENTRY_ALL_EX(&DescentPhase2, 0, &EnterDescentPhase2, &ExitDescentPhase2)
 	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
 };
