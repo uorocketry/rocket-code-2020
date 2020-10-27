@@ -92,6 +92,10 @@ if (DEFINED ENV{USE_SBG} OR USE_SBG)
 	add_definitions(-D USE_SBG)
 endif()
 
+if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
+	add_definitions(-D USE_RADIO)
+endif()
+
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../src/init/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)

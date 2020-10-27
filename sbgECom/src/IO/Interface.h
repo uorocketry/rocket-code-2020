@@ -5,6 +5,9 @@
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
+#if USE_RADIO
+	#include "IO/Radio.h"
+#endif
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
 #include "IO/IO.h"
@@ -51,5 +54,9 @@ private:
 
 #if USE_LOGGER
 	Logger logger;
+#endif
+
+#if USE_RADIO
+	Radio radio;
 #endif
 };
