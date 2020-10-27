@@ -28,7 +28,7 @@ private:
 	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToRadio();
 
-	void sendData(std::ofstream &file, const sensorsData &currentState);
+	void sendData(const sensorsData &currentState);
 
 	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 

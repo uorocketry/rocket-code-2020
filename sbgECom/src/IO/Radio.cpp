@@ -67,6 +67,8 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
+	static unsigned char c = 0;
+	serialPutchar (fd, c++);	
 	// if (fileStream != nullptr)
 	// {
 	// 	sensorsData currentState;
@@ -89,9 +91,10 @@ void Radio::dequeueToRadio()
 }
 
 
-void Radio::sendData(std::ofstream &fileStream, const sensorsData &currentState)
+void Radio::sendData(const sensorsData &currentState)
 {
-
+	static unsigned char c = 0;
+	serialPutchar (fd, c++);
 
 // 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 // 	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
