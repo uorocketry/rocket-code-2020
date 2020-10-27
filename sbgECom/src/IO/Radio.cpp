@@ -19,19 +19,19 @@ Radio::~Radio()
 
 void Radio::initialize()
 {
-	wiringPiSetupGpio();
 
-	pinMode(14, OUTPUT);
-	pinMode(15, INPUT);
+	// pinMode(14, OUTPUT);
+	// pinMode(15, INPUT);
 
-	fd = serialOpen("/dev/ttyS0", 57600);
-	if (fd < 0) {
+	if ((fd = serialOpen("/dev/ttyS0", 57600)) < 0) {
 		std::cout << "Error while opening serial communication!\n";
 		status.wiringPiStatus = INIT; 
 	} else {
 		status.wiringPiStatus = READY; 
 	}
 
+	wiringPiSetup();
+	
 	IO::initialize();
 }
 
@@ -67,8 +67,8 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
-	static unsigned char c = 0;
-	serialPutchar (fd, c++);	
+	static unsigned char c = 127;
+	serialPutchar(fd, c);	
 	// if (fileStream != nullptr)
 	// {
 	// 	sensorsData currentState;
@@ -93,8 +93,8 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(const sensorsData &currentState)
 {
-	static unsigned char c = 0;
-	serialPutchar (fd, c++);
+	// static unsigned char c = 0;
+	// serialPutchar(fd, c++);
 
 // 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 // 	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
