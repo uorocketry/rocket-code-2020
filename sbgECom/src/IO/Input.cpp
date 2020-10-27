@@ -1,3 +1,6 @@
+#include "config/config.h"
+#if USE_INPUT
+
 #include "Input.h"
 #include "IO.h"
 #include "iostream"
@@ -44,3 +47,5 @@ bool Input::isNumber(const std::string& s) {
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
 }
+
+#endif

@@ -1,3 +1,4 @@
+#include "config/config.h"
 #if USE_LOGGER
 
 #include "Logger.h"

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "config/config.h"
+#if USE_LOGGER
+
 #include "../data/sensorsData.h"
 #include "IO.h"
 #include <queue>
@@ -48,3 +51,5 @@ private:
 		InitStatus fileStatus = INIT;
 	} status;
 };
+
+#endif

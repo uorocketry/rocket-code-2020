@@ -1,11 +1,10 @@
+#include "config/config.h"
 #include "Interface.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <iostream>
-
-#ifdef TESTING
 #include "IO/TestingSensors.h"
-#endif // TESTING
+
 
 Interface::Interface()
 {

@@ -1,4 +1,5 @@
-#if !TESTING
+#include "config/config.h"
+#if USE_SOCKET_CLIENT
 
 #include "SocketClient.h"
 #include "../data/SBGData.h"

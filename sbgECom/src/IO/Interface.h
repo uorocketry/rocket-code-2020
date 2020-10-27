@@ -5,18 +5,14 @@
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
-#if USE_RADIO
-	#include "IO/Radio.h"
-#endif
+#include "IO/Radio.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <queue>
-
-#if TESTING
 #include "IO/TestingSensors.h"
-#endif // TESTING
+
 
 class Interface
 {

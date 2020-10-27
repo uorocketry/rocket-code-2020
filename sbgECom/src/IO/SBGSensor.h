@@ -1,5 +1,7 @@
-#ifndef _SBGSENSOR_H
-#define _SBGSENSOR_H
+#pragma once
+
+#include "config/config.h"
+#if USE_SBG
 
 #include "IO.h"
 #include "../data/SBGData.h"

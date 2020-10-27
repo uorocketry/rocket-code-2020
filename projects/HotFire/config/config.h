@@ -24,3 +24,9 @@
 #ifndef USE_RADIO
 #define USE_RADIO 1
 #endif
+
+// because we can't use inputs if it is manual testing
+#if TESTING
+    #define USE_LOGGER 0
+    #define USE_SOCKET_CLIENT 0
+#endif

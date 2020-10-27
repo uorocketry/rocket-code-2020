@@ -1,3 +1,6 @@
+#include "config/config.h"
+#if USE_SBG
+
 #include "SBGSensor.h"
 #include<chrono>
 #include<thread>
@@ -261,3 +264,4 @@ sbgData SBGSensor::getData() {
 	return data;
 }
 
+#endif

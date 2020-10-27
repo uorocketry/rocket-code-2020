@@ -1,4 +1,6 @@
 #pragma once
+#if USE_INPUT
+
 #include "IO.h"
 #include <mutex>
 
@@ -21,3 +23,5 @@ private:
     bool isNumber(const std::string& s);
 
 };
+
+#endif

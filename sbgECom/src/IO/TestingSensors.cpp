@@ -1,3 +1,4 @@
+#include "config/config.h"
 #if TESTING
 
 #include "../helpers/Helper.h"
