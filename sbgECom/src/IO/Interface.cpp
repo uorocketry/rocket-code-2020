@@ -36,6 +36,10 @@ void Interface::initializeSensors()
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
 #endif
+#if USE_RADIO
+	std::cout << "Initializing RADIO...\n";
+	radio.initialize();
+#endif
 }
 
 bool Interface::sensorsInitialized()
@@ -63,6 +67,10 @@ bool Interface::sensorsInitialized()
 	result &= input.isInitialized();
 #endif
 
+#if USE_RADIO
+	result &= radio.isInitialized();
+#endif
+
 	return result;
 }
 
@@ -88,6 +96,10 @@ void Interface::update(const UOSMData *smdata)
 
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
+#endif
+
+#if USE_RADIO
+	radio.enqueueSensorData(latestState);
 #endif
 }
 

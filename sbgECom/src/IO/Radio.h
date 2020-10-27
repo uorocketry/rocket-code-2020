@@ -43,9 +43,11 @@ private:
 
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 
+	int fd;
+
 	struct InitFlags
 	{
-		InitStatus fileStatus = INIT;
+		InitStatus wiringPiStatus = INIT;
 	} status;
 };
 

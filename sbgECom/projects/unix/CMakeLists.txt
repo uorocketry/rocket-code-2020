@@ -49,6 +49,7 @@ else ()
 endif()
 
 add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC} ${SM_CONFIG_SRC})
+add_library(WiringPi STATIC ${WIRINGPI_SRC})
 
 if (MSVC)
 	target_link_libraries(sbgECom Ws2_32)
@@ -99,6 +100,8 @@ endif()
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../src/init/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
+target_link_libraries(MainLoop WiringPi)
+add_dependencies(MainLoop WiringPi)
 target_link_libraries(MainLoop stdc++fs)
 
 

@@ -1,6 +1,8 @@
 #include "config/config.h"
 #if USE_RADIO
 
+#include "wiringPi.h"
+#include "wiringSerial.h"
 #include "Radio.h"
 #include "data/sensorsData.h"
 
@@ -17,21 +19,27 @@ Radio::~Radio()
 
 void Radio::initialize()
 {
+	wiringPiSetupGpio();
+
+	fd = serialOpen("/dev/serial0", 57600);
+	if (fd < 0) {
+		std::cout << "Error while opening serial communication!\n";
+		status.wiringPiStatus = INIT; 
+	} else {
+		status.wiringPiStatus = READY; 
+	}
+
 	IO::initialize();
 }
 
 bool Radio::isInitialized()
 {
-	return (status.fileStatus == READY);
+	return (status.wiringPiStatus == READY);
 }
 
 void Radio::run()
 {
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
-
-	
-
-	status.fileStatus = READY;
 
 	while (true)
 	{
@@ -67,7 +75,7 @@ void Radio::dequeueToRadio()
 
 	// 	if (fileStream->is_open())
 	// 	{
-	// 		writeData(*fileStream, currentState);
+	// 		sendData(*fileStream, currentState);
 	// 	}
 	// 	else
 	// 	{
@@ -80,6 +88,7 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(std::ofstream &fileStream, const sensorsData &currentState)
 {
+
 
 // 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 // 	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
