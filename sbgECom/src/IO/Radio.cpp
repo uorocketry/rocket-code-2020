@@ -21,7 +21,10 @@ void Radio::initialize()
 {
 	wiringPiSetupGpio();
 
-	fd = serialOpen("/dev/serial0", 57600);
+	pinMode(14, OUTPUT);
+	pinMode(15, INPUT);
+
+	fd = serialOpen("/dev/ttyS0", 57600);
 	if (fd < 0) {
 		std::cout << "Error while opening serial communication!\n";
 		status.wiringPiStatus = INIT; 
