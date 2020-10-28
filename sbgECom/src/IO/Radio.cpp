@@ -22,8 +22,7 @@ Radio::~Radio()
 
 void Radio::initialize()
 {
-	// Serial object
-    serialib serial;
+
 
 
     // Connection to serial port
@@ -72,8 +71,8 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
-
-	writeString("Hello\n");
+	const char* s = "hello\n";
+	int a = serial.writeString(s);
 	// char *s = "Hello world\r\n";
 	//serialPutchar(fd, hello);
 	// serialPrintf(fd, s);

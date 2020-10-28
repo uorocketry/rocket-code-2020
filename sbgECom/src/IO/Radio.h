@@ -3,6 +3,7 @@
 #include "config/config.h"
 #if USE_RADIO
 
+#include "serialib.h"
 #include "../data/sensorsData.h"
 #include "IO.h"
 #include <queue>
@@ -43,7 +44,8 @@ private:
 
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 
-	int fd;
+	// Serial object
+    serialib serial;
 
 	struct InitFlags
 	{
