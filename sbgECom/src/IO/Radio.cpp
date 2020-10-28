@@ -1,6 +1,7 @@
 #include "config/config.h"
 #if USE_RADIO
 
+#include <unistd.h>
 #include "wiringPi.h"
 #include "wiringSerial.h"
 #include "Radio.h"
@@ -20,8 +21,7 @@ Radio::~Radio()
 void Radio::initialize()
 {
 
-	// pinMode(14, OUTPUT);
-	// pinMode(15, INPUT);
+
 
 	if ((fd = serialOpen("/dev/ttyS0", 57600)) < 0) {
 		std::cout << "Error while opening serial communication!\n";
@@ -67,8 +67,10 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
-	static unsigned char c = 127;
-	serialPutchar(fd, c);	
+
+	char *s = "Hello world\r\n";
+	//serialPutchar(fd, hello);
+	serialPrintf(fd, s);
 	// if (fileStream != nullptr)
 	// {
 	// 	sensorsData currentState;
