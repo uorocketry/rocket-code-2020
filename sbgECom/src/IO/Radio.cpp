@@ -2,8 +2,8 @@
 #if USE_RADIO
 
 #include <unistd.h>
-#include "wiringPi.h"
-#include "wiringSerial.h"
+#include "serialib.h"
+#include <stdio.h>
 #include "Radio.h"
 #include "data/sensorsData.h"
 
@@ -13,6 +13,8 @@
 #include <chrono>
 #include <mutex>
 
+#define SERIAL_PORT "/dev/ttyS0"
+
 Radio::~Radio()
 {
 	
@@ -20,17 +22,20 @@ Radio::~Radio()
 
 void Radio::initialize()
 {
+	// Serial object
+    serialib serial;
 
 
+    // Connection to serial port
+    char errorOpening = serial.openDevice(SERIAL_PORT, 57600);
 
-	if ((fd = serialOpen("/dev/ttyS0", 57600)) < 0) {
-		std::cout << "Error while opening serial communication!\n";
-		status.wiringPiStatus = INIT; 
-	} else {
-		status.wiringPiStatus = READY; 
-	}
 
-	wiringPiSetup();
+    // If connection fails, return the error code otherwise, display a success message
+    if (errorOpening!=1) {
+		printf("ERROR");
+	} 
+    printf ("Successful connection to %s\n",SERIAL_PORT);
+
 	
 	IO::initialize();
 }
@@ -68,9 +73,10 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 void Radio::dequeueToRadio()
 {
 
-	char *s = "Hello world\r\n";
+	writeString("Hello\n");
+	// char *s = "Hello world\r\n";
 	//serialPutchar(fd, hello);
-	serialPrintf(fd, s);
+	// serialPrintf(fd, s);
 	// if (fileStream != nullptr)
 	// {
 	// 	sensorsData currentState;
