@@ -1,6 +1,7 @@
 #include "config/config.h"
 #if USE_RADIO
 
+#include <string>
 #include <unistd.h>
 #include "wiringPi.h"
 #include "wiringSerial.h"
@@ -23,7 +24,7 @@ void Radio::initialize()
 
 
 
-	if ((fd = serialOpen("/dev/ttyS0", 57600)) < 0) {
+	if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0) {
 		std::cout << "Error while opening serial communication!\n";
 		status.wiringPiStatus = INIT; 
 	} else {
@@ -46,13 +47,14 @@ void Radio::run()
 
 	while (true)
 	{
+		dequeueToRadio();
 		if (!logQueue.empty())
 		{
-			dequeueToRadio();
+			//dequeueToRadio();
 		}
 		else
 		{
-			writingCondition.wait_for(writingLock, ONE_SECOND);
+			//writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
 	}
 }
@@ -67,10 +69,16 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
-
-	char *s = "Hello world\r\n";
+	
+	//const char *c1;
+	//std::string s1("Hello world\n");
+	//c1 = s1.c_str();
+	//char *s = "Hello world\r\n";
 	//serialPutchar(fd, hello);
-	serialPrintf(fd, s);
+	//serialPrintf(fd, "Hello world\n");
+	std::cout << "Send\n";
+	serialPrintf(fd, "HELLOOOO");
+	std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	// if (fileStream != nullptr)
 	// {
 	// 	sensorsData currentState;
