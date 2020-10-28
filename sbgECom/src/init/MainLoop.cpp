@@ -16,6 +16,7 @@ int main()
 	time_point start, now;
 	duration_ns target_ns, elapsed_ns;
 	start = std::chrono::steady_clock::now();
+	UOSMData data = UOSMData();
 
 	uint64_t count = 1;
 	while (true)
@@ -23,7 +24,6 @@ int main()
 		// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 		now = std::chrono::steady_clock::now();
 
-		UOSMData data = UOSMData();
 		data.now = now;
 
 		uOttSM.updateStateMachine(&data);

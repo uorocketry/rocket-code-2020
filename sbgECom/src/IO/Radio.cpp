@@ -13,6 +13,7 @@
 #include <queue>
 #include <chrono>
 #include <mutex>
+#include <string>
 
 Radio::~Radio()
 {
@@ -47,14 +48,13 @@ void Radio::run()
 
 	while (true)
 	{
-		dequeueToRadio();
 		if (!logQueue.empty())
 		{
-			//dequeueToRadio();
+			dequeueToRadio();
 		}
 		else
 		{
-			//writingCondition.wait_for(writingLock, ONE_SECOND);
+			writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
 	}
 }
@@ -69,74 +69,40 @@ void Radio::enqueueSensorData(sensorsData curSensorData)
 
 void Radio::dequeueToRadio()
 {
-	
-	//const char *c1;
-	//std::string s1("Hello world\n");
-	//c1 = s1.c_str();
-	//char *s = "Hello world\r\n";
-	//serialPutchar(fd, hello);
-	//serialPrintf(fd, "Hello world\n");
-	std::cout << "Send\n";
-	serialPrintf(fd, "HELLOOOO");
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	// if (fileStream != nullptr)
-	// {
-	// 	sensorsData currentState;
-	// 	{
-	// 		std::lock_guard<std::mutex> lockGuard(mutex);
-	// 		currentState = logQueue.front();
-	// 		logQueue.pop();
-	// 	}
+	sensorsData currentState;
+	{
+		std::lock_guard<std::mutex> lockGuard(mutex);
+		currentState = logQueue.front();
+		logQueue.pop();
+	}
 
-	// 	if (fileStream->is_open())
-	// 	{
-	// 		sendData(*fileStream, currentState);
-	// 	}
-	// 	else
-	// 	{
-	// 		std::cout << "Unable to open log file."
-	// 				  << "\n";
-	// 	}
-	// }
+
+	sendData(currentState);
 }
 
 
 void Radio::sendData(const sensorsData &currentState)
 {
-	// static unsigned char c = 0;
-	// serialPutchar(fd, c++);
 
-// 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
-// 	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
-
-// #if USE_SBG
-// 	fileStream << currentState.sbg.Xangle << ",";
-// 	fileStream << currentState.sbg.Yangle << ",";
-// 	fileStream << currentState.sbg.Zangle << ",";
-
-// 	fileStream << currentState.sbg.XangleAcc << ",";
-// 	fileStream << currentState.sbg.YangleAcc << ",";
-// 	fileStream << currentState.sbg.ZangleAcc << ",";
-
-// 	fileStream << currentState.sbg.gpsLatitude << ",";
-// 	fileStream << currentState.sbg.gpsLongitude << ",";
-// 	fileStream << currentState.sbg.gpsAltitude << ",";
-
-// 	fileStream << currentState.sbg.barometricAltitude << ",";
-
-// 	fileStream << currentState.sbg.velocityN << ",";
-// 	fileStream << currentState.sbg.velocityE << ",";
-// 	fileStream << currentState.sbg.velocityD << ",";
-
-// 	fileStream << currentState.sbg.filteredXacc << ",";
-// 	fileStream << currentState.sbg.filteredYacc << ",";
-// 	fileStream << currentState.sbg.filteredZacc << ",";
-
-// 	fileStream << currentState.sbg.solutionStatus << ",";
-// #endif
-// 	fileStream << "\n";
-
-// 	fileStream.flush();
+	serialPrintf(fd, std::to_string(currentState.SMData.now.time_since_epoch().count()).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.Xangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.Yangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.Zangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.XangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.YangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.ZangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.gpsLatitude).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.gpsLongitude).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.gpsAltitude).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.barometricAltitude).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.velocityN).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.velocityE).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.velocityD).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredXacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredYacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, "\r\n");
 }
 
 #endif
