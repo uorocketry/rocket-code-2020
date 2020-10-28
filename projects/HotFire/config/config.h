@@ -20,9 +20,12 @@
 #define TESTING 0
 #endif
 
-
 #ifndef USE_RADIO
 #define USE_RADIO 1
+#endif
+
+#ifndef SKIP_INIT
+#define SKIP_INIT 0
 #endif
 
 // because we can't use inputs if it is manual testing

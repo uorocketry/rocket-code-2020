@@ -85,23 +85,41 @@ void Radio::sendData(const sensorsData &currentState)
 {
 
 	serialPrintf(fd, std::to_string(currentState.SMData.now.time_since_epoch().count()).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.Xangle).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.Yangle).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.Zangle).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.XangleAcc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.YangleAcc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.ZangleAcc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsLatitude).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsLongitude).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsAltitude).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.barometricAltitude).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityN).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityE).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityD).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredXacc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredYacc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, "\r\n");
 }
 

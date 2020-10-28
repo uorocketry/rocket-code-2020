@@ -24,6 +24,10 @@
 #define TESTING 0
 #endif
 
+#ifndef SKIP_INIT
+#define SKIP_INIT 1
+#endif
+
 // because we can't use inputs if it is manual testing
 #if TESTING
     #define USE_LOGGER 0

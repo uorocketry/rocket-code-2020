@@ -92,16 +92,22 @@ void Interface::update(const UOSMData *smdata)
 	latestState.clientEventNumber = client.getData();
 #endif
 
-	latestState.SMData = *smdata;
-
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
 
 #if USE_RADIO
-	radio.enqueueSensorData(latestState);
+	static int count = 0;
+	count++;
+	if(count>=5) {
+		count = 0;
+		radio.enqueueSensorData(latestState);
+	}
 #endif
+	latestState.SMData = *smdata;
+
 }
+
 
 sensorsData *Interface::getLatest()
 {
