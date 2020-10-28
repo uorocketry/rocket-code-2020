@@ -93,14 +93,19 @@ void Interface::update(const UOSMData *smdata)
 #endif
 
 #if USE_LOGGER
-	logger.enqueueSensorData(latestState);
+	static int countLogger = 0;
+	countLogger++;
+	if(countLogger>=5) {
+		countLogger = 0;
+		logger.enqueueSensorData(latestState);
+	}
 #endif
 
 #if USE_RADIO
-	static int count = 0;
-	count++;
-	if(count>=7) {
-		count = 0;
+	static int countRadio = 0;
+	countRadio++;
+	if(countRadio>=7) {
+		countRadio = 0;
 		radio.enqueueSensorData(latestState);
 	}
 #endif
