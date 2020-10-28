@@ -79,6 +79,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
+	rocketInterface.update(data);
 	if (rocketInterface.sensorsInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_LAUNCH);

@@ -99,12 +99,12 @@ void Interface::update(const UOSMData *smdata)
 #if USE_RADIO
 	static int count = 0;
 	count++;
-	if(count>=5) {
+	if(count>=7) {
 		count = 0;
 		radio.enqueueSensorData(latestState);
 	}
 #endif
-	latestState.SMData = *smdata;
+	latestState.timeStamp = smdata->now.time_since_epoch().count();
 
 }
 

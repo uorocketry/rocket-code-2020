@@ -25,7 +25,7 @@
 #endif
 
 #ifndef SKIP_INIT
-#define SKIP_INIT 1
+#define SKIP_INIT 0
 #endif
 
 // because we can't use inputs if it is manual testing

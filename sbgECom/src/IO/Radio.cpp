@@ -84,7 +84,7 @@ void Radio::dequeueToRadio()
 void Radio::sendData(const sensorsData &currentState)
 {
 
-	serialPrintf(fd, std::to_string(currentState.SMData.now.time_since_epoch().count()).c_str());
+	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.Xangle).c_str());
 	serialPrintf(fd, ";");
@@ -118,7 +118,7 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.solutionStatus).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, "\r\n");
 }
