@@ -9,11 +9,11 @@
 #endif
 
 #ifndef USE_LOGGER
-#define USE_LOGGER 0
+#define USE_LOGGER 1
 #endif
 
 #ifndef USE_INPUT
-#define USE_INPUT 1
+#define USE_INPUT 0
 #endif
 
 #ifndef USE_RADIO

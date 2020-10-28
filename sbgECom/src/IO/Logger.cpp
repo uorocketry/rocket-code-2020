@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_LOGGER
+// #if USE_LOGGER
 
 #include "Logger.h"
 #include "data/sensorsData.h"
@@ -129,7 +129,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 {
 
 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
-	fileStream << currentState.SMData.now.time_since_epoch().count() << ",";
+	fileStream << currentState.timeStamp << ",";
 
 #if USE_SBG
 	fileStream << currentState.sbg.Xangle << ",";
@@ -161,4 +161,4 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream.flush();
 }
 
-#endif
+// #endif

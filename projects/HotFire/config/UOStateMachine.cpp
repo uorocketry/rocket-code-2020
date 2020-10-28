@@ -325,6 +325,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
+#if USE_INPUT
 	int eventNbr = data->inputEventNumber;
 
 	switch (eventNbr)
@@ -352,6 +353,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	default:
 		break;
 	}
+#endif
 
 #if USE_SOCKET_CLIENT
 	eventNbr = data->clientEventNumber;

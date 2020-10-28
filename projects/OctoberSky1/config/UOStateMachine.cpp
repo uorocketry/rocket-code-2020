@@ -203,7 +203,9 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
+#if USE_INPUT
 	int eventNbr = data->inputEventNumber;
+	
 	switch (eventNbr)
 	{
 	case 0:
@@ -218,6 +220,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	default:
 		break;
 	}
+#endif
 }
 
 void UOStateMachine::detectApogee(const sensorsData *data)
