@@ -31,7 +31,7 @@ protected:
 
 private:
 	//pop queue and log the data from sensorsData on logging thread
-	void dequeueToFile();
+	void dequeueToFile(std::ofstream &fileStream);
 
 	void writeHeader(std::ofstream &file);
 	void writeData(std::ofstream &file, const sensorsData &currentState);
@@ -46,8 +46,6 @@ private:
 	std::mutex writingMutex;
 	std::unique_lock<std::mutex> writingLock;
 	std::condition_variable writingCondition;
-
-	std::ofstream fileStream;
 
 	struct InitFlags
 	{
