@@ -1,5 +1,5 @@
 #include "config/config.h"
-// #if USE_LOGGER
+#if USE_LOGGER
 
 #include "Logger.h"
 #include "data/sensorsData.h"
@@ -165,4 +165,4 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream.flush();
 }
 
-// #endif
+#endif
