@@ -18,7 +18,6 @@ public:
 	static int working;
 	~Logger();
 
-
 	void initialize();
 	void run();
 	bool isInitialized();
@@ -35,6 +34,8 @@ private:
 
 	void writeHeader(std::ofstream &file);
 	void writeData(std::ofstream &file, const sensorsData &currentState);
+
+	int getBootId(std::string &path);
 
 	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 

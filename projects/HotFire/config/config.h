@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-#define USE_LOGGER 0
+#define USE_LOGGER 1
 #endif
 
 #ifndef USE_INPUT

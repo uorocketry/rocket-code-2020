@@ -14,12 +14,12 @@
 #include <chrono>
 #include <mutex>
 #include <string>
+#include <vector>
 
 int Logger::working = 0;
 Logger::~Logger()
 {
 }
-
 
 void Logger::initialize()
 {
@@ -33,13 +33,14 @@ bool Logger::isInitialized()
 
 void Logger::run()
 {
-	const int maxLine = 1000;
-	int logId = 0;
+	const int maxLine = 300;
 	int lineCount = 0;
+	int logId = 0;
 
 	std::string path = "./data/";
-	std::string filename = "log";
-	std::string ext = ".csv";
+	std::string ext = ".uorocketlog";
+
+	int bootId = getBootId(path);
 
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
@@ -73,7 +74,7 @@ void Logger::run()
 				logId++;
 			}
 
-			fileStream.open(path + filename + std::to_string(logId) + ext, std::ios_base::app);
+			fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::app);
 
 			dequeueToFile(fileStream);
 
@@ -85,6 +86,48 @@ void Logger::run()
 			writingCondition.wait_for(writingLock, ONE_SECOND);
 		}
 	}
+}
+
+int Logger::getBootId(std::string &path)
+{
+	int bootId = 0;
+
+	for (auto &p : std::experimental::filesystem::directory_iterator(path))
+	{
+		std::string itemPath = p.path();
+		std::vector<std::string> tokens1;
+
+		// stringstream class check1
+		std::stringstream check1(itemPath);
+		std::string intermediate;
+
+		// splitting string with '/'
+		while (getline(check1, intermediate, '/'))
+		{
+			tokens1.push_back(intermediate);
+		}
+
+		if (tokens1.size() > 0)
+		{
+			std::string currentLog = tokens1[tokens1.size() - 1];
+			std::vector<std::string> tokens2;
+
+			std::stringstream check2(currentLog);
+
+			// splitting string with '.'
+			while (getline(check2, intermediate, '.'))
+			{
+				tokens2.push_back(intermediate);
+			}
+
+			if (atoi(tokens2[0].c_str()) + 1 > bootId)
+			{
+				bootId = atoi(tokens2[0].c_str()) + 1;
+			}
+		}
+	}
+
+	return bootId;
 }
 
 void Logger::enqueueSensorData(sensorsData curSensorData)
@@ -106,7 +149,7 @@ void Logger::dequeueToFile(std::ofstream &fileStream)
 
 	if (fileStream.is_open())
 	{
-		working=1;
+		working = 1;
 		writeData(fileStream, currentState);
 	}
 	else
