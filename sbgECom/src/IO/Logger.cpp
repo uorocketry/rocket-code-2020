@@ -6,17 +6,17 @@
 
 #include <sys/stat.h>
 #include <iostream>
+#include <fstream>
 #include <experimental/filesystem>
 #include <thread>
 #include <iostream>
-#include <fstream>
 #include <queue>
 #include <chrono>
 #include <mutex>
 
 Logger::~Logger()
 {
-	fileStream->close();
+	fileStream.close();
 }
 
 void Logger::initialize()
@@ -41,11 +41,11 @@ void Logger::run()
 	}
 
 	bool shouldWriteHeader = !std::experimental::filesystem::exists(path + filename);
-	fileStream = std::make_shared<std::ofstream>(path + filename, std::ios_base::app);
+	// fileStream = std::make_shared<std::ofstream>(path + filename, std::ios_base::app);
 
 	if (shouldWriteHeader)
 	{
-		writeHeader(*fileStream);
+		writeHeader(fileStream);
 	}
 
 	status.fileStatus = READY;
@@ -54,7 +54,9 @@ void Logger::run()
 	{
 		if (!logQueue.empty())
 		{
+			fileStream.open(path + filename, std::ios_base::app);
 			dequeueToFile();
+			fileStream.close();
 		}
 		else
 		{
@@ -73,24 +75,21 @@ void Logger::enqueueSensorData(sensorsData curSensorData)
 
 void Logger::dequeueToFile()
 {
-	if (fileStream != nullptr)
+	sensorsData currentState;
 	{
-		sensorsData currentState;
-		{
-			std::lock_guard<std::mutex> lockGuard(mutex);
-			currentState = logQueue.front();
-			logQueue.pop();
-		}
+		std::lock_guard<std::mutex> lockGuard(mutex);
+		currentState = logQueue.front();
+		logQueue.pop();
+	}
 
-		if (fileStream->is_open())
-		{
-			writeData(*fileStream, currentState);
-		}
-		else
-		{
-			std::cout << "Unable to open log file."
-					  << "\n";
-		}
+	if (fileStream.is_open())
+	{
+		writeData(fileStream, currentState);
+	}
+	else
+	{
+		std::cout << "Unable to open log file."
+					 << "\n";
 	}
 }
 
@@ -194,7 +193,6 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.deltaAngleX << ",";
 	fileStream << currentState.sbg.deltaAngleY << ",";
 	fileStream << currentState.sbg.deltaAngleZ << ",";
-
 
 #endif
 	fileStream << "\n";

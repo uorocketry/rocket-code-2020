@@ -8,6 +8,7 @@
 #include <queue>
 #include <mutex>
 #include <thread>
+#include <fstream>
 #include <iostream>
 #include <condition_variable>
 
@@ -44,7 +45,7 @@ private:
 	std::unique_lock<std::mutex> writingLock;
 	std::condition_variable writingCondition;
 
-	std::shared_ptr<std::ofstream> fileStream = nullptr;
+	std::ofstream fileStream;
 
 	struct InitFlags
 	{
