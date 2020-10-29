@@ -13,6 +13,7 @@
 #include <queue>
 #include <chrono>
 #include <mutex>
+#include <string>
 
 Logger::~Logger()
 {
@@ -30,25 +31,31 @@ bool Logger::isInitialized()
 
 void Logger::run()
 {
-	writingLock = std::unique_lock<std::mutex>(writingMutex);
+	const int maxLine = 1000;
+	int logId = 0;
+	int lineCount = 0;
 
 	std::string path = "./data/";
-	std::string filename = "log.csv";
+	std::string filename = "log";
+	std::string ext = ".csv";
+
+	writingLock = std::unique_lock<std::mutex>(writingMutex);
+
 	if (!std::experimental::filesystem::exists(path))
 	{
 		std::experimental::filesystem::create_directories(path);
 	}
 
-	bool shouldWriteHeader = !std::experimental::filesystem::exists(path + filename);
+	// bool shouldWriteHeader = !std::experimental::filesystem::exists(path + filename);
 	// fileStream = std::make_shared<std::ofstream>(path + filename, std::ios_base::app);
 
-	if (shouldWriteHeader)
-	{
-		std::ofstream fileStream;
-		fileStream.open(path + filename, std::ios_base::app);
-		writeHeader(fileStream);
-		fileStream.close();
-	}
+	// if (shouldWriteHeader)
+	// {
+	// 	std::ofstream fileStream;
+	// 	fileStream.open(path + filename, std::ios_base::app);
+	// 	writeHeader(fileStream);
+	// 	fileStream.close();
+	// }
 
 	status.fileStatus = READY;
 
@@ -57,9 +64,19 @@ void Logger::run()
 		if (!logQueue.empty())
 		{
 			std::ofstream fileStream;
-			fileStream.open(path + filename, std::ios_base::app);
+
+			if (lineCount >= maxLine)
+			{
+				lineCount = 0;
+				logId++;
+			}
+
+			fileStream.open(path + filename + std::to_string(logId) + ext, std::ios_base::app);
+
 			dequeueToFile(fileStream);
+
 			fileStream.close();
+			lineCount++;
 		}
 		else
 		{
