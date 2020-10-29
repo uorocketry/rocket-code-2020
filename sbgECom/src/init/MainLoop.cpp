@@ -6,7 +6,7 @@
 #include "iostream"
 #include <thread>
 
-#define TARGET_DELAY_NS 1000000000L / 200L // in nanoseconds = 5 miliseconds = 200Hz
+#define TARGET_DELAY_NS 1000000000L / 30L // in nanoseconds = 33 miliseconds = 30Hz
 
 int main()
 {
