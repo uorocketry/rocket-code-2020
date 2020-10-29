@@ -15,7 +15,9 @@
 class Logger : public IO
 {
 public:
+	static int working;
 	~Logger();
+
 
 	void initialize();
 	void run();

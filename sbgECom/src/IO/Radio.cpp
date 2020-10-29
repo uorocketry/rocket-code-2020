@@ -14,6 +14,7 @@
 #include <chrono>
 #include <mutex>
 #include <string>
+#include "Logger.h"
 
 Radio::~Radio()
 {
@@ -83,7 +84,8 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(const sensorsData &currentState)
 {
-
+	serialPrintf(fd, std::to_string(Logger::working).c_str());
+	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.roll).c_str());

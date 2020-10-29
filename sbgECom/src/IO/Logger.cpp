@@ -14,10 +14,12 @@
 #include <chrono>
 #include <mutex>
 
+int Logger::working = 0;
 Logger::~Logger()
 {
 	fileStream.close();
 }
+
 
 void Logger::initialize()
 {
@@ -84,12 +86,14 @@ void Logger::dequeueToFile()
 
 	if (fileStream.is_open())
 	{
+		working=1;
 		writeData(fileStream, currentState);
 	}
 	else
 	{
 		std::cout << "Unable to open log file."
 					 << "\n";
+		working = 0;
 	}
 }
 
