@@ -98,13 +98,13 @@ void Logger::writeHeader(std::ofstream &fileStream)
 {
 	fileStream << "Timestamp (Relative),";
 
-	fileStream << "Xangle,";
-	fileStream << "Yangle,";
-	fileStream << "Zangle,";
+	fileStream << "roll,";
+	fileStream << "pitch,";
+	fileStream << "yaw,";
 
-	fileStream << "XangleAcc,";
-	fileStream << "YangleAcc,";
-	fileStream << "ZangleAcc,";
+	fileStream << "rollAccuracy,";
+	fileStream << "pitchAccuracy,";
+	fileStream << "yawAccuracy,";
 
 	fileStream << "gpsLatitude,";
 	fileStream << "gpsLongitude,";
@@ -116,9 +116,9 @@ void Logger::writeHeader(std::ofstream &fileStream)
 	fileStream << "velocityE,";
 	fileStream << "velocityD,";
 
-	fileStream << "filteredXacc,";
-	fileStream << "filteredYacc,";
-	fileStream << "filteredZacc,";
+	fileStream << "filteredXaccelerometer,";
+	fileStream << "filteredYaccelerometer,";
+	fileStream << "filteredZaccelerometer,";
 
 	fileStream << "solutionStatus,";
 
@@ -134,13 +134,13 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.timeStamp << ",";
 
 #if USE_SBG
-	fileStream << currentState.sbg.Xangle << ",";
-	fileStream << currentState.sbg.Yangle << ",";
-	fileStream << currentState.sbg.Zangle << ",";
+	fileStream << currentState.sbg.roll << ",";
+	fileStream << currentState.sbg.pitch << ",";
+	fileStream << currentState.sbg.yaw << ",";
 
-	fileStream << currentState.sbg.XangleAcc << ",";
-	fileStream << currentState.sbg.YangleAcc << ",";
-	fileStream << currentState.sbg.ZangleAcc << ",";
+	fileStream << currentState.sbg.rollAccuracy << ",";
+	fileStream << currentState.sbg.pitchAccuracy << ",";
+	fileStream << currentState.sbg.yawAccuracy << ",";
 
 	fileStream << currentState.sbg.gpsLatitude << ",";
 	fileStream << currentState.sbg.gpsLongitude << ",";
@@ -152,13 +152,50 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.velocityE << ",";
 	fileStream << currentState.sbg.velocityD << ",";
 
-	fileStream << currentState.sbg.filteredXacc << ",";
-	fileStream << currentState.sbg.filteredYacc << ",";
-	fileStream << currentState.sbg.filteredZacc << ",";
+	fileStream << currentState.sbg.filteredXaccelerometer << ",";
+	fileStream << currentState.sbg.filteredYaccelerometer << ",";
+	fileStream << currentState.sbg.filteredZaccelerometer << ",";
 
 	fileStream << currentState.sbg.solutionStatus << ",";
 
 	fileStream << currentState.currentStateNo << ",";
+
+	fileStream << currentState.sbg.gpsPosStatus << ",";
+
+	fileStream << currentState.sbg.gpsPosAccuracyLatitude << ",";
+	fileStream << currentState.sbg.gpsPosAccuracyLongitude << ",";
+	fileStream << currentState.sbg.gpsPosAccuracyAltitude << ",";
+
+	fileStream << currentState.sbg.NumSvUsed << ",";
+
+	fileStream << currentState.sbg.velocityNAccuracy << ",";
+	fileStream << currentState.sbg.velocityEAccuracy << ",";
+	fileStream << currentState.sbg.velocityDAccuracy << ",";
+
+	fileStream << currentState.sbg.latitudeAccuracy << ",";
+	fileStream << currentState.sbg.longitudeAccuracy << ",";
+	fileStream << currentState.sbg.altitudeAccuracy << ",";
+
+	fileStream << currentState.sbg.pressureStatus << ",";
+	fileStream << currentState.sbg.barometricPressure << ",";
+
+	fileStream << currentState.sbg.imuStatus << ",";
+
+	fileStream << currentState.sbg.gyroX << ",";
+	fileStream << currentState.sbg.gyroY << ",";
+	fileStream << currentState.sbg.gyroZ << ",";
+
+	fileStream << currentState.sbg.temp << ",";
+
+	fileStream << currentState.sbg.deltaVelX << ",";
+	fileStream << currentState.sbg.deltaVelY << ",";
+	fileStream << currentState.sbg.deltaVelZ << ",";
+
+	fileStream << currentState.sbg.deltaAngleX << ",";
+	fileStream << currentState.sbg.deltaAngleY << ",";
+	fileStream << currentState.sbg.deltaAngleZ << ",";
+
+
 #endif
 	fileStream << "\n";
 

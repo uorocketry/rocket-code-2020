@@ -228,12 +228,12 @@ void UOStateMachine::detectApogee(const sensorsData *data)
 #if USE_SBG
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
-	// pitch is Yangle
+	// pitch is pitch
 	static uint8_t consecutiveEvents = 0;
 
-	float Yangle = (180 / PI) * (acos(cos(data->sbg.Xangle * (PI / 180)) * cos(data->sbg.Yangle * (PI / 180))));
+	float pitch = (180 / PI) * (acos(cos(data->sbg.roll * (PI / 180)) * cos(data->sbg.pitch * (PI / 180))));
 
-	if (Yangle >= 45)
+	if (pitch >= 45)
 	{
 		consecutiveEvents++;
 	}

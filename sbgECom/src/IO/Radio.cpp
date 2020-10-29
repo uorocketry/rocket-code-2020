@@ -86,17 +86,17 @@ void Radio::sendData(const sensorsData &currentState)
 
 	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.Xangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.roll).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.Yangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.pitch).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.Zangle).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.yaw).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.XangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.rollAccuracy).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.YangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.pitchAccuracy).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.ZangleAcc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.yawAccuracy).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsLatitude).c_str());
 	serialPrintf(fd, ";");
@@ -112,11 +112,11 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityD).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.filteredXacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredXaccelerometer).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.filteredYacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredYaccelerometer).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.filteredZacc).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.filteredZaccelerometer).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.solutionStatus).c_str());
 	serialPrintf(fd, ";");

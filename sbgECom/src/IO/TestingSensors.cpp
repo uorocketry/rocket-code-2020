@@ -40,12 +40,12 @@ void TestingSensors::initialize()
 
 #if USE_SBG
 		// SBG:
-		currentData.sbg.Xangle = processFloat(currentRow[0]);
-		currentData.sbg.Yangle = processFloat(currentRow[1]);
-		currentData.sbg.Zangle = processFloat(currentRow[2]);
-		currentData.sbg.XangleAcc = processFloat(currentRow[3]);
-		currentData.sbg.YangleAcc = processFloat(currentRow[4]);
-		currentData.sbg.ZangleAcc = processFloat(currentRow[5]);
+		currentData.sbg.roll = processFloat(currentRow[0]);
+		currentData.sbg.pitch = processFloat(currentRow[1]);
+		currentData.sbg.yaw = processFloat(currentRow[2]);
+		currentData.sbg.rollAccuracy = processFloat(currentRow[3]);
+		currentData.sbg.pitchAccuracy = processFloat(currentRow[4]);
+		currentData.sbg.yawAccuracy = processFloat(currentRow[5]);
 		currentData.sbg.gpsLatitude = processDouble(currentRow[6]);
 		currentData.sbg.gpsLongitude = processDouble(currentRow[7]);
 		currentData.sbg.gpsAltitude = processDouble(currentRow[8]);
@@ -53,9 +53,9 @@ void TestingSensors::initialize()
 		currentData.sbg.velocityN = processFloat(currentRow[10]);
 		currentData.sbg.velocityE = processFloat(currentRow[11]);
 		currentData.sbg.velocityD = processFloat(currentRow[12]);
-		currentData.sbg.filteredXacc = processFloat(currentRow[13]);
-		currentData.sbg.filteredYacc = processFloat(currentRow[14]);
-		currentData.sbg.filteredZacc = processFloat(currentRow[15]);
+		currentData.sbg.filteredXaccelerometer = processFloat(currentRow[13]);
+		currentData.sbg.filteredYaccelerometer = processFloat(currentRow[14]);
+		currentData.sbg.filteredZaccelerometer = processFloat(currentRow[15]);
 		currentData.sbg.solutionStatus = processInt(currentRow[16]);
 #endif
 

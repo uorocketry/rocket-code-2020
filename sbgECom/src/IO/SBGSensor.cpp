@@ -41,6 +41,11 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		sens->data.gpsLatitude = pLogData->gpsPosData.latitude;
 		sens->data.gpsLongitude = pLogData->gpsPosData.longitude;
 		sens->data.gpsAltitude = pLogData->gpsPosData.altitude;
+		sens->data.gpsPosStatus = pLogData->gpsPosData.status;
+		sens->data.gpsPosAccuracyLatitude = pLogData->gpsPosData.latitudeAccuracy;
+		sens->data.gpsPosAccuracyLongitude = pLogData->gpsPosData.longitudeAccuracy;
+		sens->data.gpsPosAccuracyAltitude = pLogData->gpsPosData.altitudeAccuracy;
+		sens->data.NumSvUsed = pLogData->gpsPosData.numSvUsed;
 
 		break;
 
@@ -52,12 +57,12 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		// 		sbgRadToDegF(pLogData->ekfEulerData.euler[0]), sbgRadToDegF(pLogData->ekfEulerData.euler[1]), sbgRadToDegF(pLogData->ekfEulerData.euler[2]), 
 		// 		sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]), sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]));
 		
-		sens->data.Xangle = sbgRadToDegF(pLogData->ekfEulerData.euler[0]);
-		sens->data.Yangle = sbgRadToDegF(pLogData->ekfEulerData.euler[1]);
-		sens->data.Zangle = sbgRadToDegF(pLogData->ekfEulerData.euler[2]);
-		sens->data.XangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]);
-		sens->data.YangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]);
-		sens->data.ZangleAcc = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]);
+		sens->data.roll = sbgRadToDegF(pLogData->ekfEulerData.euler[0]);
+		sens->data.pitch = sbgRadToDegF(pLogData->ekfEulerData.euler[1]);
+		sens->data.yaw = sbgRadToDegF(pLogData->ekfEulerData.euler[2]);
+		sens->data.rollAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]);
+		sens->data.pitchAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]);
+		sens->data.yawAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]);
 		break;
 
 	case SBG_ECOM_LOG_EKF_NAV:
@@ -69,7 +74,17 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		sens->data.velocityD = pLogData->ekfNavData.velocity[2];
 
 		sens->data.solutionStatus = pLogData->ekfNavData.status;
-		
+
+		sens->data.velocityNAccuracy = pLogData->ekfNavData.velocityStdDev[0];
+		sens->data.velocityEAccuracy = pLogData->ekfNavData.velocityStdDev[1];
+		sens->data.velocityDAccuracy = pLogData->ekfNavData.velocityStdDev[2];
+
+
+		sens->data.latitudeAccuracy = pLogData->ekfNavData.positionStdDev[0];
+		sens->data.longitudeAccuracy = pLogData->ekfNavData.positionStdDev[1];
+		sens->data.altitudeAccuracy = pLogData->ekfNavData.positionStdDev[2];
+
+
 	// 	// printf("Vel x Vel Y Vel Z: %3.6f\t%3.6f\t%3.6f\t   \r\n", 
 	// 			// pLogData->ekfNavData.velocity[0], pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
 
@@ -77,15 +92,37 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		break;
 	case SBG_ECOM_LOG_PRESSURE:
 		sens->data.barometricAltitude = pLogData->pressureData.height;
+		
+		sens->data.pressureStatus = pLogData->pressureData.status;
+		sens->data.barometricPressure = pLogData->pressureData.pressure;
+
 		break;
 
 	case SBG_ECOM_LOG_IMU_DATA:
-		// sens->data.filteredXangle = sbgRadToDegF(pLogData->imuData.gyroscopes[0]);
-		// sens->data.filteredYangle = sbgRadToDegF(pLogData->imuData.gyroscopes[1]);
-		// sens->data.filteredZangle = sbgRadToDegF(pLogData->imuData.gyroscopes[2]);
-		sens->data.filteredXacc = pLogData->imuData.accelerometers[0];
-		sens->data.filteredYacc = pLogData->imuData.accelerometers[1];
-		sens->data.filteredZacc = pLogData->imuData.accelerometers[2];
+		// sens->data.filteredroll = sbgRadToDegF(pLogData->imuData.gyroscopes[0]);
+		// sens->data.filteredpitch = sbgRadToDegF(pLogData->imuData.gyroscopes[1]);
+		// sens->data.filteredyaw = sbgRadToDegF(pLogData->imuData.gyroscopes[2]);
+		sens->data.filteredXaccelerometer = pLogData->imuData.accelerometers[0];
+		sens->data.filteredYaccelerometer = pLogData->imuData.accelerometers[1];
+		sens->data.filteredZaccelerometer = pLogData->imuData.accelerometers[2];
+
+		sens->data.imuStatus = pLogData->imuData.status;
+
+
+		sens->data.gyroX = pLogData->imuData.gyroscopes[0];
+		sens->data.gyroY = pLogData->imuData.gyroscopes[1];
+		sens->data.gyroZ = pLogData->imuData.gyroscopes[2];
+
+		sens->data.temp = pLogData->imuData.temperature;
+		
+		sens->data.deltaVelX = pLogData->imuData.deltaVelocity[0];
+		sens->data.deltaVelY = pLogData->imuData.deltaVelocity[1];
+		sens->data.deltaVelZ = pLogData->imuData.deltaVelocity[2];	
+
+		sens->data.deltaAngleX = pLogData->imuData.deltaAngle[0];
+		sens->data.deltaAngleY = pLogData->imuData.deltaAngle[1];
+		sens->data.deltaAngleZ = pLogData->imuData.deltaAngle[2];	
+
 		break;
 	default:
 		break;
