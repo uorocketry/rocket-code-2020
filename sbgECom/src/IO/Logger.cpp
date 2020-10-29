@@ -15,9 +15,11 @@
 #include <mutex>
 #include <string>
 
+int Logger::working = 0;
 Logger::~Logger()
 {
 }
+
 
 void Logger::initialize()
 {
@@ -104,12 +106,14 @@ void Logger::dequeueToFile(std::ofstream &fileStream)
 
 	if (fileStream.is_open())
 	{
+		working=1;
 		writeData(fileStream, currentState);
 	}
 	else
 	{
 		std::cout << "Unable to open log file."
 					 << "\n";
+		working = 0;
 	}
 }
 
