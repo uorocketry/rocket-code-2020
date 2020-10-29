@@ -27,7 +27,7 @@ public:
 	sensorsData *getLatest();
 
 	// loop over each sensor and update the latestState
-	void update(const UOSMData *smdata);
+	void update(const UOSMData *smdata, int currentState);
 
 
 private:

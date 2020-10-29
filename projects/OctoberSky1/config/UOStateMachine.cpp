@@ -79,7 +79,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_WAIT_FOR_INIT);
 	if (rocketInterface.sensorsInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
@@ -98,7 +98,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
@@ -117,7 +117,7 @@ ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 // code for the flight state
 STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_POWERED_FLIGHT);
 	rocketData = rocketInterface.getLatest();
 
 	InternalEvent(ST_COAST);
@@ -136,7 +136,7 @@ ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_COAST);
 	rocketData = rocketInterface.getLatest();
 
 	// detectApogee(rocketData);
@@ -157,7 +157,7 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 // code for the DescentPhase1 state
 STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_DESCENT_PHASE_1);
 	rocketData = rocketInterface.getLatest();
 
 	InternalEvent(ST_DESCENT_PHASE_2);
@@ -176,7 +176,7 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 
 STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_DESCENT_PHASE_2);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);
@@ -195,7 +195,7 @@ ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 // code for the ground state
 STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
-	rocketInterface.update(data);
+	rocketInterface.update(data, ST_GROUND);
 	rocketData = rocketInterface.getLatest();
 
 	detectExternEvent(rocketData);

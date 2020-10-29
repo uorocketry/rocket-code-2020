@@ -120,7 +120,9 @@ void Logger::writeHeader(std::ofstream &fileStream)
 	fileStream << "filteredYacc,";
 	fileStream << "filteredZacc,";
 
-	fileStream << "solutionStatus,\n";
+	fileStream << "solutionStatus,";
+
+	fileStream << "currentStateNo,\n";
 
 	fileStream.flush();
 }
@@ -155,6 +157,8 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.filteredZacc << ",";
 
 	fileStream << currentState.sbg.solutionStatus << ",";
+
+	fileStream << currentState.currentStateNo << ",";
 #endif
 	fileStream << "\n";
 

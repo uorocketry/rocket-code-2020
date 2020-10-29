@@ -74,7 +74,7 @@ bool Interface::sensorsInitialized()
 	return result;
 }
 
-void Interface::update(const UOSMData *smdata)
+void Interface::update(const UOSMData *smdata, int currentStateNo)
 {
 #if TESTING
 	latestState = testingSensors.getLatest();
@@ -99,8 +99,9 @@ void Interface::update(const UOSMData *smdata)
 #if USE_RADIO
 	radio.enqueueSensorData(latestState);
 #endif
-	latestState.timeStamp = smdata->now.time_since_epoch().count();
 
+	latestState.timeStamp = smdata->now.time_since_epoch().count();
+	latestState.currentStateNo = currentStateNo;
 }
 
 

@@ -7,6 +7,7 @@
 struct sensorsData
 {
     uint64_t timeStamp;
+    uint16_t currentStateNo;
 
 #if USE_SBG
     sbgData sbg;

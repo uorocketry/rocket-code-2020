@@ -159,7 +159,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_WAIT_FOR_INIT);
 	hotFireData = hotFireInterface.getLatest();
 
 	if (hotFireInterface.sensorsInitialized())
@@ -182,7 +182,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_WAIT_FOR_FILLING);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -200,7 +200,7 @@ ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_FILLING);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -218,7 +218,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_WAIT_FOR_IGNITION);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -237,7 +237,7 @@ ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_IGNITION);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -256,7 +256,7 @@ ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_FULL_BURN);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -274,7 +274,7 @@ ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_FINAL_VENTING);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -293,7 +293,7 @@ ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_DONE);
 	hotFireData = hotFireInterface.getLatest();
 }
 
@@ -304,7 +304,7 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_ABORT_FILLING);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);
@@ -317,7 +317,7 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 {
-	hotFireInterface.update(data);
+	hotFireInterface.update(data, ST_ABORT_BURN);
 	hotFireData = hotFireInterface.getLatest();
 
 	detectExternEvent(hotFireData);

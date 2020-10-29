@@ -120,6 +120,7 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.solutionStatus).c_str());
 	serialPrintf(fd, ";");
+	serialPrintf(fd, std::to_string(currentState.currentStateNo).c_str());
 	serialPrintf(fd, "\r\n");
 }
 
