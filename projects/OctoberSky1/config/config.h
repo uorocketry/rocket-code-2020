@@ -17,7 +17,7 @@
 #endif
 
 #ifndef USE_RADIO
-#define USE_RADIO 1
+#define USE_RADIO 0
 #endif
 
 #ifndef TESTING

@@ -16,7 +16,6 @@
 
 Logger::~Logger()
 {
-	fileStream.close();
 }
 
 void Logger::initialize()
@@ -45,7 +44,10 @@ void Logger::run()
 
 	if (shouldWriteHeader)
 	{
+		std::ofstream fileStream;
+		fileStream.open(path + filename, std::ios_base::app);
 		writeHeader(fileStream);
+		fileStream.close();
 	}
 
 	status.fileStatus = READY;
@@ -54,8 +56,9 @@ void Logger::run()
 	{
 		if (!logQueue.empty())
 		{
+			std::ofstream fileStream;
 			fileStream.open(path + filename, std::ios_base::app);
-			dequeueToFile();
+			dequeueToFile(fileStream);
 			fileStream.close();
 		}
 		else
@@ -73,7 +76,7 @@ void Logger::enqueueSensorData(sensorsData curSensorData)
 	writingCondition.notify_one();
 }
 
-void Logger::dequeueToFile()
+void Logger::dequeueToFile(std::ofstream &fileStream)
 {
 	sensorsData currentState;
 	{
