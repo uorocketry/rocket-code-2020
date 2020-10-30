@@ -37,7 +37,7 @@ void Logger::run()
 	int lineCount = 0;
 	int logId = 0;
 
-	std::string path = "./data/";
+	std::string path = "/data/";
 	std::string ext = ".uorocketlog";
 
 	int bootId = getBootId(path);
@@ -61,24 +61,24 @@ void Logger::run()
 	// }
 
 	status.fileStatus = READY;
-
+	std::ofstream fileStream;
+	fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
 	while (true)
 	{
 		if (!logQueue.empty())
 		{
-			std::ofstream fileStream;
-
 			if (lineCount >= maxLine)
 			{
+				fileStream.close();
 				lineCount = 0;
 				logId++;
+				fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
+				fileStream.sync_with_stdio(true);
 			}
 
-			fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::app);
 
 			dequeueToFile(fileStream);
 
-			fileStream.close();
 			lineCount++;
 		}
 		else
