@@ -10,6 +10,8 @@ jobs:
     steps:
       # Initialization
       - uses: actions/checkout@v1
+        with:
+          submodules: true
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.0
         with:
