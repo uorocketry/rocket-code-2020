@@ -1,11 +1,10 @@
+#include "config/config.h"
 #include "Interface.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <iostream>
-
-#ifdef TESTING
 #include "IO/TestingSensors.h"
-#endif // TESTING
+
 
 Interface::Interface()
 {
@@ -37,6 +36,10 @@ void Interface::initializeSensors()
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
 #endif
+#if USE_RADIO
+	std::cout << "Initializing RADIO...\n";
+	radio.initialize();
+#endif
 }
 
 bool Interface::sensorsInitialized()
@@ -64,10 +67,14 @@ bool Interface::sensorsInitialized()
 	result &= input.isInitialized();
 #endif
 
+#if USE_RADIO
+	result &= radio.isInitialized();
+#endif
+
 	return result;
 }
 
-void Interface::update(const UOSMData *smdata)
+void Interface::update(const UOSMData *smdata, int currentStateNo)
 {
 #if TESTING
 	latestState = testingSensors.getLatest();
@@ -85,12 +92,18 @@ void Interface::update(const UOSMData *smdata)
 	latestState.clientEventNumber = client.getData();
 #endif
 
-	latestState.SMData = *smdata;
-
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
+
+#if USE_RADIO
+	radio.enqueueSensorData(latestState);
+#endif
+
+	latestState.timeStamp = smdata->now.time_since_epoch().count();
+	latestState.currentStateNo = currentStateNo;
 }
+
 
 sensorsData *Interface::getLatest()
 {

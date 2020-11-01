@@ -6,7 +6,8 @@
 //all the informations about the rocket that the state machine will need
 struct sensorsData
 {
-    UOSMData SMData;
+    uint64_t timeStamp;
+    uint16_t currentStateNo;
 
 #if USE_SBG
     sbgData sbg;

@@ -1,0 +1,3 @@
+[submodule "sbgECom/WiringPi"]
+	path = sbgECom/WiringPi
+	url = https://github.com/WiringPi/WiringPi.git

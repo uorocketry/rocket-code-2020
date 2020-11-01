@@ -5,6 +5,7 @@ project(sbgECom C CXX)
 include_directories(
 	${PROJECT_SOURCE_DIR}/../../src/
 	${PROJECT_SOURCE_DIR}/../../common/
+	${PROJECT_SOURCE_DIR}/../../WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
 )
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
@@ -23,6 +24,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/../../bin/)
 
 file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/../../src/*.c)
 file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/../../common/*.c)
+file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/../../WiringPi/wiringPi/*.c)
 
 
 file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/../../src/*.cpp)
@@ -47,6 +49,7 @@ else ()
 endif()
 
 add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC} ${SM_CONFIG_SRC})
+add_library(WiringPi STATIC ${WIRINGPI_SRC})
 
 if (MSVC)
 	target_link_libraries(sbgECom Ws2_32)
@@ -90,9 +93,15 @@ if (DEFINED ENV{USE_SBG} OR USE_SBG)
 	add_definitions(-D USE_SBG)
 endif()
 
+if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
+	add_definitions(-D USE_RADIO)
+endif()
+
 add_executable(MainLoop "${PROJECT_SOURCE_DIR}/../../src/init/MainLoop.cpp")
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
+target_link_libraries(MainLoop WiringPi)
+add_dependencies(MainLoop WiringPi)
 target_link_libraries(MainLoop stdc++fs)
 
 

@@ -5,15 +5,14 @@
 #include "data/SBGData.h"
 #include "IO/SBGSensor.h"
 #include "IO/Logger.h"
+#include "IO/Radio.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <queue>
-
-#if TESTING
 #include "IO/TestingSensors.h"
-#endif // TESTING
+
 
 class Interface
 {
@@ -28,7 +27,8 @@ public:
 	sensorsData *getLatest();
 
 	// loop over each sensor and update the latestState
-	void update(const UOSMData *smdata);
+	void update(const UOSMData *smdata, int currentState);
+
 
 private:
 	sensorsData latestState;
@@ -51,5 +51,9 @@ private:
 
 #if USE_LOGGER
 	Logger logger;
+#endif
+
+#if USE_RADIO
+	Radio radio;
 #endif
 };

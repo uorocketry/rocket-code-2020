@@ -1,6 +1,7 @@
 #pragma once
 
-#if !TESTING
+#include "config/config.h"
+#if USE_SOCKET_CLIENT
 
 #include "IO.h"
 #include "../data/SBGData.h"

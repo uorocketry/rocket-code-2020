@@ -1,22 +1,18 @@
 #pragma once
 
 #include "config/config.h"
-#if USE_LOGGER
+#if USE_RADIO
 
 #include "../data/sensorsData.h"
 #include "IO.h"
 #include <queue>
 #include <mutex>
-#include <thread>
-#include <fstream>
-#include <iostream>
 #include <condition_variable>
 
-class Logger : public IO
+class Radio : public IO
 {
 public:
-	static int working;
-	~Logger();
+	~Radio();
 
 	void initialize();
 	void run();
@@ -30,12 +26,9 @@ protected:
 
 private:
 	//pop queue and log the data from sensorsData on logging thread
-	void dequeueToFile(std::ofstream &fileStream);
+	void dequeueToRadio();
 
-	void writeHeader(std::ofstream &file);
-	void writeData(std::ofstream &file, const sensorsData &currentState);
-
-	int getBootId(std::string &path);
+	void sendData(const sensorsData &currentState);
 
 	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 
@@ -48,9 +41,13 @@ private:
 	std::unique_lock<std::mutex> writingLock;
 	std::condition_variable writingCondition;
 
+	std::shared_ptr<std::ofstream> fileStream = nullptr;
+
+	int fd;
+
 	struct InitFlags
 	{
-		InitStatus fileStatus = INIT;
+		InitStatus wiringPiStatus = INIT;
 	} status;
 };
 
