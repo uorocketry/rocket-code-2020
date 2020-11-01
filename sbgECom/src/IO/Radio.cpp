@@ -84,10 +84,13 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(const sensorsData &currentState)
 {
+#if USE_LOGGER
 	serialPrintf(fd, std::to_string(Logger::working).c_str());
 	serialPrintf(fd, ";");
+#endif
 	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
 	serialPrintf(fd, ";");
+#if USE_SBG
 	serialPrintf(fd, std::to_string(currentState.sbg.roll).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.pitch).c_str());
@@ -122,6 +125,7 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.solutionStatus).c_str());
 	serialPrintf(fd, ";");
+#endif
 	serialPrintf(fd, std::to_string(currentState.currentStateNo).c_str());
 	serialPrintf(fd, "\r\n");
 }
