@@ -51,7 +51,7 @@ void UOStateMachine::Apogee()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_INIT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_LAUNCH
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_POWERED_FLIGHT
+		TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_POWERED_FLIGHT
 		TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_COAST
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_2
@@ -137,6 +137,7 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 	rocketData = rocketInterface.getLatest();
 
 	detectMotorBurnout(rocketData);
+	detectApogee(rocketData);
 	// InternalEvent(ST_COAST);
 	// detectExternEvent(rocketData);
 }
@@ -247,9 +248,13 @@ void UOStateMachine::detectLaunch(const sensorsData *data)
 
 	static uint8_t consecutiveEvents = 0;
 
+	float xAcc = data->sbg.filteredXaccelerometer;
+	float yAcc = data->sbg.filteredYaccelerometer;
 	float zAcc = data->sbg.filteredZaccelerometer;
 
-	if (zAcc <= -24.5)
+	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+
+	if (resultingAcc >= 24.5)
 	{
 		consecutiveEvents++;
 	}
