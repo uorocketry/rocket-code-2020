@@ -272,10 +272,10 @@ void UOStateMachine::detectLaunch(const sensorsData *data)
 	}
 
 	// trigger launch if the sbg detects "LaunchThreshold" number of consecutive times
-	// that the rocket is pointing downwards and falling
+	// that the rocket launching
 	if (consecutiveEvents >= LaunchThreshold)
 	{
-		std::cout << "Start \n";
+		std::cout << "Launch \n";
 		Launch();
 	}
 #endif
@@ -303,9 +303,9 @@ void UOStateMachine::detectMotorBurnout(const sensorsData *data)
 		consecutiveEvents = 0;
 	}
 
-	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times
-	// that the rocket is pointing downwards and falling
-	if (consecutiveEvents >= ApogeeThreshold)
+	// trigger motor burn out if the sbg detects "BurnOutThreshold" number of consecutive times
+	// that the rocket is in coast
+	if (consecutiveEvents >= BurnOutThreshold)
 	{
 		std::cout << "MotorBurnout \n";
 		MotorBurnout();
@@ -335,9 +335,9 @@ void UOStateMachine::detectTouchdown(const sensorsData *data)
 		consecutiveEvents = 0;
 	}
 
-	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times
-	// that the rocket is pointing downwards and falling
-	if (consecutiveEvents >= ApogeeThreshold)
+	// trigger touchdown if the sbg detects "TouchdownThreshold" number of consecutive times
+	// that the rocket is on the ground
+	if (consecutiveEvents >= TouchdownThreshold)
 	{
 		std::cout << "Touchdown \n";
 		Touchdown();
