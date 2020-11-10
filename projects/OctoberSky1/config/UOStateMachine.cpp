@@ -13,14 +13,29 @@ UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 	UOStateMachine::enterNewState(States(0));
 }
 
-// Start external event
-void UOStateMachine::Start()
+// Launch external event
+void UOStateMachine::Launch()
 {
 	BEGIN_TRANSITION_MAP						// - Current State -
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_INIT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY(ST_POWERED_FLIGHT) // ST_WAIT_FOR_LAUNCH
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_POWERED_FLIGHT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_COAST
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
+		END_TRANSITION_MAP(NULL)
+}
+
+// Launch external event
+void UOStateMachine::MotorBurnout()
+{
+	BEGIN_TRANSITION_MAP						// - Current State -
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED) 	// ST_WAIT_FOR_LAUNCH
+		TRANSITION_MAP_ENTRY(ST_COAST)			// ST_POWERED_FLIGHT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_COAST
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
@@ -36,7 +51,7 @@ void UOStateMachine::Apogee()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_INIT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_INIT
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_WAIT_FOR_LAUNCH
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_POWERED_FLIGHT
+		TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_POWERED_FLIGHT
 		TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_COAST
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_2
@@ -101,7 +116,8 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
 	rocketData = rocketInterface.getLatest();
 
-	detectExternEvent(rocketData);
+	// detectExternEvent(rocketData);
+	detectLaunch(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
@@ -120,7 +136,9 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 	rocketInterface.update(data, ST_POWERED_FLIGHT);
 	rocketData = rocketInterface.getLatest();
 
-	InternalEvent(ST_COAST);
+	detectMotorBurnout(rocketData);
+	detectApogee(rocketData);
+	// InternalEvent(ST_COAST);
 	// detectExternEvent(rocketData);
 }
 
@@ -139,9 +157,9 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 	rocketInterface.update(data, ST_COAST);
 	rocketData = rocketInterface.getLatest();
 
-	// detectApogee(rocketData);
+	detectApogee(rocketData);
 
-	detectExternEvent(rocketData);
+	// detectExternEvent(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
@@ -209,7 +227,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	switch (eventNbr)
 	{
 	case 0:
-		Start();
+		Launch();
 		break;
 	case 1:
 		Apogee();
@@ -223,6 +241,69 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 #endif
 }
 
+
+void UOStateMachine::detectLaunch(const sensorsData *data)
+{
+#if USE_SBG
+
+	static uint8_t consecutiveEvents = 0;
+
+	float xAcc = data->sbg.filteredXaccelerometer;
+	float yAcc = data->sbg.filteredYaccelerometer;
+	float zAcc = data->sbg.filteredZaccelerometer;
+
+	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+	if (resultingAcc >= 24.5)
+	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger launch if the sbg detects "LaunchThreshold" number of consecutive times
+	// that the rocket is pointing downwards and falling
+	if (consecutiveEvents >= LaunchThreshold)
+	{
+		std::cout << "Start \n";
+		Launch();
+	}
+#endif
+}
+
+void UOStateMachine::detectMotorBurnout(const sensorsData *data)
+{
+#if USE_SBG
+	// TODO: only check for apogee x seconds after launch
+	// Euler angle
+	// pitch is pitch
+	static uint8_t consecutiveEvents = 0;
+
+	float xAcc = data->sbg.filteredXaccelerometer;
+	float yAcc = data->sbg.filteredYaccelerometer;
+	float zAcc = data->sbg.filteredZaccelerometer;
+
+	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+	if (resultingAcc <= 4.9)
+	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times
+	// that the rocket is pointing downwards and falling
+	if (consecutiveEvents >= ApogeeThreshold)
+	{
+		std::cout << "MotorBurnout \n";
+		MotorBurnout();
+	}
+#endif
+}
+
 void UOStateMachine::detectApogee(const sensorsData *data)
 {
 #if USE_SBG
@@ -231,9 +312,10 @@ void UOStateMachine::detectApogee(const sensorsData *data)
 	// pitch is pitch
 	static uint8_t consecutiveEvents = 0;
 
-	float pitch = (180 / PI) * (acos(cos(data->sbg.roll * (PI / 180)) * cos(data->sbg.pitch * (PI / 180))));
+	//float pitch = (180 / PI) * (acos(cos(data->sbg.roll * (PI / 180)) * cos(data->sbg.pitch * (PI / 180))));
+	//std::cout << data->sbg.pitch << "\n";
 
-	if (pitch >= 45)
+	if (data->sbg.pitch >= -45)
 	{
 		consecutiveEvents++;
 	}

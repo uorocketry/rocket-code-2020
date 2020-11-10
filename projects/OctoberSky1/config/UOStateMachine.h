@@ -14,17 +14,24 @@ public:
 
 	// External events taken by this state machine
 	// void Apogee(UOSMData* data);
-	void Start();
+	void Launch();
+	void MotorBurnout();
 	void Apogee();
 	void Touchdown();
 
 private:
 	void detectExternEvent(const sensorsData *data);
 	void detectApogee(const sensorsData *data);
+	void detectLaunch(const sensorsData *data);
+	void detectMotorBurnout(const sensorsData *data);
+
 	void showInfo(const sensorsData *data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
+	
+	//number of consecutive readings needed to trigger apogee
+	uint8_t LaunchThreshold = 5;
 
 	Interface rocketInterface;
 	sensorsData *rocketData;
