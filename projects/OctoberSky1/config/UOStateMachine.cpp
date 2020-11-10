@@ -208,7 +208,7 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 	rocketInterface.update(data, ST_DESCENT_PHASE_2);
 	rocketData = rocketInterface.getLatest();
 
-	detectExternEvent(rocketData);
+	detectTouchdown(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
@@ -226,8 +226,6 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
 	rocketInterface.update(data, ST_GROUND);
 	rocketData = rocketInterface.getLatest();
-
-	detectExternEvent(rocketData);
 }
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
@@ -311,6 +309,38 @@ void UOStateMachine::detectMotorBurnout(const sensorsData *data)
 	{
 		std::cout << "MotorBurnout \n";
 		MotorBurnout();
+	}
+#endif
+}
+
+void UOStateMachine::detectTouchdown(const sensorsData *data)
+{
+#if USE_SBG
+	// TODO: only check for apogee x seconds after launch
+	// Euler angle
+	// pitch is pitch
+	static uint8_t consecutiveEvents = 0;
+
+	float xAcc = data->sbg.filteredXaccelerometer;
+	float yAcc = data->sbg.filteredYaccelerometer;
+	float zAcc = data->sbg.filteredZaccelerometer;
+
+	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+	if (resultingAcc <= -9.8)
+	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times
+	// that the rocket is pointing downwards and falling
+	if (consecutiveEvents >= ApogeeThreshold)
+	{
+		std::cout << "Touchdown \n";
+		Touchdown();
 	}
 #endif
 }

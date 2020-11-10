@@ -24,6 +24,7 @@ private:
 	void detectApogee(const sensorsData *data);
 	void detectLaunch(const sensorsData *data);
 	void detectMotorBurnout(const sensorsData *data);
+	void detectTouchdown(const sensorsData *data);
 
 	void showInfo(const sensorsData *data);
 
