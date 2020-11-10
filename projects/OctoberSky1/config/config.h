@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef USE_SBG
-#define USE_SBG 0
+#define USE_SBG 1
 #endif
 
 #ifndef USE_SOCKET_CLIENT
@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-#define USE_LOGGER 0
+#define USE_LOGGER 1
 #endif
 
 #ifndef USE_INPUT
@@ -17,7 +17,7 @@
 #endif
 
 #ifndef USE_RADIO
-#define USE_RADIO 0
+#define USE_RADIO 1
 #endif
 
 #ifndef TESTING
