@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-#define USE_LOGGER 0
+#define USE_LOGGER 1
 #endif
 
 #ifndef USE_INPUT
@@ -17,7 +17,7 @@
 #endif
 
 #ifndef USE_RADIO
-#define USE_RADIO 0
+#define USE_RADIO 1
 #endif
 
 #ifndef TESTING
@@ -25,7 +25,7 @@
 #endif
 
 #ifndef SKIP_INIT
-#define SKIP_INIT 1
+#define SKIP_INIT 0
 #endif
 
 // because we can't use inputs if it is manual testing

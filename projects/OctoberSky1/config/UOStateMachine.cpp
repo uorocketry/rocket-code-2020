@@ -253,7 +253,6 @@ void UOStateMachine::detectLaunch(const sensorsData *data)
 	float zAcc = data->sbg.filteredZaccelerometer;
 
 	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
-
 	if (resultingAcc >= 24.5)
 	{
 		consecutiveEvents++;
@@ -313,9 +312,10 @@ void UOStateMachine::detectApogee(const sensorsData *data)
 	// pitch is pitch
 	static uint8_t consecutiveEvents = 0;
 
-	float pitch = (180 / PI) * (acos(cos(data->sbg.roll * (PI / 180)) * cos(data->sbg.pitch * (PI / 180))));
+	//float pitch = (180 / PI) * (acos(cos(data->sbg.roll * (PI / 180)) * cos(data->sbg.pitch * (PI / 180))));
+	//std::cout << data->sbg.pitch << "\n";
 
-	if (pitch >= 45)
+	if (data->sbg.pitch >= -45)
 	{
 		consecutiveEvents++;
 	}
