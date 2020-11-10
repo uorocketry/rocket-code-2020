@@ -110,6 +110,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
 	std::cout << "RocketSM::EnterWaitForLaunch\n";
+	enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
@@ -117,8 +118,10 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
 	rocketData = rocketInterface.getLatest();
 
-	// detectExternEvent(rocketData);
-	detectLaunch(rocketData);
+	if (isDelayElapsed(duration_ms(10000))) // wait 10 seconds before attempting external event detection
+	{
+		detectLaunch(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
@@ -129,6 +132,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
 ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 {
 	std::cout << "RocketSM::EnterPoweredFlight\n";
+	enterNewState(ST_POWERED_FLIGHT);
 }
 
 // code for the flight state
@@ -137,10 +141,11 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 	rocketInterface.update(data, ST_POWERED_FLIGHT);
 	rocketData = rocketInterface.getLatest();
 
-	detectMotorBurnout(rocketData);
-	detectApogee(rocketData);
-	// InternalEvent(ST_COAST);
-	// detectExternEvent(rocketData);
+	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection 
+	{
+		detectMotorBurnout(rocketData);
+		detectApogee(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
@@ -151,6 +156,7 @@ EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
 ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 {
 	std::cout << "RocketSM::EnterCoast\n";
+	enterNewState(ST_COAST);
 }
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
@@ -158,9 +164,10 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 	rocketInterface.update(data, ST_COAST);
 	rocketData = rocketInterface.getLatest();
 
-	detectApogee(rocketData);
-
-	// detectExternEvent(rocketData);
+	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection 
+	{
+		detectApogee(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
@@ -179,8 +186,11 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 	rocketInterface.update(data, ST_DESCENT_PHASE_1);
 	rocketData = rocketInterface.getLatest();
 
+#if USE_SBG
+	if (rocketData->sbg.relativeBarometricAltitude <= 300) // change descent phase at given relative altitude
+		InternalEvent(ST_DESCENT_PHASE_2);
+#endif
 	InternalEvent(ST_DESCENT_PHASE_2);
-	// detectExternEvent(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
