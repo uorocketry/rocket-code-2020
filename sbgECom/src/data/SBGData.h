@@ -13,6 +13,7 @@ struct sbgData {
 	double gpsLongitude;
 	double gpsAltitude;
 	float barometricAltitude;
+	float relativeBarometricAltitude;
 	float velocityN;
 	float velocityE;
 	float velocityD;

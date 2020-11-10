@@ -195,71 +195,73 @@ void Logger::writeHeader(std::ofstream &fileStream)
 
 void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
 {
+	const char* sep = ","; 
 
 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
-	fileStream << currentState.timeStamp << ",";
+	fileStream << currentState.timeStamp << sep;
 
 #if USE_SBG
-	fileStream << currentState.sbg.roll << ",";
-	fileStream << currentState.sbg.pitch << ",";
-	fileStream << currentState.sbg.yaw << ",";
+	fileStream << currentState.sbg.roll << sep;
+	fileStream << currentState.sbg.pitch << sep;
+	fileStream << currentState.sbg.yaw << sep;
 
-	fileStream << currentState.sbg.rollAccuracy << ",";
-	fileStream << currentState.sbg.pitchAccuracy << ",";
-	fileStream << currentState.sbg.yawAccuracy << ",";
+	fileStream << currentState.sbg.rollAccuracy << sep;
+	fileStream << currentState.sbg.pitchAccuracy << sep;
+	fileStream << currentState.sbg.yawAccuracy << sep;
 
-	fileStream << currentState.sbg.gpsLatitude << ",";
-	fileStream << currentState.sbg.gpsLongitude << ",";
-	fileStream << currentState.sbg.gpsAltitude << ",";
+	fileStream << currentState.sbg.gpsLatitude << sep;
+	fileStream << currentState.sbg.gpsLongitude << sep;
+	fileStream << currentState.sbg.gpsAltitude << sep;
 
-	fileStream << currentState.sbg.barometricAltitude << ",";
+	fileStream << currentState.sbg.barometricAltitude << sep;
+	fileStream << currentState.sbg.relativeBarometricAltitude << sep;
 
-	fileStream << currentState.sbg.velocityN << ",";
-	fileStream << currentState.sbg.velocityE << ",";
-	fileStream << currentState.sbg.velocityD << ",";
+	fileStream << currentState.sbg.velocityN << sep;
+	fileStream << currentState.sbg.velocityE << sep;
+	fileStream << currentState.sbg.velocityD << sep;
 
-	fileStream << currentState.sbg.filteredXaccelerometer << ",";
-	fileStream << currentState.sbg.filteredYaccelerometer << ",";
-	fileStream << currentState.sbg.filteredZaccelerometer << ",";
+	fileStream << currentState.sbg.filteredXaccelerometer << sep;
+	fileStream << currentState.sbg.filteredYaccelerometer << sep;
+	fileStream << currentState.sbg.filteredZaccelerometer << sep;
 
-	fileStream << currentState.sbg.solutionStatus << ",";
+	fileStream << currentState.sbg.solutionStatus << sep;
 
-	fileStream << currentState.currentStateNo << ",";
+	fileStream << currentState.currentStateNo << sep;
 
-	fileStream << currentState.sbg.gpsPosStatus << ",";
+	fileStream << currentState.sbg.gpsPosStatus << sep;
 
-	fileStream << currentState.sbg.gpsPosAccuracyLatitude << ",";
-	fileStream << currentState.sbg.gpsPosAccuracyLongitude << ",";
-	fileStream << currentState.sbg.gpsPosAccuracyAltitude << ",";
+	fileStream << currentState.sbg.gpsPosAccuracyLatitude << sep;
+	fileStream << currentState.sbg.gpsPosAccuracyLongitude << sep;
+	fileStream << currentState.sbg.gpsPosAccuracyAltitude << sep;
 
-	fileStream << currentState.sbg.NumSvUsed << ",";
+	fileStream << currentState.sbg.NumSvUsed << sep;
 
-	fileStream << currentState.sbg.velocityNAccuracy << ",";
-	fileStream << currentState.sbg.velocityEAccuracy << ",";
-	fileStream << currentState.sbg.velocityDAccuracy << ",";
+	fileStream << currentState.sbg.velocityNAccuracy << sep;
+	fileStream << currentState.sbg.velocityEAccuracy << sep;
+	fileStream << currentState.sbg.velocityDAccuracy << sep;
 
-	fileStream << currentState.sbg.latitudeAccuracy << ",";
-	fileStream << currentState.sbg.longitudeAccuracy << ",";
-	fileStream << currentState.sbg.altitudeAccuracy << ",";
+	fileStream << currentState.sbg.latitudeAccuracy << sep;
+	fileStream << currentState.sbg.longitudeAccuracy << sep;
+	fileStream << currentState.sbg.altitudeAccuracy << sep;
 
-	fileStream << currentState.sbg.pressureStatus << ",";
-	fileStream << currentState.sbg.barometricPressure << ",";
+	fileStream << currentState.sbg.pressureStatus << sep;
+	fileStream << currentState.sbg.barometricPressure << sep;
 
-	fileStream << currentState.sbg.imuStatus << ",";
+	fileStream << currentState.sbg.imuStatus << sep;
 
-	fileStream << currentState.sbg.gyroX << ",";
-	fileStream << currentState.sbg.gyroY << ",";
-	fileStream << currentState.sbg.gyroZ << ",";
+	fileStream << currentState.sbg.gyroX << sep;
+	fileStream << currentState.sbg.gyroY << sep;
+	fileStream << currentState.sbg.gyroZ << sep;
 
-	fileStream << currentState.sbg.temp << ",";
+	fileStream << currentState.sbg.temp << sep;
 
-	fileStream << currentState.sbg.deltaVelX << ",";
-	fileStream << currentState.sbg.deltaVelY << ",";
-	fileStream << currentState.sbg.deltaVelZ << ",";
+	fileStream << currentState.sbg.deltaVelX << sep;
+	fileStream << currentState.sbg.deltaVelY << sep;
+	fileStream << currentState.sbg.deltaVelZ << sep;
 
-	fileStream << currentState.sbg.deltaAngleX << ",";
-	fileStream << currentState.sbg.deltaAngleY << ",";
-	fileStream << currentState.sbg.deltaAngleZ << ",";
+	fileStream << currentState.sbg.deltaAngleX << sep;
+	fileStream << currentState.sbg.deltaAngleY << sep;
+	fileStream << currentState.sbg.deltaAngleZ << sep;
 
 #endif
 	fileStream << "\n";

@@ -92,6 +92,7 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 		break;
 	case SBG_ECOM_LOG_PRESSURE:
 		sens->data.barometricAltitude = pLogData->pressureData.height;
+		sens->data.relativeBarometricAltitude = pLogData->pressureData.height - sens->barometricAltitudeOffset;
 		
 		sens->data.pressureStatus = pLogData->pressureData.status;
 		sens->data.barometricPressure = pLogData->pressureData.pressure;
@@ -296,9 +297,14 @@ bool SBGSensor::isInitialized() {
 	return ((data.solutionStatus & 0b1111) == 4);
 }
 
+void SBGSensor::setZeroBarometricAltitude() {
+	barometricAltitudeOffset = data.barometricAltitude;
+}
+
 sbgData SBGSensor::getData() {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	return data;
 }
+
 
 #endif

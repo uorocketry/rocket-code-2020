@@ -97,6 +97,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_INIT);
 	if (rocketInterface.sensorsInitialized())
 	{
+		rocketInterface.calibrateTelemetry();
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
 	}
 }
