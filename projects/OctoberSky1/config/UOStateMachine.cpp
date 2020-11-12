@@ -326,7 +326,7 @@ void UOStateMachine::detectTouchdown(const sensorsData *data)
 	float zAcc = data->sbg.filteredZaccelerometer;
 
 	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
-	if (resultingAcc <= -9.8)
+	if (resultingAcc >= 8.82)
 	{
 		consecutiveEvents++;
 	}

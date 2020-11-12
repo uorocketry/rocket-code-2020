@@ -109,7 +109,7 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsAltitude).c_str());
 	serialPrintf(fd, ";");
-	serialPrintf(fd, std::to_string(currentState.sbg.barometricAltitude).c_str());
+	serialPrintf(fd, std::to_string(currentState.sbg.relativeBarometricAltitude).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityN).c_str());
 	serialPrintf(fd, ";");
