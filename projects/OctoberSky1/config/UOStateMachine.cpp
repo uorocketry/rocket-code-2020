@@ -118,7 +118,7 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
 	rocketData = rocketInterface.getLatest();
 
-	if (isDelayElapsed(duration_ms(10000))) // wait 10 seconds before attempting external event detection
+	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
 	{
 		detectLaunch(rocketData);
 	}
@@ -141,10 +141,10 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 	rocketInterface.update(data, ST_POWERED_FLIGHT);
 	rocketData = rocketInterface.getLatest();
 
-	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection 
+	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
-		detectMotorBurnout(rocketData);
 		detectApogee(rocketData);
+		detectMotorBurnout(rocketData);
 	}
 }
 
@@ -164,7 +164,7 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 	rocketInterface.update(data, ST_COAST);
 	rocketData = rocketInterface.getLatest();
 
-	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection 
+	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
 		detectApogee(rocketData);
 	}
@@ -187,8 +187,9 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 	rocketData = rocketInterface.getLatest();
 
 #if USE_SBG
-	if (rocketData->sbg.relativeBarometricAltitude <= 300) // change descent phase at given relative altitude
+	if (rocketData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
 		InternalEvent(ST_DESCENT_PHASE_2);
+	}
 #endif
 	InternalEvent(ST_DESCENT_PHASE_2);
 }
