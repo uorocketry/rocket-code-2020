@@ -191,7 +191,7 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 		InternalEvent(ST_DESCENT_PHASE_2);
 	}
 #endif
-	InternalEvent(ST_DESCENT_PHASE_2);
+	// InternalEvent(ST_DESCENT_PHASE_2);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
