@@ -207,6 +207,8 @@ public:
 	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
 
 	bool switchStatesAfterTime(BYTE state, duration_ms targetTime);
+
+	bool isDelayElapsed(duration_ms targetTime);
 	// END CUSTOM CODE ADDED BY uORocketry
 	
 protected:

@@ -263,9 +263,15 @@ double StateMachine::getValueForTime(double minimum, double maximum, duration_ms
     return minimum(maximum, minimum + progress * (maximum - minimum));
 }
 
-bool StateMachine::switchStatesAfterTime(BYTE state, duration_ms targetTime) {
+bool StateMachine::isDelayElapsed(duration_ms targetTime) 
+{
 	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
-	if (timeSinceEntry >= duration_ns(targetTime)) {
+	return timeSinceEntry >= duration_ns(targetTime);
+}
+
+bool StateMachine::switchStatesAfterTime(BYTE state, duration_ms targetTime) 
+{	
+	if (isDelayElapsed(targetTime)) {
 		InternalEvent(state);
 
 		return true;

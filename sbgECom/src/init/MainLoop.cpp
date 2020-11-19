@@ -39,8 +39,6 @@ int main()
 		{
 			std::cout << "Timing Error: Update took too long\n";
 		}
-
-		// std::cout.flush();
 	}
 
 	return 0;

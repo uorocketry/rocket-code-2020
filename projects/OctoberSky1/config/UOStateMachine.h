@@ -24,14 +24,21 @@ private:
 	void detectApogee(const sensorsData *data);
 	void detectLaunch(const sensorsData *data);
 	void detectMotorBurnout(const sensorsData *data);
+	void detectTouchdown(const sensorsData *data);
 
 	void showInfo(const sensorsData *data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
 	
-	//number of consecutive readings needed to trigger apogee
+	//number of consecutive readings needed to trigger launch
 	uint8_t LaunchThreshold = 5;
+
+	//number of consecutive readings needed to trigger motor burnout
+	uint8_t BurnOutThreshold = 5;
+
+	//number of consecutive readings needed to trigger touchdown
+	uint8_t TouchdownThreshold = 5;
 
 	Interface rocketInterface;
 	sensorsData *rocketData;

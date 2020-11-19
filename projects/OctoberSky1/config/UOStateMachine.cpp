@@ -97,6 +97,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_INIT);
 	if (rocketInterface.sensorsInitialized())
 	{
+		rocketInterface.calibrateTelemetry();
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
 	}
 }
@@ -109,6 +110,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
 	std::cout << "RocketSM::EnterWaitForLaunch\n";
+	enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
@@ -116,8 +118,10 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
 	rocketData = rocketInterface.getLatest();
 
-	// detectExternEvent(rocketData);
-	detectLaunch(rocketData);
+	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
+	{
+		detectLaunch(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
@@ -128,6 +132,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
 ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 {
 	std::cout << "RocketSM::EnterPoweredFlight\n";
+	enterNewState(ST_POWERED_FLIGHT);
 }
 
 // code for the flight state
@@ -136,10 +141,11 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 	rocketInterface.update(data, ST_POWERED_FLIGHT);
 	rocketData = rocketInterface.getLatest();
 
-	detectMotorBurnout(rocketData);
-	detectApogee(rocketData);
-	// InternalEvent(ST_COAST);
-	// detectExternEvent(rocketData);
+	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
+	{
+		detectApogee(rocketData);
+		detectMotorBurnout(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
@@ -150,6 +156,7 @@ EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
 ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 {
 	std::cout << "RocketSM::EnterCoast\n";
+	enterNewState(ST_COAST);
 }
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
@@ -157,9 +164,10 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 	rocketInterface.update(data, ST_COAST);
 	rocketData = rocketInterface.getLatest();
 
-	detectApogee(rocketData);
-
-	// detectExternEvent(rocketData);
+	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
+	{
+		detectApogee(rocketData);
+	}
 }
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
@@ -178,8 +186,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 	rocketInterface.update(data, ST_DESCENT_PHASE_1);
 	rocketData = rocketInterface.getLatest();
 
-	InternalEvent(ST_DESCENT_PHASE_2);
-	// detectExternEvent(rocketData);
+#if USE_SBG
+	if (rocketData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
+		InternalEvent(ST_DESCENT_PHASE_2);
+	}
+#endif
+	// InternalEvent(ST_DESCENT_PHASE_2);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
@@ -197,7 +209,7 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 	rocketInterface.update(data, ST_DESCENT_PHASE_2);
 	rocketData = rocketInterface.getLatest();
 
-	detectExternEvent(rocketData);
+	detectTouchdown(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
@@ -215,8 +227,6 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
 	rocketInterface.update(data, ST_GROUND);
 	rocketData = rocketInterface.getLatest();
-
-	detectExternEvent(rocketData);
 }
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
@@ -263,10 +273,10 @@ void UOStateMachine::detectLaunch(const sensorsData *data)
 	}
 
 	// trigger launch if the sbg detects "LaunchThreshold" number of consecutive times
-	// that the rocket is pointing downwards and falling
+	// that the rocket launching
 	if (consecutiveEvents >= LaunchThreshold)
 	{
-		std::cout << "Start \n";
+		std::cout << "Launch \n";
 		Launch();
 	}
 #endif
@@ -294,12 +304,44 @@ void UOStateMachine::detectMotorBurnout(const sensorsData *data)
 		consecutiveEvents = 0;
 	}
 
-	// trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive times
-	// that the rocket is pointing downwards and falling
-	if (consecutiveEvents >= ApogeeThreshold)
+	// trigger motor burn out if the sbg detects "BurnOutThreshold" number of consecutive times
+	// that the rocket is in coast
+	if (consecutiveEvents >= BurnOutThreshold)
 	{
 		std::cout << "MotorBurnout \n";
 		MotorBurnout();
+	}
+#endif
+}
+
+void UOStateMachine::detectTouchdown(const sensorsData *data)
+{
+#if USE_SBG
+	// TODO: only check for apogee x seconds after launch
+	// Euler angle
+	// pitch is pitch
+	static uint8_t consecutiveEvents = 0;
+
+	float xAcc = data->sbg.filteredXaccelerometer;
+	float yAcc = data->sbg.filteredYaccelerometer;
+	float zAcc = data->sbg.filteredZaccelerometer;
+
+	float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+	if (resultingAcc >= 8.82)
+	{
+		consecutiveEvents++;
+	}
+	else
+	{
+		consecutiveEvents = 0;
+	}
+
+	// trigger touchdown if the sbg detects "TouchdownThreshold" number of consecutive times
+	// that the rocket is on the ground
+	if (consecutiveEvents >= TouchdownThreshold)
+	{
+		std::cout << "Touchdown \n";
+		Touchdown();
 	}
 #endif
 }

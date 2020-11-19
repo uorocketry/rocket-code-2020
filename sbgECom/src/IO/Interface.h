@@ -22,6 +22,7 @@ public:
 
 	void initializeSensors();
 	bool sensorsInitialized();
+	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState
 	sensorsData *getLatest();

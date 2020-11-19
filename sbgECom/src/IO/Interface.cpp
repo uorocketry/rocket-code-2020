@@ -104,6 +104,13 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 	latestState.currentStateNo = currentStateNo;
 }
 
+void Interface::calibrateTelemetry() 
+{
+#if USE_SBG
+	mySbgSensor.setZeroBarometricAltitude();
+#endif
+}
+
 
 sensorsData *Interface::getLatest()
 {

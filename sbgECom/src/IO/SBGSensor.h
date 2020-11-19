@@ -14,6 +14,7 @@ class SBGSensor : public IO
 public:
 	void run();
 	void initialize();
+	void setZeroBarometricAltitude();
 	bool isInitialized();
 
 	sbgData getData();
@@ -21,6 +22,7 @@ public:
 
 private:
 	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
+	float barometricAltitudeOffset = 0;
 
 	struct InitFlags
 	{
