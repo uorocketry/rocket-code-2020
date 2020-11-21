@@ -27,6 +27,11 @@ jobs:
           path: ./sbgECom/bin
 
       - name: "HOTFIRE_TEST: Cmake Makefiles"
+        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "HOTFIRE_TEST: Run make"
+        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; make
+
+      - name: "USE_SBG: Cmake Makefiles"
         run: export USE_SBG=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
       - name: "USE_SBG: Run make"
         run: export USE_SBG=1; cd ./sbgECom/projects/unix; make
