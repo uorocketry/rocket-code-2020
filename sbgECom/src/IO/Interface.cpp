@@ -81,8 +81,9 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 
 #if TESTING
 	latestState = testingSensors.getLatest();
-#endif
+#else
 
+ 	//Normal case
 #if USE_SBG
 	latestState.sbg = mySbgSensor.getData();
 #endif
@@ -95,9 +96,12 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 	latestState.clientEventNumber = client.getData();
 #endif
 
+#endif //!TESTING
+
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
+
 
 #if USE_RADIO
 	radio.enqueueSensorData(latestState);

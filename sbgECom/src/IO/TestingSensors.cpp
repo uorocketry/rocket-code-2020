@@ -38,25 +38,77 @@ void TestingSensors::initialize()
 
 		sensorsData currentData;
 
+		// Will keep increasing by one for each read
+		int count = 0;
+
+		//TODO: Load timestamp
+		currentData.timeStamp = processUInt64(currentRow[count++]);
+
 #if USE_SBG
 		// SBG:
-		currentData.sbg.roll = processFloat(currentRow[0]);
-		currentData.sbg.pitch = processFloat(currentRow[1]);
-		currentData.sbg.yaw = processFloat(currentRow[2]);
-		currentData.sbg.rollAccuracy = processFloat(currentRow[3]);
-		currentData.sbg.pitchAccuracy = processFloat(currentRow[4]);
-		currentData.sbg.yawAccuracy = processFloat(currentRow[5]);
-		currentData.sbg.gpsLatitude = processDouble(currentRow[6]);
-		currentData.sbg.gpsLongitude = processDouble(currentRow[7]);
-		currentData.sbg.gpsAltitude = processDouble(currentRow[8]);
-		currentData.sbg.barometricAltitude = processFloat(currentRow[9]);
-		currentData.sbg.velocityN = processFloat(currentRow[10]);
-		currentData.sbg.velocityE = processFloat(currentRow[11]);
-		currentData.sbg.velocityD = processFloat(currentRow[12]);
-		currentData.sbg.filteredXaccelerometer = processFloat(currentRow[13]);
-		currentData.sbg.filteredYaccelerometer = processFloat(currentRow[14]);
-		currentData.sbg.filteredZaccelerometer = processFloat(currentRow[15]);
+		currentData.sbg.roll = processFloat(currentRow[count++]);
+		currentData.sbg.pitch = processFloat(currentRow[count++]);
+		currentData.sbg.yaw = processFloat(currentRow[count++]);
+
+		currentData.sbg.rollAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.pitchAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.yawAccuracy = processFloat(currentRow[count++]);
+
+		currentData.sbg.gpsLatitude = processDouble(currentRow[count++]);
+		currentData.sbg.gpsLongitude = processDouble(currentRow[count++]);
+		currentData.sbg.gpsAltitude = processDouble(currentRow[count++]);
+
+		currentData.sbg.barometricAltitude = processFloat(currentRow[count++]);
+		currentData.sbg.relativeBarometricAltitude = processFloat(currentRow[10]);
+
+		currentData.sbg.velocityN = processFloat(currentRow[count++]);
+		currentData.sbg.velocityE = processFloat(currentRow[count++]);
+		currentData.sbg.velocityD = processFloat(currentRow[count++]);
+
+		currentData.sbg.filteredXaccelerometer = processFloat(currentRow[count++]);
+		currentData.sbg.filteredYaccelerometer = processFloat(currentRow[count++]);
+		currentData.sbg.filteredZaccelerometer = processFloat(currentRow[count++]);
+
 		currentData.sbg.solutionStatus = processInt(currentRow[16]);
+
+		// Ignore the state, that's an output value
+		count++;
+
+		currentData.sbg.gpsPosStatus = processFloat(currentRow[count++]);
+
+		currentData.sbg.gpsPosAccuracyLatitude = processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosAccuracyLongitude = processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosAccuracyAltitude = processFloat(currentRow[count++]);
+
+		currentData.sbg.NumSvUsed = processFloat(currentRow[count++]);
+
+		currentData.sbg.velocityNAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.velocityEAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.velocityDAccuracy = processFloat(currentRow[count++]);
+
+		currentData.sbg.latitudeAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.longitudeAccuracy = processFloat(currentRow[count++]);
+		currentData.sbg.altitudeAccuracy = processFloat(currentRow[count++]);
+
+		currentData.sbg.pressureStatus = processFloat(currentRow[count++]);
+		currentData.sbg.barometricPressure = processFloat(currentRow[count++]);
+
+		currentData.sbg.imuStatus = processFloat(currentRow[count++]);
+
+		currentData.sbg.gyroX = processFloat(currentRow[count++]);
+		currentData.sbg.gyroY = processFloat(currentRow[count++]);
+		currentData.sbg.gyroZ = processFloat(currentRow[count++]);
+
+		currentData.sbg.temp = processFloat(currentRow[count++]);
+
+		currentData.sbg.deltaVelX = processFloat(currentRow[count++]);
+		currentData.sbg.deltaVelY = processFloat(currentRow[count++]);
+		currentData.sbg.deltaVelZ = processFloat(currentRow[count++]);
+
+		currentData.sbg.deltaAngleX = processFloat(currentRow[count++]);
+		currentData.sbg.deltaAngleY = processFloat(currentRow[count++]);
+		currentData.sbg.deltaAngleZ = processFloat(currentRow[count++]);
+
 #endif
 
 		data.push(currentData);
@@ -89,6 +141,11 @@ bool TestingSensors::isInitialized()
 int TestingSensors::processInt(std::string data)
 {
 	return strtol(data.c_str(), nullptr, 10);
+}
+
+uint64_t TestingSensors::processUInt64(std::string data)
+{
+	return strtoull(data.c_str(), nullptr, 10);
 }
 
 float TestingSensors::processFloat(std::string data)

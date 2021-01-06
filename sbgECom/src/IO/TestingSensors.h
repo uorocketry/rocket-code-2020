@@ -21,6 +21,7 @@ private:
 	std::queue<sensorsData> data;
 
 	int processInt(std::string data);
+	uint64_t processUInt64(std::string data);
 	float processFloat(std::string data);
 	double processDouble(std::string data);
 };
