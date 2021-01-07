@@ -6,22 +6,17 @@
 
 namespace helper {
 
-	inline std::vector<std::string> stringSplit(std::string text, char delimiter) 
-	{
-		std::stringstream lineStream(text);
-		std::string cell;
-		std::vector<std::string> result;
+	std::vector<std::string> stringSplit(std::string text, char delimiter);
 
-		while (std::getline(lineStream, cell, delimiter)) {
-			result.push_back(cell);
-		}
+	const char* getEnvOrDefault(const char* envName, const char* defaultValue);
 
-		return result;
-	}
+	uint64_t getEnvOrDefault(const char* envName, uint64_t defaultValue);
 
-	inline const char* getEnvOrDefault(const char* envName, const char* defaultValue)
-	{
-		const char* value = std::getenv(envName);
-		return value ? value : defaultValue;
-	}
+	int processInt(std::string data);
+
+	uint64_t processUInt64(std::string data);
+
+	float processFloat(std::string data);
+
+	double processDouble(std::string data);
 }

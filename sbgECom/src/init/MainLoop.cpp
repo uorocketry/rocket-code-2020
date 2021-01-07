@@ -1,12 +1,14 @@
 #include "../helpers/Types.h"
 #include "config/UOStateMachine.h"
 
+#include "helpers/Helper.h"
+
 #include <stdio.h>
 #include "chrono"
 #include "iostream"
 #include <thread>
 
-#define TARGET_DELAY_NS 1000000000L / 30L // in nanoseconds = 33 miliseconds = 30Hz
+#define DEFAULT_TARGET_UPDATE_DURATION_NS 1000000000L / 30L // in nanoseconds = 33 miliseconds = 30Hz
 
 int main()
 {
@@ -17,6 +19,9 @@ int main()
 	duration_ns target_ns, elapsed_ns;
 	start = std::chrono::steady_clock::now();
 	UOSMData data = UOSMData();
+
+	const uint64_t targetUpdateDuration = 
+			helper::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
 
 	uint64_t count = 1;
 	while (true)
@@ -29,7 +34,7 @@ int main()
 		uOttSM.updateStateMachine(&data);
 
 		elapsed_ns = duration_ns(now - start);
-		target_ns = duration_ns(TARGET_DELAY_NS * count++);
+		target_ns = duration_ns(targetUpdateDuration * count++);
 
 		if (target_ns > elapsed_ns)
 		{
