@@ -1,12 +1,13 @@
-#ifndef _HELPER_H
-#define _HELPER_H
+#pragma once
 
 #include <string>
 #include <vector>
 #include <sstream>
 
 namespace helper {
-	std::vector<std::string> stringSplit(std::string text, char delimiter) {
+
+	inline std::vector<std::string> stringSplit(std::string text, char delimiter) 
+	{
 		std::stringstream lineStream(text);
 		std::string cell;
 		std::vector<std::string> result;
@@ -17,6 +18,10 @@ namespace helper {
 
 		return result;
 	}
-}
 
-#endif
+	inline const char* getEnvOrDefault(const char* envName, const char* defaultValue)
+	{
+		const char* value = std::getenv(envName);
+		return value ? value : defaultValue;
+	}
+}

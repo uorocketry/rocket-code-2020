@@ -1,8 +1,8 @@
 #include "config/config.h"
 #if TESTING
 
-#include "../helpers/Helper.h"
-#include "../data/sensorsData.h"
+#include "helpers/Helper.h"
+#include "data/sensorsData.h"
 #include "TestingSensors.h"
 
 #include <sstream>
@@ -19,7 +19,7 @@ void TestingSensors::initialize()
 {
 	createThread = false;
 
-	std::ifstream logFile("./data/test-data.csv");
+	std::ifstream logFile(helper::getEnvOrDefault("TESTING_INPUT_FILE", "./data/test-data.csv"));
 
 	std::string line;
 	bool headerRow = true;
