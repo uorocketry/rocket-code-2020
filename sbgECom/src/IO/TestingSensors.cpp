@@ -22,15 +22,8 @@ void TestingSensors::initialize()
 	std::ifstream logFile(helper::getEnvOrDefault("TESTING_INPUT_FILE", "./data/test-data.csv"));
 
 	std::string line;
-	bool headerRow = true;
 	while (std::getline(logFile, line))
 	{
-		if (headerRow)
-		{
-			headerRow = false;
-			continue;
-		}
-
 		std::stringstream lineStream(line);
 		std::string cell;
 
