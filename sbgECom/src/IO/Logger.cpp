@@ -4,6 +4,8 @@
 #include "Logger.h"
 #include "data/sensorsData.h"
 
+#include "helpers/Helper.h"
+
 #include <sys/stat.h>
 #include <iostream>
 #include <fstream>
@@ -37,7 +39,7 @@ void Logger::run()
 	int lineCount = 0;
 	int logId = 0;
 
-	std::string path = "/data/";
+	std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
 	std::string ext = ".uorocketlog";
 
 	int bootId = getBootId(path);

@@ -1,8 +1,8 @@
 #include "config/config.h"
 #if TESTING
 
-#include "../helpers/Helper.h"
-#include "../data/sensorsData.h"
+#include "helpers/Helper.h"
+#include "data/sensorsData.h"
 #include "TestingSensors.h"
 
 #include <sstream>
@@ -19,18 +19,11 @@ void TestingSensors::initialize()
 {
 	createThread = false;
 
-	std::ifstream logFile("./data/test-data.csv");
+	std::ifstream logFile(helper::getEnvOrDefault("TESTING_INPUT_FILE", "./data/test-data.csv"));
 
 	std::string line;
-	bool headerRow = true;
 	while (std::getline(logFile, line))
 	{
-		if (headerRow)
-		{
-			headerRow = false;
-			continue;
-		}
-
 		std::stringstream lineStream(line);
 		std::string cell;
 
@@ -38,25 +31,76 @@ void TestingSensors::initialize()
 
 		sensorsData currentData;
 
+		// Will keep increasing by one for each read
+		int count = 0;
+
+		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
+
 #if USE_SBG
 		// SBG:
-		currentData.sbg.roll = processFloat(currentRow[0]);
-		currentData.sbg.pitch = processFloat(currentRow[1]);
-		currentData.sbg.yaw = processFloat(currentRow[2]);
-		currentData.sbg.rollAccuracy = processFloat(currentRow[3]);
-		currentData.sbg.pitchAccuracy = processFloat(currentRow[4]);
-		currentData.sbg.yawAccuracy = processFloat(currentRow[5]);
-		currentData.sbg.gpsLatitude = processDouble(currentRow[6]);
-		currentData.sbg.gpsLongitude = processDouble(currentRow[7]);
-		currentData.sbg.gpsAltitude = processDouble(currentRow[8]);
-		currentData.sbg.barometricAltitude = processFloat(currentRow[9]);
-		currentData.sbg.velocityN = processFloat(currentRow[10]);
-		currentData.sbg.velocityE = processFloat(currentRow[11]);
-		currentData.sbg.velocityD = processFloat(currentRow[12]);
-		currentData.sbg.filteredXaccelerometer = processFloat(currentRow[13]);
-		currentData.sbg.filteredYaccelerometer = processFloat(currentRow[14]);
-		currentData.sbg.filteredZaccelerometer = processFloat(currentRow[15]);
-		currentData.sbg.solutionStatus = processInt(currentRow[16]);
+		currentData.sbg.roll = helper::processFloat(currentRow[count++]);
+		currentData.sbg.pitch = helper::processFloat(currentRow[count++]);
+		currentData.sbg.yaw = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.rollAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.pitchAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.yawAccuracy = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.gpsLatitude = helper::processDouble(currentRow[count++]);
+		currentData.sbg.gpsLongitude = helper::processDouble(currentRow[count++]);
+		currentData.sbg.gpsAltitude = helper::processDouble(currentRow[count++]);
+
+		currentData.sbg.barometricAltitude = helper::processFloat(currentRow[count++]);
+		currentData.sbg.relativeBarometricAltitude = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.velocityN = helper::processFloat(currentRow[count++]);
+		currentData.sbg.velocityE = helper::processFloat(currentRow[count++]);
+		currentData.sbg.velocityD = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.filteredXaccelerometer = helper::processFloat(currentRow[count++]);
+		currentData.sbg.filteredYaccelerometer = helper::processFloat(currentRow[count++]);
+		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.solutionStatus = helper::processInt(currentRow[count++]);
+
+		// Ignore the state, that's an output value
+		count++;
+
+		currentData.sbg.gpsPosStatus = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.gpsPosAccuracyLatitude = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosAccuracyLongitude = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosAccuracyAltitude = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.NumSvUsed = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.velocityNAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.velocityEAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.velocityDAccuracy = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.latitudeAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.longitudeAccuracy = helper::processFloat(currentRow[count++]);
+		currentData.sbg.altitudeAccuracy = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.pressureStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.barometricPressure = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.imuStatus = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.gyroX = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gyroY = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gyroZ = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.temp = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.deltaVelX = helper::processFloat(currentRow[count++]);
+		currentData.sbg.deltaVelY = helper::processFloat(currentRow[count++]);
+		currentData.sbg.deltaVelZ = helper::processFloat(currentRow[count++]);
+
+		currentData.sbg.deltaAngleX = helper::processFloat(currentRow[count++]);
+		currentData.sbg.deltaAngleY = helper::processFloat(currentRow[count++]);
+		currentData.sbg.deltaAngleZ = helper::processFloat(currentRow[count++]);
+
 #endif
 
 		data.push(currentData);
@@ -84,21 +128,6 @@ bool TestingSensors::isInitialized()
 {
 	// Unused when in testing mode
 	return true;
-}
-
-int TestingSensors::processInt(std::string data)
-{
-	return strtol(data.c_str(), nullptr, 10);
-}
-
-float TestingSensors::processFloat(std::string data)
-{
-	return strtof(data.c_str(), nullptr);
-}
-
-double TestingSensors::processDouble(std::string data)
-{
-	return strtod(data.c_str(), nullptr);
 }
 
 #endif

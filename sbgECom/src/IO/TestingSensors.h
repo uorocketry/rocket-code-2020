@@ -19,10 +19,6 @@ public:
 
 private:
 	std::queue<sensorsData> data;
-
-	int processInt(std::string data);
-	float processFloat(std::string data);
-	double processDouble(std::string data);
 };
 
 #endif
