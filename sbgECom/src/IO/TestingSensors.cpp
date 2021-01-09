@@ -34,7 +34,6 @@ void TestingSensors::initialize()
 		// Will keep increasing by one for each read
 		int count = 0;
 
-		//TODO: Load timestamp
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
 
 #if USE_SBG
