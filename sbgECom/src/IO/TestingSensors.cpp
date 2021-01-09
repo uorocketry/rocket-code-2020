@@ -52,7 +52,7 @@ void TestingSensors::initialize()
 		currentData.sbg.gpsAltitude = helper::processDouble(currentRow[count++]);
 
 		currentData.sbg.barometricAltitude = helper::processFloat(currentRow[count++]);
-		currentData.sbg.relativeBarometricAltitude = helper::processFloat(currentRow[10]);
+		currentData.sbg.relativeBarometricAltitude = helper::processFloat(currentRow[count++]);
 
 		currentData.sbg.velocityN = helper::processFloat(currentRow[count++]);
 		currentData.sbg.velocityE = helper::processFloat(currentRow[count++]);
@@ -62,7 +62,7 @@ void TestingSensors::initialize()
 		currentData.sbg.filteredYaccelerometer = helper::processFloat(currentRow[count++]);
 		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.solutionStatus = helper::processInt(currentRow[16]);
+		currentData.sbg.solutionStatus = helper::processInt(currentRow[count++]);
 
 		// Ignore the state, that's an output value
 		count++;
