@@ -45,10 +45,17 @@ bool Radio::isInitialized()
 
 void Radio::run()
 {
+	
+
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	while (true)
-	{
+	{	
+		if(serialDataAvail(fd) > 0) 
+		{
+			radioEventNumber = serialGetchar(fd);
+		}
+		
 		if (!logQueue.empty())
 		{
 			dequeueToRadio();
@@ -130,4 +137,13 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, "\r\n");
 }
 
+int Radio::getData() {
+	// called by the interface
+	std::lock_guard<std::mutex> lockGuard(mutex);
+	int result = radioEventNumber;
+	radioEventNumber = -1;
+	return result;
+}
+
+//END USE_RADIO
 #endif

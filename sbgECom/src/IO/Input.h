@@ -12,8 +12,7 @@ public:
 	void initialize();
 	void run();
 	bool isInitialized();
-
-    int getData();
+	int getData();
 
 protected:
 	std::mutex mutex;

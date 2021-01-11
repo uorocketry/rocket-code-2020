@@ -384,6 +384,36 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 		break;
 	}
 #endif
+
+#if USE_RADIO
+	eventNbr = data->radioEventNumber;
+
+	switch (eventNbr)
+	{
+	case 0:
+		StartFillingEXT();
+		break;
+	case 1:
+		StopFillingEXT();
+		break;
+	case 2:
+		IgnitionEXT();
+		break;
+	case 3:
+		FinalVentingEXT();
+		break;
+	case 4:
+		DoneEXT();
+		break;
+	case 5:
+		AbortFillingEXT();
+		break;
+	case 6:
+		AbortBurnEXT();
+	default:
+		break;
+	}
+#endif
 }
 
 void UOStateMachine::showInfo(const sensorsData *data)

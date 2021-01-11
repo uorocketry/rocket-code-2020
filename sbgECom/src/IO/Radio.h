@@ -21,6 +21,8 @@ public:
 	//write data to sensorsData struct and push to queue on main thread
 	void enqueueSensorData(sensorsData curSensorData);
 
+	int getData();
+
 protected:
 	std::mutex mutex;
 
@@ -44,6 +46,7 @@ private:
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 
 	int fd;
+	int radioEventNumber;
 
 	struct InitFlags
 	{

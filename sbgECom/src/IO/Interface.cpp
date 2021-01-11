@@ -96,16 +96,22 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 	latestState.clientEventNumber = client.getData();
 #endif
 
+// RADIO RECIEVE
+#if USE_RADIO
+	latestState.radioEventNumber = radio.getData();
+#endif
+
+// RADIO SEND
+#if USE_RADIO
+	radio.enqueueSensorData(latestState);
+#endif
+
 #endif //!TESTING
 
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
 
-
-#if USE_RADIO
-	radio.enqueueSensorData(latestState);
-#endif
 }
 
 void Interface::calibrateTelemetry() 
