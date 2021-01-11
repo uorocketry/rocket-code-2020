@@ -61,7 +61,7 @@ void TestingSensors::initialize()
 		currentData.sbg.filteredYaccelerometer = helper::processFloat(currentRow[count++]);
 		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.solutionStatus = helper::processInt(currentRow[count++]);
+		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
 
 		// Ignore the state, that's an output value
 		count++;

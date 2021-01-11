@@ -77,7 +77,6 @@ bool Interface::sensorsInitialized()
 void Interface::update(const UOSMData *smdata, int currentStateNo)
 {
 	latestState.timeStamp = smdata->now.time_since_epoch().count();
-	latestState.currentStateNo = currentStateNo;
 
 #if TESTING
 	latestState = testingSensors.getLatest();
@@ -97,6 +96,9 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 #endif
 
 #endif //!TESTING
+
+	// Save current state no matter what
+	latestState.currentStateNo = currentStateNo;
 
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);

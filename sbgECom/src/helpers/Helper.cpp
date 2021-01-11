@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Helper.h"
 
 #include <string>
@@ -41,6 +39,11 @@ namespace helper {
 	uint64_t processUInt64(std::string data)
 	{
 		return strtoull(data.c_str(), nullptr, 10);
+	}
+
+    uint32_t processUInt32(std::string data)
+	{
+		return strtoul(data.c_str(), nullptr, 10);
 	}
 
 	float processFloat(std::string data)
