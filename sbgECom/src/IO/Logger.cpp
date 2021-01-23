@@ -236,7 +236,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.gpsPosAccuracyLongitude << sep;
 	fileStream << currentState.sbg.gpsPosAccuracyAltitude << sep;
 
-	fileStream << currentState.sbg.NumSvUsed << sep;
+	fileStream << (int) currentState.sbg.NumSvUsed << sep;
 
 	fileStream << currentState.sbg.velocityNAccuracy << sep;
 	fileStream << currentState.sbg.velocityEAccuracy << sep;

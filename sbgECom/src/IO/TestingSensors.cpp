@@ -72,7 +72,7 @@ void TestingSensors::initialize()
 		currentData.sbg.gpsPosAccuracyLongitude = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gpsPosAccuracyAltitude = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.NumSvUsed = helper::processFloat(currentRow[count++]);
+		currentData.sbg.NumSvUsed = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.velocityNAccuracy = helper::processFloat(currentRow[count++]);
 		currentData.sbg.velocityEAccuracy = helper::processFloat(currentRow[count++]);
