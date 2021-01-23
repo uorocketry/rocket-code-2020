@@ -5,7 +5,7 @@
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
-
+#define LED 0
 UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 {
 
@@ -142,6 +142,8 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
+	wiringPiSetupGpio();
+	pinMode(LED, OUTPUT);
 	hotFireInterface.initializeSensors();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
@@ -178,6 +180,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterWaitForFilling\n";
+	digitalWrite(LED, 1);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
@@ -196,6 +199,7 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterFilling\n";
+	digitalWrite(LED, 0);
 }
 
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
@@ -325,8 +329,9 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
+	int eventNbr;
 #if USE_INPUT
-	int eventNbr = data->inputEventNumber;
+	eventNbr = data->inputEventNumber;
 
 	switch (eventNbr)
 	{
@@ -387,7 +392,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 
 #if USE_RADIO
 	eventNbr = data->radioEventNumber;
-
+	std::cout << eventNbr << "\n";
 	switch (eventNbr)
 	{
 	case 0:
