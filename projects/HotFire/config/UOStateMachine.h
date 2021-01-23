@@ -22,6 +22,7 @@ public:
 	void DoneEXT();
 
 	void updateHotFire(UOSMData *data);
+	void initServos();
 
 private:
 	void detectExternEvent(const sensorsData *data);

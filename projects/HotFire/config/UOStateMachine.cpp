@@ -6,6 +6,8 @@
 #include <iostream>
 #include "data/sensorsData.h"
 
+#define VALVE_160 12
+
 UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 {
 
@@ -142,6 +144,7 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
+	initServos();
 	hotFireInterface.initializeSensors();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
@@ -182,6 +185,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
+	pwmWrite(VALVE_160, 1000);
 	hotFireInterface.update(data, ST_WAIT_FOR_FILLING);
 	hotFireData = hotFireInterface.getLatest();
 
@@ -393,4 +397,13 @@ void UOStateMachine::showInfo(const sensorsData *data)
 void UOStateMachine::updateHotFire(UOSMData *data)
 {
 	ExecuteCurrentState(data);
+}
+
+void UOStateMachine::initServos()
+{
+	wiringPiSetupGpio();
+	pinMode (VALVE_160, PWM_OUTPUT) ;
+	pwmSetMode (PWM_MODE_MS);
+	pwmSetRange (2000);
+	pwmSetClock (192);
 }
