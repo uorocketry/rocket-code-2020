@@ -12,6 +12,10 @@ if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	include_directories(
 		${PROJECT_SOURCE_DIR}/../../../projects/HotFire/
 	)
+elseif (DEFINED ENV{HYDROSTATIC_TEST} OR HYDROSTATIC_TEST)
+	include_directories(
+		${PROJECT_SOURCE_DIR}/../../../projects/HydrostaticTest/
+	)
 else()
 	include_directories(
 		${PROJECT_SOURCE_DIR}/../../../projects/OctoberSky1/
@@ -32,6 +36,8 @@ file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/../../src/*.cpp)
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/../../../projects/HotFire/*.cpp)
+elseif(DEFINED ENV{HYDROSTATIC_TEST} OR HYDROSTATIC_TEST)
+	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/../../../projects/HydrostaticTest/*.cpp)
 else()
 	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/../../../projects/OctoberSky1/*.cpp)
 endif()
