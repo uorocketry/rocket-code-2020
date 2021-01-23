@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir -p output
 
 TEST_PATH=/tests/octoberSky/
