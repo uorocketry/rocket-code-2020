@@ -17,4 +17,4 @@ jobs:
         with:
           cmake-version: "3.16.x"
       - name: Run octoberSky Test
-        run: cd ./tests/octoberSky/; ./run_test.sh
+        run: cd ./tests/octoberSky/; bash ./run_test.sh
