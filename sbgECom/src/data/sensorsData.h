@@ -20,4 +20,8 @@ struct sensorsData
 #if USE_SOCKET_CLIENT
     int clientEventNumber = -1;
 #endif
+
+#if TESTING
+    bool outOfData = false;
+#endif
 };

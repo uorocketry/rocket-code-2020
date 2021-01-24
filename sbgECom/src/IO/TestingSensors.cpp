@@ -120,7 +120,10 @@ sensorsData TestingSensors::getLatest()
 	}
 	else
 	{
-		exit(EXIT_SUCCESS);
+		sensorsData currentData;
+		currentData.outOfData = true;
+
+		return currentData;
 	}
 }
 

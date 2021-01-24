@@ -271,4 +271,8 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream.flush();
 }
 
+bool Logger::queueEmpty() {
+	return logQueue.empty();
+}
+
 #endif

@@ -80,6 +80,17 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 
 #if TESTING
 	latestState = testingSensors.getLatest();
+
+	if (latestState.outOfData) {
+		#if USE_LOGGER
+		if (!logger.queueEmpty()) {
+			// Wait for logger to finish
+			return;
+		}
+		#endif
+
+		exit(EXIT_SUCCESS);
+	}
 #else
 
  	//Normal case
