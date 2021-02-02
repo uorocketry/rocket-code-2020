@@ -2,7 +2,7 @@ Files in `sbgECom/common`, `sbgECom/doc`, `sbgECom/src/binaryLogs`, `sbgECom/src
 
 ***
 
-Files in `sbgECom/src/stateMachineLib` follow the following license
+Files in `sbgECom/src/stateMachineLib` follow the following license:
 
 <h3>The Code Project Open License (CPOL) 1.02<h3>
 
