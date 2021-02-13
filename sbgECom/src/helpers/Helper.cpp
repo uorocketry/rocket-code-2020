@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <cmath>
 
 namespace helper {
 
@@ -48,7 +49,12 @@ namespace helper {
 
 	float processFloat(std::string data)
 	{
-		return strtof(data.c_str(), nullptr);
+		float result = strtof(data.c_str(), nullptr);
+		if (std::isnan(result)) {
+			return NAN;
+		}
+
+		return result;
 	}
 
 	double processDouble(std::string data)

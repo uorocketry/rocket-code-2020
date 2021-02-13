@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf output
+
 mkdir -p output
 
 TEST_PATH=/tests/octoberSky/
@@ -21,8 +23,6 @@ for file in ./output-expected/*; do
         printf "\nError in the following file: ${file##*/}\n\n"
     fi
 done
-
-rm -rf output
 
 if [[ $FAIL = "1" ]]; then
     exit 1
