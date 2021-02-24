@@ -21,9 +21,7 @@
 #define RECONNECT_WAIT_TIME_NS duration_ns(1000000000) // 1 second
 #define UPDATE_WAIT_TIME_NS duration_ns(10000000)      // 100th of a second
 
-SocketClient::SocketClient()
-{
-}
+SocketClient::SocketClient(EventQueue &eventQueue) : eventQueue(eventQueue) {}
 
 SocketClient::~SocketClient()
 {
@@ -78,7 +76,7 @@ void SocketClient::run()
                     close(sock);
                 }
 
-                eventNumberQueue.push((int)buffer[0]);
+                eventQueue.push((int)buffer[0]);
 
                 std::this_thread::sleep_for(UPDATE_WAIT_TIME_NS);
             }
@@ -92,20 +90,6 @@ void SocketClient::initialize()
               << "\n";
     IO::initialize();
 };
-
-int SocketClient::getData()
-{
-    std::lock_guard<std::mutex> lockGuard(mutex);
-
-    if (eventNumberQueue.empty())
-    {
-        return -1;
-    }
-
-    int nbr = eventNumberQueue.front();
-    eventNumberQueue.pop();
-    return nbr;
-}
 
 bool SocketClient::isInitialized()
 {

@@ -12,6 +12,7 @@
 #include "data/UOSMData.h"
 #include <queue>
 #include "IO/TestingSensors.h"
+#include "EventQueue.h"
 
 
 class Interface
@@ -33,6 +34,7 @@ public:
 
 private:
 	sensorsData latestState;
+    EventQueue eventQueue;
 
 #if TESTING
 	TestingSensors testingSensors;

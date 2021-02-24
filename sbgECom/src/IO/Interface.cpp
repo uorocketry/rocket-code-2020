@@ -6,7 +6,13 @@
 #include "IO/TestingSensors.h"
 
 
-Interface::Interface()
+Interface::Interface() : eventQueue()
+#if USE_INPUT
+        , input(eventQueue)
+#endif
+#if USE_SOCKET_CLIENT
+        , client(eventQueue)
+#endif
 {
 }
 
@@ -88,13 +94,7 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 	latestState.sbg = mySbgSensor.getData();
 #endif
 
-#if USE_INPUT
-	latestState.inputEventNumber = input.getData();
-#endif
-
-#if USE_SOCKET_CLIENT
-	latestState.clientEventNumber = client.getData();
-#endif
+	latestState.eventNumber = eventQueue.pop();
 
 #endif //!TESTING
 
@@ -108,7 +108,7 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 #endif
 }
 
-void Interface::calibrateTelemetry() 
+void Interface::calibrateTelemetry()
 {
 #if USE_SBG
 	mySbgSensor.setZeroBarometricAltitude();
