@@ -1,3 +1,4 @@
 /build.sh text eol=lf
 /run.sh text eol=lf
 /build-and-run.sh text eol=lf
+/tests/octoberSky/run_tests.sh text eol=lf
