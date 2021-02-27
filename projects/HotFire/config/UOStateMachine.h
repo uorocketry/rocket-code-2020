@@ -4,6 +4,7 @@
 #include "stateMachineLib/StateMachine.h"
 #include "IO/Interface.h"
 #include "IO/InterfaceImpl.h"
+#include "IO/TestingInterface.h"
 #include "helpers/Types.h"
 #include "data/UOSMData.h"
 #include "data/sensorsData.h"
@@ -28,7 +29,11 @@ private:
 	void detectExternEvent(std::shared_ptr<sensorsData> data);
 	void showInfo(std::shared_ptr<sensorsData> data);
 
+#if !TESTING
 	InterfaceImpl interfaceImpl;
+#else
+	TestingInterface interfaceImpl;
+#endif
 	Interface *interface = &(interfaceImpl);
 
 	std::shared_ptr<sensorsData> hotFireData;

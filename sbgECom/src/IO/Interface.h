@@ -27,5 +27,5 @@ public:
 
 	// loop over each sensor and update the latestState
 	virtual bool updateInputs() = 0;
-	virtual bool updateOutputs(const sensorsData &data) = 0;
+	virtual bool updateOutputs(std::shared_ptr<sensorsData> data) = 0;
 };

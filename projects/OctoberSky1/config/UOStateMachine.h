@@ -6,6 +6,7 @@
 #include "data/UOSMData.h"
 #include "IO/Interface.h"
 #include "IO/InterfaceImpl.h"
+#include "IO/TestingInterface.h"
 #include "helpers/Types.h"
 
 class UOStateMachine : public StateMachine
@@ -41,7 +42,11 @@ private:
 	//number of consecutive readings needed to trigger touchdown
 	uint8_t TouchdownThreshold = 5;
 
+#if !TESTING
 	InterfaceImpl interfaceImpl;
+#else
+	TestingInterface interfaceImpl;
+#endif
 	Interface *interface = &(interfaceImpl);
 
 	std::shared_ptr<sensorsData> rocketData;

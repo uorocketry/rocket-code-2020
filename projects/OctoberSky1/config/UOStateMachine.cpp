@@ -92,16 +92,20 @@ EXIT_DEFINE(UOStateMachine, ExitInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
 	std::cout << "RocketSM::EnterWaitForInit\n";
+	enterNewState(ST_WAIT_FOR_INIT);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	updateInterface(data, ST_WAIT_FOR_INIT);
+	rocketData = updateInterface(data, ST_WAIT_FOR_INIT);
+
 	if (interface->isInitialized())
 	{
 		interface->calibrateTelemetry();
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
 	}
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
@@ -117,13 +121,14 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 {
-	updateInterface(data, ST_WAIT_FOR_LAUNCH);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_WAIT_FOR_LAUNCH);
 
 	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
 	{
 		detectLaunch(rocketData);
 	}
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
@@ -140,14 +145,15 @@ ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 // code for the flight state
 STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 {
-	updateInterface(data, ST_POWERED_FLIGHT);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_POWERED_FLIGHT);
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
 		detectApogee(rocketData);
 		detectMotorBurnout(rocketData);
 	}
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
@@ -163,13 +169,14 @@ ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 {
-	updateInterface(data, ST_COAST);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_COAST);
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
 		detectApogee(rocketData);
 	}
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
@@ -180,13 +187,13 @@ EXIT_DEFINE(UOStateMachine, ExitCoast)
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 {
 	std::cout << "RocketSM::EnterDescentPhase1\n";
+	enterNewState(ST_DESCENT_PHASE_1);
 }
 
 // code for the DescentPhase1 state
 STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
-	updateInterface(data, ST_DESCENT_PHASE_1);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_DESCENT_PHASE_1);
 
 #if USE_SBG
 	if (rocketData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
@@ -194,6 +201,8 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 	}
 #endif
 	// InternalEvent(ST_DESCENT_PHASE_2);
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
@@ -204,14 +213,16 @@ EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 {
 	std::cout << "RocketSM::EnterDescentPhase2\n";
+	enterNewState(ST_DESCENT_PHASE_2);
 }
 
 STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 {
-	updateInterface(data, ST_DESCENT_PHASE_2);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_DESCENT_PHASE_2);
 
 	detectTouchdown(rocketData);
+
+	interface->updateOutputs(rocketData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
@@ -222,13 +233,15 @@ EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
 ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
 	std::cout << "RocketSM::EnterGround\n";
+	enterNewState(ST_GROUND);
 }
 
 // code for the ground state
 STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
-	updateInterface(data, ST_GROUND);
-	rocketData = interface->getLatest();
+	rocketData = updateInterface(data, ST_GROUND);
+
+	interface->updateOutputs(rocketData);
 }
 
 void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
@@ -397,7 +410,9 @@ std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smd
 	interface->updateInputs();
 	std::shared_ptr<sensorsData> data = interface->getLatest();
 
-	data->timeStamp = smdata->now.time_since_epoch().count();
+	// If statement to prevent overwiring data from TESTING
+	if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
+
 	data->currentStateNo = state;
 
 	return data;

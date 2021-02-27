@@ -3,7 +3,7 @@
 #if TESTING
 
 #include "IO/Interface.h"
-
+#include "IO/TestingSensors.h"
 
 class TestingInterface : public Interface
 {
@@ -17,22 +17,25 @@ public:
 	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState
-	sensorsData *getLatest();
+	std::shared_ptr<sensorsData> getLatest();
 
 	bool updateInputs();
-	bool updateOutputs(const sensorsData &data);
-
-	bool sendData(const sensorsData &data);
+	bool updateOutputs(std::shared_ptr<sensorsData> data);
 
 private:
-	void initializeSensors();
 	void initializeOutputs();
 
-	bool updateSensors();
-	bool updateOutputs();
+	std::shared_ptr<sensorsData> latestState;
 
 	TestingSensors testingSensors;
 
+#if USE_LOGGER
+	Logger logger;
+#endif
+
+#if USE_RADIO
+	Radio radio;
+#endif
 };
 
 #endif

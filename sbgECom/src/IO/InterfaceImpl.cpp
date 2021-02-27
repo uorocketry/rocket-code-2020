@@ -117,14 +117,14 @@ bool InterfaceImpl::updateInputs()
 	return true;
 }
 
-bool InterfaceImpl::updateOutputs(const sensorsData &data) 
+bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data) 
 {
 #if USE_LOGGER
-	logger.enqueueSensorData(data);
+	logger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO
-	radio.enqueueSensorData(data);
+	radio.enqueueSensorData(*data);
 #endif
 
 	return true;
