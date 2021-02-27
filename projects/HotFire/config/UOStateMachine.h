@@ -36,7 +36,7 @@ private:
 #endif
 	Interface *interface = &(interfaceImpl);
 
-	std::shared_ptr<sensorsData> hotFireData;
+	std::shared_ptr<sensorsData> interfaceData;
 
 	time_point entryTime;
 

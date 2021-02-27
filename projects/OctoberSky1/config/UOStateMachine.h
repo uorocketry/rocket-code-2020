@@ -49,7 +49,7 @@ private:
 #endif
 	Interface *interface = &(interfaceImpl);
 
-	std::shared_ptr<sensorsData> rocketData;
+	std::shared_ptr<sensorsData> interfaceData;
 
 	time_point entryTime;
 

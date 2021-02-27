@@ -97,7 +97,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	rocketData = updateInterface(data, ST_WAIT_FOR_INIT);
+	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
 	if (interface->isInitialized())
 	{
@@ -105,7 +105,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
 	}
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
@@ -121,14 +121,14 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 {
-	rocketData = updateInterface(data, ST_WAIT_FOR_LAUNCH);
+	interfaceData = updateInterface(data, ST_WAIT_FOR_LAUNCH);
 
 	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
 	{
-		detectLaunch(rocketData);
+		detectLaunch(interfaceData);
 	}
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
@@ -145,15 +145,15 @@ ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 // code for the flight state
 STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 {
-	rocketData = updateInterface(data, ST_POWERED_FLIGHT);
+	interfaceData = updateInterface(data, ST_POWERED_FLIGHT);
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
-		detectApogee(rocketData);
-		detectMotorBurnout(rocketData);
+		detectApogee(interfaceData);
+		detectMotorBurnout(interfaceData);
 	}
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
@@ -169,14 +169,14 @@ ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 {
-	rocketData = updateInterface(data, ST_COAST);
+	interfaceData = updateInterface(data, ST_COAST);
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
-		detectApogee(rocketData);
+		detectApogee(interfaceData);
 	}
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
@@ -193,16 +193,16 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 // code for the DescentPhase1 state
 STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
-	rocketData = updateInterface(data, ST_DESCENT_PHASE_1);
+	interfaceData = updateInterface(data, ST_DESCENT_PHASE_1);
 
 #if USE_SBG
-	if (rocketData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
+	if (interfaceData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
 		InternalEvent(ST_DESCENT_PHASE_2);
 	}
 #endif
 	// InternalEvent(ST_DESCENT_PHASE_2);
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
@@ -218,11 +218,11 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 
 STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 {
-	rocketData = updateInterface(data, ST_DESCENT_PHASE_2);
+	interfaceData = updateInterface(data, ST_DESCENT_PHASE_2);
 
-	detectTouchdown(rocketData);
+	detectTouchdown(interfaceData);
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
@@ -239,9 +239,9 @@ ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 // code for the ground state
 STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
-	rocketData = updateInterface(data, ST_GROUND);
+	interfaceData = updateInterface(data, ST_GROUND);
 
-	interface->updateOutputs(rocketData);
+	interface->updateOutputs(interfaceData);
 }
 
 void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
