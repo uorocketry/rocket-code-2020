@@ -11,6 +11,8 @@ UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
+
+	// interface = &interfaceImpl;
 }
 
 // Launch external event
@@ -77,7 +79,7 @@ void UOStateMachine::Touchdown(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	rocketInterface.initialize();
+	interface->initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -94,10 +96,10 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	rocketInterface.update(data, ST_WAIT_FOR_INIT);
-	if (rocketInterface.isInitialized())
+	updateInterface(data, ST_WAIT_FOR_INIT);
+	if (interface->isInitialized())
 	{
-		rocketInterface.calibrateTelemetry();
+		interface->calibrateTelemetry();
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
 	}
 }
@@ -115,8 +117,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 {
-	rocketInterface.update(data, ST_WAIT_FOR_LAUNCH);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_WAIT_FOR_LAUNCH);
+	rocketData = interface->getLatest();
 
 	if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
 	{
@@ -138,8 +140,8 @@ ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 // code for the flight state
 STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 {
-	rocketInterface.update(data, ST_POWERED_FLIGHT);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_POWERED_FLIGHT);
+	rocketData = interface->getLatest();
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
@@ -161,8 +163,8 @@ ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 {
-	rocketInterface.update(data, ST_COAST);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_COAST);
+	rocketData = interface->getLatest();
 
 	if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection 
 	{
@@ -183,8 +185,8 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 // code for the DescentPhase1 state
 STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
-	rocketInterface.update(data, ST_DESCENT_PHASE_1);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_DESCENT_PHASE_1);
+	rocketData = interface->getLatest();
 
 #if USE_SBG
 	if (rocketData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
@@ -206,8 +208,8 @@ ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 
 STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 {
-	rocketInterface.update(data, ST_DESCENT_PHASE_2);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_DESCENT_PHASE_2);
+	rocketData = interface->getLatest();
 
 	detectTouchdown(rocketData);
 }
@@ -225,11 +227,11 @@ ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 // code for the ground state
 STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 {
-	rocketInterface.update(data, ST_GROUND);
-	rocketData = rocketInterface.getLatest();
+	updateInterface(data, ST_GROUND);
+	rocketData = interface->getLatest();
 }
 
-void UOStateMachine::detectExternEvent(const sensorsData *data)
+void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
 #if USE_INPUT
 	int eventNbr = data->inputEventNumber;
@@ -252,7 +254,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 }
 
 
-void UOStateMachine::detectLaunch(const sensorsData *data)
+void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 {
 #if USE_SBG
 
@@ -282,7 +284,7 @@ void UOStateMachine::detectLaunch(const sensorsData *data)
 #endif
 }
 
-void UOStateMachine::detectMotorBurnout(const sensorsData *data)
+void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
 {
 #if USE_SBG
 	// TODO: only check for apogee x seconds after launch
@@ -314,7 +316,7 @@ void UOStateMachine::detectMotorBurnout(const sensorsData *data)
 #endif
 }
 
-void UOStateMachine::detectTouchdown(const sensorsData *data)
+void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
 {
 #if USE_SBG
 	// TODO: only check for apogee x seconds after launch
@@ -346,7 +348,7 @@ void UOStateMachine::detectTouchdown(const sensorsData *data)
 #endif
 }
 
-void UOStateMachine::detectApogee(const sensorsData *data)
+void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
 {
 #if USE_SBG
 	// TODO: only check for apogee x seconds after launch
@@ -376,7 +378,7 @@ void UOStateMachine::detectApogee(const sensorsData *data)
 #endif
 }
 
-void UOStateMachine::showInfo(const sensorsData *data)
+void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 {
 #if USE_SBG
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
@@ -388,4 +390,15 @@ void UOStateMachine::showInfo(const sensorsData *data)
 // std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 #endif
 	return;
+}
+
+std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
+{
+	interface->updateInputs();
+	std::shared_ptr<sensorsData> data = interface->getLatest();
+
+	data->timeStamp = smdata->now.time_since_epoch().count();
+	data->currentStateNo = state;
+
+	return data;
 }

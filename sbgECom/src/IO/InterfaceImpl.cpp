@@ -1,31 +1,27 @@
 #include "config/config.h"
-#include "Interface.h"
+#include "InterfaceImpl.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <iostream>
 #include "IO/TestingSensors.h"
 
 
-Interface::Interface()
+InterfaceImpl::InterfaceImpl()
 {
 }
 
-Interface::~Interface()
+InterfaceImpl::~InterfaceImpl()
 {
 }
 
-void Interface::initialize() 
+void InterfaceImpl::initialize() 
 {
-	initializeSensors();
+	initializeInputs();
 	initializeOutputs();
 }
 
-void Interface::initializeSensors()
+void InterfaceImpl::initializeInputs()
 {
-#if TESTING
-	std::cout << "Initializing TESTING...\n";
-	testingSensors.initialize();
-#else
 	#if USE_SBG
 		std::cout << "Initializing SBG...\n";
 		mySbgSensor.initialize();
@@ -38,10 +34,9 @@ void Interface::initializeSensors()
 		std::cout << "Initializing SOCKET_CLIENT...\n";
 		client.initialize();
 	#endif
-#endif //!TESTING
 }
 
-void Interface::initializeOutputs() 
+void InterfaceImpl::initializeOutputs() 
 {
 #if USE_LOGGER
 	std::cout << "Initializing LOGGER...\n";
@@ -54,7 +49,7 @@ void Interface::initializeOutputs()
 }
 
 
-bool Interface::isInitialized()
+bool InterfaceImpl::isInitialized()
 {
 #if SKIP_INIT
 	std::cout << "Skipping init\n";
@@ -86,7 +81,7 @@ bool Interface::isInitialized()
 	return result;
 }
 
-void Interface::update(const UOSMData *smdata, int currentStateNo)
+/*void InterfaceImpl::update(const UOSMData *smdata, int currentStateNo)
 {
 	latestState.timeStamp = smdata->now.time_since_epoch().count();
 
@@ -100,57 +95,43 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 	if (!updateOutputs()) {
 		return;
 	}
-}
+}*/
 
-bool Interface::updateSensors()
+bool InterfaceImpl::updateInputs()
 {
-#if TESTING
-	latestState = testingSensors.getLatest();
+	latestState = std::make_shared<sensorsData>();
+	// latestState = sensorsData();
 
-	if (latestState.outOfData) {
-		#if USE_LOGGER
-		if (!logger.queueEmpty()) {
-			// Wait for logger to finish
-			return false;
-		}
-		#endif
-
-		exit(EXIT_SUCCESS);
-	}
-#else
-
- 	//Normal case
 #if USE_SBG
-	latestState.sbg = mySbgSensor.getData();
+	latestState->sbg = mySbgSensor.getData();
 #endif
 
 #if USE_INPUT
-	latestState.inputEventNumber = input.getData();
+	latestState->inputEventNumber = input.getData();
 #endif
 
 #if USE_SOCKET_CLIENT
-	latestState.clientEventNumber = client.getData();
+	latestState->clientEventNumber = client.getData();
 #endif
-
-#endif //!TESTING
 
 	return true;
 }
 
-bool Interface::updateOutputs() 
+bool InterfaceImpl::updateOutputs(const sensorsData &data) 
 {
 #if USE_LOGGER
-	logger.enqueueSensorData(latestState);
+	logger.enqueueSensorData(data);
 #endif
 
 #if USE_RADIO
-	radio.enqueueSensorData(latestState);
+	radio.enqueueSensorData(data);
 #endif
 
 	return true;
 }
 
-void Interface::calibrateTelemetry() 
+
+void InterfaceImpl::calibrateTelemetry() 
 {
 #if USE_SBG
 	mySbgSensor.setZeroBarometricAltitude();
@@ -158,7 +139,7 @@ void Interface::calibrateTelemetry()
 }
 
 
-sensorsData *Interface::getLatest()
+std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
-	return &latestState;
+	return latestState;
 }

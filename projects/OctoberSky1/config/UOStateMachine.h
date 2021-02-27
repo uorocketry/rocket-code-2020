@@ -5,6 +5,7 @@
 #include "data/sensorsData.h"
 #include "data/UOSMData.h"
 #include "IO/Interface.h"
+#include "IO/InterfaceImpl.h"
 #include "helpers/Types.h"
 
 class UOStateMachine : public StateMachine
@@ -20,13 +21,13 @@ public:
 	void Touchdown();
 
 private:
-	void detectExternEvent(const sensorsData *data);
-	void detectApogee(const sensorsData *data);
-	void detectLaunch(const sensorsData *data);
-	void detectMotorBurnout(const sensorsData *data);
-	void detectTouchdown(const sensorsData *data);
+	void detectExternEvent(std::shared_ptr<sensorsData> data);
+	void detectApogee(std::shared_ptr<sensorsData> data);
+	void detectLaunch(std::shared_ptr<sensorsData> data);
+	void detectMotorBurnout(std::shared_ptr<sensorsData> data);
+	void detectTouchdown(std::shared_ptr<sensorsData> data);
 
-	void showInfo(const sensorsData *data);
+	void showInfo(std::shared_ptr<sensorsData> data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
@@ -40,8 +41,10 @@ private:
 	//number of consecutive readings needed to trigger touchdown
 	uint8_t TouchdownThreshold = 5;
 
-	Interface rocketInterface;
-	sensorsData *rocketData;
+	InterfaceImpl interfaceImpl;
+	Interface *interface = &(interfaceImpl);
+
+	std::shared_ptr<sensorsData> rocketData;
 
 	time_point entryTime;
 
@@ -103,4 +106,6 @@ private:
 	STATE_MAP_ENTRY_ALL_EX(&DescentPhase2, 0, &EnterDescentPhase2, &ExitDescentPhase2)
 	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
+
+	std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
 };

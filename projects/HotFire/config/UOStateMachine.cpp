@@ -142,7 +142,7 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	hotFireInterface.initialize();
+	interface->initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -159,10 +159,10 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_INIT);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_WAIT_FOR_INIT);
+	hotFireData = interface->getLatest();
 
-	if (hotFireInterface.isInitialized())
+	if (interface->isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
 	}
@@ -182,8 +182,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_WAIT_FOR_FILLING);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -200,8 +200,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
-	hotFireInterface.update(data, ST_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_FILLING);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -218,8 +218,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_IGNITION);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_WAIT_FOR_IGNITION);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -237,8 +237,8 @@ ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 {
-	hotFireInterface.update(data, ST_IGNITION);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_IGNITION);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 	switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000));
@@ -256,8 +256,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 {
-	hotFireInterface.update(data, ST_FULL_BURN);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_FULL_BURN);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -274,8 +274,8 @@ ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 
 STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 {
-	hotFireInterface.update(data, ST_FINAL_VENTING);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_FINAL_VENTING);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -293,8 +293,8 @@ ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
-	hotFireInterface.update(data, ST_DONE);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_DONE);
+	hotFireData = interface->getLatest();
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
@@ -304,8 +304,8 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 {
-	hotFireInterface.update(data, ST_ABORT_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_ABORT_FILLING);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
@@ -317,13 +317,13 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 
 STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 {
-	hotFireInterface.update(data, ST_ABORT_BURN);
-	hotFireData = hotFireInterface.getLatest();
+	updateInterface(data, ST_ABORT_BURN);
+	hotFireData = interface->getLatest();
 
 	detectExternEvent(hotFireData);
 }
 
-void UOStateMachine::detectExternEvent(const sensorsData *data)
+void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
 #if USE_INPUT
 	int eventNbr = data->inputEventNumber;
@@ -386,11 +386,22 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 #endif
 }
 
-void UOStateMachine::showInfo(const sensorsData *data)
+void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 {
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)
 {
 	ExecuteCurrentState(data);
+}
+
+std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
+{
+	interface->updateInputs();
+	std::shared_ptr<sensorsData> data = interface->getLatest();
+
+	data->timeStamp = smdata->now.time_since_epoch().count();
+	data->currentStateNo = state;
+
+	return data;
 }

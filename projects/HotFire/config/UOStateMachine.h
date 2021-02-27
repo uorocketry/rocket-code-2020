@@ -3,6 +3,7 @@
 #include "config/config.h"
 #include "stateMachineLib/StateMachine.h"
 #include "IO/Interface.h"
+#include "IO/InterfaceImpl.h"
 #include "helpers/Types.h"
 #include "data/UOSMData.h"
 #include "data/sensorsData.h"
@@ -22,13 +23,15 @@ public:
 	void DoneEXT();
 
 	void updateHotFire(UOSMData *data);
-
+	
 private:
-	void detectExternEvent(const sensorsData *data);
-	void showInfo(const sensorsData *data);
+	void detectExternEvent(std::shared_ptr<sensorsData> data);
+	void showInfo(std::shared_ptr<sensorsData> data);
 
-	Interface hotFireInterface;
-	sensorsData *hotFireData;
+	InterfaceImpl interfaceImpl;
+	Interface *interface = &(interfaceImpl);
+
+	std::shared_ptr<sensorsData> hotFireData;
 
 	time_point entryTime;
 
@@ -105,4 +108,6 @@ private:
 	STATE_MAP_ENTRY_ALL_EX(&AbortFilling, 0, &EnterAbortFilling, 0)
 	STATE_MAP_ENTRY_ALL_EX(&AbortBurn, 0, &EnterAbortBurn, 0)
 	END_STATE_MAP_EX
+	
+	std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
 };
