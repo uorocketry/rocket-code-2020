@@ -231,8 +231,7 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
-#if USE_INPUT
-	int eventNbr = data->inputEventNumber;
+	int eventNbr = data->eventNumber;
 	
 	switch (eventNbr)
 	{
@@ -248,9 +247,7 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	default:
 		break;
 	}
-#endif
 }
-
 
 void UOStateMachine::detectLaunch(const sensorsData *data)
 {

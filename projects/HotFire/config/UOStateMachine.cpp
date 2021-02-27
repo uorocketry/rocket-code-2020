@@ -325,8 +325,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
-#if USE_INPUT
-	int eventNbr = data->inputEventNumber;
+	int eventNbr = data->eventNumber;
 
 	switch (eventNbr)
 	{
@@ -353,37 +352,6 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	default:
 		break;
 	}
-#endif
-
-#if USE_SOCKET_CLIENT
-	eventNbr = data->clientEventNumber;
-
-	switch (eventNbr)
-	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortFillingEXT();
-		break;
-	case 6:
-		AbortBurnEXT();
-	default:
-		break;
-	}
-#endif
 }
 
 void UOStateMachine::showInfo(const sensorsData *data)
