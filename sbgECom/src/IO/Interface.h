@@ -20,8 +20,9 @@ public:
 	Interface();
 	~Interface();
 
-	void initializeSensors();
-	bool sensorsInitialized();
+	void initialize();
+	
+	bool isInitialized();
 	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState
@@ -30,8 +31,13 @@ public:
 	// loop over each sensor and update the latestState
 	void update(const UOSMData *smdata, int currentState);
 
-
 private:
+	void initializeSensors();
+	void initializeOutputs();
+
+	bool updateSensors();
+	bool updateOutputs();
+
 	sensorsData latestState;
 
 #if TESTING

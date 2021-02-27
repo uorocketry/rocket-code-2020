@@ -14,6 +14,12 @@ Interface::~Interface()
 {
 }
 
+void Interface::initialize() 
+{
+	initializeSensors();
+	initializeOutputs();
+}
+
 void Interface::initializeSensors()
 {
 #if TESTING
@@ -33,7 +39,10 @@ void Interface::initializeSensors()
 		client.initialize();
 	#endif
 #endif //!TESTING
+}
 
+void Interface::initializeOutputs() 
+{
 #if USE_LOGGER
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
@@ -44,7 +53,8 @@ void Interface::initializeSensors()
 #endif
 }
 
-bool Interface::sensorsInitialized()
+
+bool Interface::isInitialized()
 {
 #if SKIP_INIT
 	std::cout << "Skipping init\n";
@@ -80,6 +90,20 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 {
 	latestState.timeStamp = smdata->now.time_since_epoch().count();
 
+	if (!updateSensors()) {
+		return;
+	}
+
+	// Save current state no matter what
+	latestState.currentStateNo = currentStateNo;
+
+	if (!updateOutputs()) {
+		return;
+	}
+}
+
+bool Interface::updateSensors()
+{
 #if TESTING
 	latestState = testingSensors.getLatest();
 
@@ -87,7 +111,7 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 		#if USE_LOGGER
 		if (!logger.queueEmpty()) {
 			// Wait for logger to finish
-			return;
+			return false;
 		}
 		#endif
 
@@ -110,17 +134,20 @@ void Interface::update(const UOSMData *smdata, int currentStateNo)
 
 #endif //!TESTING
 
-	// Save current state no matter what
-	latestState.currentStateNo = currentStateNo;
+	return true;
+}
 
+bool Interface::updateOutputs() 
+{
 #if USE_LOGGER
 	logger.enqueueSensorData(latestState);
 #endif
 
-
 #if USE_RADIO
 	radio.enqueueSensorData(latestState);
 #endif
+
+	return true;
 }
 
 void Interface::calibrateTelemetry() 

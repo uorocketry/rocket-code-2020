@@ -142,7 +142,7 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	hotFireInterface.initializeSensors();
+	hotFireInterface.initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -162,7 +162,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 	hotFireInterface.update(data, ST_WAIT_FOR_INIT);
 	hotFireData = hotFireInterface.getLatest();
 
-	if (hotFireInterface.sensorsInitialized())
+	if (hotFireInterface.isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
 	}

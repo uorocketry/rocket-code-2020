@@ -77,7 +77,7 @@ void UOStateMachine::Touchdown(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	rocketInterface.initializeSensors();
+	rocketInterface.initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -95,7 +95,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	rocketInterface.update(data, ST_WAIT_FOR_INIT);
-	if (rocketInterface.sensorsInitialized())
+	if (rocketInterface.isInitialized())
 	{
 		rocketInterface.calibrateTelemetry();
 		InternalEvent(ST_WAIT_FOR_LAUNCH);
