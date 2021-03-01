@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config/config.h"
 #if TESTING
 
 #include "IO/Interface.h"

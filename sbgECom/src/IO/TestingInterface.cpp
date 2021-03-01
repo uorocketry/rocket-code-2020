@@ -1,6 +1,6 @@
+#include "config/config.h"
 #if TESTING
 
-#include "config/config.h"
 #include "TestingInterface.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
