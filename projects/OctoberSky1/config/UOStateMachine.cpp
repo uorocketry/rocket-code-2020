@@ -7,12 +7,13 @@
 
 #define PI 3.14159265
 
-UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine() : 
+	StateMachine(ST_MAX_STATES), interfaceImpl()
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
 
-	// interface = &interfaceImpl;
+	interface = &interfaceImpl;
 }
 
 // Launch external event

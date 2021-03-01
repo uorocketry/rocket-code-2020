@@ -6,11 +6,14 @@
 #include <iostream>
 #include "data/sensorsData.h"
 
-UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine() : 
+	StateMachine(ST_MAX_STATES), interfaceImpl()
 {
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
+
+	interface = &interfaceImpl;
 }
 
 // StartFilling external event

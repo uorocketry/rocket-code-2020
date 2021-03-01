@@ -47,7 +47,7 @@ private:
 #else
 	TestingInterface interfaceImpl;
 #endif
-	Interface *interface = &(interfaceImpl);
+	Interface *interface;
 
 	std::shared_ptr<sensorsData> interfaceData;
 
