@@ -1,4 +1,6 @@
 #include "config/config.h"
+#if !TESTING
+
 #include "InterfaceImpl.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
@@ -143,3 +145,5 @@ std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
 	return latestState;
 }
+
+#endif

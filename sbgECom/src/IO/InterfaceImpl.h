@@ -1,5 +1,8 @@
 #pragma once
 
+#include "config/config.h"
+#if !TESTING
+
 #include "IO/Interface.h"
 
 class InterfaceImpl: public Interface
@@ -46,3 +49,5 @@ private:
 	Radio radio;
 #endif
 };
+
+#endif
