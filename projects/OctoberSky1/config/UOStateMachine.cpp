@@ -4,6 +4,7 @@
 #include "data/sensorsData.h"
 #include "UOStateMachine.h"
 #include <math.h>
+#include "helpers/Types.h"
 
 #define PI 3.14159265
 
@@ -231,7 +232,7 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
-	int eventNbr = data->eventNumber;
+	eventType eventNbr = data->eventNumber;
 	
 	switch (eventNbr)
 	{

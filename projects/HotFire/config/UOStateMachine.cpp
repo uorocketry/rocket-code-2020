@@ -5,6 +5,7 @@
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
+#include "helpers/Types.h"
 
 UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
 {
@@ -325,7 +326,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(const sensorsData *data)
 {
-	int eventNbr = data->eventNumber;
+	eventType eventNbr = data->eventNumber;
 
 	switch (eventNbr)
 	{

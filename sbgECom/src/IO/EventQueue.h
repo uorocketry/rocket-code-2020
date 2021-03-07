@@ -1,8 +1,8 @@
-#ifndef SBGECOM_EVENTQUEUE_H
-#define SBGECOM_EVENTQUEUE_H
+#pragma once
 
 #include <queue>
 #include "IO.h"
+#include "helpers/Types.h"
 
 class EventQueue {
 public:
@@ -12,17 +12,14 @@ public:
 
     // Adds an event to the end of the queue
     // Thread safe
-    void push(int);
+    void push(eventType);
 
     // Pops the first event from the queue
     // or returns -1 if the queue is empty
     // Thread safe
-    int pop();
+    eventType pop();
 
 private:
     std::mutex queueMutex;
-    std::queue<int> eventNumberQueue;
+    std::queue<eventType> eventNumberQueue;
 };
-
-
-#endif //SBGECOM_EVENTQUEUE_H
