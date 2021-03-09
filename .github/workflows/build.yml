@@ -17,41 +17,41 @@ jobs:
         with:
           cmake-version: "3.16.x"
       - name: Cmake Makefiles
-        run: cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: cmake -B ./build -G 'Unix Makefiles'
       - name: Run make
-        run: cd ./sbgECom/projects/unix; make
+        run: cmake --build ./build --target MainLoop
       - name: "Upload Binary"
         uses: actions/upload-artifact@v1
         with:
           name: bin
-          path: ./sbgECom/bin
+          path: ./build/MainLoop
 
       - name: "HOTFIRE_TEST: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export HOTFIRE_TEST=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "HOTFIRE_TEST: Run make"
-        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; make
+        run: export HOTFIRE_TEST=1; cmake --build ./build --target MainLoop
 
       - name: "USE_SBG: Cmake Makefiles"
-        run: export USE_SBG=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export USE_SBG=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "USE_SBG: Run make"
-        run: export USE_SBG=1; cd ./sbgECom/projects/unix; make
+        run: export USE_SBG=1; cmake --build ./build --target MainLoop
 
       - name: "SKIP_INIT: Cmake Makefiles"
-        run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export SKIP_INIT=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "SKIP_INIT: Run make"
-        run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; make
+        run: export SKIP_INIT=1; cmake --build ./build --target MainLoop
         
       - name: "HOTFIRE_TEST and SKIP_INIT: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "HOTFIRE_TEST and SKIP_INIT: Run make"
-        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cd ./sbgECom/projects/unix; make
+        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cmake --build ./build --target MainLoop
 
       - name: "TESTING: Cmake Makefiles"
-        run: export TESTING=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export TESTING=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "TESTING: Run make"
-        run: export TESTING=1; cd ./sbgECom/projects/unix; make
+        run: export TESTING=1; cmake --build ./build --target MainLoop
 
       - name: "HOTFIRE_TEST and TESTING: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; export TESTING=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+        run: export HOTFIRE_TEST=1; export TESTING=1; cmake -B ./build -G 'Unix Makefiles'
       - name: "HOTFIRE_TEST and TESTING: Run make"
-        run: export HOTFIRE_TEST=1; export TESTING=1; cd ./sbgECom/projects/unix; make
+        run: export HOTFIRE_TEST=1; export TESTING=1; cmake --build ./build --target MainLoop
