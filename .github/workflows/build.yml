@@ -3,8 +3,8 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  build:
-    name: Build
+  build_default:
+    name: Build Default
     runs-on: ubuntu-latest
 
     steps:
@@ -26,32 +26,36 @@ jobs:
           name: bin
           path: ./sbgECom/bin
 
-      - name: "HOTFIRE_TEST: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "HOTFIRE_TEST: Run make"
-        run: export HOTFIRE_TEST=1; cd ./sbgECom/projects/unix; make
+  build_environments:
+    name: Build Environments
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - name: "HOTFIRE_TEST"
+            append: export HOTFIRE_TEST=1;
+          - name: "USE_SBG"
+            append: export USE_SBG=1;
+          - name: "SKIP_INIT"
+            append: export SKIP_INIT=1;
+          - name: "HOTFIRE_TEST and SKIP_INIT"
+            append: export HOTFIRE_TEST=1; export SKIP_INIT=1;
+          - name: "TESTING"
+            append: export TESTING=1;
+          - name: "HOTFIRE_TEST and TESTING"
+            append: export HOTFIRE_TEST=1; export TESTING=1;
 
-      - name: "USE_SBG: Cmake Makefiles"
-        run: export USE_SBG=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "USE_SBG: Run make"
-        run: export USE_SBG=1; cd ./sbgECom/projects/unix; make
-
-      - name: "SKIP_INIT: Cmake Makefiles"
-        run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "SKIP_INIT: Run make"
-        run: export SKIP_INIT=1; cd ./sbgECom/projects/unix; make
-        
-      - name: "HOTFIRE_TEST and SKIP_INIT: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "HOTFIRE_TEST and SKIP_INIT: Run make"
-        run: export HOTFIRE_TEST=1; export SKIP_INIT=1; cd ./sbgECom/projects/unix; make
-
-      - name: "TESTING: Cmake Makefiles"
-        run: export TESTING=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "TESTING: Run make"
-        run: export TESTING=1; cd ./sbgECom/projects/unix; make
-
-      - name: "HOTFIRE_TEST and TESTING: Cmake Makefiles"
-        run: export HOTFIRE_TEST=1; export TESTING=1; cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
-      - name: "HOTFIRE_TEST and TESTING: Run make"
-        run: export HOTFIRE_TEST=1; export TESTING=1; cd ./sbgECom/projects/unix; make
+    steps:
+      # Initialization
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.4
+        with:
+          cmake-version: "3.16.x"
+      # Build the project
+      - name: "${{ matrix.name }}: Cmake Makefiles"
+        run: ${{ matrix.append }} cd ./sbgECom/projects/unix; cmake -G 'Unix Makefiles'
+      - name: "${{ matrix.name }}: Run make"
+        run: ${{ matrix.append }} cd ./sbgECom/projects/unix; make
