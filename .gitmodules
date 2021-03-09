@@ -1,3 +1,6 @@
 [submodule "sbgECom/WiringPi"]
 	path = sbgECom/WiringPi
 	url = https://github.com/WiringPi/WiringPi.git
+[submodule "unitTesting/Catch2"]
+	path = unitTesting/Catch2
+	url = https://github.com/catchorg/Catch2.git

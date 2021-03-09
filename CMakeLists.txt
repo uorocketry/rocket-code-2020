@@ -104,6 +104,17 @@ target_link_libraries(MainLoop WiringPi)
 add_dependencies(MainLoop WiringPi)
 target_link_libraries(MainLoop stdc++fs)
 
+# ---------------
+# Unit Testing - Catch2
+# ---------------
+
+file(GLOB_RECURSE TESTING_SRC ${PROJECT_SOURCE_DIR}/unitTesting/tests/*.cpp)
+
+add_subdirectory(./unitTesting/Catch2)
+add_executable(tests ${TESTING_SRC})
+target_link_libraries(tests PRIVATE Catch2::Catch2)
+
+
 
 # add_executable(ekinoxMinimal "${PROJECT_SOURCE_DIR}/../../examples/ekinoxMinimal/src/ekinoxMinimal.c")
 # target_link_libraries(ekinoxMinimal sbgECom)
