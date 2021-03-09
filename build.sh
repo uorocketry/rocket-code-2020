@@ -1,5 +1,6 @@
 #!/bin/bash
 
-cd ./sbgECom/projects/unix
-cmake -G 'Unix Makefiles'
+mkdir -p build
+cd build
+cmake ../
 make
