@@ -7,7 +7,6 @@ struct GpioData {
     #endif
     #if VALVE2
     bool valve2Status = false;
-    #endif VALVE
-    
-    
-}
+    #endif
+   
+};

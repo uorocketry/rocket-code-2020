@@ -26,10 +26,7 @@ struct sensorsData
     int clientEventNumber = -1;
 #endif
 
-<<<<<<< HEAD
-=======
 #if TESTING
     bool outOfData = false;
 #endif
->>>>>>> f70dc946cd6a92767c69e9189dbaf3ef2c1882c8
 };
