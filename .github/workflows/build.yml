@@ -20,7 +20,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: bin
-          path: ./sbgECom/bin
+          path: ./build/MainLoop
 
   build_environments:
     name: Build Environments
