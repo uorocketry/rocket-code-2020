@@ -8,6 +8,7 @@
 #include "IO/Radio.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
+#include "IO/Gpio.h"
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <queue>
@@ -48,6 +49,9 @@ private:
 
 #if USE_SOCKET_CLIENT
 	SocketClient client;
+#endif
+#if USE_GPIO
+	Gpio gpio;
 #endif
 
 #if USE_LOGGER

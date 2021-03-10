@@ -32,6 +32,10 @@ void Interface::initializeSensors()
 	std::cout << "Initializing SOCKET_CLIENT...\n";
 	client.initialize();
 #endif
+#if USE_GPIO
+	std::cout << "Initializing GPIO...\n";
+	gpio.initialize();
+#endif
 #if USE_LOGGER
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
@@ -40,6 +44,7 @@ void Interface::initializeSensors()
 	std::cout << "Initializing RADIO...\n";
 	radio.initialize();
 #endif
+
 }
 
 bool Interface::sensorsInitialized()
