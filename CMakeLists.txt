@@ -4,7 +4,8 @@ project(sbgECom C CXX)
 
 include_directories(
 	${PROJECT_SOURCE_DIR}/sbgECom/src/
-	${PROJECT_SOURCE_DIR}/sbgECom/common/
+	${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/
+	${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/
 	${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
 )
 
@@ -22,18 +23,18 @@ endif()
 #set(LIBRARY_OUTPUT_PATH sbgECom/bin)
 #set(EXECUTABLE_OUTPUT_PATH sbgECom/bin)
 
-file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.c)
-file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/sbgECom/common/*.c)
+file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.c)
+file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/*.c)
 file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/*.c)
 
 
-file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.cpp)
+file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.cpp)
 #file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/sbgECom/common/*.cpp)
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
+	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
 else()
-	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
+	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
 endif()
 
 
@@ -43,12 +44,12 @@ find_package (Threads)
 #	Exclude platform specific files
 #
 if (NOT MSVC)
-	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/sbgECom/common/interfaces/sbgInterfaceSerialWin.c")
+	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/interfaces/sbgInterfaceSerialWin.c")
 else ()
-	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c")
+	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c")
 endif()
 
-add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC} ${SM_CONFIG_SRC})
+add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC})
 add_library(WiringPi STATIC ${WIRINGPI_SRC})
 
 if (MSVC)
@@ -97,7 +98,8 @@ if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
 	add_definitions(-D USE_RADIO)
 endif()
 
-add_executable(MainLoop "${PROJECT_SOURCE_DIR}/sbgECom/src/init/MainLoop.cpp")
+file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/sbgECom/src/*.cpp)
+add_executable(MainLoop ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
 target_link_libraries(MainLoop WiringPi)
