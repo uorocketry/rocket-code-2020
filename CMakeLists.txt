@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(sbgECom C CXX)
+project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
 
