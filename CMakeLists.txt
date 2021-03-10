@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(sbgECom C CXX)
 
 include_directories(
-	${PROJECT_SOURCE_DIR}/sbgECom/src/
+	${PROJECT_SOURCE_DIR}/src/
 	${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/
 	${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/
 	${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
@@ -98,7 +98,7 @@ if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
 	add_definitions(-D USE_RADIO)
 endif()
 
-file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/sbgECom/src/*.cpp)
+file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_executable(MainLoop ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
