@@ -5,7 +5,7 @@ project(sbgECom C CXX)
 include_directories(
 	${PROJECT_SOURCE_DIR}/sbgECom/src/
 	${PROJECT_SOURCE_DIR}/sbgECom/common/
-	${PROJECT_SOURCE_DIR}/sbgECom/WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
+	${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
 )
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
@@ -24,7 +24,7 @@ endif()
 
 file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.c)
 file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/sbgECom/common/*.c)
-file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/sbgECom/WiringPi/wiringPi/*.c)
+file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/*.c)
 
 
 file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.cpp)
