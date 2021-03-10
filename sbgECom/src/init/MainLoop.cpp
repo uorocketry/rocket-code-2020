@@ -40,7 +40,7 @@ int main()
 		{
 			std::this_thread::sleep_for(target_ns - elapsed_ns);
 		}
-		else
+		else if (targetUpdateDuration != 0)
 		{
 			std::cout << "Timing Error: Update took too long\n";
 		}

@@ -1,0 +1,20 @@
+name: End-to-end
+
+on: [push, pull_request]
+
+jobs:
+  OctoberSky1:
+    name: OctoberSky1
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialization
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.4
+        with:
+          cmake-version: "3.16.x"
+      - name: Run OctoberSky1 Test
+        run: cd ./tests/octoberSky/; bash ./run_test.sh

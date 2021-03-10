@@ -146,13 +146,18 @@ void Logger::dequeueToFile(std::ofstream &fileStream)
 	{
 		std::lock_guard<std::mutex> lockGuard(mutex);
 		currentState = logQueue.front();
-		logQueue.pop();
 	}
 
 	if (fileStream.is_open())
 	{
 		working = 1;
 		writeData(fileStream, currentState);
+
+		// Pop data now that it has been successfully written
+		{
+			std::lock_guard<std::mutex> lockGuard(mutex);
+			logQueue.pop();
+		}
 	}
 	else
 	{
@@ -236,7 +241,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.gpsPosAccuracyLongitude << sep;
 	fileStream << currentState.sbg.gpsPosAccuracyAltitude << sep;
 
-	fileStream << currentState.sbg.NumSvUsed << sep;
+	fileStream << (int) currentState.sbg.NumSvUsed << sep;
 
 	fileStream << currentState.sbg.velocityNAccuracy << sep;
 	fileStream << currentState.sbg.velocityEAccuracy << sep;
@@ -269,6 +274,10 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << "\n";
 
 	fileStream.flush();
+}
+
+bool Logger::queueEmpty() {
+	return logQueue.empty();
 }
 
 #endif

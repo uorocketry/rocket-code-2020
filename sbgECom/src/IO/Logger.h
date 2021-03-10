@@ -25,6 +25,8 @@ public:
 	//write data to sensorsData struct and push to queue on main thread
 	void enqueueSensorData(sensorsData curSensorData);
 
+	bool queueEmpty();
+
 protected:
 	std::mutex mutex;
 

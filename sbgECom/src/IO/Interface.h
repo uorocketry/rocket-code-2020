@@ -18,47 +18,15 @@
 class Interface
 {
 public:
-	Interface();
-	~Interface();
-
-	void initializeSensors();
-	bool sensorsInitialized();
-	void calibrateTelemetry();
+	virtual void initialize() = 0;
+	
+	virtual bool isInitialized() = 0;
+	virtual void calibrateTelemetry()  = 0;
 
 	// to get the latest rocket state. return a pointer to latestState
-	sensorsData *getLatest();
+	virtual std::shared_ptr<sensorsData> getLatest() = 0;
 
 	// loop over each sensor and update the latestState
-	void update(const UOSMData *smdata, int currentState);
-
-
-private:
-	sensorsData latestState;
-
-#if TESTING
-	TestingSensors testingSensors;
-#endif
-
-#if USE_SBG
-	SBGSensor mySbgSensor;
-#endif
-
-#if USE_INPUT
-	Input input;
-#endif
-
-#if USE_SOCKET_CLIENT
-	SocketClient client;
-#endif
-#if USE_GPIO
-	Gpio gpio;
-#endif
-
-#if USE_LOGGER
-	Logger logger;
-#endif
-
-#if USE_RADIO
-	Radio radio;
-#endif
+	virtual bool updateInputs() = 0;
+	virtual bool updateOutputs(std::shared_ptr<sensorsData> data) = 0;
 };
