@@ -9,9 +9,13 @@ jobs:
 
     steps:
       # Initialization
-      - uses: actions/checkout@v1
-        with:
-          submodules: true
+      - name: Install SSH Key # For private submodules
+        run: mkdir $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - uses: actions/checkout@v2
+      - name: Checkout submodules
+        run: |
+          git submodule init
+          git submodule update
       - name: Cmake Makefiles
         run: cmake -B ./build -G 'Unix Makefiles'
       - name: Run make
