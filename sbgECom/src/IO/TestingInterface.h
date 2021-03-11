@@ -32,6 +32,8 @@ private:
 
 	TestingSensors testingSensors;
 
+	time_point latestTime;
+
 #if USE_LOGGER
 	Logger logger;
 #endif

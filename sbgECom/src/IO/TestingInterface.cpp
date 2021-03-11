@@ -5,6 +5,7 @@
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <iostream>
+#include <chrono>
 #include "IO/TestingSensors.h"
 
 
@@ -45,7 +46,7 @@ bool TestingInterface::isInitialized()
 bool TestingInterface::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>(testingSensors.getLatest());
-
+	
 	return true;
 }
 
@@ -84,8 +85,13 @@ std::shared_ptr<sensorsData> TestingInterface::getLatest()
 
 time_point TestingInterface::getCurrentTime()
 {
-	//TODO: Fake this number
-	return std::chrono::steady_clock::now();
+	if (latestState != nullptr) 
+	{
+		return time_point(std::chrono::duration_cast<time_point::duration>(duration_ns(latestState->timeStamp)));
+	} else
+	{
+		return std::chrono::steady_clock::now();
+	}
 }
 
 #endif
