@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
+add_subdirectory(./unitTesting)
 
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
@@ -75,13 +76,3 @@ add_dependencies(MainLoop WiringPi)
 target_link_libraries(MainLoop stdc++fs)
 
 target_link_libraries (MainLoop ${CMAKE_THREAD_LIBS_INIT})
-
-# ---------------
-# Unit Testing - Catch2
-# ---------------
-
-file(GLOB_RECURSE TESTING_SRC ${PROJECT_SOURCE_DIR}/unitTesting/tests/*.cpp)
-
-add_subdirectory(./unitTesting/Catch2)
-add_executable(tests ${TESTING_SRC})
-target_link_libraries(tests PRIVATE Catch2::Catch2)

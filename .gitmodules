@@ -1,8 +1,8 @@
 [submodule "sbgECom/WiringPi"]
 	path = libraries/WiringPi
 	url = https://github.com/WiringPi/WiringPi.git
-[submodule "unitTesting/Catch2"]
-	path = unitTesting/Catch2
+[submodule "libraries/Catch2"]
+	path = libraries/Catch2
 	url = https://github.com/catchorg/Catch2.git
 [submodule "libraries/sbgECom"]
 	path = libraries/sbgECom
