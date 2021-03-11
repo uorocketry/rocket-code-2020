@@ -21,4 +21,4 @@ jobs:
       - name: Run make
         run: cmake --build ./build --target tests
       - name: Run Unit Tests
-        run: ./build/tests
+        run: ./build/unitTesting/tests
