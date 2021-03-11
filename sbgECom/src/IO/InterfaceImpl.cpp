@@ -83,26 +83,9 @@ bool InterfaceImpl::isInitialized()
 	return result;
 }
 
-/*void InterfaceImpl::update(const UOSMData *smdata, int currentStateNo)
-{
-	latestState.timeStamp = smdata->now.time_since_epoch().count();
-
-	if (!updateSensors()) {
-		return;
-	}
-
-	// Save current state no matter what
-	latestState.currentStateNo = currentStateNo;
-
-	if (!updateOutputs()) {
-		return;
-	}
-}*/
-
 bool InterfaceImpl::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>();
-	// latestState = sensorsData();
 
 #if USE_SBG
 	latestState->sbg = mySbgSensor.getData();
