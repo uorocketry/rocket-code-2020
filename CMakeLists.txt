@@ -1,67 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(sbgECom C CXX)
+project(RocketCode2020 C CXX)
 
-include_directories(
-	${PROJECT_SOURCE_DIR}/sbgECom/src/
-	${PROJECT_SOURCE_DIR}/sbgECom/common/
-	${PROJECT_SOURCE_DIR}/sbgECom/WiringPi/wiringPi/ # Only imports one part of wiringPi for now, other folders can be added later
-)
+add_subdirectory(./libraries)
 
-if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-	include_directories(
-		${PROJECT_SOURCE_DIR}/projects/HotFire/
-	)
-else()
-	include_directories(
-		${PROJECT_SOURCE_DIR}/projects/OctoberSky1/
-	)
-endif()
-
-
-#set(LIBRARY_OUTPUT_PATH sbgECom/bin)
-#set(EXECUTABLE_OUTPUT_PATH sbgECom/bin)
-
-file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.c)
-file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/sbgECom/common/*.c)
-file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/sbgECom/WiringPi/wiringPi/*.c)
-
-
-file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/sbgECom/src/*.cpp)
-#file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/sbgECom/common/*.cpp)
-
-if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
-else()
-	file(GLOB_RECURSE SM_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
-endif()
-
-
-find_package (Threads)
-
-#
-#	Exclude platform specific files
-#
-if (NOT MSVC)
-	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/sbgECom/common/interfaces/sbgInterfaceSerialWin.c")
-else ()
-	list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c")
-endif()
-
-add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC} ${SM_CONFIG_SRC})
-add_library(WiringPi STATIC ${WIRINGPI_SRC})
-
-if (MSVC)
-	target_link_libraries(sbgECom Ws2_32)
-endif()
-
-# add_executable(ellipseMinimal "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/ellipseMinimal.cpp")
-# target_link_libraries(ellipseMinimal sbgECom)
-# add_dependencies(ellipseMinimal sbgECom)
-
-# add_executable(test_hello "${PROJECT_SOURCE_DIR}/../../examples/ellipseMinimal/src/test_hello.cpp")
-# target_link_libraries(test_hello sbgECom)
-# add_dependencies(test_hello sbgECom)
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	add_definitions(-D HOTFIRE_TEST)
@@ -97,12 +39,42 @@ if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
 	add_definitions(-D USE_RADIO)
 endif()
 
-add_executable(MainLoop "${PROJECT_SOURCE_DIR}/sbgECom/src/init/MainLoop.cpp")
+# ---------------
+# Main executable
+# ---------------
+find_package (Threads)
+
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
+else()
+	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
+endif()
+
+file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/src/*.cpp)
+
+add_executable(MainLoop ${SRC_MAIN} ${MAIN_CONFIG_SRC})
+
+target_include_directories(MainLoop PUBLIC ./src/)
+
+if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+	target_include_directories(MainLoop PUBLIC
+			./projects/HotFire/
+	)
+else()
+	target_include_directories(MainLoop PUBLIC
+			./projects/OctoberSky1/
+	)
+endif()
+
 target_link_libraries(MainLoop sbgECom)
 add_dependencies(MainLoop sbgECom)
+
 target_link_libraries(MainLoop WiringPi)
 add_dependencies(MainLoop WiringPi)
+
 target_link_libraries(MainLoop stdc++fs)
+
+target_link_libraries (MainLoop ${CMAKE_THREAD_LIBS_INIT})
 
 # ---------------
 # Unit Testing - Catch2
@@ -113,16 +85,3 @@ file(GLOB_RECURSE TESTING_SRC ${PROJECT_SOURCE_DIR}/unitTesting/tests/*.cpp)
 add_subdirectory(./unitTesting/Catch2)
 add_executable(tests ${TESTING_SRC})
 target_link_libraries(tests PRIVATE Catch2::Catch2)
-
-
-
-# add_executable(ekinoxMinimal "${PROJECT_SOURCE_DIR}/../../examples/ekinoxMinimal/src/ekinoxMinimal.c")
-# target_link_libraries(ekinoxMinimal sbgECom)
-# add_dependencies(ekinoxMinimal sbgECom)
-
-# add_executable(ellipseOnboardMagCalib "${PROJECT_SOURCE_DIR}/../../examples/ellipseOnboardMagCalib/src/ellipseOnboardMagCalib.c")
-# target_link_libraries(ellipseOnboardMagCalib sbgECom)
-# add_dependencies(ellipseOnboardMagCalib sbgECom)
-
-# target_link_libraries (test_hello ${CMAKE_THREAD_LIBS_INIT})
-target_link_libraries (MainLoop ${CMAKE_THREAD_LIBS_INIT})
