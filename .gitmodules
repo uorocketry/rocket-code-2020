@@ -1,3 +1,6 @@
 [submodule "sbgECom/WiringPi"]
 	path = libraries/WiringPi
 	url = https://github.com/WiringPi/WiringPi.git
+[submodule "libraries/sbgECom"]
+	path = libraries/sbgECom
+	url = git@github.com:uorocketry/sbgECom.git
