@@ -3,31 +3,14 @@ name: Build
 on: [push, pull_request]
 
 jobs:
-  build_default:
-    name: Build Default
-    runs-on: ubuntu-latest
-
-    steps:
-      # Initialization
-      - uses: actions/checkout@v1
-        with:
-          submodules: true
-      - name: Cmake Makefiles
-        run: cmake -B ./build -G 'Unix Makefiles'
-      - name: Run make
-        run: cmake --build ./build --target MainLoop
-      - name: "Upload Binary"
-        uses: actions/upload-artifact@v1
-        with:
-          name: bin
-          path: ./build/MainLoop
-
-  build_environments:
-    name: Build Environments
+  build:
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         include:
+          - name: "Default"
+            append:
           - name: "HOTFIRE_TEST"
             append: export HOTFIRE_TEST=1;
           - name: "USE_SBG"
