@@ -146,4 +146,9 @@ std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 	return latestState;
 }
 
+time_point InterfaceImpl::getCurrentTime()
+{
+	return std::chrono::steady_clock::now();
+}
+
 #endif

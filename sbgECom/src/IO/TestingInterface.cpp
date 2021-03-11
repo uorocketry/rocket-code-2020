@@ -82,4 +82,10 @@ std::shared_ptr<sensorsData> TestingInterface::getLatest()
 	return latestState;
 }
 
+time_point TestingInterface::getCurrentTime()
+{
+	//TODO: Fake this number
+	return std::chrono::steady_clock::now();
+}
+
 #endif

@@ -7,7 +7,7 @@
 #include "data/sensorsData.h"
 
 UOStateMachine::UOStateMachine() : 
-	StateMachine(ST_MAX_STATES), interfaceImpl()
+	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
 {
 
 	// There is no state entry function for the first state

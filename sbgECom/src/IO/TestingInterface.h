@@ -23,6 +23,8 @@ public:
 	bool updateInputs();
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
 
+	time_point getCurrentTime();
+
 private:
 	void initializeOutputs();
 
