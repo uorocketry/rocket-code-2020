@@ -21,6 +21,7 @@ void Gpio::initialize()
 {
 
 	status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
+	//status.gpioSatus = READY;
 	
 	// init servos
 
@@ -31,6 +32,10 @@ void Gpio::initialize()
 bool Gpio::isInitialized()
 {
 	return (status.gpioSatus == READY);
+}
+
+void Gpio::setOutputs(const GpioData data) {
+	std::cout<< "SetOutputs called with " << data.testValue << "\n";
 }
 
 

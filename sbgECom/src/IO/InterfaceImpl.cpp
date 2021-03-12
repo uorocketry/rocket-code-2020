@@ -48,6 +48,10 @@ void InterfaceImpl::initializeOutputs()
 	std::cout << "Initializing RADIO...\n";
 	radio.initialize();
 #endif
+#if USE_GPIO
+	std::cout << "Initializing GPIO...\n";
+	gpio.initialize();
+#endif
 }
 
 
@@ -78,6 +82,10 @@ bool InterfaceImpl::isInitialized()
 
 #if USE_RADIO
 	result &= radio.isInitialized();
+#endif
+
+#if USE_GPIO
+	result &= gpio.isInitialized();
 #endif
 
 	return result;
@@ -127,6 +135,11 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 
 #if USE_RADIO
 	radio.enqueueSensorData(*data);
+#endif
+
+
+#if USE_GPIO
+	gpio.setOutputs((*data).gpioData);
 #endif
 
 	return true;

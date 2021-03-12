@@ -3,7 +3,7 @@
 #include "config/config.h"
 #if USE_GPIO
 
-#include "../data/sensorsData.h"
+#include "../data/GpioData.h"
 #include "IO.h"
 #include <queue>
 #include <mutex>
@@ -21,19 +21,12 @@ public:
 	void run();
 	bool isInitialized();
 
+	void setOutputs(const GpioData data);
+
 protected:
 	std::mutex mutex;
 
 private:
-
-	std::thread thisThread;
-
-	//queue of sensor data to be logged
-	std::queue<sensorsData> logQueue;
-
-	std::mutex writingMutex;
-	std::unique_lock<std::mutex> writingLock;
-	std::condition_variable writingCondition;
 	
 	struct InitFlags
 	{

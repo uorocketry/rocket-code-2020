@@ -48,6 +48,10 @@ private:
 #if USE_RADIO
 	Radio radio;
 #endif
+
+#if USE_GPIO
+	Gpio gpio;
+#endif
 };
 
 #endif

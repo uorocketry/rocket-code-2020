@@ -8,5 +8,7 @@ struct GpioData {
     #if VALVE2
     bool valve2Status = false;
     #endif
+
+    int testValue = 0;
    
 };
