@@ -3,8 +3,13 @@
 #include "config/config.h"
 #if TESTING
 
+#include "data/sensorsData.h"
+
 #include "IO/Interface.h"
 #include "IO/TestingSensors.h"
+#include "IO/Logger.h"
+#include "IO/Radio.h"
+#include <queue>
 
 class TestingInterface : public Interface
 {

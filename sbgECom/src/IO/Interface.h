@@ -2,16 +2,8 @@
 
 #include "config/config.h"
 #include "data/sensorsData.h"
-#include "data/SBGData.h"
-#include "IO/SBGSensor.h"
-#include "IO/Logger.h"
-#include "IO/Radio.h"
-#include "IO/Input.h"
-#include "IO/SocketClient.h"
 #include "IO/IO.h"
-#include "data/UOSMData.h"
 #include <queue>
-#include "IO/TestingSensors.h"
 
 
 class Interface

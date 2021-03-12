@@ -4,6 +4,11 @@
 #if !TESTING
 
 #include "IO/Interface.h"
+#include "IO/SBGSensor.h"
+#include "IO/Input.h"
+#include "IO/SocketClient.h"
+#include "IO/Logger.h"
+#include "IO/Radio.h"
 
 class InterfaceImpl: public Interface
 {
