@@ -3,54 +3,54 @@
 #include "sbgTypes.h"
 
 struct sbgData {
-	float roll;
-	float pitch;
-	float yaw;
-	float rollAccuracy;
-	float pitchAccuracy;
-	float yawAccuracy;
-	double gpsLatitude;
-	double gpsLongitude;
-	double gpsAltitude;
-	float barometricAltitude;
-	float relativeBarometricAltitude;
-	float velocityN;
-	float velocityE;
-	float velocityD;
-	float filteredXaccelerometer;
-	float filteredYaccelerometer;
-	float filteredZaccelerometer;
-	uint32 solutionStatus;
+	float roll = -1;
+	float pitch = -1;
+	float yaw = -1;
+	float rollAccuracy = -1;
+	float pitchAccuracy = -1;
+	float yawAccuracy = -1;
+	double gpsLatitude = -1;
+	double gpsLongitude = -1;
+	double gpsAltitude = -1;
+	float barometricAltitude = -1;
+	float relativeBarometricAltitude = -1;
+	float velocityN = -1;
+	float velocityE = -1;
+	float velocityD = -1;
+	float filteredXaccelerometer = -1;
+	float filteredYaccelerometer = -1;
+	float filteredZaccelerometer = -1;
+	uint32 solutionStatus = -1;
 
 	//to only log
 
-	uint32 gpsPosStatus;
-	float gpsPosAccuracyLatitude;
-	float gpsPosAccuracyLongitude;
-	float gpsPosAccuracyAltitude;
-	uint8 NumSvUsed;
+	uint32 gpsPosStatus = -1;
+	float gpsPosAccuracyLatitude = -1;
+	float gpsPosAccuracyLongitude = -1;
+	float gpsPosAccuracyAltitude = -1;
+	uint8 NumSvUsed = -1;
 
-	float velocityNAccuracy;
-	float velocityEAccuracy;
-	float velocityDAccuracy;
+	float velocityNAccuracy = -1;
+	float velocityEAccuracy = -1;
+	float velocityDAccuracy = -1;
 
-	float latitudeAccuracy;
-	float longitudeAccuracy;
-	float altitudeAccuracy;
+	float latitudeAccuracy = -1;
+	float longitudeAccuracy = -1;
+	float altitudeAccuracy = -1;
 
-	uint16 pressureStatus;
-	float barometricPressure;
+	uint16 pressureStatus = -1;
+	float barometricPressure = -1;
 
-	uint32 imuStatus;
-	float gyroX;
-	float gyroY;
-	float gyroZ;
-	float temp;
-	float deltaVelX;
-	float deltaVelY;
-	float deltaVelZ;
-	float deltaAngleX;
-	float deltaAngleY;
-	float deltaAngleZ;
+	uint32 imuStatus = -1;
+	float gyroX = -1;
+	float gyroY = -1;
+	float gyroZ = -1;
+	float temp = -1;
+	float deltaVelX = -1;
+	float deltaVelY = -1;
+	float deltaVelZ = -1;
+	float deltaAngleX = -1;
+	float deltaAngleY = -1;
+	float deltaAngleZ = -1;
 	
 };

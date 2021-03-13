@@ -252,30 +252,3 @@ void StateMachine::ExecuteCurrentState(EventData* data)
 void StateMachine::updateStateMachine(EventData* data) {
 	ExecuteCurrentState(data);
 }
-
-void StateMachine::enterNewState(BYTE state) {
-	entryTime = std::chrono::steady_clock::now();
-}
-
-double StateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime) {
-	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
-	double progress = ((double) timeSinceEntry.count()) / duration_ns(targetTime).count();
-    return minimum(maximum, minimum + progress * (maximum - minimum));
-}
-
-bool StateMachine::isDelayElapsed(duration_ms targetTime) 
-{
-	duration_ns timeSinceEntry = std::chrono::steady_clock::now() - entryTime;
-	return timeSinceEntry >= duration_ns(targetTime);
-}
-
-bool StateMachine::switchStatesAfterTime(BYTE state, duration_ms targetTime) 
-{	
-	if (isDelayElapsed(targetTime)) {
-		InternalEvent(state);
-
-		return true;
-	}
-
-	return false;
-}

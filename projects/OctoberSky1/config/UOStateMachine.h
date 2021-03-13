@@ -1,13 +1,12 @@
 #pragma once
 
 #include "config/config.h"
-#include "stateMachineLib/StateMachine.h"
-#include "data/sensorsData.h"
+#include "stateMachine/InterfacingStateMachine.h"
 #include "data/UOSMData.h"
-#include "IO/Interface.h"
+
 #include "helpers/Types.h"
 
-class UOStateMachine : public StateMachine
+class UOStateMachine : public InterfacingStateMachine
 {
 public:
 	UOStateMachine();
@@ -19,14 +18,16 @@ public:
 	void Apogee();
 	void Touchdown();
 
-private:
-	void detectExternEvent(const sensorsData *data);
-	void detectApogee(const sensorsData *data);
-	void detectLaunch(const sensorsData *data);
-	void detectMotorBurnout(const sensorsData *data);
-	void detectTouchdown(const sensorsData *data);
+protected:
 
-	void showInfo(const sensorsData *data);
+private:
+	void detectExternEvent(std::shared_ptr<sensorsData> data);
+	void detectApogee(std::shared_ptr<sensorsData> data);
+	void detectLaunch(std::shared_ptr<sensorsData> data);
+	void detectMotorBurnout(std::shared_ptr<sensorsData> data);
+	void detectTouchdown(std::shared_ptr<sensorsData> data);
+
+	void showInfo(std::shared_ptr<sensorsData> data);
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
@@ -40,10 +41,7 @@ private:
 	//number of consecutive readings needed to trigger touchdown
 	uint8_t TouchdownThreshold = 5;
 
-	Interface rocketInterface;
-	sensorsData *rocketData;
 
-	time_point entryTime;
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
@@ -103,4 +101,6 @@ private:
 	STATE_MAP_ENTRY_ALL_EX(&DescentPhase2, 0, &EnterDescentPhase2, &ExitDescentPhase2)
 	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
 	END_STATE_MAP_EX
+
+	std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
 };

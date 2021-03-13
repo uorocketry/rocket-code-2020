@@ -7,11 +7,14 @@
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 
-UOStateMachine::UOStateMachine() : StateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine() : 
+	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
 {
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
+
+	interface = &interfaceImpl;
 }
 
 // StartFilling external event
@@ -143,7 +146,7 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	hotFireInterface.initializeSensors();
+	interface->initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -156,19 +159,21 @@ EXIT_DEFINE(UOStateMachine, ExitInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
 	std::cout << "HotFireSM::EnterWaitForInit\n";
+	enterNewState(ST_WAIT_FOR_INIT);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_INIT);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-	if (hotFireInterface.sensorsInitialized())
+	if (interface->isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
 	}
 
-	// showInfo(hotFireData);
+	// showInfo(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
@@ -179,14 +184,16 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterWaitForFilling\n";
+	enterNewState(ST_WAIT_FOR_FILLING);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
@@ -197,14 +204,16 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterFilling\n";
+	enterNewState(ST_FILLING);
 }
-
+	
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
-	hotFireInterface.update(data, ST_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_FILLING);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitFilling)
@@ -215,14 +224,16 @@ EXIT_DEFINE(UOStateMachine, ExitFilling)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 {
 	std::cout << "HotFireSM::WaitForIgnition\n";
+	enterNewState(ST_WAIT_FOR_IGNITION);
 }
 
 STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 {
-	hotFireInterface.update(data, ST_WAIT_FOR_IGNITION);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_WAIT_FOR_IGNITION);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
@@ -238,11 +249,12 @@ ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 {
-	hotFireInterface.update(data, ST_IGNITION);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_IGNITION);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
 	switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000));
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitIgnition)
@@ -253,14 +265,16 @@ EXIT_DEFINE(UOStateMachine, ExitIgnition)
 ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 {
 	std::cout << "HotFireSM::EnterFullBurn\n";
+	enterNewState(ST_FULL_BURN);
 }
 
 STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 {
-	hotFireInterface.update(data, ST_FULL_BURN);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_FULL_BURN);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitFullBurn)
@@ -271,14 +285,16 @@ EXIT_DEFINE(UOStateMachine, ExitFullBurn)
 ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 {
 	std::cout << "HotFireSM::EnterFinalVenting\n";
+	enterNewState(ST_FINAL_VENTING);
 }
 
 STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 {
-	hotFireInterface.update(data, ST_FINAL_VENTING);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_FINAL_VENTING);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
@@ -290,41 +306,47 @@ ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 {
 	std::cout << "HotFireSM::EnterDone\n";
 	std::cout << "Done.\n";
+	enterNewState(ST_DONE);
 }
 
 STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
-	hotFireInterface.update(data, ST_DONE);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_DONE);
+
+	interface->updateOutputs(interfaceData);
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterAbortFilling\n";
+	enterNewState(ST_ABORT_FILLING);
 }
 
 STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 {
-	hotFireInterface.update(data, ST_ABORT_FILLING);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_ABORT_FILLING);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 {
 	std::cout << "HotFireSM::EnterAbortBurn\n";
+	enterNewState(ST_ABORT_BURN);
 }
 
 STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 {
-	hotFireInterface.update(data, ST_ABORT_BURN);
-	hotFireData = hotFireInterface.getLatest();
+	interfaceData = updateInterface(data, ST_ABORT_BURN);
 
-	detectExternEvent(hotFireData);
+	detectExternEvent(interfaceData);
+
+	interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(const sensorsData *data)
+void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
 	eventType eventNbr = data->eventNumber;
 
@@ -355,11 +377,24 @@ void UOStateMachine::detectExternEvent(const sensorsData *data)
 	}
 }
 
-void UOStateMachine::showInfo(const sensorsData *data)
+void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 {
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)
 {
 	ExecuteCurrentState(data);
+}
+
+std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
+{
+	interface->updateInputs();
+	std::shared_ptr<sensorsData> data = interface->getLatest();
+
+	// If statement to prevent overwiring data from TESTING
+	if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
+	
+	data->currentStateNo = state;
+
+	return data;
 }

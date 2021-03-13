@@ -201,14 +201,6 @@ public:
 
 	// CUSTOM CODE ADDED BY uORocketry
 	void updateStateMachine(EventData* data);
-
-	void enterNewState(BYTE state);
-
-	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
-
-	bool switchStatesAfterTime(BYTE state, duration_ms targetTime);
-
-	bool isDelayElapsed(duration_ms targetTime);
 	// END CUSTOM CODE ADDED BY uORocketry
 	
 protected:
@@ -222,6 +214,10 @@ protected:
 	/// @param[in] newState - the state machine state to transition to.
 	/// @param[in] pData - the event data sent to the state.
 	void InternalEvent(BYTE newState, const EventData* pData = NULL);
+
+	// CUSTOM CODE ADDED BY uORocketry
+	time_point entryTime;
+	// END CUSTOM CODE ADDED BY uORocketry
 	
 private:
 	/// The maximum number of state machine states.
@@ -264,11 +260,6 @@ private:
 	void StateEngine(void); 	
 	void StateEngine(const StateMapRow* const pStateMap);
 	void StateEngine(const StateMapRowEx* const pStateMapEx);
-
-	// CUSTOM CODE ADDED BY uORocketry
-	time_point entryTime;
-	// END CUSTOM CODE ADDED BY uORocketry
-
 };
 
 

@@ -61,7 +61,7 @@ void TestingSensors::initialize()
 		currentData.sbg.filteredYaccelerometer = helper::processFloat(currentRow[count++]);
 		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.solutionStatus = helper::processInt(currentRow[count++]);
+		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
 
 		// Ignore the state, that's an output value
 		count++;
@@ -72,7 +72,7 @@ void TestingSensors::initialize()
 		currentData.sbg.gpsPosAccuracyLongitude = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gpsPosAccuracyAltitude = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.NumSvUsed = helper::processFloat(currentRow[count++]);
+		currentData.sbg.NumSvUsed = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.velocityNAccuracy = helper::processFloat(currentRow[count++]);
 		currentData.sbg.velocityEAccuracy = helper::processFloat(currentRow[count++]);
@@ -120,7 +120,10 @@ sensorsData TestingSensors::getLatest()
 	}
 	else
 	{
-		exit(EXIT_SUCCESS);
+		sensorsData currentData;
+		currentData.outOfData = true;
+
+		return currentData;
 	}
 }
 
