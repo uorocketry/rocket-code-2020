@@ -90,7 +90,7 @@ time_point TestingInterface::getCurrentTime()
 		return time_point(std::chrono::duration_cast<time_point::duration>(duration_ns(latestState->timeStamp)));
 	} else
 	{
-		return std::chrono::steady_clock::now();
+		return time_point(std::chrono::duration_cast<time_point::duration>(duration_ns(0)));
 	}
 }
 
