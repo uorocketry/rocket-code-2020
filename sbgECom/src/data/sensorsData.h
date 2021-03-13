@@ -6,8 +6,8 @@
 //all the informations about the rocket that the state machine will need
 struct sensorsData
 {
-    uint64_t timeStamp;
-    uint16_t currentStateNo;
+    uint64_t timeStamp = -1;
+    uint16_t currentStateNo = -1;
 
 #if USE_SBG
     sbgData sbg;
@@ -19,5 +19,9 @@ struct sensorsData
 
 #if USE_SOCKET_CLIENT
     int clientEventNumber = -1;
+#endif
+
+#if TESTING
+    bool outOfData = false;
 #endif
 };
