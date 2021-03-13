@@ -1,5 +1,6 @@
 #!/bin/bash
 
-cd ./sbgECom/projects/unix
-cmake -G 'Unix Makefiles'
-make
+mkdir -p build
+cd build
+cmake .. -G "${1:-Ninja}"
+cmake --build ./ --target "${2:-all}"

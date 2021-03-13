@@ -5,9 +5,10 @@
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
+#include "helpers/Types.h"
 
 UOStateMachine::UOStateMachine() : 
-	StateMachine(ST_MAX_STATES), interfaceImpl()
+	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
 {
 
 	// There is no state entry function for the first state
@@ -347,8 +348,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
-#if USE_INPUT
-	int eventNbr = data->inputEventNumber;
+	eventType eventNbr = data->eventNumber;
 
 	switch (eventNbr)
 	{
@@ -375,37 +375,6 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	default:
 		break;
 	}
-#endif
-
-#if USE_SOCKET_CLIENT
-	eventNbr = data->clientEventNumber;
-
-	switch (eventNbr)
-	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortFillingEXT();
-		break;
-	case 6:
-		AbortBurnEXT();
-	default:
-		break;
-	}
-#endif
 }
 
 void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)

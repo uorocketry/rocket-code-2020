@@ -1,15 +1,11 @@
 #pragma once
 
 #include "config/config.h"
-#include "stateMachineLib/StateMachine.h"
-#include "IO/Interface.h"
-#include "IO/InterfaceImpl.h"
-#include "IO/TestingInterface.h"
+#include "stateMachine/InterfacingStateMachine.h"
 #include "helpers/Types.h"
 #include "data/UOSMData.h"
-#include "data/sensorsData.h"
 
-class UOStateMachine : public StateMachine
+class UOStateMachine : public InterfacingStateMachine
 {
 public:
 	UOStateMachine();
@@ -24,21 +20,18 @@ public:
 	void DoneEXT();
 
 	void updateHotFire(UOSMData *data);
-	
-private:
-	void detectExternEvent(std::shared_ptr<sensorsData> data);
-	void showInfo(std::shared_ptr<sensorsData> data);
+
+protected:
 
 #if !TESTING
 	InterfaceImpl interfaceImpl;
 #else
 	TestingInterface interfaceImpl;
 #endif
-	Interface *interface;
-
-	std::shared_ptr<sensorsData> interfaceData;
-
-	time_point entryTime;
+	
+private:
+	void detectExternEvent(std::shared_ptr<sensorsData> data);
+	void showInfo(std::shared_ptr<sensorsData> data);
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.

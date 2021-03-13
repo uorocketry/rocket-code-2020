@@ -1,15 +1,12 @@
 #pragma once
 
 #include "config/config.h"
-#include "stateMachineLib/StateMachine.h"
-#include "data/sensorsData.h"
+#include "stateMachine/InterfacingStateMachine.h"
 #include "data/UOSMData.h"
-#include "IO/Interface.h"
-#include "IO/InterfaceImpl.h"
-#include "IO/TestingInterface.h"
+
 #include "helpers/Types.h"
 
-class UOStateMachine : public StateMachine
+class UOStateMachine : public InterfacingStateMachine
 {
 public:
 	UOStateMachine();
@@ -20,6 +17,8 @@ public:
 	void MotorBurnout();
 	void Apogee();
 	void Touchdown();
+
+protected:
 
 private:
 	void detectExternEvent(std::shared_ptr<sensorsData> data);
@@ -42,16 +41,7 @@ private:
 	//number of consecutive readings needed to trigger touchdown
 	uint8_t TouchdownThreshold = 5;
 
-#if !TESTING
-	InterfaceImpl interfaceImpl;
-#else
-	TestingInterface interfaceImpl;
-#endif
-	Interface *interface;
 
-	std::shared_ptr<sensorsData> interfaceData;
-
-	time_point entryTime;
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.

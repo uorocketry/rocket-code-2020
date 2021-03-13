@@ -4,16 +4,15 @@
 #include "data/sensorsData.h"
 #include "UOStateMachine.h"
 #include <math.h>
+#include "helpers/Types.h"
 
 #define PI 3.14159265
 
 UOStateMachine::UOStateMachine() : 
-	StateMachine(ST_MAX_STATES), interfaceImpl()
+	InterfacingStateMachine(ST_MAX_STATES)
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
-
-	interface = &interfaceImpl;
 }
 
 // Launch external event
@@ -247,8 +246,7 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 
 void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
-#if USE_INPUT
-	int eventNbr = data->inputEventNumber;
+	eventType eventNbr = data->eventNumber;
 	
 	switch (eventNbr)
 	{
@@ -264,9 +262,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	default:
 		break;
 	}
-#endif
 }
-
 
 void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 {
