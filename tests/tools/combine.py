@@ -6,7 +6,7 @@ mypath = "./data/"
 begining = "2"
 
 
-files = [f for f in listdir(mypath) if (isfile(join(mypath, f)) and f[0]=="2")]
+files = [f for f in listdir(mypath) if (isfile(join(mypath, f)) and f[0] == begining)]
 
 allText = ""
 
