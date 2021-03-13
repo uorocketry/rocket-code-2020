@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0)
 project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
-add_subdirectory(./unitTesting)
 
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
@@ -53,26 +52,32 @@ endif()
 
 file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-add_executable(MainLoop ${SRC_MAIN} ${MAIN_CONFIG_SRC})
+add_library(MainLoopLib ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 
-target_include_directories(MainLoop PUBLIC ./src/)
+target_include_directories(MainLoopLib PUBLIC ./src/)
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-	target_include_directories(MainLoop PUBLIC
+	target_include_directories(MainLoopLib PUBLIC
 			./projects/HotFire/
 	)
 else()
-	target_include_directories(MainLoop PUBLIC
+	target_include_directories(MainLoopLib PUBLIC
 			./projects/OctoberSky1/
 	)
 endif()
 
-target_link_libraries(MainLoop sbgECom)
-add_dependencies(MainLoop sbgECom)
+target_link_libraries(MainLoopLib sbgECom)
+add_dependencies(MainLoopLib sbgECom)
 
-target_link_libraries(MainLoop WiringPi)
-add_dependencies(MainLoop WiringPi)
+target_link_libraries(MainLoopLib WiringPi)
+add_dependencies(MainLoopLib WiringPi)
 
-target_link_libraries(MainLoop stdc++fs)
+target_link_libraries(MainLoopLib stdc++fs)
 
-target_link_libraries (MainLoop ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
+
+add_executable(MainLoop ./src/init/MainLoop.cpp)
+target_link_libraries(MainLoop MainLoopLib)
+
+
+add_subdirectory(./unitTesting)
