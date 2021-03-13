@@ -5,31 +5,31 @@
 
 #include "IO.h"
 #include "../data/SBGData.h"
+#include "EventQueue.h"
 #include <iostream>
 #include <queue>
 
 class SocketClient : public IO
 {
 public:
-	SocketClient();
-	~SocketClient();
+    SocketClient(EventQueue &eventQueue);
+    ~SocketClient();
 
-	void run();
-	void initialize();
-	bool isInitialized();
+    void run();
+    void initialize();
+    bool isInitialized();
 
-	int getData();
-	// rocketState getLatest();
+    // rocketState getLatest();
 
 private:
-	std::queue<int> eventNumberQueue;
+    EventQueue &eventQueue;
 
-	struct InitFlags
-	{
-		InitStatus socketCreated = INIT;
-		InitStatus socketBinded = INIT;
-		InitStatus serverConnection = INIT;
-	} status;
+    struct InitFlags
+    {
+        InitStatus socketCreated = INIT;
+        InitStatus socketBinded = INIT;
+        InitStatus serverConnection = INIT;
+    } status;
 };
 
 #endif

@@ -8,7 +8,13 @@
 #include "IO/TestingSensors.h"
 
 
-InterfaceImpl::InterfaceImpl()
+InterfaceImpl::InterfaceImpl() : eventQueue()
+#if USE_INPUT
+        , input(eventQueue)
+#endif
+#if USE_SOCKET_CLIENT
+        , client(eventQueue)
+#endif
 {
 }
 
@@ -91,13 +97,7 @@ bool InterfaceImpl::updateInputs()
 	latestState->sbg = mySbgSensor.getData();
 #endif
 
-#if USE_INPUT
-	latestState->inputEventNumber = input.getData();
-#endif
-
-#if USE_SOCKET_CLIENT
-	latestState->clientEventNumber = client.getData();
-#endif
+	latestState->eventNumber = eventQueue.pop();
 
 	return true;
 }

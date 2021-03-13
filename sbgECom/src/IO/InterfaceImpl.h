@@ -9,6 +9,7 @@
 #include "IO/SocketClient.h"
 #include "IO/Logger.h"
 #include "IO/Radio.h"
+#include "EventQueue.h"
 
 class InterfaceImpl: public Interface
 {
@@ -35,6 +36,7 @@ private:
 	void initializeOutputs();
 
 	std::shared_ptr<sensorsData> latestState;
+	EventQueue eventQueue;
 
 #if USE_SBG
 	SBGSensor mySbgSensor;

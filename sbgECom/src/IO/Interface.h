@@ -5,7 +5,6 @@
 #include "IO/IO.h"
 #include <queue>
 
-
 class Interface
 {
 public:
