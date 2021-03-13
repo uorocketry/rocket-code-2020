@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd ./sbgECom/bin
+cd ./build
 ./MainLoop

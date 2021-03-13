@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./build.sh && ./run.sh
+./build.sh "$1" "$2" && ./run.sh

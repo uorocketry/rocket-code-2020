@@ -62,3 +62,6 @@ sbgECom/projects/unix/CMakeFiles/*
 sbgECom/projects/visual/.vs
 sbgECom/projects/unix/CMakeCache.txt
 sbgECom/projects/unix/out
+
+# CLion
+.idea
