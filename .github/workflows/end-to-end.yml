@@ -23,4 +23,4 @@ jobs:
         with:
           cmake-version: "3.16.x"
       - name: Run OctoberSky1 Test
-        run: cd ./tests/octoberSky/; bash ./run_test.sh "Unix Makesfiles"
+        run: cd ./tests/octoberSky/; bash ./run_test.sh "Unix Makefiles"
