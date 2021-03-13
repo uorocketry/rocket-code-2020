@@ -1,4 +1,4 @@
-[submodule "sbgECom/WiringPi"]
+[submodule "libraries/WiringPi"]
 	path = libraries/WiringPi
 	url = https://github.com/WiringPi/WiringPi.git
 [submodule "libraries/Catch2"]
@@ -6,4 +6,4 @@
 	url = https://github.com/catchorg/Catch2.git
 [submodule "libraries/sbgECom"]
 	path = libraries/sbgECom
-	url = git@github.com:uorocketry/sbgECom.git
+	url = https://github.com/uorocketry/sbgECom.git

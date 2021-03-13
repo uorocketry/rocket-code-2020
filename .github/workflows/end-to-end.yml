@@ -1,0 +1,26 @@
+name: End-to-end
+
+on: [push, pull_request]
+
+jobs:
+  OctoberSky1:
+    name: OctoberSky1
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialization
+      - name: Install SSH Key # For private submodules
+        run: mkdir $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - uses: actions/checkout@v2
+      - name: Force Git to use SSH
+        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+      - name: Checkout submodules
+        run: |
+          git submodule init
+          git submodule update
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.4
+        with:
+          cmake-version: "3.16.x"
+      - name: Run OctoberSky1 Test
+        run: cd ./tests/octoberSky/; bash ./run_test.sh "Unix Makefiles"

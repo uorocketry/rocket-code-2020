@@ -5,8 +5,7 @@
 #include "IO.h"
 #include "iostream"
 
-Input::Input() {
-	
+Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue) {
 }
 
 Input::~Input() {
@@ -29,17 +28,9 @@ void Input::run() {
         std::getline(std::cin, line);
 
         if (isNumber(line)) {
-            eventNumber = strtol(line.c_str(), nullptr, 10);
+            eventQueue.push(strtol(line.c_str(), nullptr, 10));
         }
     }
-}
-
-int Input::getData() {
-    // called by the interface
-    std::lock_guard<std::mutex> lockGuard(mutex);
-    int result = eventNumber;
-    eventNumber = -1;
-	return result;
 }
 
 bool Input::isNumber(const std::string& s) {

@@ -1,10 +1,9 @@
-#pragma once
-
 #include "Helper.h"
 
 #include <string>
 #include <vector>
 #include <sstream>
+#include <cmath>
 
 namespace helper {
 
@@ -43,9 +42,19 @@ namespace helper {
 		return strtoull(data.c_str(), nullptr, 10);
 	}
 
+    uint32_t processUInt32(std::string data)
+	{
+		return strtoul(data.c_str(), nullptr, 10);
+	}
+
 	float processFloat(std::string data)
 	{
-		return strtof(data.c_str(), nullptr);
+		float result = strtof(data.c_str(), nullptr);
+		if (std::isnan(result)) {
+			return NAN;
+		}
+
+		return result;
 	}
 
 	double processDouble(std::string data)
