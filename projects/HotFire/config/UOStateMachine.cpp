@@ -2,6 +2,7 @@
 
 #include <wiringPi.h>
 #include "config/config.h"
+#include "config/GpioConfig.h"
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"

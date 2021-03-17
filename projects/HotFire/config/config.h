@@ -36,19 +36,6 @@
     #define USE_GPIO 1
 #endif
 
-#if USE_GPIO
-    #ifndef PWMVALVE1
-        #define PWMVALVE1 1
-    #endif
-
-#endif
-
-#if PWMVALVE1
-    #define PWMVALVE1PIN 6
-    #define PWMVALVE1OPEN 0
-    #define PWMVALVE1CLOSE 150
-#endif
-
 // because we can't use inputs if it is manual testing
 #if TESTING
     #define USE_SOCKET_CLIENT 0
