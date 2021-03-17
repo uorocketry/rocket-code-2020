@@ -4,6 +4,7 @@
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include <memory>
+#include <string>
 
 class Interface
 {
@@ -19,6 +20,10 @@ public:
 	// loop over each sensor and update the latestState
 	virtual bool updateInputs() = 0;
 	virtual bool updateOutputs(std::shared_ptr<sensorsData> data) = 0;
+
+	#ifdef USE_GPIO
+	virtual void createNewGpioPwmOutput(std::string name, int pinNbr) = 0;
+	#endif
 
 	virtual time_point getCurrentTime() = 0;
 };

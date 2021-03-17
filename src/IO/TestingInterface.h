@@ -10,6 +10,7 @@
 #include "IO/Logger.h"
 #include "IO/Radio.h"
 #include <queue>
+#include <string>
 
 class TestingInterface : public Interface
 {
@@ -27,6 +28,10 @@ public:
 
 	bool updateInputs();
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
+
+	#ifdef USE_GPIO
+	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	#endif
 
 	time_point getCurrentTime();
 

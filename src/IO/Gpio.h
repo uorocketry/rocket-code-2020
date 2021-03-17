@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <condition_variable>
+#include <string>
 
 class Gpio : public IO
 {
@@ -21,14 +22,14 @@ public:
 	void run();
 	bool isInitialized();
 
+	void createNewGpioPwmOutput(std::string name, int pinNbr);
 	void setOutputs(const GpioData data);
 
 protected:
 	std::mutex mutex;
 
 private:
-	
-	struct InitFlags
+		struct InitFlags
 	{
 		InitStatus gpioSatus = INIT;
 	} status;

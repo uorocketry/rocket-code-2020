@@ -12,6 +12,7 @@
 #include "IO/Gpio.h"
 #include "EventQueue.h"
 #include <memory>
+#include <string>
 
 class InterfaceImpl: public Interface
 {
@@ -30,6 +31,10 @@ public:
 	// loop over each sensor and update the latestState
 	bool updateInputs();
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
+
+	#ifdef USE_GPIO
+	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	#endif
 
 	time_point getCurrentTime();
 

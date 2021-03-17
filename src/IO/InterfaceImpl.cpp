@@ -6,6 +6,7 @@
 #include "data/UOSMData.h"
 #include <iostream>
 #include "IO/TestingSensors.h"
+#include <string>
 
 
 InterfaceImpl::InterfaceImpl() : eventQueue()
@@ -128,6 +129,12 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	return true;
 }
 
+#ifdef USE_GPIO
+void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr) 
+{
+	gpio.createNewGpioPwmOutput(name, pinNbr);
+}
+#endif
 
 void InterfaceImpl::calibrateTelemetry() 
 {

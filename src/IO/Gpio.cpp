@@ -6,6 +6,7 @@
 
 #include "helpers/Helper.h"
 #include <wiringPi.h>
+#include <string>
 
 
 Gpio::~Gpio()
@@ -38,5 +39,8 @@ void Gpio::setOutputs(const GpioData data) {
 	std::cout<< "SetOutputs called with " << data.testValue << "\n";
 }
 
+void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
+
+}
 
 #endif
