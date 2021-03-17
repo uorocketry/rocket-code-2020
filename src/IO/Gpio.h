@@ -5,6 +5,7 @@
 
 #include "../data/GpioData.h"
 #include "IO.h"
+#include "IO/PwmOutput.h"
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -12,6 +13,7 @@
 #include <iostream>
 #include <condition_variable>
 #include <string>
+#include <unordered_map>
 
 class Gpio : public IO
 {
@@ -29,7 +31,9 @@ protected:
 	std::mutex mutex;
 
 private:
-		struct InitFlags
+	std::unordered_map<std::string, PwmOutput> pwmOutputsMap;
+
+	struct InitFlags
 	{
 		InitStatus gpioSatus = INIT;
 	} status;

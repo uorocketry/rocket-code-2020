@@ -1,12 +1,14 @@
 #include "config/config.h"
 #if USE_GPIO
 
-#include "Gpio.h"
+#include "IO/Gpio.h"
 #include "data/sensorsData.h"
+#include "IO/PwmOutput.h"
 
 #include "helpers/Helper.h"
 #include <wiringPi.h>
 #include <string>
+#include <iostream>
 
 
 Gpio::~Gpio()
@@ -40,6 +42,7 @@ void Gpio::setOutputs(const GpioData data) {
 }
 
 void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
+	pwmOutputsMap.insert({name, PwmOutput(name, pinNbr)});
 
 }
 
