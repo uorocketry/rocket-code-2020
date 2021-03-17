@@ -72,7 +72,7 @@ bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
 	return true;
 }
 
-#ifdef USE_GPIO
+#if USE_GPIO
 void TestingInterface::createNewGpioPwmOutput(std::string name, int pinNbr) 
 {
 	return; //don't do anything for now

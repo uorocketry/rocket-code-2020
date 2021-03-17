@@ -21,7 +21,7 @@ public:
 	virtual bool updateInputs() = 0;
 	virtual bool updateOutputs(std::shared_ptr<sensorsData> data) = 0;
 
-	#ifdef USE_GPIO
+	#if USE_GPIO
 	virtual void createNewGpioPwmOutput(std::string name, int pinNbr) = 0;
 	#endif
 

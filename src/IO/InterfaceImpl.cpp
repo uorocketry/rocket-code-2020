@@ -129,7 +129,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	return true;
 }
 
-#ifdef USE_GPIO
+#if USE_GPIO
 void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr) 
 {
 	gpio.createNewGpioPwmOutput(name, pinNbr);
