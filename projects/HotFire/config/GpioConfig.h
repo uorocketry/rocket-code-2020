@@ -20,7 +20,7 @@
     #if USE_PWM2
         #define PWM2_NAME "Valve505"
         #define PWM2_PIN 14
-        #define PWM2_OPEN 180
+        #define PWM2_OPEN 50
         #define PWM2_CLOSE 0
     #endif
 

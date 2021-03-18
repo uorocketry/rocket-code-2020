@@ -7,6 +7,7 @@
 #include <iostream>
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
+#include "data/GpioData.h"
 
 UOStateMachine::UOStateMachine() : 
 	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
@@ -177,7 +178,18 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
 
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+		
+	#endif
 	if (interface->isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
@@ -202,6 +214,19 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
+
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+		
+	#endif
 
 	detectExternEvent(interfaceData);
 

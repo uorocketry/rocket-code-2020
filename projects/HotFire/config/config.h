@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef USE_SBG
-    #define USE_SBG 1
+    #define USE_SBG 0
 #endif
 
 #ifndef USE_SOCKET_CLIENT
@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-    #define USE_LOGGER 1
+    #define USE_LOGGER 0
 #endif
 
 #ifndef USE_INPUT
@@ -24,12 +24,12 @@
     #if TESTING
         #define USE_RADIO 0
     #else
-        #define USE_RADIO 1
+        #define USE_RADIO 0
     #endif
 #endif
 
 #ifndef SKIP_INIT
-    #define SKIP_INIT 0
+    #define SKIP_INIT 1
 #endif
 
 #ifndef USE_GPIO

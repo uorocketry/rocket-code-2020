@@ -23,8 +23,8 @@ void Gpio::run() {
 void Gpio::initialize()
 {
 
-	status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
-	//status.gpioSatus = READY;
+	//status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
+	status.gpioSatus = READY;
 	
 	// init servos
 
@@ -38,7 +38,12 @@ bool Gpio::isInitialized()
 }
 
 void Gpio::setOutputs(const GpioData data) {
-	std::cout<< "SetOutputs called with " << data.testValue << "\n";
+	for (std::pair<std::string, int> output : data.pwmOutputMap)
+	{
+    	std::cout << output.first << " :: " << output.second << std::endl;
+	}
+
+	//std::cout<< "SetOutputs called with " << data.testValue << "\n";
 }
 
 void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
