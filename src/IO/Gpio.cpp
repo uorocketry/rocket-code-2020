@@ -40,7 +40,8 @@ bool Gpio::isInitialized()
 void Gpio::setOutputs(const GpioData data) {
 	for (std::pair<std::string, int> output : data.pwmOutputMap)
 	{
-    	std::cout << output.first << " :: " << output.second << std::endl;
+		pwmOutputsMap.at(output.first).setValue(output.second);
+    	//std::cout << output.first << " :: " << output.second << std::endl;
 	}
 
 	//std::cout<< "SetOutputs called with " << data.testValue << "\n";

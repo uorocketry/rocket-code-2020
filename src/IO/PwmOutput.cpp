@@ -9,6 +9,7 @@ PwmOutput::PwmOutput(const std::string name, const int pin) : name(name), pinNbr
 
 bool PwmOutput::setValue(int value) {
     this->value = value;
+    std::cout << "Set value to " << value << "\n";
     return true;
 };
 
