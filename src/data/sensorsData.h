@@ -18,7 +18,6 @@ struct sensorsData
 #if TESTING
     bool outOfData = false;
 #endif
-<<<<<<< HEAD:sbgECom/src/data/sensorsData.h
 
 #if USE_RADIO
     int radioEventNumber = -1;
@@ -28,6 +27,3 @@ struct sensorsData
     int clientEventNumber = -1;
 #endif
 };
-=======
-};
->>>>>>> master:src/data/sensorsData.h
