@@ -13,13 +13,10 @@ public:
 	void initialize();
 	void run();
 	bool isInitialized();
-<<<<<<< HEAD:sbgECom/src/IO/Input.h
 	int getData();
 
 protected:
 	std::mutex mutex;
-=======
->>>>>>> master:src/IO/Input.h
 
 private:
     EventQueue &eventQueue;
