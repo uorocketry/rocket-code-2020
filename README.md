@@ -1,6 +1,12 @@
 # rocket-code-2020
 This is the flight computer code for the 2019-2020 and 2020-2021 season
 
+# Cloning
+
+To clone this project, you need to clone with all submodules
+
+`git clone https://github.com/uorocketry/rocket-code-2020/ --recurse-submodules`
+
 # Build
 
 Building instructions can be found [in this wiki page](https://github.com/uorocketry/rocket-code-2020/wiki/Compiling-the-SBG-Library-on-Linux%5CUnix%5CWSL)
