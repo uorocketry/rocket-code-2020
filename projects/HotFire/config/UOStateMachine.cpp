@@ -337,7 +337,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
 	int eventNbr;
 #if USE_INPUT
-	eventNbr = data->inputEventNumber;
+	eventNbr = data->eventNumber;
 
 	switch (eventNbr)
 	{
@@ -365,7 +365,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 #endif
 
 #if USE_SOCKET_CLIENT
-	eventType eventNbr = data->eventNumber;
+	eventNbr = data->clientEventNumber;
 
 	switch (eventNbr)
 	{
@@ -395,6 +395,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 #if USE_RADIO
 	eventNbr = data->radioEventNumber;
 	std::cout << eventNbr << "\n";
+	
 	switch (eventNbr)
 	{
 	case 0:
@@ -418,6 +419,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	default:
 		break;
 	}
+#endif
 }
 
 void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
