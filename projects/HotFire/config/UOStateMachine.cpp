@@ -157,6 +157,10 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 	#if USE_PWM2
 	interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
 	#endif
+
+	#if USE_OUT1
+	interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
+	#endif
 	
 	#endif
 	interface->initialize();
@@ -188,8 +192,13 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		#if USE_PWM2
 		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
 		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		#endif
 		
 	#endif
+
 	if (interface->isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
@@ -224,6 +233,10 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 
 		#if USE_PWM2
 		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif

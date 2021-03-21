@@ -6,6 +6,7 @@
 #include "../data/GpioData.h"
 #include "IO.h"
 #include "IO/PwmOutput.h"
+#include "IO/Output.h"
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -24,13 +25,16 @@ public:
 	void run();
 	bool isInitialized();
 
+	void createNewGpioOutput(std::string name, int pinNbr);
 	void createNewGpioPwmOutput(std::string name, int pinNbr);
+
 	void setOutputs(const GpioData data);
 
 protected:
 	std::mutex mutex;
 
 private:
+	std::unordered_map<std::string, Output> outputsMap;
 	std::unordered_map<std::string, PwmOutput> pwmOutputsMap;
 
 	struct InitFlags

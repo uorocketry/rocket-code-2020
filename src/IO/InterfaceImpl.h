@@ -33,6 +33,7 @@ public:
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
 
 	#if USE_GPIO
+	void createNewGpioOutput(std::string name, int pinNbr);
 	void createNewGpioPwmOutput(std::string name, int pinNbr);
 	#endif
 

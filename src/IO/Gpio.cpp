@@ -43,8 +43,18 @@ void Gpio::setOutputs(const GpioData data) {
 		pwmOutputsMap.at(output.first).setValue(output.second);
     	//std::cout << output.first << " :: " << output.second << std::endl;
 	}
+	for (std::pair<std::string, int> output : data.outputMap)
+	{
+		outputsMap.at(output.first).setValue(output.second);
+    	//std::cout << output.first << " :: " << output.second << std::endl;
+	}
 
 	//std::cout<< "SetOutputs called with " << data.testValue << "\n";
+}
+
+void Gpio::createNewGpioOutput(std::string name, int pinNbr) {
+	outputsMap.insert({name, Output(name, pinNbr)});
+
 }
 
 void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
