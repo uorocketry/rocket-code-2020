@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-    #define USE_LOGGER 0
+    #define USE_LOGGER 1
 #endif
 
 #ifndef USE_INPUT
@@ -29,14 +29,9 @@
 #endif
 
 #ifndef SKIP_INIT
-    #define SKIP_INIT 1
+    #define SKIP_INIT 0
 #endif
 
 #ifndef USE_GPIO
     #define USE_GPIO 1
-#endif
-
-// because we can't use inputs if it is manual testing
-#if TESTING
-    #define USE_SOCKET_CLIENT 0
 #endif
