@@ -260,7 +260,24 @@ ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FILLING);
+	
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
 
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_CLOSE});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
+		#endif
+		
+	#endif
+	
 	detectExternEvent(interfaceData);
 
 	interface->updateOutputs(interfaceData);

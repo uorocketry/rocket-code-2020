@@ -9,8 +9,10 @@ Output::Output(const std::string name, const int pin) : name(name), pinNbr(pin){
 }
 
 bool Output::setValue(int value) {
-    this->value = value;
-    std::cout << "Set value OUT to " << value << "\n";
+    if(currentState != value) {
+        currentState = value;
+        std::cout << "OUT " << name << "changed to " << currentState << "\n";
+    }
     return true;
 };
 

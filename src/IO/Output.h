@@ -14,7 +14,7 @@ public:
 
 private:
     std::string name;
-    int value;
+    int currentState;
     const int pinNbr;
 };
 
