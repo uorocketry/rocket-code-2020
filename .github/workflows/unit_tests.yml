@@ -1,0 +1,26 @@
+name: Unit Testing
+
+on: [push, pull_request]
+
+jobs:
+  unit_testing:
+    name: Unit Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      # Initialization
+      - name: Install SSH Key # For private submodules
+        run: mkdir $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - uses: actions/checkout@v2
+      - name: Force Git to use SSH
+        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
+      - name: Checkout submodules
+        run: |
+          git submodule init
+          git submodule update
+      - name: Cmake Makefiles
+        run: cmake -B ./build -G 'Unix Makefiles'
+      - name: Run make
+        run: cmake --build ./build --target tests
+      - name: Run Unit Tests
+        run: ./build/unitTesting/tests
