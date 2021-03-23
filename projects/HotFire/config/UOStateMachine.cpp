@@ -185,7 +185,12 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
-	pwmWrite(VALVE_160, 1000);
+	static unsigned char pwmValue = 0;
+
+    	if (pwmValue == 256)
+       		pwmValue = 100;
+    	
+	pwmWrite(VALVE_160, pwmValue++);
 	hotFireInterface.update(data, ST_WAIT_FOR_FILLING);
 	hotFireData = hotFireInterface.getLatest();
 
@@ -404,6 +409,6 @@ void UOStateMachine::initServos()
 	wiringPiSetupGpio();
 	pinMode (VALVE_160, PWM_OUTPUT) ;
 	pwmSetMode (PWM_MODE_MS);
-	pwmSetRange (2000);
+	pwmSetRange (256);
 	pwmSetClock (192);
 }
