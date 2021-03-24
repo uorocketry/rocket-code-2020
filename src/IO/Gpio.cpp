@@ -6,9 +6,12 @@
 #include "IO/PwmOutput.h"
 
 #include "helpers/Helper.h"
-#include <wiringPi.h>
 #include <string>
 #include <iostream>
+
+#if USE_WIRING_Pi
+#include <wiringPi.h>
+#endif
 
 
 Gpio::~Gpio()
@@ -23,9 +26,11 @@ void Gpio::run() {
 void Gpio::initialize()
 {
 
-	//status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
+	#if USE_WIRING_Pi
+	status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
+	#else
 	status.gpioSatus = READY;
-	
+	#endif
 	// init servos
 
 	createThread = false;

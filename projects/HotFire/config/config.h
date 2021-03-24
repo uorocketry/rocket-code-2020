@@ -35,3 +35,9 @@
 #ifndef USE_GPIO
     #define USE_GPIO 1
 #endif
+
+#if USE_GPIO
+    #ifndef USE_WIRING_Pi
+        #define USE_WIRING_Pi 1
+    #endif
+#endif

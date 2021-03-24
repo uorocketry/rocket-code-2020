@@ -148,6 +148,7 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
+	interface->initialize();
 	#if USE_GPIO
 	
 	#if USE_PWM1
@@ -163,7 +164,6 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 	#endif
 	
 	#endif
-	interface->initialize();
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
