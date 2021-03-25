@@ -14,16 +14,16 @@
 
     #if USE_PWM1
         #define PWM1_NAME "Valve404"
-        #define PWM1_PIN 14
-        #define PWM1_OPEN 180
-        #define PWM1_CLOSE 0
+        #define PWM1_PIN 12
+        #define PWM1_OPEN 150
+        #define PWM1_CLOSE 60
     #endif
 
     #if USE_PWM2
         #define PWM2_NAME "Valve505"
-        #define PWM2_PIN 14
-        #define PWM2_OPEN 50
-        #define PWM2_CLOSE 0
+        #define PWM2_PIN 13
+        #define PWM2_OPEN 150
+        #define PWM2_CLOSE 6
     #endif
 
     #if USE_OUT1

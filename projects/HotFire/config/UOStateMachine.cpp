@@ -269,7 +269,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 		#endif
 
 		#if USE_PWM2
-		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_CLOSE});
 		#endif
 
 		#if USE_OUT1
