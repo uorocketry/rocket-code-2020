@@ -207,6 +207,22 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	// Keep in mind, this is NOT the time since unix epoch (1970), and not the system time
 	fileStream << currentState.timeStamp << sep;
 
+
+	fileStream << currentState.currentStateNo << sep;
+
+#if USE_GPIO
+
+	for (std::pair<std::string, int> output : currentState.gpioData.outputMap)
+	{
+		fileStream << output.first << "=" << output.second << ":";
+	}
+	for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
+	{
+		fileStream << output.first << "=" << output.second << ":";
+	}
+	fileStream << sep;
+#endif
+
 #if USE_SBG
 	fileStream << currentState.sbg.roll << sep;
 	fileStream << currentState.sbg.pitch << sep;
@@ -232,8 +248,6 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.filteredZaccelerometer << sep;
 
 	fileStream << currentState.sbg.solutionStatus << sep;
-
-	fileStream << currentState.currentStateNo << sep;
 
 	fileStream << currentState.sbg.gpsPosStatus << sep;
 
