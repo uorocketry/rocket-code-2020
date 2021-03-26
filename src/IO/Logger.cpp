@@ -208,8 +208,6 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.timeStamp << sep;
 
 
-	fileStream << currentState.currentStateNo << sep;
-
 #if USE_GPIO
 
 	for (std::pair<std::string, int> output : currentState.gpioData.outputMap)
@@ -248,6 +246,8 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.filteredZaccelerometer << sep;
 
 	fileStream << currentState.sbg.solutionStatus << sep;
+
+	fileStream << currentState.currentStateNo << sep;
 
 	fileStream << currentState.sbg.gpsPosStatus << sep;
 
