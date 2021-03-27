@@ -264,24 +264,16 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 	#if USE_GPIO
 		GpioData& gpioData = interfaceData->gpioData;
 
-		#if USE_SV01
-		gpioData.OutputMap.insert({SV01_NAME, SV01_OPEN});
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_CLOSE});
 		#endif
 
-		#if USE_SV02
-		gpioData.OutputMap.insert({SV02_NAME, SV02_CLOSE});
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_CLOSE});
 		#endif
 
-		#if USE_PWM_SBV01
-		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
-		#endif
-
-		#if USE_PWM_SBV02
-		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
-		#endif
-
-		#if USE_PWM_SBV03
-		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
 		#endif
 		
 	#endif
