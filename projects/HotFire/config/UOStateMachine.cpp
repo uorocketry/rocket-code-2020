@@ -151,17 +151,26 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 	interface->initialize();
 	#if USE_GPIO
 	
-	#if USE_PWM1
-	interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
-	#endif
+		#if USE_SV01
+		interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
+		#endif
 
-	#if USE_PWM2
-	interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
-	#endif
+		#if USE_SV02
+		interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
+		#endif
+		
 
-	#if USE_OUT1
-	interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
-	#endif
+		#if USE_PWM_SBV01
+		interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN);
+		#endif
+
+		#if USE_PWM_SBV02
+		interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN);
+		#endif
+
+		#if USE_PWM_SBV03
+		interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN);
+		#endif
 	
 	#endif
 
@@ -182,22 +191,6 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
-	#if USE_GPIO
-		GpioData& gpioData = interfaceData->gpioData;
-
-		#if USE_PWM1
-		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
-		#endif
-
-		#if USE_PWM2
-		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
-		#endif
-
-		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
-		#endif
-		
-	#endif
 
 	if (interface->isInitialized())
 	{
@@ -227,8 +220,8 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 	#if USE_GPIO
 		GpioData& gpioData = interfaceData->gpioData;
 
-		#if USE_PWM1
-		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
+		#if USE_SV01
+		gpioData.pwmOutputMap.insert({SV01_NAME, SV01_OPEN});
 		#endif
 
 		#if USE_PWM2
