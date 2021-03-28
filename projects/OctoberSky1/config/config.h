@@ -32,6 +32,10 @@
     #define SKIP_INIT 0
 #endif
 
+#ifndef USE_GPIO
+    #define USE_GPIO 0
+#endif
+
 // because we can't use inputs if it is manual testing
 #if TESTING
     #define USE_SOCKET_CLIENT 0

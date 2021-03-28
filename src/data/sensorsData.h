@@ -2,7 +2,9 @@
 
 #include "data/SBGData.h"
 #include "data/UOSMData.h"
+#include "data/GpioData.h"
 #include "helpers/Types.h"
+#include <unordered_map>
 
 //all the informations about the rocket that the state machine will need
 struct sensorsData
@@ -13,6 +15,10 @@ struct sensorsData
 
 #if USE_SBG
     sbgData sbg;
+#endif
+
+#if USE_GPIO
+    GpioData gpioData;
 #endif
 
 #if TESTING

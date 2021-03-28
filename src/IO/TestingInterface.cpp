@@ -72,6 +72,17 @@ bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
 	return true;
 }
 
+#if USE_GPIO
+void TestingInterface::createNewGpioOutput(std::string name, int pinNbr) 
+{
+	return; //don't do anything for now
+}
+void TestingInterface::createNewGpioPwmOutput(std::string name, int pinNbr) 
+{
+	return; //don't do anything for now
+}
+#endif
+
 void TestingInterface::calibrateTelemetry() 
 {
 

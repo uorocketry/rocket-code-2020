@@ -9,7 +9,10 @@
 #include "IO/SocketClient.h"
 #include "IO/Logger.h"
 #include "IO/Radio.h"
+#include "IO/Gpio.h"
 #include "EventQueue.h"
+#include <memory>
+#include <string>
 
 class InterfaceImpl: public Interface
 {
@@ -28,6 +31,11 @@ public:
 	// loop over each sensor and update the latestState
 	bool updateInputs();
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
+
+	#if USE_GPIO
+	void createNewGpioOutput(std::string name, int pinNbr);
+	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	#endif
 
 	time_point getCurrentTime();
 
@@ -56,6 +64,10 @@ private:
 
 #if USE_RADIO
 	Radio radio;
+#endif
+
+#if USE_GPIO
+	Gpio gpio;
 #endif
 };
 

@@ -4,6 +4,7 @@
 #include "IO/TestingInterface.h"
 #include "data/sensorsData.h"
 #include "stateMachineLib/StateMachine.h"
+#include <memory>
 
 class InterfacingStateMachine : public StateMachine
 {

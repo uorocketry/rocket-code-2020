@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef USE_SBG
-    #define USE_SBG 1
+    #define USE_SBG 0
 #endif
 
 #ifndef USE_SOCKET_CLIENT
@@ -24,7 +24,7 @@
     #if TESTING
         #define USE_RADIO 0
     #else
-        #define USE_RADIO 1
+        #define USE_RADIO 0
     #endif
 #endif
 
@@ -32,7 +32,12 @@
     #define SKIP_INIT 0
 #endif
 
-// because we can't use inputs if it is manual testing
-#if TESTING
-    #define USE_SOCKET_CLIENT 0
+#ifndef USE_GPIO
+    #define USE_GPIO 1
+#endif
+
+#if USE_GPIO
+    #ifndef USE_WIRING_Pi
+        #define USE_WIRING_Pi 1
+    #endif
 #endif

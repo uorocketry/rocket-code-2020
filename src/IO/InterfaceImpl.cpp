@@ -6,6 +6,7 @@
 #include "data/UOSMData.h"
 #include <iostream>
 #include "IO/TestingSensors.h"
+#include <string>
 
 
 InterfaceImpl::InterfaceImpl() : eventQueue()
@@ -54,6 +55,10 @@ void InterfaceImpl::initializeOutputs()
 	std::cout << "Initializing RADIO...\n";
 	radio.initialize();
 #endif
+#if USE_GPIO
+	std::cout << "Initializing GPIO...\n";
+	gpio.initialize();
+#endif
 }
 
 
@@ -86,6 +91,10 @@ bool InterfaceImpl::isInitialized()
 	result &= radio.isInitialized();
 #endif
 
+#if USE_GPIO
+	result &= gpio.isInitialized();
+#endif
+
 	return result;
 }
 
@@ -112,9 +121,25 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	radio.enqueueSensorData(*data);
 #endif
 
+
+#if USE_GPIO
+	gpio.setOutputs((*data).gpioData);
+#endif
+
 	return true;
 }
 
+#if USE_GPIO
+void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr) 
+{
+	gpio.createNewGpioOutput(name, pinNbr);
+}
+
+void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr) 
+{
+	gpio.createNewGpioPwmOutput(name, pinNbr);
+}
+#endif
 
 void InterfaceImpl::calibrateTelemetry() 
 {

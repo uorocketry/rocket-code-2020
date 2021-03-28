@@ -2,6 +2,7 @@
 #include "InterfacingStateMachine.h"
 #include "stateMachineLib/StateMachine.h"
 
+
 InterfacingStateMachine::InterfacingStateMachine(BYTE maxStates, BYTE initialState) : 
 	StateMachine(maxStates, initialState), interfaceImpl()
 {
