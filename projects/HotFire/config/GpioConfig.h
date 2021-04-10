@@ -3,7 +3,7 @@
 #include "config/config.h"
 
 
-#if USE_GPIO
+#if USE_GPIO == 1
 
     #define USE_PWM1 1
 

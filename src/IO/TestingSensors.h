@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if TESTING
+#if TESTING == 1
 
 #include "IO.h"
 #include "../data/SBGData.h"

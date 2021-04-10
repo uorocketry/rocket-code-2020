@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if TESTING
+#if TESTING == 1
 
 #include "helpers/Helper.h"
 #include "data/sensorsData.h"
@@ -36,7 +36,7 @@ void TestingSensors::initialize()
 
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
 
-#if USE_SBG
+#if USE_SBG == 1
 		// SBG:
 		currentData.sbg.roll = helper::processFloat(currentRow[count++]);
 		currentData.sbg.pitch = helper::processFloat(currentRow[count++]);

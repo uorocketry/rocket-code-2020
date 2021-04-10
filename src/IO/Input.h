@@ -1,5 +1,5 @@
 #pragma once
-#if USE_INPUT
+#if USE_INPUT == 1
 
 #include "IO.h"
 #include "EventQueue.h"

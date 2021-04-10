@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_SBG
+#if USE_SBG == 1
 
 #include "SBGSensor.h"
 #include<chrono>

@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
 
 #include "SocketClient.h"
 #include "../data/SBGData.h"

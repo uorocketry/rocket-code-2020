@@ -1,17 +1,17 @@
 #include "config/config.h"
-#if USE_GPIO
+#if USE_GPIO == 1
 
 #include "IO/PwmOutput.h"
 #include <iostream>
 
-#if USE_WIRING_Pi
+#if USE_WIRING_Pi == 1
 #include <wiringPi.h>
 #endif
 
 PwmOutput::PwmOutput(const std::string name, const int pin) : name(name), pinNbr(pin){
     std::cout << "created pwmOutput " << name << "\n";
     
-    #if USE_WIRING_Pi
+    #if USE_WIRING_Pi == 1
     pinMode (pinNbr, PWM_OUTPUT) ;
 	pwmSetMode (PWM_MODE_MS);
 	pwmSetRange (256);
@@ -24,7 +24,7 @@ bool PwmOutput::setValue(int value) {
         currentState = value;
         std::cout << "PWM " << name << "changed to " << currentState << "\n";
 
-        #if USE_WIRING_Pi
+        #if USE_WIRING_Pi == 1
         pwmWrite(pinNbr, value);
         #endif
     }

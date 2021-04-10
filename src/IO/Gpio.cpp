@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_GPIO
+#if USE_GPIO == 1
 
 #include "IO/Gpio.h"
 #include "data/sensorsData.h"
@@ -9,7 +9,7 @@
 #include <string>
 #include <iostream>
 
-#if USE_WIRING_Pi
+#if USE_WIRING_Pi == 1
 #include <wiringPi.h>
 #endif
 
@@ -26,7 +26,7 @@ void Gpio::run() {
 void Gpio::initialize()
 {
 
-	#if USE_WIRING_Pi
+	#if USE_WIRING_Pi == 1
 	status.gpioSatus = (wiringPiSetupGpio() == 0) ? READY : INIT;
 	#else
 	status.gpioSatus = READY;
