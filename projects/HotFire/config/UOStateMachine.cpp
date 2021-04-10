@@ -2,11 +2,13 @@
 
 #include <wiringPi.h>
 #include "config/config.h"
+#include "config/GpioConfig.h"
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
 #define LED 0
 #include "helpers/Types.h"
+#include "data/GpioData.h"
 
 UOStateMachine::UOStateMachine() : 
 	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
@@ -132,6 +134,21 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 	wiringPiSetupGpio();
 	pinMode(LED, OUTPUT);
 	interface->initialize();
+	#if USE_GPIO == 1
+	
+	#if USE_PWM1
+	interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
+	#endif
+
+	#if USE_PWM2
+	interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
+	#endif
+
+	#if USE_OUT1
+	interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
+	#endif
+	
+	#endif
 
 	InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -150,6 +167,22 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
+	#if USE_GPIO == 1
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		#endif
+		
+	#endif
 
 	if (interface->isInitialized())
 	{
@@ -177,6 +210,23 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
 
+	#if USE_GPIO == 1
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
+		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		#endif
+		
+	#endif
+
 	detectExternEvent(interfaceData);
 
 	interface->updateOutputs(interfaceData);
@@ -197,7 +247,24 @@ ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FILLING);
+	
+	#if USE_GPIO == 1
+		GpioData& gpioData = interfaceData->gpioData;
 
+		#if USE_PWM1
+		gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_CLOSE});
+		#endif
+
+		#if USE_PWM2
+		gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_CLOSE});
+		#endif
+
+		#if USE_OUT1
+		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
+		#endif
+		
+	#endif
+	
 	detectExternEvent(interfaceData);
 
 	interface->updateOutputs(interfaceData);

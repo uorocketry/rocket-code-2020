@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if USE_RADIO
+#if USE_RADIO == 1
 
 #include "../data/sensorsData.h"
 #include "IO.h"

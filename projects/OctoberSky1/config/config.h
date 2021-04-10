@@ -21,7 +21,7 @@
 #endif
 
 #ifndef USE_RADIO
-    #if TESTING
+    #if TESTING == 1
         #define USE_RADIO 0
     #else
         #define USE_RADIO 1
@@ -32,7 +32,11 @@
     #define SKIP_INIT 0
 #endif
 
+#ifndef USE_GPIO
+    #define USE_GPIO 0
+#endif
+
 // because we can't use inputs if it is manual testing
-#if TESTING
+#if TESTING == 1
     #define USE_SOCKET_CLIENT 0
 #endif

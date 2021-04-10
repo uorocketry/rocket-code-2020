@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
 
 #include "IO.h"
 #include "../data/SBGData.h"

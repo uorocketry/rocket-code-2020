@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_INPUT
+#if USE_INPUT == 1
 
 #include "Input.h"
 #include "IO.h"

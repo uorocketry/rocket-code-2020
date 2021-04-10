@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if TESTING
+#if TESTING == 1
 
 #include "data/sensorsData.h"
 
@@ -10,6 +10,7 @@
 #include "IO/Logger.h"
 #include "IO/Radio.h"
 #include <queue>
+#include <string>
 
 class TestingInterface : public Interface
 {
@@ -28,6 +29,11 @@ public:
 	bool updateInputs();
 	bool updateOutputs(std::shared_ptr<sensorsData> data);
 
+	#if USE_GPIO == 1
+	void createNewGpioOutput(std::string name, int pinNbr);
+	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	#endif
+
 	time_point getCurrentTime();
 
 private:
@@ -39,11 +45,11 @@ private:
 
 	time_point latestTime;
 
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	Logger logger;
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
 	Radio radio;
 #endif
 };
