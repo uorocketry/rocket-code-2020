@@ -24,12 +24,4 @@ struct sensorsData
 #if TESTING == 1
     bool outOfData = false;
 #endif
-
-#if USE_RADIO
-    int radioEventNumber = -1;
-#endif
-
-#if USE_SOCKET_CLIENT
-    int clientEventNumber = -1;
-#endif
 };

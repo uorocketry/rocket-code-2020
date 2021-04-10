@@ -1,12 +1,10 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
-#include <wiringPi.h>
 #include "config/config.h"
 #include "config/GpioConfig.h"
 #include "UOStateMachine.h"
 #include <iostream>
 #include "data/sensorsData.h"
-#define LED 0
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 
@@ -131,8 +129,6 @@ void UOStateMachine::DoneEXT(){
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
-	wiringPiSetupGpio();
-	pinMode(LED, OUTPUT);
 	interface->initialize();
 	#if USE_GPIO == 1
 	
@@ -202,7 +198,6 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterWaitForFilling\n";
-	digitalWrite(LED, 1);
 	enterNewState(ST_WAIT_FOR_FILLING);
 }
 
@@ -240,7 +235,6 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
 	std::cout << "HotFireSM::EnterFilling\n";
-	digitalWrite(LED, 0);
 	enterNewState(ST_FILLING);
 }
 	
@@ -402,91 +396,31 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 
 void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 {
-	int eventNbr;
-#if USE_INPUT
-	eventNbr = data->eventNumber;
+	eventType eventNbr = data->eventNumber;
 
 	switch (eventNbr)
 	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortEXT();
-		break;
-	default:
-		break;
+		case 0:
+			StartFillingEXT();
+			break;
+		case 1:
+			StopFillingEXT();
+			break;
+		case 2:
+			IgnitionEXT();
+			break;
+		case 3:
+			FinalVentingEXT();
+			break;
+		case 4:
+			DoneEXT();
+			break;
+		case 5:
+			AbortEXT();
+			break;
+		default:
+			break;
 	}
-#endif
-
-#if USE_SOCKET_CLIENT
-	eventNbr = data->clientEventNumber;
-
-	switch (eventNbr)
-	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortEXT();
-		break;
-	default:
-		break;
-	}
-#endif
-
-#if USE_RADIO
-	eventNbr = data->radioEventNumber;
-	std::cout << eventNbr << "\n";
-	
-	switch (eventNbr)
-	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortEXT();
-		break;
-	default:
-		break;
-	}
-#endif
 }
 
 void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)

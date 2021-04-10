@@ -16,6 +16,9 @@ InterfaceImpl::InterfaceImpl() : eventQueue()
 #if USE_SOCKET_CLIENT == 1
         , client(eventQueue)
 #endif
+#if USE_RADIO == 1
+        , radio(eventQueue)
+#endif
 {
 }
 

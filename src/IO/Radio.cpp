@@ -16,6 +16,12 @@
 #include <string>
 #include "Logger.h"
 
+Radio::Radio(EventQueue &eventQueue) 
+	: eventQueue(eventQueue)
+{
+	
+}
+
 Radio::~Radio()
 {
 	
@@ -45,15 +51,13 @@ bool Radio::isInitialized()
 
 void Radio::run()
 {
-	
-
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	while (true)
 	{	
 		if(serialDataAvail(fd) > 0) 
 		{
-			radioEventNumber = serialGetchar(fd);
+			eventQueue.push(serialGetchar(fd));
 		}
 		
 		if (!logQueue.empty())
@@ -137,13 +141,4 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, "\r\n");
 }
 
-int Radio::getData() {
-	// called by the interface
-	std::lock_guard<std::mutex> lockGuard(mutex);
-	int result = radioEventNumber;
-	radioEventNumber = -1;
-	return result;
-}
-
-//END USE_RADIO
-#endif
+#endif // USE_RADIO

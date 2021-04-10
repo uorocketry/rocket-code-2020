@@ -24,7 +24,7 @@
     #if TESTING == 1
         #define USE_RADIO 0
     #else
-        #define USE_RADIO 0
+        #define USE_RADIO 1
     #endif
 #endif
 

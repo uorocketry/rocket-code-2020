@@ -19,8 +19,6 @@ public:
     void initialize();
     bool isInitialized();
 
-    // rocketState getLatest();
-
 private:
     EventQueue &eventQueue;
 

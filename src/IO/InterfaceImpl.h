@@ -58,12 +58,12 @@ private:
 	SocketClient client;
 #endif
 
-#if USE_LOGGER == 1
-	Logger logger;
-#endif
-
 #if USE_RADIO == 1
 	Radio radio;
+#endif
+
+#if USE_LOGGER == 1
+	Logger logger;
 #endif
 
 #if USE_GPIO == 1
