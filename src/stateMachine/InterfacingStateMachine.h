@@ -19,7 +19,7 @@ public:
 
 protected:
 
-#if !TESTING
+#if TESTING != 1
 	InterfaceImpl interfaceImpl;
 #else
 	TestingInterface interfaceImpl;

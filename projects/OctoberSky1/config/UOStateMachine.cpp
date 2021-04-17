@@ -195,7 +195,7 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_DESCENT_PHASE_1);
 
-#if USE_SBG
+#if USE_SBG == 1
 	if (interfaceData->sbg.relativeBarometricAltitude <= 100) { // change descent phase at given relative altitude
 		InternalEvent(ST_DESCENT_PHASE_2);
 	}
@@ -266,7 +266,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 
 void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 {
-#if USE_SBG
+#if USE_SBG == 1
 
 	static uint8_t consecutiveEvents = 0;
 
@@ -296,7 +296,7 @@ void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 
 void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
 {
-#if USE_SBG
+#if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
 	// pitch is pitch
@@ -328,7 +328,7 @@ void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
 
 void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
 {
-#if USE_SBG
+#if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
 	// pitch is pitch
@@ -360,7 +360,7 @@ void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
 
 void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
 {
-#if USE_SBG
+#if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
 	// Euler angle
 	// pitch is pitch
@@ -390,7 +390,7 @@ void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
 
 void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 {
-#if USE_SBG
+#if USE_SBG == 1
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
 		   data->sbg.barometricAltitude,
 		   data->sbg.gpsLatitude, data->sbg.gpsLongitude, data->sbg.gpsAltitude,

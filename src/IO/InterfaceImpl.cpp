@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if !TESTING
+#if TESTING != 1
 
 #include "InterfaceImpl.h"
 #include "IO/IO.h"
@@ -10,10 +10,10 @@
 
 
 InterfaceImpl::InterfaceImpl() : eventQueue()
-#if USE_INPUT
+#if USE_INPUT == 1
         , input(eventQueue)
 #endif
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
         , client(eventQueue)
 #endif
 {
@@ -31,15 +31,15 @@ void InterfaceImpl::initialize()
 
 void InterfaceImpl::initializeInputs()
 {
-	#if USE_SBG
+	#if USE_SBG == 1
 		std::cout << "Initializing SBG...\n";
 		mySbgSensor.initialize();
 	#endif
-	#if USE_INPUT
+	#if USE_INPUT == 1
 		std::cout << "Initializing INPUT...\n";
 		input.initialize();
 	#endif
-	#if USE_SOCKET_CLIENT
+	#if USE_SOCKET_CLIENT == 1
 		std::cout << "Initializing SOCKET_CLIENT...\n";
 		client.initialize();
 	#endif
@@ -47,15 +47,15 @@ void InterfaceImpl::initializeInputs()
 
 void InterfaceImpl::initializeOutputs() 
 {
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
 #endif
-#if USE_RADIO
+#if USE_RADIO == 1
 	std::cout << "Initializing RADIO...\n";
 	radio.initialize();
 #endif
-#if USE_GPIO
+#if USE_GPIO == 1
 	std::cout << "Initializing GPIO...\n";
 	gpio.initialize();
 #endif
@@ -64,34 +64,34 @@ void InterfaceImpl::initializeOutputs()
 
 bool InterfaceImpl::isInitialized()
 {
-#if SKIP_INIT
+#if SKIP_INIT == 1
 	std::cout << "Skipping init\n";
 	return true;
 #endif
 
 	bool result = 1;
 
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	result &= logger.isInitialized();
 #endif
 
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
 	result &= client.isInitialized();
 #endif
 
-#if USE_SBG
+#if USE_SBG == 1
 	result &= mySbgSensor.isInitialized();
 #endif
 
-#if USE_INPUT
+#if USE_INPUT == 1
 	result &= input.isInitialized();
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
 	result &= radio.isInitialized();
 #endif
 
-#if USE_GPIO
+#if USE_GPIO == 1
 	result &= gpio.isInitialized();
 #endif
 
@@ -102,7 +102,7 @@ bool InterfaceImpl::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>();
 
-#if USE_SBG
+#if USE_SBG == 1
 	latestState->sbg = mySbgSensor.getData();
 #endif
 
@@ -113,23 +113,23 @@ bool InterfaceImpl::updateInputs()
 
 bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data) 
 {
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	logger.enqueueSensorData(*data);
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
 	radio.enqueueSensorData(*data);
 #endif
 
 
-#if USE_GPIO
+#if USE_GPIO == 1
 	gpio.setOutputs((*data).gpioData);
 #endif
 
 	return true;
 }
 
-#if USE_GPIO
+#if USE_GPIO == 1
 void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr) 
 {
 	gpio.createNewGpioOutput(name, pinNbr);
@@ -143,7 +143,7 @@ void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr)
 
 void InterfaceImpl::calibrateTelemetry() 
 {
-#if USE_SBG
+#if USE_SBG == 1
 	mySbgSensor.setZeroBarometricAltitude();
 #endif
 }

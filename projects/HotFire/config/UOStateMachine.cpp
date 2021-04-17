@@ -149,7 +149,7 @@ void UOStateMachine::DoneEXT(){
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
 	interface->initialize();
-	#if USE_GPIO
+	#if USE_GPIO == 1
 	
 	#if USE_PWM1
 	interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
@@ -182,7 +182,7 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
-	#if USE_GPIO
+	#if USE_GPIO == 1
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_PWM1
@@ -224,7 +224,7 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
 
-	#if USE_GPIO
+	#if USE_GPIO == 1
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_PWM1
@@ -261,7 +261,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FILLING);
 	
-	#if USE_GPIO
+	#if USE_GPIO == 1
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_PWM1
