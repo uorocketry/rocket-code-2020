@@ -23,7 +23,7 @@ public:
 
 protected:
 
-#if TESTING == 0
+#if TESTING != 1
 	InterfaceImpl interfaceImpl;
 #else
 	TestingInterface interfaceImpl;

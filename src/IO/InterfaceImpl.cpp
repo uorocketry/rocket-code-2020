@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if TESTING == 0
+#if TESTING != 1
 
 #include "InterfaceImpl.h"
 #include "IO/IO.h"
