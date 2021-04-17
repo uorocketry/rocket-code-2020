@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if !TESTING
+#if TESTING == 0
 
 #include "IO/Interface.h"
 #include "IO/SBGSensor.h"
