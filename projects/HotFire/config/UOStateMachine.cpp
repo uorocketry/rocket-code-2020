@@ -198,11 +198,13 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		#endif
 		
 	#endif
+	
+	// Must add logic to determine if the interface is ready based on interface data
 
-	if (interface->isInitialized())
-	{
-		InternalEvent(ST_WAIT_FOR_FILLING);
-	}
+	// if (interface->isInitialized())
+	// {
+	// 	InternalEvent(ST_WAIT_FOR_FILLING);
+	// }
 
 	// showInfo(interfaceData);
 

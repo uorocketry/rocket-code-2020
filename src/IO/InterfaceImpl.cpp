@@ -61,21 +61,6 @@ void InterfaceImpl::initializeOutputs()
 #endif
 }
 
-
-bool InterfaceImpl::isInitialized()
-{
-#if SKIP_INIT
-	std::cout << "Skipping init\n";
-	return true;
-#endif
-
-	bool result = 1;
-
-
-
-	return result;
-}
-
 bool InterfaceImpl::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>();
