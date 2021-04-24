@@ -26,17 +26,17 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
     interface->initialize();
 
-#if USE_GPIO
+#if USE_GPIO == 1
 
-#if USE_PWM1
+#if USE_PWM1 == 1
     interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
 #endif
 
-#if USE_PWM2
+#if USE_PWM2 == 1
     interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
 #endif
 
-#if USE_OUT1
+#if USE_OUT1 == 1
     interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
 #endif
 
@@ -87,28 +87,28 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
     /*
      * GPIO event number, a 4 bit binary number where the
-     * 4th bit is the enable bit and the first 3 control
+     * 1st bit is the enable bit and the last 3 control
      * whether the PWM2, PWM1, and OUT1 are open/closed.
      * A '1' means to open the valve and a '0' to close it.
      *
      * 0 0 0 0
-     * | | | ^--------- OUT1
-     * | | ^----------- PWM1
-     * | ^------------- PWM2
-     * ^--------------- Enable bit
+     * | | | ^--------- Enable bit
+     * | | ^----------- OUT1
+     * | ^------------- PWM1
+     * ^--------------- PWM2
      */
 
-#if USE_GPIO
+#if USE_GPIO == 1
     GpioData& gpioData = interfaceData->gpioData;
 
     // Check if enable bit is set
-    bool enabled = eventNbr > 0 && (eventNbr & 0b1000);
+    bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
 
-#if USE_OUT1
+#if USE_OUT1 == 1
     if (enabled)
     {
         // Open OUT1 is the first bit is set
-        bool open = eventNbr & 0b1;
+        bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
 
         gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
 
@@ -116,11 +116,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
     }
 #endif
 
-#if USE_PWM1
+#if USE_PWM1 == 1
     if (enabled)
     {
         // Open PWM2 if the second bit is set
-        bool open = eventNbr & 0b10;
+        bool open = eventNbr & PWM1_EVENT_ENABLE_MASK;
 
         gpioData.pwmOutputMap.insert({PWM1_NAME, open ? PWM1_OPEN : PWM1_CLOSE});
 
@@ -128,11 +128,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
     }
 #endif
 
-#if USE_PWM2
+#if USE_PWM2 == 1
     if (enabled)
     {
         // Open PWM2 if the third bit is set
-        bool open = eventNbr & 0b100;
+        bool open = eventNbr & PWM2_EVENT_ENABLE_MASK;
 
         gpioData.pwmOutputMap.insert({PWM2_NAME, open ? PWM2_OPEN : PWM2_CLOSE});
 
