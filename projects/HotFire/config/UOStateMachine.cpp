@@ -306,6 +306,31 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_IGNITION);
 
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_OPEN});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
+
 	detectExternEvent(interfaceData);
 
 	interface->updateOutputs(interfaceData);
@@ -325,6 +350,31 @@ ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_IGNITION);
+
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_IGNITION});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
 
 	detectExternEvent(interfaceData);
 	switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000));
@@ -347,6 +397,31 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FULL_BURN);
 
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_OPEN});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
+
 	detectExternEvent(interfaceData);
 
 	interface->updateOutputs(interfaceData);
@@ -366,6 +441,31 @@ ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FINAL_VENTING);
+
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_OPEN});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_OPEN});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
 
 	detectExternEvent(interfaceData);
 
@@ -388,6 +488,31 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_DONE);
 
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
+
 	interface->updateOutputs(interfaceData);
 }
 
@@ -400,6 +525,32 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_ABORT_FILLING);
+
+
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
 
 	detectExternEvent(interfaceData);
 
@@ -415,6 +566,31 @@ ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_ABORT_BURN);
+
+	#if USE_GPIO
+		GpioData& gpioData = interfaceData->gpioData;
+
+		#if USE_SV01
+		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		#endif
+
+		#if USE_SV02
+		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV01
+		gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV02
+		gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
+		#endif
+
+		#if USE_PWM_SBV03
+		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+		#endif
+		
+	#endif
 
 	detectExternEvent(interfaceData);
 
