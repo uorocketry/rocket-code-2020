@@ -4,6 +4,9 @@ project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
 
+if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
+	add_compile_definitions(-D SERVO_CONTROL=$ENV{SERVO_CONTROL})
+endif()
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	add_compile_definitions(HOTFIRE_TEST=$ENV{HOTFIRE_TEST})
@@ -52,7 +55,9 @@ endif()
 # ---------------
 find_package (Threads)
 
-if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
+	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/ServoControl/*.cpp)
+elseif (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
 else()
 	file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
@@ -64,7 +69,14 @@ add_library(MainLoopLib ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 
 target_include_directories(MainLoopLib PUBLIC ./src/)
 
-if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
+if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
+	target_include_directories(MainLoopLib PUBLIC
+			./projects/ServoControl/
+	)
+	target_include_directories(MainLoopLib PUBLIC
+			./projects/HotFire/
+	)
+elseif (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	target_include_directories(MainLoopLib PUBLIC
 			./projects/HotFire/
 	)
