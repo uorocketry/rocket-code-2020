@@ -5,10 +5,13 @@
 #include "IO.h"
 #include "iostream"
 
-Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue) {
+Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue)
+{
+
 }
 
-Input::~Input() {
+Input::~Input() 
+{
     
 }
 

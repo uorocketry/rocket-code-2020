@@ -14,6 +14,9 @@ public:
 	void run();
 	bool isInitialized();
 
+protected:
+	std::mutex mutex;
+
 private:
     EventQueue &eventQueue;
 

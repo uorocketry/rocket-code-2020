@@ -12,10 +12,9 @@ public:
 
 	// External events taken by this state machine
 	void StartFillingEXT();
+	void AbortEXT();
 	void StopFillingEXT();
-	void AbortFillingEXT();
 	void IgnitionEXT();
-	void AbortBurnEXT();
 	void FinalVentingEXT();
 	void DoneEXT();
 

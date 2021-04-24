@@ -5,6 +5,7 @@
 
 #include "../data/sensorsData.h"
 #include "IO.h"
+#include "EventQueue.h"
 #include <queue>
 #include <mutex>
 #include <condition_variable>
@@ -12,6 +13,7 @@
 class Radio : public IO
 {
 public:
+	Radio(EventQueue &eventQueue);
 	~Radio();
 
 	void initialize();
@@ -25,6 +27,8 @@ protected:
 	std::mutex mutex;
 
 private:
+	EventQueue &eventQueue;
+
 	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToRadio();
 

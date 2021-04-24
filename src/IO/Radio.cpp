@@ -16,6 +16,12 @@
 #include <string>
 #include "Logger.h"
 
+Radio::Radio(EventQueue &eventQueue) 
+	: eventQueue(eventQueue)
+{
+	
+}
+
 Radio::~Radio()
 {
 	
@@ -48,7 +54,12 @@ void Radio::run()
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	while (true)
-	{
+	{	
+		if(serialDataAvail(fd) > 0) 
+		{
+			eventQueue.push(serialGetchar(fd));
+		}
+		
 		if (!logQueue.empty())
 		{
 			dequeueToRadio();
@@ -130,4 +141,4 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, "\r\n");
 }
 
-#endif
+#endif // USE_RADIO
