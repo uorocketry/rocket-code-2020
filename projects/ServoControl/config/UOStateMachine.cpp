@@ -26,21 +26,21 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
     interface->initialize();
 
-#if USE_GPIO == 1
+    #if USE_GPIO == 1
 
-#if USE_PWM1 == 1
-    interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
-#endif
+        #if USE_PWM1 == 1
+            interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
+        #endif
 
-#if USE_PWM2 == 1
-    interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
-#endif
+        #if USE_PWM2 == 1
+            interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
+        #endif
 
-#if USE_OUT1 == 1
-    interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
-#endif
+        #if USE_OUT1 == 1
+            interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
+        #endif
 
-#endif
+    #endif
 
     InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -98,49 +98,49 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
      * ^--------------- PWM2
      */
 
-#if USE_GPIO == 1
-    GpioData& gpioData = interfaceData->gpioData;
+    #if USE_GPIO == 1
+        GpioData& gpioData = interfaceData->gpioData;
 
-    // Check if enable bit is set
-    bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
+        // Check if enable bit is set
+        bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
 
-#if USE_OUT1 == 1
-    if (enabled)
-    {
-        // Open OUT1 is the first bit is set
-        bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
+        #if USE_OUT1 == 1
+            if (enabled)
+            {
+                // Open OUT1 is the first bit is set
+                bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
 
-        gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
+                gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
 
-        std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
-    }
-#endif
+                std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
+            }
+        #endif
 
-#if USE_PWM1 == 1
-    if (enabled)
-    {
-        // Open PWM2 if the second bit is set
-        bool open = eventNbr & PWM1_EVENT_ENABLE_MASK;
+        #if USE_PWM1 == 1
+            if (enabled)
+            {
+                // Open PWM2 if the second bit is set
+                bool open = eventNbr & PWM1_EVENT_ENABLE_MASK;
 
-        gpioData.pwmOutputMap.insert({PWM1_NAME, open ? PWM1_OPEN : PWM1_CLOSE});
+                gpioData.pwmOutputMap.insert({PWM1_NAME, open ? PWM1_OPEN : PWM1_CLOSE});
 
-        std::cout << "ServoControlSM::Control PWM1 " << (open ? "OPEN" : "CLOSE") << "\n";
-    }
-#endif
+                std::cout << "ServoControlSM::Control PWM1 " << (open ? "OPEN" : "CLOSE") << "\n";
+            }
+        #endif
 
-#if USE_PWM2 == 1
-    if (enabled)
-    {
-        // Open PWM2 if the third bit is set
-        bool open = eventNbr & PWM2_EVENT_ENABLE_MASK;
+        #if USE_PWM2 == 1
+            if (enabled)
+            {
+                // Open PWM2 if the third bit is set
+                bool open = eventNbr & PWM2_EVENT_ENABLE_MASK;
 
-        gpioData.pwmOutputMap.insert({PWM2_NAME, open ? PWM2_OPEN : PWM2_CLOSE});
+                gpioData.pwmOutputMap.insert({PWM2_NAME, open ? PWM2_OPEN : PWM2_CLOSE});
 
-        std::cout << "ServoControlSM::Control PWM2 " << (open ? "OPEN" : "CLOSE") << "\n";
-    }
-#endif
+                std::cout << "ServoControlSM::Control PWM2 " << (open ? "OPEN" : "CLOSE") << "\n";
+            }
+        #endif
 
-#endif
+    #endif
 
     interface->updateOutputs(interfaceData);
 }
