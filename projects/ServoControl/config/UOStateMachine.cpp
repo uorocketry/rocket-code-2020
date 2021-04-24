@@ -19,63 +19,13 @@ UOStateMachine::UOStateMachine() :
     interface = &interfaceImpl;
 }
 
-// StartFilling external event
-void UOStateMachine::StartFillingEXT()
-{
-    BEGIN_TRANSITION_MAP					    // - Current State -
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-            TRANSITION_MAP_ENTRY(ST_FILLING)	// ST_WAIT_FOR_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
-    END_TRANSITION_MAP(NULL)
-}
-
-// StopFilling external event
-void UOStateMachine::StopFillingEXT()
-{
-    BEGIN_TRANSITION_MAP						       // - Current State -
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_WAIT_FOR_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_WAIT_FOR_FILLING
-            TRANSITION_MAP_ENTRY(ST_DONE)              // ST_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_DONE
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_ABORT_FILLING
-    END_TRANSITION_MAP(NULL)
-}
-
-// AbortFilling external event
-void UOStateMachine::AbortFillingEXT()
-{
-    BEGIN_TRANSITION_MAP					       // - Current State -
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_WAIT_FOR_INIT
-            TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
-            TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_FILLING
-    END_TRANSITION_MAP(NULL)
-}
-
-// Done external event
-void UOStateMachine::DoneEXT(){
-    BEGIN_TRANSITION_MAP					        // - Current State -
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_INIT
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_WAIT_FOR_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_FILLING
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DONE
-            TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_ABORT_FILLING
-    END_TRANSITION_MAP(NULL)
-}
-
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
     interface->initialize();
+
 #if USE_GPIO
 
 #if USE_PWM1
@@ -109,29 +59,11 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
-#if USE_GPIO
-    GpioData& gpioData = interfaceData->gpioData;
-
-#if USE_PWM1
-    gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
-#endif
-
-#if USE_PWM2
-    gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
-#endif
-
-#if USE_OUT1
-    gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
-#endif
-
-#endif
 
     if (interface->isInitialized())
     {
-        InternalEvent(ST_WAIT_FOR_FILLING);
+        InternalEvent(ST_CONTROL);
     }
-
-    // showInfo(interfaceData);
 
     interface->updateOutputs(interfaceData);
 }
@@ -141,134 +73,76 @@ EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
     std::cout << "ServoControlSM::ExitWaitForInit\n";
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
+ENTRY_DEFINE(UOStateMachine, EnterControl, UOSMData)
 {
-    std::cout << "ServoControlSM::EnterWaitForFilling\n";
-    enterNewState(ST_WAIT_FOR_FILLING);
+    std::cout << "ServoControlSM::EnterControl\n";
+    enterNewState(ST_CONTROL);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
+STATE_DEFINE(UOStateMachine, Control, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
+    interfaceData = updateInterface(data, ST_CONTROL);
+
+    eventType eventNbr = interfaceData->eventNumber;
+
+    /*
+     * GPIO event number, a 4 bit binary number where the
+     * 4th bit is the enable bit and the first 3 control
+     * whether the PWM2, PWM1, and OUT1 are open/closed.
+     * A '1' means to open the valve and a '0' to close it.
+     *
+     * 0 0 0 0
+     * | | | ^--------- OUT1
+     * | | ^----------- PWM1
+     * | ^------------- PWM2
+     * ^--------------- Enable bit
+     */
 
 #if USE_GPIO
     GpioData& gpioData = interfaceData->gpioData;
 
-#if USE_PWM1
-    gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_OPEN});
-#endif
-
-#if USE_PWM2
-    gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_OPEN});
-#endif
+    // Check if enable bit is set
+    bool enabled = eventNbr > 0 && (eventNbr & 0b1000);
 
 #if USE_OUT1
-    gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
-#endif
-
-#endif
-
-    detectExternEvent(interfaceData);
-
-    interface->updateOutputs(interfaceData);
-}
-
-EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
-{
-    std::cout << "ServoControlSM::ExitWaitForFilling\n";
-}
-
-ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
-{
-    std::cout << "ServoControlSM::EnterFilling\n";
-    enterNewState(ST_FILLING);
-}
-
-STATE_DEFINE(UOStateMachine, Filling, UOSMData)
-{
-    interfaceData = updateInterface(data, ST_FILLING);
-
-#if USE_GPIO
-    GpioData& gpioData = interfaceData->gpioData;
-
-#if USE_PWM1
-    gpioData.pwmOutputMap.insert({PWM1_NAME, PWM1_CLOSE});
-#endif
-
-#if USE_PWM2
-    gpioData.pwmOutputMap.insert({PWM2_NAME, PWM2_CLOSE});
-#endif
-
-#if USE_OUT1
-    gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
-#endif
-
-#endif
-
-    detectExternEvent(interfaceData);
-
-    interface->updateOutputs(interfaceData);
-}
-
-EXIT_DEFINE(UOStateMachine, ExitFilling)
-{
-    std::cout << "ServoControlSM::ExitFilling\n";
-}
-
-ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
-{
-    std::cout << "ServoControlSM::EnterDone\n";
-    std::cout << "Done.\n";
-    enterNewState(ST_DONE);
-}
-
-STATE_DEFINE(UOStateMachine, Done, UOSMData)
-{
-    interfaceData = updateInterface(data, ST_DONE);
-
-    interface->updateOutputs(interfaceData);
-}
-
-ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
-{
-    std::cout << "ServoControlSM::EnterAbortFilling\n";
-    enterNewState(ST_ABORT_FILLING);
-}
-
-STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
-{
-    interfaceData = updateInterface(data, ST_ABORT_FILLING);
-
-    detectExternEvent(interfaceData);
-
-    interface->updateOutputs(interfaceData);
-}
-
-void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
-{
-    eventType eventNbr = data->eventNumber;
-
-    switch (eventNbr)
+    if (enabled)
     {
-        case 0:
-            StartFillingEXT();
-            break;
-        case 1:
-            StopFillingEXT();
-            break;
-        case 4:
-            DoneEXT();
-            break;
-        case 5:
-            AbortFillingEXT();
-            break;
-        default:
-            break;
-    }
-}
+        // Open OUT1 is the first bit is set
+        bool open = eventNbr & 0b1;
 
-void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
-{
+        gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
+
+        std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
+    }
+#endif
+
+#if USE_PWM1
+    if (enabled)
+    {
+        // Open PWM2 if the second bit is set
+        bool open = eventNbr & 0b10;
+
+        gpioData.pwmOutputMap.insert({PWM1_NAME, open ? PWM1_OPEN : PWM1_CLOSE});
+
+        std::cout << "ServoControlSM::Control PWM1 " << (open ? "OPEN" : "CLOSE") << "\n";
+    }
+#endif
+
+#if USE_PWM2
+    if (enabled)
+    {
+        // Open PWM2 if the third bit is set
+        bool open = eventNbr & 0b100;
+
+        gpioData.pwmOutputMap.insert({PWM2_NAME, open ? PWM2_OPEN : PWM2_CLOSE});
+
+        std::cout << "ServoControlSM::Control PWM2 " << (open ? "OPEN" : "CLOSE") << "\n";
+    }
+#endif
+
+#endif
+
+    interface->updateOutputs(interfaceData);
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)
