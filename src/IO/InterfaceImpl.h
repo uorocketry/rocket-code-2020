@@ -9,7 +9,7 @@
 #include "IO/SocketClient.h"
 #include "IO/Logger.h"
 #include "IO/Radio.h"
-#include "IO/Gpio.h"
+#include "IO/gpio/Gpio.h"
 #include "EventQueue.h"
 #include <memory>
 #include <string>
