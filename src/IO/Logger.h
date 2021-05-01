@@ -1,7 +1,7 @@
 #pragma once
 
 #include "config/config.h"
-#if USE_LOGGER
+#if USE_LOGGER == 1
 
 #include "../data/sensorsData.h"
 #include "IO.h"

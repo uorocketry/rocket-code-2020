@@ -21,10 +21,10 @@
 #endif
 
 #ifndef USE_RADIO
-    #if TESTING
+    #if TESTING == 1
         #define USE_RADIO 0
     #else
-        #define USE_RADIO 0
+        #define USE_RADIO 1
     #endif
 #endif
 
@@ -36,7 +36,7 @@
     #define USE_GPIO 1
 #endif
 
-#if USE_GPIO
+#if USE_GPIO == 1
     #ifndef USE_WIRING_Pi
         #define USE_WIRING_Pi 1
     #endif

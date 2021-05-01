@@ -1,14 +1,17 @@
 #include "config/config.h"
-#if USE_INPUT
+#if USE_INPUT == 1
 
 #include "Input.h"
 #include "IO.h"
 #include "iostream"
 
-Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue) {
+Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue)
+{
+
 }
 
-Input::~Input() {
+Input::~Input() 
+{
     
 }
 

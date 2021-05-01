@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_RADIO
+#if USE_RADIO == 1
 
 #include <string>
 #include <unistd.h>
@@ -15,6 +15,12 @@
 #include <mutex>
 #include <string>
 #include "Logger.h"
+
+Radio::Radio(EventQueue &eventQueue) 
+	: eventQueue(eventQueue)
+{
+	
+}
 
 Radio::~Radio()
 {
@@ -48,7 +54,12 @@ void Radio::run()
 	writingLock = std::unique_lock<std::mutex>(writingMutex);
 
 	while (true)
-	{
+	{	
+		if(serialDataAvail(fd) > 0) 
+		{
+			eventQueue.push(serialGetchar(fd));
+		}
+		
 		if (!logQueue.empty())
 		{
 			dequeueToRadio();
@@ -84,13 +95,13 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(const sensorsData &currentState)
 {
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	serialPrintf(fd, std::to_string(Logger::working).c_str());
 	serialPrintf(fd, ";");
 #endif
 	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
 	serialPrintf(fd, ";");
-#if USE_SBG
+#if USE_SBG == 1
 	serialPrintf(fd, std::to_string(currentState.sbg.roll).c_str());
 	serialPrintf(fd, ";");
 	serialPrintf(fd, std::to_string(currentState.sbg.pitch).c_str());
@@ -130,4 +141,4 @@ void Radio::sendData(const sensorsData &currentState)
 	serialPrintf(fd, "\r\n");
 }
 
-#endif
+#endif // USE_RADIO

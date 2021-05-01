@@ -13,15 +13,15 @@ struct sensorsData
     uint16_t currentStateNo = -1;
     eventType eventNumber = -1;
 
-#if USE_SBG
+#if USE_SBG == 1
     sbgData sbg;
 #endif
 
-#if USE_GPIO
+#if USE_GPIO == 1
     GpioData gpioData;
 #endif
 
-#if TESTING
+#if TESTING == 1
     bool outOfData = false;
 #endif
 };

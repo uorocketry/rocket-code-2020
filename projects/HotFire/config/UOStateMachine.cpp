@@ -1,6 +1,5 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
-#include <wiringPi.h>
 #include "config/config.h"
 #include "config/GpioConfig.h"
 #include "UOStateMachine.h"
@@ -37,6 +36,24 @@ void UOStateMachine::StartFillingEXT()
 		END_TRANSITION_MAP(NULL)
 }
 
+// Abort external event
+void UOStateMachine::AbortEXT()
+{
+	BEGIN_TRANSITION_MAP					   // - Current State -
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_INIT
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_WAIT_FOR_INIT
+		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
+		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
+		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_IGNITION
+		TRANSITION_MAP_ENTRY(ST_ABORT_BURN)	   // ST_IGNITION
+		TRANSITION_MAP_ENTRY(ST_ABORT_BURN)	   // ST_FULL_BURN
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_FINAL_VENTING
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_FILLING
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_BURN
+		END_TRANSITION_MAP(NULL)
+}
+
 // StopFilling external event
 void UOStateMachine::StopFillingEXT()
 {
@@ -55,24 +72,6 @@ void UOStateMachine::StopFillingEXT()
 		END_TRANSITION_MAP(NULL)
 }
 
-// AbortFilling external event
-void UOStateMachine::AbortFillingEXT()
-{
-	BEGIN_TRANSITION_MAP					   // - Current State -
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_INIT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_WAIT_FOR_INIT
-		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
-		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
-		TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_IGNITION
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_IGNITION
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_FULL_BURN
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_FINAL_VENTING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_FILLING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
-}
-
 // Ignition external event
 void UOStateMachine::IgnitionEXT()
 {
@@ -84,24 +83,6 @@ void UOStateMachine::IgnitionEXT()
 		TRANSITION_MAP_ENTRY(ST_IGNITION)	// ST_WAIT_FOR_IGNITION
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
-}
-
-// AbortBurn external event
-void UOStateMachine::AbortBurnEXT()
-{
-	BEGIN_TRANSITION_MAP					// - Current State -
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
-		TRANSITION_MAP_ENTRY(ST_ABORT_BURN) // ST_IGNITION
-		TRANSITION_MAP_ENTRY(ST_ABORT_BURN) // ST_FULL_BURN
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
@@ -149,7 +130,7 @@ void UOStateMachine::DoneEXT(){
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
 	interface->initialize();
-	#if USE_GPIO
+	#if USE_GPIO == 1
 	
 		#if USE_SV01
 		interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
@@ -216,7 +197,7 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
 
-	#if USE_GPIO
+	#if USE_GPIO == 1
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
@@ -261,7 +242,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_FILLING);
 	
-	#if USE_GPIO
+	#if USE_GPIO == 1
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
@@ -603,28 +584,26 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 
 	switch (eventNbr)
 	{
-	case 0:
-		StartFillingEXT();
-		break;
-	case 1:
-		StopFillingEXT();
-		break;
-	case 2:
-		IgnitionEXT();
-		break;
-	case 3:
-		FinalVentingEXT();
-		break;
-	case 4:
-		DoneEXT();
-		break;
-	case 5:
-		AbortFillingEXT();
-		break;
-	case 6:
-		AbortBurnEXT();
-	default:
-		break;
+		case 0:
+			StartFillingEXT();
+			break;
+		case 1:
+			StopFillingEXT();
+			break;
+		case 2:
+			IgnitionEXT();
+			break;
+		case 3:
+			FinalVentingEXT();
+			break;
+		case 4:
+			DoneEXT();
+			break;
+		case 5:
+			AbortEXT();
+			break;
+		default:
+			break;
 	}
 }
 
