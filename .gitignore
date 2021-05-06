@@ -58,6 +58,8 @@ sbgECom/projects/unix/CMakeFiles/*
 
 /build/
 
+/build-arm/
+
 .vs
 sbgECom/projects/visual/.vs
 sbgECom/projects/unix/CMakeCache.txt

@@ -21,7 +21,7 @@ public:
 	friend SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, void *pUserArg);
 
 private:
-	sbgData data{0,0,0,0,0,0,0,0,0,0,0,0,0};
+	sbgData data;
 	float barometricAltitudeOffset = 0;
 
 	struct InitFlags
