@@ -8,7 +8,7 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-	UOStateMachine();
+    UOStateMachine(Interface* anInterface);
 
 	// External events taken by this state machine
 	void StartFillingEXT();
