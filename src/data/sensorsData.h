@@ -8,6 +8,8 @@
 //all the informations about the rocket that the state machine will need
 struct sensorsData
 {
+    bool isInitialized() const;
+
     uint64_t timeStamp = -1;
     uint16_t currentStateNo = -1;
     eventType eventNumber = -1;

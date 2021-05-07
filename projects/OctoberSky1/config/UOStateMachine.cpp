@@ -99,13 +99,11 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-	// Must add logic to determine if the interface is ready based on interface data
-
-	// if (interface->isInitialized())
-	// {
-	// 	interface->calibrateTelemetry();
-	// 	InternalEvent(ST_WAIT_FOR_LAUNCH);
-	// }
+	 if (interfaceData->isInitialized())
+	 {
+	 	interface->calibrateTelemetry();
+	 	InternalEvent(ST_WAIT_FOR_LAUNCH);
+	 }
 
 	interface->updateOutputs(interfaceData);
 }
