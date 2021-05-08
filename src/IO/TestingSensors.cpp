@@ -36,6 +36,9 @@ void TestingSensors::initialize()
 
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
 
+		// Ignore the state, that's an output value
+		count++;
+
 #if USE_SBG
 		// SBG:
 		currentData.sbg.roll = helper::processFloat(currentRow[count++]);
@@ -62,9 +65,6 @@ void TestingSensors::initialize()
 		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
 
 		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
-
-		// Ignore the state, that's an output value
-		count++;
 
 		currentData.sbg.gpsPosStatus = helper::processFloat(currentRow[count++]);
 
