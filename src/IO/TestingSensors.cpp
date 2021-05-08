@@ -103,6 +103,31 @@ void TestingSensors::initialize()
 
 #endif
 
+        // Initialization data
+#if USE_LOGGER
+        currentData.loggerIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SOCKET_CLIENT
+        currentData.client.isInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SBG
+        currentData.sbgIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_INPUT
+        currentData.inputIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_RADIO
+        currentData.radioIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_GPIO
+        currentData.gpioIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
 		data.push(currentData);
 	}
 
