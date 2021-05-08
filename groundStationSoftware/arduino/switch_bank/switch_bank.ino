@@ -29,6 +29,8 @@ public:
             if ((currentTime - lastDebounceTime) > debounceDelay) {
                 if (currentState == HIGH) {
                     Serial.write(eventNbr);
+                    Serial.write("\n");
+
                 }
                 oldState = currentState;
             };

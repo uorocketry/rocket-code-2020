@@ -101,6 +101,8 @@ while True:
         while True:
             try:
                 x = ser.read(1)          # read one byte
+                if x == '\n'.encode('utf_8'):
+                    continue             # ignore new line character
                 # print(type(x))
                 print(int.from_bytes(x, "big"))
             except Exception as e:
