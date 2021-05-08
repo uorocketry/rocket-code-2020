@@ -290,7 +290,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 #endif
 
 #if USE_SOCKET_CLIENT
-    fileStream << currentState.client.isInitialized << sep();
+    fileStream << currentState.client.isInitialized << sep;
 #endif
 
 #if USE_SBG
