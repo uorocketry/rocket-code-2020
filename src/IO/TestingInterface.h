@@ -20,7 +20,6 @@ public:
 
 	void initialize();
 	
-	bool isInitialized();
 	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState

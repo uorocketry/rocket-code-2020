@@ -37,12 +37,6 @@ void TestingInterface::initializeOutputs()
 #endif
 }
 
-
-bool TestingInterface::isInitialized()
-{
-	return testingSensors.isInitialized();
-}
-
 bool TestingInterface::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>(testingSensors.getLatest());
