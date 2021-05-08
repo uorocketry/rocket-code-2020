@@ -2,13 +2,8 @@
 #if USE_SBG == 1
 
 #include "SBGSensor.h"
-#include<chrono>
-#include<thread>
 
 #include "iostream"
-#include "../data/SBGData.h"
-#include <sbgEComLib.h>
-#include <time.h>
 
 //----------------------------------------------------------------------//
 //  Call backs                                                          //
@@ -29,7 +24,7 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
 	// Handle separately each received data according to the log ID
 	//
 	// std::cout << pUserArg;
-	SBGSensor* sens = (SBGSensor*)pUserArg;
+	auto* sens = (SBGSensor*)pUserArg;
 	std::lock_guard<std::mutex> lockGuard(sens->mutex);
 
 	switch (msg)
@@ -234,7 +229,7 @@ void SBGSensor::run()
 			//
 			// Loop until the user exist
 			//
-			while (1)
+			while (true)
 			{
 				//
 				// Try to read a frame

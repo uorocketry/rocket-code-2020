@@ -7,14 +7,14 @@
 class PwmOutput
 {
 public:
-    PwmOutput(const std::string name, const int pin);
+    PwmOutput(const std::string& name, int pin);
 
     
     bool setValue(int value);
 
 private:
     std::string name;
-    int currentState;
+    int currentState{};
     const int pinNbr;
 };
 

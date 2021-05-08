@@ -13,15 +13,15 @@
 class Radio : public IO
 {
 public:
-	Radio(EventQueue &eventQueue);
+	explicit Radio(EventQueue &eventQueue);
 	~Radio();
 
-	void initialize();
-	void run();
-	bool isInitialized();
+	void initialize() override;
+	void run() override;
+	bool isInitialized() override;
 
 	//write data to sensorsData struct and push to queue on main thread
-	void enqueueSensorData(sensorsData curSensorData);
+	void enqueueSensorData(const sensorsData& curSensorData);
 
 protected:
 	std::mutex mutex;
@@ -32,7 +32,7 @@ private:
 	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToRadio();
 
-	void sendData(const sensorsData &currentState);
+	void sendData(const sensorsData &currentState) const;
 
 	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 
@@ -47,7 +47,7 @@ private:
 
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 
-	int fd;
+	int fd{};
 
 	struct InitFlags
 	{

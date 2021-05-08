@@ -23,9 +23,7 @@ Radio::Radio(EventQueue &eventQueue)
 }
 
 Radio::~Radio()
-{
-	
-}
+= default;
 
 void Radio::initialize()
 {
@@ -71,7 +69,7 @@ void Radio::run()
 	}
 }
 
-void Radio::enqueueSensorData(sensorsData curSensorData)
+void Radio::enqueueSensorData(const sensorsData& curSensorData)
 {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
@@ -93,7 +91,7 @@ void Radio::dequeueToRadio()
 }
 
 
-void Radio::sendData(const sensorsData &currentState)
+void Radio::sendData(const sensorsData &currentState) const
 {
 #if USE_LOGGER == 1
 	serialPrintf(fd, std::to_string(Logger::working).c_str());

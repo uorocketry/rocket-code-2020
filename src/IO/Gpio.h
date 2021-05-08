@@ -21,14 +21,14 @@ class Gpio : public IO
 public:
 	~Gpio();
 
-	void initialize();
-	void run();
-	bool isInitialized();
+	void initialize() override;
+	void run() override;
+	bool isInitialized() override;
 
-	void createNewGpioOutput(std::string name, int pinNbr);
-	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	void createNewGpioOutput(const std::string& name, int pinNbr);
+	void createNewGpioPwmOutput(const std::string& name, int pinNbr);
 
-	void setOutputs(const GpioData data);
+	void setOutputs(const GpioData& data);
 
 protected:
 	std::mutex mutex;

@@ -7,14 +7,14 @@
 class Output
 {
 public:
-    Output(const std::string name, const int pin);
+    Output(const std::string& name, int pin);
 
     
     bool setValue(int value);
 
 private:
     std::string name;
-    int currentState;
+    int currentState{};
     const int pinNbr;
 };
 

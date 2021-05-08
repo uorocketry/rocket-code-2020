@@ -8,7 +8,7 @@
 #include <wiringPi.h>
 #endif
 
-Output::Output(const std::string name, const int pin) : name(name), pinNbr(pin){
+Output::Output(const std::string& name, const int pin) : name(name), pinNbr(pin){
     std::cout << "created Output " << name << "\n";
     
     #if USE_WIRING_Pi == 1
@@ -25,8 +25,8 @@ bool Output::setValue(int value) {
         #if USE_WIRING_Pi == 1
         digitalWrite(pinNbr, value);
         #endif
-    };
+    }
     return true;
-};
+}
 
 #endif

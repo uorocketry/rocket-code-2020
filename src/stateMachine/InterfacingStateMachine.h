@@ -10,7 +10,7 @@ class InterfacingStateMachine : public StateMachine
 {
 
 public:
-    InterfacingStateMachine(BYTE maxStates, BYTE initialState = 0);
+    explicit InterfacingStateMachine(BYTE maxStates, BYTE initialState = 0);
 
     void enterNewState(BYTE state);
 	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
