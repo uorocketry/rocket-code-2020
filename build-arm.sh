@@ -5,6 +5,11 @@ if [ -z "$RPI_TOOLS" ]; then
   exit 1
 fi
 
+if [ -z "$BOOST_DIRECTORY" ]; then
+  echo "BOOST_DIRECTORY not specified, exiting..." >> /dev/stderr
+  exit 1
+fi
+
 mkdir -p build-arm
 cd build-arm
 cmake .. -G "${1:-Ninja}" -DCMAKE_TOOLCHAIN_FILE=../toolchain-rpi.cmake
