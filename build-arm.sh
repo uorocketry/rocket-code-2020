@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euf -o pipefail
+
 if [ -z "$RPI_TOOLS" ]; then
   echo "RPI_TOOLS not specified, exiting..." >> /dev/stderr
   exit 1
