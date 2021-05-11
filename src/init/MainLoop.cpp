@@ -12,8 +12,14 @@
 
 int main()
 {
+#if TESTING != 1
+    InterfaceImpl interfaceImpl;
+#else
+    TestingInterface interfaceImpl;
+#endif
+
 	// create a state machine instance
-	UOStateMachine uOttSM;
+	UOStateMachine uOttSM(&interfaceImpl);
 
 	time_point start, now;
 	duration_ns target_ns, elapsed_ns;

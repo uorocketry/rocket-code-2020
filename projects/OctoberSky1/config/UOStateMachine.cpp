@@ -8,8 +8,8 @@
 
 #define PI 3.14159265
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+	InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));

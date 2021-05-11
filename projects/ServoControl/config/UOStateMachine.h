@@ -8,7 +8,7 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-    UOStateMachine();
+    UOStateMachine(Interface* anInterface);
 
     void updateHotFire(UOSMData *data);
 
