@@ -1,8 +1,4 @@
-Files in `sbgECom/common`, `sbgECom/doc`, `sbgECom/src/binaryLogs`, `sbgECom/src/commands` and `sbgECom/src/protocol` follow the licenses specified in their header.
-
-***
-
-Files in `sbgECom/src/stateMachineLib` follow the following license:
+Files in `src/stateMachineLib` follow the following license:
 
 <h3>The Code Project Open License (CPOL) 1.02</h3>
 

@@ -8,14 +8,13 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-	UOStateMachine();
+    UOStateMachine(Interface* anInterface);
 
 	// External events taken by this state machine
 	void StartFillingEXT();
+	void AbortEXT();
 	void StopFillingEXT();
-	void AbortFillingEXT();
 	void IgnitionEXT();
-	void AbortBurnEXT();
 	void FinalVentingEXT();
 	void DoneEXT();
 
@@ -23,7 +22,7 @@ public:
 
 protected:
 
-#if !TESTING
+#if TESTING != 1
 	InterfaceImpl interfaceImpl;
 #else
 	TestingInterface interfaceImpl;

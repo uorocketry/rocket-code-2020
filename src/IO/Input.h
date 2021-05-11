@@ -1,5 +1,5 @@
 #pragma once
-#if USE_INPUT
+#if USE_INPUT == 1
 
 #include "IO.h"
 #include "EventQueue.h"
@@ -13,6 +13,9 @@ public:
 	void initialize();
 	void run();
 	bool isInitialized();
+
+protected:
+	std::mutex mutex;
 
 private:
     EventQueue &eventQueue;

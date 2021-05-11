@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if TESTING
+#if TESTING == 1
 
 #include "TestingInterface.h"
 #include "IO/IO.h"
@@ -27,11 +27,11 @@ void TestingInterface::initialize()
 
 void TestingInterface::initializeOutputs() 
 {
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	std::cout << "Initializing LOGGER...\n";
 	logger.initialize();
 #endif
-#if USE_RADIO
+#if USE_RADIO == 1
 	std::cout << "Initializing RADIO...\n";
 	radio.initialize();
 #endif
@@ -46,7 +46,7 @@ bool TestingInterface::updateInputs()
 
 bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data) 
 {
-#if USE_LOGGER
+#if USE_LOGGER == 1
 	if (latestState->outOfData) {
 		if (!logger.queueEmpty()) {
 			// Wait for logger to finish
@@ -59,14 +59,14 @@ bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
 	logger.enqueueSensorData(*data);
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
 	radio.enqueueSensorData(*data);
 #endif
 
 	return true;
 }
 
-#if USE_GPIO
+#if USE_GPIO == 1
 void TestingInterface::createNewGpioOutput(std::string name, int pinNbr) 
 {
 	return; //don't do anything for now

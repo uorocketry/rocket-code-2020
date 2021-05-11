@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if USE_LOGGER
+#if USE_LOGGER == 1
 
 #include "Logger.h"
 #include "data/sensorsData.h"
@@ -209,7 +209,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.currentStateNo << sep;
 
 
-#if USE_GPIO
+#if USE_GPIO == 1
 
 	for (std::pair<std::string, int> output : currentState.gpioData.outputMap)
 	{
@@ -222,7 +222,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << sep;
 #endif
 
-#if USE_SBG
+#if USE_SBG == 1
 	fileStream << currentState.sbg.roll << sep;
 	fileStream << currentState.sbg.pitch << sep;
 	fileStream << currentState.sbg.yaw << sep;

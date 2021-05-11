@@ -1,5 +1,5 @@
 #include "config/config.h"
-#if TESTING
+#if TESTING == 1
 
 #include "helpers/Helper.h"
 #include "data/sensorsData.h"
@@ -36,10 +36,10 @@ void TestingSensors::initialize()
 
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
 
-		// Ignore the state, that's an output value
-		count++;
+        // Ignore the state, that's an output value
+        count++;
 
-#if USE_SBG
+#if USE_SBG == 1
 		// SBG:
 		currentData.sbg.roll = helper::processFloat(currentRow[count++]);
 		currentData.sbg.pitch = helper::processFloat(currentRow[count++]);
@@ -104,27 +104,27 @@ void TestingSensors::initialize()
 #endif
 
         // Initialization data
-#if USE_LOGGER
+#if USE_LOGGER == 1
         currentData.loggerIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
         currentData.client.isInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
-#if USE_SBG
+#if USE_SBG == 1
         currentData.sbgIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
-#if USE_INPUT
+#if USE_INPUT == 1
         currentData.inputIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
         currentData.radioIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
-#if USE_GPIO
+#if USE_GPIO == 1
         currentData.gpioIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
