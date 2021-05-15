@@ -63,7 +63,7 @@ def openSerial():
     while(not valid):
         time.sleep(1)
         try:
-            ser = serial.Serial([(port) for port in serial_ports() if 'USB' in port][0], 9600, timeout=None)
+            ser = serial.Serial([(port) for port in serial_ports() if 'USB' in port][0], 57600, timeout=None)
             ser.reset_input_buffer()
             valid = True
             print("Serial communication established.")
