@@ -60,7 +60,7 @@ void setup() {
     }
 
     // begin serial communication
-    Serial.begin(9600);
+    Serial.begin(57600);
 }
 
 void loop() {   
