@@ -10,7 +10,7 @@ class InterfacingStateMachine : public StateMachine
 {
 
 public:
-    explicit InterfacingStateMachine(BYTE maxStates, BYTE initialState = 0);
+    InterfacingStateMachine(Interface* anInterface, BYTE maxStates, BYTE initialState = 0);
 
     void enterNewState(BYTE state);
 	double getValueForTime(double minimum, double maximum, duration_ms targetTime);
@@ -19,11 +19,6 @@ public:
 
 protected:
 
-#if TESTING != 1
-	InterfaceImpl interfaceImpl;
-#else
-	TestingInterface interfaceImpl;
-#endif
 	Interface *interface;
 
 	std::shared_ptr<sensorsData> interfaceData;

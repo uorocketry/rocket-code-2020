@@ -1,7 +1,7 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
-#include "IO/PwmOutput.h"
+#include "PwmOutput.h"
 #include <iostream>
 
 #if USE_WIRING_Pi == 1
@@ -22,7 +22,7 @@ PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNb
 bool PwmOutput::setValue(int value) {
     if(currentState != value) {
         currentState = value;
-        std::cout << "PWM " << name << "changed to " << currentState << "\n";
+        std::cout << "PWM " << name << " changed to " << currentState << "\n";
 
         #if USE_WIRING_Pi == 1
         pwmWrite(pinNbr, value);

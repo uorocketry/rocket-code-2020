@@ -3,10 +3,10 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
-#include "../data/GpioData.h"
-#include "IO.h"
-#include "IO/PwmOutput.h"
-#include "IO/Output.h"
+#include "data/GpioData.h"
+#include "IO/IO.h"
+#include "IO/gpio/PwmOutput.h"
+#include "IO/gpio/DigitalOutput.h"
 #include <queue>
 #include <mutex>
 #include <thread>
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <condition_variable>
 #include <string>
-#include <unordered_map>
+#include <map>
 
 class Gpio : public IO
 {
@@ -28,19 +28,22 @@ public:
 	void createNewGpioOutput(const std::string& name, int pinNbr);
 	void createNewGpioPwmOutput(const std::string& name, int pinNbr);
 
-	void setOutputs(const GpioData& data);
+	GpioData setOutputs(const GpioData& data);
 
 protected:
 	std::mutex mutex;
 
 private:
-	std::unordered_map<std::string, Output> outputsMap;
-	std::unordered_map<std::string, PwmOutput> pwmOutputsMap;
+	std::map<std::string, DigitalOutput> digitalOutputsMap;
+	std::map<std::string, PwmOutput> pwmOutputsMap;
 
 	struct InitFlags
 	{
 		InitStatus gpioSatus = INIT;
 	} status;
+
+	template<typename T, typename std::enable_if<std::is_base_of<Output, T>::value>::type* = nullptr>
+	std::map<std::string, int> toRawMap(std::map<std::string, T> map);
 };
 
 #endif

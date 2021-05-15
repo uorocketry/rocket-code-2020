@@ -115,17 +115,17 @@ bool InterfaceImpl::updateInputs()
 
 bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data) 
 {
+
+#if USE_GPIO == 1
+	data->gpioData = gpio.setOutputs(data->gpioData);
+#endif
+
 #if USE_LOGGER == 1
 	logger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO == 1
 	radio.enqueueSensorData(*data);
-#endif
-
-
-#if USE_GPIO == 1
-	gpio.setOutputs((*data).gpioData);
 #endif
 
 	return true;

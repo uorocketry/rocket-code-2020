@@ -2,9 +2,11 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
+#include "Output.h"
+
 #include <string>
 
-class PwmOutput
+class PwmOutput: public Output
 {
 public:
     PwmOutput(const std::string& name, int pin);
@@ -14,7 +16,6 @@ public:
 
 private:
     std::string name;
-    int currentState{};
     const int pinNbr;
 };
 

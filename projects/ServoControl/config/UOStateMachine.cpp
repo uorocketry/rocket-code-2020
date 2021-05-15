@@ -9,14 +9,12 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 
-UOStateMachine::UOStateMachine() :
-        InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
-
     // There is no state entry function for the first state
     enterNewState(States(0));
 
-    interface = &interfaceImpl;
 }
 
 // Code for each state. Do not put while in them. The right function according to the current state

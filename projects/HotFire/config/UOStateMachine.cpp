@@ -8,14 +8,12 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
-
-	interface = &interfaceImpl;
 }
 
 // StartFilling external event
@@ -175,7 +173,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
@@ -217,7 +215,7 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
@@ -254,7 +252,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_CLOSE});
 		#endif
 		
 	#endif

@@ -2,19 +2,20 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
+#include "Output.h"
+
 #include <string>
 
-class Output
+class DigitalOutput: public Output
 {
 public:
-    Output(const std::string& name, int pin);
+    DigitalOutput(const std::string& name, const int pin);
 
     
     bool setValue(int value);
 
 private:
     std::string name;
-    int currentState{};
     const int pinNbr;
 };
 
