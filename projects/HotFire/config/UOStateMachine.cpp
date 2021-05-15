@@ -173,7 +173,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
@@ -215,7 +215,7 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
@@ -252,7 +252,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_CLOSE});
 		#endif
 		
 	#endif

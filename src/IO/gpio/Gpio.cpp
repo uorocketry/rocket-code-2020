@@ -1,9 +1,8 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
-#include "IO/Gpio.h"
+#include "Gpio.h"
 #include "data/sensorsData.h"
-#include "IO/PwmOutput.h"
 
 #include "helpers/Helper.h"
 #include <string>
@@ -42,25 +41,43 @@ bool Gpio::isInitialized()
 	return (status.gpioSatus == READY);
 }
 
-void Gpio::setOutputs(const GpioData data) {
+GpioData Gpio::setOutputs(const GpioData data) {
 	for (std::pair<std::string, int> output : data.pwmOutputMap)
 	{
 		pwmOutputsMap.at(output.first).setValue(output.second);
 	}
-	for (std::pair<std::string, int> output : data.outputMap)
+	for (std::pair<std::string, int> output : data.digitalOutputMap)
 	{
-		outputsMap.at(output.first).setValue(output.second);
+		digitalOutputsMap.at(output.first).setValue(output.second);
 	}
+
+	GpioData result;
+	result.digitalOutputMap = toRawMap(digitalOutputsMap);
+	result.pwmOutputMap = toRawMap(pwmOutputsMap);
+
+	return result;
 }
 
 void Gpio::createNewGpioOutput(std::string name, int pinNbr) {
-	outputsMap.insert({name, Output(name, pinNbr)});
-
+	digitalOutputsMap.insert({name, DigitalOutput(name, pinNbr)});
 }
 
 void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
 	pwmOutputsMap.insert({name, PwmOutput(name, pinNbr)});
+}
 
+/**
+ * Convert a map with Output to a map with numbers
+ */
+template<typename T, typename std::enable_if<std::is_base_of<Output, T>::value>::type*>
+std::map<std::string, int> Gpio::toRawMap(std::map<std::string, T> map) {
+	std::map<std::string, int> result;
+	for (std::pair<const std::string, T> output : map)
+	{
+		result.insert({output.first, output.second.getValue()});
+	}
+
+	return result;
 }
 
 #endif

@@ -41,6 +41,7 @@ void Logger::run()
 
 	std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
 	std::string ext = ".uorocketlog";
+	if (path.back() != '/') path += "/";
 
 	int bootId = getBootId(path);
 
@@ -210,16 +211,15 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 
 
 #if USE_GPIO == 1
-
-	for (std::pair<std::string, int> output : currentState.gpioData.outputMap)
+	for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
 	{
-		fileStream << output.first << "=" << output.second << ":";
+		fileStream << output.second << sep;
 	}
+
 	for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
 	{
-		fileStream << output.first << "=" << output.second << ":";
+		fileStream << output.second << sep;
 	}
-	fileStream << sep;
 #endif
 
 #if USE_SBG == 1
