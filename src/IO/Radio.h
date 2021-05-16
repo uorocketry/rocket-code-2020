@@ -47,7 +47,7 @@ private:
 
 	std::shared_ptr<std::ofstream> fileStream = nullptr;
 
-	int fd{};
+	int fd = 0;
 
 	struct InitFlags
 	{

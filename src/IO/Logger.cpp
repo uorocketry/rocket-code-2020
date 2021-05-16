@@ -64,14 +64,7 @@ void Logger::run()
 				lineCount = 0;
 				logId++;
 
-				// Generate the file name. Apparently it's quicker to concatenate this way than using +
-				std::string name = path;
-				name += std::to_string(bootId);
-				name += ".";
-				name += std::to_string(logId);
-				name += ext;
-
-				fileStream.open(name, std::ios_base::ate);
+				fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
 				std::ofstream::sync_with_stdio(true);
 			}
 
