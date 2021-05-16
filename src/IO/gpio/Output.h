@@ -11,7 +11,7 @@ public:
     int getValue();
 
 protected:
-    int currentState;
+    int currentState = 0;
 };
 
 #endif
