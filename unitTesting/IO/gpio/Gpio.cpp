@@ -23,7 +23,6 @@ void createOutputs(Gpio* gpio) {
     gpio->createNewGpioPwmOutput(PWM_2, 4);
 }
 
-
 TEST_CASE("EventQueue setOutputs", "[EventQueue]") {
     Gpio* gpio = new TestableGpio();
     createOutputs(gpio);
