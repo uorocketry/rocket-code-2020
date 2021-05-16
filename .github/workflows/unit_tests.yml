@@ -19,8 +19,8 @@ jobs:
           git submodule init
           git submodule update
       - name: Cmake Makefiles
-        run: cmake -B ./build -G 'Unix Makefiles'
+        run: USE_GPIO=1 cmake -B ./build -G 'Unix Makefiles'
       - name: Run make
-        run: cmake --build ./build --target tests
+        run: USE_GPIO=1 cmake --build ./build --target tests
       - name: Run Unit Tests
         run: ./build/unitTesting/tests
