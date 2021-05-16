@@ -8,11 +8,11 @@
 #define PWM_1 "PWM 1"
 #define PWM_2 "PWM 2"
 
-class TestableGpio : public Gpio
+class FakeGpio : public Gpio
 {
     public:
-        TestableGpio() {};
-        ~TestableGpio() {};
+        FakeGpio() {};
+        ~FakeGpio() {};
 };
 
 void createOutputs(Gpio* gpio) {
@@ -24,7 +24,7 @@ void createOutputs(Gpio* gpio) {
 }
 
 TEST_CASE("EventQueue setOutputs", "[EventQueue]") {
-    Gpio* gpio = new TestableGpio();
+    Gpio* gpio = new FakeGpio();
     createOutputs(gpio);
 
     GpioData input;
