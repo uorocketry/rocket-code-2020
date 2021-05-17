@@ -23,8 +23,7 @@ InterfaceImpl::InterfaceImpl() : eventQueue()
 }
 
 InterfaceImpl::~InterfaceImpl()
-{
-}
+= default;
 
 void InterfaceImpl::initialize() 
 {
@@ -72,7 +71,7 @@ bool InterfaceImpl::isInitialized()
 	return true;
 #endif
 
-	bool result = 1;
+	bool result = true;
 
 #if USE_LOGGER == 1
 	result &= logger.isInitialized();

@@ -3,12 +3,7 @@
 
 #include "helpers/Helper.h"
 
-#include <stdio.h>
-#include "chrono"
-#include "iostream"
-#include <thread>
-
-#define DEFAULT_TARGET_UPDATE_DURATION_NS 1000000000L / 30L // in nanoseconds = 33 miliseconds = 30Hz
+#define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
 int main()
 {

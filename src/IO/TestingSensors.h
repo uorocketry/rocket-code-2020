@@ -11,9 +11,9 @@
 class TestingSensors : public IO
 {
 public:
-	void run();
-	void initialize();
-	bool isInitialized();
+	void run() override;
+	void initialize() override;
+	bool isInitialized() override;
 
 	sensorsData getLatest();
 

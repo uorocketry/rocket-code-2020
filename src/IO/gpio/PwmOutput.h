@@ -9,7 +9,7 @@
 class PwmOutput: public Output
 {
 public:
-    PwmOutput(const std::string name, const int pin);
+    PwmOutput(const std::string& name, int pin);
 
     
     bool setValue(int value);

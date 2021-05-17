@@ -8,7 +8,7 @@
 #include <wiringPi.h>
 #endif
 
-PwmOutput::PwmOutput(const std::string name, const int pin) : name(name), pinNbr(pin){
+PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNbr(pin){
     std::cout << "created pwmOutput " << name << "\n";
     
     #if USE_WIRING_Pi == 1
@@ -29,6 +29,6 @@ bool PwmOutput::setValue(int value) {
         #endif
     }
     return true;
-};
+}
 
 #endif

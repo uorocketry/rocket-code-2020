@@ -9,7 +9,7 @@
 class DigitalOutput: public Output
 {
 public:
-    DigitalOutput(const std::string name, const int pin);
+    DigitalOutput(const std::string& name, const int pin);
 
     
     bool setValue(int value);

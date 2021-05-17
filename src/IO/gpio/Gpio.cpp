@@ -14,12 +14,10 @@
 
 
 Gpio::~Gpio()
-{
-}
+= default;
 
 void Gpio::run() {
-	return;
-}
+	}
 
 
 void Gpio::initialize()
@@ -41,7 +39,7 @@ bool Gpio::isInitialized()
 	return (status.gpioSatus == READY);
 }
 
-GpioData Gpio::setOutputs(const GpioData data) {
+GpioData Gpio::setOutputs(const GpioData& data) {
 	for (std::pair<std::string, int> output : data.pwmOutputMap)
 	{
 		pwmOutputsMap.at(output.first).setValue(output.second);
@@ -58,11 +56,11 @@ GpioData Gpio::setOutputs(const GpioData data) {
 	return result;
 }
 
-void Gpio::createNewGpioOutput(std::string name, int pinNbr) {
+void Gpio::createNewGpioOutput(const std::string& name, int pinNbr) {
 	digitalOutputsMap.insert({name, DigitalOutput(name, pinNbr)});
 }
 
-void Gpio::createNewGpioPwmOutput(std::string name, int pinNbr) {
+void Gpio::createNewGpioPwmOutput(const std::string& name, int pinNbr) {
 	pwmOutputsMap.insert({name, PwmOutput(name, pinNbr)});
 }
 
