@@ -94,6 +94,8 @@ add_dependencies(MainLoopLib WiringPi)
 
 target_link_libraries(MainLoopLib stdc++fs)
 
+target_link_libraries(MainLoopLib spdlog::spdlog)
+
 target_link_libraries (MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
 
 add_executable(MainLoop ./src/init/MainLoop.cpp)

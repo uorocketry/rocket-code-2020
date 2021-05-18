@@ -34,6 +34,12 @@ add_library(WiringPi STATIC ${WIRINGPI_SRC})
 target_include_directories(WiringPi PUBLIC ./WiringPi/wiringPi)
 
 # ---------------
+# spdlog library
+# ---------------
+
+add_subdirectory(./spdlog)
+
+# ---------------
 # Unit Testing - Catch2
 # ---------------
 
