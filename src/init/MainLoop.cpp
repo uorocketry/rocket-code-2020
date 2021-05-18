@@ -4,10 +4,45 @@
 
 #include "helpers/Helper.h"
 
+#include "chrono"
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/basic_file_sink.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
+
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
+
+// Specify the minimum logging level. The specified level and up will be logged.
+// For example, if we have the level to be `info`, `warning` and `error` will be logged but not `debug`.
+const auto CONSOLE_LOGGING_LEVEL = spdlog::level::info;
+const auto FILE_LOGGING_LEVEL = spdlog::level::debug;
+
+void setup_logging() {
+	// Get the current Unix time so we can create a unique log file
+	auto unix_timestamp = std::chrono::seconds(std::time(nullptr));
+	long unix_timestamp_x_1000 = std::chrono::milliseconds(unix_timestamp).count();
+
+	// Log to a file
+	auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>("logs/global_" + std::to_string(unix_timestamp_x_1000) + ".log");
+	file_sink->set_level(FILE_LOGGING_LEVEL);
+
+	// Log to the console
+	auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+	stdout_sink->set_level(CONSOLE_LOGGING_LEVEL);
+
+	std::vector<spdlog::sink_ptr> sinks{file_sink, stdout_sink};
+
+	// Create a new logger with name 'global'
+	auto logger = std::make_shared<spdlog::logger>("global", begin(sinks), end(sinks));
+
+	// Register the logger we just created so we can access it from anywhere
+	spdlog::register_logger(logger);
+	spdlog::set_default_logger(logger);
+}
 
 int main()
 {
+	setup_logging();
+
 #if TESTING != 1
     InterfaceImpl interfaceImpl;
 #else
