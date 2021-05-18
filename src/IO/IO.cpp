@@ -1,19 +1,22 @@
+#include <spdlog/spdlog.h>
 #include "IO.h"
 #include "iostream"
 
-IO::IO() = default;
+IO::IO() {
+    logger = spdlog::default_logger();
+}
 
 IO::~IO() {
 	// destroy thread
-	std::cout << "destroy thread" << std::endl;
+	logger->debug("Destroy Thread");
 	thisThread.~thread(); // thread not killed
-	std::cout << "Thread " << "testSensorThread" << " killed:" << std::endl;
+	logger->debug("Thread testSensorThread killed:");
 }
 
 void IO::initialize() {
 	if (createThread) {
 		// create thread
-		std::cout << "create thread" << std::endl;
+		logger->debug("Create Thread");
 
 		thisThread = std::thread(&IO::run, this);
 		thisThread.detach();

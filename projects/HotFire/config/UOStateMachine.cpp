@@ -7,6 +7,7 @@
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include "data/GpioData.h"
+#include <spdlog/spdlog.h>
 
 UOStateMachine::UOStateMachine(Interface* anInterface) :
         InterfacingStateMachine(anInterface, ST_MAX_STATES)
@@ -14,6 +15,8 @@ UOStateMachine::UOStateMachine(Interface* anInterface) :
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
+
+	logger = spdlog::default_logger();
 }
 
 // StartFilling external event
@@ -149,12 +152,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	std::cout << "HotFireSM::ExitInit\n";
+	logger->info("HotFireSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	std::cout << "HotFireSM::EnterWaitForInit\n";
+	logger->info("HotFireSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -190,12 +193,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	std::cout << "HotFireSM::ExitWaitForInit\n";
+	logger->info("HotFireSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterWaitForFilling\n";
+	logger->info("HotFireSM::EnterWaitForFilling");
 	enterNewState(ST_WAIT_FOR_FILLING);
 }
 
@@ -227,12 +230,12 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 {
-	std::cout << "HotFireSM::ExitWaitForFilling\n";
+	logger->info("HotFireSM::ExitWaitForFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFilling\n";
+	logger->info("HotFireSM::EnterFilling");
 	enterNewState(ST_FILLING);
 }
 	
@@ -264,12 +267,12 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFilling)
 {
-	std::cout << "HotFireSM::ExitFilling\n";
+	logger->info("HotFireSM::ExitFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 {
-	std::cout << "HotFireSM::WaitForIgnition\n";
+	logger->info("HotFireSM::WaitForIgnition");
 	enterNewState(ST_WAIT_FOR_IGNITION);
 }
 
@@ -284,12 +287,12 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
 {
-	std::cout << "HotFireSM::ExitWaitForIgnition\n";
+	logger->info("HotFireSM::ExitWaitForIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 {
-	std::cout << "HotFireSM::EnterIgnition\n";
+	logger->info("HotFireSM::EnterIgnition");
 	enterNewState(ST_IGNITION);
 }
 
@@ -305,12 +308,12 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitIgnition)
 {
-	std::cout << "HotFireSM::ExitIgnition\n";
+	logger->info("HotFireSM::ExitIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFullBurn\n";
+	logger->info("HotFireSM::EnterFullBurn");
 	enterNewState(ST_FULL_BURN);
 }
 
@@ -325,12 +328,12 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFullBurn)
 {
-	std::cout << "HotFireSM::ExitFullBurn\n";
+	logger->info("HotFireSM::ExitFullBurn");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFinalVenting\n";
+	logger->info("HotFireSM::EnterFinalVenting");
 	enterNewState(ST_FINAL_VENTING);
 }
 
@@ -345,13 +348,13 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
 {
-	std::cout << "HotFireSM::ExitFinalVenting\n";
+	logger->info("HotFireSM::ExitFinalVenting");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 {
-	std::cout << "HotFireSM::EnterDone\n";
-	std::cout << "Done.\n";
+	logger->info("HotFireSM::EnterDone");
+	logger->info("Done.");
 	enterNewState(ST_DONE);
 }
 
@@ -364,7 +367,7 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterAbortFilling\n";
+	logger->info("HotFireSM::EnterAbortFilling");
 	enterNewState(ST_ABORT_FILLING);
 }
 
@@ -379,7 +382,7 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 {
-	std::cout << "HotFireSM::EnterAbortBurn\n";
+	logger->info("HotFireSM::EnterAbortBurn");
 	enterNewState(ST_ABORT_BURN);
 }
 

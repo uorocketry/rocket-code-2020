@@ -13,7 +13,7 @@
 
 // Specify the minimum logging level. The specified level and up will be logged.
 // For example, if we have the level to be `info`, `warning` and `error` will be logged but not `debug`.
-const auto CONSOLE_LOGGING_LEVEL = spdlog::level::info;
+const auto CONSOLE_LOGGING_LEVEL = spdlog::level::debug;
 const auto FILE_LOGGING_LEVEL = spdlog::level::debug;
 
 void setup_logging() {
@@ -37,6 +37,8 @@ void setup_logging() {
 	// Register the logger we just created so we can access it from anywhere
 	spdlog::register_logger(logger);
 	spdlog::set_default_logger(logger);
+
+	spdlog::enable_backtrace(32);
 }
 
 int main()
@@ -79,7 +81,7 @@ int main()
 		}
 		else if (targetUpdateDuration != 0)
 		{
-			std::cout << "Timing Error: Update took too long\n";
+			spdlog::error("Timing Error: Update took too long");
 		}
 	}
 

@@ -13,6 +13,7 @@
 #include "EventQueue.h"
 #include <memory>
 #include <string>
+#include <spdlog/logger.h>
 
 class InterfaceImpl: public Interface
 {
@@ -41,6 +42,8 @@ public:
 private:
 	void initializeInputs();
 	void initializeOutputs();
+
+	std::shared_ptr<spdlog::logger> logger;
 
 	std::shared_ptr<sensorsData> latestState;
 	EventQueue eventQueue;

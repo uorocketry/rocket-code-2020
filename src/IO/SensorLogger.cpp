@@ -151,8 +151,7 @@ void SensorLogger::dequeueToFile(std::ofstream &fileStream)
 	}
 	else
 	{
-		std::cout << "Unable to open log file."
-					 << "\n";
+		logger->error("Unable to open log file.");
 		working = 0;
 	}
 }

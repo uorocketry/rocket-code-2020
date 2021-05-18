@@ -14,12 +14,13 @@
 #include <chrono>
 #include <mutex>
 #include <string>
+#include <spdlog/spdlog.h>
 #include "SensorLogger.h"
 
 Radio::Radio(EventQueue &eventQueue) 
 	: eventQueue(eventQueue)
 {
-	
+	logger = spdlog::default_logger();
 }
 
 Radio::~Radio()
@@ -31,8 +32,8 @@ void Radio::initialize()
 
 
 	if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0) {
-		std::cout << "Error while opening serial communication!\n";
-		status.wiringPiStatus = INIT; 
+		logger->error("Error while opening serial communication!");
+		status.wiringPiStatus = INIT;
 	} else {
 		status.wiringPiStatus = READY; 
 	}

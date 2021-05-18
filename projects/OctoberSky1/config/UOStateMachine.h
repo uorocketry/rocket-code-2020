@@ -29,6 +29,8 @@ private:
 
 	static void showInfo(const std::shared_ptr<sensorsData>& data);
 
+	std::shared_ptr<spdlog::logger> logger;
+
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
 	

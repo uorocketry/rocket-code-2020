@@ -38,6 +38,8 @@ public:
 private:
 	void initializeOutputs();
 
+	std::shared_ptr<spdlog::logger> logger;
+
 	std::shared_ptr<sensorsData> latestState;
 
 	TestingSensors testingSensors;

@@ -7,6 +7,7 @@
 #include <iostream>
 #include "IO/TestingSensors.h"
 #include <string>
+#include <spdlog/spdlog.h>
 
 
 InterfaceImpl::InterfaceImpl() : eventQueue()
@@ -20,6 +21,7 @@ InterfaceImpl::InterfaceImpl() : eventQueue()
         , radio(eventQueue)
 #endif
 {
+    logger = spdlog::default_logger();
 }
 
 InterfaceImpl::~InterfaceImpl()
@@ -34,15 +36,15 @@ void InterfaceImpl::initialize()
 void InterfaceImpl::initializeInputs()
 {
 	#if USE_SBG == 1
-		std::cout << "Initializing SBG...\n";
+		logger->info("Initializing SBG...");
 		mySbgSensor.initialize();
 	#endif
 	#if USE_INPUT == 1
-		std::cout << "Initializing INPUT...\n";
+		logger->info("Initializing INPUT...");
 		input.initialize();
 	#endif
 	#if USE_SOCKET_CLIENT == 1
-		std::cout << "Initializing SOCKET_CLIENT...\n";
+		logger->info("Initializing SOCKET_CLIENT...");
 		client.initialize();
 	#endif
 }
@@ -50,15 +52,15 @@ void InterfaceImpl::initializeInputs()
 void InterfaceImpl::initializeOutputs() 
 {
 #if USE_LOGGER == 1
-	std::cout << "Initializing LOGGER...\n";
-    sensorLogger.initialize();
+	logger->info("Initializing SENSOR_LOGGER...");
+	sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
-	std::cout << "Initializing RADIO...\n";
+	logger->info("Initializing RADIO...");
 	radio.initialize();
 #endif
 #if USE_GPIO == 1
-	std::cout << "Initializing GPIO...\n";
+	logger->info("Initializing GPIO...");
 	gpio.initialize();
 #endif
 }
@@ -108,7 +110,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 #endif
 
 #if USE_LOGGER == 1
-    sensorLogger.enqueueSensorData(*data);
+	sensorLogger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO == 1

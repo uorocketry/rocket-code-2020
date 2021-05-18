@@ -32,6 +32,8 @@ private:
 	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
 	void showInfo(const std::shared_ptr<sensorsData>& data);
 
+	std::shared_ptr<spdlog::logger> logger;
+
 	// State enumeration order must match the order of state method entries
 	// in the state map.
 	enum States

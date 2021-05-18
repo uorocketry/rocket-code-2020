@@ -14,7 +14,7 @@ Input::~Input()
 = default;
 
 void Input::initialize() {
-    std::cout << "init input thread" << "\n";
+    logger->debug("init input thread");
     IO::initialize();
 }
 
@@ -23,7 +23,7 @@ bool Input::isInitialized() {
 }
 
 void Input::run() {
-    std::cout << "started input thread" << "\n";
+    logger->debug("started input thread");
     while (true) {
         std::string line;
         std::getline(std::cin, line);

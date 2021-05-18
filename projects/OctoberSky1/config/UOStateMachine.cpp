@@ -4,6 +4,7 @@
 #include "data/sensorsData.h"
 #include "UOStateMachine.h"
 #include <cmath>
+#include <spdlog/spdlog.h>
 
 #define PI 3.14159265
 
@@ -12,6 +13,8 @@ UOStateMachine::UOStateMachine(Interface* anInterface) :
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
+
+	logger = spdlog::default_logger();
 }
 
 // Launch external event
@@ -85,12 +88,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	std::cout << "RocketSM::ExitInit\n";
+	logger->info("RocketSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	std::cout << "RocketSM::EnterWaitForInit\n";
+	logger->info("RocketSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -109,12 +112,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	std::cout << "RocketSM::ExitWaitForInit\n";
+	logger->info("RocketSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
-	std::cout << "RocketSM::EnterWaitForLaunch\n";
+	logger->info("RocketSM::EnterWaitForLaunch");
 	enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
@@ -132,12 +135,12 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
 {
-	std::cout << "RocketSM::ExitWaitForLaunch\n";
+	logger->info("RocketSM::ExitWaitForLaunch");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 {
-	std::cout << "RocketSM::EnterPoweredFlight\n";
+	logger->info("RocketSM::EnterPoweredFlight");
 	enterNewState(ST_POWERED_FLIGHT);
 }
 
@@ -157,12 +160,12 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
 {
-	std::cout << "RocketSM::ExitPoweredFlight\n";
+	logger->info("RocketSM::ExitPoweredFlight");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 {
-	std::cout << "RocketSM::EnterCoast\n";
+	logger->info("RocketSM::EnterCoast");
 	enterNewState(ST_COAST);
 }
 
@@ -180,12 +183,12 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
 {
-	std::cout << "RocketSM::ExitCoast\n";
+	logger->info("RocketSM::ExitCoast");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 {
-	std::cout << "RocketSM::EnterDescentPhase1\n";
+	logger->info("RocketSM::EnterDescentPhase1");
 	enterNewState(ST_DESCENT_PHASE_1);
 }
 
@@ -206,12 +209,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
 {
-	std::cout << "RocketSM::ExitDescentPhase1\n";
+	logger->info("RocketSM::ExitDescentPhase1");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 {
-	std::cout << "RocketSM::EnterDescentPhase2\n";
+	logger->info("RocketSM::EnterDescentPhase2");
 	enterNewState(ST_DESCENT_PHASE_2);
 }
 
@@ -226,12 +229,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
 {
-	std::cout << "RocketSM::ExitDescentPhase2\n";
+	logger->info("RocketSM::ExitDescentPhase2");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
-	std::cout << "RocketSM::EnterGround\n";
+	logger->info("RocketSM::EnterGround");
 	enterNewState(ST_GROUND);
 }
 
@@ -287,7 +290,7 @@ void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData>& data)
 	// that the rocket launching
 	if (consecutiveEvents >= LaunchThreshold)
 	{
-		std::cout << "Launch \n";
+		logger->info("Launch");
 		Launch();
 	}
 #endif
@@ -319,7 +322,7 @@ void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData>& data
 	// that the rocket is in coast
 	if (consecutiveEvents >= BurnOutThreshold)
 	{
-		std::cout << "MotorBurnout \n";
+		logger->info("MotorBurnout");
 		MotorBurnout();
 	}
 #endif
@@ -351,7 +354,7 @@ void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData>& data)
 	// that the rocket is on the ground
 	if (consecutiveEvents >= TouchdownThreshold)
 	{
-		std::cout << "Touchdown \n";
+		logger->info("Touchdown");
 		Touchdown();
 	}
 #endif
@@ -381,7 +384,7 @@ void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData>& data)
 	// that the rocket is pointing downwards and falling
 	if (consecutiveEvents >= ApogeeThreshold)
 	{
-		std::cout << "Apogee \n";
+		logger->info("Apogee");
 		Apogee();
 	}
 #endif
