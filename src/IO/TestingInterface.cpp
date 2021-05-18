@@ -22,7 +22,7 @@ void TestingInterface::initializeOutputs()
 {
 #if USE_LOGGER == 1
 	std::cout << "Initializing LOGGER...\n";
-	logger.initialize();
+    sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
 	std::cout << "Initializing RADIO...\n";
@@ -41,7 +41,7 @@ bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
 {
 #if USE_LOGGER == 1
 	if (latestState->outOfData) {
-		if (!logger.queueEmpty()) {
+		if (!sensorLogger.queueEmpty()) {
 			// Wait for logger to finish
 			return false;
 		}
@@ -49,7 +49,7 @@ bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
 		exit(EXIT_SUCCESS);
 	}
 
-	logger.enqueueSensorData(*data);
+    sensorLogger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO == 1

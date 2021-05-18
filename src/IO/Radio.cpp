@@ -14,7 +14,7 @@
 #include <chrono>
 #include <mutex>
 #include <string>
-#include "Logger.h"
+#include "SensorLogger.h"
 
 Radio::Radio(EventQueue &eventQueue) 
 	: eventQueue(eventQueue)
@@ -149,7 +149,7 @@ void Radio::sendData(const sensorsData &currentState) const
 #endif
 
 #if USE_LOGGER == 1
-	serialPrintf(fd, std::to_string(Logger::working).c_str());
+	serialPrintf(fd, std::to_string(SensorLogger::working).c_str());
 	serialPrintf(fd, ",");
 #endif // USE_LOGGER
 

@@ -7,7 +7,7 @@
 #include "IO/SBGSensor.h"
 #include "IO/Input.h"
 #include "IO/SocketClient.h"
-#include "IO/Logger.h"
+#include "IO/SensorLogger.h"
 #include "IO/Radio.h"
 #include "IO/gpio/Gpio.h"
 #include "EventQueue.h"
@@ -62,7 +62,7 @@ private:
 #endif
 
 #if USE_LOGGER == 1
-	Logger logger;
+	SensorLogger sensorLogger;
 #endif
 
 #if USE_GPIO == 1

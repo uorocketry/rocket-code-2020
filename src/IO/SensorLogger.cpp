@@ -1,27 +1,27 @@
 #include "config/config.h"
 #if USE_LOGGER == 1
 
-#include "Logger.h"
+#include "SensorLogger.h"
 
 #include "helpers/Helper.h"
 
 #include <experimental/filesystem>
 
-int Logger::working = 0;
-Logger::~Logger()
+int SensorLogger::working = 0;
+SensorLogger::~SensorLogger()
 = default;
 
-void Logger::initialize()
+void SensorLogger::initialize()
 {
 	IO::initialize();
 }
 
-bool Logger::isInitialized()
+bool SensorLogger::isInitialized()
 {
 	return (status.fileStatus == READY);
 }
 
-void Logger::run()
+void SensorLogger::run()
 {
 	const int maxLine = 300;
 	int lineCount = 0;
@@ -80,7 +80,7 @@ void Logger::run()
 	}
 }
 
-int Logger::getBootId(std::string &path)
+int SensorLogger::getBootId(std::string &path)
 {
 	int bootId = 0;
 
@@ -122,7 +122,7 @@ int Logger::getBootId(std::string &path)
 	return bootId;
 }
 
-void Logger::enqueueSensorData(const sensorsData& curSensorData)
+void SensorLogger::enqueueSensorData(const sensorsData& curSensorData)
 {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
@@ -130,7 +130,7 @@ void Logger::enqueueSensorData(const sensorsData& curSensorData)
 	writingCondition.notify_one();
 }
 
-void Logger::dequeueToFile(std::ofstream &fileStream)
+void SensorLogger::dequeueToFile(std::ofstream &fileStream)
 {
 	sensorsData currentState;
 	{
@@ -157,7 +157,7 @@ void Logger::dequeueToFile(std::ofstream &fileStream)
 	}
 }
 
-void Logger::writeHeader(std::ofstream &fileStream)
+void SensorLogger::writeHeader(std::ofstream &fileStream)
 {
 	fileStream << "Timestamp (Relative),";
 
@@ -190,7 +190,7 @@ void Logger::writeHeader(std::ofstream &fileStream)
 	fileStream.flush();
 }
 
-void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
+void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
 {
 	const char* sep = ","; 
 
@@ -303,7 +303,7 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream.flush();
 }
 
-bool Logger::queueEmpty() {
+bool SensorLogger::queueEmpty() {
 	return logQueue.empty();
 }
 

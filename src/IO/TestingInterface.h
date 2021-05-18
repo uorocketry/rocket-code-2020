@@ -7,7 +7,7 @@
 
 #include "IO/Interface.h"
 #include "IO/TestingSensors.h"
-#include "IO/Logger.h"
+#include "IO/SensorLogger.h"
 #include "IO/Radio.h"
 #include <queue>
 #include <string>
@@ -45,7 +45,7 @@ private:
 	time_point latestTime;
 
 #if USE_LOGGER == 1
-	Logger logger;
+	SensorLogger sensorLogger;
 #endif
 
 #if USE_RADIO == 1

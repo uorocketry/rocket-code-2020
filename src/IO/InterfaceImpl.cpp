@@ -51,7 +51,7 @@ void InterfaceImpl::initializeOutputs()
 {
 #if USE_LOGGER == 1
 	std::cout << "Initializing LOGGER...\n";
-	logger.initialize();
+    sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
 	std::cout << "Initializing RADIO...\n";
@@ -74,7 +74,7 @@ bool InterfaceImpl::updateInputs()
 	latestState->eventNumber = eventQueue.pop();
 
 #if USE_LOGGER == 1
-    latestState->loggerIsInitialized = logger.isInitialized();
+    latestState->loggerIsInitialized = sensorLogger.isInitialized();
 #endif
 
 #if USE_SOCKET_CLIENT == 1
@@ -108,7 +108,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 #endif
 
 #if USE_LOGGER == 1
-	logger.enqueueSensorData(*data);
+    sensorLogger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO == 1

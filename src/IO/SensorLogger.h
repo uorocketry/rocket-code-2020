@@ -12,11 +12,11 @@
 #include <iostream>
 #include <condition_variable>
 
-class Logger : public IO
+class SensorLogger : public IO
 {
 public:
 	static int working;
-	~Logger();
+	~SensorLogger();
 
 	void initialize() override;
 	void run() override;
