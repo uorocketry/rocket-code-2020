@@ -8,6 +8,9 @@
 #include "EventQueue.h"
 #include <iostream>
 #include <queue>
+#include <boost/circular_buffer.hpp>
+#include <data/sensorsData.h>
+#include <condition_variable>
 
 class SocketClient : public IO
 {
@@ -15,12 +18,23 @@ public:
     SocketClient(EventQueue &eventQueue);
     ~SocketClient();
 
-    void run();
+    [[noreturn]] void run();
     void initialize();
     bool isInitialized();
+    void enqueueSensorData(const sensorsData &data);
 
 private:
+    void sendingLoop(int sock);
+
+    const int SENDING_BUFFER_CAPACITY = 32;
+
+    bool connected = false;
+
     EventQueue &eventQueue;
+    boost::circular_buffer<std::string> sendingBuffer;
+
+    std::condition_variable sendingCondition;
+    std::mutex sendingMutex;
 
     struct InitFlags
     {

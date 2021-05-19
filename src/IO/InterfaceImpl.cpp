@@ -117,6 +117,10 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	radio.enqueueSensorData(*data);
 #endif
 
+#if USE_SOCKET_CLIENT == 1
+    client.enqueueSensorData(*data);
+#endif
+
 	return true;
 }
 
