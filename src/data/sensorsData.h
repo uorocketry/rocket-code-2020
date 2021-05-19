@@ -10,6 +10,7 @@
 struct sensorsData
 {
     bool isInitialized() const;
+    std::string convertToReducedString() const;
 
     uint64_t timeStamp = 0;
     uint16_t currentStateNo = 0;

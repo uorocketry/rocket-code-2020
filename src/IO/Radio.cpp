@@ -93,69 +93,14 @@ void Radio::dequeueToRadio()
 
 void Radio::sendData(const sensorsData &currentState) const
 {
-    std::string data;
-
-	data += std::to_string(currentState.timeStamp);
-	data += ",";
-	data += std::to_string(currentState.currentStateNo);
-	data += ",";
-
-#if USE_SBG == 1
-	data += std::to_string(currentState.sbg.roll);
-	data += ",";
-	data += std::to_string(currentState.sbg.pitch);
-	data += ",";
-	data += std::to_string(currentState.sbg.yaw);
-	data += ",";
-	data += std::to_string(currentState.sbg.rollAccuracy);
-	data += ",";
-	data += std::to_string(currentState.sbg.pitchAccuracy);
-	data += ",";
-	data += std::to_string(currentState.sbg.yawAccuracy);
-	data += ",";
-	data += std::to_string(currentState.sbg.gpsLatitude);
-	data += ",";
-	data += std::to_string(currentState.sbg.gpsLongitude);
-	data += ",";
-	data += std::to_string(currentState.sbg.gpsAltitude);
-	data += ",";
-	data += std::to_string(currentState.sbg.relativeBarometricAltitude);
-	data += ",";
-	data += std::to_string(currentState.sbg.velocityN);
-	data += ",";
-	data += std::to_string(currentState.sbg.velocityE);
-	data += ",";
-	data += std::to_string(currentState.sbg.velocityD);
-	data += ",";
-	data += std::to_string(currentState.sbg.filteredXaccelerometer);
-	data += ",";
-	data += std::to_string(currentState.sbg.filteredYaccelerometer);
-	data += ",";
-	data += std::to_string(currentState.sbg.filteredZaccelerometer);
-	data += ",";
-	data += std::to_string(currentState.sbg.solutionStatus);
-	data += ",";
-#endif // USE_SBG
-
-#if USE_GPIO == 1
-	for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
-	{
-		data += std::to_string(output.second);
-		data += ",";
-	}
-	for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
-	{
-		data += std::to_string(output.second);
-		data += ",";
-	}
-#endif
+    auto data = currentState.convertToReducedString();
 
 #if USE_LOGGER == 1
-	data += std::to_string(SensorLogger::working);
-	data += ",";
+    data += std::to_string(SensorLogger::working);
+    data += ",";
 #endif // USE_LOGGER
 
-	data += "\r\n";
+    data += "\r\n";
 
     serialPrintf(fd, data.c_str());
 }
