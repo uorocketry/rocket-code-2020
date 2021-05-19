@@ -7,15 +7,11 @@
 class Output
 {
 public:
-    Output(const std::string name, const int pin);
+    virtual bool setValue(int value) = 0;
+    int getValue();
 
-    
-    bool setValue(int value);
-
-private:
-    std::string name;
+protected:
     int currentState;
-    const int pinNbr;
 };
 
 #endif

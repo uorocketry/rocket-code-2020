@@ -5,15 +5,11 @@
 #include "data/sensorsData.h"
 #include "TestingSensors.h"
 
-#include <sstream>
 #include <fstream>
-#include <string>
-#include <vector>
 
 void TestingSensors::run()
 {
-	return;
-}
+	}
 
 void TestingSensors::initialize()
 {
@@ -66,7 +62,7 @@ void TestingSensors::initialize()
 
 		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
 
-		currentData.sbg.gpsPosStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosStatus = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.gpsPosAccuracyLatitude = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gpsPosAccuracyLongitude = helper::processFloat(currentRow[count++]);
@@ -82,10 +78,10 @@ void TestingSensors::initialize()
 		currentData.sbg.longitudeAccuracy = helper::processFloat(currentRow[count++]);
 		currentData.sbg.altitudeAccuracy = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.pressureStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.pressureStatus = helper::processUInt32(currentRow[count++]);
 		currentData.sbg.barometricPressure = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.imuStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.imuStatus = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.gyroX = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gyroY = helper::processFloat(currentRow[count++]);

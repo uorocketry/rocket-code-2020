@@ -18,22 +18,22 @@ public:
 	TestingInterface();
 	~TestingInterface();
 
-	void initialize();
+	void initialize() override;
 	
-	void calibrateTelemetry();
+	void calibrateTelemetry() override;
 
 	// to get the latest rocket state. return a pointer to latestState
-	std::shared_ptr<sensorsData> getLatest();
+	std::shared_ptr<sensorsData> getLatest() override;
 
-	bool updateInputs();
-	bool updateOutputs(std::shared_ptr<sensorsData> data);
+	bool updateInputs() override;
+	bool updateOutputs(std::shared_ptr<sensorsData> data) override;
 
 	#if USE_GPIO == 1
 	void createNewGpioOutput(std::string name, int pinNbr);
 	void createNewGpioPwmOutput(std::string name, int pinNbr);
 	#endif
 
-	time_point getCurrentTime();
+	time_point getCurrentTime() override;
 
 private:
 	void initializeOutputs();

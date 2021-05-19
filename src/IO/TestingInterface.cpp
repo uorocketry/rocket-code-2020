@@ -2,20 +2,13 @@
 #if TESTING == 1
 
 #include "TestingInterface.h"
-#include "IO/IO.h"
-#include "data/UOSMData.h"
-#include <iostream>
-#include <chrono>
-#include "IO/TestingSensors.h"
 
 
 TestingInterface::TestingInterface()
-{
-}
+= default;
 
 TestingInterface::~TestingInterface()
-{
-}
+= default;
 
 void TestingInterface::initialize()
 {

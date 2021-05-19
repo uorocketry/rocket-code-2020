@@ -2,19 +2,20 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
+#include "Output.h"
+
 #include <string>
 
-class PwmOutput
+class PwmOutput: public Output
 {
 public:
-    PwmOutput(const std::string name, const int pin);
+    PwmOutput(const std::string& name, int pin);
 
     
     bool setValue(int value);
 
 private:
     std::string name;
-    int currentState;
     const int pinNbr;
 };
 

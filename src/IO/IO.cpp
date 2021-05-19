@@ -1,10 +1,7 @@
 #include "IO.h"
 #include "iostream"
-#include<thread>
 
-IO::IO() {
-	
-}
+IO::IO() = default;
 
 IO::~IO() {
 	// destroy thread
