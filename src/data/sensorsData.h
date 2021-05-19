@@ -45,4 +45,8 @@ struct sensorsData
 #if TESTING == 1
     bool outOfData = false;
 #endif
+
+#if USE_LOGGER == 1
+    bool loggerWorking;
+#endif // USE_LOGGER
 };

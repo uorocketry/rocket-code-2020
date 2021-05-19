@@ -92,5 +92,10 @@ std::string sensorsData::convertToReducedString() const {
 	}
 #endif
 
+#if USE_LOGGER == 1
+    data += std::to_string(loggerWorking);
+    data += ",";
+#endif // USE_LOGGER
+
     return data;
 }

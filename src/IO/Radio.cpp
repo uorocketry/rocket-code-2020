@@ -94,12 +94,6 @@ void Radio::dequeueToRadio()
 void Radio::sendData(const sensorsData &currentState) const
 {
     auto data = currentState.convertToReducedString();
-
-#if USE_LOGGER == 1
-    data += std::to_string(SensorLogger::working);
-    data += ",";
-#endif // USE_LOGGER
-
     data += "\r\n";
 
     serialPrintf(fd, data.c_str());

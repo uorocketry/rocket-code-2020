@@ -143,6 +143,10 @@ void InterfaceImpl::calibrateTelemetry()
 std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
 
+#if USE_LOGGER == 1
+    latestState->loggerWorking = SensorLogger::working;
+#endif // USE_LOGGER
+
 	return latestState;
 }
 
