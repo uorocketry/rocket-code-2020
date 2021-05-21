@@ -126,11 +126,11 @@ void SocketClient::sendingLoop(int sock) {
 
 void SocketClient::enqueueSensorData(const sensorsData &data) {
     auto dataStr = data.convertToReducedString();
+    dataStr += "\r\n";
 
-    {
-        std::lock_guard<std::mutex> guard(sendingMutex);
-        sendingBuffer.push_back(dataStr);
-    }
+    std::lock_guard<std::mutex> guard(sendingMutex);
+    sendingBuffer.push_back(dataStr);
+
     sendingCondition.notify_one();
 }
 
