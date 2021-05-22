@@ -100,7 +100,6 @@ else()
 	find_package(Boost 1.67.0 COMPONENTS system filesystem REQUIRED)
 	target_include_directories(MainLoopLib PUBLIC ${Boost_INCLUDE_DIRS})
 	target_link_libraries(MainLoopLib ${Boost_LIBRARIES})
-	add_dependencies(MainLoopLib ${Boost_LIBRARIES})
 endif()
 
 target_link_libraries (MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
