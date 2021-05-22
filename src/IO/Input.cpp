@@ -11,9 +11,7 @@ Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue)
 }
 
 Input::~Input() 
-{
-    
-}
+= default;
 
 void Input::initialize() {
     std::cout << "init input thread" << "\n";

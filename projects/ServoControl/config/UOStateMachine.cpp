@@ -9,14 +9,12 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 
-UOStateMachine::UOStateMachine() :
-        InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
-
     // There is no state entry function for the first state
     enterNewState(States(0));
 
-    interface = &interfaceImpl;
 }
 
 // Code for each state. Do not put while in them. The right function according to the current state
@@ -60,7 +58,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-    if (interface->isInitialized())
+    if (interfaceData->isInitialized())
     {
         InternalEvent(ST_CONTROL);
     }
@@ -110,7 +108,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 // Open OUT1 is the first bit is set
                 bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
 
-                gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
+                gpioData.digitalOutputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
 
                 std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
             }

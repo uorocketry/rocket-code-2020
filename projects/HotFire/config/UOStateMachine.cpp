@@ -8,14 +8,12 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
-
-	interface = &interfaceImpl;
 }
 
 // StartFilling external event
@@ -33,7 +31,7 @@ void UOStateMachine::StartFillingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Abort external event
@@ -51,7 +49,7 @@ void UOStateMachine::AbortEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // StopFilling external event
@@ -69,7 +67,7 @@ void UOStateMachine::StopFillingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Ignition external event
@@ -87,7 +85,7 @@ void UOStateMachine::IgnitionEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // FinalVenting external event
@@ -105,7 +103,7 @@ void UOStateMachine::FinalVentingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
 		TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Done external event
@@ -122,7 +120,7 @@ void UOStateMachine::DoneEXT(){
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DONE
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_ABORT_FILLING
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_ABORT_BURN
-	END_TRANSITION_MAP(NULL)}
+	END_TRANSITION_MAP(nullptr)}
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
@@ -175,15 +173,15 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
-
-	if (interface->isInitialized())
-	{
-		InternalEvent(ST_WAIT_FOR_FILLING);
-	}
+	
+	 if (interfaceData->isInitialized())
+	 {
+	 	InternalEvent(ST_WAIT_FOR_FILLING);
+	 }
 
 	// showInfo(interfaceData);
 
@@ -217,7 +215,7 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_OPEN});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_OPEN});
 		#endif
 		
 	#endif
@@ -254,7 +252,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 		#endif
 
 		#if USE_OUT1
-		gpioData.outputMap.insert({OUT1_NAME, OUT1_CLOSE});
+		gpioData.digitalOutputMap.insert({OUT1_NAME, OUT1_CLOSE});
 		#endif
 		
 	#endif
@@ -394,7 +392,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 	interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData>& data)
 {
 	eventType eventNbr = data->eventNumber;
 
@@ -423,7 +421,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	}
 }
 
-void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
+void UOStateMachine::showInfo(const std::shared_ptr<sensorsData>& data)
 {
 }
 

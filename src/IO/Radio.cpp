@@ -23,9 +23,7 @@ Radio::Radio(EventQueue &eventQueue)
 }
 
 Radio::~Radio()
-{
-	
-}
+= default;
 
 void Radio::initialize()
 {
@@ -71,7 +69,7 @@ void Radio::run()
 	}
 }
 
-void Radio::enqueueSensorData(sensorsData curSensorData)
+void Radio::enqueueSensorData(const sensorsData& curSensorData)
 {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
@@ -93,51 +91,68 @@ void Radio::dequeueToRadio()
 }
 
 
-void Radio::sendData(const sensorsData &currentState)
+void Radio::sendData(const sensorsData &currentState) const
 {
-#if USE_LOGGER == 1
-	serialPrintf(fd, std::to_string(Logger::working).c_str());
-	serialPrintf(fd, ";");
-#endif
 	serialPrintf(fd, std::to_string(currentState.timeStamp).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
+	serialPrintf(fd, std::to_string(currentState.currentStateNo).c_str());
+	serialPrintf(fd, ",");
+
 #if USE_SBG == 1
 	serialPrintf(fd, std::to_string(currentState.sbg.roll).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.pitch).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.yaw).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.rollAccuracy).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.pitchAccuracy).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.yawAccuracy).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsLatitude).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsLongitude).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.gpsAltitude).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.relativeBarometricAltitude).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityN).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityE).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.velocityD).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredXaccelerometer).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredYaccelerometer).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.filteredZaccelerometer).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
 	serialPrintf(fd, std::to_string(currentState.sbg.solutionStatus).c_str());
-	serialPrintf(fd, ";");
+	serialPrintf(fd, ",");
+#endif // USE_SBG
+
+#if USE_GPIO == 1
+	for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
+	{
+		serialPrintf(fd, std::to_string(output.second).c_str());
+		serialPrintf(fd, ",");
+	}
+	for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
+	{
+		serialPrintf(fd, std::to_string(output.second).c_str());
+		serialPrintf(fd, ",");
+	}
 #endif
-	serialPrintf(fd, std::to_string(currentState.currentStateNo).c_str());
+
+#if USE_LOGGER == 1
+	serialPrintf(fd, std::to_string(Logger::working).c_str());
+	serialPrintf(fd, ",");
+#endif // USE_LOGGER
+
 	serialPrintf(fd, "\r\n");
 }
 

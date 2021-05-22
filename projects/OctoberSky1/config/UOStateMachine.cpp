@@ -3,13 +3,12 @@
 #include <bitset>
 #include "data/sensorsData.h"
 #include "UOStateMachine.h"
-#include <math.h>
-#include "helpers/Types.h"
+#include <cmath>
 
 #define PI 3.14159265
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+	InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
@@ -27,7 +26,7 @@ void UOStateMachine::Launch()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Launch external event
@@ -42,7 +41,7 @@ void UOStateMachine::MotorBurnout()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Apogee external event
@@ -58,7 +57,7 @@ void UOStateMachine::Apogee()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Touchdown external event
@@ -72,7 +71,7 @@ void UOStateMachine::Touchdown(){
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 	TRANSITION_MAP_ENTRY(ST_GROUND)			// ST_DESCENT_PHASE_2
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-	END_TRANSITION_MAP(NULL)}
+	END_TRANSITION_MAP(nullptr)}
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
@@ -99,11 +98,11 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-	if (interface->isInitialized())
-	{
-		interface->calibrateTelemetry();
-		InternalEvent(ST_WAIT_FOR_LAUNCH);
-	}
+	 if (interfaceData->isInitialized())
+	 {
+	 	interface->calibrateTelemetry();
+	 	InternalEvent(ST_WAIT_FOR_LAUNCH);
+	 }
 
 	interface->updateOutputs(interfaceData);
 }
@@ -244,7 +243,7 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 	interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData>& data)
 {
 	eventType eventNbr = data->eventNumber;
 	
@@ -264,7 +263,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	}
 }
 
-void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 
@@ -294,7 +293,7 @@ void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 #endif
 }
 
-void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -326,7 +325,7 @@ void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
 #endif
 }
 
-void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -358,7 +357,7 @@ void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
 #endif
 }
 
-void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -388,7 +387,7 @@ void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
 #endif
 }
 
-void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
+void UOStateMachine::showInfo(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
@@ -399,7 +398,6 @@ void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 		   (data->sbg.solutionStatus) & 0b1111);
 // std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 #endif
-	return;
 }
 
 std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
@@ -408,7 +406,7 @@ std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smd
 	std::shared_ptr<sensorsData> data = interface->getLatest();
 
 	// If statement to prevent overwiring data from TESTING
-	if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
+	if (data->timeStamp == 0) data->timeStamp = smdata->now.time_since_epoch().count();
 
 	data->currentStateNo = state;
 

@@ -9,7 +9,7 @@
 #include "IO/SocketClient.h"
 #include "IO/Logger.h"
 #include "IO/Radio.h"
-#include "IO/Gpio.h"
+#include "IO/gpio/Gpio.h"
 #include "EventQueue.h"
 #include <memory>
 #include <string>
@@ -20,24 +20,23 @@ public:
 	InterfaceImpl();
 	~InterfaceImpl();
 
-	void initialize();
+	void initialize() override;
 	
-	bool isInitialized();
 	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState
-	std::shared_ptr<sensorsData> getLatest();
+	std::shared_ptr<sensorsData> getLatest() override;
 
 	// loop over each sensor and update the latestState
-	bool updateInputs();
-	bool updateOutputs(std::shared_ptr<sensorsData> data);
+	bool updateInputs() override;
+	bool updateOutputs(std::shared_ptr<sensorsData> data) override;
 
 	#if USE_GPIO == 1
-	void createNewGpioOutput(std::string name, int pinNbr);
-	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	void createNewGpioOutput(std::string name, int pinNbr) override;
+	void createNewGpioPwmOutput(std::string name, int pinNbr) override;
 	#endif
 
-	time_point getCurrentTime();
+	time_point getCurrentTime() override;
 
 private:
 	void initializeInputs();

@@ -1,8 +1,8 @@
 #pragma once
 #include "config/config.h"
-#include <unordered_map>
+#include <map>
 #include <string>
 struct GpioData {
-    std::unordered_map<std::string, int> outputMap;
-    std::unordered_map<std::string, int> pwmOutputMap;
+    std::map<std::string, int> digitalOutputMap;
+    std::map<std::string, int> pwmOutputMap;
 };

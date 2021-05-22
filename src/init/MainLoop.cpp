@@ -1,19 +1,21 @@
 #include "../helpers/Types.h"
 #include "config/UOStateMachine.h"
+#include "iostream"
 
 #include "helpers/Helper.h"
 
-#include <stdio.h>
-#include "chrono"
-#include "iostream"
-#include <thread>
-
-#define DEFAULT_TARGET_UPDATE_DURATION_NS 1000000000L / 30L // in nanoseconds = 33 miliseconds = 30Hz
+#define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
 int main()
 {
+#if TESTING != 1
+    InterfaceImpl interfaceImpl;
+#else
+    TestingInterface interfaceImpl;
+#endif
+
 	// create a state machine instance
-	UOStateMachine uOttSM;
+	UOStateMachine uOttSM(&interfaceImpl);
 
 	time_point start, now;
 	duration_ns target_ns, elapsed_ns;

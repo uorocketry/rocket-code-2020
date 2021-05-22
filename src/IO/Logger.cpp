@@ -2,7 +2,6 @@
 #if USE_LOGGER == 1
 
 #include "Logger.h"
-#include "data/sensorsData.h"
 
 #include "helpers/Helper.h"
 
@@ -15,9 +14,7 @@
 #include "boost/filesystem.hpp"
 
 int Logger::working = 0;
-Logger::~Logger()
-{
-}
+Logger::~Logger() = default;
 
 void Logger::initialize()
 {
@@ -37,6 +34,7 @@ void Logger::run()
 
 	std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
 	std::string ext = ".uorocketlog";
+	if (path.back() != '/') path += "/";
 
 	int bootId = getBootId(path);
 
@@ -70,8 +68,9 @@ void Logger::run()
 				fileStream.close();
 				lineCount = 0;
 				logId++;
+
 				fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
-				fileStream.sync_with_stdio(true);
+				std::ofstream::sync_with_stdio(true);
 			}
 
 
@@ -105,7 +104,7 @@ int Logger::getBootId(std::string &path)
 			tokens1.push_back(intermediate);
 		}
 
-		if (tokens1.size() > 0)
+		if (!tokens1.empty())
 		{
 			std::string currentLog = tokens1[tokens1.size() - 1];
 			std::vector<std::string> tokens2;
@@ -128,7 +127,7 @@ int Logger::getBootId(std::string &path)
 	return bootId;
 }
 
-void Logger::enqueueSensorData(sensorsData curSensorData)
+void Logger::enqueueSensorData(const sensorsData& curSensorData)
 {
 	std::lock_guard<std::mutex> lockGuard(mutex);
 	logQueue.push(curSensorData);
@@ -206,16 +205,15 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 
 
 #if USE_GPIO == 1
-
-	for (std::pair<std::string, int> output : currentState.gpioData.outputMap)
+	for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
 	{
-		fileStream << output.first << "=" << output.second << ":";
+		fileStream << output.second << sep;
 	}
+
 	for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
 	{
-		fileStream << output.first << "=" << output.second << ":";
+		fileStream << output.second << sep;
 	}
-	fileStream << sep;
 #endif
 
 #if USE_SBG == 1
@@ -278,8 +276,33 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.deltaAngleX << sep;
 	fileStream << currentState.sbg.deltaAngleY << sep;
 	fileStream << currentState.sbg.deltaAngleZ << sep;
-
 #endif
+
+	// Initialization data
+#if USE_LOGGER
+    fileStream << currentState.loggerIsInitialized << sep;
+#endif
+
+#if USE_SOCKET_CLIENT
+    fileStream << currentState.client.isInitialized << sep;
+#endif
+
+#if USE_SBG
+    fileStream << currentState.sbgIsInitialized << sep;
+#endif
+
+#if USE_INPUT
+    fileStream << currentState.inputIsInitialized << sep;
+#endif
+
+#if USE_RADIO
+    fileStream << currentState.radioIsInitialized << sep;
+#endif
+
+#if USE_GPIO
+    fileStream << currentState.gpioIsInitialized << sep;
+#endif
+
 	fileStream << "\n";
 
 	fileStream.flush();

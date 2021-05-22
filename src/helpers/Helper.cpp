@@ -1,13 +1,10 @@
 #include "Helper.h"
 
-#include <string>
-#include <vector>
-#include <sstream>
 #include <cmath>
 
 namespace helper {
 
-	std::vector<std::string> stringSplit(std::string text, char delimiter) 
+	std::vector<std::string> stringSplit(const std::string& text, char delimiter)
 	{
 		std::stringstream lineStream(text);
 		std::string cell;
@@ -32,22 +29,22 @@ namespace helper {
 		return value ? processUInt64(value) : defaultValue;
 	}
 
-	int processInt(std::string data)
+	int processInt(const std::string& data)
 	{
 		return strtol(data.c_str(), nullptr, 10);
 	}
 
-	uint64_t processUInt64(std::string data)
+	uint64_t processUInt64(const std::string& data)
 	{
 		return strtoull(data.c_str(), nullptr, 10);
 	}
 
-    uint32_t processUInt32(std::string data)
+    uint32_t processUInt32(const std::string& data)
 	{
 		return strtoul(data.c_str(), nullptr, 10);
 	}
 
-	float processFloat(std::string data)
+	float processFloat(const std::string& data)
 	{
 		float result = strtof(data.c_str(), nullptr);
 		if (std::isnan(result)) {
@@ -57,7 +54,7 @@ namespace helper {
 		return result;
 	}
 
-	double processDouble(std::string data)
+	double processDouble(const std::string& data)
 	{
 		return strtod(data.c_str(), nullptr);
 	}

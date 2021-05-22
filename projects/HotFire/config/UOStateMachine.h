@@ -8,7 +8,7 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-	UOStateMachine();
+    UOStateMachine(Interface* anInterface);
 
 	// External events taken by this state machine
 	void StartFillingEXT();
@@ -29,8 +29,8 @@ protected:
 #endif
 	
 private:
-	void detectExternEvent(std::shared_ptr<sensorsData> data);
-	void showInfo(std::shared_ptr<sensorsData> data);
+	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
+	void showInfo(const std::shared_ptr<sensorsData>& data);
 
 	// State enumeration order must match the order of state method entries
 	// in the state map.
@@ -93,17 +93,17 @@ private:
 	STATE_DECLARE(UOStateMachine, AbortBurn, UOSMData)
 
 	BEGIN_STATE_MAP_EX
-	STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
-	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
-	STATE_MAP_ENTRY_ALL_EX(&WaitForFilling, 0, &EnterWaitForFilling, &ExitWaitForFilling)
-	STATE_MAP_ENTRY_ALL_EX(&Filling, 0, &EnterFilling, &ExitFilling)
-	STATE_MAP_ENTRY_ALL_EX(&WaitForIgnition, 0, &EnterWaitForIgnition, &ExitWaitForIgnition)
-	STATE_MAP_ENTRY_ALL_EX(&Ignition, 0, &EnterIgnition, &ExitIgnition)
-	STATE_MAP_ENTRY_ALL_EX(&FullBurn, 0, &EnterFullBurn, &ExitFullBurn)
-	STATE_MAP_ENTRY_ALL_EX(&FinalVenting, 0, &EnterFinalVenting, &ExitFinalVenting)
-	STATE_MAP_ENTRY_ALL_EX(&Done, 0, &EnterDone, 0)
-	STATE_MAP_ENTRY_ALL_EX(&AbortFilling, 0, &EnterAbortFilling, 0)
-	STATE_MAP_ENTRY_ALL_EX(&AbortBurn, 0, &EnterAbortBurn, 0)
+	STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, nullptr, &EnterWaitForInit, &ExitWaitForInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForFilling, nullptr, &EnterWaitForFilling, &ExitWaitForFilling)
+	STATE_MAP_ENTRY_ALL_EX(&Filling, nullptr, &EnterFilling, &ExitFilling)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForIgnition, nullptr, &EnterWaitForIgnition, &ExitWaitForIgnition)
+	STATE_MAP_ENTRY_ALL_EX(&Ignition, nullptr, &EnterIgnition, &ExitIgnition)
+	STATE_MAP_ENTRY_ALL_EX(&FullBurn, nullptr, &EnterFullBurn, &ExitFullBurn)
+	STATE_MAP_ENTRY_ALL_EX(&FinalVenting, nullptr, &EnterFinalVenting, &ExitFinalVenting)
+	STATE_MAP_ENTRY_ALL_EX(&Done, nullptr, &EnterDone, nullptr)
+	STATE_MAP_ENTRY_ALL_EX(&AbortFilling, nullptr, &EnterAbortFilling, nullptr)
+	STATE_MAP_ENTRY_ALL_EX(&AbortBurn, nullptr, &EnterAbortBurn, nullptr)
 	END_STATE_MAP_EX
 	
 	std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);

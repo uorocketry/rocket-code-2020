@@ -21,8 +21,8 @@ jobs:
       - name: Install Boost filesystem
         run: sudo apt-get install libboost-system-dev libboost-filesystem-dev -y
       - name: Cmake Makefiles
-        run: cmake -B ./build -G 'Unix Makefiles'
+        run: USE_GPIO=1 cmake -B ./build -G 'Unix Makefiles'
       - name: Run make
-        run: cmake --build ./build --target tests
+        run: USE_GPIO=1 cmake --build ./build --target tests
       - name: Run Unit Tests
         run: ./build/unitTesting/tests
