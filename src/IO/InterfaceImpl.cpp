@@ -63,43 +63,6 @@ void InterfaceImpl::initializeOutputs()
 #endif
 }
 
-
-bool InterfaceImpl::isInitialized()
-{
-#if SKIP_INIT == 1
-	std::cout << "Skipping init\n";
-	return true;
-#endif
-
-	bool result = true;
-
-#if USE_LOGGER == 1
-	result &= logger.isInitialized();
-#endif
-
-#if USE_SOCKET_CLIENT == 1
-	result &= client.isInitialized();
-#endif
-
-#if USE_SBG == 1
-	result &= mySbgSensor.isInitialized();
-#endif
-
-#if USE_INPUT == 1
-	result &= input.isInitialized();
-#endif
-
-#if USE_RADIO == 1
-	result &= radio.isInitialized();
-#endif
-
-#if USE_GPIO == 1
-	result &= gpio.isInitialized();
-#endif
-
-	return result;
-}
-
 bool InterfaceImpl::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>();
@@ -109,6 +72,30 @@ bool InterfaceImpl::updateInputs()
 #endif
 
 	latestState->eventNumber = eventQueue.pop();
+
+#if USE_LOGGER == 1
+    latestState->loggerIsInitialized = logger.isInitialized();
+#endif
+
+#if USE_SOCKET_CLIENT == 1
+    latestState->clientIsInitialized = client.isInitialized();
+#endif
+
+#if USE_SBG == 1
+    latestState->sbgIsInitialized = mySbgSensor.isInitialized();
+#endif
+
+#if USE_INPUT == 1
+    latestState->inputIsInitialized = input.isInitialized();
+#endif
+
+#if USE_RADIO == 1
+    latestState->radioIsInitialized = radio.isInitialized();
+#endif
+
+#if USE_GPIO == 1
+    latestState->gpioIsInitialized = gpio.isInitialized();
+#endif
 
 	return true;
 }
@@ -153,6 +140,7 @@ void InterfaceImpl::calibrateTelemetry()
 
 std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
+
 	return latestState;
 }
 

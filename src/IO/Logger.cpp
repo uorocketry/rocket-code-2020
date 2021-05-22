@@ -271,8 +271,33 @@ void Logger::writeData(std::ofstream &fileStream, const sensorsData &currentStat
 	fileStream << currentState.sbg.deltaAngleX << sep;
 	fileStream << currentState.sbg.deltaAngleY << sep;
 	fileStream << currentState.sbg.deltaAngleZ << sep;
-
 #endif
+
+	// Initialization data
+#if USE_LOGGER
+    fileStream << currentState.loggerIsInitialized << sep;
+#endif
+
+#if USE_SOCKET_CLIENT
+    fileStream << currentState.client.isInitialized << sep;
+#endif
+
+#if USE_SBG
+    fileStream << currentState.sbgIsInitialized << sep;
+#endif
+
+#if USE_INPUT
+    fileStream << currentState.inputIsInitialized << sep;
+#endif
+
+#if USE_RADIO
+    fileStream << currentState.radioIsInitialized << sep;
+#endif
+
+#if USE_GPIO
+    fileStream << currentState.gpioIsInitialized << sep;
+#endif
+
 	fileStream << "\n";
 
 	fileStream.flush();

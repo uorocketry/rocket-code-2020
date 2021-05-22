@@ -32,6 +32,9 @@ void TestingSensors::initialize()
 
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
 
+        // Ignore the state, that's an output value
+        count++;
+
 #if USE_SBG == 1
 		// SBG:
 		currentData.sbg.roll = helper::processFloat(currentRow[count++]);
@@ -58,9 +61,6 @@ void TestingSensors::initialize()
 		currentData.sbg.filteredZaccelerometer = helper::processFloat(currentRow[count++]);
 
 		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
-
-		// Ignore the state, that's an output value
-		count++;
 
 		currentData.sbg.gpsPosStatus = helper::processUInt32(currentRow[count++]);
 
@@ -97,6 +97,31 @@ void TestingSensors::initialize()
 		currentData.sbg.deltaAngleY = helper::processFloat(currentRow[count++]);
 		currentData.sbg.deltaAngleZ = helper::processFloat(currentRow[count++]);
 
+#endif
+
+        // Initialization data
+#if USE_LOGGER == 1
+        currentData.loggerIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SOCKET_CLIENT == 1
+        currentData.client.isInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SBG == 1
+        currentData.sbgIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_INPUT == 1
+        currentData.inputIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_RADIO == 1
+        currentData.radioIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_GPIO == 1
+        currentData.gpioIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
 		data.push(currentData);

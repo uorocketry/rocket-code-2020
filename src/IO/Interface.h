@@ -11,7 +11,6 @@ class Interface
 public:
 	virtual void initialize() = 0;
 	
-	virtual bool isInitialized() = 0;
 	virtual void calibrateTelemetry()  = 0;
 
 	// to get the latest rocket state. return a pointer to latestState

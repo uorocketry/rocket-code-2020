@@ -22,8 +22,7 @@ public:
 
 	void initialize() override;
 	
-	bool isInitialized() override;
-	void calibrateTelemetry() override;
+	void calibrateTelemetry();
 
 	// to get the latest rocket state. return a pointer to latestState
 	std::shared_ptr<sensorsData> getLatest() override;
