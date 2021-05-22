@@ -108,7 +108,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 // Open OUT1 is the first bit is set
                 bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
 
-                gpioData.outputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
+                gpioData.digitalOutputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
 
                 std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
             }
