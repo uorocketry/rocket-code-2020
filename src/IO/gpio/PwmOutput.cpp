@@ -12,7 +12,7 @@
 PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNbr(pin){
     logger = spdlog::default_logger();
 
-    logger->debug("Created PwmOutput {}", name);
+    SPDLOG_LOGGER_DEBUG(logger, "Created PwmOutput {}", name);
 
     #if USE_WIRING_Pi == 1
     pinMode (pinNbr, PWM_OUTPUT) ;
@@ -25,7 +25,7 @@ PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNb
 bool PwmOutput::setValue(int value) {
     if(currentState != value) {
         currentState = value;
-        logger->debug("PWM {} changed to {}", name, currentState);
+        SPDLOG_LOGGER_DEBUG(logger, "PWM {} changed to {}", name, currentState);
 
         #if USE_WIRING_Pi == 1
         pwmWrite(pinNbr, value);

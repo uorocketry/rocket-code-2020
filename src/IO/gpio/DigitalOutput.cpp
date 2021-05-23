@@ -12,7 +12,7 @@
 DigitalOutput::DigitalOutput(const std::string& name, const int pin) : name(name), pinNbr(pin){
     logger = spdlog::default_logger();
 
-    logger->debug("Created Output {}", name);
+    SPDLOG_LOGGER_DEBUG(logger, "Created Output {}", name);
 
     #if USE_WIRING_Pi == 1
     pinMode (pinNbr, OUTPUT);
@@ -22,7 +22,7 @@ DigitalOutput::DigitalOutput(const std::string& name, const int pin) : name(name
 bool DigitalOutput::setValue(int value) {
     if(currentState != value) {
         currentState = value;
-        logger->debug("OUT {} changed to {}", name, currentState);
+        SPDLOG_LOGGER_DEBUG(logger, "OUT {} changed to {}", name, currentState);
 
         #if USE_WIRING_Pi == 1
         digitalWrite(pinNbr, value);

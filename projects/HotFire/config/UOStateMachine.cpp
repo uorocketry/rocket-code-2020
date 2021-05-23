@@ -152,12 +152,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	logger->info("HotFireSM::ExitInit");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	logger->info("HotFireSM::EnterWaitForInit");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -193,12 +193,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	logger->info("HotFireSM::ExitWaitForInit");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
-	logger->info("HotFireSM::EnterWaitForFilling");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForFilling");
 	enterNewState(ST_WAIT_FOR_FILLING);
 }
 
@@ -230,12 +230,12 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 {
-	logger->info("HotFireSM::ExitWaitForFilling");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
-	logger->info("HotFireSM::EnterFilling");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFilling");
 	enterNewState(ST_FILLING);
 }
 	
@@ -267,12 +267,12 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFilling)
 {
-	logger->info("HotFireSM::ExitFilling");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 {
-	logger->info("HotFireSM::WaitForIgnition");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::WaitForIgnition");
 	enterNewState(ST_WAIT_FOR_IGNITION);
 }
 
@@ -287,12 +287,12 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
 {
-	logger->info("HotFireSM::ExitWaitForIgnition");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 {
-	logger->info("HotFireSM::EnterIgnition");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
 	enterNewState(ST_IGNITION);
 }
 
@@ -308,12 +308,12 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitIgnition)
 {
-	logger->info("HotFireSM::ExitIgnition");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 {
-	logger->info("HotFireSM::EnterFullBurn");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFullBurn");
 	enterNewState(ST_FULL_BURN);
 }
 
@@ -328,12 +328,12 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFullBurn)
 {
-	logger->info("HotFireSM::ExitFullBurn");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFullBurn");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 {
-	logger->info("HotFireSM::EnterFinalVenting");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFinalVenting");
 	enterNewState(ST_FINAL_VENTING);
 }
 
@@ -348,13 +348,13 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
 {
-	logger->info("HotFireSM::ExitFinalVenting");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFinalVenting");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 {
-	logger->info("HotFireSM::EnterDone");
-	logger->info("Done.");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterDone");
+	SPDLOG_LOGGER_INFO(logger, "Done.");
 	enterNewState(ST_DONE);
 }
 
@@ -367,7 +367,7 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 {
-	logger->info("HotFireSM::EnterAbortFilling");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortFilling");
 	enterNewState(ST_ABORT_FILLING);
 }
 
@@ -382,7 +382,7 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 {
-	logger->info("HotFireSM::EnterAbortBurn");
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortBurn");
 	enterNewState(ST_ABORT_BURN);
 }
 

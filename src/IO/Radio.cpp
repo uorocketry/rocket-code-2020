@@ -32,7 +32,7 @@ void Radio::initialize()
 
 
 	if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0) {
-		logger->error("Error while opening serial communication!");
+		SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
 		status.wiringPiStatus = INIT;
 	} else {
 		status.wiringPiStatus = READY; 

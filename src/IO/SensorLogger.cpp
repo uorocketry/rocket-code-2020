@@ -6,6 +6,7 @@
 #include "helpers/Helper.h"
 
 #include <experimental/filesystem>
+#include <spdlog/spdlog.h>
 
 int SensorLogger::working = 0;
 SensorLogger::~SensorLogger()
@@ -151,7 +152,7 @@ void SensorLogger::dequeueToFile(std::ofstream &fileStream)
 	}
 	else
 	{
-		logger->error("Unable to open log file.");
+		SPDLOG_LOGGER_ERROR(logger, "Unable to open log file.");
 		working = 0;
 	}
 }

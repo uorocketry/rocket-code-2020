@@ -8,15 +8,15 @@ IO::IO() {
 
 IO::~IO() {
 	// destroy thread
-	logger->debug("Destroy Thread");
+	SPDLOG_LOGGER_DEBUG("destroy thread");
 	thisThread.~thread(); // thread not killed
-	logger->debug("Thread testSensorThread killed:");
+	SPDLOG_LOGGER_DEBUG(logger, "Thread testSensorThread killed:");
 }
 
 void IO::initialize() {
 	if (createThread) {
 		// create thread
-		logger->debug("Create Thread");
+		SPDLOG_LOGGER_DEBUG(logger, "Create Thread");
 
 		thisThread = std::thread(&IO::run, this);
 		thisThread.detach();

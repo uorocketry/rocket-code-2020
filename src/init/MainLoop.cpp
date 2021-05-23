@@ -87,7 +87,7 @@ int main()
 		}
 		else if (targetUpdateDuration != 0)
 		{
-			spdlog::error("Timing Error: Update took too long");
+			SPDLOG_ERROR("Timing Error: Update took too long");
 		}
 	}
 

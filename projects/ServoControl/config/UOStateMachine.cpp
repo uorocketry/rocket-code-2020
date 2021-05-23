@@ -47,12 +47,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-    logger->info("ServoControlSM::ExitInit");
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-    logger->info("ServoControlSM::EnterWaitForInit");
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::EnterWaitForInit");
     enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -70,12 +70,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-    logger->info("ServoControlSM::ExitWaitForInit");
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterControl, UOSMData)
 {
-    logger->info("ServoControlSM::EnterControl");
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::EnterControl");
     enterNewState(ST_CONTROL);
 }
 

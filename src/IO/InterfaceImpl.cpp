@@ -36,15 +36,15 @@ void InterfaceImpl::initialize()
 void InterfaceImpl::initializeInputs()
 {
 	#if USE_SBG == 1
-		logger->info("Initializing SBG...");
+		SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
 		mySbgSensor.initialize();
 	#endif
 	#if USE_INPUT == 1
-		logger->info("Initializing INPUT...");
+		SPDLOG_LOGGER_INFO(logger, "Initializing INPUT...");
 		input.initialize();
 	#endif
 	#if USE_SOCKET_CLIENT == 1
-		logger->info("Initializing SOCKET_CLIENT...");
+		SPDLOG_LOGGER_INFO(logger, "Initializing SOCKET_CLIENT...");
 		client.initialize();
 	#endif
 }
@@ -52,15 +52,15 @@ void InterfaceImpl::initializeInputs()
 void InterfaceImpl::initializeOutputs() 
 {
 #if USE_LOGGER == 1
-	logger->info("Initializing SENSOR_LOGGER...");
+	SPDLOG_LOGGER_INFO(logger, "Initializing SENSOR_LOGGER...");
 	sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
-	logger->info("Initializing RADIO...");
+	SPDLOG_LOGGER_INFO(logger, "Initializing RADIO...");
 	radio.initialize();
 #endif
 #if USE_GPIO == 1
-	logger->info("Initializing GPIO...");
+	SPDLOG_LOGGER_INFO(logger, "Initializing GPIO...");
 	gpio.initialize();
 #endif
 }

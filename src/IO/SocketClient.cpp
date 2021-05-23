@@ -37,7 +37,7 @@ void SocketClient::run()
         struct sockaddr_in serv_addr;
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         {
-            logger->error("Socket creation error");
+            SPDLOG_LOGGER_ERROR(logger, "Socket creation error");
             continue;
         }
 
@@ -49,16 +49,16 @@ void SocketClient::run()
         // Convert IPv4 and IPv6 addresses from text to binary form
         if (inet_pton(AF_INET, HOST_IP, &serv_addr.sin_addr) <= 0)
         {
-            logger->error("Invalid address / Address not supported");
+            SPDLOG_LOGGER_ERROR(logger, "Invalid address / Address not supported");
             continue;
         }
 
         status.socketBinded = READY;
 
-        logger->info("Trying to connect...");
+        SPDLOG_LOGGER_INFO(logger, "Trying to connect...");
         if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
         {
-            logger->info("Connected");
+            SPDLOG_LOGGER_INFO(logger, "Connected");
 
             status.serverConnection = READY;
 

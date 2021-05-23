@@ -88,12 +88,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	logger->info("RocketSM::ExitInit");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	logger->info("RocketSM::EnterWaitForInit");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -112,12 +112,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	logger->info("RocketSM::ExitWaitForInit");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
-	logger->info("RocketSM::EnterWaitForLaunch");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForLaunch");
 	enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
@@ -135,12 +135,12 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
 {
-	logger->info("RocketSM::ExitWaitForLaunch");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForLaunch");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 {
-	logger->info("RocketSM::EnterPoweredFlight");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterPoweredFlight");
 	enterNewState(ST_POWERED_FLIGHT);
 }
 
@@ -160,12 +160,12 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
 {
-	logger->info("RocketSM::ExitPoweredFlight");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitPoweredFlight");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 {
-	logger->info("RocketSM::EnterCoast");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterCoast");
 	enterNewState(ST_COAST);
 }
 
@@ -183,12 +183,12 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
 {
-	logger->info("RocketSM::ExitCoast");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitCoast");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 {
-	logger->info("RocketSM::EnterDescentPhase1");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase1");
 	enterNewState(ST_DESCENT_PHASE_1);
 }
 
@@ -209,12 +209,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
 {
-	logger->info("RocketSM::ExitDescentPhase1");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase1");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 {
-	logger->info("RocketSM::EnterDescentPhase2");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase2");
 	enterNewState(ST_DESCENT_PHASE_2);
 }
 
@@ -229,12 +229,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
 {
-	logger->info("RocketSM::ExitDescentPhase2");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase2");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
-	logger->info("RocketSM::EnterGround");
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterGround");
 	enterNewState(ST_GROUND);
 }
 
@@ -290,7 +290,7 @@ void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData>& data)
 	// that the rocket launching
 	if (consecutiveEvents >= LaunchThreshold)
 	{
-		logger->info("Launch");
+		SPDLOG_LOGGER_INFO(logger, "Launch");
 		Launch();
 	}
 #endif
@@ -322,7 +322,7 @@ void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData>& data
 	// that the rocket is in coast
 	if (consecutiveEvents >= BurnOutThreshold)
 	{
-		logger->info("MotorBurnout");
+		SPDLOG_LOGGER_INFO(logger, "MotorBurnout");
 		MotorBurnout();
 	}
 #endif
@@ -354,7 +354,7 @@ void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData>& data)
 	// that the rocket is on the ground
 	if (consecutiveEvents >= TouchdownThreshold)
 	{
-		logger->info("Touchdown");
+		SPDLOG_LOGGER_INFO(logger, "Touchdown");
 		Touchdown();
 	}
 #endif
@@ -384,7 +384,7 @@ void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData>& data)
 	// that the rocket is pointing downwards and falling
 	if (consecutiveEvents >= ApogeeThreshold)
 	{
-		logger->info("Apogee");
+		SPDLOG_LOGGER_INFO(logger, "Apogee");
 		Apogee();
 	}
 #endif

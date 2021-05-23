@@ -14,7 +14,7 @@ TestingInterface::~TestingInterface()
 
 void TestingInterface::initialize()
 {
-	logger->info("Initializing TESTING...");
+	SPDLOG_LOGGER_INFO(logger, "Initializing TESTING...");
 	testingSensors.initialize();
 
 	initializeOutputs();
@@ -23,11 +23,11 @@ void TestingInterface::initialize()
 void TestingInterface::initializeOutputs() 
 {
 #if USE_LOGGER == 1
-	logger->info("Initializing LOGGER...");
+	SPDLOG_LOGGER_INFO(logger, "Initializing LOGGER...");
 	sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
-	logger->info("Initializing RADIO..."); \
+	SPDLOG_LOGGER_INFO(logger, "Initializing RADIO..."); \
 	radio.initialize();
 #endif
 }
