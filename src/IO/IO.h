@@ -2,6 +2,7 @@
 
 #include<mutex>
 #include<thread>
+#include <spdlog/logger.h>
 
 
 class IO {
@@ -20,7 +21,7 @@ protected:
 	bool createThread = true;
 	std::mutex mutex;
 
-
+    std::shared_ptr<spdlog::logger> logger;
 private:
 	std::thread thisThread;
 };

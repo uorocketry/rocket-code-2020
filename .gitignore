@@ -65,3 +65,6 @@ sbgECom/projects/unix/out
 
 # CLion
 .idea
+
+# Logs
+logs

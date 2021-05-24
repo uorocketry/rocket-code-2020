@@ -9,6 +9,7 @@
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <spdlog/logger.h>
 
 class Radio : public IO
 {
@@ -28,6 +29,8 @@ protected:
 
 private:
 	EventQueue &eventQueue;
+
+	std::shared_ptr<spdlog::logger> logger;
 
 	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToRadio();

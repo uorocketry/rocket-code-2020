@@ -5,6 +5,7 @@
 #include "Output.h"
 
 #include <string>
+#include <spdlog/logger.h>
 
 class DigitalOutput: public Output
 {
@@ -15,6 +16,7 @@ public:
     bool setValue(int value);
 
 private:
+    std::shared_ptr<spdlog::logger> logger;
     std::string name;
     const int pinNbr;
 };
