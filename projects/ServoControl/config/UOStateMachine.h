@@ -29,6 +29,8 @@ private:
         ST_MAX_STATES
     };
 
+    std::shared_ptr<spdlog::logger> logger;
+
     // Define the state machine state functions with event data type
     // Init
     STATE_DECLARE(UOStateMachine, Init, UOSMData)

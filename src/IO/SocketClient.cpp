@@ -15,6 +15,7 @@
 #include <chrono>
 #include <thread>
 #include <queue>
+#include <spdlog/spdlog.h>
 
 #define PORT 8080
 #define HOST_IP "127.0.0.1"
@@ -36,8 +37,7 @@ void SocketClient::run()
         struct sockaddr_in serv_addr;
         if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
         {
-            std::cout << "Socket creation error"
-                      << "\n";
+            SPDLOG_LOGGER_ERROR(logger, "Socket creation error");
             continue;
         }
 
@@ -49,18 +49,16 @@ void SocketClient::run()
         // Convert IPv4 and IPv6 addresses from text to binary form
         if (inet_pton(AF_INET, HOST_IP, &serv_addr.sin_addr) <= 0)
         {
-            std::cout << "Invalid address / Address not supported"
-                      << "\n";
+            SPDLOG_LOGGER_ERROR(logger, "Invalid address / Address not supported");
             continue;
         }
 
         status.socketBinded = READY;
 
-        std::cout << "Trying to connect..."
-                  << "\n";
+        SPDLOG_LOGGER_INFO(logger, "Trying to connect...");
         if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
         {
-            std::cout << "Connected\n";
+            SPDLOG_LOGGER_INFO(logger, "Connected");
 
             status.serverConnection = READY;
 

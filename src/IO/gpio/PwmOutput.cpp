@@ -3,14 +3,17 @@
 
 #include "PwmOutput.h"
 #include <iostream>
+#include <spdlog/spdlog.h>
 
 #if USE_WIRING_Pi == 1
 #include <wiringPi.h>
 #endif
 
 PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNbr(pin){
-    std::cout << "created pwmOutput " << name << "\n";
-    
+    logger = spdlog::default_logger();
+
+    SPDLOG_LOGGER_DEBUG(logger, "Created PwmOutput {}", name);
+
     #if USE_WIRING_Pi == 1
     pinMode (pinNbr, PWM_OUTPUT) ;
 	pwmSetMode (PWM_MODE_MS);
@@ -22,7 +25,7 @@ PwmOutput::PwmOutput(const std::string& name, const int pin) : name(name), pinNb
 bool PwmOutput::setValue(int value) {
     if(currentState != value) {
         currentState = value;
-        std::cout << "PWM " << name << " changed to " << currentState << "\n";
+        SPDLOG_LOGGER_DEBUG(logger, "PWM {} changed to {}", name, currentState);
 
         #if USE_WIRING_Pi == 1
         pwmWrite(pinNbr, value);
