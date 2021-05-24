@@ -92,7 +92,15 @@ add_dependencies(MainLoopLib sbgECom)
 target_link_libraries(MainLoopLib WiringPi)
 add_dependencies(MainLoopLib WiringPi)
 
-target_link_libraries(MainLoopLib stdc++fs)
+if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "arm")
+	target_include_directories(MainLoopLib PUBLIC "$ENV{BOOST_DIRECTORY}")
+	target_link_directories(MainLoopLib PUBLIC "$ENV{BOOST_DIRECTORY}/stage/lib")
+	target_link_libraries(MainLoopLib boost_filesystem boost_system)
+else()
+	find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
+	target_include_directories(MainLoopLib PUBLIC ${Boost_INCLUDE_DIRS})
+	target_link_libraries(MainLoopLib ${Boost_LIBRARIES})
+endif()
 
 target_link_libraries(MainLoopLib spdlog::spdlog)
 
@@ -100,6 +108,5 @@ target_link_libraries (MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
 
 add_executable(MainLoop ./src/init/MainLoop.cpp)
 target_link_libraries(MainLoop MainLoopLib)
-
 
 add_subdirectory(./unitTesting)
