@@ -8,7 +8,7 @@ bool sensorsData::isInitialized() const {
 #endif
 
 #if USE_SOCKET_CLIENT
-    result &= client.isInitialized();
+    result &= clientIsInitialized;
 #endif
 
 #if USE_SBG
