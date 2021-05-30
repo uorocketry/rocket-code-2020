@@ -16,19 +16,21 @@
 #include <string>
 #include <map>
 
-class Gpio : public IO
-{
+class Gpio : public IO {
 public:
 	~Gpio();
 
 	void initialize() override;
+
 	void run() override;
+
 	bool isInitialized() override;
 
-	void createNewGpioOutput(const std::string& name, int pinNbr);
-	void createNewGpioPwmOutput(const std::string& name, int pinNbr);
+	void createNewGpioOutput(const std::string &name, int pinNbr);
 
-	GpioData setOutputs(const GpioData& data);
+	void createNewGpioPwmOutput(const std::string &name, int pinNbr, bool softPWM = false);
+
+	GpioData setOutputs(const GpioData &data);
 
 protected:
 	std::mutex mutex;
@@ -37,8 +39,7 @@ private:
 	std::map<std::string, DigitalOutput> digitalOutputsMap;
 	std::map<std::string, PwmOutput> pwmOutputsMap;
 
-	struct InitFlags
-	{
+	struct InitFlags {
 		InitStatus gpioSatus = INIT;
 	} status;
 
