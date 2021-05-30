@@ -29,11 +29,11 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     #if USE_GPIO == 1
 
         #if USE_PWM1 == 1
-            interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
+            interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN, PWM1_SOFTPWM);
         #endif
 
         #if USE_PWM2 == 1
-            interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
+            interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN, PWM2_SOFTPWM);
         #endif
 
         #if USE_OUT1 == 1
