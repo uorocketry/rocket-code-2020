@@ -66,7 +66,7 @@ void TestingInterface::createNewGpioOutput(std::string name, int pinNbr)
 {
 	return; //don't do anything for now
 }
-void TestingInterface::createNewGpioPwmOutput(std::string name, int pinNbr) 
+void TestingInterface::createNewGpioPwmOutput(std::string name, int pinNbr, bool softpwm)
 {
 	return; //don't do anything for now
 }
