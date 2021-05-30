@@ -19,6 +19,7 @@
         #define PWM1_OPEN 150
         #define PWM1_CLOSE 60
         #define PWM1_EVENT_ENABLE_MASK 0b100
+		#define PWM1_SOFTPWM false
     #endif
 
     #if USE_PWM2
@@ -27,6 +28,7 @@
         #define PWM2_OPEN 150
         #define PWM2_CLOSE 6
         #define PWM2_EVENT_ENABLE_MASK 0b1000
+		#define PWM2_SOFTPWM false
     #endif
 
     #if USE_OUT1
