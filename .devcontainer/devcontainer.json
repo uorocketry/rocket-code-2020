@@ -1,5 +1,6 @@
 {
     "build": { "dockerfile": "Dockerfile" },
+    "postCreateCommand": "git submodule update --init",
     "forwardPorts": [],
     "extensions": [
         "ms-vscode.cpptools",
