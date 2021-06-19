@@ -7,3 +7,6 @@
 [submodule "libraries/sbgECom"]
 	path = libraries/sbgECom
 	url = https://github.com/uorocketry/sbgECom.git
+[submodule "libraries/spdlog"]
+	path = libraries/spdlog
+	url = https://github.com/gabime/spdlog.git

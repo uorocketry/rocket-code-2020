@@ -3,16 +3,18 @@
 #include <bitset>
 #include "data/sensorsData.h"
 #include "UOStateMachine.h"
-#include <math.h>
-#include "helpers/Types.h"
+#include <cmath>
+#include <spdlog/spdlog.h>
 
 #define PI 3.14159265
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES)
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+	InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 	// There is no state entry function for the first state
 	UOStateMachine::enterNewState(States(0));
+
+	logger = spdlog::default_logger();
 }
 
 // Launch external event
@@ -27,7 +29,7 @@ void UOStateMachine::Launch()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Launch external event
@@ -42,7 +44,7 @@ void UOStateMachine::MotorBurnout()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Apogee external event
@@ -58,7 +60,7 @@ void UOStateMachine::Apogee()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_1
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_DESCENT_PHASE_2
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		 // ST_GROUND
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Touchdown external event
@@ -72,7 +74,7 @@ void UOStateMachine::Touchdown(){
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DESCENT_PHASE_1
 	TRANSITION_MAP_ENTRY(ST_GROUND)			// ST_DESCENT_PHASE_2
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_GROUND
-	END_TRANSITION_MAP(NULL)}
+	END_TRANSITION_MAP(nullptr)}
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
@@ -86,12 +88,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	std::cout << "RocketSM::ExitInit\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	std::cout << "RocketSM::EnterWaitForInit\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -99,23 +101,23 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-	if (interface->isInitialized())
-	{
-		interface->calibrateTelemetry();
-		InternalEvent(ST_WAIT_FOR_LAUNCH);
-	}
+	 if (interfaceData->isInitialized())
+	 {
+	 	interface->calibrateTelemetry();
+	 	InternalEvent(ST_WAIT_FOR_LAUNCH);
+	 }
 
 	interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	std::cout << "RocketSM::ExitWaitForInit\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
 {
-	std::cout << "RocketSM::EnterWaitForLaunch\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForLaunch");
 	enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
@@ -133,12 +135,12 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
 {
-	std::cout << "RocketSM::ExitWaitForLaunch\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForLaunch");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
 {
-	std::cout << "RocketSM::EnterPoweredFlight\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterPoweredFlight");
 	enterNewState(ST_POWERED_FLIGHT);
 }
 
@@ -158,12 +160,12 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
 {
-	std::cout << "RocketSM::ExitPoweredFlight\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitPoweredFlight");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
 {
-	std::cout << "RocketSM::EnterCoast\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterCoast");
 	enterNewState(ST_COAST);
 }
 
@@ -181,12 +183,12 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitCoast)
 {
-	std::cout << "RocketSM::ExitCoast\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitCoast");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
 {
-	std::cout << "RocketSM::EnterDescentPhase1\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase1");
 	enterNewState(ST_DESCENT_PHASE_1);
 }
 
@@ -207,12 +209,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
 {
-	std::cout << "RocketSM::ExitDescentPhase1\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase1");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
 {
-	std::cout << "RocketSM::EnterDescentPhase2\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase2");
 	enterNewState(ST_DESCENT_PHASE_2);
 }
 
@@ -227,12 +229,12 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
 {
-	std::cout << "RocketSM::ExitDescentPhase2\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase2");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
 {
-	std::cout << "RocketSM::EnterGround\n";
+	SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterGround");
 	enterNewState(ST_GROUND);
 }
 
@@ -244,7 +246,7 @@ STATE_DEFINE(UOStateMachine, Ground, UOSMData)
 	interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData>& data)
 {
 	eventType eventNbr = data->eventNumber;
 	
@@ -264,7 +266,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	}
 }
 
-void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 
@@ -288,13 +290,13 @@ void UOStateMachine::detectLaunch(std::shared_ptr<sensorsData> data)
 	// that the rocket launching
 	if (consecutiveEvents >= LaunchThreshold)
 	{
-		std::cout << "Launch \n";
+		SPDLOG_LOGGER_INFO(logger, "Launch");
 		Launch();
 	}
 #endif
 }
 
-void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -320,13 +322,13 @@ void UOStateMachine::detectMotorBurnout(std::shared_ptr<sensorsData> data)
 	// that the rocket is in coast
 	if (consecutiveEvents >= BurnOutThreshold)
 	{
-		std::cout << "MotorBurnout \n";
+		SPDLOG_LOGGER_INFO(logger, "MotorBurnout");
 		MotorBurnout();
 	}
 #endif
 }
 
-void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -352,13 +354,13 @@ void UOStateMachine::detectTouchdown(std::shared_ptr<sensorsData> data)
 	// that the rocket is on the ground
 	if (consecutiveEvents >= TouchdownThreshold)
 	{
-		std::cout << "Touchdown \n";
+		SPDLOG_LOGGER_INFO(logger, "Touchdown");
 		Touchdown();
 	}
 #endif
 }
 
-void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	// TODO: only check for apogee x seconds after launch
@@ -382,13 +384,13 @@ void UOStateMachine::detectApogee(std::shared_ptr<sensorsData> data)
 	// that the rocket is pointing downwards and falling
 	if (consecutiveEvents >= ApogeeThreshold)
 	{
-		std::cout << "Apogee \n";
+		SPDLOG_LOGGER_INFO(logger, "Apogee");
 		Apogee();
 	}
 #endif
 }
 
-void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
+void UOStateMachine::showInfo(const std::shared_ptr<sensorsData>& data)
 {
 #if USE_SBG == 1
 	printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t Velocity: N %f\tE %f\tD %f\tSolutionStatus %d\t%d\n",
@@ -399,7 +401,6 @@ void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
 		   (data->sbg.solutionStatus) & 0b1111);
 // std::cout << std::bitset<32>(data->sbg.solutionStatus) << "\n";
 #endif
-	return;
 }
 
 std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
@@ -408,7 +409,7 @@ std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smd
 	std::shared_ptr<sensorsData> data = interface->getLatest();
 
 	// If statement to prevent overwiring data from TESTING
-	if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
+	if (data->timeStamp == 0) data->timeStamp = smdata->now.time_since_epoch().count();
 
 	data->currentStateNo = state;
 

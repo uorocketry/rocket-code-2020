@@ -9,7 +9,7 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-	UOStateMachine();
+	UOStateMachine(Interface* anInterface);
 
 	// External events taken by this state machine
 	// void Apogee(UOSMData* data);
@@ -21,13 +21,15 @@ public:
 protected:
 
 private:
-	void detectExternEvent(std::shared_ptr<sensorsData> data);
-	void detectApogee(std::shared_ptr<sensorsData> data);
-	void detectLaunch(std::shared_ptr<sensorsData> data);
-	void detectMotorBurnout(std::shared_ptr<sensorsData> data);
-	void detectTouchdown(std::shared_ptr<sensorsData> data);
+	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
+	void detectApogee(const std::shared_ptr<sensorsData>& data);
+	void detectLaunch(const std::shared_ptr<sensorsData>& data);
+	void detectMotorBurnout(const std::shared_ptr<sensorsData>& data);
+	void detectTouchdown(const std::shared_ptr<sensorsData>& data);
 
-	void showInfo(std::shared_ptr<sensorsData> data);
+	static void showInfo(const std::shared_ptr<sensorsData>& data);
+
+	std::shared_ptr<spdlog::logger> logger;
 
 	//number of consecutive readings needed to trigger apogee
 	uint8_t ApogeeThreshold = 5;
@@ -92,14 +94,14 @@ private:
 	// State map to define state object order. Each state map entry defines a
 	// state object.
 	BEGIN_STATE_MAP_EX
-	STATE_MAP_ENTRY_ALL_EX(&Init, 0, 0, &ExitInit)
-	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, 0, &EnterWaitForInit, &ExitWaitForInit)
-	STATE_MAP_ENTRY_ALL_EX(&WaitForLaunch, 0, &EnterWaitForLaunch, &ExitWaitForLaunch)
-	STATE_MAP_ENTRY_ALL_EX(&PoweredFlight, 0, &EnterPoweredFlight, &ExitPoweredFlight)
-	STATE_MAP_ENTRY_ALL_EX(&Coast, 0, &EnterCoast, &ExitCoast)
-	STATE_MAP_ENTRY_ALL_EX(&DescentPhase1, 0, &EnterDescentPhase1, &ExitDescentPhase1)
-	STATE_MAP_ENTRY_ALL_EX(&DescentPhase2, 0, &EnterDescentPhase2, &ExitDescentPhase2)
-	STATE_MAP_ENTRY_ALL_EX(&Ground, 0, &EnterGround, 0)
+	STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForInit, nullptr, &EnterWaitForInit, &ExitWaitForInit)
+	STATE_MAP_ENTRY_ALL_EX(&WaitForLaunch, nullptr, &EnterWaitForLaunch, &ExitWaitForLaunch)
+	STATE_MAP_ENTRY_ALL_EX(&PoweredFlight, nullptr, &EnterPoweredFlight, &ExitPoweredFlight)
+	STATE_MAP_ENTRY_ALL_EX(&Coast, nullptr, &EnterCoast, &ExitCoast)
+	STATE_MAP_ENTRY_ALL_EX(&DescentPhase1, nullptr, &EnterDescentPhase1, &ExitDescentPhase1)
+	STATE_MAP_ENTRY_ALL_EX(&DescentPhase2, nullptr, &EnterDescentPhase2, &ExitDescentPhase2)
+	STATE_MAP_ENTRY_ALL_EX(&Ground, nullptr, &EnterGround, nullptr)
 	END_STATE_MAP_EX
 
 	std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);

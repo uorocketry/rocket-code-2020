@@ -20,7 +20,7 @@ protected:
 private:
     EventQueue &eventQueue;
 
-    bool isNumber(const std::string& s);
+    static bool isNumber(const std::string& s);
 };
 
 #endif

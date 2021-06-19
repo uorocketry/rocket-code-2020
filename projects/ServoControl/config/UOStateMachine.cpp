@@ -8,15 +8,15 @@
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include "data/GpioData.h"
+#include <spdlog/spdlog.h>
 
-UOStateMachine::UOStateMachine() :
-        InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
-
     // There is no state entry function for the first state
     enterNewState(States(0));
 
-    interface = &interfaceImpl;
+    logger = spdlog::default_logger();
 }
 
 // Code for each state. Do not put while in them. The right function according to the current state
@@ -55,12 +55,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-    std::cout << "ServoControlSM::ExitInit\n";
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-    std::cout << "ServoControlSM::EnterWaitForInit\n";
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::EnterWaitForInit");
     enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -68,7 +68,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-    if (interface->isInitialized())
+    if (interfaceData->isInitialized())
     {
         InternalEvent(ST_CONTROL);
     }
@@ -78,12 +78,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-    std::cout << "ServoControlSM::ExitWaitForInit\n";
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterControl, UOSMData)
 {
-    std::cout << "ServoControlSM::EnterControl\n";
+    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::EnterControl");
     enterNewState(ST_CONTROL);
 }
 

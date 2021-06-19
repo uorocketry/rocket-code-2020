@@ -9,7 +9,7 @@
 #endif
 
 #ifndef USE_LOGGER
-    #define USE_LOGGER 1
+    #define USE_LOGGER 0
 #endif
 
 #ifndef USE_INPUT
@@ -24,7 +24,7 @@
     #if TESTING == 1
         #define USE_RADIO 0
     #else
-        #define USE_RADIO 1
+        #define USE_RADIO 0
     #endif
 #endif
 
@@ -38,6 +38,6 @@
 
 #if USE_GPIO == 1
     #ifndef USE_WIRING_Pi
-        #define USE_WIRING_Pi 1
+        #define USE_WIRING_Pi 0
     #endif
 #endif

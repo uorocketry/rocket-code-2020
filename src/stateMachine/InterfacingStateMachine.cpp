@@ -1,12 +1,10 @@
 #include "config/config.h"
 #include "InterfacingStateMachine.h"
-#include "stateMachineLib/StateMachine.h"
 
 
-InterfacingStateMachine::InterfacingStateMachine(BYTE maxStates, BYTE initialState) : 
-	StateMachine(maxStates, initialState), interfaceImpl()
+InterfacingStateMachine::InterfacingStateMachine(Interface* anInterface, BYTE maxStates, BYTE initialState) :
+	StateMachine(maxStates, initialState), interface(anInterface)
 {
-	interface = &interfaceImpl;
 }
 
 void InterfacingStateMachine::enterNewState(BYTE state)

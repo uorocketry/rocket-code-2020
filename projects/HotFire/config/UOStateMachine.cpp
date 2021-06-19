@@ -7,15 +7,16 @@
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include "data/GpioData.h"
+#include <spdlog/spdlog.h>
 
-UOStateMachine::UOStateMachine() : 
-	InterfacingStateMachine(ST_MAX_STATES), interfaceImpl()
+UOStateMachine::UOStateMachine(Interface* anInterface) :
+        InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 
 	// There is no state entry function for the first state
 	enterNewState(States(0));
 
-	interface = &interfaceImpl;
+	logger = spdlog::default_logger();
 }
 
 // StartFilling external event
@@ -33,7 +34,7 @@ void UOStateMachine::StartFillingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Abort external event
@@ -51,7 +52,7 @@ void UOStateMachine::AbortEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // StopFilling external event
@@ -69,7 +70,7 @@ void UOStateMachine::StopFillingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		   // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Ignition external event
@@ -87,7 +88,7 @@ void UOStateMachine::IgnitionEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // FinalVenting external event
@@ -105,7 +106,7 @@ void UOStateMachine::FinalVentingEXT()
 		TRANSITION_MAP_ENTRY(EVENT_IGNORED)	   // ST_DONE
 		TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_FILLING
 		TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_BURN
-		END_TRANSITION_MAP(NULL)
+		END_TRANSITION_MAP(nullptr)
 }
 
 // Done external event
@@ -122,7 +123,7 @@ void UOStateMachine::DoneEXT(){
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_DONE
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_ABORT_FILLING
 	TRANSITION_MAP_ENTRY(EVENT_IGNORED)		// ST_ABORT_BURN
-	END_TRANSITION_MAP(NULL)}
+	END_TRANSITION_MAP(nullptr)}
 
 // Code for each state. Do not put while in them. The right function according to the current state
 // will be call in the main loop.
@@ -159,12 +160,12 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitInit)
 {
-	std::cout << "HotFireSM::ExitInit\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
 {
-	std::cout << "HotFireSM::EnterWaitForInit\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForInit");
 	enterNewState(ST_WAIT_FOR_INIT);
 }
 
@@ -184,12 +185,12 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
-	std::cout << "HotFireSM::ExitWaitForInit\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForInit");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterWaitForFilling\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForFilling");
 	enterNewState(ST_WAIT_FOR_FILLING);
 }
 
@@ -201,11 +202,11 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -229,12 +230,12 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
 {
-	std::cout << "HotFireSM::ExitWaitForFilling\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFilling\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFilling");
 	enterNewState(ST_FILLING);
 }
 	
@@ -246,11 +247,11 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_OPEN});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_OPEN});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -274,12 +275,12 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFilling)
 {
-	std::cout << "HotFireSM::ExitFilling\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFilling");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
 {
-	std::cout << "HotFireSM::WaitForIgnition\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::WaitForIgnition");
 	enterNewState(ST_WAIT_FOR_IGNITION);
 }
 
@@ -291,11 +292,11 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_OPEN});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_OPEN});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -319,12 +320,12 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
 {
-	std::cout << "HotFireSM::ExitWaitForIgnition\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
 {
-	std::cout << "HotFireSM::EnterIgnition\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
 	enterNewState(ST_IGNITION);
 }
 
@@ -336,11 +337,11 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -365,12 +366,12 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitIgnition)
 {
-	std::cout << "HotFireSM::ExitIgnition\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFullBurn\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFullBurn");
 	enterNewState(ST_FULL_BURN);
 }
 
@@ -382,11 +383,11 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -410,12 +411,12 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFullBurn)
 {
-	std::cout << "HotFireSM::ExitFullBurn\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFullBurn");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
 {
-	std::cout << "HotFireSM::EnterFinalVenting\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFinalVenting");
 	enterNewState(ST_FINAL_VENTING);
 }
 
@@ -427,11 +428,11 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_OPEN});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_OPEN});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_OPEN});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_OPEN});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -455,13 +456,13 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 
 EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
 {
-	std::cout << "HotFireSM::ExitFinalVenting\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFinalVenting");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
 {
-	std::cout << "HotFireSM::EnterDone\n";
-	std::cout << "Done.\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterDone");
+	SPDLOG_LOGGER_INFO(logger, "Done.");
 	enterNewState(ST_DONE);
 }
 
@@ -473,11 +474,11 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -499,7 +500,7 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
 {
-	std::cout << "HotFireSM::EnterAbortFilling\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortFilling");
 	enterNewState(ST_ABORT_FILLING);
 }
 
@@ -512,11 +513,11 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -540,7 +541,7 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 
 ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
 {
-	std::cout << "HotFireSM::EnterAbortBurn\n";
+	SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortBurn");
 	enterNewState(ST_ABORT_BURN);
 }
 
@@ -552,11 +553,11 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 		GpioData& gpioData = interfaceData->gpioData;
 
 		#if USE_SV01
-		gpioData.outputMap.insert({SV01_NAME, SV01_CLOSE});
+		gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
 		#endif
 
 		#if USE_SV02
-		gpioData.outputMap.insert({SV02_NAME, SV02_CLOSE});
+		gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
 		#endif
 
 		#if USE_PWM_SBV01
@@ -578,7 +579,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 	interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
+void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData>& data)
 {
 	eventType eventNbr = data->eventNumber;
 
@@ -607,7 +608,7 @@ void UOStateMachine::detectExternEvent(std::shared_ptr<sensorsData> data)
 	}
 }
 
-void UOStateMachine::showInfo(std::shared_ptr<sensorsData> data)
+void UOStateMachine::showInfo(const std::shared_ptr<sensorsData>& data)
 {
 }
 

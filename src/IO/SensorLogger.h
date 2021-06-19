@@ -12,18 +12,18 @@
 #include <iostream>
 #include <condition_variable>
 
-class Logger : public IO
+class SensorLogger : public IO
 {
 public:
 	static int working;
-	~Logger();
+	~SensorLogger();
 
-	void initialize();
-	void run();
-	bool isInitialized();
+	void initialize() override;
+	void run() override;
+	bool isInitialized() override;
 
 	//write data to sensorsData struct and push to queue on main thread
-	void enqueueSensorData(sensorsData curSensorData);
+	void enqueueSensorData(const sensorsData& curSensorData);
 
 	bool queueEmpty();
 
@@ -34,10 +34,10 @@ private:
 	//pop queue and log the data from sensorsData on logging thread
 	void dequeueToFile(std::ofstream &fileStream);
 
-	void writeHeader(std::ofstream &file);
-	void writeData(std::ofstream &file, const sensorsData &currentState);
+	static void writeHeader(std::ofstream &file);
+	static void writeData(std::ofstream &file, const sensorsData &currentState);
 
-	int getBootId(std::string &path);
+	static int getBootId(std::string &path);
 
 	const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND = std::chrono::duration<int64_t, std::ratio<1, 1>>(1);
 

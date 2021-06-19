@@ -8,17 +8,12 @@
 class UOStateMachine : public InterfacingStateMachine
 {
 public:
-    UOStateMachine();
+    UOStateMachine(Interface* anInterface);
 
     void updateHotFire(UOSMData *data);
 
 protected:
 
-#if !TESTING
-    InterfaceImpl interfaceImpl;
-#else
-    TestingInterface interfaceImpl;
-#endif
 
 private:
     enum States
@@ -28,6 +23,8 @@ private:
         ST_CONTROL,
         ST_MAX_STATES
     };
+
+    std::shared_ptr<spdlog::logger> logger;
 
     // Define the state machine state functions with event data type
     // Init

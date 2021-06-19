@@ -2,19 +2,22 @@
 #include "config/config.h"
 #if USE_GPIO == 1
 
-#include <string>
+#include "Output.h"
 
-class PwmOutput
+#include <string>
+#include <spdlog/logger.h>
+
+class DigitalOutput: public Output
 {
 public:
-    PwmOutput(const std::string name, const int pin);
+    DigitalOutput(const std::string& name, const int pin);
 
     
     bool setValue(int value);
 
 private:
+    std::shared_ptr<spdlog::logger> logger;
     std::string name;
-    int currentState;
     const int pinNbr;
 };
 

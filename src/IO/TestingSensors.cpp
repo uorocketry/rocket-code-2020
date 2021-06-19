@@ -5,15 +5,11 @@
 #include "data/sensorsData.h"
 #include "TestingSensors.h"
 
-#include <sstream>
 #include <fstream>
-#include <string>
-#include <vector>
 
 void TestingSensors::run()
 {
-	return;
-}
+	}
 
 void TestingSensors::initialize()
 {
@@ -35,6 +31,9 @@ void TestingSensors::initialize()
 		int count = 0;
 
 		currentData.timeStamp = helper::processUInt64(currentRow[count++]);
+
+        // Ignore the state, that's an output value
+        count++;
 
 #if USE_SBG == 1
 		// SBG:
@@ -63,10 +62,7 @@ void TestingSensors::initialize()
 
 		currentData.sbg.solutionStatus = helper::processUInt32(currentRow[count++]);
 
-		// Ignore the state, that's an output value
-		count++;
-
-		currentData.sbg.gpsPosStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.gpsPosStatus = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.gpsPosAccuracyLatitude = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gpsPosAccuracyLongitude = helper::processFloat(currentRow[count++]);
@@ -82,10 +78,10 @@ void TestingSensors::initialize()
 		currentData.sbg.longitudeAccuracy = helper::processFloat(currentRow[count++]);
 		currentData.sbg.altitudeAccuracy = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.pressureStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.pressureStatus = helper::processUInt32(currentRow[count++]);
 		currentData.sbg.barometricPressure = helper::processFloat(currentRow[count++]);
 
-		currentData.sbg.imuStatus = helper::processFloat(currentRow[count++]);
+		currentData.sbg.imuStatus = helper::processUInt32(currentRow[count++]);
 
 		currentData.sbg.gyroX = helper::processFloat(currentRow[count++]);
 		currentData.sbg.gyroY = helper::processFloat(currentRow[count++]);
@@ -101,6 +97,31 @@ void TestingSensors::initialize()
 		currentData.sbg.deltaAngleY = helper::processFloat(currentRow[count++]);
 		currentData.sbg.deltaAngleZ = helper::processFloat(currentRow[count++]);
 
+#endif
+
+        // Initialization data
+#if USE_LOGGER == 1
+        currentData.loggerIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SOCKET_CLIENT == 1
+        currentData.client.isInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_SBG == 1
+        currentData.sbgIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_INPUT == 1
+        currentData.inputIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_RADIO == 1
+        currentData.radioIsInitialized = helper::processUInt32(currentRow[count++]);
+#endif
+
+#if USE_GPIO == 1
+        currentData.gpioIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
 		data.push(currentData);
