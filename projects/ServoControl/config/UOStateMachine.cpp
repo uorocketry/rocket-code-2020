@@ -94,9 +94,9 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
     eventType eventNbr = interfaceData->eventNumber;
 
     /*
-     * GPIO event number, a 4 bit binary number where the
-     * 1st bit is the enable bit and the last 3 control
-     * whether the PWM2, PWM1, and OUT1 are open/closed.
+     * GPIO event number, a 6 bit binary number where the
+     * 1st bit is the enable bit and the last 5 control
+     * whether the valves are open/closed.
      * A '1' means to open the valve and a '0' to close it.
      *
      * 0 0 0 0 0 0
@@ -113,12 +113,15 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
         // Check if enable bit is set
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
+        if (eventNbr > -1) {
+            std::cout << " Hemm"<< (eventNbr&0b1)  << " : " << (eventNbr&0b1)  << " : " << (eventNbr&0b10)  << " : " << (eventNbr&0b100)  << " : " << (eventNbr&0b1000)  << " : " << enabled << "\n";
+        }
 
         #if USE_SV01 == 1
             if (enabled)
             {
                 // Open SV01 is the first bit is set
-                bool open = eventNbr & SV01_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
 
@@ -130,7 +133,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
             if (enabled)
             {
                 // Open SV02 if the second bit is set
-                bool open = eventNbr & SV02_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
@@ -142,7 +145,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
             if (enabled)
             {
                 // Open SBV01 if the third bit is set
-                bool open = eventNbr & SBV01_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
 
@@ -154,7 +157,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
             if (enabled)
             {
                 // Open SBV02 if the third bit is set
-                bool open = eventNbr & SBV02_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
 
@@ -166,7 +169,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
             if (enabled)
             {
                 // Open SBV03 if the third bit is set
-                bool open = eventNbr & SBV03_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
 

@@ -15,9 +15,9 @@
 
     #define USE_PWM_SBV03 1
 
-    #define EVENT_ENABLE_MASK 0
+    #define EVENT_ENABLE_MASK 0b1
 
-
+    
     #if USE_SV01
         #define SV01_NAME "SV-01"
         #define SV01_PIN 16
