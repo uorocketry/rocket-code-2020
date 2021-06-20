@@ -120,7 +120,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 // Open SV01 is the first bit is set
                 bool open = eventNbr & SV01_EVENT_ENABLE_MASK;
 
-                gpioData.outputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
+                gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
 
                 std::cout << "ServoControlSM::Control SV01 " << (open ? "OPEN" : "CLOSE") << "\n";
             }
@@ -132,7 +132,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 // Open SV02 if the second bit is set
                 bool open = eventNbr & SV02_EVENT_ENABLE_MASK;
 
-                gpioData.pwmOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
+                gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
                 std::cout << "ServoControlSM::Control SV02 " << (open ? "OPEN" : "CLOSE") << "\n";
             }
