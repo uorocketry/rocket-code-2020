@@ -9,6 +9,8 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 #include <spdlog/spdlog.h>
+#include <string.h>
+
 
 UOStateMachine::UOStateMachine(Interface* anInterface) :
         InterfacingStateMachine(anInterface, ST_MAX_STATES)
@@ -113,9 +115,6 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
         // Check if enable bit is set
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
-        if (eventNbr > -1) {
-            std::cout << " Hemm"<< (eventNbr&0b1)  << " : " << (eventNbr&0b1)  << " : " << (eventNbr&0b10)  << " : " << (eventNbr&0b100)  << " : " << (eventNbr&0b1000)  << " : " << enabled << "\n";
-        }
 
         #if USE_SV01 == 1
             if (enabled)
@@ -124,8 +123,12 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
-
-                std::cout << "ServoControlSM::Control SV01 " << (open ? "OPEN" : "CLOSE") << "\n";
+                
+                if(open) {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV01 OPEN");
+                } else {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV01 CLOSE");
+                }    
             }
         #endif
 
@@ -137,7 +140,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
-                std::cout << "ServoControlSM::Control SV02 " << (open ? "OPEN" : "CLOSE") << "\n";
+                if(open) {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV02 OPEN");
+                } else {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV02 CLOSE");
+                } 
             }
         #endif
 
@@ -149,7 +156,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
 
-                std::cout << "ServoControlSM::Control SBV01 " << (open ? "OPEN" : "CLOSE") << "\n";
+                if(open) {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV01 OPEN");
+                } else {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV01 CLOSE");
+                } 
             }
         #endif
 
@@ -161,7 +172,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
 
-                std::cout << "ServoControlSM::Control SBV02 " << (open ? "OPEN" : "CLOSE") << "\n";
+                if(open) {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV02 OPEN");
+                } else {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV02 CLOSE");
+                }             
             }
         #endif
 
@@ -173,7 +188,11 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
 
-                std::cout << "ServoControlSM::Control SBV03 " << (open ? "OPEN" : "CLOSE") << "\n";
+                if(open) {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV03 OPEN");
+                } else {
+                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV03 CLOSE");
+                }
             }
         #endif
 
