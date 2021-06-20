@@ -65,8 +65,7 @@ void InterfaceImpl::initializeOutputs()
 #endif
 }
 
-bool InterfaceImpl::updateInputs()
-{
+bool InterfaceImpl::updateInputs() {
 	latestState = std::make_shared<sensorsData>();
 
 #if USE_SBG == 1
@@ -75,6 +74,7 @@ bool InterfaceImpl::updateInputs()
 
 	latestState->eventNumber = eventQueue.pop();
 
+	
 #if USE_LOGGER == 1
     latestState->loggerIsInitialized = sensorLogger.isInitialized();
 #endif

@@ -173,7 +173,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 {
 	interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
-	if (interface->isInitialized())
+	if (interfaceData->isInitialized())
 	{
 		InternalEvent(ST_WAIT_FOR_FILLING);
 	}

@@ -10,7 +10,6 @@ class Interface
 {
 public:
 	virtual void initialize() = 0;
-	virtual void isInitialized() = 0;
 	
 	virtual void calibrateTelemetry()  = 0;
 
