@@ -65,7 +65,8 @@ void InterfaceImpl::initializeOutputs()
 #endif
 }
 
-bool InterfaceImpl::updateInputs() {
+bool InterfaceImpl::updateInputs()
+{
 	latestState = std::make_shared<sensorsData>();
 
 #if USE_SBG == 1
