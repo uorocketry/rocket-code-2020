@@ -45,4 +45,6 @@ private:
     END_STATE_MAP_EX
 
     std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
+
+    void logValveStatus(std::string valveName, bool status);
 };

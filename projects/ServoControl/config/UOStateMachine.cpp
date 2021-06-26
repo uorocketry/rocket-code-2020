@@ -123,11 +123,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
                 
-                if(open) {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV01 OPEN");
-                } else {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV01 CLOSE");
-                }    
+                logValveStatus(SV01_NAME, open); 
             }
         #endif
 
@@ -138,11 +134,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
-                if(open) {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV02 OPEN");
-                } else {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SV02 CLOSE");
-                } 
+                logValveStatus(SV02_NAME, open);
             }
         #endif
 
@@ -153,11 +145,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
 
-                if(open) {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV01 OPEN");
-                } else {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV01 CLOSE");
-                } 
+                logValveStatus(SBV01_NAME, open);
             }
         #endif
 
@@ -168,11 +156,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
 
-                if(open) {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV02 OPEN");
-                } else {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV02 CLOSE");
-                }             
+                logValveStatus(SBV02_NAME, open);         
             }
         #endif
 
@@ -183,17 +167,21 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
 
-                if(open) {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV03 OPEN");
-                } else {
-                    SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control SBV03 CLOSE");
-                }
+                logValveStatus(SBV03_NAME, open);
             }
         #endif
 
     #endif
 
     interface->updateOutputs(interfaceData);
+}
+
+void UOStateMachine::logValveStatus(std::string valveName, bool status) {
+    if(status) {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " OPEN");
+    } else {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " CLOSE");
+    } 
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)
