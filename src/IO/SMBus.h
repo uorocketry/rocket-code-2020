@@ -6,14 +6,14 @@
 class SMBusError : public std::runtime_error
 {
 public:
-    explicit SMBusError(const std::string &str) : std::runtime_error(str)
-    {}
+    explicit SMBusError(const std::string &str) : std::runtime_error(str) {}
 };
 
 class SMBus
 {
 public:
     explicit SMBus(int address);
+    ~SMBus();
 
     int32_t readByte(uint8_t reg) const;
 

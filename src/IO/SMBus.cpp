@@ -3,6 +3,7 @@
 #include <sys/ioctl.h>
 #include <spdlog/spdlog.h>
 #include <i2c/smbus.h>
+#include <unistd.h>
 #include "SMBus.h"
 
 using std::string;
@@ -22,6 +23,10 @@ SMBus::SMBus(int address) : address(address)
     if (ioctl(file, I2C_SLAVE, address) < 0) {
         throw SMBusError("Error opening I2C for address " + to_string(address) + ": " + strerror(errno));
     }
+}
+
+SMBus::~SMBus() {
+    close(file);
 }
 
 int32_t SMBus::readByte(uint8_t reg) const
