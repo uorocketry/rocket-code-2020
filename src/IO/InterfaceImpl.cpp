@@ -75,6 +75,7 @@ bool InterfaceImpl::updateInputs()
 
 	latestState->eventNumber = eventQueue.pop();
 
+	
 #if USE_LOGGER == 1
     latestState->loggerIsInitialized = sensorLogger.isInitialized();
 #endif

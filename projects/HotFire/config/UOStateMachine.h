@@ -20,13 +20,6 @@ public:
 
 	void updateHotFire(UOSMData *data);
 
-protected:
-
-#if TESTING != 1
-	InterfaceImpl interfaceImpl;
-#else
-	TestingInterface interfaceImpl;
-#endif
 	
 private:
 	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
