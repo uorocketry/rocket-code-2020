@@ -16,7 +16,8 @@
 #include <string>
 #include <map>
 
-class Gpio : public IO {
+class Gpio : public IO
+{
 public:
 	~Gpio();
 
@@ -39,7 +40,8 @@ private:
 	std::map<std::string, DigitalOutput> digitalOutputsMap;
 	std::map<std::string, PwmOutput> pwmOutputsMap;
 
-	struct InitFlags {
+	struct InitFlags
+	{
 		InitStatus gpioSatus = INIT;
 	} status;
 

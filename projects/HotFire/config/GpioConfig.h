@@ -24,7 +24,7 @@
         #define SV01_OPEN 1
         #define SV01_CLOSE 0
         #define SV01_EVENT_ENABLE_MASK 0b10
-#endif
+    #endif
 
     #if USE_SV02
         #define SV02_NAME "SV-02"
@@ -32,7 +32,7 @@
         #define SV02_OPEN 1
         #define SV02_CLOSE 0
         #define SV02_EVENT_ENABLE_MASK 0b100
-#endif
+    #endif
 
     #if USE_PWM_SBV01
         #define SBV01_NAME "SBV01"
@@ -42,7 +42,7 @@
         #define SBV01_CLOSE 270
         #define SBV01_EVENT_ENABLE_MASK 0b1000
         #define SBV01_SOFTPWM false
-#endif
+    #endif
 
     #if USE_PWM_SBV02
         #define SBV02_NAME "SBV02"
@@ -51,7 +51,7 @@
         #define SBV02_CLOSE 60
         #define SBV02_EVENT_ENABLE_MASK 0b10000
         #define SBV02_SOFTPWM false
-#endif
+    #endif
 
     #if USE_PWM_SBV03
         #define SBV03_NAME "SBV03"
@@ -60,5 +60,5 @@
         #define SBV03_CLOSE 60
         #define SBV03_EVENT_ENABLE_MASK 0b100000
         #define SBV03_SOFTPWM false
-#endif
+    #endif
 #endif
