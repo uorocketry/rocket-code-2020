@@ -2,6 +2,8 @@
 
 #include <cstdint>
 #include <utility>
+#include <string>
+#include <stdexcept>
 
 class SMBusError : public std::runtime_error
 {

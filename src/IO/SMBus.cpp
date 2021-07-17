@@ -1,10 +1,13 @@
 #include <fcntl.h>
-#include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
 #include <spdlog/spdlog.h>
-#include <i2c/smbus.h>
 #include <unistd.h>
 #include "SMBus.h"
+
+extern "C" {
+#include <i2c/smbus.h>
+#include <linux/i2c-dev.h>
+}
 
 using std::string;
 using std::to_string;
