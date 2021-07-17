@@ -43,11 +43,30 @@ int32_t SMBus::readByte(uint8_t reg) const
     return data;
 }
 
-void SMBus::writeByte(uint8_t reg, uint8_t data)
+int32_t SMBus::readByte() const
+{
+    __s32 data = i2c_smbus_read_byte(file);
+    if (data < 0) {
+        throw SMBusError("I2C read on device " + to_string(address) + " failed: " +
+                         strerror(errno));
+    }
+
+    return data;
+}
+
+void SMBus::writeByte(uint8_t reg, uint8_t data) const
 {
     __s32 err = i2c_smbus_write_byte_data(file, reg, data);
     if (err < 0) {
         throw SMBusError("I2C write on device " + to_string(address) + ", register " + to_string(reg) + " failed: " +
+                         strerror(errno));
+    }
+}
+void SMBus::writeByte(uint8_t data) const
+{
+    __s32 err = i2c_smbus_write_byte(file, data);
+    if (err < 0) {
+        throw SMBusError("I2C write on device " + to_string(address) + " failed: " +
                          strerror(errno));
     }
 }

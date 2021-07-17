@@ -18,8 +18,10 @@ public:
     ~SMBus();
 
     int32_t readByte(uint8_t reg) const;
+    int32_t readByte() const;
 
-    void writeByte(uint8_t reg, uint8_t data);
+    void writeByte(uint8_t reg, uint8_t data) const;
+    void writeByte(uint8_t data) const;
 
 private:
     const int address;
