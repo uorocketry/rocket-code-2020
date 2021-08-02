@@ -19,109 +19,92 @@
 #include <spdlog/spdlog.h>
 
 using namespace std::chrono_literals;
+using namespace boost::asio;
 
 #define PORT 8080
-#define HOST_IP "127.0.0.1"
-#define RECONNECT_WAIT_TIME_NS duration_ns(1000000000) // 1 second
-#define UPDATE_WAIT_TIME_NS duration_ns(10000000)      // 100th of a second
 
-/**
- * Send the specified data over the socket. This function will try to send all of the data, making multiple send()
- * calls if necessary.
- * @return 0 if everything was sent successfully, -1 otherwise
- */
-int sendTCPData(int socket, const char *data, int length) {
-    int data_sent = 0;
-    while (data_sent < length) {
-        int bytes_sent = send(socket, data+data_sent, length-data_sent, 0);
-        if (bytes_sent == -1) {
-            return bytes_sent;
-        }
-        data_sent += bytes_sent;
-    }
-
-    return 0;
+SocketClient::SocketClient(EventQueue &eventQueue) :
+    eventQueue(eventQueue), 
+    sendingBuffer(SENDING_BUFFER_CAPACITY),
+    endpoint(boost::asio::ip::tcp::v4(), PORT),
+    acceptor(io_service, endpoint) 
+{
 }
-
-SocketClient::SocketClient(EventQueue &eventQueue) : eventQueue(eventQueue), sendingBuffer(SENDING_BUFFER_CAPACITY) {}
 
 SocketClient::~SocketClient()
 {
 }
 
-[[noreturn]] void SocketClient::run()
+void SocketClient::run()
 {
-    while (true)
-    {
-        connected = false;
+    waitForConnection();
+}
 
-        std::this_thread::sleep_for(RECONNECT_WAIT_TIME_NS);
-        int sock = 0, valread;
-        struct sockaddr_in serv_addr;
-        if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-        {
-            SPDLOG_LOGGER_ERROR(logger, "Socket creation error");
-            continue;
-        }
+void SocketClient::waitForConnection() {
+    SPDLOG_LOGGER_INFO(logger, "Waiting for connection...");
+    auto socket(std::make_shared<ip::tcp::socket>(io_service));
 
-        status.socketCreated = READY;
+    boost::system::error_code err;
+    acceptor.accept(*socket, err);
+    if (err) {
+        SPDLOG_LOGGER_ERROR(logger, err.message());
+    } else {
+        connected++;
+        SPDLOG_LOGGER_INFO(logger, "Connected to device. Currently connected to {} clients", connected);
 
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_port = htons(PORT);
+        std::thread sendingThread([this, socket] { sendingLoop(socket); });
+        sendingThread.detach();
+        std::thread recievingThread([this, socket] { receivingLoop(socket); });
+        recievingThread.detach();
+    }
 
-        // Convert IPv4 and IPv6 addresses from text to binary form
-        if (inet_pton(AF_INET, HOST_IP, &serv_addr.sin_addr) <= 0)
-        {
-            SPDLOG_LOGGER_ERROR(logger, "Invalid address / Address not supported");
-            continue;
-        }
+    // Wait for another connection
+    std::thread waitingThread([this] { waitForConnection(); });
+    waitingThread.detach();
+}
 
-        status.socketBinded = READY;
+void SocketClient::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
+    std::unique_lock<std::mutex> lk(sendingMutex);
+    while (socket->is_open()) {
+        sendingCondition.wait_for(lk, 100ms);
 
-        SPDLOG_LOGGER_INFO(logger, "Trying to connect...");
-        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) == 0)
-        {
-            SPDLOG_LOGGER_INFO(logger, "Connected");
-            connected = true;
-
-            std::thread sendingThread(&SocketClient::sendingLoop, this, sock);
-
-            status.serverConnection = READY;
-
-            char buffer[1] = {(char)-1};
-            while (connected)
-            {
-                valread = read(sock, buffer, 1);
-
-                if (valread == 0)
-                {
-                    connected = false;
-                    close(sock);
+        while (!sendingBuffer.empty() && socket->is_open()) {
+            boost::system::error_code err;
+            if (write(*socket, buffer(sendingBuffer[0]), err) == -1 || err) {
+                if (err) {
+                    SPDLOG_LOGGER_ERROR(logger, err.message());
+                } else {
+                    SPDLOG_LOGGER_ERROR(logger, "Could not successfully send the TCP message");
                 }
-
-                eventQueue.push((int)buffer[0]);
-
-                std::this_thread::sleep_for(UPDATE_WAIT_TIME_NS);
             }
+
+            sendingBuffer.pop_front();
         }
     }
 }
 
-void SocketClient::sendingLoop(int sock) {
-    std::unique_lock<std::mutex> lk(sendingMutex);
-    while (connected) {
-        sendingCondition.wait_for(lk, 100ms, [this]{return !connected;});
+void SocketClient::receivingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
+    while (socket->is_open()) {
+        char b[1] = {(char)-1};
+        boost::system::error_code err;
+        socket->read_some(buffer(b), err);
 
-        while (!sendingBuffer.empty()) {
-            auto data = sendingBuffer[0].c_str();
+        SPDLOG_LOGGER_INFO(logger, "Recieved data: {}", (int) b[0]);
 
-            int error = sendTCPData(sock, data, strlen(data));
-            if (error == -1) {
-                std::cout << "Could not successfully send the TCP message" << std::endl;
+        if (err) {
+            SPDLOG_LOGGER_ERROR(logger, err.message());
+
+            if (err == boost::asio::error::eof) { 
+                SPDLOG_LOGGER_INFO(logger, "Connection closed by the device");
+                socket->close();
+                return;
             }
-            sendingBuffer.pop_front();
+        } else {
+            eventQueue.push((int)b[0]);
         }
     }
+
+    connected--;
 }
 
 void SocketClient::enqueueSensorData(const sensorsData &data) {

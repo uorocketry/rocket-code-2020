@@ -5,7 +5,7 @@
 #endif
 
 #ifndef USE_SOCKET_CLIENT
-    #define USE_SOCKET_CLIENT 0
+    #define USE_SOCKET_CLIENT 1
 #endif
 
 #ifndef USE_LOGGER
