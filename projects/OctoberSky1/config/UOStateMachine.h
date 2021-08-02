@@ -18,8 +18,6 @@ public:
 	void Apogee();
 	void Touchdown();
 
-protected:
-
 private:
 	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
 	void detectApogee(const std::shared_ptr<sensorsData>& data);
