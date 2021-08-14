@@ -20,7 +20,6 @@ public:
 
 	void updateHotFire(UOSMData *data);
 
-	
 private:
 	void detectExternEvent(const std::shared_ptr<sensorsData>& data);
 	void showInfo(const std::shared_ptr<sensorsData>& data);
