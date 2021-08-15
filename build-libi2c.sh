@@ -14,4 +14,4 @@ tar -xf "$LIBI2C_DIRECTORY.tar.gz"
 
 cd "$LIBI2C_DIRECTORY"
 
-make
+CC=$RPI_TOOLS/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc make
