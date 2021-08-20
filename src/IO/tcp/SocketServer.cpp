@@ -1,10 +1,10 @@
 #include "config/config.h"
 #if USE_SOCKET_CLIENT == 1
 
-#include "SocketClient.h"
-#include "../data/SBGData.h"
-#include "IO.h"
-#include "../helpers/Types.h"
+#include "SocketServer.h"
+#include "data/SBGData.h"
+#include "IO/IO.h"
+#include "helpers/Types.h"
 
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -23,7 +23,7 @@ using namespace boost::asio;
 
 #define PORT 8080
 
-SocketClient::SocketClient(EventQueue &eventQueue) :
+SocketServer::SocketServer(EventQueue &eventQueue) :
     eventQueue(eventQueue), 
     sendingBuffer(SENDING_BUFFER_CAPACITY),
     endpoint(boost::asio::ip::tcp::v4(), PORT),
@@ -31,16 +31,16 @@ SocketClient::SocketClient(EventQueue &eventQueue) :
 {
 }
 
-SocketClient::~SocketClient()
+SocketServer::~SocketServer()
 {
 }
 
-void SocketClient::run()
+void SocketServer::run()
 {
     waitForConnection();
 }
 
-void SocketClient::waitForConnection() {
+void SocketServer::waitForConnection() {
     SPDLOG_LOGGER_INFO(logger, "Waiting for connection...");
     auto socket(std::make_shared<ip::tcp::socket>(io_service));
 
@@ -63,7 +63,7 @@ void SocketClient::waitForConnection() {
     waitingThread.detach();
 }
 
-void SocketClient::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
+void SocketServer::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
     std::unique_lock<std::mutex> lk(sendingMutex);
     while (socket->is_open()) {
         sendingCondition.wait_for(lk, 100ms);
@@ -83,7 +83,7 @@ void SocketClient::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
     }
 }
 
-void SocketClient::receivingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
+void SocketServer::receivingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
     while (socket->is_open()) {
         char b[1] = {(char)-1};
         boost::system::error_code err;
@@ -107,7 +107,7 @@ void SocketClient::receivingLoop(const std::shared_ptr<ip::tcp::socket> &socket)
     connected--;
 }
 
-void SocketClient::enqueueSensorData(const sensorsData &data) {
+void SocketServer::enqueueSensorData(const sensorsData &data) {
     auto dataStr = data.convertToReducedString();
     dataStr += "\r\n";
 
@@ -117,14 +117,7 @@ void SocketClient::enqueueSensorData(const sensorsData &data) {
     sendingCondition.notify_one();
 }
 
-void SocketClient::initialize()
-{
-    std::cout << "initialize client thread"
-              << "\n";
-    IO::initialize();
-};
-
-bool SocketClient::isInitialized()
+bool SocketServer::isInitialized()
 {
     return (status.socketCreated == READY && status.socketBinded == READY && status.serverConnection == READY);
 }

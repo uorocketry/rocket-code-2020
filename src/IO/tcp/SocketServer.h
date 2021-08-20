@@ -3,9 +3,9 @@
 #include "config/config.h"
 #if USE_SOCKET_CLIENT == 1
 
-#include "IO.h"
-#include "../data/SBGData.h"
-#include "EventQueue.h"
+#include "IO/IO.h"
+#include "data/SBGData.h"
+#include "IO/EventQueue.h"
 #include <iostream>
 #include <queue>
 #include <boost/circular_buffer.hpp>
@@ -13,14 +13,13 @@
 #include <condition_variable>
 #include <boost/asio.hpp>
 
-class SocketClient : public IO
+class SocketServer : public IO
 {
 public:
-    SocketClient(EventQueue &eventQueue);
-    ~SocketClient();
+    SocketServer(EventQueue &eventQueue);
+    ~SocketServer();
 
     void run();
-    void initialize();
     bool isInitialized();
     void enqueueSensorData(const sensorsData &data);
 
