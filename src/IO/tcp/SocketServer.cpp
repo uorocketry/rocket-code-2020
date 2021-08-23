@@ -37,10 +37,14 @@ SocketServer::~SocketServer()
 
 void SocketServer::run()
 {
+    std::thread sendingThread([this] { sendingLoop(); });
+    sendingThread.detach();
+
     waitForConnection();
 }
 
-void SocketServer::waitForConnection() {
+void SocketServer::waitForConnection() 
+{
     SPDLOG_LOGGER_INFO(logger, "Waiting for connection...");
     auto socket(std::make_shared<ip::tcp::socket>(io_service));
 
@@ -49,13 +53,10 @@ void SocketServer::waitForConnection() {
     if (err) {
         SPDLOG_LOGGER_ERROR(logger, err.message());
     } else {
-        connected++;
-        SPDLOG_LOGGER_INFO(logger, "Connected to device. Currently connected to {} clients", connected);
+        SPDLOG_LOGGER_INFO(logger, "Connected to device. Currently connected to {} clients", clients.size() + 1);
 
-        std::thread sendingThread([this, socket] { sendingLoop(socket); });
-        sendingThread.detach();
-        std::thread recievingThread([this, socket] { receivingLoop(socket); });
-        recievingThread.detach();
+        std::shared_ptr<SocketClient> client = std::make_shared<SocketClient>(socket, [this](auto b) { received(b); }, [this](auto client) { closed(client); });
+        clients.push_back(client);
     }
 
     // Wait for another connection
@@ -63,19 +64,18 @@ void SocketServer::waitForConnection() {
     waitingThread.detach();
 }
 
-void SocketServer::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
-    std::unique_lock<std::mutex> lk(sendingMutex);
-    while (socket->is_open()) {
+void SocketServer::sendingLoop() 
+{
+    while (true) {
+        std::unique_lock<std::mutex> lk(sendingMutex);
         sendingCondition.wait_for(lk, 100ms);
 
-        while (!sendingBuffer.empty() && socket->is_open()) {
-            boost::system::error_code err;
-            if (write(*socket, buffer(sendingBuffer[0]), err) == -1 || err) {
-                if (err) {
-                    SPDLOG_LOGGER_ERROR(logger, err.message());
-                } else {
-                    SPDLOG_LOGGER_ERROR(logger, "Could not successfully send the TCP message");
-                }
+        while (!sendingBuffer.empty()) {
+            auto data = sendingBuffer.front();
+
+            std::lock_guard<std::mutex> lockGuard(clientsMutex);
+            for (auto &client: clients) {
+                client->send(data);
             }
 
             sendingBuffer.pop_front();
@@ -83,31 +83,21 @@ void SocketServer::sendingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
     }
 }
 
-void SocketServer::receivingLoop(const std::shared_ptr<ip::tcp::socket> &socket) {
-    while (socket->is_open()) {
-        char b[1] = {(char)-1};
-        boost::system::error_code err;
-        socket->read_some(buffer(b), err);
-
-        SPDLOG_LOGGER_INFO(logger, "Recieved data: {}", (int) b[0]);
-
-        if (err) {
-            SPDLOG_LOGGER_ERROR(logger, err.message());
-
-            if (err == boost::asio::error::eof) { 
-                SPDLOG_LOGGER_INFO(logger, "Connection closed by the device");
-                socket->close();
-                return;
-            }
-        } else {
-            eventQueue.push((int)b[0]);
-        }
-    }
-
-    connected--;
+void SocketServer::received(const char b[]) 
+{
+    eventQueue.push((int)b[0]);
 }
 
-void SocketServer::enqueueSensorData(const sensorsData &data) {
+void SocketServer::closed(const SocketClient* client) {
+    std::lock_guard<std::mutex> lockGuard(clientsMutex);
+
+    clients.erase(std::remove_if(clients.begin(), clients.end(), [client](const std::shared_ptr<SocketClient> &c) {
+        return c.get() == client;
+    }));
+}
+
+void SocketServer::enqueueSensorData(const sensorsData &data) 
+{
     auto dataStr = data.convertToReducedString();
     dataStr += "\r\n";
 

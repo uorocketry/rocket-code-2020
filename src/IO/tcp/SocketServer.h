@@ -6,6 +6,7 @@
 #include "IO/IO.h"
 #include "data/SBGData.h"
 #include "IO/EventQueue.h"
+#include "SocketClient.h"
 #include <iostream>
 #include <queue>
 #include <boost/circular_buffer.hpp>
@@ -24,16 +25,19 @@ public:
     void enqueueSensorData(const sensorsData &data);
 
 private:
-    void sendingLoop(const std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
-    void receivingLoop(const std::shared_ptr<boost::asio::ip::tcp::socket> &socket);
+    void sendingLoop();
+    void received(const char b[]);
+    void closed(const SocketClient* client);
     void waitForConnection();
 
     const int SENDING_BUFFER_CAPACITY = 32;
 
-    int connected = 0;
     boost::asio::io_service io_service;
     boost::asio::ip::tcp::endpoint endpoint;
     boost::asio::ip::tcp::acceptor acceptor;
+
+    std::vector<std::shared_ptr<SocketClient>> clients;
+    std::mutex clientsMutex;
 
     EventQueue &eventQueue;
     boost::circular_buffer<std::string> sendingBuffer;
