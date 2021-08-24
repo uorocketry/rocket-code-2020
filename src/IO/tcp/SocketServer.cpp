@@ -93,7 +93,7 @@ void SocketServer::closed(const SocketClient* client) {
 
     clients.erase(std::remove_if(clients.begin(), clients.end(), [client](const std::shared_ptr<SocketClient> &c) {
         return c.get() == client;
-    }));
+    }), clients.end());
 }
 
 void SocketServer::enqueueSensorData(const sensorsData &data) 
