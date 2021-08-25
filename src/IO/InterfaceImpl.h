@@ -6,7 +6,7 @@
 #include "IO/Interface.h"
 #include "IO/SBGSensor.h"
 #include "IO/Input.h"
-#include "IO/SocketClient.h"
+#include "IO/tcp/SocketServer.h"
 #include "IO/SensorLogger.h"
 #include "IO/Radio.h"
 #include "IO/gpio/Gpio.h"
@@ -57,7 +57,7 @@ private:
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-	SocketClient client;
+	SocketServer client;
 #endif
 
 #if USE_RADIO == 1

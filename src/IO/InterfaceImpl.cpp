@@ -122,6 +122,10 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	radio.enqueueSensorData(*data);
 #endif
 
+#if USE_SOCKET_CLIENT == 1
+    client.enqueueSensorData(*data);
+#endif
+
 	return true;
 }
 
@@ -147,6 +151,10 @@ void InterfaceImpl::calibrateTelemetry()
 
 std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
+
+#if USE_LOGGER == 1
+    latestState->loggerWorking = SensorLogger::working;
+#endif // USE_LOGGER
 
 	return latestState;
 }
