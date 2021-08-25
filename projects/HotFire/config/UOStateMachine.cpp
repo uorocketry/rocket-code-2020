@@ -622,9 +622,6 @@ std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smd
 	interface->updateInputs();
 	std::shared_ptr<sensorsData> data = interface->getLatest();
 
-	// If statement to prevent overwiring data from TESTING
-	if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
-	
 	data->currentStateNo = state;
 
 	return data;
