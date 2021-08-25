@@ -38,8 +38,8 @@ jobs:
           git submodule init
           git submodule update
       # Build the project
-      - name: Install Boost filesystem
-        run: sudo apt-get install libboost-system-dev libboost-filesystem-dev -y
+      - name: Install Boost
+        run: sudo apt-get install libboost-all-dev -y
       - name: "${{ matrix.name }}: Cmake Makefiles"
         run: ${{ matrix.append }} cmake -B ./build -G 'Unix Makefiles'
       - name: "${{ matrix.name }}: Run make"

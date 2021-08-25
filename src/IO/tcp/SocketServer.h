@@ -3,32 +3,41 @@
 #include "config/config.h"
 #if USE_SOCKET_CLIENT == 1
 
-#include "IO.h"
-#include "../data/SBGData.h"
-#include "EventQueue.h"
+#include "IO/IO.h"
+#include "data/SBGData.h"
+#include "IO/EventQueue.h"
+#include "SocketClient.h"
 #include <iostream>
 #include <queue>
 #include <boost/circular_buffer.hpp>
 #include <data/sensorsData.h>
 #include <condition_variable>
+#include <boost/asio.hpp>
 
-class SocketClient : public IO
+class SocketServer : public IO
 {
 public:
-    SocketClient(EventQueue &eventQueue);
-    ~SocketClient();
+    SocketServer(EventQueue &eventQueue);
+    ~SocketServer();
 
-    [[noreturn]] void run();
-    void initialize();
+    void run();
     bool isInitialized();
     void enqueueSensorData(const sensorsData &data);
 
 private:
-    void sendingLoop(int sock);
+    void sendingLoop();
+    void received(const char b[]);
+    void closed(const SocketClient* client);
+    void waitForConnection();
 
     const int SENDING_BUFFER_CAPACITY = 32;
 
-    bool connected = false;
+    boost::asio::io_service io_service;
+    boost::asio::ip::tcp::endpoint endpoint;
+    boost::asio::ip::tcp::acceptor acceptor;
+
+    std::vector<std::shared_ptr<SocketClient>> clients;
+    std::mutex clientsMutex;
 
     EventQueue &eventQueue;
     boost::circular_buffer<std::string> sendingBuffer;

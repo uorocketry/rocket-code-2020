@@ -29,6 +29,8 @@ public:
             if ((currentTime - lastDebounceTime) > debounceDelay) {
                 if (currentState == HIGH) {
                     Serial.write(eventNbr);
+                    Serial.write("\n");
+
                 }
                 oldState = currentState;
             };
@@ -58,7 +60,7 @@ void setup() {
     }
 
     // begin serial communication
-    Serial.begin(9600);
+    Serial.begin(57600);
 }
 
 void loop() {   

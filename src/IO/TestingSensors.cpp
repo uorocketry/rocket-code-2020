@@ -105,7 +105,7 @@ void TestingSensors::initialize()
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-        currentData.client.isInitialized = helper::processUInt32(currentRow[count++]);
+        currentData.clientIsInitialized = helper::processUInt32(currentRow[count++]);
 #endif
 
 #if USE_SBG == 1
