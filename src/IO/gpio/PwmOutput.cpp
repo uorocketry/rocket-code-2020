@@ -6,6 +6,7 @@
 #include <iostream>
 #include <utility>
 #include <spdlog/spdlog.h>
+#include <wiringSerial.h>
 
 #if USE_WIRING_Pi == 1
 
@@ -21,19 +22,22 @@ PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::
 
     SPDLOG_LOGGER_DEBUG(logger, "Created PwmOutput {}", name);
 
-#if USE_WIRING_Pi == 1
     if (!softPWM) {
+#if USE_WIRING_Pi == 1
         pinMode(pinNbr, PWM_OUTPUT);
         pwmSetMode(PWM_MODE_MS);
         pwmSetRange(256);
         pwmSetClock(192);
+#endif
     } else {
-        int status = softPwmCreate(pinNbr, 0, 100);
-        if (status == 0) {
-            SPDLOG_LOGGER_ERROR(logger, "Error while creating software PWM output: {}", errno);
-        }
+#if USE_ARDUINO_PROXY == 1
+    if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0) {
+        SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
+        return;
     }
 #endif
+    }
+
 }
 
 bool PwmOutput::setValue(int value)
@@ -42,13 +46,19 @@ bool PwmOutput::setValue(int value)
         currentState = value;
         SPDLOG_LOGGER_DEBUG(logger, "PWM {} changed to {}", name, currentState);
 
-#if USE_WIRING_Pi == 1
+
         if (!softPWM) {
+#if USE_WIRING_Pi == 1
             pwmWrite(pinNbr, value);
-        } else {
-            softPwmWrite(pinNbr, value);
-        }
 #endif
+        } else {
+#if USE_ARDUINO_PROXY == 1
+            // Send serial to proxy
+            serialPutchar(fd, 0b00000);
+            serialPutchar(fd, value);
+#endif
+        }
+
     }
     return true;
 }

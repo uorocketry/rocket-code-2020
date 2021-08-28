@@ -21,6 +21,16 @@ private:
     const std::string name;
     const int pinNbr;
     const bool softPWM;
+
+#if USE_ARDUINO_PROXY == 1
+    int fd = 0;
+    
+//     struct InitFlags
+// 	{
+// 		InitStatus wiringPiStatus = INIT;
+// 	} status;
+#endif
+
 };
 
 #endif

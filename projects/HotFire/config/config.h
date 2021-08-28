@@ -40,4 +40,8 @@
     #ifndef USE_WIRING_Pi
         #define USE_WIRING_Pi 1
     #endif
+
+    #ifndef USE_ARDUINO_PROXY
+        #define USE_ARDUINO_PROXY 1
+    #endif
 #endif

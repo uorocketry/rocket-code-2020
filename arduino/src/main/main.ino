@@ -2,7 +2,7 @@
 
 #define SERVO 0
 #define DIGITAL 1
-#define TESTING 1
+#define TESTING 0
 
 //int servoCount = 3;
 //int servoPins[] = {1, 2, 3};
@@ -28,11 +28,14 @@ void setup() {
 
 void loop() {
   if (Serial.available() == 0) return;
-  int input = getInt();
+  byte buffer[2];
+  Serial.readBytes(buffer, 2);
+//  byte data[] = getData();
+  byte input = buffer[0];
 
   if (input != -1) {
-    unsigned int command = input & 0b11;
-    unsigned int index = (input >> 0b10) & 0b11;
+    byte command = input & 0b11;
+    byte index = (input >> 0b10) & 0b11;
   
     Serial.println("Input " + String(input));
     Serial.println("Command " + String(command));
@@ -41,9 +44,10 @@ void loop() {
     switch(command) {
       case SERVO:
         if (index < servoCount) {
-//          unsigned int angle = input & 0b111111110000;
-          while (Serial.available() == 0);
-          int angle = getInt();
+//          unsigned int angle = (input >> 5) & 0b11111111;
+           byte angle = buffer[1];
+//          while (Serial.available() == 0);
+//          int angle = getInt();
 
           Serial.println("Angle " + String(angle));
           if (angle < 0 || angle > 180) return;
@@ -68,10 +72,12 @@ void loop() {
   }
 }
 
-int getInt() {
-# if TESTING == 0
-  return Serial.read();
-#else
-  return Serial.parseInt();
-#endif
-}
+//byte* getData() {
+////# if TESTING == 0
+//  byte buffer[2];
+//  Serial.readBytes(buffer, 2);
+//  return buffer;
+////#else
+////  return Serial.parseInt();
+////#endif
+//}
