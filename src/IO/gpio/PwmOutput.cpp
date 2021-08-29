@@ -44,8 +44,7 @@ bool PwmOutput::setValue(int value)
 {
     if (currentState != value) {
         currentState = value;
-        SPDLOG_LOGGER_DEBUG(logger, "PWM {} changed to {}", name, currentState);
-
+        SPDLOG_LOGGER_INFO(logger, "PWM {} changed to {} on pin {}", name, currentState, pinNbr);
 
         if (!softPWM) {
 #if USE_WIRING_Pi == 1
@@ -54,7 +53,8 @@ bool PwmOutput::setValue(int value)
         } else {
 #if USE_ARDUINO_PROXY == 1
             // Send serial to proxy
-            serialPutchar(fd, 0b00000);
+            serialPutchar(fd, 162); // Verify byte
+            serialPutchar(fd, pinNbr << 2);
             serialPutchar(fd, value);
 #endif
         }

@@ -4,12 +4,12 @@
 #define DIGITAL 1
 #define TESTING 0
 
-//int servoCount = 3;
-//int servoPins[] = {1, 2, 3};
-//Servo servos[3];
-int servoCount = 1;
-int servoPins[] = {5};
-Servo servos[1];
+int servoCount = 3;
+int servoPins[] = {5, 2, 3};
+Servo servos[3];
+//int servoCount = 1;
+//int servoPins[] = {5};
+//Servo servos[1];
 
 int digitalPinCount = 1;
 int digitalPins[] = {13};
@@ -28,10 +28,13 @@ void setup() {
 
 void loop() {
   if (Serial.available() == 0) return;
-  byte buffer[2];
-  Serial.readBytes(buffer, 2);
+  byte buffer[3];
+  Serial.readBytes(buffer, 3);
 //  byte data[] = getData();
-  byte input = buffer[0];
+  byte input = buffer[1];
+
+  // verify byte
+  if (buffer[0] != 162) return;
 
   if (input != -1) {
     byte command = input & 0b11;
@@ -45,7 +48,7 @@ void loop() {
       case SERVO:
         if (index < servoCount) {
 //          unsigned int angle = (input >> 5) & 0b11111111;
-           byte angle = buffer[1];
+           byte angle = buffer[2];
 //          while (Serial.available() == 0);
 //          int angle = getInt();
 
