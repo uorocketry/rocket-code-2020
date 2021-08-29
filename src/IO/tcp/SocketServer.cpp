@@ -18,7 +18,6 @@
 #include <sys/poll.h>
 #include <spdlog/spdlog.h>
 
-using namespace std::chrono_literals;
 using namespace boost::asio;
 
 #define PORT 8080
@@ -55,7 +54,7 @@ void SocketServer::waitForConnection()
     } else {
         SPDLOG_LOGGER_INFO(logger, "Connected to device. Currently connected to {} clients", clients.size() + 1);
 
-        std::shared_ptr<SocketClient> client = std::make_shared<SocketClient>(socket, [this](auto b) { received(b); }, [this](auto client) { closed(client); });
+        std::shared_ptr<SocketClient> client = std::make_shared<SocketClient>(socket, [this](auto b) { this->received(b); }, [this](auto client) { this->closed(client); });
         clients.push_back(client);
     }
 
@@ -68,7 +67,7 @@ void SocketServer::sendingLoop()
 {
     while (true) {
         std::unique_lock<std::mutex> lk(sendingMutex);
-        sendingCondition.wait_for(lk, 100ms);
+        sendingCondition.wait_for(lk, MAX_WAIT);
 
         while (!sendingBuffer.empty()) {
             auto data = sendingBuffer.front();

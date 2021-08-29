@@ -7,7 +7,7 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 SET(CMAKE_C_COMPILER "$ENV{RPI_TOOLS}/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc")
 SET(CMAKE_CXX_COMPILER "$ENV{RPI_TOOLS}/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/bin/arm-linux-gnueabihf-g++")
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # Define the sysroot path for the RaspberryPi distribution in our tools folder 
 SET(CMAKE_FIND_ROOT_PATH "$ENV{RPI_TOOLS}/arm-bcm2708/arm-rpi-4.9.3-linux-gnueabihf/arm-linux-gnueabihf/sysroot/")

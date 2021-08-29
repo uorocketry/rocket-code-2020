@@ -13,6 +13,7 @@
 #include <data/sensorsData.h>
 #include <condition_variable>
 #include <boost/asio.hpp>
+#include <chrono>
 
 class SocketServer : public IO
 {
@@ -31,6 +32,7 @@ private:
     void waitForConnection();
 
     const int SENDING_BUFFER_CAPACITY = 32;
+    const duration_ms MAX_WAIT = duration_ms(1);
 
     boost::asio::io_service io_service;
     boost::asio::ip::tcp::endpoint endpoint;
