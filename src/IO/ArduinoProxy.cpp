@@ -18,7 +18,6 @@ ArduinoProxy* ArduinoProxy::getInstance() {
 }
 
 void ArduinoProxy::initialize() {
-    SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
     IO::initialize();
 
     std::lock_guard<std::mutex> lockGuard(serialMutex);

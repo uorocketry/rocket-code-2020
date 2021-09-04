@@ -69,6 +69,7 @@ void InterfaceImpl::initializeOutputs()
 	gpio.initialize();
 #endif
 #if USE_ARDUINO_PROXY == 1
+	SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
 	arduinoProxy->initialize();
 #endif
 }
