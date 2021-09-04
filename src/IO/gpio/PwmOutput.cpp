@@ -15,8 +15,7 @@
 
 #endif
 
-PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::move(name)), pinNbr(pin),
-                                                                      softPWM(softPWM)
+PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::move(name)), pinNbr(pin), softPWM(softPWM)
 {
     logger = spdlog::default_logger();
 
@@ -31,10 +30,7 @@ PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::
 #endif
     } else {
 #if USE_ARDUINO_PROXY == 1
-    if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0) {
-        SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
-        return;
-    }
+        arduinoProxy = ArduinoProxy::getInstance();
 #endif
     }
 
@@ -53,9 +49,9 @@ bool PwmOutput::setValue(int value)
         } else {
 #if USE_ARDUINO_PROXY == 1
             // Send serial to proxy
-            serialPutchar(fd, 162); // Verify byte
-            serialPutchar(fd, pinNbr << 2);
-            serialPutchar(fd, value);
+            arduinoProxy->send(162); // Verify byte
+            arduinoProxy->send(pinNbr << 2);
+            arduinoProxy->send(value);
 #endif
         }
 

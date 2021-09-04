@@ -4,6 +4,10 @@
 
 #include "Output.h"
 
+#if USE_ARDUINO_PROXY == 1
+#include "IO/ArduinoProxy.h"
+#endif
+
 #include <string>
 #include <spdlog/logger.h>
 
@@ -19,6 +23,10 @@ private:
     std::shared_ptr<spdlog::logger> logger;
     std::string name;
     const int pinNbr;
+
+    #if USE_ARDUINO_PROXY == 1
+        ArduinoProxy* arduinoProxy;
+    #endif
 };
 
 #endif

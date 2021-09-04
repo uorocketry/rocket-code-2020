@@ -69,7 +69,6 @@ void loop() {
           } else {
             digitalWrite(digitalPins[index], LOW);
           }
-          
         }
     }
   }

@@ -303,6 +303,10 @@ void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &curre
     fileStream << currentState.gpioIsInitialized << sep;
 #endif
 
+#if USE_ARDUINO_PROXY
+    fileStream << currentState.arduinoProxyIsInitialized << sep;
+#endif
+
 	fileStream << "\n";
 
 	fileStream.flush();

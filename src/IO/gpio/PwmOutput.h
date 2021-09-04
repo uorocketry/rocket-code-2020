@@ -6,6 +6,10 @@
 
 #include "Output.h"
 
+#if USE_ARDUINO_PROXY
+#include "IO/ArduinoProxy.h"
+#endif
+
 #include <string>
 #include <spdlog/logger.h>
 
@@ -23,7 +27,7 @@ private:
     const bool softPWM;
 
 #if USE_ARDUINO_PROXY == 1
-    int fd = 0;
+    ArduinoProxy* arduinoProxy;
     
 //     struct InitFlags
 // 	{

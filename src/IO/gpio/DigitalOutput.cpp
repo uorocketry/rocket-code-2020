@@ -14,8 +14,10 @@ DigitalOutput::DigitalOutput(const std::string& name, const int pin) : name(name
 
     SPDLOG_LOGGER_DEBUG(logger, "Created Output {}", name);
 
-    #if USE_WIRING_Pi == 1
-    pinMode (pinNbr, OUTPUT);
+    #if USE_ARDUINO_PROXY == 1
+        arduinoProxy = ArduinoProxy::getInstance();
+    #elif USE_WIRING_Pi == 1
+        pinMode(pinNbr, OUTPUT);
     #endif
 }
 
@@ -24,8 +26,11 @@ bool DigitalOutput::setValue(int value) {
         currentState = value;
         SPDLOG_LOGGER_DEBUG(logger, "OUT {} changed to {}", name, currentState);
 
-        #if USE_WIRING_Pi == 1
-        digitalWrite(pinNbr, value);
+        #if USE_ARDUINO_PROXY == 1
+            arduinoProxy->send(162); // Verify byte
+            arduinoProxy->send(pinNbr << 2 + value << 4);
+        #elif USE_WIRING_Pi == 1
+            digitalWrite(pinNbr, value);
         #endif
     }
     return true;

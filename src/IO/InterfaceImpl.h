@@ -10,6 +10,7 @@
 #include "IO/SensorLogger.h"
 #include "IO/Radio.h"
 #include "IO/gpio/Gpio.h"
+#include "IO/ArduinoProxy.h"
 #include "EventQueue.h"
 #include <memory>
 #include <string>
@@ -70,6 +71,10 @@ private:
 
 #if USE_GPIO == 1
 	Gpio gpio;
+#endif
+
+#if USE_ARDUINO_PROXY == 1
+	ArduinoProxy* arduinoProxy;
 #endif
 };
 
