@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message ArduinoIn {
+  message PWM_CONTROL {
+
+  }
+
+  message DIGITAL_CONTROL {
+
+  }
+
+  oneof data {
+    PWM_CONTROL pwm = 1;
+    DIGITAL_CONTROL digital = 2;
+  }
+}
