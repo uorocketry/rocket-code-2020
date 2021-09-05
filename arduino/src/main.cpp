@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Servo.h>
+#include <ArduinoComm.pb.h>
 
 #define SERVO 0
 #define DIGITAL 1
