@@ -1,16 +1,20 @@
 syntax = "proto3";
 
+package RocketryProto;
+
+message ServoInit {
+  uint32 pin = 1;
+  int32 safePosition = 2;
+}
+
+message ServoControl {
+  uint32 pin = 1;
+  int32 position = 2;
+}
+
 message ArduinoIn {
-  message PWM_CONTROL {
-
-  }
-
-  message DIGITAL_CONTROL {
-
-  }
-
   oneof data {
-    PWM_CONTROL pwm = 1;
-    DIGITAL_CONTROL digital = 2;
+    ServoInit servoInit = 1;
+    ServoControl servoControl = 2;
   }
 }
