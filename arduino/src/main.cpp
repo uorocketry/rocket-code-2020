@@ -5,6 +5,7 @@
 #include <pb_decode.h>
 #include "servoMessage.h"
 #include "utils.h"
+#include "digitalMessage.h"
 
 COBSPacketSerial cobsPacketSerial;
 
@@ -34,6 +35,12 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
     break;
     case RocketryProto_ArduinoIn_servoControl_tag:
       controlServo(message);
+    break;
+    case RocketryProto_ArduinoIn_digitalInit_tag:
+      initDigital(message);
+    break;
+    case RocketryProto_ArduinoIn_digitalControl_tag:
+      controlDigital(message);
     break;
     default:
       serialPrintLn("Unknown message type. Ignoring request.");

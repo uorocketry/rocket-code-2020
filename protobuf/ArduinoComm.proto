@@ -12,9 +12,20 @@ message ServoControl {
   int32 position = 2;
 }
 
+message DigitalInit {
+  uint32 pin = 1;
+}
+
+message DigitalControl {
+  uint32 pin = 1;
+  bool activate = 2;
+}
+
 message ArduinoIn {
   oneof data {
     ServoInit servoInit = 1;
     ServoControl servoControl = 2;
+    DigitalInit digitalInit = 3;
+    DigitalControl digitalControl = 4;
   }
 }
