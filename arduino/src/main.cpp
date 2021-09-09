@@ -4,6 +4,7 @@
 #include <ArduinoComm.pb.h>
 #include <pb_decode.h>
 #include "servoMessage.h"
+#include "utils.h"
 
 COBSPacketSerial cobsPacketSerial;
 
@@ -23,6 +24,7 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
   pb_istream_t stream = pb_istream_from_buffer(buffer, size);
 
   if (!pb_decode(&stream, RocketryProto_ArduinoIn_fields, &message)) {
+    serialPrintLn("Error decoding message: ", stream.errmsg);
     return;
   }
 
@@ -33,5 +35,7 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
     case RocketryProto_ArduinoIn_servoControl_tag:
       controlServo(message);
     break;
+    default:
+      serialPrintLn("Unknown message type. Ignoring request.");
   }
 }
