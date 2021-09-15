@@ -29,7 +29,7 @@ public:
 
 	void createNewGpioOutput(const std::string &name, int pinNbr);
 
-	void createNewGpioPwmOutput(const std::string &name, int pinNbr, bool softPWM = false);
+	void createNewGpioPwmOutput(const std::string &name, int pinNbr, int safePosition, bool softPWM = false);
 
 	GpioData setOutputs(const GpioData &data);
 

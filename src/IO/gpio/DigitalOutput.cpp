@@ -16,6 +16,10 @@ DigitalOutput::DigitalOutput(const std::string& name, const int pin) : name(name
 
     #if USE_ARDUINO_PROXY == 1
         arduinoProxy = ArduinoProxy::getInstance();
+
+        RocketryProto::ArduinoIn arduinoIn;
+        arduinoIn.mutable_digitalinit()->set_pin(pin);
+        arduinoProxy->send(arduinoIn);
     #elif USE_WIRING_Pi == 1
         pinMode(pinNbr, OUTPUT);
     #endif
@@ -27,8 +31,11 @@ bool DigitalOutput::setValue(int value) {
         SPDLOG_LOGGER_DEBUG(logger, "OUT {} changed to {}", name, currentState);
 
         #if USE_ARDUINO_PROXY == 1
-            arduinoProxy->send(162); // Verify byte
-            arduinoProxy->send(pinNbr << 2 + value << 4);
+            RocketryProto::ArduinoIn arduinoIn;
+            arduinoIn.mutable_digitalcontrol()->set_pin(pinNbr);
+            arduinoIn.mutable_digitalcontrol()->set_activate(value == 1);
+
+            arduinoProxy->send(arduinoIn);
         #elif USE_WIRING_Pi == 1
             digitalWrite(pinNbr, value);
         #endif

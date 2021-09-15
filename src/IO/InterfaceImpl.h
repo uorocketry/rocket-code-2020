@@ -35,7 +35,7 @@ public:
 
 #if USE_GPIO == 1
 	void createNewGpioOutput(std::string name, int pinNbr) override;
-	void createNewGpioPwmOutput(std::string name, int pinNbr, bool softpwm) override;
+	void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
 #endif
 
 	time_point getCurrentTime() override;

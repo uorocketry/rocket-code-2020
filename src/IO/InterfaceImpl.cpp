@@ -146,8 +146,8 @@ void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr)
 	gpio.createNewGpioOutput(name, pinNbr);
 }
 
-void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, bool softpwm) {
-	gpio.createNewGpioPwmOutput(name, pinNbr, softpwm);
+void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) {
+	gpio.createNewGpioPwmOutput(name, pinNbr, safePosition, softpwm);
 }
 #endif
 

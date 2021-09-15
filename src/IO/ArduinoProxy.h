@@ -5,6 +5,7 @@
 
 #include "IO.h"
 #include <wiringSerial.h>
+#include <ArduinoComm.pb.h>
 
 class ArduinoProxy : IO {
 public:
@@ -17,7 +18,7 @@ public:
 	void run();
 	bool isInitialized();
 
-	void send(unsigned char c);
+	void send(RocketryProto::ArduinoIn c);
 
 	ArduinoProxy(ArduinoProxy const&) = delete;
 	void operator=(ArduinoProxy const&) = delete;

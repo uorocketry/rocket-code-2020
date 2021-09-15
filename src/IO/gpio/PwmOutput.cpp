@@ -15,7 +15,7 @@
 
 #endif
 
-PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::move(name)), pinNbr(pin), softPWM(softPWM)
+PwmOutput::PwmOutput(std::string name, const int pin, const int safePosition, bool softPWM) : name(std::move(name)), pinNbr(pin), softPWM(softPWM), safePosition(safePosition)
 {
     logger = spdlog::default_logger();
 
@@ -31,6 +31,11 @@ PwmOutput::PwmOutput(std::string name, const int pin, bool softPWM) : name(std::
     } else {
 #if USE_ARDUINO_PROXY == 1
         arduinoProxy = ArduinoProxy::getInstance();
+        
+        RocketryProto::ArduinoIn arduinoIn;
+        arduinoIn.mutable_servoinit()->set_pin(pinNbr);
+        arduinoIn.mutable_servoinit()->set_safeposition(safePosition);
+        arduinoProxy->send(arduinoIn);
 #endif
     }
 
@@ -48,10 +53,11 @@ bool PwmOutput::setValue(int value)
 #endif
         } else {
 #if USE_ARDUINO_PROXY == 1
-            // Send serial to proxy
-            arduinoProxy->send(162); // Verify byte
-            arduinoProxy->send(pinNbr << 2);
-            arduinoProxy->send(value);
+            RocketryProto::ArduinoIn arduinoIn;
+            arduinoIn.mutable_servocontrol()->set_pin(pinNbr);
+            arduinoIn.mutable_servocontrol()->set_position(value);
+
+            arduinoProxy->send(arduinoIn);
 #endif
         }
 
