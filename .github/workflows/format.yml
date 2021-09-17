@@ -1,0 +1,13 @@
+name: Formatting
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run clang-format
+        uses: jidicula/clang-format-action@v4.0.0
+        with:
+          clang-format-version: '12'
