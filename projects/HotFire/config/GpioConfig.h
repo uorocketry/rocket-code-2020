@@ -20,7 +20,7 @@
 
     #if USE_SV01
         #define SV01_NAME "SV-01"
-        #define SV01_PIN 16
+        #define SV01_PIN 7
         #define SV01_OPEN 1
         #define SV01_CLOSE 0
         #define SV01_SAFE 1
@@ -29,7 +29,7 @@
 
     #if USE_SV02
         #define SV02_NAME "SV-02"
-        #define SV02_PIN 16
+        #define SV02_PIN 8
         #define SV02_OPEN 1
         #define SV02_CLOSE 0
         #define SV02_SAFE 1
@@ -38,7 +38,7 @@
 
     #if USE_PWM_SBV01
         #define SBV01_NAME "SBV01"
-        #define SBV01_PIN 1
+        #define SBV01_PIN 11
         #define SBV01_OPEN 0
         #define SBV01_IGNITION 54
         #define SBV01_CLOSE 270
@@ -49,7 +49,7 @@
 
     #if USE_PWM_SBV02
         #define SBV02_NAME "SBV02"
-        #define SBV02_PIN 0
+        #define SBV02_PIN 9
         #define SBV02_OPEN 150
         #define SBV02_CLOSE 60
         #define SBV02_SAFE 150
@@ -59,7 +59,7 @@
 
     #if USE_PWM_SBV03
         #define SBV03_NAME "SBV03"
-        #define SBV03_PIN 2
+        #define SBV03_PIN 3
         #define SBV03_OPEN 150
         #define SBV03_CLOSE 60
         #define SBV03_SAFE 150
