@@ -6,7 +6,7 @@
 #include "IO/GroundStationEncoder.h"
 
 ArduinoProxy::ArduinoProxy() {
-    createThread = false;
+
 }
 
 ArduinoProxy::~ArduinoProxy() { 
@@ -36,7 +36,22 @@ bool ArduinoProxy::isInitialized() {
 }
 
 void ArduinoProxy::run() {
+    std::string data;
+    while (true) {
+        while (serialDataAvail(fd) > 0) 
+		{
+            char value = serialGetchar(fd);
+            data += value; 
 
+            if (value == '\n') {
+                // Remove newline since spdlog adds it back
+                data.pop_back();
+                SPDLOG_LOGGER_INFO(logger, "Arduino: {}", data);
+
+                data = "";
+            }
+		}
+    }
 }
 
 void ArduinoProxy::send(RocketryProto::ArduinoIn data) {
