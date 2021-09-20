@@ -9,8 +9,6 @@
 
 COBSPacketSerial cobsPacketSerial;
 
-RocketryProto_ArduinoIn message = RocketryProto_ArduinoIn_init_zero;
-
 void setup() {
   cobsPacketSerial.begin(57600);
 
@@ -24,6 +22,8 @@ void loop() {
 void onPacketReceived(const uint8_t* buffer, size_t size) {
   if (size == 0) return;
 
+  RocketryProto_ArduinoIn message = RocketryProto_ArduinoIn_init_zero;
+
   pb_istream_t stream = pb_istream_from_buffer(buffer, size);
 
   if (!pb_decode(&stream, RocketryProto_ArduinoIn_fields, &message)) {
@@ -33,16 +33,16 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
 
   switch(message.which_data) {
     case RocketryProto_ArduinoIn_servoInit_tag:
-      initServo(message);
+      initServo(message.data.servoInit);
     break;
     case RocketryProto_ArduinoIn_servoControl_tag:
-      controlServo(message);
+      controlServo(message.data.servoControl);
     break;
     case RocketryProto_ArduinoIn_digitalInit_tag:
-      initDigital(message);
+      initDigital(message.data.digitalInit);
     break;
     case RocketryProto_ArduinoIn_digitalControl_tag:
-      controlDigital(message);
+      controlDigital(message.data.digitalControl);
     break;
     default:
       serialPrintLn("Unknown message type. Ignoring request.");

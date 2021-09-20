@@ -18,9 +18,7 @@ void controlDigital(uint8_t pin, bool activate) {
     digitalWrite(pin, activate);
 }
 
-void initDigital(const RocketryProto_ArduinoIn &message) {
-  const RocketryProto_DigitalInit &digitalInit = message.data.digitalInit;
-
+void initDigital(const RocketryProto_DigitalInit &digitalInit) {
   uint8_t pin = digitalInit.pin;
 
   if (!arrayContains(enabledDigitalPins, digitalCount, pin)) {
@@ -40,8 +38,6 @@ void initDigital(const RocketryProto_ArduinoIn &message) {
   }
 }
 
-void controlDigital(const RocketryProto_ArduinoIn &message) {
-    const RocketryProto_DigitalControl &digitalControl = message.data.digitalControl;
-
+void controlDigital(const RocketryProto_DigitalControl &digitalControl) {
     controlDigital(digitalControl.pin, digitalControl.activate);
 }

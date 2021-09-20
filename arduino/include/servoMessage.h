@@ -9,5 +9,5 @@ struct ServoInfo {
     int safePosition;
 };
 
-void initServo(const RocketryProto_ArduinoIn &message);
-void controlServo(const RocketryProto_ArduinoIn &message);
+void initServo(const RocketryProto_ServoInit &message);
+void controlServo(const RocketryProto_ServoControl &message);

@@ -2,5 +2,5 @@
 
 #include "ArduinoComm.pb.h"
 
-void initDigital(const RocketryProto_ArduinoIn &message);
-void controlDigital(const RocketryProto_ArduinoIn &message);
+void initDigital(const RocketryProto_DigitalInit &message);
+void controlDigital(const RocketryProto_DigitalControl &message);

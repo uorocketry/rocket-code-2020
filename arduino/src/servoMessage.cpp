@@ -30,9 +30,7 @@ void controlServo(uint8_t pin, int position) {
     }
 }
 
-void initServo(const RocketryProto_ArduinoIn &message) {
-    const RocketryProto_ServoInit &servoInit = message.data.servoInit;
-
+void initServo(const RocketryProto_ServoInit &servoInit) {
     ServoInfo* servo = findServo(servoInit.pin);
 
     if (servo == nullptr) {
@@ -57,8 +55,6 @@ void initServo(const RocketryProto_ArduinoIn &message) {
     }
 }
 
-void controlServo(const RocketryProto_ArduinoIn &message) {
-    const RocketryProto_ServoControl &servoControl = message.data.servoControl;
-
+void controlServo(const RocketryProto_ServoControl &servoControl) {
     controlServo(servoControl.pin, servoControl.position);
 }
