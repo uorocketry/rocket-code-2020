@@ -9,6 +9,8 @@
 #include "helpers/Types.h"
 #include "data/GpioData.h"
 #include <spdlog/spdlog.h>
+#include <string.h>
+
 
 UOStateMachine::UOStateMachine(Interface* anInterface) :
         InterfacingStateMachine(anInterface, ST_MAX_STATES)
@@ -27,20 +29,28 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     interface->initialize();
 
     #if USE_GPIO == 1
+        
+            #if USE_SV01
+            interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
+            #endif
 
-        #if USE_PWM1 == 1
-            interface->createNewGpioPwmOutput(PWM1_NAME, PWM1_PIN);
+            #if USE_SV02
+            interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
+            #endif
+            
+            #if USE_PWM_SBV01
+            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN);
+            #endif
+
+            #if USE_PWM_SBV02
+            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN);
+            #endif
+
+            #if USE_PWM_SBV03
+            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN);
+            #endif
+        
         #endif
-
-        #if USE_PWM2 == 1
-            interface->createNewGpioPwmOutput(PWM2_NAME, PWM2_PIN);
-        #endif
-
-        #if USE_OUT1 == 1
-            interface->createNewGpioOutput(OUT1_NAME, OUT1_PIN);
-        #endif
-
-    #endif
 
     InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -86,16 +96,18 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
     eventType eventNbr = interfaceData->eventNumber;
 
     /*
-     * GPIO event number, a 4 bit binary number where the
-     * 1st bit is the enable bit and the last 3 control
-     * whether the PWM2, PWM1, and OUT1 are open/closed.
+     * GPIO event number, a 6 bit binary number where the
+     * 1st bit is the enable bit and the last 5 control
+     * whether the valves are open/closed.
      * A '1' means to open the valve and a '0' to close it.
      *
-     * 0 0 0 0
-     * | | | ^--------- Enable bit
-     * | | ^----------- OUT1
-     * | ^------------- PWM1
-     * ^--------------- PWM2
+     * 0 0 0 0 0 0
+     * | | | | | ^--------- Enable bit
+     * | | | | ^----------- USE_SV01
+     * | | | ^------------- USE_SV02
+     * | | ^--------------- USE_PWM_SBV01
+     * | ^----------------- USE_PWM_SBV02
+     * ^------------------- USE_PWM_SBV03
      */
 
     #if USE_GPIO == 1
@@ -104,45 +116,72 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
         // Check if enable bit is set
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
 
-        #if USE_OUT1 == 1
+        #if USE_SV01 == 1
             if (enabled)
             {
-                // Open OUT1 is the first bit is set
-                bool open = eventNbr & OUT1_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({OUT1_NAME, open ? OUT1_OPEN : OUT1_CLOSE});
-
-                std::cout << "ServoControlSM::Control OUT1 " << (open ? "OPEN" : "CLOSE") << "\n";
+                gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
+                
+                logValveStatus(SV01_NAME, open); 
             }
         #endif
 
-        #if USE_PWM1 == 1
+        #if USE_SV02 == 1
             if (enabled)
             {
-                // Open PWM2 if the second bit is set
-                bool open = eventNbr & PWM1_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({PWM1_NAME, open ? PWM1_OPEN : PWM1_CLOSE});
+                gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
-                std::cout << "ServoControlSM::Control PWM1 " << (open ? "OPEN" : "CLOSE") << "\n";
+                logValveStatus(SV02_NAME, open);
             }
         #endif
 
-        #if USE_PWM2 == 1
+        #if USE_PWM_SBV01 == 1
             if (enabled)
             {
-                // Open PWM2 if the third bit is set
-                bool open = eventNbr & PWM2_EVENT_ENABLE_MASK;
+                bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({PWM2_NAME, open ? PWM2_OPEN : PWM2_CLOSE});
+                gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
 
-                std::cout << "ServoControlSM::Control PWM2 " << (open ? "OPEN" : "CLOSE") << "\n";
+                logValveStatus(SBV01_NAME, open);
+            }
+        #endif
+
+        #if USE_PWM_SBV02 == 1
+            if (enabled)
+            {
+                bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
+
+                logValveStatus(SBV02_NAME, open);         
+            }
+        #endif
+
+        #if USE_PWM_SBV03 == 1
+            if (enabled)
+            {
+                bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
+
+                logValveStatus(SBV03_NAME, open);
             }
         #endif
 
     #endif
 
     interface->updateOutputs(interfaceData);
+}
+
+void UOStateMachine::logValveStatus(std::string valveName, bool status) {
+    if(status) {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " OPEN");
+    } else {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " CLOSE");
+    } 
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)

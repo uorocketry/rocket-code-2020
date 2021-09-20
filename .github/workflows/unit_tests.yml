@@ -19,7 +19,7 @@ jobs:
           git submodule init
           git submodule update
       - name: Install dependencies
-        run: sudo apt-get install libi2c-dev libboost-system-dev libboost-filesystem-dev -y
+        run: sudo apt-get install libi2c-dev libboost-all-dev -y
       - name: Cmake Makefiles
         run: USE_GPIO=1 cmake -B ./build -G 'Unix Makefiles'
       - name: Run make

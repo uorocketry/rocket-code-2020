@@ -5,6 +5,8 @@
 #include "IO/IO.h"
 #include "data/UOSMData.h"
 #include <iostream>
+#include <chrono>
+#include "helpers/Types.h"
 #include "IO/TestingSensors.h"
 #include <string>
 #include <spdlog/spdlog.h>
@@ -69,12 +71,15 @@ bool InterfaceImpl::updateInputs()
 {
 	latestState = std::make_shared<sensorsData>();
 
+	latestState->timeStamp = std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
+
 #if USE_SBG == 1
 	latestState->sbg = mySbgSensor.getData();
 #endif
 
 	latestState->eventNumber = eventQueue.pop();
 
+	
 #if USE_LOGGER == 1
     latestState->loggerIsInitialized = sensorLogger.isInitialized();
 #endif
@@ -117,6 +122,10 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 	radio.enqueueSensorData(*data);
 #endif
 
+#if USE_SOCKET_CLIENT == 1
+    client.enqueueSensorData(*data);
+#endif
+
 	return true;
 }
 
@@ -142,6 +151,10 @@ void InterfaceImpl::calibrateTelemetry()
 
 std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
+
+#if USE_LOGGER == 1
+    latestState->loggerWorking = SensorLogger::working;
+#endif // USE_LOGGER
 
 	return latestState;
 }

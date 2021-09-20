@@ -24,5 +24,7 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.4
         with:
           cmake-version: "3.16.x"
+      - name: Install dependencies
+        run: sudo apt-get install libi2c-dev libboost-all-dev -y
       - name: Run OctoberSky1 Test
         run: cd ./tests/octoberSky/; bash ./run_test.sh "Unix Makefiles"

@@ -10,6 +10,7 @@
 struct sensorsData
 {
     bool isInitialized() const;
+    std::string convertToReducedString() const;
 
     uint64_t timeStamp = 0;
     uint16_t currentStateNo = 0;
@@ -44,4 +45,8 @@ struct sensorsData
 #if TESTING == 1
     bool outOfData = false;
 #endif
+
+#if USE_LOGGER == 1
+    bool loggerWorking;
+#endif // USE_LOGGER
 };
