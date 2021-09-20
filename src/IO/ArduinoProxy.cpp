@@ -45,6 +45,7 @@ void ArduinoProxy::send(RocketryProto::ArduinoIn data) {
 
         helper::SharedArray<char> encodedData = GroundStationEncoder::encode(data);
 
+        serialPutchar(fd, 0);
         for (int i = 0; i < encodedData.length; i++) {
             serialPutchar(fd, encodedData.data[i]);
         }
