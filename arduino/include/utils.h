@@ -10,6 +10,21 @@ void serialPrintLn(const T message, Types... otherMessages) {
     serialPrintLn(otherMessages...);
 }
 
+template <typename... Types>
+void serialInfo(Types... messages) {
+    serialPrintLn("INFO: ", messages...);
+}
+
+template <typename... Types>
+void serialWarning(Types... messages) {
+    serialPrintLn("WARN: ", messages...);
+}
+
+template <typename... Types>
+void serialError(Types... messages) {
+    serialPrintLn("Error: ", messages...);
+}
+
 template <typename T>
 bool arrayContains(const T* array, int size, T element) {
     for (int i = 0; i < size; i++) {
