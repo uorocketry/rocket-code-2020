@@ -39,15 +39,15 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
             #endif
 
             #if USE_PWM_SBV01
-            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SOFTPWM);
+            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
             #endif
 
             #if USE_PWM_SBV02
-            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SOFTPWM);
+            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
             #endif
 
             #if USE_PWM_SBV03
-            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SOFTPWM);
+            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
             #endif
 
         #endif
