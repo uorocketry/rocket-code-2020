@@ -12,7 +12,7 @@ COBSPacketSerial cobsPacketSerial;
 RocketryProto_ArduinoIn message = RocketryProto_ArduinoIn_init_zero;
 
 void setup() {
-  cobsPacketSerial.begin(115200);
+  cobsPacketSerial.begin(57600);
 
   cobsPacketSerial.setPacketHandler(&onPacketReceived);
 }
@@ -22,6 +22,8 @@ void loop() {
 }
 
 void onPacketReceived(const uint8_t* buffer, size_t size) {
+  if (size == 0) return;
+
   pb_istream_t stream = pb_istream_from_buffer(buffer, size);
 
   if (!pb_decode(&stream, RocketryProto_ArduinoIn_fields, &message)) {
