@@ -19,8 +19,8 @@ void createOutputs(Gpio* gpio) {
     gpio->createNewGpioOutput(DIGITAL_1, 1);
     gpio->createNewGpioOutput(DIGITAL_2, 2);
 
-    gpio->createNewGpioPwmOutput(PWM_1, 3);
-    gpio->createNewGpioPwmOutput(PWM_2, 4);
+    gpio->createNewGpioPwmOutput(PWM_1, 3, 250, false);
+    gpio->createNewGpioPwmOutput(PWM_2, 4, 0, false);
 }
 
 TEST_CASE("EventQueue setOutputs", "[EventQueue]") {
