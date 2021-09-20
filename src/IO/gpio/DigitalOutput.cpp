@@ -28,7 +28,7 @@ DigitalOutput::DigitalOutput(const std::string& name, const int pin) : name(name
 bool DigitalOutput::setValue(int value) {
     if(currentState != value) {
         currentState = value;
-        SPDLOG_LOGGER_DEBUG(logger, "OUT {} changed to {}", name, currentState);
+        SPDLOG_LOGGER_INFO(logger, "OUT {} changed to {}", name, currentState);
 
         #if USE_ARDUINO_PROXY == 1
             RocketryProto::ArduinoIn arduinoIn;
