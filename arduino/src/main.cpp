@@ -19,6 +19,8 @@ void loop() {
   cobsPacketSerial.update();
 }
 
+void(* resetFunc) (void) = 0;
+
 void onPacketReceived(const uint8_t* buffer, size_t size) {
   if (size == 0) return;
 
@@ -43,6 +45,9 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
     break;
     case RocketryProto_ArduinoIn_digitalControl_tag:
       controlDigital(message.data.digitalControl);
+    break;
+    case RocketryProto_ArduinoIn_reset_tag:
+      resetFunc();
     break;
     default:
       serialPrintLn("Unknown message type. Ignoring request.");

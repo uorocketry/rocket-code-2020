@@ -21,11 +21,16 @@ message DigitalControl {
   bool activate = 2;
 }
 
+message Reset {
+
+}
+
 message ArduinoIn {
   oneof data {
     ServoInit servoInit = 1;
     ServoControl servoControl = 2;
     DigitalInit digitalInit = 3;
     DigitalControl digitalControl = 4;
+    Reset reset = 5;
   }
 }
