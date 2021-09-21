@@ -1,17 +1,16 @@
 #pragma once
 
-#include <rocket.pb.h>
 #include <memory>
 #include "cobs.h"
 #include "helpers/Helper.h"
 
-class GroundStationEncoder {
+class ArduinoEncoder {
 public:
 	template<typename T>
-	static helper::SharedArray<char> encode(const T& dataOut);
+	static helper::SharedArray<char> encode(const T &dataOut);
 
 	template<typename T>
-	static T decode(const helper::SharedArray<char>& dataIn);
+	static T decode(const helper::SharedArray<char> &dataIn);
 };
 
 
@@ -20,7 +19,7 @@ public:
  * 0x0 byte, so it can be sent as is.
  */
 template<typename T>
-helper::SharedArray<char> GroundStationEncoder::encode(const T& dataOut) {
+helper::SharedArray<char> ArduinoEncoder::encode(const T &dataOut) {
 	// Convert from Protobuf to byte array
 	size_t protoSize = dataOut.ByteSizeLong();
 
@@ -43,9 +42,9 @@ helper::SharedArray<char> GroundStationEncoder::encode(const T& dataOut) {
  * Decodes a byte array to a Protobuf object. DataIn should contain the ending 0x0 byte.
  */
 template<typename T>
-T GroundStationEncoder::decode(const helper::SharedArray<char>& dataIn) {
+T ArduinoEncoder::decode(const helper::SharedArray<char> &dataIn) {
 	// Remove COBS from data
-	int dataLength = static_cast<int>(dataIn.length)-2;
+	int dataLength = static_cast<int>(dataIn.length) - 2;
 	std::unique_ptr<char[]> data(new char[dataLength]);
 
 	cobs_decode_result cobsLength = cobs_decode(&data[0], dataLength, &dataIn.data[0], dataIn.length - 1);

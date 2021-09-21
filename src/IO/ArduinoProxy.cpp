@@ -3,7 +3,7 @@
 #if USE_ARDUINO_PROXY == 1
 
 #include <spdlog/spdlog.h>
-#include "IO/GroundStationEncoder.h"
+#include "IO/ArduinoEncoder.h"
 
 ArduinoProxy::ArduinoProxy() 
 {
@@ -69,7 +69,7 @@ void ArduinoProxy::send(RocketryProto::ArduinoIn data)
     {
         std::lock_guard<std::mutex> lockGuard(serialMutex);
 
-        helper::SharedArray<char> encodedData = GroundStationEncoder::encode(data);
+	    helper::SharedArray<char> encodedData = ArduinoEncoder::encode(data);
 
         serialPutchar(fd, 0);
         for (int i = 0; i < encodedData.length; i++) 
