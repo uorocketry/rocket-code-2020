@@ -29,8 +29,8 @@ public:
 	bool updateOutputs(std::shared_ptr<sensorsData> data) override;
 
 	#if USE_GPIO == 1
-	void createNewGpioOutput(std::string name, int pinNbr);
-	void createNewGpioPwmOutput(std::string name, int pinNbr);
+	void createNewGpioOutput(std::string name, int pinNbr) override;
+	void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
 	#endif
 
 	time_point getCurrentTime() override;

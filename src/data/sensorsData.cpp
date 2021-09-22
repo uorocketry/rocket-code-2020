@@ -27,6 +27,10 @@ bool sensorsData::isInitialized() const {
     result &= gpioIsInitialized;
 #endif
 
+#if USE_ARDUINO_PROXY
+    result &= arduinoProxyIsInitialized;
+#endif
+
     return result;
 }
 

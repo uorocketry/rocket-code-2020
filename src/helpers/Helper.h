@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <memory>
 
 namespace helper {
 
@@ -21,4 +22,10 @@ namespace helper {
 	float processFloat(const std::string& data);
 
 	double processDouble(const std::string& data);
+
+	template<class T>
+	struct SharedArray {
+		std::shared_ptr<T[]> data;
+		size_t length;
+	};
 }

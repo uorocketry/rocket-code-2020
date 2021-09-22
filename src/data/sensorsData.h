@@ -42,6 +42,10 @@ struct sensorsData
     bool radioIsInitialized = 0;
 #endif
 
+#if USE_ARDUINO_PROXY
+    bool arduinoProxyIsInitialized = 0;
+#endif
+
 #if TESTING == 1
     bool outOfData = false;
 #endif

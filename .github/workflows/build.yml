@@ -40,8 +40,8 @@ jobs:
           git submodule init
           git submodule update
       # Build the project
-      - name: Install Boost
-        run: sudo apt-get install libboost-all-dev -y
+      - name: Install Dependencies
+        run: sudo apt-get install libboost-all-dev protobuf-compiler -y
       - name: "${{ matrix.name }}: Cmake Makefiles"
         run: ${{ matrix.append }} cmake -B ./build -G 'Unix Makefiles'
       - name: "${{ matrix.name }}: Run make"

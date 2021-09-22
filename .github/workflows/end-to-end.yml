@@ -22,7 +22,7 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v1.4
         with:
           cmake-version: "3.16.x"
-      - name: Install Boost filesystem
-        run: sudo apt-get install libboost-all-dev -y
+      - name: Install dependencies
+        run: sudo apt-get install libboost-all-dev protobuf-compiler -y
       - name: Run OctoberSky1 Test
         run: cd ./tests/octoberSky/; bash ./run_test.sh "Unix Makefiles"

@@ -29,7 +29,7 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     interface->initialize();
 
     #if USE_GPIO == 1
-        
+
             #if USE_SV01
             interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
             #endif
@@ -37,19 +37,19 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
             #if USE_SV02
             interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
             #endif
-            
+
             #if USE_PWM_SBV01
-            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN);
+            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
             #endif
 
             #if USE_PWM_SBV02
-            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN);
+            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
             #endif
 
             #if USE_PWM_SBV03
-            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN);
+            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
             #endif
-        
+
         #endif
 
     InternalEvent(ST_WAIT_FOR_INIT);
@@ -122,8 +122,8 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
                 bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
 
                 gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
-                
-                logValveStatus(SV01_NAME, open); 
+
+                logValveStatus(SV01_NAME, open);
             }
         #endif
 
@@ -156,7 +156,7 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
 
                 gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
 
-                logValveStatus(SBV02_NAME, open);         
+                logValveStatus(SBV02_NAME, open);
             }
         #endif
 
@@ -181,7 +181,7 @@ void UOStateMachine::logValveStatus(std::string valveName, bool status) {
         SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " OPEN");
     } else {
         SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " CLOSE");
-    } 
+    }
 }
 
 void UOStateMachine::updateHotFire(UOSMData *data)

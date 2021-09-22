@@ -4,6 +4,8 @@ project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
 
+add_subdirectory(./protobuf)
+
 if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
 	add_compile_definitions(SERVO_CONTROL=$ENV{SERVO_CONTROL})
 endif()
@@ -103,6 +105,10 @@ else()
 endif()
 
 target_link_libraries(MainLoopLib spdlog::spdlog)
+
+target_link_libraries(MainLoopLib protobufDef)
+
+target_link_libraries(MainLoopLib cobs-c)
 
 target_link_libraries (MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
 
