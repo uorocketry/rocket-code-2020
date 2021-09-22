@@ -26,6 +26,8 @@ void saveInitData(const uint8_t* buffer, size_t size) {
         return;
     }
 
+    serialInfo("Writing ", size, " bytes to EEPROM...");
+
     // Write the ID
     EEPROM.write(ID_BYTE, ID_VALUE);
     
@@ -38,16 +40,20 @@ void saveInitData(const uint8_t* buffer, size_t size) {
         EEPROM.write(DATA_START_BYTE+i, buffer[i]);
     }
 
-    serialInfo("Successfully wrote init data to the EEPROM. Now resseting...");
+    serialInfo("Successfully wrote init data to the EEPROM! Now resseting...");
 
+    Serial.flush();
     resetFunc2();
 }
 
 bool readEEPROM(pb_istream_t *stream, uint8_t *buf, size_t count) {
+    uint16_t *bytesRead = (uint16_t*) stream->state;
+
     for (size_t i = 0; i < count; i++) {
-        buf[i] = EEPROM.read(DATA_START_BYTE+i);
+        buf[i] = EEPROM.read(DATA_START_BYTE+*bytesRead+i);
     }
 
+    (*bytesRead) += count;
     return true;
 }
 
@@ -75,9 +81,10 @@ void restoreInitData() {
     serialInfo("Reading ", size, " bytes from the EEPROM...");
 
     RocketryProto_ArduinoIn arduinoIn = RocketryProto_ArduinoIn_init_zero;
-    arduinoIn.data.initData.data.funcs.decode = restoreCallback;
+    arduinoIn.data.initData.data.funcs.decode = &restoreCallback;
 
-    pb_istream_t eepromStream = {&readEEPROM, nullptr, size};
+    uint16_t bytesRead = 0;
+    pb_istream_t eepromStream = {&readEEPROM, &bytesRead, size};
 
     if (!pb_decode(&eepromStream, RocketryProto_ArduinoIn_fields, &arduinoIn)) {
         serialError("Error decoding message");
