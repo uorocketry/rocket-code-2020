@@ -47,7 +47,7 @@ bool readEEPROM(pb_istream_t *stream, uint8_t *buf, size_t count) {
     for (size_t i = 0; i < count; i++) {
         buf[i] = EEPROM.read(DATA_START_BYTE+i);
     }
-    
+
     return true;
 }
 
@@ -80,7 +80,7 @@ void restoreInitData() {
     pb_istream_t eepromStream = {&readEEPROM, nullptr, size};
 
     if (!pb_decode(&eepromStream, RocketryProto_ArduinoIn_fields, &arduinoIn)) {
-        serialPrintLn("Error decoding message: ", eepromStream.errmsg);
+        serialError("Error decoding message");
         return;
     }
 }

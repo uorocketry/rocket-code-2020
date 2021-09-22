@@ -32,7 +32,7 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
   pb_istream_t stream = pb_istream_from_buffer(buffer, size);
 
   if (!pb_decode(&stream, RocketryProto_ArduinoIn_fields, &message)) {
-    serialPrintLn("Error decoding message: ", stream.errmsg);
+    serialError("Error decoding message");
     return;
   }
 
