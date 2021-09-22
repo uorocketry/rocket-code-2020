@@ -6,6 +6,7 @@
 #include "servoMessage.h"
 #include "utils.h"
 #include "digitalMessage.h"
+#include "persistentInit.h"
 
 COBSPacketSerial cobsPacketSerial;
 
@@ -13,6 +14,8 @@ void setup() {
   cobsPacketSerial.begin(57600);
 
   cobsPacketSerial.setPacketHandler(&onPacketReceived);
+
+  restoreInitData();
 }
 
 void loop() {
@@ -48,6 +51,9 @@ void onPacketReceived(const uint8_t* buffer, size_t size) {
     break;
     case RocketryProto_ArduinoIn_reset_tag:
       resetFunc();
+      break;
+    case RocketryProto_ArduinoIn_initData_tag:
+      saveInitData(buffer, size);
     break;
     default:
       serialPrintLn("Unknown message type. Ignoring request.");

@@ -22,7 +22,17 @@ message DigitalControl {
 }
 
 message Reset {
+}
 
+message InitData {
+  message Data {
+    oneof data {
+      ServoInit servoInit = 1;
+      DigitalInit digitalInit = 2;
+    }
+  }
+
+  repeated Data data = 1;
 }
 
 message ArduinoIn {
@@ -32,5 +42,6 @@ message ArduinoIn {
     DigitalInit digitalInit = 3;
     DigitalControl digitalControl = 4;
     Reset reset = 5;
+    InitData initData = 6;
   }
 }
