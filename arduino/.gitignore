@@ -1,2 +1,5 @@
 .pio
 lib/RocketryProto/
+
+CMakeLists.txt
+CMakeListsPrivate.txt
