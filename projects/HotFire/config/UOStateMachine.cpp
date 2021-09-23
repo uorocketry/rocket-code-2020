@@ -140,17 +140,17 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
 		#if USE_SV02
 		interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
 		#endif
-		
+
 		#if USE_PWM_SBV01
-		interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN);
+		interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
 		#endif
 
 		#if USE_PWM_SBV02
-		interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN);
+		interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
 		#endif
 
 		#if USE_PWM_SBV03
-		interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN);
+		interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
 		#endif
 	
 	#endif
@@ -310,7 +310,7 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);
@@ -355,7 +355,7 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);
@@ -401,7 +401,7 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);
@@ -446,7 +446,7 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);
@@ -492,7 +492,7 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	interface->updateOutputs(interfaceData);
@@ -531,7 +531,7 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);
@@ -571,7 +571,7 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 		#if USE_PWM_SBV03
 		gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 		#endif
-		
+
 	#endif
 
 	detectExternEvent(interfaceData);

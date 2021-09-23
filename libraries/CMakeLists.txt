@@ -44,3 +44,9 @@ add_subdirectory(./spdlog)
 # ---------------
 
 add_subdirectory(./Catch2)
+
+# ---------------
+# Unit Testing - Catch2
+# ---------------
+add_library(cobs-c STATIC ./cobs-c/cobs.c)
+target_include_directories(cobs-c PUBLIC ./cobs-c)

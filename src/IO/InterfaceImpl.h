@@ -10,6 +10,7 @@
 #include "IO/SensorLogger.h"
 #include "IO/Radio.h"
 #include "IO/gpio/Gpio.h"
+#include "IO/ArduinoProxy.h"
 #include "EventQueue.h"
 #include <memory>
 #include <string>
@@ -32,10 +33,10 @@ public:
 	bool updateInputs() override;
 	bool updateOutputs(std::shared_ptr<sensorsData> data) override;
 
-	#if USE_GPIO == 1
+#if USE_GPIO == 1
 	void createNewGpioOutput(std::string name, int pinNbr) override;
-	void createNewGpioPwmOutput(std::string name, int pinNbr) override;
-	#endif
+	void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
+#endif
 
 	time_point getCurrentTime() override;
 
@@ -70,6 +71,10 @@ private:
 
 #if USE_GPIO == 1
 	Gpio gpio;
+#endif
+
+#if USE_ARDUINO_PROXY == 1
+	ArduinoProxy* arduinoProxy;
 #endif
 };
 

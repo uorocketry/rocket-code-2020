@@ -37,18 +37,21 @@ void InterfaceImpl::initialize()
 
 void InterfaceImpl::initializeInputs()
 {
-	#if USE_SBG == 1
-		SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
-		mySbgSensor.initialize();
-	#endif
-	#if USE_INPUT == 1
-		SPDLOG_LOGGER_INFO(logger, "Initializing INPUT...");
-		input.initialize();
-	#endif
-	#if USE_SOCKET_CLIENT == 1
-		SPDLOG_LOGGER_INFO(logger, "Initializing SOCKET_CLIENT...");
-		client.initialize();
-	#endif
+#if USE_SBG == 1
+	SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
+	mySbgSensor.initialize();
+#endif
+#if USE_INPUT == 1
+	SPDLOG_LOGGER_INFO(logger, "Initializing INPUT...");
+	input.initialize();
+#endif
+#if USE_SOCKET_CLIENT == 1
+	SPDLOG_LOGGER_INFO(logger, "Initializing SOCKET_CLIENT...");
+	client.initialize();
+#endif
+#if USE_ARDUINO_PROXY == 1
+	arduinoProxy = ArduinoProxy::getInstance();
+#endif
 }
 
 void InterfaceImpl::initializeOutputs() 
@@ -64,6 +67,10 @@ void InterfaceImpl::initializeOutputs()
 #if USE_GPIO == 1
 	SPDLOG_LOGGER_INFO(logger, "Initializing GPIO...");
 	gpio.initialize();
+#endif
+#if USE_ARDUINO_PROXY == 1
+	SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
+	arduinoProxy->initialize();
 #endif
 }
 
@@ -104,6 +111,10 @@ bool InterfaceImpl::updateInputs()
     latestState->gpioIsInitialized = gpio.isInitialized();
 #endif
 
+#if USE_ARDUINO_PROXY == 1
+    latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
+#endif
+
 	return true;
 }
 
@@ -135,9 +146,8 @@ void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr)
 	gpio.createNewGpioOutput(name, pinNbr);
 }
 
-void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr) 
-{
-	gpio.createNewGpioPwmOutput(name, pinNbr);
+void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) {
+	gpio.createNewGpioPwmOutput(name, pinNbr, safePosition, softpwm);
 }
 #endif
 
