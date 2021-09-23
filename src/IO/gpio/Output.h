@@ -6,11 +6,11 @@
 
 class Output
 {
-public:
+  public:
     virtual bool setValue(int value) = 0;
     int getValue();
 
-protected:
+  protected:
     int currentState = 0;
 };
 

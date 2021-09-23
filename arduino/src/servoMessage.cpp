@@ -1,5 +1,5 @@
-#include "Arduino.h"
 #include "servoMessage.h"
+#include "Arduino.h"
 #include "utils.h"
 
 // Servo Information
@@ -7,10 +7,13 @@ constexpr int maxServoCount = 12;
 ServoInfo servos[maxServoCount];
 uint16_t servoCount = 0;
 
-ServoInfo* findServo(int pin) {
-    for (uint16_t i = 0; i < servoCount; i++) {
+ServoInfo *findServo(int pin)
+{
+    for (uint16_t i = 0; i < servoCount; i++)
+    {
         ServoInfo &servo = servos[i];
-        if (servo.pin == pin) {
+        if (servo.pin == pin)
+        {
             return &servo;
         }
     }
@@ -18,24 +21,31 @@ ServoInfo* findServo(int pin) {
     return nullptr;
 }
 
-void controlServo(uint8_t pin, int position) {
-    ServoInfo* servo = findServo(pin);
-    
-    if (servo != nullptr) {
+void controlServo(uint8_t pin, int position)
+{
+    ServoInfo *servo = findServo(pin);
+
+    if (servo != nullptr)
+    {
         serialPrintLn("Servo control: pin: ", pin, ", position: ", position);
 
         servo->servo.write(position);
-    } else {
+    }
+    else
+    {
         serialPrintLn("Servo ", pin, " is not initialized. Ignoring request.");
     }
 }
 
-void initServo(const RocketryProto_ServoInit &servoInit) {
-    ServoInfo* servo = findServo(servoInit.pin);
+void initServo(const RocketryProto_ServoInit &servoInit)
+{
+    ServoInfo *servo = findServo(servoInit.pin);
 
-    if (servo == nullptr) {
+    if (servo == nullptr)
+    {
         // Ignore if we don't have any more free servos
-        if (maxServoCount == servoCount) {
+        if (maxServoCount == servoCount)
+        {
             return;
         }
 
@@ -47,7 +57,9 @@ void initServo(const RocketryProto_ServoInit &servoInit) {
         servoCount++;
 
         serialPrintLn("Servo init: pin: ", servoInit.pin, ", safePosition:", servoInit.safePosition);
-    } else {
+    }
+    else
+    {
         servo->safePosition = servoInit.safePosition;
 
         controlServo(servoInit.pin, servoInit.safePosition);
@@ -55,6 +67,7 @@ void initServo(const RocketryProto_ServoInit &servoInit) {
     }
 }
 
-void controlServo(const RocketryProto_ServoControl &servoControl) {
+void controlServo(const RocketryProto_ServoControl &servoControl)
+{
     controlServo(servoControl.pin, servoControl.position);
 }

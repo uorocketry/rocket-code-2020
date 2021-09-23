@@ -10,17 +10,17 @@
 #include "IO/ArduinoProxy.h"
 #endif
 
-#include <string>
 #include <spdlog/logger.h>
+#include <string>
 
 class PwmOutput : public Output
 {
-public:
+  public:
     PwmOutput(std::string name, int pin, const int safePosition, bool softPWM = false);
 
     bool setValue(int value) override;
 
-private:
+  private:
     std::shared_ptr<spdlog::logger> logger;
     const std::string name;
     const int pinNbr;
@@ -28,14 +28,13 @@ private:
     const bool softPWM;
 
 #if USE_ARDUINO_PROXY == 1
-    ArduinoProxy* arduinoProxy;
-    
+    ArduinoProxy *arduinoProxy;
+
 //     struct InitFlags
 // 	{
 // 		InitStatus wiringPiStatus = INIT;
 // 	} status;
 #endif
-
 };
 
 #endif

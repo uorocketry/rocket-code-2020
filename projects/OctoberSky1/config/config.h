@@ -1,5 +1,7 @@
 #pragma once
 
+// clang-format off
+
 #ifndef TESTING
     #define TESTING 0
 #endif
@@ -40,3 +42,5 @@
 #if TESTING == 1
     #define USE_SOCKET_CLIENT 0
 #endif
+
+// clang-format on

@@ -1,19 +1,21 @@
 #pragma once
 
 #include <cstdint>
-#include <utility>
-#include <string>
 #include <stdexcept>
+#include <string>
+#include <utility>
 
 class SMBusError : public std::runtime_error
 {
-public:
-    explicit SMBusError(const std::string &str) : std::runtime_error(str) {}
+  public:
+    explicit SMBusError(const std::string &str) : std::runtime_error(str)
+    {
+    }
 };
 
 class SMBus
 {
-public:
+  public:
     explicit SMBus(int address);
     ~SMBus();
 
@@ -23,7 +25,7 @@ public:
     void writeByte(uint8_t reg, uint8_t data) const;
     void writeByte(uint8_t data) const;
 
-private:
+  private:
     const int address;
 
     int file;

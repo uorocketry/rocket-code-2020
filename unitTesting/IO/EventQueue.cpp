@@ -1,7 +1,8 @@
-#include <catch2/catch.hpp>
 #include <IO/EventQueue.h>
+#include <catch2/catch.hpp>
 
-TEST_CASE("EventQueue push and pop", "[EventQueue]") {
+TEST_CASE("EventQueue push and pop", "[EventQueue]")
+{
     auto eventQueue = new EventQueue();
 
     REQUIRE(eventQueue->pop() == -1);

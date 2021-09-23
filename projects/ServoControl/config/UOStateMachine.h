@@ -1,21 +1,19 @@
 #pragma once
 
 #include "config/config.h"
-#include "stateMachine/InterfacingStateMachine.h"
-#include "helpers/Types.h"
 #include "data/UOSMData.h"
+#include "helpers/Types.h"
+#include "stateMachine/InterfacingStateMachine.h"
 
 class UOStateMachine : public InterfacingStateMachine
 {
-public:
-    UOStateMachine(Interface* anInterface);
+  public:
+    UOStateMachine(Interface *anInterface);
 
     void updateHotFire(UOSMData *data);
 
-protected:
-
-
-private:
+  protected:
+  private:
     enum States
     {
         ST_INIT,

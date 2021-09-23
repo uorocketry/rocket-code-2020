@@ -1,6 +1,7 @@
 #include "sensorsData.h"
 
-bool sensorsData::isInitialized() const {
+bool sensorsData::isInitialized() const
+{
     bool result = true;
 
 #if USE_LOGGER
@@ -35,10 +36,11 @@ bool sensorsData::isInitialized() const {
 }
 
 /**
- * Convert a reduced set of sensorsData variables to a comma delimited string. There is NO newline character at the end
- * of the returned string.
+ * Convert a reduced set of sensorsData variables to a comma delimited string.
+ * There is NO newline character at the end of the returned string.
  */
-std::string sensorsData::convertToReducedString() const {
+std::string sensorsData::convertToReducedString() const
+{
     std::string data;
 
     data += std::to_string(timeStamp);
@@ -85,15 +87,15 @@ std::string sensorsData::convertToReducedString() const {
 
 #if USE_GPIO == 1
     for (std::pair<std::string, int> output : gpioData.digitalOutputMap)
-	{
-		data += std::to_string(output.second);
-		data += ",";
-	}
-	for (std::pair<std::string, int> output : gpioData.pwmOutputMap)
-	{
-		data += std::to_string(output.second);
-		data += ",";
-	}
+    {
+        data += std::to_string(output.second);
+        data += ",";
+    }
+    for (std::pair<std::string, int> output : gpioData.pwmOutputMap)
+    {
+        data += std::to_string(output.second);
+        data += ",";
+    }
 #endif
 
 #if USE_LOGGER == 1

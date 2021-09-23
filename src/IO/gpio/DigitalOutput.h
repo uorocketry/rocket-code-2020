@@ -8,25 +8,24 @@
 #include "IO/ArduinoProxy.h"
 #endif
 
-#include <string>
 #include <spdlog/logger.h>
+#include <string>
 
-class DigitalOutput: public Output
+class DigitalOutput : public Output
 {
-public:
-    DigitalOutput(const std::string& name, const int pin);
+  public:
+    DigitalOutput(const std::string &name, const int pin);
 
-    
     bool setValue(int value);
 
-private:
+  private:
     std::shared_ptr<spdlog::logger> logger;
     std::string name;
     const int pinNbr;
 
-    #if USE_ARDUINO_PROXY == 1
-        ArduinoProxy* arduinoProxy;
-    #endif
+#if USE_ARDUINO_PROXY == 1
+    ArduinoProxy *arduinoProxy;
+#endif
 };
 
 #endif

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "config/config.h"
+// clang-format off
 
+#include "config/config.h"
 
 #if USE_GPIO == 1
 
@@ -16,7 +17,6 @@
     #define USE_PWM_SBV03 1
 
     #define EVENT_ENABLE_MASK 0b1
-
 
     #if USE_SV01
         #define SV01_NAME "SV-01"
@@ -67,3 +67,5 @@
         #define SBV03_SOFTPWM true
     #endif
 #endif
+
+// clang-format on

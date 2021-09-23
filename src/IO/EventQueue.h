@@ -1,11 +1,12 @@
 #pragma once
 
-#include <queue>
 #include "IO.h"
 #include "helpers/Types.h"
+#include <queue>
 
-class EventQueue {
-public:
+class EventQueue
+{
+  public:
     EventQueue();
 
     ~EventQueue();
@@ -19,7 +20,7 @@ public:
     // Thread safe
     eventType pop();
 
-private:
+  private:
     std::mutex queueMutex;
     std::queue<eventType> eventNumberQueue;
 };

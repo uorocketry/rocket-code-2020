@@ -3,21 +3,21 @@
 #include "config/config.h"
 #if USE_SOCKET_CLIENT == 1
 
-#include "IO/IO.h"
-#include "data/SBGData.h"
 #include "IO/EventQueue.h"
+#include "IO/IO.h"
 #include "SocketClient.h"
+#include "data/SBGData.h"
+#include <boost/asio.hpp>
+#include <boost/circular_buffer.hpp>
+#include <chrono>
+#include <condition_variable>
+#include <data/sensorsData.h>
 #include <iostream>
 #include <queue>
-#include <boost/circular_buffer.hpp>
-#include <data/sensorsData.h>
-#include <condition_variable>
-#include <boost/asio.hpp>
-#include <chrono>
 
 class SocketServer : public IO
 {
-public:
+  public:
     SocketServer(EventQueue &eventQueue);
     ~SocketServer();
 
@@ -25,10 +25,10 @@ public:
     bool isInitialized();
     void enqueueSensorData(const sensorsData &data);
 
-private:
+  private:
     void sendingLoop();
     void received(const char b[]);
-    void closed(const SocketClient* client);
+    void closed(const SocketClient *client);
     void waitForConnection();
 
     const int SENDING_BUFFER_CAPACITY = 32;

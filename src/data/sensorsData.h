@@ -1,12 +1,12 @@
 #pragma once
 
+#include "data/GpioData.h"
 #include "data/SBGData.h"
 #include "data/UOSMData.h"
-#include "data/GpioData.h"
-#include <unordered_map>
 #include "helpers/Types.h"
+#include <unordered_map>
 
-//all the informations about the rocket that the state machine will need
+// all the informations about the rocket that the state machine will need
 struct sensorsData
 {
     bool isInitialized() const;
