@@ -57,17 +57,6 @@ bool readEEPROM(pb_istream_t *stream, uint8_t *buf, size_t count) {
     return true;
 }
 
-bool restoreCallback(pb_istream_t *stream, const pb_field_iter_t *field, void **arg) {
-    RocketryProto_InitData_Data data = RocketryProto_InitData_Data_init_zero;
-    if(pb_decode(stream, RocketryProto_InitData_Data_fields, &data) == false) {
-        serialError("Error decoding field");
-        return false;
-    }
-
-    handleInitDataMessage(data);
-    return true;
-}
-
 void restoreInitData() {
     uint8_t id = EEPROM.read(ID_BYTE);
     if (id != ID_VALUE) {
@@ -81,7 +70,6 @@ void restoreInitData() {
     serialInfo("Reading ", size, " bytes from the EEPROM...");
 
     RocketryProto_ArduinoIn arduinoIn = RocketryProto_ArduinoIn_init_zero;
-    arduinoIn.data.initData.data.funcs.decode = &restoreCallback;
 
     uint16_t bytesRead = 0;
     pb_istream_t eepromStream = {&readEEPROM, &bytesRead, size};
@@ -89,6 +77,10 @@ void restoreInitData() {
     if (!pb_decode(&eepromStream, RocketryProto_ArduinoIn_fields, &arduinoIn)) {
         serialError("Error decoding message");
         return;
+    }
+
+    for (size_t i = 0; i < arduinoIn.data.initData.data_count; i++) {
+        handleInitDataMessage(arduinoIn.data.initData.data[i]);
     }
 }
 
@@ -107,5 +99,4 @@ void handleInitDataMessage(const RocketryProto_InitData_Data &data) {
         serialWarning("Unkown message type ", data.which_data);
         break;
     }
-
 }
