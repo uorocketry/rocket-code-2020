@@ -56,7 +56,7 @@ sbgECom/projects/unix/CMakeFiles/*
 
 .vscode/
 
-/build/
+/build*
 
 /build-arm/
 
