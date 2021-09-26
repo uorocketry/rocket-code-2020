@@ -47,6 +47,8 @@ void SocketServer::waitForConnection()
     SPDLOG_LOGGER_INFO(logger, "Waiting for connection...");
     auto socket(std::make_shared<ip::tcp::socket>(io_service));
 
+    initialized = true;
+
     boost::system::error_code err;
     acceptor.accept(*socket, err);
     if (err) {
@@ -108,7 +110,7 @@ void SocketServer::enqueueSensorData(const sensorsData &data)
 
 bool SocketServer::isInitialized()
 {
-    return (status.socketCreated == READY && status.socketBinded == READY && status.serverConnection == READY);
+    return initialized;
 }
 
 #endif

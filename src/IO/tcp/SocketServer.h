@@ -47,12 +47,7 @@ private:
     std::condition_variable sendingCondition;
     std::mutex sendingMutex;
 
-    struct InitFlags
-    {
-        InitStatus socketCreated = INIT;
-        InitStatus socketBinded = INIT;
-        InitStatus serverConnection = INIT;
-    } status;
+    bool initialized = false;
 };
 
 #endif
