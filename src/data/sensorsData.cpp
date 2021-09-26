@@ -3,32 +3,36 @@
 bool sensorsData::isInitialized() const {
     bool result = true;
 
-#if USE_LOGGER
+#if SKIP_INIT != 1
+
+#if USE_LOGGER == 1
     result &= loggerIsInitialized;
 #endif
 
-#if USE_SOCKET_CLIENT
+#if USE_SOCKET_CLIENT == 1
     result &= clientIsInitialized;
 #endif
 
-#if USE_SBG
+#if USE_SBG == 1
     result &= sbgIsInitialized;
 #endif
 
-#if USE_INPUT
+#if USE_INPUT == 1
     result &= inputIsInitialized;
 #endif
 
-#if USE_RADIO
+#if USE_RADIO == 1
     result &= radioIsInitialized;
 #endif
 
-#if USE_GPIO
+#if USE_GPIO == 1
     result &= gpioIsInitialized;
 #endif
 
-#if USE_ARDUINO_PROXY
+#if USE_ARDUINO_PROXY == 1
     result &= arduinoProxyIsInitialized;
+#endif
+
 #endif
 
     return result;
