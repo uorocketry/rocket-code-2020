@@ -52,6 +52,10 @@ if (DEFINED ENV{USE_GPIO} OR USE_GPIO)
 	add_compile_definitions(USE_GPIO=$ENV{USE_GPIO})
 endif()
 
+if (DEFINED ENV{USE_ARDUINO_PROXY} OR USE_ARDUINO_PROXY)
+	add_compile_definitions(USE_ARDUINO_PROXY=$ENV{USE_ARDUINO_PROXY})
+endif()
+
 # ---------------
 # Main executable
 # ---------------
