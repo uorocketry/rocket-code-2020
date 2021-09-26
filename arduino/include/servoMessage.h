@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Servo.h"
 #include "ArduinoComm.pb.h"
+#include "Servo.h"
 
-struct ServoInfo {
+struct ServoInfo
+{
     Servo servo;
     uint8_t pin;
     int safePosition;

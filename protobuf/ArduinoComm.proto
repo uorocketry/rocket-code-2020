@@ -2,35 +2,41 @@ syntax = "proto3";
 
 package RocketryProto;
 
-message ServoInit {
-  uint32 pin = 1;
-  int32 safePosition = 2;
+message ServoInit
+{
+    uint32 pin = 1;
+    int32 safePosition = 2;
 }
 
-message ServoControl {
-  uint32 pin = 1;
-  int32 position = 2;
+message ServoControl
+{
+    uint32 pin = 1;
+    int32 position = 2;
 }
 
-message DigitalInit {
-  uint32 pin = 1;
+message DigitalInit
+{
+    uint32 pin = 1;
 }
 
-message DigitalControl {
-  uint32 pin = 1;
-  bool activate = 2;
+message DigitalControl
+{
+    uint32 pin = 1;
+    bool activate = 2;
 }
 
-message Reset {
-
+message Reset
+{
 }
 
-message ArduinoIn {
-  oneof data {
-    ServoInit servoInit = 1;
-    ServoControl servoControl = 2;
-    DigitalInit digitalInit = 3;
-    DigitalControl digitalControl = 4;
-    Reset reset = 5;
-  }
+message ArduinoIn
+{
+    oneof data
+    {
+        ServoInit servoInit = 1;
+        ServoControl servoControl = 2;
+        DigitalInit digitalInit = 3;
+        DigitalControl digitalControl = 4;
+        Reset reset = 5;
+    }
 }

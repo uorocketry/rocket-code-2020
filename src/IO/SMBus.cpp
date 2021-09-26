@@ -1,10 +1,11 @@
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <spdlog/spdlog.h>
-#include <unistd.h>
 #include "SMBus.h"
+#include <fcntl.h>
+#include <spdlog/spdlog.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
 
-extern "C" {
+extern "C"
+{
 #include <i2c/smbus.h>
 #include <linux/i2c-dev.h>
 }
@@ -19,25 +20,29 @@ using std::to_string;
 SMBus::SMBus(int address) : address(address)
 {
     file = open("/dev/i2c-1", O_RDWR);
-    if (file < 0) {
+    if (file < 0)
+    {
         throw SMBusError("Error getting file handle for I2C: " + string(strerror(errno)));
     }
 
-    if (ioctl(file, I2C_SLAVE, address) < 0) {
+    if (ioctl(file, I2C_SLAVE, address) < 0)
+    {
         throw SMBusError("Error opening I2C for address " + to_string(address) + ": " + strerror(errno));
     }
 }
 
-SMBus::~SMBus() {
+SMBus::~SMBus()
+{
     close(file);
 }
 
 int32_t SMBus::readByte(uint8_t reg) const
 {
     __s32 data = i2c_smbus_read_byte_data(file, reg);
-    if (data < 0) {
-        throw SMBusError("I2C read on device " + to_string(address) + ", register " + to_string(reg) + " failed: " +
-                         strerror(errno));
+    if (data < 0)
+    {
+        throw SMBusError("I2C read on device " + to_string(address) + ", register " + to_string(reg) +
+                         " failed: " + strerror(errno));
     }
 
     return data;
@@ -46,9 +51,9 @@ int32_t SMBus::readByte(uint8_t reg) const
 int32_t SMBus::readByte() const
 {
     __s32 data = i2c_smbus_read_byte(file);
-    if (data < 0) {
-        throw SMBusError("I2C read on device " + to_string(address) + " failed: " +
-                         strerror(errno));
+    if (data < 0)
+    {
+        throw SMBusError("I2C read on device " + to_string(address) + " failed: " + strerror(errno));
     }
 
     return data;
@@ -57,16 +62,17 @@ int32_t SMBus::readByte() const
 void SMBus::writeByte(uint8_t reg, uint8_t data) const
 {
     __s32 err = i2c_smbus_write_byte_data(file, reg, data);
-    if (err < 0) {
-        throw SMBusError("I2C write on device " + to_string(address) + ", register " + to_string(reg) + " failed: " +
-                         strerror(errno));
+    if (err < 0)
+    {
+        throw SMBusError("I2C write on device " + to_string(address) + ", register " + to_string(reg) +
+                         " failed: " + strerror(errno));
     }
 }
 void SMBus::writeByte(uint8_t data) const
 {
     __s32 err = i2c_smbus_write_byte(file, data);
-    if (err < 0) {
-        throw SMBusError("I2C write on device " + to_string(address) + " failed: " +
-                         strerror(errno));
+    if (err < 0)
+    {
+        throw SMBusError("I2C write on device " + to_string(address) + " failed: " + strerror(errno));
     }
 }

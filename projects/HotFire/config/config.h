@@ -1,5 +1,7 @@
 #pragma once
 
+// clang-format off
+
 #ifndef USE_SBG
     #define USE_SBG 0
 #endif
@@ -45,3 +47,5 @@
         #define USE_ARDUINO_PROXY 1
     #endif
 #endif
+
+// clang-format on

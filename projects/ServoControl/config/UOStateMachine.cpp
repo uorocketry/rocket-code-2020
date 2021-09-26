@@ -1,19 +1,17 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
-#include <wiringPi.h>
-#include "config/config.h"
-#include "config/GpioConfig.h"
 #include "UOStateMachine.h"
-#include <iostream>
+#include "config/GpioConfig.h"
+#include "config/config.h"
+#include "data/GpioData.h"
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
-#include "data/GpioData.h"
+#include <iostream>
 #include <spdlog/spdlog.h>
 #include <string.h>
+#include <wiringPi.h>
 
-
-UOStateMachine::UOStateMachine(Interface* anInterface) :
-        InterfacingStateMachine(anInterface, ST_MAX_STATES)
+UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
     // There is no state entry function for the first state
     enterNewState(States(0));
@@ -21,36 +19,36 @@ UOStateMachine::UOStateMachine(Interface* anInterface) :
     logger = spdlog::default_logger();
 }
 
-// Code for each state. Do not put while in them. The right function according to the current state
-// will be call in the main loop.
+// Code for each state. Do not put while in them. The right function according
+// to the current state will be call in the main loop.
 
 STATE_DEFINE(UOStateMachine, Init, UOSMData)
 {
     interface->initialize();
 
-    #if USE_GPIO == 1
+#if USE_GPIO == 1
 
-            #if USE_SV01
-            interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
-            #endif
+#if USE_SV01
+    interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
+#endif
 
-            #if USE_SV02
-            interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
-            #endif
+#if USE_SV02
+    interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
+#endif
 
-            #if USE_PWM_SBV01
-            interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
-            #endif
+#if USE_PWM_SBV01
+    interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
+#endif
 
-            #if USE_PWM_SBV02
-            interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
-            #endif
+#if USE_PWM_SBV02
+    interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
+#endif
 
-            #if USE_PWM_SBV03
-            interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
-            #endif
+#if USE_PWM_SBV03
+    interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
+#endif
 
-        #endif
+#endif
 
     InternalEvent(ST_WAIT_FOR_INIT);
 }
@@ -110,76 +108,80 @@ STATE_DEFINE(UOStateMachine, Control, UOSMData)
      * ^------------------- USE_PWM_SBV03
      */
 
-    #if USE_GPIO == 1
-        GpioData& gpioData = interfaceData->gpioData;
+#if USE_GPIO == 1
+    GpioData &gpioData = interfaceData->gpioData;
 
-        // Check if enable bit is set
-        bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
+    // Check if enable bit is set
+    bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
 
-        #if USE_SV01 == 1
-            if (enabled)
-            {
-                bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
+#if USE_SV01 == 1
+    if (enabled)
+    {
+        bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
+        gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
 
-                logValveStatus(SV01_NAME, open);
-            }
-        #endif
+        logValveStatus(SV01_NAME, open);
+    }
+#endif
 
-        #if USE_SV02 == 1
-            if (enabled)
-            {
-                bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
+#if USE_SV02 == 1
+    if (enabled)
+    {
+        bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
+        gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
 
-                logValveStatus(SV02_NAME, open);
-            }
-        #endif
+        logValveStatus(SV02_NAME, open);
+    }
+#endif
 
-        #if USE_PWM_SBV01 == 1
-            if (enabled)
-            {
-                bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
+#if USE_PWM_SBV01 == 1
+    if (enabled)
+    {
+        bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
+        gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
 
-                logValveStatus(SBV01_NAME, open);
-            }
-        #endif
+        logValveStatus(SBV01_NAME, open);
+    }
+#endif
 
-        #if USE_PWM_SBV02 == 1
-            if (enabled)
-            {
-                bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
+#if USE_PWM_SBV02 == 1
+    if (enabled)
+    {
+        bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
+        gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
 
-                logValveStatus(SBV02_NAME, open);
-            }
-        #endif
+        logValveStatus(SBV02_NAME, open);
+    }
+#endif
 
-        #if USE_PWM_SBV03 == 1
-            if (enabled)
-            {
-                bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
+#if USE_PWM_SBV03 == 1
+    if (enabled)
+    {
+        bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
+        gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
 
-                logValveStatus(SBV03_NAME, open);
-            }
-        #endif
+        logValveStatus(SBV03_NAME, open);
+    }
+#endif
 
-    #endif
+#endif
 
     interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::logValveStatus(std::string valveName, bool status) {
-    if(status) {
+void UOStateMachine::logValveStatus(std::string valveName, bool status)
+{
+    if (status)
+    {
         SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " OPEN");
-    } else {
+    }
+    else
+    {
         SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " CLOSE");
     }
 }
@@ -195,7 +197,8 @@ std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smd
     std::shared_ptr<sensorsData> data = interface->getLatest();
 
     // If statement to prevent overwiring data from TESTING
-    if (data->timeStamp == -1) data->timeStamp = smdata->now.time_since_epoch().count();
+    if (data->timeStamp == -1)
+        data->timeStamp = smdata->now.time_since_epoch().count();
 
     data->currentStateNo = state;
 

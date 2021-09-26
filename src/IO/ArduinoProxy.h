@@ -4,30 +4,31 @@
 #if USE_ARDUINO_PROXY == 1
 
 #include "IO.h"
-#include <wiringSerial.h>
 #include <ArduinoComm.pb.h>
+#include <wiringSerial.h>
 
-class ArduinoProxy : IO {
-public:
-	static ArduinoProxy* getInstance();
+class ArduinoProxy : IO
+{
+  public:
+    static ArduinoProxy *getInstance();
 
-	ArduinoProxy();
-	~ArduinoProxy();
+    ArduinoProxy();
+    ~ArduinoProxy();
 
-	void initialize();
-	void run();
-	bool isInitialized();
+    void initialize();
+    void run();
+    bool isInitialized();
 
-	void send(RocketryProto::ArduinoIn c);
+    void send(RocketryProto::ArduinoIn c);
 
-	ArduinoProxy(ArduinoProxy const&) = delete;
-	void operator=(ArduinoProxy const&) = delete;
+    ArduinoProxy(ArduinoProxy const &) = delete;
+    void operator=(ArduinoProxy const &) = delete;
 
-private:
+  private:
     int fd = 0;
     bool inititialized = false;
 
-	std::mutex serialMutex;
+    std::mutex serialMutex;
 };
 
 #endif

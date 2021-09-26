@@ -10,12 +10,13 @@
 
 class FakeGpio : public Gpio
 {
-    public:
-        FakeGpio() {};
-        ~FakeGpio() {};
+  public:
+    FakeGpio(){};
+    ~FakeGpio(){};
 };
 
-void createOutputs(Gpio* gpio) {
+void createOutputs(Gpio *gpio)
+{
     gpio->createNewGpioOutput(DIGITAL_1, 1);
     gpio->createNewGpioOutput(DIGITAL_2, 2);
 
@@ -23,14 +24,15 @@ void createOutputs(Gpio* gpio) {
     gpio->createNewGpioPwmOutput(PWM_2, 4, 0, false);
 }
 
-TEST_CASE("EventQueue setOutputs", "[EventQueue]") {
-    Gpio* gpio = new FakeGpio();
+TEST_CASE("EventQueue setOutputs", "[EventQueue]")
+{
+    Gpio *gpio = new FakeGpio();
     createOutputs(gpio);
 
     GpioData input;
     input.digitalOutputMap.insert({DIGITAL_1, 500});
     input.pwmOutputMap.insert({PWM_2, 600});
-    
+
     auto result = gpio->setOutputs(input);
 
     REQUIRE(result.digitalOutputMap.at(DIGITAL_1) == 500);

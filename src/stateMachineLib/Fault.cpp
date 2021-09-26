@@ -8,15 +8,16 @@
 //----------------------------------------------------------------------------
 // FaultHandler
 //----------------------------------------------------------------------------
-void FaultHandler(const char* file, unsigned short line)
+void FaultHandler(const char *file, unsigned short line)
 {
-	// If you hit this line, it means one of the ASSERT macros failed.
+    // If you hit this line, it means one of the ASSERT macros failed.
 #if WIN32
-    DebugBreak();	
+    DebugBreak();
 
-	assert(0);
+    assert(0);
 #endif
-	
-	// Trap fault here
-	while(1);
+
+    // Trap fault here
+    while (1)
+        ;
 }

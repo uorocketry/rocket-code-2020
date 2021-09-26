@@ -1,92 +1,94 @@
 #include "config/config.h"
 #if TESTING != 1
 
-#include "InterfaceImpl.h"
 #include "IO/IO.h"
-#include "data/UOSMData.h"
-#include <iostream>
-#include <chrono>
-#include "helpers/Types.h"
 #include "IO/TestingSensors.h"
-#include <string>
+#include "InterfaceImpl.h"
+#include "data/UOSMData.h"
+#include "helpers/Types.h"
+#include <chrono>
+#include <iostream>
 #include <spdlog/spdlog.h>
+#include <string>
 
-
-InterfaceImpl::InterfaceImpl() : eventQueue()
+InterfaceImpl::InterfaceImpl()
+    : eventQueue()
 #if USE_INPUT == 1
-        , input(eventQueue)
+      ,
+      input(eventQueue)
 #endif
 #if USE_SOCKET_CLIENT == 1
-        , client(eventQueue)
+      ,
+      client(eventQueue)
 #endif
 #if USE_RADIO == 1
-        , radio(eventQueue)
+      ,
+      radio(eventQueue)
 #endif
 {
     logger = spdlog::default_logger();
 }
 
-InterfaceImpl::~InterfaceImpl()
-= default;
+InterfaceImpl::~InterfaceImpl() = default;
 
-void InterfaceImpl::initialize() 
+void InterfaceImpl::initialize()
 {
-	initializeInputs();
-	initializeOutputs();
+    initializeInputs();
+    initializeOutputs();
 }
 
 void InterfaceImpl::initializeInputs()
 {
 #if USE_SBG == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
-	mySbgSensor.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
+    mySbgSensor.initialize();
 #endif
 #if USE_INPUT == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing INPUT...");
-	input.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing INPUT...");
+    input.initialize();
 #endif
 #if USE_SOCKET_CLIENT == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing SOCKET_CLIENT...");
-	client.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing SOCKET_CLIENT...");
+    client.initialize();
 #endif
 #if USE_ARDUINO_PROXY == 1
-	arduinoProxy = ArduinoProxy::getInstance();
+    arduinoProxy = ArduinoProxy::getInstance();
 #endif
 }
 
-void InterfaceImpl::initializeOutputs() 
+void InterfaceImpl::initializeOutputs()
 {
 #if USE_LOGGER == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing SENSOR_LOGGER...");
-	sensorLogger.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing SENSOR_LOGGER...");
+    sensorLogger.initialize();
 #endif
 #if USE_RADIO == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing RADIO...");
-	radio.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing RADIO...");
+    radio.initialize();
 #endif
 #if USE_GPIO == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing GPIO...");
-	gpio.initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing GPIO...");
+    gpio.initialize();
 #endif
 #if USE_ARDUINO_PROXY == 1
-	SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
-	arduinoProxy->initialize();
+    SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
+    arduinoProxy->initialize();
 #endif
 }
 
 bool InterfaceImpl::updateInputs()
 {
-	latestState = std::make_shared<sensorsData>();
+    latestState = std::make_shared<sensorsData>();
 
-	latestState->timeStamp = std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    latestState->timeStamp =
+        std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
 
 #if USE_SBG == 1
-	latestState->sbg = mySbgSensor.getData();
+    latestState->sbg = mySbgSensor.getData();
 #endif
 
-	latestState->eventNumber = eventQueue.pop();
+    latestState->eventNumber = eventQueue.pop();
 
-	
 #if USE_LOGGER == 1
     latestState->loggerIsInitialized = sensorLogger.isInitialized();
 #endif
@@ -115,49 +117,49 @@ bool InterfaceImpl::updateInputs()
     latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
 #endif
 
-	return true;
+    return true;
 }
 
-bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data) 
+bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 {
 
 #if USE_GPIO == 1
-	data->gpioData = gpio.setOutputs(data->gpioData);
+    data->gpioData = gpio.setOutputs(data->gpioData);
 #endif
 
 #if USE_LOGGER == 1
-	sensorLogger.enqueueSensorData(*data);
+    sensorLogger.enqueueSensorData(*data);
 #endif
 
 #if USE_RADIO == 1
-	radio.enqueueSensorData(*data);
+    radio.enqueueSensorData(*data);
 #endif
 
 #if USE_SOCKET_CLIENT == 1
     client.enqueueSensorData(*data);
 #endif
 
-	return true;
+    return true;
 }
 
 #if USE_GPIO == 1
-void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr) 
+void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr)
 {
-	gpio.createNewGpioOutput(name, pinNbr);
+    gpio.createNewGpioOutput(name, pinNbr);
 }
 
-void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) {
-	gpio.createNewGpioPwmOutput(name, pinNbr, safePosition, softpwm);
+void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm)
+{
+    gpio.createNewGpioPwmOutput(name, pinNbr, safePosition, softpwm);
 }
 #endif
 
-void InterfaceImpl::calibrateTelemetry() 
+void InterfaceImpl::calibrateTelemetry()
 {
 #if USE_SBG == 1
-	mySbgSensor.setZeroBarometricAltitude();
+    mySbgSensor.setZeroBarometricAltitude();
 #endif
 }
-
 
 std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
 {
@@ -166,12 +168,12 @@ std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
     latestState->loggerWorking = SensorLogger::working;
 #endif // USE_LOGGER
 
-	return latestState;
+    return latestState;
 }
 
 time_point InterfaceImpl::getCurrentTime()
 {
-	return std::chrono::steady_clock::now();
+    return std::chrono::steady_clock::now();
 }
 
 #endif

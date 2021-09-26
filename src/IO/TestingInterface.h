@@ -6,52 +6,53 @@
 #include "data/sensorsData.h"
 
 #include "IO/Interface.h"
-#include "IO/TestingSensors.h"
-#include "IO/SensorLogger.h"
 #include "IO/Radio.h"
+#include "IO/SensorLogger.h"
+#include "IO/TestingSensors.h"
+#include "data/sensorsData.h"
 #include <queue>
 #include <string>
 
 class TestingInterface : public Interface
 {
-public:
-	TestingInterface();
-	~TestingInterface();
+  public:
+    TestingInterface();
+    ~TestingInterface();
 
-	void initialize() override;
-		
-	void calibrateTelemetry() override;
+    void initialize() override;
 
-	// to get the latest rocket state. return a pointer to latestState
-	std::shared_ptr<sensorsData> getLatest() override;
+    void calibrateTelemetry() override;
 
-	bool updateInputs() override;
-	bool updateOutputs(std::shared_ptr<sensorsData> data) override;
+    // to get the latest rocket state. return a pointer to latestState
+    std::shared_ptr<sensorsData> getLatest() override;
 
-	#if USE_GPIO == 1
-	void createNewGpioOutput(std::string name, int pinNbr) override;
-	void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
-	#endif
+    bool updateInputs() override;
+    bool updateOutputs(std::shared_ptr<sensorsData> data) override;
 
-	time_point getCurrentTime() override;
+#if USE_GPIO == 1
+    void createNewGpioOutput(std::string name, int pinNbr) override;
+    void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
+#endif
 
-private:
-	void initializeOutputs();
+    time_point getCurrentTime() override;
 
-	std::shared_ptr<spdlog::logger> logger;
+  private:
+    void initializeOutputs();
 
-	std::shared_ptr<sensorsData> latestState;
+    std::shared_ptr<spdlog::logger> logger;
 
-	TestingSensors testingSensors;
+    std::shared_ptr<sensorsData> latestState;
 
-	time_point latestTime;
+    TestingSensors testingSensors;
+
+    time_point latestTime;
 
 #if USE_LOGGER == 1
-	SensorLogger sensorLogger;
+    SensorLogger sensorLogger;
 #endif
 
 #if USE_RADIO == 1
-	Radio radio;
+    Radio radio;
 #endif
 };
 

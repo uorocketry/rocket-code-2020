@@ -3,7 +3,8 @@
 
 #include "./Output.h"
 
-int Output::getValue() {
+int Output::getValue()
+{
     return currentState;
 };
 
