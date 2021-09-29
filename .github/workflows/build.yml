@@ -41,7 +41,7 @@ jobs:
           git submodule update
       # Build the project
       - name: Install dependencies
-        run: sudo apt-get install libi2c-dev libboost-all-dev protobuf-compiler -y
+        run: sudo ./install-dependencies.sh
       - name: "${{ matrix.name }}: Cmake Makefiles"
         run: ${{ matrix.append }} cmake -B ./build -G 'Unix Makefiles'
       - name: "${{ matrix.name }}: Run make"
