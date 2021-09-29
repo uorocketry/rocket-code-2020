@@ -19,7 +19,7 @@ jobs:
           git submodule init
           git submodule update
       - name: Install dependencies
-        run: sudo apt-get install libi2c-dev libboost-system-dev libboost-filesystem-dev -y
+        run: sudo ./install-dependencies.sh
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.4
         with:
