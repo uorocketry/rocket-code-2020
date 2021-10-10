@@ -36,6 +36,8 @@ Note: If the platform-io installer script doesn't work, try installing with `pip
 
 4. Upload to a connected Arduino: `pio run --target upload`
 
+Note: on Windows, you might get an access denied error. You need to **temporarly** turn off Windows Security settings in order to build ( [Issue](https://github.com/platformio/platformio-core/issues/2844) ). For this, go on Settings -> Update & Security -> Windows Security -> Open Windows Security -> Virus & Threat protection -> Virus & threat protection settings (Manage settings) and turn off the security settings.
+
 ## Development
 
 Make sure to open the Arduino project in another VSCode window and make sure it is not running in WSL if on Windows.
