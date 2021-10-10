@@ -1,0 +1,14 @@
+[Unit]
+Description=rocket_code_startup_script
+After=network.target
+
+[Service]
+ExecStart=sudo /home/pi/rocket-code-2020/sbgECom/bin/MainLoop &
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+RestartSec=10
+User=pi
+
+[Install]
+WantedBy=multi-user.target
