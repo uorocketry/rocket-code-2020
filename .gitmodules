@@ -13,3 +13,6 @@
 [submodule "libraries/cobs-c"]
 	path = libraries/cobs-c
 	url = https://github.com/cmcqueen/cobs-c
+[submodule "libraries/protobuf-definitions"]
+	path = libraries/protobuf-definitions
+	url = git@github.com:uorocketry/protobuf-definitions.git
