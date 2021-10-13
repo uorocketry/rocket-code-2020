@@ -4,8 +4,6 @@ project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
 
-add_subdirectory(./protobuf)
-
 if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
 	add_compile_definitions(SERVO_CONTROL=$ENV{SERVO_CONTROL})
 endif()

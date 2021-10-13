@@ -50,3 +50,9 @@ add_subdirectory(./Catch2)
 # ---------------
 add_library(cobs-c STATIC ./cobs-c/cobs.c)
 target_include_directories(cobs-c PUBLIC ./cobs-c)
+
+# ---------------
+# Protobuf Definitions
+# ---------------
+add_subdirectory(./protobuf-definitions)
+
