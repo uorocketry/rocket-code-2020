@@ -6,10 +6,6 @@ file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.c)
 file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/*.c)
 file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.cpp)
 
-if (MSVC)
-    target_link_libraries(sbgECom Ws2_32)
-endif()
-
 #
 #	Exclude platform specific files
 #
@@ -21,8 +17,11 @@ endif()
 
 add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC})
 
-target_include_directories(sbgECom PUBLIC ./sbgECom/common ./sbgECom/src)
+if (MSVC)
+    target_link_libraries(sbgECom Ws2_32)
+endif()
 
+target_include_directories(sbgECom PUBLIC ./sbgECom/common ./sbgECom/src)
 
 # ---------------
 # WiringPi library
