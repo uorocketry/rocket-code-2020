@@ -166,33 +166,54 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
 {
     fileStream << "Timestamp (Relative),";
 
-    fileStream << "roll,";
-    fileStream << "pitch,";
-    fileStream << "yaw,";
+    fileStream << "State Number";
 
-    fileStream << "rollAccuracy,";
-    fileStream << "pitchAccuracy,";
-    fileStream << "yawAccuracy,";
+    #if USE_GPIO == 1
+    for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
+        {
+            fileStream << output.first << sep;
+        }
 
-    fileStream << "gpsLatitude,";
-    fileStream << "gpsLongitude,";
-    fileStream << "gpsAltitude,";
+        for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
+        {
+            fileStream << output.first << sep;
+        }
+    #endif
+    
+    #if USE_SBG == 1
+        fileStream << "roll,";
+        fileStream << "pitch,";
+        fileStream << "yaw,";
 
-    fileStream << "barometricAltitude,";
+        fileStream << "rollAccuracy,";
+        fileStream << "pitchAccuracy,";
+        fileStream << "yawAccuracy,";
 
-    fileStream << "velocityN,";
-    fileStream << "velocityE,";
-    fileStream << "velocityD,";
+        fileStream << "gpsLatitude,";
+        fileStream << "gpsLongitude,";
+        fileStream << "gpsAltitude,";
 
-    fileStream << "filteredXaccelerometer,";
-    fileStream << "filteredYaccelerometer,";
-    fileStream << "filteredZaccelerometer,";
+        fileStream << "barometricAltitude,";
+        fileStream << "relativeBarometricAltitude";
 
-    fileStream << "solutionStatus,";
+        fileStream << "velocityN,";
+        fileStream << "velocityE,";
+        fileStream << "velocityD,";
 
-    fileStream << "currentStateNo,\n";
+        fileStream << "filteredXaccelerometer,";
+        fileStream << "filteredYaccelerometer,";
+        fileStream << "filteredZaccelerometer,";
 
-    fileStream.flush();
+        fileStream << "solutionStatus,";
+
+        fileStream << "gpsPosStatus";
+
+        fileStream << "gpsPosAccurracy";
+
+        fileStream << "currentStateNo,\n";
+
+        fileStream.flush();
+    #endif
 }
 
 void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
