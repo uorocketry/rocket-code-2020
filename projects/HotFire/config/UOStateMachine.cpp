@@ -114,40 +114,42 @@ void UOStateMachine::FinalVentingEXT()
 }
 
 // Done external event
-void UOStateMachine::DoneEXT(){
-    BEGIN_TRANSITION_MAP                        // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_IGNITION
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_IGNITION
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_FULL_BURN
-        TRANSITION_MAP_ENTRY(ST_DONE)           // ST_FINAL_VENTING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DONE
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_ABORT_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_ABORT_BURN
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_SERVO_CONTROL
+void UOStateMachine::DoneEXT()
+{
+    BEGIN_TRANSITION_MAP                    // - Current State -
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(ST_DONE)       // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
 // Done external event
-void UOStateMachine::ServoControlEXT(){
-    BEGIN_TRANSITION_MAP                        // - Current State -
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_FILLING
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FULL_BURN
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)           // ST_FINAL_VENTING
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_DONE
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_FILLING
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_BURN
-        TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
-}
+// clang-format off
+void UOStateMachine::ServoControlEXT() {
+    BEGIN_TRANSITION_MAP                       // - Current State -
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FULL_BURN
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FINAL_VENTING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_DONE
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_BURN
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_SERVO_CONTROL
+    END_TRANSITION_MAP(nullptr)
+} // clang-format on
 
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
@@ -615,27 +617,29 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
     eventType eventNbr = interfaceData->eventNumber;
     bool dataRecieved = eventNbr > -1;
 
-    if (dataRecieved) {
+    if (dataRecieved)
+    {
 #if USE_GPIO == 1
         GpioData &gpioData = interfaceData->gpioData;
 
         /*
-        * GPIO event number, a 6 bit binary number where the
-        * 1st bit is the enable bit and the last 5 control
-        * whether the valves are open/closed.
-        * A '1' means to open the valve and a '0' to close it.
-        *
-        * 0 0 0 0 0 0
-        * | | | | | ^--------- Enable bit
-        * | | | | ^----------- USE_SV01
-        * | | | ^------------- USE_SV02
-        * | | ^--------------- USE_PWM_SBV01
-        * | ^----------------- USE_PWM_SBV02
-        * ^------------------- USE_PWM_SBV03
-        */
+         * GPIO event number, a 6 bit binary number where the
+         * 1st bit is the enable bit and the last 5 control
+         * whether the valves are open/closed.
+         * A '1' means to open the valve and a '0' to close it.
+         *
+         * 0 0 0 0 0 0
+         * | | | | | ^--------- Enable bit
+         * | | | | ^----------- USE_SV01
+         * | | | ^------------- USE_SV02
+         * | | ^--------------- USE_PWM_SBV01
+         * | ^----------------- USE_PWM_SBV02
+         * ^------------------- USE_PWM_SBV03
+         */
 
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
-        if (enabled) {
+        if (enabled)
+        {
 
 #if USE_SV01 == 1
             {
@@ -686,12 +690,13 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
                 logValveStatus(SBV03_NAME, open);
             }
 #endif
-        } else {
+        }
+        else
+        {
             // Switch back to specified state
             InternalEvent(eventNbr << 1);
         }
 #endif
-
     }
 
     interface->updateOutputs(interfaceData);
