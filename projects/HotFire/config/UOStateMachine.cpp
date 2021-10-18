@@ -261,7 +261,7 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 #endif
 
 #if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
+    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
 #endif
 
 #endif
@@ -442,7 +442,7 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
 #endif
 
 #endif
@@ -605,9 +605,9 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
     }
 }
 
-void UOStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
-{
-}
+// void UOStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
+// {
+// }
 
 void UOStateMachine::updateHotFire(UOSMData *data)
 {
