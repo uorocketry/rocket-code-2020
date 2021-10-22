@@ -208,12 +208,43 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
 
         fileStream << "gpsPosStatus";
 
-        fileStream << "gpsPosAccurracy";
+        fileStream << "gpsPosAccurracyLatitude";
+        fileStream << "gpsPosAccuracyLongitude";
+        fileStream << "gpsPosAccuracyAltitude";
 
-        fileStream << "currentStateNo,\n";
+        fileStream << "NumSvUsed";
 
-        fileStream.flush();
+        fileStream << "velocityNAccuracy";
+        fileStream << "velocityEAccuracy";
+        fileStream << "velocityDAccuracy";
+
+        fileStream << "latitudeAccuracy";
+        fileStream << "longitudeAccuracy";
+        fileStream << "altitudeAccuracy";
+
+        fileStream << "pressureStatus";
+        fileStream << "barometricPressure";
+
+        fileStream << "imuStatus";
+
+        fileStream << "gyroX";
+        fileStream << "gyroY";
+        fileStream << "gyroZ";
+
+        fileStream << "temp";
+
+        fileStream << "deltaVelX";
+        fileStream << "deltaVelY";
+        fileStream << "deltaVelZ";
+
+        fileStream << "deltaAngleX";
+        fileStream << "deltaAngleY";
+        fileStream << "deltaAngleZ";
     #endif
+
+    fileStream << "currentStateNo,\n";
+
+    fileStream.flush();
 }
 
 void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
