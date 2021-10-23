@@ -33,6 +33,7 @@ void UOStateMachine::StartFillingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
         TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
@@ -51,6 +52,7 @@ void UOStateMachine::AbortEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
@@ -69,6 +71,7 @@ void UOStateMachine::StopFillingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_DONE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
@@ -87,6 +90,7 @@ void UOStateMachine::IgnitionEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
@@ -105,23 +109,47 @@ void UOStateMachine::FinalVentingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
         END_TRANSITION_MAP(nullptr)
 }
 
 // Done external event
-void UOStateMachine::DoneEXT(){BEGIN_TRANSITION_MAP                    // - Current State -
-                                   TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_FILLING
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_FILLING
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_IGNITION
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_IGNITION
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_FULL_BURN
-                               TRANSITION_MAP_ENTRY(ST_DONE)           // ST_FINAL_VENTING
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DONE
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_ABORT_FILLING
-                               TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_ABORT_BURN
-                               END_TRANSITION_MAP(nullptr)}
+void UOStateMachine::DoneEXT()
+{
+    BEGIN_TRANSITION_MAP                    // - Current State -
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(ST_DONE)       // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
+        END_TRANSITION_MAP(nullptr)
+}
+
+// Done external event
+// clang-format off
+void UOStateMachine::ServoControlEXT() {
+    BEGIN_TRANSITION_MAP                       // - Current State -
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FULL_BURN
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FINAL_VENTING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_DONE
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_BURN
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_SERVO_CONTROL
+    END_TRANSITION_MAP(nullptr)
+} // clang-format on
 
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
@@ -576,6 +604,116 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
+ENTRY_DEFINE(UOStateMachine, EnterServoControl, UOSMData)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterServoControl");
+    enterNewState(ST_SERVO_CONTROL);
+}
+
+STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
+{
+    interfaceData = updateInterface(data, ST_SERVO_CONTROL);
+
+    eventType eventNbr = interfaceData->eventNumber;
+    bool dataRecieved = eventNbr > -1;
+
+    if (dataRecieved)
+    {
+#if USE_GPIO == 1
+        GpioData &gpioData = interfaceData->gpioData;
+
+        /*
+         * GPIO event number, a 6 bit binary number where the
+         * 1st bit is the enable bit and the last 5 control
+         * whether the valves are open/closed.
+         * A '1' means to open the valve and a '0' to close it.
+         *
+         * 0 0 0 0 0 0
+         * | | | | | ^--------- Enable bit
+         * | | | | ^----------- USE_SV01
+         * | | | ^------------- USE_SV02
+         * | | ^--------------- USE_PWM_SBV01
+         * | ^----------------- USE_PWM_SBV02
+         * ^------------------- USE_PWM_SBV03
+         */
+
+        bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
+        if (enabled)
+        {
+
+#if USE_SV01 == 1
+            {
+                bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
+
+                logValveStatus(SV01_NAME, open);
+            }
+#endif
+
+#if USE_SV02 == 1
+            {
+                bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
+
+                logValveStatus(SV02_NAME, open);
+            }
+#endif
+
+#if USE_PWM_SBV01 == 1
+            {
+                bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
+
+                logValveStatus(SBV01_NAME, open);
+            }
+#endif
+
+#if USE_PWM_SBV02 == 1
+            {
+                bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
+
+                logValveStatus(SBV02_NAME, open);
+            }
+#endif
+
+#if USE_PWM_SBV03 == 1
+            {
+                bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
+
+                logValveStatus(SBV03_NAME, open);
+            }
+#endif
+        }
+        else
+        {
+            // Switch back to specified state
+            InternalEvent(eventNbr << 1);
+        }
+#endif
+    }
+
+    interface->updateOutputs(interfaceData);
+}
+
+void UOStateMachine::logValveStatus(std::string valveName, bool status)
+{
+    if (status)
+    {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " OPEN");
+    }
+    else
+    {
+        SPDLOG_LOGGER_INFO(logger, "ServoControlSM::Control " + valveName + " CLOSE");
+    }
+}
+
 void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
 {
     eventType eventNbr = data->eventNumber;
@@ -599,6 +737,9 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
         break;
     case 5:
         AbortEXT();
+        break;
+    case 6:
+        ServoControlEXT();
         break;
     default:
         break;

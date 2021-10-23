@@ -17,6 +17,7 @@ class UOStateMachine : public InterfacingStateMachine
     void IgnitionEXT();
     void FinalVentingEXT();
     void DoneEXT();
+    void ServoControlEXT();
 
     void updateHotFire(UOSMData *data);
 
@@ -41,6 +42,7 @@ class UOStateMachine : public InterfacingStateMachine
         ST_DONE,
         ST_ABORT_FILLING,
         ST_ABORT_BURN,
+        ST_SERVO_CONTROL, // Debugging state
         ST_MAX_STATES
     };
 
@@ -85,6 +87,9 @@ class UOStateMachine : public InterfacingStateMachine
     // AbortBurn
     ENTRY_DECLARE(UOStateMachine, EnterAbortBurn, UOSMData)
     STATE_DECLARE(UOStateMachine, AbortBurn, UOSMData)
+    // ServoControl
+    ENTRY_DECLARE(UOStateMachine, EnterServoControl, UOSMData)
+    STATE_DECLARE(UOStateMachine, ServoControl, UOSMData)
 
     BEGIN_STATE_MAP_EX
     STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)
@@ -98,7 +103,10 @@ class UOStateMachine : public InterfacingStateMachine
     STATE_MAP_ENTRY_ALL_EX(&Done, nullptr, &EnterDone, nullptr)
     STATE_MAP_ENTRY_ALL_EX(&AbortFilling, nullptr, &EnterAbortFilling, nullptr)
     STATE_MAP_ENTRY_ALL_EX(&AbortBurn, nullptr, &EnterAbortBurn, nullptr)
+    STATE_MAP_ENTRY_ALL_EX(&ServoControl, nullptr, &EnterServoControl, nullptr)
     END_STATE_MAP_EX
 
     std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
+
+    void logValveStatus(std::string valveName, bool status);
 };
