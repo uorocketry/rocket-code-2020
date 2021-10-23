@@ -605,10 +605,6 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
     }
 }
 
-// void UOStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
-// {
-// }
-
 void UOStateMachine::updateHotFire(UOSMData *data)
 {
     ExecuteCurrentState(data);
