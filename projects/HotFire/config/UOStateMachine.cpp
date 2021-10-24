@@ -718,6 +718,17 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
 {
     eventType eventNbr = data->eventNumber;
 
+    uint64_t timestamp =
+        std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    static bool connectionAborted = false;
+    if (!connectionAborted && data->lastActiveClientTimestamp != 0 &&
+        timestamp - data->lastActiveClientTimestamp > connectionFailsafeTimeout)
+    {
+        connectionAborted = true;
+        SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
+        AbortEXT();
+    }
+
     switch (eventNbr)
     {
     case 0:

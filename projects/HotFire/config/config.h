@@ -48,4 +48,7 @@
     #endif
 #endif
 
+const unsigned long nm = 1000000000;
+const unsigned long connectionFailsafeTimeout = 1 * 60 * 60 * nm;
+
 // clang-format on

@@ -32,6 +32,7 @@ struct sensorsData
 
 #if USE_SOCKET_CLIENT
     bool clientIsInitialized = 0;
+    uint64_t lastActiveClientTimestamp = 0;
 #endif
 
 #if USE_INPUT

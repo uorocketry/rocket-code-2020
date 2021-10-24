@@ -24,6 +24,7 @@ class SocketServer : public IO
     void run();
     bool isInitialized();
     void enqueueSensorData(const sensorsData &data);
+    uint64_t getLastConnectionTimestamp();
 
   private:
     void sendingLoop();
@@ -48,6 +49,8 @@ class SocketServer : public IO
     std::mutex sendingMutex;
 
     bool initialized = false;
+
+    uint64_t lastConnectionTimestamp = 0;
 };
 
 #endif

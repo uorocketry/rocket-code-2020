@@ -285,6 +285,7 @@ void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &curre
 
 #if USE_SOCKET_CLIENT
     fileStream << currentState.clientIsInitialized << sep;
+    fileStream << currentState.lastActiveClientTimestamp << sep;
 #endif
 
 #if USE_SBG
