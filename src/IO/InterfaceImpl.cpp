@@ -95,6 +95,7 @@ bool InterfaceImpl::updateInputs()
 
 #if USE_SOCKET_CLIENT == 1
     latestState->clientIsInitialized = client.isInitialized();
+    latestState->lastActiveClientTimestamp = client.getLastConnectionTimestamp();
 #endif
 
 #if USE_SBG == 1
