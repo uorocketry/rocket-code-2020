@@ -50,7 +50,7 @@ class SocketServer : public IO
 
     bool initialized = false;
 
-    uint64_t lastConnectionTimestamp;
+    uint64_t lastConnectionTimestamp = 0;
 };
 
 #endif
