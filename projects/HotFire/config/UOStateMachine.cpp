@@ -285,11 +285,11 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 #endif
 
 #if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
+    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
 #endif
 
 #if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
 #endif
 
 #endif
@@ -462,11 +462,11 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_OPEN});
 #endif
 
 #if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
+    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
 #endif
 
 #if USE_PWM_SBV03
@@ -500,15 +500,15 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_OPEN});
 #endif
 
 #if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_OPEN});
 #endif
 
 #if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_OPEN});
 #endif
 
 #if USE_PWM_SBV02
@@ -516,7 +516,7 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 #endif
 
 #if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
 #endif
 
 #endif
