@@ -694,7 +694,7 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
         else
         {
             // Switch back to specified state
-            InternalEvent(eventNbr << 1);
+            InternalEvent(eventNbr >> 1);
         }
 #endif
     }
