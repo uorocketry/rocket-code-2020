@@ -21,8 +21,6 @@ ArduinoProxy *ArduinoProxy::getInstance()
 
 void ArduinoProxy::initialize()
 {
-    IO::initialize();
-
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
     if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
@@ -32,6 +30,8 @@ void ArduinoProxy::initialize()
     }
 
     inititialized = true;
+
+    IO::initialize();
 }
 
 bool ArduinoProxy::isInitialized()
