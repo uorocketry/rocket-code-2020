@@ -4,6 +4,7 @@
 
 #include "IO/ArduinoEncoder.h"
 #include <spdlog/spdlog.h>
+#include <sys/poll.h>
 
 ArduinoProxy::ArduinoProxy()
 {
@@ -44,6 +45,9 @@ void ArduinoProxy::run()
     std::string data;
     while (true)
     {
+        struct pollfd pfds[1] = {fd, POLLIN};
+        poll(pfds, 1, -1);
+
         while (serialDataAvail(fd) > 0)
         {
             char value = serialGetchar(fd);
