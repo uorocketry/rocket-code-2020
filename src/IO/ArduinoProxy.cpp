@@ -4,6 +4,7 @@
 
 #include "IO/ArduinoEncoder.h"
 #include <spdlog/spdlog.h>
+#include <sys/poll.h>
 
 ArduinoProxy::ArduinoProxy()
 {
@@ -21,8 +22,6 @@ ArduinoProxy *ArduinoProxy::getInstance()
 
 void ArduinoProxy::initialize()
 {
-    IO::initialize();
-
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
     if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
@@ -32,6 +31,8 @@ void ArduinoProxy::initialize()
     }
 
     inititialized = true;
+
+    IO::initialize();
 }
 
 bool ArduinoProxy::isInitialized()
@@ -44,6 +45,9 @@ void ArduinoProxy::run()
     std::string data;
     while (true)
     {
+        struct pollfd pfds[1] = {fd, POLLIN};
+        poll(pfds, 1, -1);
+
         while (serialDataAvail(fd) > 0)
         {
             char value = serialGetchar(fd);
