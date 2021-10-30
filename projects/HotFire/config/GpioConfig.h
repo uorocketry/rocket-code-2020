@@ -38,7 +38,7 @@
 
     #if USE_PWM_SBV01
         #define SBV01_NAME "SBV01"
-        #define SBV01_PIN 5
+        #define SBV01_PIN 9
         #define SBV01_OPEN 180
         #define SBV01_IGNITION 54
         #define SBV01_CLOSE 0
@@ -50,9 +50,9 @@
     #if USE_PWM_SBV02
         #define SBV02_NAME "SBV02"
         #define SBV02_PIN 5
-        #define SBV02_OPEN 180
-        #define SBV02_CLOSE 0
-        #define SBV02_SAFE 180
+        #define SBV02_OPEN 0
+        #define SBV02_CLOSE 180
+        #define SBV02_SAFE 0
         #define SBV02_EVENT_ENABLE_MASK 0b10000
         #define SBV02_SOFTPWM true
     #endif
