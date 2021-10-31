@@ -74,7 +74,8 @@ void SocketServer::sendingLoop()
         std::unique_lock<std::mutex> lk(sendingMutex);
         sendingCondition.wait_for(lk, MAX_WAIT);
 
-        while (!sendingBuffer.empty())
+        int sentValues = 0;
+        while (!sendingBuffer.empty() && sentValues < 100)
         {
             auto data = sendingBuffer.front();
 
@@ -85,6 +86,7 @@ void SocketServer::sendingLoop()
             }
 
             sendingBuffer.pop_front();
+            sentValues++;
         }
     }
 }
