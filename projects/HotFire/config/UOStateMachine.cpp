@@ -19,6 +19,26 @@ UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine
 }
 
 // StartFilling external event
+void UOStateMachine::ReadyEXT()
+{
+    BEGIN_TRANSITION_MAP                          // - Current State -
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(ST_WAIT_FOR_FILLING) // ST_WAIT_FOR_READY
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_SERVO_CONTROL
+        END_TRANSITION_MAP(nullptr)
+}
+
+// StartFilling external event
 void UOStateMachine::StartFillingEXT()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
@@ -208,7 +228,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
     if (interfaceData->isInitialized())
     {
-        InternalEvent(ST_WAIT_FOR_FILLING);
+        InternalEvent(ST_WAIT_FOR_READY);
     }
 
     // showInfo(interfaceData);
@@ -230,6 +250,8 @@ ENTRY_DEFINE(UOStateMachine, EnterWaitForReady, UOSMData)
 STATE_DEFINE(UOStateMachine, WaitForReady, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_READY);
+
+    detectExternEvent(interfaceData);
 
     interface->updateOutputs(interfaceData);
 }
