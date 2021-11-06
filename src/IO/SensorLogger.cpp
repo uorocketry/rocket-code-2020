@@ -46,20 +46,19 @@ void SensorLogger::run()
         boost::filesystem::create_directories(path);
     }
 
-    // bool shouldWriteHeader = !std::experimental::filesystem::exists(path +
-    // filename); fileStream = std::make_shared<std::ofstream>(path + filename,
-    // std::ios_base::app);
+    std::string filename = std::to_string(bootId) + ext;
+    bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
+    std::ofstream fileStream(path + filename, std::ios_base::app);
 
-    // if (shouldWriteHeader)
-    // {
-    // 	std::ofstream fileStream;
-    // 	fileStream.open(path + filename, std::ios_base::app);
-    // 	writeHeader(fileStream);
-    // 	fileStream.close();
-    // }
+    if (shouldWriteHeader)
+    {
+        std::ofstream fileStream;
+     	fileStream.open(path + filename, std::ios_base::app);
+     	writeHeader(fileStream);
+     	fileStream.close();
+    }
 
     status.fileStatus = READY;
-    std::ofstream fileStream;
     fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
     while (true)
     {
@@ -166,18 +165,13 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
 {
     fileStream << "Timestamp (Relative),";
 
-    fileStream << "State Number";
+    fileStream << "State Number,";
+
 
     #if USE_GPIO == 1
-    for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
-        {
-            fileStream << output.first << sep;
-        }
+        fileStream << "digitalOutputMap,";
 
-        for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
-        {
-            fileStream << output.first << sep;
-        }
+        fileStream << "pwmOutputMap,";
     #endif
     
     #if USE_SBG == 1
@@ -194,7 +188,7 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
         fileStream << "gpsAltitude,";
 
         fileStream << "barometricAltitude,";
-        fileStream << "relativeBarometricAltitude";
+        fileStream << "relativeBarometricAltitude,";
 
         fileStream << "velocityN,";
         fileStream << "velocityE,";
@@ -206,45 +200,72 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
 
         fileStream << "solutionStatus,";
 
-        fileStream << "gpsPosStatus";
+        fileStream << "gpsPosStatus,";
 
-        fileStream << "gpsPosAccurracyLatitude";
-        fileStream << "gpsPosAccuracyLongitude";
-        fileStream << "gpsPosAccuracyAltitude";
+        fileStream << "gpsPosAccurracyLatitude,";
+        fileStream << "gpsPosAccuracyLongitude,";
+        fileStream << "gpsPosAccuracyAltitude,";
 
-        fileStream << "NumSvUsed";
+        fileStream << "NumSvUsed,";
 
-        fileStream << "velocityNAccuracy";
-        fileStream << "velocityEAccuracy";
-        fileStream << "velocityDAccuracy";
+        fileStream << "velocityNAccuracy,";
+        fileStream << "velocityEAccuracy,";
+        fileStream << "velocityDAccuracy,";
 
-        fileStream << "latitudeAccuracy";
-        fileStream << "longitudeAccuracy";
-        fileStream << "altitudeAccuracy";
+        fileStream << "latitudeAccuracy,";
+        fileStream << "longitudeAccuracy,";
+        fileStream << "altitudeAccuracy,";
 
-        fileStream << "pressureStatus";
-        fileStream << "barometricPressure";
+        fileStream << "pressureStatus,";
+        fileStream << "barometricPressure,";
 
-        fileStream << "imuStatus";
+        fileStream << "imuStatus,";
 
-        fileStream << "gyroX";
-        fileStream << "gyroY";
-        fileStream << "gyroZ";
+        fileStream << "gyroX,";
+        fileStream << "gyroY,";
+        fileStream << "gyroZ,";
 
-        fileStream << "temp";
+        fileStream << "temp,";
 
-        fileStream << "deltaVelX";
-        fileStream << "deltaVelY";
-        fileStream << "deltaVelZ";
+        fileStream << "deltaVelX,";
+        fileStream << "deltaVelY,";
+        fileStream << "deltaVelZ,";
 
-        fileStream << "deltaAngleX";
-        fileStream << "deltaAngleY";
-        fileStream << "deltaAngleZ";
+        fileStream << "deltaAngleX,";
+        fileStream << "deltaAngleY,";
+        fileStream << "deltaAngleZ,";
     #endif
 
-    fileStream << "currentStateNo,\n";
+    // Initialization data
+#if USE_LOGGER
+    fileStream << "loggerIsInitialized,";
+#endif
 
-    fileStream.flush();
+#if USE_SOCKET_CLIENT
+    fileStream << "clientIsInitialized,";
+#endif
+
+#if USE_SBG
+    fileStream << "sbgIsInitialized,";
+#endif
+
+#if USE_INPUT
+    fileStream << "inputIsInitialized,";
+#endif
+
+#if USE_RADIO
+    fileStream << "radioIsInitialized,";
+#endif
+
+#if USE_GPIO
+    fileStream << "gpioIsInitialized,";
+#endif
+
+#if USE_ARDUINO_PROXY
+    fileStream << "arduinoProxyIsInitialized";
+#endif
+
+fileStream.flush();
 }
 
 void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
