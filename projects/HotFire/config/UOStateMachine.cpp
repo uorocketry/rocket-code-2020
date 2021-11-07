@@ -159,24 +159,20 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     interface->initialize();
 #if USE_GPIO == 1
 
-#if USE_SV01
-    interface->createNewGpioOutput(SV01_NAME, SV01_PIN);
+#if USE_SOLENOID
+    interface->createNewGpioOutput(SOLENOID_NAME, SOLENOID_PIN);
 #endif
 
-#if USE_SV02
-    interface->createNewGpioOutput(SV02_NAME, SV02_PIN);
+#if USE_PWM_MANIFOLD
+    interface->createNewGpioPwmOutput(MANIFOLD_NAME, MANIFOLD_PIN, MANIFOLD_SAFE, MANIFOLD_SOFTPWM);
 #endif
 
-#if USE_PWM_SBV01
-    interface->createNewGpioPwmOutput(SBV01_NAME, SBV01_PIN, SBV01_SAFE, SBV01_SOFTPWM);
+#if USE_PWM_FILL
+    interface->createNewGpioPwmOutput(FILL_NAME, FILL_PIN, FILL_SAFE, FILL_SOFTPWM);
 #endif
 
-#if USE_PWM_SBV02
-    interface->createNewGpioPwmOutput(SBV02_NAME, SBV02_PIN, SBV02_SAFE, SBV02_SOFTPWM);
-#endif
-
-#if USE_PWM_SBV03
-    interface->createNewGpioPwmOutput(SBV03_NAME, SBV03_PIN, SBV03_SAFE, SBV03_SOFTPWM);
+#if USE_PWM_VENT
+    interface->createNewGpioPwmOutput(VENT_NAME, VENT_PIN, VENT_SAFE, VENT_SOFTPWM);
 #endif
 
 #endif
@@ -227,24 +223,20 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -272,24 +264,20 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_OPEN});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_OPEN});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -317,24 +305,20 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_OPEN});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -362,24 +346,20 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_IGNITION});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_IGNITION});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -408,24 +388,20 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_OPEN});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_OPEN});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -453,24 +429,20 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_OPEN});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_OPEN});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_OPEN});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_OPEN});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
 #endif
@@ -499,24 +471,20 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_OPEN});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -537,24 +505,20 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -577,24 +541,20 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SV01
-    gpioData.digitalOutputMap.insert({SV01_NAME, SV01_CLOSE});
+#if USE_SOLENOID
+    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
 #endif
 
-#if USE_SV02
-    gpioData.digitalOutputMap.insert({SV02_NAME, SV02_CLOSE});
+#if USE_PWM_MANIFOLD
+    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
 #endif
 
-#if USE_PWM_SBV01
-    gpioData.pwmOutputMap.insert({SBV01_NAME, SBV01_CLOSE});
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
-#if USE_PWM_SBV02
-    gpioData.pwmOutputMap.insert({SBV02_NAME, SBV02_CLOSE});
-#endif
-
-#if USE_PWM_SBV03
-    gpioData.pwmOutputMap.insert({SBV03_NAME, SBV03_CLOSE});
+#if USE_PWM_VENT
+    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -641,53 +601,43 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
         if (enabled)
         {
 
-#if USE_SV01 == 1
+#if USE_SOLENOID == 1
             {
-                bool open = (eventNbr & SV01_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & SOLENOID_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({SV01_NAME, open ? SV01_OPEN : SV01_CLOSE});
+                gpioData.digitalOutputMap.insert({SOLENOID_NAME, open ? SOLENOID_OPEN : SOLENOID_CLOSE});
 
-                logValveStatus(SV01_NAME, open);
+                logValveStatus(SOLENOID_NAME, open);
             }
 #endif
 
-#if USE_SV02 == 1
+#if USE_PWM_MANIFOLD == 1
             {
-                bool open = (eventNbr & SV02_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & MANIFOLD_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({SV02_NAME, open ? SV02_OPEN : SV02_CLOSE});
+                gpioData.pwmOutputMap.insert({MANIFOLD_NAME, open ? MANIFOLD_OPEN : MANIFOLD_CLOSE});
 
-                logValveStatus(SV02_NAME, open);
+                logValveStatus(MANIFOLD_NAME, open);
             }
 #endif
 
-#if USE_PWM_SBV01 == 1
+#if USE_PWM_FILL == 1
             {
-                bool open = (eventNbr & SBV01_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & FILL_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({SBV01_NAME, open ? SBV01_OPEN : SBV01_CLOSE});
+                gpioData.pwmOutputMap.insert({FILL_NAME, open ? FILL_OPEN : FILL_CLOSE});
 
-                logValveStatus(SBV01_NAME, open);
+                logValveStatus(FILL_NAME, open);
             }
 #endif
 
-#if USE_PWM_SBV02 == 1
+#if USE_PWM_VENT == 1
             {
-                bool open = (eventNbr & SBV02_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & VENT_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({SBV02_NAME, open ? SBV02_OPEN : SBV02_CLOSE});
+                gpioData.pwmOutputMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
 
-                logValveStatus(SBV02_NAME, open);
-            }
-#endif
-
-#if USE_PWM_SBV03 == 1
-            {
-                bool open = (eventNbr & SBV03_EVENT_ENABLE_MASK) > 0;
-
-                gpioData.pwmOutputMap.insert({SBV03_NAME, open ? SBV03_OPEN : SBV03_CLOSE});
-
-                logValveStatus(SBV03_NAME, open);
+                logValveStatus(VENT_NAME, open);
             }
 #endif
         }
