@@ -29,6 +29,8 @@ class ArduinoProxy : IO
     bool inititialized = false;
 
     std::mutex serialMutex;
+
+    void handleArduinoMessage(const RocketryProto::ArduinoOut &arduinoOut);
 };
 
 #endif
