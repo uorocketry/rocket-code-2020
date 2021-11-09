@@ -6,13 +6,9 @@
 #include <spdlog/spdlog.h>
 #include <sys/poll.h>
 
-ArduinoProxy::ArduinoProxy()
-{
-}
+ArduinoProxy::ArduinoProxy() = default;
 
-ArduinoProxy::~ArduinoProxy()
-{
-}
+ArduinoProxy::~ArduinoProxy() = default;
 
 ArduinoProxy *ArduinoProxy::getInstance()
 {
@@ -55,8 +51,7 @@ void ArduinoProxy::run()
 
             if (value == 0x0)
             {
-                RocketryProto::ArduinoOut msg =
-                    ArduinoEncoder::decode<RocketryProto::ArduinoOut>(buffer.data(), buffer.size());
+                auto msg = ArduinoEncoder::decode<RocketryProto::ArduinoOut>(buffer.data(), buffer.size());
 
                 handleArduinoMessage(msg);
 
@@ -102,7 +97,7 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
     }
 }
 
-void ArduinoProxy::send(RocketryProto::ArduinoIn data)
+void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
 {
     if (inititialized)
     {
