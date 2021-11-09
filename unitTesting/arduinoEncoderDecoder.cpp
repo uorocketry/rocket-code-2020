@@ -14,7 +14,7 @@ TEST_CASE("Encode and decode protobuf message", "[protobuf]")
 
     helper::SharedArray<char> encodedData = ArduinoEncoder::encode(arduinoIn);
 
-    ArduinoIn arduinoIn2 = ArduinoEncoder::decode<ArduinoIn>(encodedData);
+    auto arduinoIn2 = ArduinoEncoder::decode<ArduinoIn>(encodedData.data.get(), encodedData.length);
 
     REQUIRE(arduinoIn2.data_case() == ArduinoIn::kServoInit);
     REQUIRE(arduinoIn2.servoinit().pin() == 1823);
