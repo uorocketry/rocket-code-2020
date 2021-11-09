@@ -51,15 +51,17 @@ void SocketClient::receivingLoop()
 
         if (err)
         {
-            SPDLOG_LOGGER_ERROR(logger, err.message());
-
             if (err == boost::asio::error::eof)
             {
-                SPDLOG_LOGGER_INFO(logger, "Connection closed by the device");
+                SPDLOG_LOGGER_WARN(logger, "Connection closed by the device");
                 socket->close();
 
                 closeCallback(this);
                 return;
+            }
+            else
+            {
+                SPDLOG_LOGGER_ERROR(logger, err.message());
             }
         }
         else
