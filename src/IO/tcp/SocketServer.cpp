@@ -79,7 +79,7 @@ void SocketServer::sendingLoop()
             auto data = sendingBuffer.front();
 
             std::lock_guard<std::mutex> lockGuard(clientsMutex);
-            
+
             for (auto &client : clients)
             {
                 client->send(data);
