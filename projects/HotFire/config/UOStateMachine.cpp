@@ -201,7 +201,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
     if (interfaceData->isInitialized())
     {
-        InternalEvent(ST_SERVO_CONTROL);
+        InternalEvent(ST_WAIT_FOR_FILLING);
     }
 
     // showInfo(interfaceData);

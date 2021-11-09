@@ -80,13 +80,10 @@ void SocketServer::sendingLoop()
 
             std::lock_guard<std::mutex> lockGuard(clientsMutex);
             
-            if (clients.size() > 0 && clients[clients.size() - 1] != nullptr) {
-                clients[clients.size() - 1]->send(data);
+            for (auto &client : clients)
+            {
+                client->send(data);
             }
-            //for (auto &client : clients)
-            //{
-            //    client->send(data);
-            //}
 
             sendingBuffer.pop_front();
         }
