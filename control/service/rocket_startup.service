@@ -3,6 +3,7 @@ Description=rocket_code_startup_script
 After=network.target
 
 [Service]
+Environment="INSIDE_SERVICE=1"
 ExecStart=/home/pi/rocket-code-2020/build/MainLoop &
 StandardOutput=inherit
 StandardError=inherit

@@ -108,14 +108,13 @@ if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "arm")
 	target_link_directories(MainLoopLib PUBLIC "$ENV{LIBI2C_DIRECTORY}/lib")
 	
 else()
+	target_link_libraries(MainLoopLib systemd)
 	find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
 	target_include_directories(MainLoopLib PUBLIC ${Boost_INCLUDE_DIRS})
 	target_link_libraries(MainLoopLib ${Boost_LIBRARIES})
 endif()
 
 target_link_libraries(MainLoopLib i2c)
-
-
 
 target_link_libraries(MainLoopLib spdlog::spdlog)
 
