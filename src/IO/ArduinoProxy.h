@@ -21,6 +21,9 @@ class ArduinoProxy : IO
 
     void send(const RocketryProto::ArduinoIn &c);
 
+    bool getDigitalState(int pin);
+    int getServoState(int pin);
+
     ArduinoProxy(ArduinoProxy const &) = delete;
     void operator=(ArduinoProxy const &) = delete;
 

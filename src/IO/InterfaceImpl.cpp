@@ -112,6 +112,7 @@ bool InterfaceImpl::updateInputs()
 
 #if USE_GPIO == 1
     latestState->gpioIsInitialized = gpio.isInitialized();
+    latestState->gpioState = gpio.getCurrentState();
 #endif
 
 #if USE_ARDUINO_PROXY == 1

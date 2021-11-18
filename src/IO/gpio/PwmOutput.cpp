@@ -71,4 +71,20 @@ bool PwmOutput::setValue(int value)
     return true;
 }
 
+int PwmOutput::getCurrentState()
+{
+#if USE_ARDUINO_PROXY == 1
+    try
+    {
+        return arduinoProxy->getServoState(pinNbr);
+    }
+    catch (std::out_of_range &error)
+    {
+        return -1;
+    }
+#else
+    return -1;
+#endif
+}
+
 #endif

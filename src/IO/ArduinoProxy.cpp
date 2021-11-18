@@ -127,4 +127,24 @@ void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
     }
 }
 
+/**
+ * Returns the state of the pin. If we don't know the state, throws a std::out_of_range.
+ */
+bool ArduinoProxy::getDigitalState(int pin)
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    return digitalStates.at(pin);
+}
+
+/**
+ * Returns the state of the pin. If we don't know the state, throws a std::out_of_range.
+ */
+int ArduinoProxy::getServoState(int pin)
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    return servoStates.at(pin);
+}
+
 #endif

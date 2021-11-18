@@ -33,6 +33,8 @@ class Gpio : public IO
 
     GpioData setOutputs(const GpioData &data);
 
+    GpioState getCurrentState();
+
   protected:
     std::mutex mutex;
 
