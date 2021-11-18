@@ -28,8 +28,8 @@ class ArduinoProxy : IO
     void operator=(ArduinoProxy const &) = delete;
 
   private:
-    std::map<unsigned int, bool> digitalStates;
-    std::map<unsigned int, int> servoStates;
+    std::map<unsigned int, std::pair<bool, std::chrono::time_point<std::chrono::steady_clock>>> digitalStates;
+    std::map<unsigned int, std::pair<int, std::chrono::time_point<std::chrono::steady_clock>>> servoStates;
     std::mutex stateMutex;
 
     int fd = 0;
