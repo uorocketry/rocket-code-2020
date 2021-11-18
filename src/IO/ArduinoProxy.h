@@ -25,6 +25,10 @@ class ArduinoProxy : IO
     void operator=(ArduinoProxy const &) = delete;
 
   private:
+    std::map<unsigned int, bool> digitalStates;
+    std::map<unsigned int, int> servoStates;
+    std::mutex stateMutex;
+
     int fd = 0;
     bool inititialized = false;
 

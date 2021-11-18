@@ -91,6 +91,20 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
             SPDLOG_LOGGER_WARN(logger, "Arduino Error: {}", RocketryProto::ErrorTypes_Name(error));
         }
         break;
+    case RocketryProto::ArduinoOut::kServoState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &servoState = arduinoOut.servostate();
+        servoStates[servoState.pin()] = servoState.position();
+    }
+    break;
+    case RocketryProto::ArduinoOut::kDigitalState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &digitalState = arduinoOut.digitalstate();
+        digitalStates[digitalState.pin()] = digitalState.activated();
+    }
+    break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
         SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
         break;
