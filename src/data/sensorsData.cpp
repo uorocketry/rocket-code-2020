@@ -100,6 +100,16 @@ std::string sensorsData::convertToReducedString() const
         data += std::to_string(output.second);
         data += ",";
     }
+    for (std::pair<std::string, int> output : gpioState.digitalStateMap)
+    {
+        data += std::to_string(output.second);
+        data += ",";
+    }
+    for (std::pair<std::string, int> output : gpioState.pwmStateMap)
+    {
+        data += std::to_string(output.second);
+        data += ",";
+    }
 #endif
 
 #if USE_LOGGER == 1
