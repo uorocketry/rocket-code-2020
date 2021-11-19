@@ -186,20 +186,20 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     interface->initialize();
 #if USE_GPIO == 1
 
-#if USE_SOLENOID
-    interface->createNewGpioOutput(SOLENOID_NAME, SOLENOID_PIN);
+#if USE_VENT
+    interface->createNewGpioOutput(VENT_NAME, VENT_PIN);
 #endif
 
-#if USE_PWM_MANIFOLD
-    interface->createNewGpioPwmOutput(MANIFOLD_NAME, MANIFOLD_PIN, MANIFOLD_SAFE, MANIFOLD_SOFTPWM);
+#if USE_PWM_MAIN
+    interface->createNewGpioPwmOutput(MAIN_NAME, MAIN_PIN, MAIN_SAFE, MAIN_SOFTPWM);
+#endif
+
+#if USE_PWM_PINHOLE
+    interface->createNewGpioPwmOutput(PINHOLE_NAME, PINHOLE_PIN, PINHOLE_SAFE, PINHOLE_SOFTPWM);
 #endif
 
 #if USE_PWM_FILL
     interface->createNewGpioPwmOutput(FILL_NAME, FILL_PIN, FILL_SAFE, FILL_SOFTPWM);
-#endif
-
-#if USE_PWM_VENT
-    interface->createNewGpioPwmOutput(VENT_NAME, VENT_PIN, VENT_SAFE, VENT_SOFTPWM);
 #endif
 
 #endif
@@ -270,20 +270,20 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -311,20 +311,20 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_OPEN});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -352,20 +352,20 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -393,20 +393,20 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_IGNITION});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -435,20 +435,20 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_OPEN});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -476,20 +476,20 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_OPEN});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
 #endif
@@ -518,20 +518,20 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -552,20 +552,20 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -588,20 +588,20 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
 
-#if USE_SOLENOID
-    gpioData.digitalOutputMap.insert({SOLENOID_NAME, SOLENOID_CLOSE});
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
-#if USE_PWM_MANIFOLD
-    gpioData.pwmOutputMap.insert({MANIFOLD_NAME, MANIFOLD_CLOSE});
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
-#endif
-
-#if USE_PWM_VENT
-    gpioData.pwmOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #endif
@@ -637,34 +637,44 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
          *
          * 0 0 0 0 0 0
          * | | | | | ^--------- Enable bit
-         * | | | | ^----------- USE_SV01
+         * | | | | ^----------- USE_VENT
          * | | | ^------------- USE_SV02
-         * | | ^--------------- USE_PWM_SBV01
-         * | ^----------------- USE_PWM_SBV02
-         * ^------------------- USE_PWM_SBV03
+         * | | ^--------------- USE_PWM_MAIN
+         * | ^----------------- USE_PWM_PINHOLE
+         * ^------------------- USE_PWM_FILL
          */
 
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
         if (enabled)
         {
 
-#if USE_SOLENOID == 1
+#if USE_VENT == 1
             {
-                bool open = (eventNbr & SOLENOID_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & VENT_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({SOLENOID_NAME, open ? SOLENOID_OPEN : SOLENOID_CLOSE});
+                gpioData.digitalOutputMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
 
-                logValveStatus(SOLENOID_NAME, open);
+                logValveStatus(VENT_NAME, open);
             }
 #endif
 
-#if USE_PWM_MANIFOLD == 1
+#if USE_PWM_MAIN == 1
             {
-                bool open = (eventNbr & MANIFOLD_EVENT_ENABLE_MASK) > 0;
+                bool open = (eventNbr & MAIN_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({MANIFOLD_NAME, open ? MANIFOLD_OPEN : MANIFOLD_CLOSE});
+                gpioData.pwmOutputMap.insert({MAIN_NAME, open ? MAIN_OPEN : MAIN_CLOSE});
 
-                logValveStatus(MANIFOLD_NAME, open);
+                logValveStatus(MAIN_NAME, open);
+            }
+#endif
+
+#if USE_PWM_PINHOLE == 1
+            {
+                bool open = (eventNbr & PINHOLE_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({PINHOLE_NAME, open ? PINHOLE_OPEN : PINHOLE_CLOSE});
+
+                logValveStatus(PINHOLE_NAME, open);
             }
 #endif
 
@@ -675,16 +685,6 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
                 gpioData.pwmOutputMap.insert({FILL_NAME, open ? FILL_OPEN : FILL_CLOSE});
 
                 logValveStatus(FILL_NAME, open);
-            }
-#endif
-
-#if USE_PWM_VENT == 1
-            {
-                bool open = (eventNbr & VENT_EVENT_ENABLE_MASK) > 0;
-
-                gpioData.pwmOutputMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
-
-                logValveStatus(VENT_NAME, open);
             }
 #endif
         }
