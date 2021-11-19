@@ -19,11 +19,32 @@ UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine
 }
 
 // StartFilling external event
+void UOStateMachine::ReadyEXT()
+{
+    BEGIN_TRANSITION_MAP                          // - Current State -
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(ST_WAIT_FOR_FILLING) // ST_WAIT_FOR_READY
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_SERVO_CONTROL
+        END_TRANSITION_MAP(nullptr)
+}
+
+// StartFilling external event
 void UOStateMachine::StartFillingEXT()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
@@ -43,6 +64,7 @@ void UOStateMachine::AbortEXT()
     BEGIN_TRANSITION_MAP                       // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_IGNITION
@@ -62,6 +84,7 @@ void UOStateMachine::StopFillingEXT()
     BEGIN_TRANSITION_MAP                           // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(ST_WAIT_FOR_IGNITION) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_IGNITION
@@ -81,6 +104,7 @@ void UOStateMachine::IgnitionEXT()
     BEGIN_TRANSITION_MAP                    // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_WAIT_FOR_IGNITION
@@ -100,6 +124,7 @@ void UOStateMachine::FinalVentingEXT()
     BEGIN_TRANSITION_MAP                       // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_IGNITION
@@ -119,6 +144,7 @@ void UOStateMachine::DoneEXT()
     BEGIN_TRANSITION_MAP                    // - Current State -
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
@@ -138,6 +164,7 @@ void UOStateMachine::ServoControlEXT() {
     BEGIN_TRANSITION_MAP                       // - Current State -
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_READY
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_FILLING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
@@ -197,7 +224,7 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 
     if (interfaceData->isInitialized())
     {
-        InternalEvent(ST_WAIT_FOR_FILLING);
+        InternalEvent(ST_WAIT_FOR_READY);
     }
 
     // showInfo(interfaceData);
@@ -208,6 +235,26 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
 EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForInit");
+}
+
+ENTRY_DEFINE(UOStateMachine, EnterWaitForReady, UOSMData)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForReady");
+    enterNewState(ST_WAIT_FOR_READY);
+}
+
+STATE_DEFINE(UOStateMachine, WaitForReady, UOSMData)
+{
+    interfaceData = updateInterface(data, ST_WAIT_FOR_READY);
+
+    detectExternEvent(interfaceData);
+
+    interface->updateOutputs(interfaceData);
+}
+
+EXIT_DEFINE(UOStateMachine, ExitWaitForReady)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForReady");
 }
 
 ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
@@ -644,7 +691,7 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
         else
         {
             // Switch back to specified state
-            InternalEvent(eventNbr << 1);
+            InternalEvent(eventNbr >> 1);
         }
 #endif
     }
@@ -701,6 +748,9 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
         break;
     case 6:
         ServoControlEXT();
+        break;
+    case 7:
+        ReadyEXT();
         break;
     default:
         break;

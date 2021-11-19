@@ -11,7 +11,7 @@ class Output
     int getValue();
 
   protected:
-    int currentState = 0;
+    int currentState = -1;
 };
 
 #endif

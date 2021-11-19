@@ -11,7 +11,7 @@ class ArduinoEncoder
     static helper::SharedArray<char> encode(const T &dataOut);
 
     template <typename T>
-    static T decode(const helper::SharedArray<char> &dataIn);
+    static T decode(const char *buffer, int length);
 };
 
 /**
@@ -44,13 +44,13 @@ helper::SharedArray<char> ArduinoEncoder::encode(const T &dataOut)
  * 0x0 byte.
  */
 template <typename T>
-T ArduinoEncoder::decode(const helper::SharedArray<char> &dataIn)
+T ArduinoEncoder::decode(const char *buffer, int length)
 {
     // Remove COBS from data
-    int dataLength = static_cast<int>(dataIn.length) - 2;
+    int dataLength = static_cast<int>(length) - 2;
     std::unique_ptr<char[]> data(new char[dataLength]);
 
-    cobs_decode_result cobsLength = cobs_decode(&data[0], dataLength, &dataIn.data[0], dataIn.length - 1);
+    cobs_decode_result cobsLength = cobs_decode(&data[0], dataLength, buffer, length - 1);
 
     // Parse Protobuf
     T protoObj;
