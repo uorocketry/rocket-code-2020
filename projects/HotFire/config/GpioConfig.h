@@ -27,7 +27,7 @@
 
     #if USE_PWM_MAIN
         #define MAIN_NAME "MAIN"
-        #define MAIN_PIN 5
+        #define MAIN_PIN 9
         #define MAIN_OPEN 180
         #define MAIN_IGNITION 54
         #define MAIN_CLOSE 0
@@ -39,9 +39,9 @@
     #if USE_PWM_PINHOLE
         #define PINHOLE_NAME "PINHOLE"
         #define PINHOLE_PIN 5
-        #define PINHOLE_OPEN 180
-        #define PINHOLE_CLOSE 0
-        #define PINHOLE_SAFE 180
+        #define PINHOLE_OPEN 0
+        #define PINHOLE_CLOSE 180
+        #define PINHOLE_SAFE 0
         #define PINHOLE_EVENT_ENABLE_MASK 0b10000
         #define PINHOLE_SOFTPWM true
     #endif
