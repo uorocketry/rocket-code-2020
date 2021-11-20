@@ -15,11 +15,11 @@ class ArduinoProxy : IO
     ArduinoProxy();
     ~ArduinoProxy();
 
-    void initialize() override;
-    void run() override;
-    bool isInitialized() override;
+    void initialize();
+    void run();
+    bool isInitialized();
 
-    void send(const RocketryProto::ArduinoIn &c);
+    void send(RocketryProto::ArduinoIn c);
 
     ArduinoProxy(ArduinoProxy const &) = delete;
     void operator=(ArduinoProxy const &) = delete;
@@ -29,8 +29,6 @@ class ArduinoProxy : IO
     bool inititialized = false;
 
     std::mutex serialMutex;
-
-    void handleArduinoMessage(const RocketryProto::ArduinoOut &arduinoOut);
 };
 
 #endif

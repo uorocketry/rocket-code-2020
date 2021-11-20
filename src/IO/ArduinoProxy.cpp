@@ -6,9 +6,13 @@
 #include <spdlog/spdlog.h>
 #include <sys/poll.h>
 
-ArduinoProxy::ArduinoProxy() = default;
+ArduinoProxy::ArduinoProxy()
+{
+}
 
-ArduinoProxy::~ArduinoProxy() = default;
+ArduinoProxy::~ArduinoProxy()
+{
+}
 
 ArduinoProxy *ArduinoProxy::getInstance()
 {
@@ -38,7 +42,7 @@ bool ArduinoProxy::isInitialized()
 
 void ArduinoProxy::run()
 {
-    std::vector<char> buffer;
+    std::string data;
     while (true)
     {
         struct pollfd pfds[1] = {fd, POLLIN};
@@ -47,57 +51,21 @@ void ArduinoProxy::run()
         while (serialDataAvail(fd) > 0)
         {
             char value = serialGetchar(fd);
-            buffer.push_back(value);
+            data += value;
 
-            if (value == 0x0)
+            if (value == '\n')
             {
-                auto msg = ArduinoEncoder::decode<RocketryProto::ArduinoOut>(buffer.data(), buffer.size());
+                // Remove newline since spdlog adds it back
+                data.pop_back();
+                SPDLOG_LOGGER_INFO(logger, "Arduino: {}", data);
 
-                handleArduinoMessage(msg);
-
-                buffer.clear();
+                data = "";
             }
         }
     }
 }
 
-void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduinoOut)
-{
-    auto event = arduinoOut.eventmessage().type();
-    auto eventData = arduinoOut.eventmessage().data();
-
-    auto error = arduinoOut.errormessage().type();
-    auto errorData = arduinoOut.errormessage().data();
-
-    switch (arduinoOut.data_case())
-    {
-    case RocketryProto::ArduinoOut::kEventMessage:
-        if (eventData != 0)
-        {
-            SPDLOG_LOGGER_INFO(logger, "Arduino Event: {} {}", RocketryProto::EventTypes_Name(event), eventData);
-        }
-        else
-        {
-            SPDLOG_LOGGER_INFO(logger, "Arduino Event: {}", RocketryProto::EventTypes_Name(event));
-        }
-        break;
-    case RocketryProto::ArduinoOut::kErrorMessage:
-        if (eventData != 0)
-        {
-            SPDLOG_LOGGER_WARN(logger, "Arduino Error: {} {}", RocketryProto::ErrorTypes_Name(error), errorData);
-        }
-        else
-        {
-            SPDLOG_LOGGER_WARN(logger, "Arduino Error: {}", RocketryProto::ErrorTypes_Name(error));
-        }
-        break;
-    case RocketryProto::ArduinoOut::DATA_NOT_SET:
-        SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
-        break;
-    }
-}
-
-void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
+void ArduinoProxy::send(RocketryProto::ArduinoIn data)
 {
     if (inititialized)
     {
