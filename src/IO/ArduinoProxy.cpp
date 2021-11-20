@@ -6,6 +6,9 @@
 #include <spdlog/spdlog.h>
 #include <sys/poll.h>
 
+// If we haven't received a pin update in that duration, remove it from the map
+const auto pinStateTimeout = std::chrono::seconds(5);
+
 ArduinoProxy::ArduinoProxy() = default;
 
 ArduinoProxy::~ArduinoProxy() = default;
@@ -91,6 +94,20 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
             SPDLOG_LOGGER_WARN(logger, "Arduino Error: {}", RocketryProto::ErrorTypes_Name(error));
         }
         break;
+    case RocketryProto::ArduinoOut::kServoState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &servoState = arduinoOut.servostate();
+        servoStates[servoState.pin()] = {servoState.position(), std::chrono::steady_clock::now()};
+    }
+    break;
+    case RocketryProto::ArduinoOut::kDigitalState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &digitalState = arduinoOut.digitalstate();
+        digitalStates[digitalState.pin()] = {digitalState.activated(), std::chrono::steady_clock::now()};
+    }
+    break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
         SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
         break;
@@ -110,6 +127,50 @@ void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
         {
             serialPutchar(fd, encodedData.data[i]);
         }
+    }
+}
+
+/**
+ * Returns the state of the pin. If we don't know the state, throws a std::out_of_range.
+ */
+bool ArduinoProxy::getDigitalState(int pin)
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    auto state = digitalStates.at(pin);
+    auto now = std::chrono::steady_clock::now();
+
+    if (now - state.second >= pinStateTimeout)
+    {
+        digitalStates.erase(pin);
+        SPDLOG_ERROR("Arduino stopped reporting digital pin {}", pin);
+        throw std::out_of_range("Pin has been removed");
+    }
+    else
+    {
+        return state.first;
+    }
+}
+
+/**
+ * Returns the state of the pin. If we don't know the state, throws a std::out_of_range.
+ */
+int ArduinoProxy::getServoState(int pin)
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    auto state = servoStates.at(pin);
+    auto now = std::chrono::steady_clock::now();
+
+    if (now - state.second >= pinStateTimeout)
+    {
+        servoStates.erase(pin);
+        SPDLOG_ERROR("Arduino stopped reporting servo pin {}", pin);
+        throw std::out_of_range("Pin has been removed");
+    }
+    else
+    {
+        return state.first;
     }
 }
 

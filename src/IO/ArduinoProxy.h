@@ -21,10 +21,17 @@ class ArduinoProxy : IO
 
     void send(const RocketryProto::ArduinoIn &c);
 
+    bool getDigitalState(int pin);
+    int getServoState(int pin);
+
     ArduinoProxy(ArduinoProxy const &) = delete;
     void operator=(ArduinoProxy const &) = delete;
 
   private:
+    std::map<unsigned int, std::pair<bool, std::chrono::time_point<std::chrono::steady_clock>>> digitalStates;
+    std::map<unsigned int, std::pair<int, std::chrono::time_point<std::chrono::steady_clock>>> servoStates;
+    std::mutex stateMutex;
+
     int fd = 0;
     bool inititialized = false;
 

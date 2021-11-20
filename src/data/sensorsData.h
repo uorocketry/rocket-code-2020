@@ -23,6 +23,7 @@ struct sensorsData
 
 #if USE_GPIO == 1
     GpioData gpioData;
+    GpioState gpioState;
     bool gpioIsInitialized = 0;
 #endif
 
