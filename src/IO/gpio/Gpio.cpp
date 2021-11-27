@@ -65,6 +65,22 @@ void Gpio::createNewGpioPwmOutput(const std::string &name, int pinNbr, int safeP
     pwmOutputsMap.insert({name, PwmOutput(name, pinNbr, safePosition, softPWM)});
 }
 
+GpioState Gpio::getCurrentState()
+{
+    GpioState state;
+
+    for (auto i : digitalOutputsMap)
+    {
+        state.digitalStateMap.insert({i.first, i.second.getCurrentState()});
+    }
+    for (auto i : pwmOutputsMap)
+    {
+        state.pwmStateMap.insert({i.first, i.second.getCurrentState()});
+    }
+
+    return state;
+}
+
 /**
  * Convert a map with Output to a map with numbers
  */

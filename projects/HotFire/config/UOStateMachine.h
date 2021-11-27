@@ -11,18 +11,19 @@ class UOStateMachine : public InterfacingStateMachine
     UOStateMachine(Interface *anInterface);
 
     // External events taken by this state machine
+    void ReadyEXT();
     void StartFillingEXT();
     void AbortEXT();
     void StopFillingEXT();
     void IgnitionEXT();
     void FinalVentingEXT();
     void DoneEXT();
+    void ServoControlEXT();
 
     void updateHotFire(UOSMData *data);
 
   private:
     void detectExternEvent(const std::shared_ptr<sensorsData> &data);
-    void showInfo(const std::shared_ptr<sensorsData> &data);
 
     std::shared_ptr<spdlog::logger> logger;
 
@@ -32,6 +33,7 @@ class UOStateMachine : public InterfacingStateMachine
     {
         ST_INIT,
         ST_WAIT_FOR_INIT,
+        ST_WAIT_FOR_READY,
         ST_WAIT_FOR_FILLING,
         ST_FILLING,
         ST_WAIT_FOR_IGNITION,
@@ -41,6 +43,7 @@ class UOStateMachine : public InterfacingStateMachine
         ST_DONE,
         ST_ABORT_FILLING,
         ST_ABORT_BURN,
+        ST_SERVO_CONTROL, // Debugging state
         ST_MAX_STATES
     };
 
@@ -52,6 +55,10 @@ class UOStateMachine : public InterfacingStateMachine
     ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
     STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
     EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
+    // WaitForReady
+    ENTRY_DECLARE(UOStateMachine, EnterWaitForReady, UOSMData)
+    STATE_DECLARE(UOStateMachine, WaitForReady, UOSMData)
+    EXIT_DECLARE(UOStateMachine, ExitWaitForReady)
     // WaitForFilling
     ENTRY_DECLARE(UOStateMachine, EnterWaitForFilling, UOSMData)
     STATE_DECLARE(UOStateMachine, WaitForFilling, UOSMData)
@@ -85,10 +92,14 @@ class UOStateMachine : public InterfacingStateMachine
     // AbortBurn
     ENTRY_DECLARE(UOStateMachine, EnterAbortBurn, UOSMData)
     STATE_DECLARE(UOStateMachine, AbortBurn, UOSMData)
+    // ServoControl
+    ENTRY_DECLARE(UOStateMachine, EnterServoControl, UOSMData)
+    STATE_DECLARE(UOStateMachine, ServoControl, UOSMData)
 
     BEGIN_STATE_MAP_EX
     STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)
     STATE_MAP_ENTRY_ALL_EX(&WaitForInit, nullptr, &EnterWaitForInit, &ExitWaitForInit)
+    STATE_MAP_ENTRY_ALL_EX(&WaitForReady, nullptr, &EnterWaitForReady, &ExitWaitForReady)
     STATE_MAP_ENTRY_ALL_EX(&WaitForFilling, nullptr, &EnterWaitForFilling, &ExitWaitForFilling)
     STATE_MAP_ENTRY_ALL_EX(&Filling, nullptr, &EnterFilling, &ExitFilling)
     STATE_MAP_ENTRY_ALL_EX(&WaitForIgnition, nullptr, &EnterWaitForIgnition, &ExitWaitForIgnition)
@@ -98,7 +109,10 @@ class UOStateMachine : public InterfacingStateMachine
     STATE_MAP_ENTRY_ALL_EX(&Done, nullptr, &EnterDone, nullptr)
     STATE_MAP_ENTRY_ALL_EX(&AbortFilling, nullptr, &EnterAbortFilling, nullptr)
     STATE_MAP_ENTRY_ALL_EX(&AbortBurn, nullptr, &EnterAbortBurn, nullptr)
+    STATE_MAP_ENTRY_ALL_EX(&ServoControl, nullptr, &EnterServoControl, nullptr)
     END_STATE_MAP_EX
 
     std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
+
+    void logValveStatus(std::string valveName, bool status);
 };

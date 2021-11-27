@@ -28,10 +28,6 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    const int maxLine = 300;
-    int lineCount = 0;
-    int logId = 0;
-
     std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
@@ -59,24 +55,12 @@ void SensorLogger::run()
     }
 
     status.fileStatus = READY;
-    fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
+    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
     while (true)
     {
         if (!logQueue.empty())
         {
-            if (lineCount >= maxLine)
-            {
-                fileStream.close();
-                lineCount = 0;
-                logId++;
-
-                fileStream.open(path + std::to_string(bootId) + "." + std::to_string(logId) + ext, std::ios_base::ate);
-                std::ofstream::sync_with_stdio(true);
-            }
-
             dequeueToFile(fileStream);
-
-            lineCount++;
         }
         else
         {
@@ -92,6 +76,7 @@ int SensorLogger::getBootId(std::string &path)
     for (auto &p : boost::filesystem::directory_iterator(path))
     {
         std::string itemPath = p.path().string();
+
         std::vector<std::string> tokens1;
 
         // stringstream class check1
@@ -358,6 +343,7 @@ void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &curre
 
 #if USE_SOCKET_CLIENT
     fileStream << currentState.clientIsInitialized << sep;
+    fileStream << currentState.lastActiveClientTimestamp << sep;
 #endif
 
 #if USE_SBG

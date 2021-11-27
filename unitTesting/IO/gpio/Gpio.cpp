@@ -36,9 +36,9 @@ TEST_CASE("EventQueue setOutputs", "[EventQueue]")
     auto result = gpio->setOutputs(input);
 
     REQUIRE(result.digitalOutputMap.at(DIGITAL_1) == 500);
-    REQUIRE(result.digitalOutputMap.at(DIGITAL_2) == 0);
+    REQUIRE(result.digitalOutputMap.at(DIGITAL_2) == -1);
 
-    REQUIRE(result.pwmOutputMap.at(PWM_1) == 0);
+    REQUIRE(result.pwmOutputMap.at(PWM_1) == -1);
     REQUIRE(result.pwmOutputMap.at(PWM_2) == 600);
 
     // Data should carry over unless replaced
@@ -50,7 +50,7 @@ TEST_CASE("EventQueue setOutputs", "[EventQueue]")
     auto result2 = gpio->setOutputs(input2);
 
     REQUIRE(result2.digitalOutputMap.at(DIGITAL_1) == 400);
-    REQUIRE(result2.digitalOutputMap.at(DIGITAL_2) == 0);
+    REQUIRE(result2.digitalOutputMap.at(DIGITAL_2) == -1);
 
     REQUIRE(result2.pwmOutputMap.at(PWM_1) == 300);
     REQUIRE(result2.pwmOutputMap.at(PWM_2) == 600);

@@ -20,6 +20,8 @@ class PwmOutput : public Output
 
     bool setValue(int value) override;
 
+    int getCurrentState();
+
   private:
     std::shared_ptr<spdlog::logger> logger;
     const std::string name;

@@ -4,10 +4,6 @@ project(RocketCode2020 C CXX)
 
 add_subdirectory(./libraries)
 
-if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
-	add_compile_definitions(SERVO_CONTROL=$ENV{SERVO_CONTROL})
-endif()
-
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
 	add_compile_definitions(HOTFIRE_TEST=$ENV{HOTFIRE_TEST})
 endif()

@@ -23,8 +23,6 @@ jobs:
             append: export TESTING=1;
           - name: "HOTFIRE_TEST and TESTING"
             append: export HOTFIRE_TEST=1; export TESTING=1;
-          - name: "SERVO_CONTROL"
-            append: export SERVO_CONTROL=1;
           - name: "USE_SOCKET_CLIENT"
             append: export USE_SOCKET_CLIENT=1;
 

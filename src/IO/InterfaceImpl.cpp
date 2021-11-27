@@ -95,6 +95,7 @@ bool InterfaceImpl::updateInputs()
 
 #if USE_SOCKET_CLIENT == 1
     latestState->clientIsInitialized = client.isInitialized();
+    latestState->lastActiveClientTimestamp = client.getLastConnectionTimestamp();
 #endif
 
 #if USE_SBG == 1
@@ -111,6 +112,7 @@ bool InterfaceImpl::updateInputs()
 
 #if USE_GPIO == 1
     latestState->gpioIsInitialized = gpio.isInitialized();
+    latestState->gpioState = gpio.getCurrentState();
 #endif
 
 #if USE_ARDUINO_PROXY == 1

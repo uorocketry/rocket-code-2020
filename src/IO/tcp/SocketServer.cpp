@@ -79,6 +79,7 @@ void SocketServer::sendingLoop()
             auto data = sendingBuffer.front();
 
             std::lock_guard<std::mutex> lockGuard(clientsMutex);
+
             for (auto &client : clients)
             {
                 client->send(data);
@@ -117,6 +118,20 @@ void SocketServer::enqueueSensorData(const sensorsData &data)
 bool SocketServer::isInitialized()
 {
     return initialized;
+}
+
+uint64_t SocketServer::getLastConnectionTimestamp()
+{
+    std::lock_guard<std::mutex> lockGuard(clientsMutex);
+
+    if (!clients.empty())
+    {
+        lastConnectionTimestamp =
+            std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch())
+                .count();
+    }
+
+    return lastConnectionTimestamp;
 }
 
 #endif

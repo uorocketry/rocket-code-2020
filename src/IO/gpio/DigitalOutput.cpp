@@ -46,4 +46,20 @@ bool DigitalOutput::setValue(int value)
     return true;
 }
 
+int DigitalOutput::getCurrentState()
+{
+#if USE_ARDUINO_PROXY == 1
+    try
+    {
+        return arduinoProxy->getDigitalState(pinNbr);
+    }
+    catch (std::out_of_range &error)
+    {
+        return -1;
+    }
+#else
+    return -1;
+#endif
+}
+
 #endif

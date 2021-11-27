@@ -18,6 +18,8 @@ class DigitalOutput : public Output
 
     bool setValue(int value);
 
+    int getCurrentState();
+
   private:
     std::shared_ptr<spdlog::logger> logger;
     std::string name;
