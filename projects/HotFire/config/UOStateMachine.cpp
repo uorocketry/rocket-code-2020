@@ -621,6 +621,8 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
 {
     interfaceData = updateInterface(data, ST_SERVO_CONTROL);
 
+    detectConnectionTimeout(interfaceData);
+
     eventType eventNbr = interfaceData->eventNumber;
     bool dataRecieved = eventNbr > -1;
 
@@ -711,10 +713,8 @@ void UOStateMachine::logValveStatus(std::string valveName, bool status)
     }
 }
 
-void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void UOStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
 {
-    eventType eventNbr = data->eventNumber;
-
     uint64_t timestamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
     static bool connectionAborted = false;
@@ -723,8 +723,15 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
     {
         connectionAborted = true;
         SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
-        AbortEXT();
+        InternalEvent(ST_FINAL_VENTING);
     }
+}
+
+void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+{
+    detectConnectionTimeout(data);
+
+    eventType eventNbr = data->eventNumber;
 
     switch (eventNbr)
     {

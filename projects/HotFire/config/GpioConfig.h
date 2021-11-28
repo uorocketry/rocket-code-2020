@@ -39,9 +39,9 @@
     #if USE_PWM_PINHOLE
         #define PINHOLE_NAME "PINHOLE"
         #define PINHOLE_PIN 5
-        #define PINHOLE_OPEN 0
-        #define PINHOLE_CLOSE 180
-        #define PINHOLE_SAFE 0
+        #define PINHOLE_OPEN 180
+        #define PINHOLE_CLOSE 0
+        #define PINHOLE_SAFE 180
         #define PINHOLE_EVENT_ENABLE_MASK 0b10000
         #define PINHOLE_SOFTPWM true
     #endif

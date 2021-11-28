@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 // clang-format off
 
 #ifndef USE_SBG
@@ -48,7 +50,7 @@
     #endif
 #endif
 
-const unsigned long nm = 1000000000;
-const unsigned long connectionFailsafeTimeout = 1 * 60 * 60 * nm;
+const uint64_t nm = 1000000000;
+const uint64_t connectionFailsafeTimeout = 1 * 60 * 60 * nm;
 
 // clang-format on
