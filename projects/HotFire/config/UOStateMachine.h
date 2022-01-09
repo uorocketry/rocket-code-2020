@@ -23,6 +23,7 @@ class UOStateMachine : public InterfacingStateMachine
     void updateHotFire(UOSMData *data);
 
   private:
+    void detectConnectionTimeout(const std::shared_ptr<sensorsData> &data);
     void detectExternEvent(const std::shared_ptr<sensorsData> &data);
 
     std::shared_ptr<spdlog::logger> logger;
