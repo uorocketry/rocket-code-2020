@@ -1,5 +1,5 @@
 #pragma once
-#include "config/config.h"
+#include "config.h"
 #include <map>
 #include <string>
 struct GpioData

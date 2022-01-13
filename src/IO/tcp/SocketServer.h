@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config/config.h"
+#include "config.h"
 #if USE_SOCKET_CLIENT == 1
 
 #include "IO/EventQueue.h"

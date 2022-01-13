@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config.h"
 #if USE_RADIO == 1
 
 #include "Radio.h"

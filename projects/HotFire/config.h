@@ -4,6 +4,8 @@
 
 // clang-format off
 
+#define STATEMACHINE HotFireStateMachine
+
 #ifndef USE_SBG
     #define USE_SBG 0
 #endif

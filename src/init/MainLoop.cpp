@@ -1,17 +1,21 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
 #include "../helpers/Types.h"
-#include "config/UOStateMachine.h"
 #include "iostream"
 #include <spdlog/sinks/systemd_sink.h>
+#include <thread>
 
 #include "helpers/Helper.h"
 
+#include "IO/InterfaceImpl.h"
 #include "chrono"
+#include "data/UOSMData.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/dup_filter_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 #include "spdlog/spdlog.h"
+#include "stateMachine/HotFire/HotFireStateMachine.h"
+#include "stateMachine/OctoberSky/OctoberSkyStateMachine.h"
 
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
@@ -76,7 +80,7 @@ int main()
 #endif
 
     // create a state machine instance
-    UOStateMachine uOttSM(&interfaceImpl);
+    STATEMACHINE uOttSM(&interfaceImpl);
 
     time_point start, now;
     duration_ns target_ns, elapsed_ns;

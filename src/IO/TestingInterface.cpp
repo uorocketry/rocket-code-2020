@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config.h"
 #include <spdlog/spdlog.h>
 #if TESTING == 1
 

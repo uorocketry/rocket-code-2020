@@ -1,5 +1,5 @@
-#include "UOStateMachine.h"
-#include "config/config.h"
+#include "OctoberSkyStateMachine.h"
+#include "config.h"
 #include "data/sensorsData.h"
 #include <bitset>
 #include <cmath>
@@ -8,19 +8,20 @@
 
 #define PI 3.14159265
 
-UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine(anInterface, ST_MAX_STATES)
+OctoberSkyStateMachine::OctoberSkyStateMachine(Interface *anInterface)
+    : InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
     // There is no state entry function for the first state
-    UOStateMachine::enterNewState(States(0));
+    OctoberSkyStateMachine::enterNewState(States(0));
 
     logger = spdlog::default_logger();
 }
 
 // Launch external event
-void UOStateMachine::Launch()
+void OctoberSkyStateMachine::Launch()
 {
     BEGIN_TRANSITION_MAP                        // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)         // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(ST_POWERED_FLIGHT) // ST_WAIT_FOR_LAUNCH
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
@@ -32,10 +33,10 @@ void UOStateMachine::Launch()
 }
 
 // Launch external event
-void UOStateMachine::MotorBurnout()
+void OctoberSkyStateMachine::MotorBurnout()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_LAUNCH
         TRANSITION_MAP_ENTRY(ST_COAST)      // ST_POWERED_FLIGHT
@@ -48,10 +49,10 @@ void UOStateMachine::MotorBurnout()
 
 // Apogee external event
 // void UOStateMachine::Apogee(UOSMData* data)
-void UOStateMachine::Apogee()
+void OctoberSkyStateMachine::Apogee()
 {
     BEGIN_TRANSITION_MAP                         // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)          // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_WAIT_FOR_LAUNCH
         TRANSITION_MAP_ENTRY(ST_DESCENT_PHASE_1) // ST_POWERED_FLIGHT
@@ -63,39 +64,39 @@ void UOStateMachine::Apogee()
 }
 
 // Touchdown external event
-void UOStateMachine::Touchdown(){BEGIN_TRANSITION_MAP                    // - Current State -
-                                     TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
-                                 TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
-                                 TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
-                                 END_TRANSITION_MAP(nullptr)}
+void OctoberSkyStateMachine::Touchdown(){BEGIN_TRANSITION_MAP                    // - Current State -
+                                             TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
+                                         TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
+                                         END_TRANSITION_MAP(nullptr)}
 
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
 
-STATE_DEFINE(UOStateMachine, Init, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, Init, UOSMData)
 {
     interface->initialize();
 
     InternalEvent(ST_WAIT_FOR_INIT);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitInit)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitInit)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitInit");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterWaitForInit, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForInit");
     enterNewState(ST_WAIT_FOR_INIT);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, WaitForInit, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
@@ -108,18 +109,18 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitWaitForInit)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForInit");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForLaunch, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterWaitForLaunch, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterWaitForLaunch");
     enterNewState(ST_WAIT_FOR_LAUNCH);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, WaitForLaunch, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_LAUNCH);
 
@@ -131,19 +132,19 @@ STATE_DEFINE(UOStateMachine, WaitForLaunch, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForLaunch)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitWaitForLaunch)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitWaitForLaunch");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterPoweredFlight, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterPoweredFlight, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterPoweredFlight");
     enterNewState(ST_POWERED_FLIGHT);
 }
 
 // code for the flight state
-STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, PoweredFlight, UOSMData)
 {
     interfaceData = updateInterface(data, ST_POWERED_FLIGHT);
 
@@ -156,18 +157,18 @@ STATE_DEFINE(UOStateMachine, PoweredFlight, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitPoweredFlight)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitPoweredFlight)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitPoweredFlight");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterCoast, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterCoast, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterCoast");
     enterNewState(ST_COAST);
 }
 
-STATE_DEFINE(UOStateMachine, Coast, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, Coast, UOSMData)
 {
     interfaceData = updateInterface(data, ST_COAST);
 
@@ -179,19 +180,19 @@ STATE_DEFINE(UOStateMachine, Coast, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitCoast)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitCoast)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitCoast");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterDescentPhase1, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterDescentPhase1, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase1");
     enterNewState(ST_DESCENT_PHASE_1);
 }
 
 // code for the DescentPhase1 state
-STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, DescentPhase1, UOSMData)
 {
     interfaceData = updateInterface(data, ST_DESCENT_PHASE_1);
 
@@ -206,18 +207,18 @@ STATE_DEFINE(UOStateMachine, DescentPhase1, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitDescentPhase1)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitDescentPhase1)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase1");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterDescentPhase2, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterDescentPhase2, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterDescentPhase2");
     enterNewState(ST_DESCENT_PHASE_2);
 }
 
-STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, DescentPhase2, UOSMData)
 {
     interfaceData = updateInterface(data, ST_DESCENT_PHASE_2);
 
@@ -226,26 +227,26 @@ STATE_DEFINE(UOStateMachine, DescentPhase2, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitDescentPhase2)
+EXIT_DEFINE(OctoberSkyStateMachine, ExitDescentPhase2)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::ExitDescentPhase2");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterGround, UOSMData)
+ENTRY_DEFINE(OctoberSkyStateMachine, EnterGround, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "RocketSM::EnterGround");
     enterNewState(ST_GROUND);
 }
 
 // code for the ground state
-STATE_DEFINE(UOStateMachine, Ground, UOSMData)
+STATE_DEFINE(OctoberSkyStateMachine, Ground, UOSMData)
 {
     interfaceData = updateInterface(data, ST_GROUND);
 
     interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
 {
     eventType eventNbr = data->eventNumber;
 
@@ -265,7 +266,7 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
     }
 }
 
-void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<sensorsData> &data)
 {
 #if USE_SBG == 1
 
@@ -295,7 +296,7 @@ void UOStateMachine::detectLaunch(const std::shared_ptr<sensorsData> &data)
 #endif
 }
 
-void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -327,7 +328,7 @@ void UOStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData> &data
 #endif
 }
 
-void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectTouchdown(const std::shared_ptr<sensorsData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -359,7 +360,7 @@ void UOStateMachine::detectTouchdown(const std::shared_ptr<sensorsData> &data)
 #endif
 }
 
-void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<sensorsData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -389,7 +390,7 @@ void UOStateMachine::detectApogee(const std::shared_ptr<sensorsData> &data)
 #endif
 }
 
-void UOStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
 {
 #if USE_SBG == 1
     printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t "
@@ -402,7 +403,7 @@ void UOStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
 #endif
 }
 
-std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
+std::shared_ptr<sensorsData> OctoberSkyStateMachine::updateInterface(const UOSMData *smdata, States state)
 {
     interface->updateInputs();
     std::shared_ptr<sensorsData> data = interface->getLatest();

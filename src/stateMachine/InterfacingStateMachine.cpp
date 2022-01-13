@@ -1,5 +1,5 @@
 #include "InterfacingStateMachine.h"
-#include "config/config.h"
+#include "config.h"
 
 InterfacingStateMachine::InterfacingStateMachine(Interface *anInterface, BYTE maxStates, BYTE initialState)
     : StateMachine(maxStates, initialState), interface(anInterface)
