@@ -32,9 +32,9 @@ class SensorLogger : public IO
 
   private:
     // pop queue and log the data from sensorsData on logging thread
-    void dequeueToFile(std::ofstream &fileStream);
+    bool writeToFile(std::ofstream &fileStream, sensorsData currentState);
 
-    static void writeHeader(std::ofstream &file);
+    static void writeHeader(std::ofstream &file, sensorsData currentState);
     static void writeData(std::ofstream &file, const sensorsData &currentState);
 
     static int getBootId(std::string &path);
