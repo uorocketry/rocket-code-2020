@@ -9,6 +9,9 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
+const uint64_t nm = 1000000000;
+const uint64_t connectionFailsafeTimeout = 1 * 60 * 60 * nm;
+
 HotFireStateMachine::HotFireStateMachine(Interface *anInterface) : InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 
@@ -715,6 +718,7 @@ void HotFireStateMachine::logValveStatus(std::string valveName, bool status)
 
 void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
 {
+#if USE_SOCKET_CLIENT
     uint64_t timestamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
     static bool connectionAborted = false;
@@ -725,6 +729,7 @@ void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsD
         SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
         InternalEvent(ST_FINAL_VENTING);
     }
+#endif
 }
 
 void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
