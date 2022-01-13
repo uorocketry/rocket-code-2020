@@ -73,6 +73,8 @@ int main()
 {
     setup_logging();
 
+    SPDLOG_INFO("Using {}", TOSTRING(STATEMACHINE));
+
 #if TESTING != 1
     InterfaceImpl interfaceImpl;
 #else
