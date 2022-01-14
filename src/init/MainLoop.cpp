@@ -1,6 +1,9 @@
+#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
+
 #include "../helpers/Types.h"
 #include "config/UOStateMachine.h"
 #include "iostream"
+#include <spdlog/sinks/systemd_sink.h>
 
 #include "helpers/Helper.h"
 
@@ -17,6 +20,7 @@
 // logged but not `debug`.
 const auto CONSOLE_LOGGING_LEVEL = spdlog::level::debug;
 const auto FILE_LOGGING_LEVEL = spdlog::level::debug;
+const auto SYSTEMD_LOGGING_LEVEL = spdlog::level::debug;
 
 void setup_logging()
 {
@@ -31,17 +35,28 @@ void setup_logging()
     auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(
         "logs/global_" + std::to_string(unix_timestamp_x_1000) + ".log");
     file_sink->set_level(FILE_LOGGING_LEVEL);
-
-    // Log to the console
-    auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-    stdout_sink->set_level(CONSOLE_LOGGING_LEVEL);
-
     dup_filter->add_sink(file_sink);
-    dup_filter->add_sink(stdout_sink);
+
+    if (std::string(helper::getEnvOrDefault("INSIDE_SERVICE", "0")) == "0")
+    {
+        // Log to the console
+        auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        stdout_sink->set_level(CONSOLE_LOGGING_LEVEL);
+        dup_filter->add_sink(stdout_sink);
+    }
+    else
+    {
+        // Log to systemd
+        auto systemd_sink = std::make_shared<spdlog::sinks::systemd_sink_mt>();
+        systemd_sink->set_level(SYSTEMD_LOGGING_LEVEL);
+        dup_filter->add_sink(systemd_sink);
+    }
+
     std::vector<spdlog::sink_ptr> sinks{dup_filter};
 
     // Create a new logger with name 'global'
     auto logger = std::make_shared<spdlog::logger>("global", begin(sinks), end(sinks));
+    logger->set_level(spdlog::level::debug);
 
     // Register the logger we just created so we can access it from anywhere
     spdlog::register_logger(logger);
@@ -70,7 +85,6 @@ int main()
 
     const uint64_t targetUpdateDuration =
         helper::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
-
     uint64_t count = 1;
     while (true)
     {
