@@ -46,13 +46,6 @@ void SensorLogger::run()
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
 
-    /*if (shouldWriteHeader)
-    {
-        std::ofstream fileStream;
-     	fileStream.open(path + filename, std::ios_base::app);
-     	writeHeader(fileStream);
-     	fileStream.close();
-    }*/
 
     status.fileStatus = READY;
     
