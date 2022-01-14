@@ -46,24 +46,22 @@ void SensorLogger::run()
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
 
-
     status.fileStatus = READY;
-    
+
     bool isFirstLine = true;
 
     while (true)
     {
         if (!logQueue.empty())
         {
-            
-            
+
             // get data
             sensorsData currentState;
             {
                 std::lock_guard<std::mutex> lockGuard(mutex);
                 currentState = logQueue.front();
             }
-            
+
             // write the headers if necessary
             if (shouldWriteHeader && isFirstLine)
             {
@@ -78,7 +76,7 @@ void SensorLogger::run()
             // write to file
             fileStream.open(path + filename, std::ios_base::app);
             bool successful = writeToFile(fileStream, currentState);
-            
+
             // pop data if writing was succesful
             if (successful)
             {
@@ -86,7 +84,7 @@ void SensorLogger::run()
                 logQueue.pop();
             }
 
-            //close File Stream
+            // close File Stream
             fileStream.close();
         }
         else
@@ -155,7 +153,6 @@ bool SensorLogger::writeToFile(std::ofstream &fileStream, sensorsData currentSta
         working = 1;
         writeData(fileStream, currentState);
         return true;
-        
     }
     else
     {
@@ -172,110 +169,109 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, sensorsData currentSta
 
     fileStream << "State Number,";
 
-
-    #if USE_GPIO == 1
+#if USE_GPIO == 1
     for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
     {
-        fileStream << output.first <<", ";
+        fileStream << output.first << ", ";
     }
 
     for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
     {
-        fileStream << output.first <<", ";
+        fileStream << output.first << ", ";
     }
-    #endif
-    
-    #if USE_SBG == 1
-        fileStream << "roll,";
-        fileStream << "pitch,";
-        fileStream << "yaw,";
+#endif
 
-        fileStream << "rollAccuracy,";
-        fileStream << "pitchAccuracy,";
-        fileStream << "yawAccuracy,";
+#if USE_SBG == 1
+    fileStream << "roll,";
+    fileStream << "pitch,";
+    fileStream << "yaw,";
 
-        fileStream << "gpsLatitude,";
-        fileStream << "gpsLongitude,";
-        fileStream << "gpsAltitude,";
+    fileStream << "rollAccuracy,";
+    fileStream << "pitchAccuracy,";
+    fileStream << "yawAccuracy,";
 
-        fileStream << "barometricAltitude,";
-        fileStream << "relativeBarometricAltitude,";
+    fileStream << "gpsLatitude,";
+    fileStream << "gpsLongitude,";
+    fileStream << "gpsAltitude,";
 
-        fileStream << "velocityN,";
-        fileStream << "velocityE,";
-        fileStream << "velocityD,";
+    fileStream << "barometricAltitude,";
+    fileStream << "relativeBarometricAltitude,";
 
-        fileStream << "filteredXaccelerometer,";
-        fileStream << "filteredYaccelerometer,";
-        fileStream << "filteredZaccelerometer,";
+    fileStream << "velocityN,";
+    fileStream << "velocityE,";
+    fileStream << "velocityD,";
 
-        fileStream << "solutionStatus,";
+    fileStream << "filteredXaccelerometer,";
+    fileStream << "filteredYaccelerometer,";
+    fileStream << "filteredZaccelerometer,";
 
-        fileStream << "gpsPosStatus,";
+    fileStream << "solutionStatus,";
 
-        fileStream << "gpsPosAccurracyLatitude,";
-        fileStream << "gpsPosAccuracyLongitude,";
-        fileStream << "gpsPosAccuracyAltitude,";
+    fileStream << "gpsPosStatus,";
 
-        fileStream << "NumSvUsed,";
+    fileStream << "gpsPosAccurracyLatitude,";
+    fileStream << "gpsPosAccuracyLongitude,";
+    fileStream << "gpsPosAccuracyAltitude,";
 
-        fileStream << "velocityNAccuracy,";
-        fileStream << "velocityEAccuracy,";
-        fileStream << "velocityDAccuracy,";
+    fileStream << "NumSvUsed,";
 
-        fileStream << "latitudeAccuracy,";
-        fileStream << "longitudeAccuracy,";
-        fileStream << "altitudeAccuracy,";
+    fileStream << "velocityNAccuracy,";
+    fileStream << "velocityEAccuracy,";
+    fileStream << "velocityDAccuracy,";
 
-        fileStream << "pressureStatus,";
-        fileStream << "barometricPressure,";
+    fileStream << "latitudeAccuracy,";
+    fileStream << "longitudeAccuracy,";
+    fileStream << "altitudeAccuracy,";
 
-        fileStream << "imuStatus,";
+    fileStream << "pressureStatus,";
+    fileStream << "barometricPressure,";
 
-        fileStream << "gyroX,";
-        fileStream << "gyroY,";
-        fileStream << "gyroZ,";
+    fileStream << "imuStatus,";
 
-        fileStream << "temp,";
+    fileStream << "gyroX,";
+    fileStream << "gyroY,";
+    fileStream << "gyroZ,";
 
-        fileStream << "deltaVelX,";
-        fileStream << "deltaVelY,";
-        fileStream << "deltaVelZ,";
+    fileStream << "temp,";
 
-        fileStream << "deltaAngleX,";
-        fileStream << "deltaAngleY,";
-        fileStream << "deltaAngleZ,";
-    #endif
+    fileStream << "deltaVelX,";
+    fileStream << "deltaVelY,";
+    fileStream << "deltaVelZ,";
 
-    // Initialization data
-    #if USE_LOGGER
-        fileStream << "loggerInitialized, ";
-    #endif
+    fileStream << "deltaAngleX,";
+    fileStream << "deltaAngleY,";
+    fileStream << "deltaAngleZ,";
+#endif
 
-    #if USE_SOCKET_CLIENT
-        fileStream << "clientInitialized, ";
-        fileStream << "lastActiveClientTimestamp, ";
-    #endif
+// Initialization data
+#if USE_LOGGER
+    fileStream << "loggerInitialized, ";
+#endif
 
-    #if USE_SBG
-        fileStream << "sbgInitialized, " ;
-    #endif
+#if USE_SOCKET_CLIENT
+    fileStream << "clientInitialized, ";
+    fileStream << "lastActiveClientTimestamp, ";
+#endif
 
-    #if USE_INPUT
-        fileStream << "inputInitialized, ";
-    #endif
+#if USE_SBG
+    fileStream << "sbgInitialized, ";
+#endif
 
-    #if USE_RADIO
-        fileStream << "radioInitialized, ";
-    #endif
+#if USE_INPUT
+    fileStream << "inputInitialized, ";
+#endif
 
-    #if USE_GPIO
-        fileStream << "gpioInitialized, ";
-    #endif
+#if USE_RADIO
+    fileStream << "radioInitialized, ";
+#endif
 
-    #if USE_ARDUINO_PROXY
-        fileStream << "arduinoProxyInitialized, ";
-    #endif
+#if USE_GPIO
+    fileStream << "gpioInitialized, ";
+#endif
+
+#if USE_ARDUINO_PROXY
+    fileStream << "arduinoProxyInitialized, ";
+#endif
     fileStream << "\n";
     fileStream.flush();
 }
