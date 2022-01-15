@@ -245,32 +245,32 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, sensorsData currentSta
 
 // Initialization data
 #if USE_LOGGER
-    fileStream << "loggerInitialized, ";
+    fileStream << "loggerInitialized,";
 #endif
 
 #if USE_SOCKET_CLIENT
-    fileStream << "clientInitialized, ";
-    fileStream << "lastActiveClientTimestamp, ";
+    fileStream << "clientInitialized,";
+    fileStream << "lastActiveClientTimestamp,";
 #endif
 
 #if USE_SBG
-    fileStream << "sbgInitialized, ";
+    fileStream << "sbgInitialized,";
 #endif
 
 #if USE_INPUT
-    fileStream << "inputInitialized, ";
+    fileStream << "inputInitialized,";
 #endif
 
 #if USE_RADIO
-    fileStream << "radioInitialized, ";
+    fileStream << "radioInitialized,";
 #endif
 
 #if USE_GPIO
-    fileStream << "gpioInitialized, ";
+    fileStream << "gpioInitialized,";
 #endif
 
 #if USE_ARDUINO_PROXY
-    fileStream << "arduinoProxyInitialized, ";
+    fileStream << "arduinoProxyInitialized,";
 #endif
     fileStream << "\n";
     fileStream.flush();
