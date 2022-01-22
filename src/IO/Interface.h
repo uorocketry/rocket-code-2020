@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config/config.h"
+#include "config.h"
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include <memory>

@@ -1,5 +1,5 @@
 #pragma once
-#include "config/config.h"
+#include "config.h"
 #if USE_GPIO == 1
 
 #include <string>

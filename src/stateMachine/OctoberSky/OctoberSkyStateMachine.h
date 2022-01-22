@@ -1,15 +1,15 @@
 #pragma once
 
-#include "config/config.h"
+#include "config.h"
 #include "data/UOSMData.h"
 #include "stateMachine/InterfacingStateMachine.h"
 
 #include "helpers/Types.h"
 
-class UOStateMachine : public InterfacingStateMachine
+class OctoberSkyStateMachine : public InterfacingStateMachine
 {
   public:
-    UOStateMachine(Interface *anInterface);
+    OctoberSkyStateMachine(Interface *anInterface);
 
     // External events taken by this state machine
     // void Apogee(UOSMData* data);
@@ -57,35 +57,35 @@ class UOStateMachine : public InterfacingStateMachine
     };
 
     // Define the state machine state functions with event data type
-    STATE_DECLARE(UOStateMachine, Init, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitInit)
+    STATE_DECLARE(OctoberSkyStateMachine, Init, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitInit)
 
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterWaitForInit, UOSMData)
+    STATE_DECLARE(OctoberSkyStateMachine, WaitForInit, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitWaitForInit)
 
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForLaunch, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForLaunch, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForLaunch)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterWaitForLaunch, UOSMData)
+    STATE_DECLARE(OctoberSkyStateMachine, WaitForLaunch, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitWaitForLaunch)
 
-    ENTRY_DECLARE(UOStateMachine, EnterPoweredFlight, UOSMData)
-    STATE_DECLARE(UOStateMachine, PoweredFlight, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitPoweredFlight)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterPoweredFlight, UOSMData)
+    STATE_DECLARE(OctoberSkyStateMachine, PoweredFlight, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitPoweredFlight)
 
-    STATE_DECLARE(UOStateMachine, Coast, UOSMData)
-    ENTRY_DECLARE(UOStateMachine, EnterCoast, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitCoast)
+    STATE_DECLARE(OctoberSkyStateMachine, Coast, UOSMData)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterCoast, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitCoast)
 
-    STATE_DECLARE(UOStateMachine, DescentPhase1, UOSMData)
-    ENTRY_DECLARE(UOStateMachine, EnterDescentPhase1, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitDescentPhase1)
+    STATE_DECLARE(OctoberSkyStateMachine, DescentPhase1, UOSMData)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterDescentPhase1, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitDescentPhase1)
 
-    STATE_DECLARE(UOStateMachine, DescentPhase2, UOSMData)
-    ENTRY_DECLARE(UOStateMachine, EnterDescentPhase2, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitDescentPhase2)
+    STATE_DECLARE(OctoberSkyStateMachine, DescentPhase2, UOSMData)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterDescentPhase2, UOSMData)
+    EXIT_DECLARE(OctoberSkyStateMachine, ExitDescentPhase2)
 
-    STATE_DECLARE(UOStateMachine, Ground, UOSMData)
-    ENTRY_DECLARE(UOStateMachine, EnterGround, UOSMData)
+    STATE_DECLARE(OctoberSkyStateMachine, Ground, UOSMData)
+    ENTRY_DECLARE(OctoberSkyStateMachine, EnterGround, UOSMData)
 
     // State map to define state object order. Each state map entry defines a
     // state object.

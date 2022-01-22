@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config.h"
 #if USE_LOGGER == 1
 
 #include "SensorLogger.h"
