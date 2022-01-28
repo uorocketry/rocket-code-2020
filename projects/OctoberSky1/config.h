@@ -2,6 +2,8 @@
 
 // clang-format off
 
+#define STATEMACHINE OctoberSkyStateMachine
+
 #ifndef TESTING
     #define TESTING 0
 #endif

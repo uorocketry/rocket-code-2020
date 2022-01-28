@@ -1,15 +1,18 @@
 #define NOMINMAX // Fix issues on Windows with std:min and std:max
 
-#include "UOStateMachine.h"
-#include "config/GpioConfig.h"
-#include "config/config.h"
+#include "HotFireStateMachine.h"
+#include "HotFireGpioConfig.h"
+#include "config.h"
 #include "data/GpioData.h"
 #include "data/sensorsData.h"
 #include "helpers/Types.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine(anInterface, ST_MAX_STATES)
+const uint64_t nm = 1000000000;
+const uint64_t connectionFailsafeTimeout = 1 * 60 * 60 * nm;
+
+HotFireStateMachine::HotFireStateMachine(Interface *anInterface) : InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
 
     // There is no state entry function for the first state
@@ -19,10 +22,10 @@ UOStateMachine::UOStateMachine(Interface *anInterface) : InterfacingStateMachine
 }
 
 // StartFilling external event
-void UOStateMachine::ReadyEXT()
+void HotFireStateMachine::ReadyEXT()
 {
     BEGIN_TRANSITION_MAP                          // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)           // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(ST_WAIT_FOR_FILLING) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_FILLING
@@ -39,10 +42,10 @@ void UOStateMachine::ReadyEXT()
 }
 
 // StartFilling external event
-void UOStateMachine::StartFillingEXT()
+void HotFireStateMachine::StartFillingEXT()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_WAIT_FOR_FILLING
@@ -59,10 +62,10 @@ void UOStateMachine::StartFillingEXT()
 }
 
 // Abort external event
-void UOStateMachine::AbortEXT()
+void HotFireStateMachine::AbortEXT()
 {
     BEGIN_TRANSITION_MAP                       // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
@@ -79,10 +82,10 @@ void UOStateMachine::AbortEXT()
 }
 
 // StopFilling external event
-void UOStateMachine::StopFillingEXT()
+void HotFireStateMachine::StopFillingEXT()
 {
     BEGIN_TRANSITION_MAP                           // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)            // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_FILLING
@@ -99,10 +102,10 @@ void UOStateMachine::StopFillingEXT()
 }
 
 // Ignition external event
-void UOStateMachine::IgnitionEXT()
+void HotFireStateMachine::IgnitionEXT()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
@@ -119,10 +122,10 @@ void UOStateMachine::IgnitionEXT()
 }
 
 // FinalVenting external event
-void UOStateMachine::FinalVentingEXT()
+void HotFireStateMachine::FinalVentingEXT()
 {
     BEGIN_TRANSITION_MAP                       // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_FILLING
@@ -139,10 +142,10 @@ void UOStateMachine::FinalVentingEXT()
 }
 
 // Done external event
-void UOStateMachine::DoneEXT()
+void HotFireStateMachine::DoneEXT()
 {
     BEGIN_TRANSITION_MAP                    // - Current State -
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
@@ -160,7 +163,7 @@ void UOStateMachine::DoneEXT()
 
 // Done external event
 // clang-format off
-void UOStateMachine::ServoControlEXT() {
+void HotFireStateMachine::ServoControlEXT() {
     BEGIN_TRANSITION_MAP                       // - Current State -
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
@@ -181,7 +184,7 @@ void UOStateMachine::ServoControlEXT() {
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
 
-STATE_DEFINE(UOStateMachine, Init, UOSMData)
+STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
 {
     interface->initialize();
 #if USE_GPIO == 1
@@ -207,18 +210,18 @@ STATE_DEFINE(UOStateMachine, Init, UOSMData)
     InternalEvent(ST_WAIT_FOR_INIT);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitInit)
+EXIT_DEFINE(HotFireStateMachine, ExitInit)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitInit");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForInit, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterWaitForInit, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForInit");
     enterNewState(ST_WAIT_FOR_INIT);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
+STATE_DEFINE(HotFireStateMachine, WaitForInit, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
 
@@ -232,18 +235,18 @@ STATE_DEFINE(UOStateMachine, WaitForInit, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForInit)
+EXIT_DEFINE(HotFireStateMachine, ExitWaitForInit)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForInit");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForReady, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterWaitForReady, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForReady");
     enterNewState(ST_WAIT_FOR_READY);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForReady, UOSMData)
+STATE_DEFINE(HotFireStateMachine, WaitForReady, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_READY);
 
@@ -252,18 +255,18 @@ STATE_DEFINE(UOStateMachine, WaitForReady, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForReady)
+EXIT_DEFINE(HotFireStateMachine, ExitWaitForReady)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForReady");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForFilling, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterWaitForFilling, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForFilling");
     enterNewState(ST_WAIT_FOR_FILLING);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
+STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
 
@@ -293,18 +296,18 @@ STATE_DEFINE(UOStateMachine, WaitForFilling, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForFilling)
+EXIT_DEFINE(HotFireStateMachine, ExitWaitForFilling)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForFilling");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterFilling, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterFilling, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFilling");
     enterNewState(ST_FILLING);
 }
 
-STATE_DEFINE(UOStateMachine, Filling, UOSMData)
+STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 {
     interfaceData = updateInterface(data, ST_FILLING);
 
@@ -334,18 +337,18 @@ STATE_DEFINE(UOStateMachine, Filling, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitFilling)
+EXIT_DEFINE(HotFireStateMachine, ExitFilling)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFilling");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterWaitForIgnition, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterWaitForIgnition, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::WaitForIgnition");
     enterNewState(ST_WAIT_FOR_IGNITION);
 }
 
-STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
+STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
 {
     interfaceData = updateInterface(data, ST_WAIT_FOR_IGNITION);
 
@@ -375,18 +378,18 @@ STATE_DEFINE(UOStateMachine, WaitForIgnition, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitWaitForIgnition)
+EXIT_DEFINE(HotFireStateMachine, ExitWaitForIgnition)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForIgnition");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterIgnition, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterIgnition, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
     enterNewState(ST_IGNITION);
 }
 
-STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
+STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 {
     interfaceData = updateInterface(data, ST_IGNITION);
 
@@ -417,18 +420,18 @@ STATE_DEFINE(UOStateMachine, Ignition, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitIgnition)
+EXIT_DEFINE(HotFireStateMachine, ExitIgnition)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterFullBurn, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterFullBurn, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFullBurn");
     enterNewState(ST_FULL_BURN);
 }
 
-STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
+STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
 {
     interfaceData = updateInterface(data, ST_FULL_BURN);
 
@@ -458,18 +461,18 @@ STATE_DEFINE(UOStateMachine, FullBurn, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitFullBurn)
+EXIT_DEFINE(HotFireStateMachine, ExitFullBurn)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFullBurn");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterFinalVenting, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterFinalVenting, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterFinalVenting");
     enterNewState(ST_FINAL_VENTING);
 }
 
-STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
+STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 {
     interfaceData = updateInterface(data, ST_FINAL_VENTING);
 
@@ -499,19 +502,19 @@ STATE_DEFINE(UOStateMachine, FinalVenting, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(UOStateMachine, ExitFinalVenting)
+EXIT_DEFINE(HotFireStateMachine, ExitFinalVenting)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitFinalVenting");
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterDone, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterDone, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterDone");
     SPDLOG_LOGGER_INFO(logger, "Done.");
     enterNewState(ST_DONE);
 }
 
-STATE_DEFINE(UOStateMachine, Done, UOSMData)
+STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 {
     interfaceData = updateInterface(data, ST_DONE);
 
@@ -539,13 +542,13 @@ STATE_DEFINE(UOStateMachine, Done, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterAbortFilling, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterAbortFilling, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortFilling");
     enterNewState(ST_ABORT_FILLING);
 }
 
-STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
+STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
 {
     interfaceData = updateInterface(data, ST_ABORT_FILLING);
 
@@ -575,13 +578,13 @@ STATE_DEFINE(UOStateMachine, AbortFilling, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterAbortBurn, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterAbortBurn, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterAbortBurn");
     enterNewState(ST_ABORT_BURN);
 }
 
-STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
+STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
 {
     interfaceData = updateInterface(data, ST_ABORT_BURN);
 
@@ -611,13 +614,13 @@ STATE_DEFINE(UOStateMachine, AbortBurn, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-ENTRY_DEFINE(UOStateMachine, EnterServoControl, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterServoControl, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterServoControl");
     enterNewState(ST_SERVO_CONTROL);
 }
 
-STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
+STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
 {
     interfaceData = updateInterface(data, ST_SERVO_CONTROL);
 
@@ -701,7 +704,7 @@ STATE_DEFINE(UOStateMachine, ServoControl, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-void UOStateMachine::logValveStatus(std::string valveName, bool status)
+void HotFireStateMachine::logValveStatus(std::string valveName, bool status)
 {
     if (status)
     {
@@ -713,8 +716,9 @@ void UOStateMachine::logValveStatus(std::string valveName, bool status)
     }
 }
 
-void UOStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
 {
+#if USE_SOCKET_CLIENT
     uint64_t timestamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
     static bool connectionAborted = false;
@@ -725,9 +729,10 @@ void UOStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> 
         SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
         InternalEvent(ST_FINAL_VENTING);
     }
+#endif
 }
 
-void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
 {
     detectConnectionTimeout(data);
 
@@ -764,12 +769,12 @@ void UOStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
     }
 }
 
-void UOStateMachine::updateHotFire(UOSMData *data)
+void HotFireStateMachine::updateHotFire(UOSMData *data)
 {
     ExecuteCurrentState(data);
 }
 
-std::shared_ptr<sensorsData> UOStateMachine::updateInterface(const UOSMData *smdata, States state)
+std::shared_ptr<sensorsData> HotFireStateMachine::updateInterface(const UOSMData *smdata, States state)
 {
     interface->updateInputs();
     std::shared_ptr<sensorsData> data = interface->getLatest();

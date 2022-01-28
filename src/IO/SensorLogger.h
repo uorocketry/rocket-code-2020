@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config/config.h"
+#include "config.h"
 #if USE_LOGGER == 1
 
 #include "../data/sensorsData.h"
@@ -34,7 +34,7 @@ class SensorLogger : public IO
     // pop queue and log the data from sensorsData on logging thread
     bool writeToFile(std::ofstream &fileStream, sensorsData currentState);
 
-    static void writeHeader(std::ofstream &file, sensorsData currentState);
+    static void writeHeader(std::ofstream &file, sensorsData currentState); 
     static void writeData(std::ofstream &file, const sensorsData &currentState);
 
     static int getBootId(std::string &path);
@@ -50,6 +50,11 @@ class SensorLogger : public IO
     std::mutex writingMutex;
     std::unique_lock<std::mutex> writingLock;
     std::condition_variable writingCondition;
+
+    sensorsData getCurrentState();
+    void writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename);
+    bool sendToWriteFile(std::string path, std::string filename, sensorsData currentState);
+    void popData();
 
     struct InitFlags
     {

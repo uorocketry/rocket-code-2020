@@ -5,6 +5,9 @@
 #include <string>
 #include <vector>
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+
 namespace helper
 {
 

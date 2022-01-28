@@ -1,14 +1,13 @@
 #pragma once
 
-#include "config/config.h"
 #include "data/UOSMData.h"
 #include "helpers/Types.h"
 #include "stateMachine/InterfacingStateMachine.h"
 
-class UOStateMachine : public InterfacingStateMachine
+class HotFireStateMachine : public InterfacingStateMachine
 {
   public:
-    UOStateMachine(Interface *anInterface);
+    HotFireStateMachine(Interface *anInterface);
 
     // External events taken by this state machine
     void ReadyEXT();
@@ -50,52 +49,52 @@ class UOStateMachine : public InterfacingStateMachine
 
     // Define the state machine state functions with event data type
     // Init
-    STATE_DECLARE(UOStateMachine, Init, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitInit)
+    STATE_DECLARE(HotFireStateMachine, Init, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitInit)
     // WaitForInit
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForInit, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForInit, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForInit)
+    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForInit, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, WaitForInit, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitWaitForInit)
     // WaitForReady
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForReady, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForReady, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForReady)
+    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForReady, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, WaitForReady, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitWaitForReady)
     // WaitForFilling
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForFilling, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForFilling, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForFilling)
+    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForFilling, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, WaitForFilling, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitWaitForFilling)
     // Filling
-    ENTRY_DECLARE(UOStateMachine, EnterFilling, UOSMData)
-    STATE_DECLARE(UOStateMachine, Filling, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitFilling)
+    ENTRY_DECLARE(HotFireStateMachine, EnterFilling, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, Filling, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitFilling)
     // WaitForIgnition
-    ENTRY_DECLARE(UOStateMachine, EnterWaitForIgnition, UOSMData)
-    STATE_DECLARE(UOStateMachine, WaitForIgnition, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitWaitForIgnition)
+    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForIgnition, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, WaitForIgnition, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitWaitForIgnition)
     // Ignition
-    ENTRY_DECLARE(UOStateMachine, EnterIgnition, UOSMData)
-    STATE_DECLARE(UOStateMachine, Ignition, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitIgnition)
+    ENTRY_DECLARE(HotFireStateMachine, EnterIgnition, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, Ignition, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitIgnition)
     // FullBurn
-    ENTRY_DECLARE(UOStateMachine, EnterFullBurn, UOSMData)
-    STATE_DECLARE(UOStateMachine, FullBurn, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitFullBurn)
+    ENTRY_DECLARE(HotFireStateMachine, EnterFullBurn, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, FullBurn, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitFullBurn)
     // FinalVenting
-    ENTRY_DECLARE(UOStateMachine, EnterFinalVenting, UOSMData)
-    STATE_DECLARE(UOStateMachine, FinalVenting, UOSMData)
-    EXIT_DECLARE(UOStateMachine, ExitFinalVenting)
+    ENTRY_DECLARE(HotFireStateMachine, EnterFinalVenting, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, FinalVenting, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitFinalVenting)
     // Done
-    ENTRY_DECLARE(UOStateMachine, EnterDone, UOSMData)
-    STATE_DECLARE(UOStateMachine, Done, UOSMData)
+    ENTRY_DECLARE(HotFireStateMachine, EnterDone, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, Done, UOSMData)
     // AbortFilling
-    ENTRY_DECLARE(UOStateMachine, EnterAbortFilling, UOSMData)
-    STATE_DECLARE(UOStateMachine, AbortFilling, UOSMData)
+    ENTRY_DECLARE(HotFireStateMachine, EnterAbortFilling, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, AbortFilling, UOSMData)
     // AbortBurn
-    ENTRY_DECLARE(UOStateMachine, EnterAbortBurn, UOSMData)
-    STATE_DECLARE(UOStateMachine, AbortBurn, UOSMData)
+    ENTRY_DECLARE(HotFireStateMachine, EnterAbortBurn, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, AbortBurn, UOSMData)
     // ServoControl
-    ENTRY_DECLARE(UOStateMachine, EnterServoControl, UOSMData)
-    STATE_DECLARE(UOStateMachine, ServoControl, UOSMData)
+    ENTRY_DECLARE(HotFireStateMachine, EnterServoControl, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, ServoControl, UOSMData)
 
     BEGIN_STATE_MAP_EX
     STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)

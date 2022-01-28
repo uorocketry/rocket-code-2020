@@ -1,6 +1,6 @@
 #pragma once
 
-#include "config/config.h"
+#include "config.h"
 #if USE_SBG == 1
 
 #include "../data/SBGData.h"

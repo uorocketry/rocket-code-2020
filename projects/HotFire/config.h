@@ -4,6 +4,8 @@
 
 // clang-format off
 
+#define STATEMACHINE HotFireStateMachine
+
 #ifndef USE_SBG
     #define USE_SBG 0
 #endif
@@ -49,8 +51,5 @@
         #define USE_ARDUINO_PROXY 1
     #endif
 #endif
-
-const uint64_t nm = 1000000000;
-const uint64_t connectionFailsafeTimeout = 1 * 60 * 60 * nm;
 
 // clang-format on

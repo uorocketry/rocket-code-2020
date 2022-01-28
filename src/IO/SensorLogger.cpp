@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config.h"
 #if USE_LOGGER == 1
 
 #include "SensorLogger.h"
@@ -56,32 +56,24 @@ void SensorLogger::run()
         {
 
             // get data
-            sensorsData currentState;
-            {
-                std::lock_guard<std::mutex> lockGuard(mutex);
-                currentState = logQueue.front();
-            }
+            sensorsData currentState = getCurrentState();
 
             // write the headers if necessary
+
             if (shouldWriteHeader && isFirstLine)
             {
-                std::ofstream fileStream;
-                fileStream.open(path + filename, std::ios_base::app);
-                writeHeader(fileStream, currentState);
-                fileStream.close();
-
-                isFirstLine = false;
+                writeToHeader(currentState, isFirstLine, path, filename);
             }
 
             // write to file
-            fileStream.open(path + filename, std::ios_base::app);
-            bool successful = writeToFile(fileStream, currentState);
+            bool successful = sendToWriteFile(path, filename, currentState);
+            
 
+            
             // pop data if writing was succesful
             if (successful)
             {
-                std::lock_guard<std::mutex> lockGuard(mutex);
-                logQueue.pop();
+                popData(); 
             }
 
             // close File Stream
@@ -92,6 +84,31 @@ void SensorLogger::run()
             writingCondition.wait_for(writingLock, ONE_SECOND);
         }
     }
+}
+
+sensorsData SensorLogger::getCurrentState() {
+    std::lock_guard<std::mutex> lockGuard(mutex);   
+    return logQueue.front();
+}
+
+void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename){
+    std::ofstream fileStream;
+    fileStream.open(path + filename, std::ios_base::app);
+    writeHeader(fileStream, currentState);
+    fileStream.close();
+    isFirstLine = false;
+}
+
+bool SensorLogger::sendToWriteFile(std::string path, std::string filename, sensorsData currentState){
+    std::ofstream fileStream;
+    fileStream.open(path + filename, std::ios_base::app);
+    bool successful = writeToFile(fileStream, currentState);
+    return successful;
+}
+
+void SensorLogger::popData(){
+    std::lock_guard<std::mutex> lockGuard(mutex);
+    logQueue.pop();
 }
 
 int SensorLogger::getBootId(std::string &path)

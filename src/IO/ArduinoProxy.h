@@ -1,5 +1,5 @@
 #pragma once
-#include "config/config.h"
+#include "config.h"
 
 #if USE_ARDUINO_PROXY == 1
 
