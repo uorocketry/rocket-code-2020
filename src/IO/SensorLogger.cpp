@@ -67,13 +67,11 @@ void SensorLogger::run()
 
             // write to file
             bool successful = sendToWriteFile(path, filename, currentState);
-            
 
-            
             // pop data if writing was succesful
             if (successful)
             {
-                popData(); 
+                popData();
             }
 
             // close File Stream
@@ -86,12 +84,14 @@ void SensorLogger::run()
     }
 }
 
-sensorsData SensorLogger::getCurrentState() {
-    std::lock_guard<std::mutex> lockGuard(mutex);   
+sensorsData SensorLogger::getCurrentState()
+{
+    std::lock_guard<std::mutex> lockGuard(mutex);
     return logQueue.front();
 }
 
-void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename){
+void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename)
+{
     std::ofstream fileStream;
     fileStream.open(path + filename, std::ios_base::app);
     writeHeader(fileStream, currentState);
@@ -99,14 +99,16 @@ void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, st
     isFirstLine = false;
 }
 
-bool SensorLogger::sendToWriteFile(std::string path, std::string filename, sensorsData currentState){
+bool SensorLogger::sendToWriteFile(std::string path, std::string filename, sensorsData currentState)
+{
     std::ofstream fileStream;
     fileStream.open(path + filename, std::ios_base::app);
     bool successful = writeToFile(fileStream, currentState);
     return successful;
 }
 
-void SensorLogger::popData(){
+void SensorLogger::popData()
+{
     std::lock_guard<std::mutex> lockGuard(mutex);
     logQueue.pop();
 }
