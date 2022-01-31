@@ -52,8 +52,8 @@ class SensorLogger : public IO
     std::condition_variable writingCondition;
 
     sensorsData getCurrentState();
-    void writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename);
-    bool sendToWriteFile(std::string path, std::string filename, sensorsData currentState);
+    void  writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename);
+    bool sendToWriteFile(std::ofstream &fileStream, sensorsData currentState, std::string path, std::string filename);
     void popData();
 
     struct InitFlags

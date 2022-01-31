@@ -46,6 +46,14 @@ void SensorLogger::run()
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
 
+    /*if (shouldWriteHeader)
+    {
+        std::ofstream fileStream;
+        fileStream.open(path + filename, std::ios_base::app);
+        writeHeader(fileStream);
+        fileStream.close();
+    }*/
+
     status.fileStatus = READY;
 
     bool isFirstLine = true;
@@ -59,14 +67,13 @@ void SensorLogger::run()
             sensorsData currentState = getCurrentState();
 
             // write the headers if necessary
-
             if (shouldWriteHeader && isFirstLine)
             {
                 writeToHeader(currentState, isFirstLine, path, filename);
             }
 
             // write to file
-            bool successful = sendToWriteFile(path, filename, currentState);
+            bool successful = sendToWriteFile(fileStream, currentState, path, filename);
 
             // pop data if writing was succesful
             if (successful)
@@ -82,35 +89,6 @@ void SensorLogger::run()
             writingCondition.wait_for(writingLock, ONE_SECOND);
         }
     }
-}
-
-sensorsData SensorLogger::getCurrentState()
-{
-    std::lock_guard<std::mutex> lockGuard(mutex);
-    return logQueue.front();
-}
-
-void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename)
-{
-    std::ofstream fileStream;
-    fileStream.open(path + filename, std::ios_base::app);
-    writeHeader(fileStream, currentState);
-    fileStream.close();
-    isFirstLine = false;
-}
-
-bool SensorLogger::sendToWriteFile(std::string path, std::string filename, sensorsData currentState)
-{
-    std::ofstream fileStream;
-    fileStream.open(path + filename, std::ios_base::app);
-    bool successful = writeToFile(fileStream, currentState);
-    return successful;
-}
-
-void SensorLogger::popData()
-{
-    std::lock_guard<std::mutex> lockGuard(mutex);
-    logQueue.pop();
 }
 
 int SensorLogger::getBootId(std::string &path)
@@ -179,6 +157,35 @@ bool SensorLogger::writeToFile(std::ofstream &fileStream, sensorsData currentSta
         working = 0;
         return false;
     }
+}
+
+sensorsData SensorLogger::getCurrentState()
+{
+    std::lock_guard<std::mutex> lockGuard(mutex);
+    return logQueue.front();
+}
+
+void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename)
+{
+    std::ofstream fileStream;
+    fileStream.open(path + filename, std::ios_base::app);
+    writeHeader(fileStream, currentState);
+    fileStream.close();
+
+    isFirstLine = false;
+}
+
+bool SensorLogger::sendToWriteFile(std::ofstream &fileStream, sensorsData currentState, std::string path,
+                                   std::string filename)
+{
+    fileStream.open(path + filename, std::ios_base::app);
+    return writeToFile(fileStream, currentState);
+}
+
+void SensorLogger::popData()
+{
+    std::lock_guard<std::mutex> lockGuard(mutex);
+    logQueue.pop();
 }
 
 void SensorLogger::writeHeader(std::ofstream &fileStream, sensorsData currentState)
@@ -264,32 +271,32 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, sensorsData currentSta
 
 // Initialization data
 #if USE_LOGGER
-    fileStream << "loggerInitialized,";
+    fileStream << "loggerInitialized, ";
 #endif
 
 #if USE_SOCKET_CLIENT
-    fileStream << "clientInitialized,";
-    fileStream << "lastActiveClientTimestamp,";
+    fileStream << "clientInitialized, ";
+    fileStream << "lastActiveClientTimestamp, ";
 #endif
 
 #if USE_SBG
-    fileStream << "sbgInitialized,";
+    fileStream << "sbgInitialized, ";
 #endif
 
 #if USE_INPUT
-    fileStream << "inputInitialized,";
+    fileStream << "inputInitialized, ";
 #endif
 
 #if USE_RADIO
-    fileStream << "radioInitialized,";
+    fileStream << "radioInitialized, ";
 #endif
 
 #if USE_GPIO
-    fileStream << "gpioInitialized,";
+    fileStream << "gpioInitialized, ";
 #endif
 
 #if USE_ARDUINO_PROXY
-    fileStream << "arduinoProxyInitialized,";
+    fileStream << "arduinoProxyInitialized, ";
 #endif
     fileStream << "\n";
     fileStream.flush();
