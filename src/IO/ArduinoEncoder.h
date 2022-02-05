@@ -3,6 +3,7 @@
 #include "cobs.h"
 #include "helpers/Helper.h"
 #include <memory>
+#include <spdlog/spdlog.h>
 
 class ArduinoEncoder
 {
@@ -46,6 +47,13 @@ helper::SharedArray<char> ArduinoEncoder::encode(const T &dataOut)
 template <typename T>
 T ArduinoEncoder::decode(const char *buffer, int length)
 {
+    if (length <= 2)
+    {
+        SPDLOG_WARN("Buffer length too small. Returning a default object");
+        T protoObj;
+        return protoObj;
+    }
+
     // Remove COBS from data
     int dataLength = static_cast<int>(length) - 2;
     std::unique_ptr<char[]> data(new char[dataLength]);
