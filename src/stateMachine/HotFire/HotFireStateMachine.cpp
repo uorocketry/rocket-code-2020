@@ -492,7 +492,7 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -526,7 +526,7 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
