@@ -3,7 +3,8 @@ name: Formatting
 on: [push, pull_request]
 
 jobs:
-  build:
+  formatting:
+    name: Clang Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -11,4 +12,4 @@ jobs:
         uses: jidicula/clang-format-action@v4.4.1
         with:
           clang-format-version: '13'
-          exclude-regex: ^\./groundStationSoftware
+          exclude-regex: (^\./groundStationSoftware|./libraries)
