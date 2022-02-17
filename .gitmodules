@@ -4,6 +4,7 @@
 [submodule "libraries/Catch2"]
 	path = libraries/Catch2
 	url = https://github.com/catchorg/Catch2.git
+	branch = v2.x
 [submodule "libraries/sbgECom"]
 	path = libraries/sbgECom
 	url = https://github.com/uorocketry/sbgECom.git
