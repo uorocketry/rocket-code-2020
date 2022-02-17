@@ -30,12 +30,12 @@ jobs:
       # Initialization
       - name: Install SSH Key # For private submodules
         run: mkdir -p $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+      - name: Force Git to use SSH
+        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Force Git to use SSH
-        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
       # Build the project
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
