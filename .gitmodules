@@ -14,6 +14,3 @@
 [submodule "libraries/protobuf-definitions"]
 	path = libraries/protobuf-definitions
 	url = https://github.com/uorocketry/protobuf-definitions.git
-[submodule "libraries/sbgECom"]
-	path = libraries/sbgECom
-	url = https://github.com/SBG-Systems/sbgECom.git
