@@ -32,6 +32,9 @@ add_library(WiringPi STATIC ${WIRINGPI_SRC})
 
 target_include_directories(WiringPi PUBLIC ./WiringPi/wiringPi)
 
+# Ignore annoying warnings we can't do anything about
+set_target_properties(WiringPi PROPERTIES COMPILE_FLAGS "-w")
+
 # ---------------
 # spdlog library
 # ---------------
