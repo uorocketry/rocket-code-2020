@@ -6,7 +6,10 @@
 #include "../data/SBGData.h"
 #include "IO.h"
 
-#include "sbgEComLib.h"
+// sbgECom headers
+#include <sbgCommon.h>
+#include <sbgEComLib.h>
+
 #include <ctime>
 
 class SBGSensor : public IO
