@@ -517,6 +517,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterDone, UOSMData)
 STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 {
     interfaceData = updateInterface(data, ST_DONE);
+    ENTRY_DECLARE(HotFireStateMachine, EnterServoControl, UOSMData);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
