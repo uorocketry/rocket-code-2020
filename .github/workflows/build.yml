@@ -27,16 +27,10 @@ jobs:
             append: export USE_SOCKET_CLIENT=1;
 
     steps:
-      # Initialization
-      - name: Install SSH Key # For private submodules
-        run: mkdir $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
-      - uses: actions/checkout@v2
-      - name: Force Git to use SSH
-        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
-      - name: Checkout submodules
-        run: |
-          git submodule init
-          git submodule update
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
       # Build the project
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
