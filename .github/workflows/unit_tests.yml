@@ -15,9 +15,9 @@ jobs:
           submodules: recursive
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
-      - name: Cmake Makefiles
-        run: USE_GPIO=1 cmake -B ./build -G 'Unix Makefiles'
-      - name: Run make
+      - name: CMake
+        run: USE_GPIO=1 cmake -B ./build -G 'Ninja'
+      - name: Build
         run: USE_GPIO=1 cmake --build ./build --target tests
       - name: Run Unit Tests
         run: ./build/unitTesting/tests

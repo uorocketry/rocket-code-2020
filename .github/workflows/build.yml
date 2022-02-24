@@ -34,7 +34,5 @@ jobs:
       # Build the project
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
-      - name: "${{ matrix.name }}: Cmake Makefiles"
-        run: ${{ matrix.append }} cmake -B ./build -G 'Unix Makefiles'
-      - name: "${{ matrix.name }}: Run make"
-        run: ${{ matrix.append }} cmake --build ./build --target MainLoop
+      - name: "${{ matrix.name }}: Build"
+        run: ${{ matrix.append }} ./build.sh
