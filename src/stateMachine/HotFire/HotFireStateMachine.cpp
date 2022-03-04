@@ -4,7 +4,7 @@
 #include "HotFireGpioConfig.h"
 #include "config.h"
 #include "data/GpioData.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include "helpers/Types.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
@@ -716,7 +716,7 @@ void HotFireStateMachine::logValveStatus(std::string valveName, bool status)
     }
 }
 
-void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<StateData> &data)
 {
 #if USE_SOCKET_CLIENT
     uint64_t timestamp =
@@ -732,7 +732,7 @@ void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsD
 #endif
 }
 
-void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &data)
 {
     detectConnectionTimeout(data);
 
@@ -774,10 +774,10 @@ void HotFireStateMachine::updateHotFire(UOSMData *data)
     ExecuteCurrentState(data);
 }
 
-std::shared_ptr<sensorsData> HotFireStateMachine::updateInterface(const UOSMData *smdata, States state)
+std::shared_ptr<StateData> HotFireStateMachine::updateInterface(const UOSMData *smdata, States state)
 {
     interface->updateInputs();
-    std::shared_ptr<sensorsData> data = interface->getLatest();
+    std::shared_ptr<StateData> data = interface->getLatest();
 
     data->currentStateNo = state;
 

@@ -27,11 +27,11 @@ class InterfaceImpl : public Interface
     void calibrateTelemetry();
 
     // to get the latest rocket state. return a pointer to latestState
-    std::shared_ptr<sensorsData> getLatest() override;
+    std::shared_ptr<StateData> getLatest() override;
 
     // loop over each sensor and update the latestState
     bool updateInputs() override;
-    bool updateOutputs(std::shared_ptr<sensorsData> data) override;
+    bool updateOutputs(std::shared_ptr<StateData> data) override;
 
 #if USE_GPIO == 1
     void createNewGpioOutput(std::string name, int pinNbr) override;
@@ -46,7 +46,7 @@ class InterfaceImpl : public Interface
 
     std::shared_ptr<spdlog::logger> logger;
 
-    std::shared_ptr<sensorsData> latestState;
+    std::shared_ptr<StateData> latestState;
     EventQueue eventQueue;
 
 #if USE_SBG == 1

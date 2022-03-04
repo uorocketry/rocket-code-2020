@@ -2,7 +2,7 @@
 #if TESTING == 1
 
 #include "TestingSensors.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include "helpers/Helper.h"
 
 #include <fstream>
@@ -25,7 +25,7 @@ void TestingSensors::initialize()
 
         std::vector<std::string> currentRow = helper::stringSplit(line, ',');
 
-        sensorsData currentData;
+        StateData currentData;
 
         // Will keep increasing by one for each read
         int count = 0;
@@ -130,18 +130,18 @@ void TestingSensors::initialize()
     IO::initialize();
 }
 
-sensorsData TestingSensors::getLatest()
+StateData TestingSensors::getLatest()
 {
     if (!data.empty())
     {
-        sensorsData currentData = data.front();
+        StateData currentData = data.front();
         data.pop();
 
         return currentData;
     }
     else
     {
-        sensorsData currentData;
+        StateData currentData;
         currentData.outOfData = true;
 
         return currentData;

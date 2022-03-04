@@ -5,7 +5,7 @@
 
 #include "../data/SBGData.h"
 #include "IO.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include <iostream>
 #include <queue>
 
@@ -16,10 +16,10 @@ class TestingSensors : public IO
     void initialize() override;
     bool isInitialized() override;
 
-    sensorsData getLatest();
+    StateData getLatest();
 
   private:
-    std::queue<sensorsData> data;
+    std::queue<StateData> data;
 };
 
 #endif

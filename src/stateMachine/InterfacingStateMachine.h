@@ -2,7 +2,7 @@
 #include "IO/Interface.h"
 #include "IO/InterfaceImpl.h"
 #include "IO/TestingInterface.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include "stateMachineLib/StateMachine.h"
 #include <memory>
 
@@ -20,5 +20,5 @@ class InterfacingStateMachine : public StateMachine
   protected:
     Interface *interface;
 
-    std::shared_ptr<sensorsData> interfaceData;
+    std::shared_ptr<StateData> interfaceData;
 };

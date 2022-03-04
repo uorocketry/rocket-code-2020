@@ -8,7 +8,7 @@
 
 #include <arpa/inet.h>
 #include <chrono>
-#include <data/sensorsData.h>
+#include <data/StateData.h>
 #include <fcntl.h>
 #include <iostream>
 #include <spdlog/spdlog.h>
@@ -104,7 +104,7 @@ void SocketServer::closed(const SocketClient *client)
                   clients.end());
 }
 
-void SocketServer::enqueueSensorData(const sensorsData &data)
+void SocketServer::enqueueSensorData(const StateData &data)
 {
     auto dataStr = data.convertToReducedString();
     dataStr += "\r\n";

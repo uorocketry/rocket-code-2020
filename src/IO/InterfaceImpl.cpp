@@ -78,7 +78,7 @@ void InterfaceImpl::initializeOutputs()
 
 bool InterfaceImpl::updateInputs()
 {
-    latestState = std::make_shared<sensorsData>();
+    latestState = std::make_shared<StateData>();
 
     latestState->timeStamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
@@ -122,7 +122,7 @@ bool InterfaceImpl::updateInputs()
     return true;
 }
 
-bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
+bool InterfaceImpl::updateOutputs(std::shared_ptr<StateData> data)
 {
 
 #if USE_GPIO == 1
@@ -163,7 +163,7 @@ void InterfaceImpl::calibrateTelemetry()
 #endif
 }
 
-std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
+std::shared_ptr<StateData> InterfaceImpl::getLatest()
 {
 
 #if USE_LOGGER == 1

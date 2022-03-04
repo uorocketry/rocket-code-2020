@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 // all the informations about the rocket that the state machine will need
-struct sensorsData
+struct StateData
 {
     bool isInitialized() const;
     std::string convertToReducedString() const;
