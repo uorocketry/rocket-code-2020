@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SensorState.h"
 #include "data/GpioData.h"
 #include "data/SBGData.h"
 #include "data/UOSMData.h"
@@ -48,11 +49,15 @@ struct StateData
     bool arduinoProxyIsInitialized = 0;
 #endif
 
+#if USE_SENSORS
+    SensorState sensorState;
+#endif
+
 #if TESTING == 1
     bool outOfData = false;
 #endif
 
 #if USE_LOGGER == 1
-    bool loggerWorking;
+    bool loggerWorking = false;
 #endif // USE_LOGGER
 };

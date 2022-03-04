@@ -117,5 +117,10 @@ std::string StateData::convertToReducedString() const
     data += ",";
 #endif // USE_LOGGER
 
+#if USE_SENSOR_MAX_31865
+    data += std::to_string(sensorState.temperature);
+    data += ",";
+#endif
+
     return data;
 }

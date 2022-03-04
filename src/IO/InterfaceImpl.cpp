@@ -54,6 +54,9 @@ void InterfaceImpl::initializeInputs()
 #if USE_ARDUINO_PROXY == 1
     arduinoProxy = ArduinoProxy::getInstance();
 #endif
+#if USE_SENSORS
+    sensors.initialize();
+#endif
 }
 
 void InterfaceImpl::initializeOutputs()
@@ -117,6 +120,10 @@ bool InterfaceImpl::updateInputs()
 
 #if USE_ARDUINO_PROXY == 1
     latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
+#endif
+
+#if USE_SENSORS
+    latestState->sensorState = sensors.getCurrentState();
 #endif
 
     return true;

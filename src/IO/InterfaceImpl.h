@@ -12,6 +12,7 @@
 #include "IO/SensorLogger.h"
 #include "IO/gpio/Gpio.h"
 #include "IO/tcp/SocketServer.h"
+#include "Sensors.h"
 #include <memory>
 #include <spdlog/logger.h>
 #include <string>
@@ -75,6 +76,10 @@ class InterfaceImpl : public Interface
 
 #if USE_ARDUINO_PROXY == 1
     ArduinoProxy *arduinoProxy;
+#endif
+
+#if USE_SENSORS == 1
+    Sensors sensors;
 #endif
 };
 
