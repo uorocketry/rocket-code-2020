@@ -727,7 +727,8 @@ void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsD
     {
         connectionAborted = true;
         SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
-        InternalEvent(ST_FINAL_VENTING);
+        EventData eventData;
+        InternalEvent(ST_FINAL_VENTING, eventData);
     }
 #endif
 }
