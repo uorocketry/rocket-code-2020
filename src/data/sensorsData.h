@@ -1,9 +1,9 @@
 #pragma once
 
+#include "common/pch.h"
 #include "data/GpioData.h"
 #include "data/SBGData.h"
 #include "data/UOSMData.h"
-#include "common/pch.h"
 #include <unordered_map>
 
 // all the informations about the rocket that the state machine will need

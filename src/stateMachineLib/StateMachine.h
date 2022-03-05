@@ -1,8 +1,6 @@
-#ifndef _STATE_MACHINE_H
-#define _STATE_MACHINE_H
-
-#include <cstdio>
+#pragma once
 #include "common/pch.h"
+#include <cstdio>
 
 /// @beief Unique state machine event data must inherit from this class.
 class EventData
@@ -35,7 +33,7 @@ class StateAction : public StateBase
 {
   public:
     /// @see StateBase::InvokeStateAction
-     void InvokeStateAction(StateMachine *sm, const EventData &data) const override
+    void InvokeStateAction(StateMachine *sm, const EventData &data) const override
     {
         // Downcast the state machine and event data to the correct derived type
         auto *derivedSM = static_cast<SM *>(sm);
@@ -152,20 +150,20 @@ class StateMachine
 
     ///	Constructor.
     ///	@param[in] maxStates - the maximum number of state machine states.
-    StateMachine(uint8_t maxStates, uint8_t initialState = 0);
+    explicit StateMachine(uint8_t maxStates, uint8_t initialState = 0);
 
     virtual ~StateMachine() = default;
 
     /// Gets the current state machine state.
     /// @return Current state machine state.
-    uint8_t GetCurrentState() const
+    [[nodiscard]] uint8_t GetCurrentState() const
     {
         return m_currentState;
     }
 
     /// Gets the maximum number of state machine states.
     /// @return The maximum state machine states.
-    uint8_t GetMaxStates() const
+    [[nodiscard]] uint8_t GetMaxStates() const
     {
         return MAX_STATES;
     }
@@ -234,29 +232,29 @@ class StateMachine
     /// internal events generated during state execution.
     void StateEngine(const EventData &pData);
     void StateEngine(const StateMapRow *pStateMap);
-    void StateEngine(const StateMapRowEx *pStateMapEx, const EventData& data);
+    void StateEngine(const StateMapRowEx *pStateMapEx, const EventData &data);
 };
 
 #define STATE_DECLARE(stateMachine, stateName, eventData)                                                              \
     void ST_##stateName(const eventData &);                                                                            \
-    StateAction<stateMachine, eventData, &stateMachine::ST_##stateName> (stateName);
+    StateAction<stateMachine, eventData, &stateMachine::ST_##stateName>(stateName);
 
 #define STATE_DEFINE(stateMachine, stateName, eventData) void stateMachine::ST_##stateName(const eventData &data)
 
 #define GUARD_DECLARE(stateMachine, guardName, eventData)                                                              \
     BOOL GD_##guardName(const eventData &);                                                                            \
-    GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName> (guardName);
+    GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName>(guardName);
 
 #define GUARD_DEFINE(stateMachine, guardName, eventData) BOOL stateMachine::GD_##guardName(const eventData &data)
 
 #define ENTRY_DECLARE(stateMachine, entryName, eventData)                                                              \
     void EN_##entryName(const eventData &);                                                                            \
-    EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName> (entryName);
+    EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName>(entryName);
 
 #define ENTRY_DEFINE(stateMachine, entryName, eventData) void stateMachine::EN_##entryName(const eventData &data)
 
 #define EXIT_DECLARE(stateMachine, exitName)                                                                           \
-    void EX_##exitName();                                                                                          \
+    void EX_##exitName();                                                                                              \
     ExitAction<stateMachine, &stateMachine::EX_##exitName> exitName;
 
 #define EXIT_DEFINE(stateMachine, exitName) void stateMachine::EX_##exitName()
@@ -265,12 +263,12 @@ class StateMachine
 
 #define TRANSITION_MAP_ENTRY(entry) entry,
 
-#define END_TRANSITION_MAP                                                                                       \
+#define END_TRANSITION_MAP                                                                                             \
     }                                                                                                                  \
     ;                                                                                                                  \
-    NoEventData _data; \
-    BOOST_ASSERT(GetCurrentState() < ST_MAX_STATES);                                                                    \
-    ExternalEvent(TRANSITIONS[GetCurrentState()], _data);                                                               \
+    NoEventData _data;                                                                                                 \
+    BOOST_ASSERT(GetCurrentState() < ST_MAX_STATES);                                                                   \
+    ExternalEvent(TRANSITIONS[GetCurrentState()], _data);                                                              \
     BOOST_STATIC_ASSERT((sizeof(TRANSITIONS) / sizeof(uint8_t)) == ST_MAX_STATES);
 
 #define PARENT_TRANSITION(state)                                                                                       \
@@ -284,7 +282,7 @@ class StateMachine
   private:                                                                                                             \
     virtual const StateMapRowEx *GetStateMapEx()                                                                       \
     {                                                                                                                  \
-        return nullptr;                                                                                                   \
+        return nullptr;                                                                                                \
     }                                                                                                                  \
     virtual const StateMapRow *GetStateMap()                                                                           \
     {                                                                                                                  \
@@ -295,7 +293,7 @@ class StateMachine
 #define END_STATE_MAP                                                                                                  \
     }                                                                                                                  \
     ;                                                                                                                  \
-    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRow)) == ST_MAX_STATES);                                              \
+    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRow)) == ST_MAX_STATES);                                   \
     return &STATE_MAP[0];                                                                                              \
     }
 
@@ -303,7 +301,7 @@ class StateMachine
   private:                                                                                                             \
     virtual const StateMapRow *GetStateMap()                                                                           \
     {                                                                                                                  \
-        return nullptr;                                                                                                   \
+        return nullptr;                                                                                                \
     }                                                                                                                  \
     virtual const StateMapRowEx *GetStateMapEx()                                                                       \
     {                                                                                                                  \
@@ -316,8 +314,6 @@ class StateMachine
 #define END_STATE_MAP_EX                                                                                               \
     }                                                                                                                  \
     ;                                                                                                                  \
-    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRowEx)) == ST_MAX_STATES);                                            \
+    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRowEx)) == ST_MAX_STATES);                                 \
     return &STATE_MAP[0];                                                                                              \
     }
-
-#endif // _STATE_MACHINE_H

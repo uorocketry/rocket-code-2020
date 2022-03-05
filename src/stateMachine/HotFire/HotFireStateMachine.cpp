@@ -2,10 +2,10 @@
 
 #include "HotFireStateMachine.h"
 #include "HotFireGpioConfig.h"
+#include "common/pch.h"
 #include "config.h"
 #include "data/GpioData.h"
 #include "data/sensorsData.h"
-#include "common/pch.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
 

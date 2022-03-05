@@ -11,7 +11,6 @@ void InterfacingStateMachine::enterNewState(uint8_t state)
     entryTime = interface->getCurrentTime();
 }
 
-
 double InterfacingStateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime)
 {
     duration_ns timeSinceEntry = interface->getCurrentTime() - entryTime;

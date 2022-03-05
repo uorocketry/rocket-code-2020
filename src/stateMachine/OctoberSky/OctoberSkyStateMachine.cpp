@@ -30,7 +30,7 @@ void OctoberSkyStateMachine::Launch()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_2
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
-    END_TRANSITION_MAP
+        END_TRANSITION_MAP
 }
 
 // Launch external event
@@ -66,18 +66,16 @@ void OctoberSkyStateMachine::Apogee()
 }
 
 // Touchdown external event
-void OctoberSkyStateMachine::Touchdown(){
-    BEGIN_TRANSITION_MAP                    // - Current State -
-    TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
-     TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
-     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
- END_TRANSITION_MAP
-}
+void OctoberSkyStateMachine::Touchdown(){BEGIN_TRANSITION_MAP                    // - Current State -
+                                             TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
+                                         TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
+                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
+                                         END_TRANSITION_MAP}
 
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.

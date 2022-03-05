@@ -2,7 +2,8 @@
 //----------------------------------------------------------------------------
 // StateMachine
 //----------------------------------------------------------------------------
-StateMachine::StateMachine(uint8_t maxStates, uint8_t initialState): MAX_STATES(maxStates), m_currentState(initialState)
+StateMachine::StateMachine(uint8_t maxStates, uint8_t initialState)
+    : MAX_STATES(maxStates), m_currentState(initialState)
 {
     BOOST_ASSERT(MAX_STATES < EVENT_IGNORED);
 }
@@ -50,11 +51,6 @@ void StateMachine::StateEngine(const EventData &pData)
 //----------------------------------------------------------------------------
 void StateMachine::StateEngine(const StateMapRow *const pStateMap)
 {
-#if EXTERNAL_EVENT_NO_HEAP_DATA
-    bool externalEvent = true;
-#endif
-    const EventData *pDataTemp = nullptr;
-
     // While events are being generated keep executing states
     while (m_eventGenerated)
     {
@@ -81,7 +77,7 @@ void StateMachine::StateEngine(const StateMapRow *const pStateMap)
 //----------------------------------------------------------------------------
 // StateEngine
 //----------------------------------------------------------------------------
-void StateMachine::StateEngine(const StateMapRowEx *const pStateMapEx, const EventData& data)
+void StateMachine::StateEngine(const StateMapRowEx *const pStateMapEx, const EventData &data)
 {
     // While events are being generated keep executing states
     while (m_eventGenerated)
@@ -94,7 +90,6 @@ void StateMachine::StateEngine(const StateMapRowEx *const pStateMapEx, const Eve
         const GuardBase *guard = pStateMapEx[m_newState].Guard;
         const EntryBase *entry = pStateMapEx[m_newState].Entry;
         const ExitBase *exit = pStateMapEx[m_currentState].Exit;
-
 
         // Event used up, reset the flag
         m_eventGenerated = false;

@@ -15,7 +15,6 @@
 #include "stateMachine/HotFire/HotFireStateMachine.h"
 #include "stateMachine/OctoberSky/OctoberSkyStateMachine.h"
 
-
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
 // Specify the minimum logging level. The specified level and up will be logged.

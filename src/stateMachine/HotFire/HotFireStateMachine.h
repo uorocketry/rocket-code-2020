@@ -1,7 +1,7 @@
 #pragma once
 
-#include "data/UOSMData.h"
 #include "common/pch.h"
+#include "data/UOSMData.h"
 #include "stateMachine/InterfacingStateMachine.h"
 
 class HotFireStateMachine : public InterfacingStateMachine

@@ -1,8 +1,8 @@
 #pragma once
 
+#include "common/pch.h"
 #include "config.h"
 #include "data/sensorsData.h"
-#include "common/pch.h"
 #include <memory>
 #include <string>
 

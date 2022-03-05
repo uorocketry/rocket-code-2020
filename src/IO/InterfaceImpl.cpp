@@ -1,10 +1,10 @@
 #include "config.h"
 #if TESTING != 1
 
-#include "common/pch.h"
 #include "IO/IO.h"
 #include "IO/TestingSensors.h"
 #include "InterfaceImpl.h"
+#include "common/pch.h"
 #include "data/UOSMData.h"
 #include <chrono>
 #include <iostream>
