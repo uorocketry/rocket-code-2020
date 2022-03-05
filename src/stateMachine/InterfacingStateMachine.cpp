@@ -25,11 +25,11 @@ bool InterfacingStateMachine::isDelayElapsed(duration_ms targetTime)
     return timeSinceEntry >= duration_ns(targetTime);
 }
 
-bool InterfacingStateMachine::switchStatesAfterTime(uint8_t state, duration_ms targetTime)
+bool InterfacingStateMachine::switchStatesAfterTime(uint8_t state, duration_ms targetTime, const EventData &eventData)
 {
     if (isDelayElapsed(targetTime))
     {
-        InternalEvent(state);
+        InternalEvent(state, eventData);
 
         return true;
     }

@@ -20,6 +20,7 @@ OctoberSkyStateMachine::OctoberSkyStateMachine(Interface *anInterface)
 // Launch external event
 void OctoberSkyStateMachine::Launch()
 {
+    EventData eventData;
     BEGIN_TRANSITION_MAP                        // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)         // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
@@ -29,12 +30,13 @@ void OctoberSkyStateMachine::Launch()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_2
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
-        END_TRANSITION_MAP(nullptr)
+    END_TRANSITION_MAP
 }
 
 // Launch external event
 void OctoberSkyStateMachine::MotorBurnout()
 {
+
     BEGIN_TRANSITION_MAP                    // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
@@ -44,7 +46,7 @@ void OctoberSkyStateMachine::MotorBurnout()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DESCENT_PHASE_1
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DESCENT_PHASE_2
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_GROUND
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Apogee external event
@@ -60,20 +62,22 @@ void OctoberSkyStateMachine::Apogee()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_DESCENT_PHASE_1
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_DESCENT_PHASE_2
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)      // ST_GROUND
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Touchdown external event
-void OctoberSkyStateMachine::Touchdown(){BEGIN_TRANSITION_MAP                    // - Current State -
-                                             TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
-                                         TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
-                                         TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
-                                         END_TRANSITION_MAP(nullptr)}
+void OctoberSkyStateMachine::Touchdown(){
+    BEGIN_TRANSITION_MAP                    // - Current State -
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_INIT
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_INIT
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_WAIT_FOR_LAUNCH
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_POWERED_FLIGHT
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_COAST
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_DESCENT_PHASE_1
+     TRANSITION_MAP_ENTRY(ST_GROUND)         // ST_DESCENT_PHASE_2
+     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_GROUND
+ END_TRANSITION_MAP
+}
 
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
@@ -82,7 +86,8 @@ STATE_DEFINE(OctoberSkyStateMachine, Init, UOSMData)
 {
     interface->initialize();
 
-    InternalEvent(ST_WAIT_FOR_INIT);
+    NoEventData eventData;
+    InternalEvent(ST_WAIT_FOR_INIT, eventData);
 }
 
 EXIT_DEFINE(OctoberSkyStateMachine, ExitInit)
@@ -98,12 +103,12 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(OctoberSkyStateMachine, WaitForInit, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
-
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_INIT);
+    EventData eventData;
     if (interfaceData->isInitialized())
     {
         interface->calibrateTelemetry();
-        InternalEvent(ST_WAIT_FOR_LAUNCH);
+        InternalEvent(ST_WAIT_FOR_LAUNCH, eventData);
     }
 
     interface->updateOutputs(interfaceData);
@@ -122,7 +127,7 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterWaitForLaunch, UOSMData)
 
 STATE_DEFINE(OctoberSkyStateMachine, WaitForLaunch, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_LAUNCH);
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_LAUNCH);
 
     if (isDelayElapsed(duration_ms(1000))) // wait 1 seconds before attempting external event detection
     {
@@ -146,7 +151,7 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterPoweredFlight, UOSMData)
 // code for the flight state
 STATE_DEFINE(OctoberSkyStateMachine, PoweredFlight, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_POWERED_FLIGHT);
+    interfaceData = updateInterface(&data, ST_POWERED_FLIGHT);
 
     if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection
     {
@@ -170,7 +175,7 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterCoast, UOSMData)
 
 STATE_DEFINE(OctoberSkyStateMachine, Coast, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_COAST);
+    interfaceData = updateInterface(&data, ST_COAST);
 
     if (isDelayElapsed(duration_ms(500))) // wait 0.5 seconds before attempting external event detection
     {
@@ -194,15 +199,15 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterDescentPhase1, UOSMData)
 // code for the DescentPhase1 state
 STATE_DEFINE(OctoberSkyStateMachine, DescentPhase1, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_DESCENT_PHASE_1);
+    interfaceData = updateInterface(&data, ST_DESCENT_PHASE_1);
 
 #if USE_SBG == 1
     if (interfaceData->sbg.relativeBarometricAltitude <= 100)
     { // change descent phase at given relative altitude
-        InternalEvent(ST_DESCENT_PHASE_2);
+        InternalEvent(ST_DESCENT_PHASE_2, data);
     }
 #endif
-    // InternalEvent(ST_DESCENT_PHASE_2);
+    // InternalEvent(ST_DESCENT_PHASE_2, data);
 
     interface->updateOutputs(interfaceData);
 }
@@ -220,7 +225,7 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterDescentPhase2, UOSMData)
 
 STATE_DEFINE(OctoberSkyStateMachine, DescentPhase2, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_DESCENT_PHASE_2);
+    interfaceData = updateInterface(&data, ST_DESCENT_PHASE_2);
 
     detectTouchdown(interfaceData);
 
@@ -241,7 +246,7 @@ ENTRY_DEFINE(OctoberSkyStateMachine, EnterGround, UOSMData)
 // code for the ground state
 STATE_DEFINE(OctoberSkyStateMachine, Ground, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_GROUND);
+    interfaceData = updateInterface(&data, ST_GROUND);
 
     interface->updateOutputs(interfaceData);
 }

@@ -14,7 +14,7 @@ class InterfacingStateMachine : public StateMachine
 
     void enterNewState(uint8_t state);
     double getValueForTime(double minimum, double maximum, duration_ms targetTime);
-    bool switchStatesAfterTime(uint8_t state, duration_ms targetTime);
+    bool switchStatesAfterTime(uint8_t state, duration_ms targetTime, const EventData &eventData);
     bool isDelayElapsed(duration_ms targetTime);
 
   protected:

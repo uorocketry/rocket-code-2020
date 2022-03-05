@@ -99,7 +99,7 @@ int main()
 
         data.now = now;
 
-        uOttSM.updateStateMachine(&data);
+        uOttSM.updateStateMachine(data);
 
         elapsed_ns = duration_ns(now - start);
         target_ns = duration_ns(targetUpdateDuration * count++);

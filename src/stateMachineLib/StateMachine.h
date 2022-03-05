@@ -4,18 +4,6 @@
 #include <cstdio>
 #include "common/pch.h"
 
-// If EXTERNAL_EVENT_NO_HEAP_DATA is defined it changes how a client sends data
-// to the state machine. When undefined, the ExternalEvent() pData argument must
-// be created on the heap. The state machine will automatically delete the
-// EventData pointer during state execution. When defined, clients must not heap
-// allocate EventData with operator new. InternalEvent() used inside the state
-// machine always heap allocates event data.
-#define EXTERNAL_EVENT_NO_HEAP_DATA 1
-
-// See
-// http://www.codeproject.com/Articles/1087619/State-Machine-Design-in-Cplusplus
-
-
 /// @beief Unique state machine event data must inherit from this class.
 class EventData
 {
@@ -36,36 +24,23 @@ class StateBase
     /// execute.
     /// @param[in] sm - A state machine instance.
     /// @param[in] data - The event data.
-    virtual void InvokeStateAction(StateMachine *sm, const EventData *data) const = 0;
+    virtual void InvokeStateAction(StateMachine *sm, const EventData &data) const = 0;
 };
 
 /// @brief StateAction takes three template arguments: A state machine class,
 /// a state function event data type (derived from EventData) and a state
 /// machine member function pointer.
-template <class SM, class Data, void (SM::*Func)(const Data *)>
+template <class SM, class Data, void (SM::*Func)(const Data &)>
 class StateAction : public StateBase
 {
   public:
     /// @see StateBase::InvokeStateAction
-     void InvokeStateAction(StateMachine *sm, const EventData *data) const override
+     void InvokeStateAction(StateMachine *sm, const EventData &data) const override
     {
         // Downcast the state machine and event data to the correct derived type
         auto *derivedSM = static_cast<SM *>(sm);
-
-        // If this check fails, there is a mismatch between the STATE_DECLARE
-        // event data type and the data type being sent to the state function.
-        // For instance, given the following state definition:
-        //    STATE_DECLARE(MyStateMachine, MyStateFunction, MyEventData)
-        // The following internal event transition is valid:
-        //    InternalEvent(ST_MY_STATE_FUNCTION, new MyEventData());
-        // This next internal event is not valid and causes the assert to fail:
-        //    InternalEvent(ST_MY_STATE_FUNCTION, new OtherEventData());
-        const auto *derivedData = dynamic_cast<const Data *>(data);
-
-        // ASSERT_TRUE(derivedData != nullptr);
-
         // Call the state function
-        (derivedSM->*Func)(derivedData);
+        (derivedSM->*Func)(static_cast<const Data &>(data));
     }
 };
 
@@ -80,22 +55,20 @@ class GuardBase
     /// @param[in] data - The event data.
     /// @return Returns TRUE if no guard condition or the guard condition
     /// evaluates to TRUE.
-    virtual bool InvokeGuardCondition(StateMachine *sm, const EventData *data) const = 0;
+    virtual bool InvokeGuardCondition(StateMachine *sm, const EventData &data) const = 0;
 };
 
 /// @brief GuardCondition takes three template arguments: A state machine class,
 /// a state function event data type (derived from EventData) and a state
 /// machine member function pointer.
-template <class SM, class Data, bool (SM::*Func)(const Data *)>
+template <class SM, class Data, bool (SM::*Func)(const Data &)>
 class GuardCondition : public GuardBase
 {
   public:
-    bool InvokeGuardCondition(StateMachine *sm, const EventData *data) const override
+    bool InvokeGuardCondition(StateMachine *sm, const EventData &data) const override
     {
         auto *derivedSM = static_cast<SM *>(sm);
         const auto *derivedData = dynamic_cast<const Data *>(data);
-        // ASSERT_TRUE(derivedData != nullptr);
-
         // Call the guard function
         return (derivedSM->*Func)(derivedData);
     }
@@ -109,24 +82,21 @@ class EntryBase
     /// when entering a state.
     /// @param[in] sm - A state machine instance.
     /// @param[in] data - The event data.
-    virtual void InvokeEntryAction(StateMachine *sm, const EventData *data) const = 0;
+    virtual void InvokeEntryAction(StateMachine *sm, const EventData &data) const = 0;
 };
 
 /// @brief EntryAction takes three template arguments: A state machine class,
 /// a state function event data type (derived from EventData) and a state
 /// machine member function pointer.
-template <class SM, class Data, void (SM::*Func)(const Data *)>
+template <class SM, class Data, void (SM::*Func)(const Data &)>
 class EntryAction : public EntryBase
 {
   public:
-    void InvokeEntryAction(StateMachine *sm, const EventData *data) const override
+    void InvokeEntryAction(StateMachine *sm, const EventData &data) const override
     {
-        auto *derivedSM = static_cast<SM *>(sm);
-        const auto *derivedData = dynamic_cast<const Data *>(data);
-        // ASSERT_TRUE(derivedData != nullptr);
-
+        SM *derivedSM = static_cast<SM *>(sm);
         // Call the entry function
-        (derivedSM->*Func)(derivedData);
+        (derivedSM->*Func)(static_cast<const Data &>(data));
     }
 };
 
@@ -201,23 +171,23 @@ class StateMachine
     }
 
     // Execute the ST_StateName function according to the current state
-    void ExecuteCurrentState(EventData *data);
+    void ExecuteCurrentState(EventData &data);
 
     // CUSTOM CODE ADDED BY uORocketry
-    void updateStateMachine(EventData *data);
+    void updateStateMachine(EventData &data);
     // END CUSTOM CODE ADDED BY uORocketry
 
   protected:
     /// External state machine event.
     /// @param[in] newState - the state machine state to transition to.
     /// @param[in] pData - the event data sent to the state.
-    void ExternalEvent(uint8_t newState, const EventData *pData = nullptr);
+    void ExternalEvent(uint8_t newState, const EventData &pData);
 
     /// Internal state machine event. These events are generated while executing
     ///	within a state machine state.
     /// @param[in] newState - the state machine state to transition to.
     /// @param[in] pData - the event data sent to the state.
-    void InternalEvent(uint8_t newState, const EventData *pData = nullptr);
+    void InternalEvent(uint8_t newState, const EventData &pData);
 
     // CUSTOM CODE ADDED BY uORocketry
     time_point entryTime;
@@ -235,9 +205,6 @@ class StateMachine
 
     /// Set to TRUE when an event is generated.
     bool m_eventGenerated = false;
-
-    /// The state event data pointer.
-    const EventData *m_pEventData = nullptr;
 
     /// Gets the state map as defined in the derived class. The BEGIN_STATE_MAP,
     /// STATE_MAP_ENTRY and END_STATE_MAP macros are used to assist in creating
@@ -265,44 +232,45 @@ class StateMachine
 
     /// State machine engine that executes the external event and, optionally, all
     /// internal events generated during state execution.
-    void StateEngine();
+    void StateEngine(const EventData &pData);
     void StateEngine(const StateMapRow *pStateMap);
-    void StateEngine(const StateMapRowEx *pStateMapEx);
+    void StateEngine(const StateMapRowEx *pStateMapEx, const EventData& data);
 };
 
 #define STATE_DECLARE(stateMachine, stateName, eventData)                                                              \
-    void ST_##stateName(const eventData *);                                                                            \
+    void ST_##stateName(const eventData &);                                                                            \
     StateAction<stateMachine, eventData, &stateMachine::ST_##stateName> (stateName);
 
-#define STATE_DEFINE(stateMachine, stateName, eventData) void stateMachine::ST_##stateName(const eventData *data)
+#define STATE_DEFINE(stateMachine, stateName, eventData) void stateMachine::ST_##stateName(const eventData &data)
 
 #define GUARD_DECLARE(stateMachine, guardName, eventData)                                                              \
-    BOOL GD_##guardName(const eventData *);                                                                            \
+    BOOL GD_##guardName(const eventData &);                                                                            \
     GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName> (guardName);
 
-#define GUARD_DEFINE(stateMachine, guardName, eventData) BOOL stateMachine::GD_##guardName(const eventData *data)
+#define GUARD_DEFINE(stateMachine, guardName, eventData) BOOL stateMachine::GD_##guardName(const eventData &data)
 
 #define ENTRY_DECLARE(stateMachine, entryName, eventData)                                                              \
-    void EN_##entryName(const eventData *);                                                                            \
+    void EN_##entryName(const eventData &);                                                                            \
     EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName> (entryName);
 
-#define ENTRY_DEFINE(stateMachine, entryName, eventData) void stateMachine::EN_##entryName(const eventData *data)
+#define ENTRY_DEFINE(stateMachine, entryName, eventData) void stateMachine::EN_##entryName(const eventData &data)
 
 #define EXIT_DECLARE(stateMachine, exitName)                                                                           \
-    void EX_##exitName(void);                                                                                          \
+    void EX_##exitName();                                                                                          \
     ExitAction<stateMachine, &stateMachine::EX_##exitName> exitName;
 
-#define EXIT_DEFINE(stateMachine, exitName) void stateMachine::EX_##exitName(void)
+#define EXIT_DEFINE(stateMachine, exitName) void stateMachine::EX_##exitName()
 
 #define BEGIN_TRANSITION_MAP static const uint8_t TRANSITIONS[] = {
 
 #define TRANSITION_MAP_ENTRY(entry) entry,
 
-#define END_TRANSITION_MAP(data)                                                                                       \
+#define END_TRANSITION_MAP                                                                                       \
     }                                                                                                                  \
     ;                                                                                                                  \
+    NoEventData _data; \
     BOOST_ASSERT(GetCurrentState() < ST_MAX_STATES);                                                                    \
-    ExternalEvent(TRANSITIONS[GetCurrentState()], data);                                                               \
+    ExternalEvent(TRANSITIONS[GetCurrentState()], _data);                                                               \
     BOOST_STATIC_ASSERT((sizeof(TRANSITIONS) / sizeof(uint8_t)) == ST_MAX_STATES);
 
 #define PARENT_TRANSITION(state)                                                                                       \

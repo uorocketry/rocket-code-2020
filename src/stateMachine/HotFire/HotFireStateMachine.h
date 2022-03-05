@@ -19,7 +19,7 @@ class HotFireStateMachine : public InterfacingStateMachine
     void DoneEXT();
     void ServoControlEXT();
 
-    void updateHotFire(UOSMData *data);
+    void updateHotFire(UOSMData &data);
 
   private:
     void detectConnectionTimeout(const std::shared_ptr<sensorsData> &data);
