@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IO.h"
-#include "helpers/Types.h"
+#include "common/pch.h"
 #include <queue>
 
 class EventQueue

@@ -1,21 +1,22 @@
 #include "InterfacingStateMachine.h"
 #include "config.h"
 
-InterfacingStateMachine::InterfacingStateMachine(Interface *anInterface, BYTE maxStates, BYTE initialState)
+InterfacingStateMachine::InterfacingStateMachine(Interface *anInterface, uint8_t maxStates, uint8_t initialState)
     : StateMachine(maxStates, initialState), interface(anInterface)
 {
 }
 
-void InterfacingStateMachine::enterNewState(BYTE state)
+void InterfacingStateMachine::enterNewState(uint8_t state)
 {
     entryTime = interface->getCurrentTime();
 }
+
 
 double InterfacingStateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime)
 {
     duration_ns timeSinceEntry = interface->getCurrentTime() - entryTime;
     double progress = ((double)timeSinceEntry.count()) / duration_ns(targetTime).count();
-    return minimum(maximum, minimum + progress * (maximum - minimum));
+    return std::min(maximum, minimum + progress * (maximum - minimum));
 }
 
 bool InterfacingStateMachine::isDelayElapsed(duration_ms targetTime)
@@ -24,7 +25,7 @@ bool InterfacingStateMachine::isDelayElapsed(duration_ms targetTime)
     return timeSinceEntry >= duration_ns(targetTime);
 }
 
-bool InterfacingStateMachine::switchStatesAfterTime(BYTE state, duration_ms targetTime)
+bool InterfacingStateMachine::switchStatesAfterTime(uint8_t state, duration_ms targetTime)
 {
     if (isDelayElapsed(targetTime))
     {

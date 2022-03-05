@@ -1,12 +1,8 @@
 #ifndef _STATE_MACHINE_H
 #define _STATE_MACHINE_H
 
-#include "DataTypes.h"
-#include "Fault.h"
-#include <stdio.h>
-#include <typeinfo>
-
-#include "helpers/Types.h"
+#include <cstdio>
+#include "common/pch.h"
 
 // If EXTERNAL_EVENT_NO_HEAP_DATA is defined it changes how a client sends data
 // to the state machine. When undefined, the ExternalEvent() pData argument must
@@ -19,22 +15,15 @@
 // See
 // http://www.codeproject.com/Articles/1087619/State-Machine-Design-in-Cplusplus
 
-// Uncomment the include below the XALLOCATOR line to use the xallocator instead
-// of the global heap. Any EventData, or derived class thereof, created with
-// new/delete will be routed to the xallocator. See xallocator.h for more info.
-//#include "xallocator.h"
 
 /// @beief Unique state machine event data must inherit from this class.
 class EventData
 {
   public:
-    virtual ~EventData()
-    {
-    }
-    // XALLOCATOR
+    virtual ~EventData() = default;
 };
 
-typedef EventData NoEventData;
+using NoEventData = EventData;
 
 class StateMachine;
 
@@ -58,22 +47,22 @@ class StateAction : public StateBase
 {
   public:
     /// @see StateBase::InvokeStateAction
-    virtual void InvokeStateAction(StateMachine *sm, const EventData *data) const
+     void InvokeStateAction(StateMachine *sm, const EventData *data) const override
     {
         // Downcast the state machine and event data to the correct derived type
-        SM *derivedSM = static_cast<SM *>(sm);
+        auto *derivedSM = static_cast<SM *>(sm);
 
         // If this check fails, there is a mismatch between the STATE_DECLARE
         // event data type and the data type being sent to the state function.
-        // For instance, given the following state defintion:
+        // For instance, given the following state definition:
         //    STATE_DECLARE(MyStateMachine, MyStateFunction, MyEventData)
         // The following internal event transition is valid:
         //    InternalEvent(ST_MY_STATE_FUNCTION, new MyEventData());
         // This next internal event is not valid and causes the assert to fail:
         //    InternalEvent(ST_MY_STATE_FUNCTION, new OtherEventData());
-        const Data *derivedData = dynamic_cast<const Data *>(data);
+        const auto *derivedData = dynamic_cast<const Data *>(data);
 
-        // ASSERT_TRUE(derivedData != NULL);
+        // ASSERT_TRUE(derivedData != nullptr);
 
         // Call the state function
         (derivedSM->*Func)(derivedData);
@@ -91,21 +80,21 @@ class GuardBase
     /// @param[in] data - The event data.
     /// @return Returns TRUE if no guard condition or the guard condition
     /// evaluates to TRUE.
-    virtual BOOL InvokeGuardCondition(StateMachine *sm, const EventData *data) const = 0;
+    virtual bool InvokeGuardCondition(StateMachine *sm, const EventData *data) const = 0;
 };
 
 /// @brief GuardCondition takes three template arguments: A state machine class,
 /// a state function event data type (derived from EventData) and a state
 /// machine member function pointer.
-template <class SM, class Data, BOOL (SM::*Func)(const Data *)>
+template <class SM, class Data, bool (SM::*Func)(const Data *)>
 class GuardCondition : public GuardBase
 {
   public:
-    virtual BOOL InvokeGuardCondition(StateMachine *sm, const EventData *data) const
+    bool InvokeGuardCondition(StateMachine *sm, const EventData *data) const override
     {
-        SM *derivedSM = static_cast<SM *>(sm);
-        const Data *derivedData = dynamic_cast<const Data *>(data);
-        // ASSERT_TRUE(derivedData != NULL);
+        auto *derivedSM = static_cast<SM *>(sm);
+        const auto *derivedData = dynamic_cast<const Data *>(data);
+        // ASSERT_TRUE(derivedData != nullptr);
 
         // Call the guard function
         return (derivedSM->*Func)(derivedData);
@@ -130,11 +119,11 @@ template <class SM, class Data, void (SM::*Func)(const Data *)>
 class EntryAction : public EntryBase
 {
   public:
-    virtual void InvokeEntryAction(StateMachine *sm, const EventData *data) const
+    void InvokeEntryAction(StateMachine *sm, const EventData *data) const override
     {
-        SM *derivedSM = static_cast<SM *>(sm);
-        const Data *derivedData = dynamic_cast<const Data *>(data);
-        // ASSERT_TRUE(derivedData != NULL);
+        auto *derivedSM = static_cast<SM *>(sm);
+        const auto *derivedData = dynamic_cast<const Data *>(data);
+        // ASSERT_TRUE(derivedData != nullptr);
 
         // Call the entry function
         (derivedSM->*Func)(derivedData);
@@ -157,9 +146,9 @@ template <class SM, void (SM::*Func)(void)>
 class ExitAction : public ExitBase
 {
   public:
-    virtual void InvokeExitAction(StateMachine *sm) const
+    void InvokeExitAction(StateMachine *sm) const override
     {
-        SM *derivedSM = static_cast<SM *>(sm);
+        auto *derivedSM = static_cast<SM *>(sm);
 
         // Call the exit function
         (derivedSM->*Func)();
@@ -193,22 +182,20 @@ class StateMachine
 
     ///	Constructor.
     ///	@param[in] maxStates - the maximum number of state machine states.
-    StateMachine(BYTE maxStates, BYTE initialState = 0);
+    StateMachine(uint8_t maxStates, uint8_t initialState = 0);
 
-    virtual ~StateMachine()
-    {
-    }
+    virtual ~StateMachine() = default;
 
     /// Gets the current state machine state.
     /// @return Current state machine state.
-    BYTE GetCurrentState()
+    uint8_t GetCurrentState() const
     {
         return m_currentState;
     }
 
     /// Gets the maximum number of state machine states.
     /// @return The maximum state machine states.
-    BYTE GetMaxStates()
+    uint8_t GetMaxStates() const
     {
         return MAX_STATES;
     }
@@ -224,13 +211,13 @@ class StateMachine
     /// External state machine event.
     /// @param[in] newState - the state machine state to transition to.
     /// @param[in] pData - the event data sent to the state.
-    void ExternalEvent(BYTE newState, const EventData *pData = NULL);
+    void ExternalEvent(uint8_t newState, const EventData *pData = nullptr);
 
     /// Internal state machine event. These events are generated while executing
     ///	within a state machine state.
     /// @param[in] newState - the state machine state to transition to.
     /// @param[in] pData - the event data sent to the state.
-    void InternalEvent(BYTE newState, const EventData *pData = NULL);
+    void InternalEvent(uint8_t newState, const EventData *pData = nullptr);
 
     // CUSTOM CODE ADDED BY uORocketry
     time_point entryTime;
@@ -238,26 +225,26 @@ class StateMachine
 
   private:
     /// The maximum number of state machine states.
-    const BYTE MAX_STATES;
+    const uint8_t MAX_STATES;
 
     /// The current state machine state.
-    BYTE m_currentState;
+    uint8_t m_currentState;
 
     /// The new state the state machine has yet to transition to.
-    BYTE m_newState;
+    uint8_t m_newState = false;
 
     /// Set to TRUE when an event is generated.
-    BOOL m_eventGenerated;
+    bool m_eventGenerated = false;
 
     /// The state event data pointer.
-    const EventData *m_pEventData;
+    const EventData *m_pEventData = nullptr;
 
     /// Gets the state map as defined in the derived class. The BEGIN_STATE_MAP,
     /// STATE_MAP_ENTRY and END_STATE_MAP macros are used to assist in creating
     /// the map. A state machine only needs to return a state map using either
     /// GetStateMap() or GetStateMapEx() but not both.
     /// @return An array of StateMapRow pointers with the array size MAX_STATES or
-    /// NULL if the state machine uses the GetStateMapEx().
+    /// nullptr if the state machine uses the GetStateMapEx().
     virtual const StateMapRow *GetStateMap() = 0;
 
     /// Gets the extended state map as defined in the derived class. The
@@ -266,38 +253,38 @@ class StateMachine
     /// machine only needs to return a state map using either GetStateMap() or
     /// GetStateMapEx() but not both.
     /// @return An array of StateMapRowEx pointers with the array size MAX_STATES
-    /// or NULL if the state machine uses the GetStateMap().
+    /// or nullptr if the state machine uses the GetStateMap().
     virtual const StateMapRowEx *GetStateMapEx() = 0;
 
     /// Set a new current state.
     /// @param[in] newState - the new state.
-    void SetCurrentState(BYTE newState)
+    void SetCurrentState(uint8_t newState)
     {
         m_currentState = newState;
     }
 
     /// State machine engine that executes the external event and, optionally, all
     /// internal events generated during state execution.
-    void StateEngine(void);
-    void StateEngine(const StateMapRow *const pStateMap);
-    void StateEngine(const StateMapRowEx *const pStateMapEx);
+    void StateEngine();
+    void StateEngine(const StateMapRow *pStateMap);
+    void StateEngine(const StateMapRowEx *pStateMapEx);
 };
 
 #define STATE_DECLARE(stateMachine, stateName, eventData)                                                              \
     void ST_##stateName(const eventData *);                                                                            \
-    StateAction<stateMachine, eventData, &stateMachine::ST_##stateName> stateName;
+    StateAction<stateMachine, eventData, &stateMachine::ST_##stateName> (stateName);
 
 #define STATE_DEFINE(stateMachine, stateName, eventData) void stateMachine::ST_##stateName(const eventData *data)
 
 #define GUARD_DECLARE(stateMachine, guardName, eventData)                                                              \
     BOOL GD_##guardName(const eventData *);                                                                            \
-    GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName> guardName;
+    GuardCondition<stateMachine, eventData, &stateMachine::GD_##guardName> (guardName);
 
 #define GUARD_DEFINE(stateMachine, guardName, eventData) BOOL stateMachine::GD_##guardName(const eventData *data)
 
 #define ENTRY_DECLARE(stateMachine, entryName, eventData)                                                              \
     void EN_##entryName(const eventData *);                                                                            \
-    EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName> entryName;
+    EntryAction<stateMachine, eventData, &stateMachine::EN_##entryName> (entryName);
 
 #define ENTRY_DEFINE(stateMachine, entryName, eventData) void stateMachine::EN_##entryName(const eventData *data)
 
@@ -307,16 +294,16 @@ class StateMachine
 
 #define EXIT_DEFINE(stateMachine, exitName) void stateMachine::EX_##exitName(void)
 
-#define BEGIN_TRANSITION_MAP static const BYTE TRANSITIONS[] = {
+#define BEGIN_TRANSITION_MAP static const uint8_t TRANSITIONS[] = {
 
 #define TRANSITION_MAP_ENTRY(entry) entry,
 
 #define END_TRANSITION_MAP(data)                                                                                       \
     }                                                                                                                  \
     ;                                                                                                                  \
-    ASSERT_TRUE(GetCurrentState() < ST_MAX_STATES);                                                                    \
+    BOOST_ASSERT(GetCurrentState() < ST_MAX_STATES);                                                                    \
     ExternalEvent(TRANSITIONS[GetCurrentState()], data);                                                               \
-    C_ASSERT((sizeof(TRANSITIONS) / sizeof(BYTE)) == ST_MAX_STATES);
+    BOOST_STATIC_ASSERT((sizeof(TRANSITIONS) / sizeof(uint8_t)) == ST_MAX_STATES);
 
 #define PARENT_TRANSITION(state)                                                                                       \
     if (GetCurrentState() >= ST_MAX_STATES && GetCurrentState() < GetMaxStates())                                      \
@@ -329,7 +316,7 @@ class StateMachine
   private:                                                                                                             \
     virtual const StateMapRowEx *GetStateMapEx()                                                                       \
     {                                                                                                                  \
-        return NULL;                                                                                                   \
+        return nullptr;                                                                                                   \
     }                                                                                                                  \
     virtual const StateMapRow *GetStateMap()                                                                           \
     {                                                                                                                  \
@@ -340,7 +327,7 @@ class StateMachine
 #define END_STATE_MAP                                                                                                  \
     }                                                                                                                  \
     ;                                                                                                                  \
-    C_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRow)) == ST_MAX_STATES);                                              \
+    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRow)) == ST_MAX_STATES);                                              \
     return &STATE_MAP[0];                                                                                              \
     }
 
@@ -348,7 +335,7 @@ class StateMachine
   private:                                                                                                             \
     virtual const StateMapRow *GetStateMap()                                                                           \
     {                                                                                                                  \
-        return NULL;                                                                                                   \
+        return nullptr;                                                                                                   \
     }                                                                                                                  \
     virtual const StateMapRowEx *GetStateMapEx()                                                                       \
     {                                                                                                                  \
@@ -361,7 +348,7 @@ class StateMachine
 #define END_STATE_MAP_EX                                                                                               \
     }                                                                                                                  \
     ;                                                                                                                  \
-    C_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRowEx)) == ST_MAX_STATES);                                            \
+    BOOST_STATIC_ASSERT((sizeof(STATE_MAP) / sizeof(StateMapRowEx)) == ST_MAX_STATES);                                            \
     return &STATE_MAP[0];                                                                                              \
     }
 

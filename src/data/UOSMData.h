@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../helpers/Types.h"
+#include "common/pch.h"
 #include "../stateMachineLib/StateMachine.h"
 
 struct UOSMData : public EventData

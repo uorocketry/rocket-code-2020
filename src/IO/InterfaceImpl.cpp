@@ -1,11 +1,11 @@
 #include "config.h"
 #if TESTING != 1
 
+#include "common/pch.h"
 #include "IO/IO.h"
 #include "IO/TestingSensors.h"
 #include "InterfaceImpl.h"
 #include "data/UOSMData.h"
-#include "helpers/Types.h"
 #include <chrono>
 #include <iostream>
 #include <spdlog/spdlog.h>

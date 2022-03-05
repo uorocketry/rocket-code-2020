@@ -1,6 +1,4 @@
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-
-#include "../helpers/Types.h"
+#include "common/pch.h"
 #include "iostream"
 #include <spdlog/sinks/systemd_sink.h>
 #include <thread>
@@ -16,6 +14,7 @@
 #include "spdlog/spdlog.h"
 #include "stateMachine/HotFire/HotFireStateMachine.h"
 #include "stateMachine/OctoberSky/OctoberSkyStateMachine.h"
+
 
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 

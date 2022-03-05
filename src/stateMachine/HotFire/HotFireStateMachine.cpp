@@ -5,7 +5,7 @@
 #include "config.h"
 #include "data/GpioData.h"
 #include "data/sensorsData.h"
-#include "helpers/Types.h"
+#include "common/pch.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
 
