@@ -24,7 +24,7 @@ void Sensors::initSensors()
 #if USE_SENSOR_MAX_31865 == 1
     if (!max31865IsInit)
     {
-        max31865IsInit = max31865.begin(MAX31865_3WIRE);
+        max31865IsInit = max31865.begin(MAX31865::NumWires::_3WIRE);
         if (!max31865IsInit)
         {
             SPDLOG_WARN("Could not init RTD sensor. Trying again shortly...");

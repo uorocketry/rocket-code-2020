@@ -36,7 +36,7 @@ MAX31865::MAX31865(const char *device) : spi_dev(device, SPI_MODE_1, 8, 1000000,
     @return True
 */
 /**************************************************************************/
-bool MAX31865::begin(max31865_numwires_t wires)
+bool MAX31865::begin(MAX31865::NumWires wires)
 {
     setWires(wires);
     enableBias(false);
@@ -56,7 +56,7 @@ bool MAX31865::begin(max31865_numwires_t wires)
 /**************************************************************************/
 uint8_t MAX31865::readFault(void)
 {
-    return readRegister8(MAX31865_FAULTSTAT_REG);
+    return readRegister8(Register_FaultStat);
 }
 
 /**************************************************************************/
@@ -66,10 +66,10 @@ uint8_t MAX31865::readFault(void)
 /**************************************************************************/
 void MAX31865::clearFault(void)
 {
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
+    uint8_t t = readRegister8(Register_Config);
     t &= ~0x2C;
-    t |= MAX31865_CONFIG_FAULTSTAT;
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    t |= Config_FaultStat;
+    writeRegister8(Register_Config, t);
 }
 
 /**************************************************************************/
@@ -80,16 +80,16 @@ void MAX31865::clearFault(void)
 /**************************************************************************/
 void MAX31865::enableBias(bool b)
 {
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
+    uint8_t t = readRegister8(Register_Config);
     if (b)
     {
-        t |= MAX31865_CONFIG_BIAS; // enable bias
+        t |= Config_Bias; // enable bias
     }
     else
     {
-        t &= ~MAX31865_CONFIG_BIAS; // disable bias
+        t &= ~Config_Bias; // disable bias
     }
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    writeRegister8(Register_Config, t);
 }
 
 /**************************************************************************/
@@ -100,16 +100,16 @@ void MAX31865::enableBias(bool b)
 /**************************************************************************/
 void MAX31865::autoConvert(bool b)
 {
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
+    uint8_t t = readRegister8(Register_Config);
     if (b)
     {
-        t |= MAX31865_CONFIG_MODEAUTO; // enable autoconvert
+        t |= Config_ModeAuto; // enable autoconvert
     }
     else
     {
-        t &= ~MAX31865_CONFIG_MODEAUTO; // disable autoconvert
+        t &= ~Config_ModeAuto; // disable autoconvert
     }
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    writeRegister8(Register_Config, t);
 }
 
 /**************************************************************************/
@@ -121,16 +121,16 @@ void MAX31865::autoConvert(bool b)
 
 void MAX31865::enable50Hz(bool b)
 {
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
+    uint8_t t = readRegister8(Register_Config);
     if (b)
     {
-        t |= MAX31865_CONFIG_FILT50HZ;
+        t |= Config_Filt50HZ;
     }
     else
     {
-        t &= ~MAX31865_CONFIG_FILT50HZ;
+        t &= ~Config_Filt50HZ;
     }
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    writeRegister8(Register_Config, t);
 }
 
 /**************************************************************************/
@@ -140,19 +140,19 @@ void MAX31865::enable50Hz(bool b)
     @param wires The number of wires in enum format
 */
 /**************************************************************************/
-void MAX31865::setWires(max31865_numwires_t wires)
+void MAX31865::setWires(MAX31865::NumWires wires)
 {
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
-    if (wires == MAX31865_3WIRE)
+    uint8_t t = readRegister8(Register_Config);
+    if (wires == NumWires::_3WIRE)
     {
-        t |= MAX31865_CONFIG_3WIRE;
+        t |= Config_3Wire;
     }
     else
     {
         // 2 or 4 wire
-        t &= ~MAX31865_CONFIG_3WIRE;
+        t &= ~Config_3Wire;
     }
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    writeRegister8(Register_Config, t);
 }
 
 /**************************************************************************/
@@ -220,12 +220,12 @@ uint16_t MAX31865::readRTD(void)
     clearFault();
     enableBias(true);
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    uint8_t t = readRegister8(MAX31865_CONFIG_REG);
-    t |= MAX31865_CONFIG_1SHOT;
-    writeRegister8(MAX31865_CONFIG_REG, t);
+    uint8_t t = readRegister8(Register_Config);
+    t |= Config_1Shot;
+    writeRegister8(Register_Config, t);
     std::this_thread::sleep_for(std::chrono::milliseconds(65));
 
-    uint16_t rtd = readRegister16(MAX31865_RTDMSB_REG);
+    uint16_t rtd = readRegister16(Register_RtdMSB);
 
     enableBias(false); // Disable bias current again to reduce selfheating.
 
