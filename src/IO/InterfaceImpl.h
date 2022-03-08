@@ -12,7 +12,6 @@
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
 #include "IO/gpio/Gpio.h"
-#include "IO/tcp/SocketServer.h"
 #include <memory>
 #include <spdlog/logger.h>
 #include <string>
