@@ -18,6 +18,8 @@ class GroundStationComm
      */
     void sendSensorData(const sensorsData &data);
 
+    virtual bool isInitialized() = 0;
+
   private:
     EventQueue &eventQueue;
 

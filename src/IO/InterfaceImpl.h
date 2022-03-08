@@ -4,6 +4,7 @@
 #if TESTING != 1
 
 #include "EventQueue.h"
+#include "GroundStationTCPComm.h"
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
 #include "IO/Interface.h"
@@ -58,7 +59,7 @@ class InterfaceImpl : public Interface
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-    SocketServer client;
+    GroundStationTCPComm groundStationTCPComm;
 #endif
 
 #if USE_RADIO == 1
