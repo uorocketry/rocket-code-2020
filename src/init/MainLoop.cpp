@@ -20,8 +20,8 @@
 // Specify the minimum logging level. The specified level and up will be logged.
 // For example, if we have the level to be `info`, `warning` and `error` will be
 // logged but not `debug`.
-const auto CONSOLE_LOGGING_LEVEL = spdlog::level::debug;
-const auto FILE_LOGGING_LEVEL = spdlog::level::debug;
+const auto CONSOLE_LOGGING_LEVEL = spdlog::level::info;
+const auto FILE_LOGGING_LEVEL = spdlog::level::info;
 const auto SYSTEMD_LOGGING_LEVEL = spdlog::level::debug;
 
 void setup_logging()
@@ -58,7 +58,7 @@ void setup_logging()
 
     // Create a new logger with name 'global'
     auto logger = std::make_shared<spdlog::logger>("global", begin(sinks), end(sinks));
-    logger->set_level(spdlog::level::debug);
+    logger->set_level(spdlog::level::trace);
 
     // Register the logger we just created so we can access it from anywhere
     spdlog::register_logger(logger);
