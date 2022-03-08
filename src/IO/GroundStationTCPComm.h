@@ -12,7 +12,13 @@ class GroundStationTCPCommMonitor : public zmq::monitor_t
     void on_event_accepted(const zmq_event_t &event, const char *addr) override;
     void on_event_disconnected(const zmq_event_t &event_, const char *addr_) override;
 
+    int getConnectedClientsCount()
+    {
+        return connectedClients;
+    };
+
   private:
+    std::atomic_int connectedClients{0};
     std::string socketName;
 };
 
@@ -28,6 +34,17 @@ class GroundStationTCPComm : public GroundStationComm
      */
     [[noreturn]] void receiveLoop();
 
+    bool isInitialized() override
+    {
+        return true;
+    }
+
+    /**
+     * Returns the last timestamp when a client was connected to this server
+     * @return
+     */
+    uint64_t getLastConnectionTimestamp();
+
   private:
     zmq::context_t zmq_ctx;
     zmq::socket_t sendingSocket;
@@ -35,4 +52,6 @@ class GroundStationTCPComm : public GroundStationComm
 
     GroundStationTCPCommMonitor sendingMonitor;
     GroundStationTCPCommMonitor receiveMonitor;
+
+    uint64_t lastConnectionTimestamp{0};
 };

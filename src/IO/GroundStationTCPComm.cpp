@@ -67,10 +67,24 @@ GroundStationTCPCommMonitor::GroundStationTCPCommMonitor(zmq::socket_t &socket, 
 
 void GroundStationTCPCommMonitor::on_event_accepted(const zmq_event_t &event, const char *addr)
 {
-    SPDLOG_INFO("New client connected on {} socket", socketName);
+    connectedClients++;
+    SPDLOG_INFO("New client connected on {} socket. Currently connected to {} devices.", socketName, connectedClients);
 }
 
 void GroundStationTCPCommMonitor::on_event_disconnected(const zmq_event_t &event_, const char *addr_)
 {
-    SPDLOG_INFO("Client disconnected on {} socket", socketName);
+    connectedClients--;
+    SPDLOG_INFO("Client disconnected on {} socket. Currently connected to {} devices.", socketName, connectedClients);
+}
+
+uint64_t GroundStationTCPComm::getLastConnectionTimestamp()
+{
+    if (sendingMonitor.getConnectedClientsCount() != 0)
+    {
+        lastConnectionTimestamp =
+            std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch())
+                .count();
+    }
+
+    return lastConnectionTimestamp;
 }
