@@ -58,7 +58,7 @@ class InterfaceImpl : public Interface
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-    GroundStationTCPComm groundStationTCPComm;
+    std::shared_ptr<GroundStationTCPComm> groundStationTCPComm;
 #endif
 
 #if USE_RADIO == 1

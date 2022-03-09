@@ -4,9 +4,11 @@
 #include "GroundStationComm.pb.h"
 #include "GroundStationEncoder.h"
 #include "data/sensorsData.h"
+#include "spdlog/sinks/base_sink.h"
+#include <mutex>
 #include <optional>
 
-class GroundStationComm
+class GroundStationComm : public spdlog::sinks::base_sink<std::mutex>
 {
   public:
     explicit GroundStationComm(EventQueue &eventQueue) : eventQueue(eventQueue)
@@ -27,6 +29,14 @@ class GroundStationComm
      * Send a protobuf message to the ground-station. This function is non-blocking and can drop the data if needed.
      */
     virtual void sendMessage(const RocketryProto::GroundStationIn &gsData) = 0;
+
+    /**
+     * Handle any logs from spdlog and send them to the ground station
+     */
+    void sink_it_(const spdlog::details::log_msg &msg) override;
+    void flush_() override
+    {
+    }
 
   protected:
     /**

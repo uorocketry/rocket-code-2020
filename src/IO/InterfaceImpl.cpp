@@ -19,7 +19,7 @@ InterfaceImpl::InterfaceImpl()
 #endif
 #if USE_SOCKET_CLIENT == 1
       ,
-      groundStationTCPComm(eventQueue)
+      groundStationTCPComm(std::make_shared<GroundStationTCPComm>(eventQueue))
 #endif
 #if USE_RADIO == 1
       ,
@@ -49,6 +49,9 @@ void InterfaceImpl::initializeInputs()
 #endif
 #if USE_ARDUINO_PROXY == 1
     arduinoProxy = ArduinoProxy::getInstance();
+#endif
+#if USE_SOCKET_CLIENT == 1
+    spdlog::default_logger()->sinks().push_back(groundStationTCPComm);
 #endif
 }
 
@@ -90,8 +93,8 @@ bool InterfaceImpl::updateInputs()
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-    latestState->clientIsInitialized = groundStationTCPComm.isInitialized();
-    latestState->lastActiveClientTimestamp = groundStationTCPComm.getLastConnectionTimestamp();
+    latestState->clientIsInitialized = groundStationTCPComm->isInitialized();
+    latestState->lastActiveClientTimestamp = groundStationTCPComm->getLastConnectionTimestamp();
 #endif
 
 #if USE_SBG == 1
@@ -134,7 +137,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
 #endif
 
 #if USE_SOCKET_CLIENT == 1
-    groundStationTCPComm.sendSensorData(*data);
+    groundStationTCPComm->sendSensorData(*data);
 #endif
 
     return true;
