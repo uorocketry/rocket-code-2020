@@ -10,11 +10,11 @@ class InterfacingStateMachine : public StateMachine
 {
 
   public:
-    InterfacingStateMachine(Interface *anInterface, BYTE maxStates, BYTE initialState = 0);
+    InterfacingStateMachine(Interface *anInterface, uint8_t maxStates, uint8_t initialState = 0);
 
-    void enterNewState(BYTE state);
+    void enterNewState(uint8_t state);
     double getValueForTime(double minimum, double maximum, duration_ms targetTime);
-    bool switchStatesAfterTime(BYTE state, duration_ms targetTime);
+    bool switchStatesAfterTime(uint8_t state, duration_ms targetTime, const EventData &eventData);
     bool isDelayElapsed(duration_ms targetTime);
 
   protected:

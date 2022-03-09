@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../helpers/Types.h"
 #include "../stateMachineLib/StateMachine.h"
+#include "common/pch.h"
 
 struct UOSMData : public EventData
 {

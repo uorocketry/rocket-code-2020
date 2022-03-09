@@ -2,10 +2,10 @@
 
 #include "HotFireStateMachine.h"
 #include "HotFireGpioConfig.h"
+#include "common/pch.h"
 #include "config.h"
 #include "data/GpioData.h"
 #include "data/sensorsData.h"
-#include "helpers/Types.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
 
@@ -38,7 +38,7 @@ void HotFireStateMachine::ReadyEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // StartFilling external event
@@ -58,7 +58,7 @@ void HotFireStateMachine::StartFillingEXT()
         TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Abort external event
@@ -78,7 +78,7 @@ void HotFireStateMachine::AbortEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // StopFilling external event
@@ -98,7 +98,7 @@ void HotFireStateMachine::StopFillingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Ignition external event
@@ -118,7 +118,7 @@ void HotFireStateMachine::IgnitionEXT()
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // FinalVenting external event
@@ -138,7 +138,7 @@ void HotFireStateMachine::FinalVentingEXT()
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Done external event
@@ -158,7 +158,7 @@ void HotFireStateMachine::DoneEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
-        END_TRANSITION_MAP(nullptr)
+        END_TRANSITION_MAP
 }
 
 // Done external event
@@ -178,7 +178,7 @@ void HotFireStateMachine::ServoControlEXT() {
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_FILLING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_ABORT_BURN
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_SERVO_CONTROL
-    END_TRANSITION_MAP(nullptr)
+    END_TRANSITION_MAP
 } // clang-format on
 
 // Code for each state. Do not put while in them. The right function according
@@ -206,8 +206,8 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
 #endif
 
 #endif
-
-    InternalEvent(ST_WAIT_FOR_INIT);
+    NoEventData eventData;
+    InternalEvent(ST_WAIT_FOR_INIT, eventData);
 }
 
 EXIT_DEFINE(HotFireStateMachine, ExitInit)
@@ -223,11 +223,11 @@ ENTRY_DEFINE(HotFireStateMachine, EnterWaitForInit, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, WaitForInit, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_INIT);
-
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_INIT);
+    NoEventData eventData;
     if (interfaceData->isInitialized())
     {
-        InternalEvent(ST_WAIT_FOR_READY);
+        InternalEvent(ST_WAIT_FOR_READY, eventData);
     }
 
     // showInfo(interfaceData);
@@ -248,7 +248,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterWaitForReady, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, WaitForReady, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_READY);
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_READY);
 
     detectExternEvent(interfaceData);
 
@@ -268,7 +268,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterWaitForFilling, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_FILLING);
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_FILLING);
 
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
@@ -309,7 +309,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterFilling, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_FILLING);
+    interfaceData = updateInterface(&data, ST_FILLING);
 
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
@@ -350,7 +350,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterWaitForIgnition, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_WAIT_FOR_IGNITION);
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_IGNITION);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -391,7 +391,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterIgnition, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_IGNITION);
+    interfaceData = updateInterface(&data, ST_IGNITION);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -413,9 +413,9 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
 
 #endif
-
+    EventData eventData;
     detectExternEvent(interfaceData);
-    switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000));
+    switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000), eventData);
 
     interface->updateOutputs(interfaceData);
 }
@@ -433,7 +433,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterFullBurn, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_FULL_BURN);
+    interfaceData = updateInterface(&data, ST_FULL_BURN);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -474,7 +474,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterFinalVenting, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_FINAL_VENTING);
+    interfaceData = updateInterface(&data, ST_FINAL_VENTING);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -516,7 +516,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterDone, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_DONE);
+    interfaceData = updateInterface(&data, ST_DONE);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -550,7 +550,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterAbortFilling, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_ABORT_FILLING);
+    interfaceData = updateInterface(&data, ST_ABORT_FILLING);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -586,7 +586,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterAbortBurn, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_ABORT_BURN);
+    interfaceData = updateInterface(&data, ST_ABORT_BURN);
 
 #if USE_GPIO
     GpioData &gpioData = interfaceData->gpioData;
@@ -622,7 +622,7 @@ ENTRY_DEFINE(HotFireStateMachine, EnterServoControl, UOSMData)
 
 STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
 {
-    interfaceData = updateInterface(data, ST_SERVO_CONTROL);
+    interfaceData = updateInterface(&data, ST_SERVO_CONTROL);
 
     detectConnectionTimeout(interfaceData);
 
@@ -696,7 +696,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
         else
         {
             // Switch back to specified state
-            InternalEvent(eventNbr >> 1);
+            InternalEvent(eventNbr >> 1, data);
         }
 #endif
     }
@@ -727,7 +727,8 @@ void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsD
     {
         connectionAborted = true;
         SPDLOG_ERROR("TCP Client has been disconnected for too long. Aborting!");
-        InternalEvent(ST_FINAL_VENTING);
+        EventData eventData;
+        InternalEvent(ST_FINAL_VENTING, eventData);
     }
 #endif
 }
@@ -769,7 +770,7 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &
     }
 }
 
-void HotFireStateMachine::updateHotFire(UOSMData *data)
+void HotFireStateMachine::updateHotFire(UOSMData &data)
 {
     ExecuteCurrentState(data);
 }
