@@ -1,22 +1,11 @@
 #include "config.h"
-#if USE_SOCKET_CLIENT == 1
 
-#include "IO/IO.h"
 #include "SocketServer.h"
 #include "common/pch.h"
-#include "data/SBGData.h"
-
-#include <arpa/inet.h>
 #include <chrono>
-#include <data/sensorsData.h>
-#include <fcntl.h>
-#include <iostream>
+#include <data/SensorsData.h>
 #include <spdlog/spdlog.h>
-#include <string.h>
-#include <sys/poll.h>
-#include <sys/socket.h>
 #include <thread>
-#include <unistd.h>
 
 using namespace boost::asio;
 
@@ -42,7 +31,7 @@ void SocketServer::run()
 
 void SocketServer::waitForConnection()
 {
-    SPDLOG_LOGGER_INFO(logger, "Waiting for connection...");
+    SPDLOG_INFO("Waiting for connection...");
     auto socket(std::make_shared<ip::tcp::socket>(io_service));
 
     initialized = true;
@@ -51,11 +40,11 @@ void SocketServer::waitForConnection()
     acceptor.accept(*socket, err);
     if (err)
     {
-        SPDLOG_LOGGER_ERROR(logger, err.message());
+        SPDLOG_ERROR(err.message());
     }
     else
     {
-        SPDLOG_LOGGER_INFO(logger, "Connected to device. Currently connected to {} clients", clients.size() + 1);
+        SPDLOG_ERROR("Connected to device. Currently connected to {} clients", clients.size() + 1);
 
         std::shared_ptr<SocketClient> client = std::make_shared<SocketClient>(
             socket, [this](auto b) { this->received(b); }, [this](auto client) { this->closed(client); });
@@ -104,7 +93,7 @@ void SocketServer::closed(const SocketClient *client)
                   clients.end());
 }
 
-void SocketServer::enqueueSensorData(const sensorsData &data)
+void SocketServer::enqueueSensorData(const SensorsData &data)
 {
     auto dataStr = data.convertToReducedString();
     dataStr += "\r\n";
@@ -133,5 +122,3 @@ uint64_t SocketServer::getLastConnectionTimestamp()
 
     return lastConnectionTimestamp;
 }
-
-#endif

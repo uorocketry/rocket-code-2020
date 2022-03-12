@@ -1,13 +1,8 @@
+#include "common/pch.h"
 #include "config.h"
-#if USE_GPIO == 1
 
 #include "./DigitalOutput.h"
 #include <iostream>
-#include <spdlog/spdlog.h>
-
-#if USE_WIRING_Pi == 1
-#include <wiringPi.h>
-#endif
 
 DigitalOutput::DigitalOutput(const std::string &name, const int pin) : name(name), pinNbr(pin)
 {
@@ -61,5 +56,3 @@ int DigitalOutput::getCurrentState()
     return -1;
 #endif
 }
-
-#endif

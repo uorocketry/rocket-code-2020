@@ -1,9 +1,7 @@
 #pragma once
 
 #include "config.h"
-#if TESTING != 1
 
-#include "EventQueue.h"
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
 #include "IO/Interface.h"
@@ -27,11 +25,11 @@ class InterfaceImpl : public Interface
     void calibrateTelemetry();
 
     // to get the latest rocket state. return a pointer to latestState
-    std::shared_ptr<sensorsData> getLatest() override;
+    std::shared_ptr<SensorsData> getLatest() override;
 
     // loop over each sensor and update the latestState
     bool updateInputs() override;
-    bool updateOutputs(std::shared_ptr<sensorsData> data) override;
+    bool updateOutputs(std::shared_ptr<SensorsData> data) override;
 
 #if USE_GPIO == 1
     void createNewGpioOutput(std::string name, int pinNbr) override;
@@ -46,7 +44,7 @@ class InterfaceImpl : public Interface
 
     std::shared_ptr<spdlog::logger> logger;
 
-    std::shared_ptr<sensorsData> latestState;
+    std::shared_ptr<SensorsData> latestState;
     EventQueue eventQueue;
 
 #if USE_SBG == 1
@@ -77,5 +75,3 @@ class InterfaceImpl : public Interface
     ArduinoProxy *arduinoProxy;
 #endif
 };
-
-#endif

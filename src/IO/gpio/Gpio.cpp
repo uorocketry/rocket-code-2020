@@ -1,16 +1,6 @@
-#include "config.h"
-#if USE_GPIO == 1
-
 #include "Gpio.h"
-#include "data/sensorsData.h"
-
-#include "helpers/Helper.h"
-#include <iostream>
-#include <string>
-
-#if USE_WIRING_Pi == 1
-#include <wiringPi.h>
-#endif
+#include "config.h"
+#include "data/SensorsData.h"
 
 Gpio::~Gpio() = default;
 
@@ -39,18 +29,18 @@ bool Gpio::isInitialized()
 
 GpioData Gpio::setOutputs(const GpioData &data)
 {
-    for (std::pair<std::string, int> output : data.pwmOutputMap)
+    for (std::pair<std::string, int> output : data.pwmMap)
     {
         pwmOutputsMap.at(output.first).setValue(output.second);
     }
-    for (std::pair<std::string, int> output : data.digitalOutputMap)
+    for (std::pair<std::string, int> output : data.digitalMap)
     {
         digitalOutputsMap.at(output.first).setValue(output.second);
     }
 
     GpioData result;
-    result.digitalOutputMap = toRawMap(digitalOutputsMap);
-    result.pwmOutputMap = toRawMap(pwmOutputsMap);
+    result.digitalMap = toRawMap(digitalOutputsMap);
+    result.pwmMap = toRawMap(pwmOutputsMap);
 
     return result;
 }
@@ -65,17 +55,17 @@ void Gpio::createNewGpioPwmOutput(const std::string &name, int pinNbr, int safeP
     pwmOutputsMap.insert({name, PwmOutput(name, pinNbr, safePosition, softPWM)});
 }
 
-GpioState Gpio::getCurrentState()
+GpioData Gpio::getCurrentState()
 {
-    GpioState state;
+    GpioData state;
 
     for (auto i : digitalOutputsMap)
     {
-        state.digitalStateMap.insert({i.first, i.second.getCurrentState()});
+        state.digitalMap.insert({i.first, i.second.getCurrentState()});
     }
     for (auto i : pwmOutputsMap)
     {
-        state.pwmStateMap.insert({i.first, i.second.getCurrentState()});
+        state.pwmMap.insert({i.first, i.second.getCurrentState()});
     }
 
     return state;
@@ -95,5 +85,3 @@ std::map<std::string, int> Gpio::toRawMap(std::map<std::string, T> map)
 
     return result;
 }
-
-#endif

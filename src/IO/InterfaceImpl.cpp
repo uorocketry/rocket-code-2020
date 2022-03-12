@@ -1,10 +1,8 @@
-#include "config.h"
-#if TESTING != 1
-
+#include "InterfaceImpl.h"
 #include "IO/IO.h"
 #include "IO/TestingSensors.h"
-#include "InterfaceImpl.h"
 #include "common/pch.h"
+#include "config.h"
 #include "data/UOSMData.h"
 #include <chrono>
 #include <iostream>
@@ -12,7 +10,7 @@
 #include <string>
 
 InterfaceImpl::InterfaceImpl()
-    : eventQueue()
+    : eventQueue(2048)
 #if USE_INPUT == 1
       ,
       input(eventQueue)
@@ -78,7 +76,7 @@ void InterfaceImpl::initializeOutputs()
 
 bool InterfaceImpl::updateInputs()
 {
-    latestState = std::make_shared<sensorsData>();
+    latestState = std::make_shared<SensorsData>();
 
     latestState->timeStamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
@@ -87,7 +85,7 @@ bool InterfaceImpl::updateInputs()
     latestState->sbg = mySbgSensor.getData();
 #endif
 
-    latestState->eventNumber = eventQueue.pop();
+    eventQueue.pop(latestState->eventNumber);
 
 #if USE_LOGGER == 1
     latestState->loggerIsInitialized = sensorLogger.isInitialized();
@@ -122,7 +120,7 @@ bool InterfaceImpl::updateInputs()
     return true;
 }
 
-bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
+bool InterfaceImpl::updateOutputs(std::shared_ptr<SensorsData> data)
 {
 
 #if USE_GPIO == 1
@@ -163,7 +161,7 @@ void InterfaceImpl::calibrateTelemetry()
 #endif
 }
 
-std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
+std::shared_ptr<SensorsData> InterfaceImpl::getLatest()
 {
 
 #if USE_LOGGER == 1
@@ -177,5 +175,3 @@ time_point InterfaceImpl::getCurrentTime()
 {
     return std::chrono::steady_clock::now();
 }
-
-#endif

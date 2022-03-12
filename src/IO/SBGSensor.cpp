@@ -1,10 +1,5 @@
-#include "config.h"
-
-#if USE_SBG == 1
-
 #include "SBGSensor.h"
-#include <sbgDefines.h>
-
+#include "config.h"
 #include "iostream"
 
 //----------------------------------------------------------------------//
@@ -159,42 +154,31 @@ void SBGSensor::run()
     // previously logged data parsing Note interface closing is also
     // differentiated !
     //
-    errorCode = sbgInterfaceSerialCreate(&sbgInterface, "/dev/ttyUSB0",
+    auto device = environment::getEnvOrDefault<std::string>("sbg-serial-device", "/dev/ttyUSB0");
+    errorCode = sbgInterfaceSerialCreate(&sbgInterface, device.c_str(),
                                          115200); // Example for Unix using a FTDI Usb2Uart converter
     // errorCode = sbgInterfaceSerialCreate(&sbgInterface, "COM3", 115200);
     // // Example for Windows serial communication
 
-    //
     // Test that the interface has been created
-    //
     if (errorCode == SBG_NO_ERROR)
     {
-        //
         // Create the sbgECom library and associate it with the created interfaces
-        //
         errorCode = sbgEComInit(&comHandle, &sbgInterface);
-
-        //
         // Test that the sbgECom has been initialized
-        //
         if (errorCode == SBG_NO_ERROR)
         {
-            //
             // Get device inforamtions
-            //
             errorCode = sbgEComCmdGetInfo(&comHandle, &deviceInfo);
-
-            //
             // Display device information if no error
-            //
             if (errorCode == SBG_NO_ERROR)
             {
                 // printf("Device : %0.9u found\n", deviceInfo.serialNumber);
-                printf("Device found\n");
+                SPDLOG_INFO("SBG Device Found");
             }
             else
             {
-                fprintf(stderr, "ellipseMinimal: Unable to get device information.\n");
+                SPDLOG_ERROR("ellipseMinimal: Unable to get device information.");
             }
 
             // std::cout <<
@@ -256,19 +240,13 @@ void SBGSensor::run()
             //
             while (true)
             {
-                //
                 // Try to read a frame
-                //
                 errorCode = sbgEComHandle(&comHandle);
 
-                //
                 // Test if we have to release some CPU (no frame received)
-                //
                 if (errorCode == SBG_NOT_READY)
                 {
-                    //
                     // Release CPU
-                    //
                     sbgSleep(1);
                 }
                 else
@@ -329,5 +307,3 @@ sbgData SBGSensor::getData()
     std::lock_guard<std::mutex> lockGuard(mutex);
     return data;
 }
-
-#endif

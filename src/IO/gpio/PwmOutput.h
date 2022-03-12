@@ -1,17 +1,9 @@
 #pragma once
-
+#include "common/pch.h"
 #include "config.h"
 
-#if USE_GPIO == 1
-
-#include "Output.h"
-
-#if USE_ARDUINO_PROXY
 #include "IO/ArduinoProxy.h"
-#endif
-
-#include <spdlog/logger.h>
-#include <string>
+#include "Output.h"
 
 class PwmOutput : public Output
 {
@@ -38,5 +30,3 @@ class PwmOutput : public Output
 // 	} status;
 #endif
 };
-
-#endif

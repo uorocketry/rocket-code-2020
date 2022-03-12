@@ -1,9 +1,9 @@
 #pragma once
 
-#include "config.h"
-#if USE_SOCKET_CLIENT == 1
+#include "common/pch.h"
 
-#include "IO/EventQueue.h"
+#include "config.h"
+
 #include "IO/IO.h"
 #include "SocketClient.h"
 #include "data/SBGData.h"
@@ -11,7 +11,7 @@
 #include <boost/circular_buffer.hpp>
 #include <chrono>
 #include <condition_variable>
-#include <data/sensorsData.h>
+#include <data/SensorsData.h>
 #include <iostream>
 #include <queue>
 
@@ -23,7 +23,7 @@ class SocketServer : public IO
 
     void run();
     bool isInitialized();
-    void enqueueSensorData(const sensorsData &data);
+    void enqueueSensorData(const SensorsData &data);
     uint64_t getLastConnectionTimestamp();
 
   private:
@@ -52,5 +52,3 @@ class SocketServer : public IO
 
     uint64_t lastConnectionTimestamp = 0;
 };
-
-#endif

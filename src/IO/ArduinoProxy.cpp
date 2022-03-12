@@ -1,9 +1,7 @@
 #include "ArduinoProxy.h"
-
-#if USE_ARDUINO_PROXY == 1
-
 #include "IO/ArduinoEncoder.h"
-#include <spdlog/spdlog.h>
+#include "common/pch.h"
+
 #include <sys/poll.h>
 
 // If we haven't received a pin update in that duration, remove it from the map
@@ -23,20 +21,22 @@ void ArduinoProxy::initialize()
 {
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
-    if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
+    // Get the arduino serial port
+    auto device = environment::getEnvOrDefault<std::string>("arduino-serial-device", "dev/ttyAMA0");
+    if ((fd = serialOpen(device.c_str(), 57600)) < 0)
     {
-        SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
+        SPDLOG_ERROR("Error while opening serial communication!");
         return;
     }
 
-    inititialized = true;
+    initialized = true;
 
     IO::initialize();
 }
 
 bool ArduinoProxy::isInitialized()
 {
-    return inititialized;
+    return initialized;
 }
 
 void ArduinoProxy::run()
@@ -77,21 +77,21 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
     case RocketryProto::ArduinoOut::kEventMessage:
         if (eventData != 0)
         {
-            SPDLOG_LOGGER_INFO(logger, "Arduino Event: {} {}", RocketryProto::EventTypes_Name(event), eventData);
+            SPDLOG_INFO("Arduino Event: {} {}", RocketryProto::EventTypes_Name(event), eventData);
         }
         else
         {
-            SPDLOG_LOGGER_INFO(logger, "Arduino Event: {}", RocketryProto::EventTypes_Name(event));
+            SPDLOG_INFO("Arduino Event: {}", RocketryProto::EventTypes_Name(event));
         }
         break;
     case RocketryProto::ArduinoOut::kErrorMessage:
         if (eventData != 0)
         {
-            SPDLOG_LOGGER_WARN(logger, "Arduino Error: {} {}", RocketryProto::ErrorTypes_Name(error), errorData);
+            SPDLOG_WARN("Arduino Error: {} {}", RocketryProto::ErrorTypes_Name(error), errorData);
         }
         else
         {
-            SPDLOG_LOGGER_WARN(logger, "Arduino Error: {}", RocketryProto::ErrorTypes_Name(error));
+            SPDLOG_WARN("Arduino Error: {}", RocketryProto::ErrorTypes_Name(error));
         }
         break;
     case RocketryProto::ArduinoOut::kServoState: {
@@ -109,23 +109,23 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
     }
     break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
-        SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
+        SPDLOG_WARN("Data field not set in Arduino message. ");
         break;
     }
 }
 
 void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
 {
-    if (inititialized)
+    if (initialized)
     {
         std::lock_guard<std::mutex> lockGuard(serialMutex);
 
-        helper::SharedArray<char> encodedData = ArduinoEncoder::encode(data);
+        std::shared_ptr<std::vector<char>> encodedData = ArduinoEncoder::encode(data);
 
         serialPutchar(fd, 0);
-        for (int i = 0; i < encodedData.length; i++)
+        for (int i = 0; i < encodedData->size(); i++)
         {
-            serialPutchar(fd, encodedData.data[i]);
+            serialPutchar(fd, encodedData->at(i));
         }
     }
 }
@@ -173,5 +173,3 @@ int ArduinoProxy::getServoState(int pin)
         return state.first;
     }
 }
-
-#endif

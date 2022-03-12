@@ -14,7 +14,7 @@ void InterfacingStateMachine::enterNewState(uint8_t state)
 double InterfacingStateMachine::getValueForTime(double minimum, double maximum, duration_ms targetTime)
 {
     duration_ns timeSinceEntry = interface->getCurrentTime() - entryTime;
-    double progress = ((double)timeSinceEntry.count()) / duration_ns(targetTime).count();
+    auto progress = timeSinceEntry.count() / duration_ns(targetTime).count();
     return std::min(maximum, minimum + progress * (maximum - minimum));
 }
 

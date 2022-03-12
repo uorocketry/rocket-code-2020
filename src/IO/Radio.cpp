@@ -1,21 +1,9 @@
-#include "config.h"
-#if USE_RADIO == 1
-
 #include "Radio.h"
-#include "data/sensorsData.h"
-#include "wiringPi.h"
-#include "wiringSerial.h"
-#include <string>
-#include <unistd.h>
+#include "common/pch.h"
+#include "config.h"
 
 #include "SensorLogger.h"
-#include <chrono>
-#include <iostream>
-#include <mutex>
-#include <queue>
-#include <spdlog/spdlog.h>
-#include <string>
-#include <thread>
+#include "data/SensorsData.h"
 
 Radio::Radio(EventQueue &eventQueue) : eventQueue(eventQueue)
 {
@@ -26,7 +14,6 @@ Radio::~Radio() = default;
 
 void Radio::initialize()
 {
-
     if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
     {
         SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
@@ -69,7 +56,7 @@ void Radio::run()
     }
 }
 
-void Radio::enqueueSensorData(const sensorsData &curSensorData)
+void Radio::enqueueSensorData(const SensorsData &curSensorData)
 {
     std::lock_guard<std::mutex> lockGuard(mutex);
     logQueue.push(curSensorData);
@@ -79,7 +66,7 @@ void Radio::enqueueSensorData(const sensorsData &curSensorData)
 
 void Radio::dequeueToRadio()
 {
-    sensorsData currentState;
+    SensorsData currentState;
     {
         std::lock_guard<std::mutex> lockGuard(mutex);
         currentState = logQueue.front();
@@ -89,12 +76,10 @@ void Radio::dequeueToRadio()
     sendData(currentState);
 }
 
-void Radio::sendData(const sensorsData &currentState) const
+void Radio::sendData(const SensorsData &currentState) const
 {
     auto data = currentState.convertToReducedString();
     data += "\r\n";
 
     serialPrintf(fd, data.c_str());
 }
-
-#endif // USE_RADIO

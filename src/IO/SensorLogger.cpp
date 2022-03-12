@@ -1,17 +1,7 @@
-#include "config.h"
-#if USE_LOGGER == 1
-
 #include "SensorLogger.h"
-
-#include "helpers/Helper.h"
+#include "config.h"
 
 #include "boost/filesystem.hpp"
-#include <iostream>
-#include <mutex>
-#include <spdlog/spdlog.h>
-#include <string>
-#include <thread>
-#include <vector>
 
 int SensorLogger::working = 0;
 SensorLogger::~SensorLogger() = default;
@@ -28,19 +18,17 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
+    auto path = environment::getEnvOrDefault<std::string>("log-folder", "./data/");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
+    // If the path doesn't exist, create it
+    if (!boost::filesystem::exists(path))
+        boost::filesystem::create_directories(path);
 
     int bootId = getBootId(path);
 
     writingLock = std::unique_lock<std::mutex>(writingMutex);
-
-    if (!boost::filesystem::exists(path))
-    {
-        boost::filesystem::create_directories(path);
-    }
 
     // bool shouldWriteHeader = !std::experimental::filesystem::exists(path +
     // filename); fileStream = std::make_shared<std::ofstream>(path + filename,
@@ -55,7 +43,7 @@ void SensorLogger::run()
     // }
 
     status.fileStatus = READY;
-    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
+    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate}; // TODO: Close fileStream on exit
     while (true)
     {
         if (!logQueue.empty())
@@ -112,7 +100,7 @@ int SensorLogger::getBootId(std::string &path)
     return bootId;
 }
 
-void SensorLogger::enqueueSensorData(const sensorsData &curSensorData)
+void SensorLogger::enqueueSensorData(const SensorsData &curSensorData)
 {
     std::lock_guard<std::mutex> lockGuard(mutex);
     logQueue.push(curSensorData);
@@ -122,7 +110,7 @@ void SensorLogger::enqueueSensorData(const sensorsData &curSensorData)
 
 void SensorLogger::dequeueToFile(std::ofstream &fileStream)
 {
-    sensorsData currentState;
+    SensorsData currentState;
     {
         std::lock_guard<std::mutex> lockGuard(mutex);
         currentState = logQueue.front();
@@ -141,7 +129,7 @@ void SensorLogger::dequeueToFile(std::ofstream &fileStream)
     }
     else
     {
-        SPDLOG_LOGGER_ERROR(logger, "Unable to open log file.");
+        SPDLOG_ERROR("Unable to open log file.");
         working = 0;
     }
 }
@@ -179,7 +167,7 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
     fileStream.flush();
 }
 
-void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
+void SensorLogger::writeData(std::ofstream &fileStream, const SensorsData &currentState)
 {
     const char *sep = ",";
 
@@ -189,12 +177,12 @@ void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &curre
     fileStream << currentState.currentStateNo << sep;
 
 #if USE_GPIO == 1
-    for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
+    for (std::pair<std::string, int> output : currentState.gpioData.digitalMap)
     {
         fileStream << output.second << sep;
     }
 
-    for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
+    for (std::pair<std::string, int> output : currentState.gpioData.pwmMap)
     {
         fileStream << output.second << sep;
     }
@@ -301,5 +289,3 @@ bool SensorLogger::queueEmpty()
 {
     return logQueue.empty();
 }
-
-#endif

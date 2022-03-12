@@ -1,14 +1,8 @@
 #pragma once
-
-#include "config.h"
-#if USE_SBG == 1
-
 #include "../data/SBGData.h"
 #include "IO.h"
-
-// sbgECom headers
-#include <sbgCommon.h>
-#include <sbgEComLib.h>
+#include "common/pch.h"
+#include "config.h"
 
 #include <ctime>
 
@@ -32,5 +26,3 @@ class SBGSensor : public IO
     {
     } status;
 };
-
-#endif

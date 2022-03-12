@@ -1,13 +1,9 @@
-#define NOMINMAX // Fix issues on Windows with std:min and std:max
-
 #include "HotFireStateMachine.h"
 #include "HotFireGpioConfig.h"
 #include "common/pch.h"
 #include "config.h"
 #include "data/GpioData.h"
-#include "data/sensorsData.h"
-#include <iostream>
-#include <spdlog/spdlog.h>
+#include "data/SensorsData.h"
 
 const uint64_t nm = 1000000000;
 const uint64_t connectionFailsafeTimeout = 1 * 60 * 60 * nm;
@@ -274,19 +270,19 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -315,19 +311,19 @@ STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_OPEN});
 #endif
 
 #endif
@@ -356,19 +352,19 @@ STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -397,19 +393,19 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_IGNITION});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -439,19 +435,19 @@ STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -480,19 +476,19 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -522,19 +518,19 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -556,19 +552,19 @@ STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -592,19 +588,19 @@ STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.pwmMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
-    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+    gpioData.pwmMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
 #endif
@@ -657,7 +653,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & VENT_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.digitalOutputMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
+                gpioData.digitalMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
 
                 logValveStatus(VENT_NAME, open);
             }
@@ -667,7 +663,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & MAIN_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({MAIN_NAME, open ? MAIN_OPEN : MAIN_CLOSE});
+                gpioData.pwmMap.insert({MAIN_NAME, open ? MAIN_OPEN : MAIN_CLOSE});
 
                 logValveStatus(MAIN_NAME, open);
             }
@@ -677,7 +673,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & PINHOLE_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({PINHOLE_NAME, open ? PINHOLE_OPEN : PINHOLE_CLOSE});
+                gpioData.pwmMap.insert({PINHOLE_NAME, open ? PINHOLE_OPEN : PINHOLE_CLOSE});
 
                 logValveStatus(PINHOLE_NAME, open);
             }
@@ -687,7 +683,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & FILL_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({FILL_NAME, open ? FILL_OPEN : FILL_CLOSE});
+                gpioData.pwmMap.insert({FILL_NAME, open ? FILL_OPEN : FILL_CLOSE});
 
                 logValveStatus(FILL_NAME, open);
             }
@@ -716,7 +712,7 @@ void HotFireStateMachine::logValveStatus(std::string valveName, bool status)
     }
 }
 
-void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<SensorsData> &data)
 {
 #if USE_SOCKET_CLIENT
     uint64_t timestamp =
@@ -733,7 +729,7 @@ void HotFireStateMachine::detectConnectionTimeout(const std::shared_ptr<sensorsD
 #endif
 }
 
-void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void HotFireStateMachine::detectExternEvent(const std::shared_ptr<SensorsData> &data)
 {
     detectConnectionTimeout(data);
 
@@ -775,10 +771,10 @@ void HotFireStateMachine::updateHotFire(UOSMData &data)
     ExecuteCurrentState(data);
 }
 
-std::shared_ptr<sensorsData> HotFireStateMachine::updateInterface(const UOSMData *smdata, States state)
+std::shared_ptr<SensorsData> HotFireStateMachine::updateInterface(const UOSMData *smdata, States state)
 {
     interface->updateInputs();
-    std::shared_ptr<sensorsData> data = interface->getLatest();
+    std::shared_ptr<SensorsData> data = interface->getLatest();
 
     data->currentStateNo = state;
 

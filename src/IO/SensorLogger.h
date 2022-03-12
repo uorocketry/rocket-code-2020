@@ -1,16 +1,10 @@
 #pragma once
-
+#include "common/pch.h"
 #include "config.h"
-#if USE_LOGGER == 1
 
-#include "../data/sensorsData.h"
+#include "../data/SensorsData.h"
 #include "IO.h"
 #include <condition_variable>
-#include <fstream>
-#include <iostream>
-#include <mutex>
-#include <queue>
-#include <thread>
 
 class SensorLogger : public IO
 {
@@ -23,7 +17,7 @@ class SensorLogger : public IO
     bool isInitialized() override;
 
     // write data to sensorsData struct and push to queue on main thread
-    void enqueueSensorData(const sensorsData &curSensorData);
+    void enqueueSensorData(const SensorsData &curSensorData);
 
     bool queueEmpty();
 
@@ -35,7 +29,7 @@ class SensorLogger : public IO
     void dequeueToFile(std::ofstream &fileStream);
 
     static void writeHeader(std::ofstream &file);
-    static void writeData(std::ofstream &file, const sensorsData &currentState);
+    static void writeData(std::ofstream &file, const SensorsData &currentState);
 
     static int getBootId(std::string &path);
 
@@ -45,7 +39,7 @@ class SensorLogger : public IO
     std::thread thisThread;
 
     // queue of sensor data to be logged
-    std::queue<sensorsData> logQueue;
+    std::queue<SensorsData> logQueue;
 
     std::mutex writingMutex;
     std::unique_lock<std::mutex> writingLock;
@@ -56,5 +50,3 @@ class SensorLogger : public IO
         InitStatus fileStatus = INIT;
     } status;
 };
-
-#endif

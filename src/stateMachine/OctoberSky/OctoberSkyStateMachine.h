@@ -1,10 +1,8 @@
 #pragma once
-
+#include "common/pch.h"
 #include "config.h"
 #include "data/UOSMData.h"
 #include "stateMachine/InterfacingStateMachine.h"
-
-#include "common/pch.h"
 
 class OctoberSkyStateMachine : public InterfacingStateMachine
 {
@@ -19,13 +17,13 @@ class OctoberSkyStateMachine : public InterfacingStateMachine
     void Touchdown();
 
   private:
-    void detectExternEvent(const std::shared_ptr<sensorsData> &data);
-    void detectApogee(const std::shared_ptr<sensorsData> &data);
-    void detectLaunch(const std::shared_ptr<sensorsData> &data);
-    void detectMotorBurnout(const std::shared_ptr<sensorsData> &data);
-    void detectTouchdown(const std::shared_ptr<sensorsData> &data);
+    void detectExternEvent(const std::shared_ptr<SensorsData> &data);
+    void detectApogee(const std::shared_ptr<SensorsData> &data);
+    void detectLaunch(const std::shared_ptr<SensorsData> &data);
+    void detectMotorBurnout(const std::shared_ptr<SensorsData> &data);
+    void detectTouchdown(const std::shared_ptr<SensorsData> &data);
 
-    static void showInfo(const std::shared_ptr<sensorsData> &data);
+    static void showInfo(const std::shared_ptr<SensorsData> &data);
 
     std::shared_ptr<spdlog::logger> logger;
 
@@ -100,5 +98,5 @@ class OctoberSkyStateMachine : public InterfacingStateMachine
     STATE_MAP_ENTRY_ALL_EX(&Ground, nullptr, &EnterGround, nullptr)
     END_STATE_MAP_EX
 
-    std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
+    std::shared_ptr<SensorsData> updateInterface(const UOSMData *smdata, States state);
 };

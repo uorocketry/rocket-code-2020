@@ -1,20 +1,12 @@
 #pragma once
-#include "config.h"
-#if USE_GPIO == 1
-
-#include "Output.h"
-
-#if USE_ARDUINO_PROXY == 1
 #include "IO/ArduinoProxy.h"
-#endif
-
-#include <spdlog/logger.h>
-#include <string>
+#include "Output.h"
+#include "config.h"
 
 class DigitalOutput : public Output
 {
   public:
-    DigitalOutput(const std::string &name, const int pin);
+    DigitalOutput(const std::string &name, int pin);
 
     bool setValue(int value);
 
@@ -29,5 +21,3 @@ class DigitalOutput : public Output
     ArduinoProxy *arduinoProxy;
 #endif
 };
-
-#endif

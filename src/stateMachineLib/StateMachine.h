@@ -1,6 +1,5 @@
 #pragma once
 #include "common/pch.h"
-#include <cstdio>
 
 /// @beief Unique state machine event data must inherit from this class.
 class EventData

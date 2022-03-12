@@ -30,30 +30,30 @@ TEST_CASE("EventQueue setOutputs", "[EventQueue]")
     createOutputs(gpio);
 
     GpioData input;
-    input.digitalOutputMap.insert({DIGITAL_1, 500});
-    input.pwmOutputMap.insert({PWM_2, 600});
+    input.digitalMap.insert({DIGITAL_1, 500});
+    input.pwmMap.insert({PWM_2, 600});
 
     auto result = gpio->setOutputs(input);
 
-    REQUIRE(result.digitalOutputMap.at(DIGITAL_1) == 500);
-    REQUIRE(result.digitalOutputMap.at(DIGITAL_2) == -1);
+    REQUIRE(result.digitalMap.at(DIGITAL_1) == 500);
+    REQUIRE(result.digitalMap.at(DIGITAL_2) == -1);
 
-    REQUIRE(result.pwmOutputMap.at(PWM_1) == -1);
-    REQUIRE(result.pwmOutputMap.at(PWM_2) == 600);
+    REQUIRE(result.pwmMap.at(PWM_1) == -1);
+    REQUIRE(result.pwmMap.at(PWM_2) == 600);
 
     // Data should carry over unless replaced
 
     GpioData input2;
-    input2.digitalOutputMap.insert({DIGITAL_1, 400});
-    input2.pwmOutputMap.insert({PWM_1, 300});
+    input2.digitalMap.insert({DIGITAL_1, 400});
+    input2.pwmMap.insert({PWM_1, 300});
 
     auto result2 = gpio->setOutputs(input2);
 
-    REQUIRE(result2.digitalOutputMap.at(DIGITAL_1) == 400);
-    REQUIRE(result2.digitalOutputMap.at(DIGITAL_2) == -1);
+    REQUIRE(result2.digitalMap.at(DIGITAL_1) == 400);
+    REQUIRE(result2.digitalMap.at(DIGITAL_2) == -1);
 
-    REQUIRE(result2.pwmOutputMap.at(PWM_1) == 300);
-    REQUIRE(result2.pwmOutputMap.at(PWM_2) == 600);
+    REQUIRE(result2.pwmMap.at(PWM_1) == 300);
+    REQUIRE(result2.pwmMap.at(PWM_2) == 600);
 
     delete gpio;
 }

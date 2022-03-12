@@ -1,6 +1,5 @@
 #pragma once
-
-#include "sbgTypes.h"
+#include "common/pch.h"
 
 struct sbgData
 {

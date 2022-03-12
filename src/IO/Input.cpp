@@ -1,9 +1,5 @@
-#include "config.h"
-#include <spdlog/spdlog.h>
-#if USE_INPUT == 1
-
-#include "IO.h"
 #include "Input.h"
+#include "IO.h"
 #include "iostream"
 
 Input::Input(EventQueue &eventQueue) : eventQueue(eventQueue)
@@ -45,5 +41,3 @@ bool Input::isNumber(const std::string &s)
         ++it;
     return !s.empty() && it == s.end();
 }
-
-#endif

@@ -1,8 +1,6 @@
 #pragma once
 #include "config.h"
 
-#if USE_ARDUINO_PROXY == 1
-
 #include "IO.h"
 #include <ArduinoComm.pb.h>
 #include <wiringSerial.h>
@@ -33,11 +31,9 @@ class ArduinoProxy : IO
     std::mutex stateMutex;
 
     int fd = 0;
-    bool inititialized = false;
+    bool initialized = false;
 
     std::mutex serialMutex;
 
     void handleArduinoMessage(const RocketryProto::ArduinoOut &arduinoOut);
 };
-
-#endif

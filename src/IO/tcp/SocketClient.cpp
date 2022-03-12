@@ -1,6 +1,4 @@
 #include "SocketClient.h"
-
-#include <mutex>
 #include <spdlog/spdlog.h>
 #include <thread>
 

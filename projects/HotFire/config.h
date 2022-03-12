@@ -1,7 +1,4 @@
 #pragma once
-
-#include <cstdint>
-
 // clang-format off
 
 #define STATEMACHINE HotFireStateMachine

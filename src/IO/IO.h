@@ -1,14 +1,10 @@
 #pragma once
-
-#include <mutex>
-#include <spdlog/logger.h>
-#include <thread>
+#include "common/pch.h"
 
 class IO
 {
   public:
-    IO();
-    ~IO();
+    IO() = default;
 
     virtual void initialize();
     virtual void run() = 0;
@@ -23,8 +19,6 @@ class IO
     /** Must be set before initialize is called */
     bool createThread = true;
     std::mutex mutex;
-
-    std::shared_ptr<spdlog::logger> logger;
 
   private:
     std::thread thisThread;

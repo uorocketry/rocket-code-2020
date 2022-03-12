@@ -1,9 +1,6 @@
 #pragma once
-#if USE_INPUT == 1
-
-#include "EventQueue.h"
 #include "IO.h"
-#include <mutex>
+#include "common/pch.h"
 
 class Input : IO
 {
@@ -23,5 +20,3 @@ class Input : IO
 
     static bool isNumber(const std::string &s);
 };
-
-#endif

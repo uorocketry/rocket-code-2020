@@ -1,7 +1,5 @@
 #include "config.h"
 
-#if USE_GPIO == 1
-
 #include "PwmOutput.h"
 #include <iostream>
 #include <spdlog/spdlog.h>
@@ -86,5 +84,3 @@ int PwmOutput::getCurrentState()
     return -1;
 #endif
 }
-
-#endif

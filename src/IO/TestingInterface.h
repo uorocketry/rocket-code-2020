@@ -25,10 +25,8 @@ class TestingInterface : public Interface
     bool updateInputs() override;
     bool updateOutputs(std::shared_ptr<SensorsData> data) override;
 
-#if USE_GPIO == 1
     void createNewGpioOutput(std::string name, int pinNbr) override;
     void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
-#endif
 
     time_point getCurrentTime() override;
 

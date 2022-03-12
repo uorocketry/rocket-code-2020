@@ -1,6 +1,5 @@
 #pragma once
 #include "config.h"
-#if USE_GPIO == 1
 
 #include <string>
 
@@ -13,5 +12,3 @@ class Output
   protected:
     int currentState = -1;
 };
-
-#endif
