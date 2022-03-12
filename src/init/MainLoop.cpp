@@ -86,7 +86,8 @@ int main(int argc, char *argv[])
     start = std::chrono::steady_clock::now();
     UOSMData data = UOSMData();
 
-    const auto targetUpdateDuration = environment::getEnvOrDefault<uint64_t>("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
+    const auto targetUpdateDuration =
+        environment::getEnvOrDefault<uint64_t>("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
     uint64_t count = 1;
     while (true)
     {

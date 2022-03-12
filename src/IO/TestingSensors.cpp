@@ -17,7 +17,8 @@ void TestingSensors::initialize()
     // CHeck if logFile exists
     if (!logFile.is_open())
     {
-        SPDLOG_ERROR("Could not open test file: {}", environment::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./input.txt"));
+        SPDLOG_ERROR("Could not open test file: {}",
+                     environment::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./input.txt"));
     }
 
     while (std::getline(logFile, line))
@@ -30,7 +31,7 @@ void TestingSensors::initialize()
         boost::split(currentRow, line, boost::is_any_of(","));
 
         // Trim all elements in currentRow
-        for (auto& element : currentRow)
+        for (auto &element : currentRow)
             boost::trim(element);
 
         SensorsData currentData;
