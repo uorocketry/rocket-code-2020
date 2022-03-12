@@ -1,18 +1,23 @@
-#include <IO/EventQueue.h>
+#include "common/types.h"
 #include <catch2/catch.hpp>
 
 TEST_CASE("EventQueue push and pop", "[EventQueue]")
 {
-    auto eventQueue = new EventQueue();
+    EventQueue eventQueue(3);
+    eventType temp;
+    REQUIRE(eventQueue.empty());
 
-    REQUIRE(eventQueue->pop() == -1);
+    eventQueue.push(100);
+    eventQueue.push(102);
+    eventQueue.push(104);
 
-    eventQueue->push(100);
-    eventQueue->push(102);
-    eventQueue->push(104);
-
-    REQUIRE(eventQueue->pop() == 100);
-    REQUIRE(eventQueue->pop() == 102);
-    REQUIRE(eventQueue->pop() == 104);
-    REQUIRE(eventQueue->pop() == -1);
+    // Pop the first element
+    eventQueue.pop(temp);
+    REQUIRE(temp == 100);
+    eventQueue.pop(temp);
+    REQUIRE(temp == 102);
+    eventQueue.pop(temp);
+    REQUIRE(temp == 104);
+    REQUIRE(eventQueue.empty());
+    REQUIRE(!eventQueue.pop(temp));
 }
