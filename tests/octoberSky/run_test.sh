@@ -12,7 +12,10 @@ export LOG_PATH="..${TEST_PATH}output/"
 export TESTING_INPUT_FILE="..${TEST_PATH}input.txt"
 
 cd ../../
-./build-and-run.sh "${1}" "MainLoop"
+./build.sh "${1}" "MainLoop"
+cd ./tests/octoberSky/
+../../build/MainLoop
+
 
 cd .${TEST_PATH}
 
