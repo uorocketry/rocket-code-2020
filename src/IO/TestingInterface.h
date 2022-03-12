@@ -42,10 +42,7 @@ class TestingInterface : public Interface
 
     time_point latestTime;
 
-#if USE_LOGGER == 1
     SensorLogger sensorLogger;
-#endif
-
 #if USE_RADIO == 1
     Radio radio;
 #endif

@@ -43,7 +43,7 @@ bool TestingInterface::updateInputs()
 
 bool TestingInterface::updateOutputs(std::shared_ptr<SensorsData> data)
 {
-#if USE_LOGGER == 1 && TESTING == 1
+#if USE_LOGGER == 1
     if (latestState->outOfData)
     {
         if (!sensorLogger.queueEmpty())

@@ -3,8 +3,6 @@
 #include "data/SensorsData.h"
 #include <spdlog/spdlog.h>
 
-#define PI 3.14159265
-
 OctoberSkyStateMachine::OctoberSkyStateMachine(Interface *anInterface)
     : InterfacingStateMachine(anInterface, ST_MAX_STATES)
 {
@@ -377,8 +375,6 @@ void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<SensorsData> &da
     {
         consecutiveEvents = 0;
     }
-    consecutiveEvents = 2 * ApogeeThreshold;
-    SPDLOG_INFO("Apogee: {}", consecutiveEvents);
 
     // trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive
     // times that the rocket is pointing downwards and falling

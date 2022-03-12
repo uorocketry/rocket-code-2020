@@ -18,7 +18,7 @@ struct SensorsData
 
 #if USE_SBG == 1
     sbgData sbg;
-    bool sbgIsInitialized = 0;
+    bool sbgIsInitialized = false;
 #endif
 
 #if USE_GPIO == 1
