@@ -21,7 +21,7 @@ cd .${TEST_PATH}
 
 FAIL=0
 for file in ./output-expected/*; do
-    if ! diff "$file" "./output/${file##*/}"; then
+    if ! diff -y --suppress-common-lines "$file" "./output/${file##*/}"; then
         FAIL=1
         printf "\nError in the following file: ${file##*/}\n\n"
     fi
