@@ -16,43 +16,33 @@ struct SensorsData
     uint16_t currentStateNo = 0;
     eventType eventNumber = -1;
 
-#if USE_SBG == 1
+    // SBG
     sbgData sbg;
     bool sbgIsInitialized = false;
-#endif
 
-#if USE_GPIO == 1
+    // Gpio
     GpioData gpioData;
     GpioData gpioState;
     bool gpioIsInitialized = false;
-#endif
 
-#if USE_LOGGER
-    bool loggerIsInitialized = false;
-#endif
 
-#if USE_SOCKET_CLIENT
+    // Socket Client
     bool clientIsInitialized = false;
     uint64_t lastActiveClientTimestamp = 0;
-#endif
 
-#if USE_INPUT
+    // Use input
     bool inputIsInitialized = false;
-#endif
 
-#if USE_RADIO
+    // Radio
     bool radioIsInitialized = false;
-#endif
 
-#if USE_ARDUINO_PROXY
+    // Arduino Proxy
     bool arduinoProxyIsInitialized = false;
-#endif
 
-#if TESTING == 1
+    // Testing
     bool outOfData = false;
-#endif
 
-#if USE_LOGGER == 1
+    // Logger
     bool loggerWorking;
-#endif // USE_LOGGER
+    bool loggerIsInitialized = false;
 };
