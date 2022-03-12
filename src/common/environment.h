@@ -16,10 +16,10 @@ static T getEnvOrDefault(const std::string &key, const T &defaultValue)
 {
     if (varMap.count(key))
     {
-        return varMap[key].as<T>();
-    } else if (getenv(key.c_str()))
+        return boost::lexical_cast<T>(varMap[key].as<T>());
+    } else if (std::getenv(key.c_str()))
     {
-        return T(getenv(key.c_str()));
+        return boost::lexical_cast<T>(std::getenv(key.c_str()));
     } else
     {
         return defaultValue;
