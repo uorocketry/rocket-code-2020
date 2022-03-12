@@ -1,7 +1,9 @@
+#include "common/pch.h"
 #include <catch2/catch.hpp>
-#include <helpers/Helper.h>
 
 TEST_CASE("Helper String Split", "[helper]")
 {
-    REQUIRE(helper::stringSplit("item1,item2,item3", ',') == std::vector<std::string>{"item1", "item2", "item3"});
+    std::vector<std::string> result;
+    boost::split(result, "item1,item2,item3", boost::is_any_of(","));
+    REQUIRE(result == std::vector<std::string>{"item1", "item2", "item3"});
 }
