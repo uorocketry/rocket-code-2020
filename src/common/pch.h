@@ -16,12 +16,13 @@
 #include <vector>
 
 // Logging
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #include <spdlog/spdlog.h>
 
-// Boost Assert
-#include <boost/assert.hpp>
+// Boost Library
+#include <boost/assert.hpp> // Assertions
 #include <boost/static_assert.hpp>
+#include <boost/algorithm/string/classification.hpp> // String Algorithms
+#include <boost/algorithm/string/split.hpp>
 
 // UoRocketry
 #include "common/types.h"

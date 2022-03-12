@@ -7,6 +7,7 @@
 
 #include <fstream>
 
+
 void TestingSensors::run()
 {
 }
@@ -23,7 +24,8 @@ void TestingSensors::initialize()
         std::stringstream lineStream(line);
         std::string cell;
 
-        std::vector<std::string> currentRow = helper::stringSplit(line, ',');
+        std::vector<std::string> currentRow;
+        boost::split(currentRow, line, boost::is_any_of(","));
 
         sensorsData currentData;
 
