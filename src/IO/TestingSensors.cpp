@@ -29,6 +29,10 @@ void TestingSensors::initialize()
         std::vector<std::string> currentRow;
         boost::split(currentRow, line, boost::is_any_of(","));
 
+        // Trim all elements in currentRow
+        for (auto& element : currentRow)
+            boost::trim(element);
+
         SensorsData currentData;
 
         // Will keep increasing by one for each read
@@ -145,6 +149,7 @@ SensorsData TestingSensors::getLatest()
     else
     {
         SensorsData currentData;
+        currentData.outOfData = true;
         return currentData;
     }
 }
