@@ -111,7 +111,7 @@ if(${CMAKE_SYSTEM_PROCESSOR} STREQUAL "arm")
 	
 else()
 	target_link_libraries(MainLoopLib systemd)
-	find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
+	find_package(Boost 1.65.1 COMPONENTS system filesystem program_options REQUIRED)
 	target_include_directories(MainLoopLib PUBLIC ${Boost_INCLUDE_DIRS})
 	target_link_libraries(MainLoopLib ${Boost_LIBRARIES})
 endif()
