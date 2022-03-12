@@ -87,8 +87,6 @@ int main(int argc, char *argv[])
     UOSMData data = UOSMData();
 
     const auto targetUpdateDuration = environment::getEnvOrDefault<uint64_t>("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
-    SPDLOG_INFO("Target update duration: {}", targetUpdateDuration);
-
     uint64_t count = 1;
     while (true)
     {

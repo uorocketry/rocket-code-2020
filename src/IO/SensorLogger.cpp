@@ -18,7 +18,7 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    auto path = environment::getEnvOrDefault<std::string>("log-folder", "./data/");
+    auto path = environment::getEnvOrDefault<std::string>("LOG_PATH", "./output/");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
