@@ -32,9 +32,7 @@
 *.app
 
 *.bin
-
 sbgECom/bin/*
-
 
 CMakeLists.txt.user
 CMakeCache.txt

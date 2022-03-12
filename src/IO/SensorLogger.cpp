@@ -22,28 +22,16 @@ void SensorLogger::run()
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
-    // If the path doesn't exist, create it
-    if (!boost::filesystem::exists(path))
-        boost::filesystem::create_directories(path);
+
+    boost::filesystem::create_directories(path);
 
     int bootId = getBootId(path);
 
     writingLock = std::unique_lock<std::mutex>(writingMutex);
 
-    // bool shouldWriteHeader = !std::experimental::filesystem::exists(path +
-    // filename); fileStream = std::make_shared<std::ofstream>(path + filename,
-    // std::ios_base::app);
-
-    // if (shouldWriteHeader)
-    // {
-    // 	std::ofstream fileStream;
-    // 	fileStream.open(path + filename, std::ios_base::app);
-    // 	writeHeader(fileStream);
-    // 	fileStream.close();
-    // }
-
     status.fileStatus = READY;
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate}; // TODO: Close fileStream on exit
+
     while (true)
     {
         if (!logQueue.empty())

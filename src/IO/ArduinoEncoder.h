@@ -34,7 +34,7 @@ std::shared_ptr<std::vector<char>> ArduinoEncoder::encode(const T &dataOut)
     auto cobsData = std::make_shared<std::vector<char>>(cobsSize);
     cobsData->resize(cobsSize);
 
-    cobs_encode(cobsData->data(), cobsSize, &protoData[0], protoSize);
+    cobs_encode(cobsData->data(), cobsSize, protoData.data(), protoData.size());
     cobsData->back() = 0;
 
     return cobsData;

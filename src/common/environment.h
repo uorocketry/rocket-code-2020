@@ -81,6 +81,5 @@ static void initializeVariablesMap(int argc, char *argv[])
         std::cout << desc << "\n";
         exit(0);
     }
-
 }
 } // namespace environment

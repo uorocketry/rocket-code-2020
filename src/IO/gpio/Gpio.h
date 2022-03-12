@@ -1,19 +1,11 @@
 #pragma once
-
+#include "common/pch.h"
 #include "config.h"
 
 #include "IO/IO.h"
 #include "IO/gpio/DigitalOutput.h"
 #include "IO/gpio/PwmOutput.h"
 #include "data/GpioData.h"
-#include <condition_variable>
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <mutex>
-#include <queue>
-#include <string>
-#include <thread>
 
 class Gpio : public IO
 {

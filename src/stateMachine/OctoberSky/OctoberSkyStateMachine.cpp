@@ -275,8 +275,7 @@ void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<SensorsData> &da
     float xAcc = data->sbg.filteredXaccelerometer;
     float yAcc = data->sbg.filteredYaccelerometer;
     float zAcc = data->sbg.filteredZaccelerometer;
-
-    float resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
+    auto resultingAcc = sqrt(pow(xAcc, 2) + pow(yAcc, 2) + pow(zAcc, 2));
     if (resultingAcc >= 24.5)
     {
         consecutiveEvents++;
@@ -285,7 +284,6 @@ void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<SensorsData> &da
     {
         consecutiveEvents = 0;
     }
-
     // trigger launch if the sbg detects "LaunchThreshold" number of consecutive
     // times that the rocket launching
     if (consecutiveEvents >= LaunchThreshold)
@@ -379,6 +377,8 @@ void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<SensorsData> &da
     {
         consecutiveEvents = 0;
     }
+    consecutiveEvents = 2 * ApogeeThreshold;
+    SPDLOG_INFO("Apogee: {}", consecutiveEvents);
 
     // trigger appogee if the sbg detects "ApogeeThreshold" number of consecutive
     // times that the rocket is pointing downwards and falling
