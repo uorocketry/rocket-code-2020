@@ -6,8 +6,8 @@
 #include "data/UOSMData.h"
 #include <unordered_map>
 
-// all the informations about the rocket that the state machine will need
-struct sensorsData
+// All the information about the rocket that the state machine will need
+struct SensorsData
 {
     bool isInitialized() const;
     std::string convertToReducedString() const;
@@ -23,29 +23,29 @@ struct sensorsData
 
 #if USE_GPIO == 1
     GpioData gpioData;
-    GpioState gpioState;
-    bool gpioIsInitialized = 0;
+    GpioData gpioState;
+    bool gpioIsInitialized = false;
 #endif
 
 #if USE_LOGGER
-    bool loggerIsInitialized = 0;
+    bool loggerIsInitialized = false;
 #endif
 
 #if USE_SOCKET_CLIENT
-    bool clientIsInitialized = 0;
+    bool clientIsInitialized = false;
     uint64_t lastActiveClientTimestamp = 0;
 #endif
 
 #if USE_INPUT
-    bool inputIsInitialized = 0;
+    bool inputIsInitialized = false;
 #endif
 
 #if USE_RADIO
-    bool radioIsInitialized = 0;
+    bool radioIsInitialized = false;
 #endif
 
 #if USE_ARDUINO_PROXY
-    bool arduinoProxyIsInitialized = 0;
+    bool arduinoProxyIsInitialized = false;
 #endif
 
 #if TESTING == 1

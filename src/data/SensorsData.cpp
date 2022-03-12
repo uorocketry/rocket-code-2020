@@ -1,6 +1,6 @@
-#include "sensorsData.h"
+#include "SensorsData.h"
 
-bool sensorsData::isInitialized() const
+bool SensorsData::isInitialized() const
 {
     bool result = true;
 
@@ -43,7 +43,7 @@ bool sensorsData::isInitialized() const
  * Convert a reduced set of sensorsData variables to a comma delimited string.
  * There is NO newline character at the end of the returned string.
  */
-std::string sensorsData::convertToReducedString() const
+std::string SensorsData::convertToReducedString() const
 {
     std::string data;
 
@@ -90,22 +90,22 @@ std::string sensorsData::convertToReducedString() const
 #endif // USE_SBG
 
 #if USE_GPIO == 1
-    for (std::pair<std::string, int> output : gpioData.digitalOutputMap)
+    for (std::pair<std::string, int> output : gpioData.digitalMap)
     {
         data += std::to_string(output.second);
         data += ",";
     }
-    for (std::pair<std::string, int> output : gpioData.pwmOutputMap)
+    for (std::pair<std::string, int> output : gpioData.pwmMap)
     {
         data += std::to_string(output.second);
         data += ",";
     }
-    for (std::pair<std::string, int> output : gpioState.digitalStateMap)
+    for (std::pair<std::string, int> output : gpioState.digitalMap)
     {
         data += std::to_string(output.second);
         data += ",";
     }
-    for (std::pair<std::string, int> output : gpioState.pwmStateMap)
+    for (std::pair<std::string, int> output : gpioState.pwmMap)
     {
         data += std::to_string(output.second);
         data += ",";
