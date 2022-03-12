@@ -1,7 +1,6 @@
 #pragma once
-
 #include "cobs.h"
-#include "helpers/Helper.h"
+#include "common/pch.h"
 #include <memory>
 #include <spdlog/spdlog.h>
 
@@ -9,7 +8,7 @@ class ArduinoEncoder
 {
   public:
     template <typename T>
-    static helper::SharedArray<char> encode(const T &dataOut);
+    static std::shared_ptr<std::vector<char>> encode(const T &dataOut);
 
     template <typename T>
     static T decode(const char *buffer, int length);
@@ -20,24 +19,25 @@ class ArduinoEncoder
  * applied to it, and INCLUDES the ending 0x0 byte, so it can be sent as is.
  */
 template <typename T>
-helper::SharedArray<char> ArduinoEncoder::encode(const T &dataOut)
+std::shared_ptr<std::vector<char>> ArduinoEncoder::encode(const T &dataOut)
 {
     // Convert from Protobuf to byte array
     size_t protoSize = dataOut.ByteSizeLong();
 
-    std::unique_ptr<char[]> protoData(new char[protoSize]);
+    std::vector<char> protoData(protoSize);
 
-    dataOut.SerializeToArray(&protoData[0], static_cast<int>(protoSize));
+    dataOut.SerializeToArray(protoData.data(), protoSize);
 
     // Apply COBS to byte array
     int cobsSize = static_cast<int>(protoSize) + 2;
 
-    std::shared_ptr<char[]> cobsData(new char[cobsSize]);
+    auto cobsData = std::make_shared<std::vector<char>>(cobsSize);
+    cobsData->resize(cobsSize);
 
-    cobs_encode(&cobsData[0], cobsSize, &protoData[0], protoSize);
-    cobsData[cobsSize - 1] = 0x0;
+    cobs_encode(cobsData->data(), cobsSize, &protoData[0], protoSize);
+    cobsData->back() = 0;
 
-    return helper::SharedArray<char>{cobsData, static_cast<size_t>(cobsSize)};
+    return cobsData;
 }
 
 /**
