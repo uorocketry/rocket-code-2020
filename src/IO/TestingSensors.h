@@ -1,13 +1,9 @@
 #pragma once
-
 #include "config.h"
-#if TESTING == 1
 
-#include "../data/SBGData.h"
 #include "IO.h"
-#include "data/sensorsData.h"
-#include <iostream>
-#include <queue>
+#include "data/SBGData.h"
+#include "data/SensorsData.h"
 
 class TestingSensors : public IO
 {
@@ -16,10 +12,8 @@ class TestingSensors : public IO
     void initialize() override;
     bool isInitialized() override;
 
-    sensorsData getLatest();
+    SensorsData getLatest();
 
   private:
-    std::queue<sensorsData> data;
+    std::queue<SensorsData> data;
 };
-
-#endif
