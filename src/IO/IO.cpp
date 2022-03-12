@@ -10,7 +10,7 @@ IO::IO()
 IO::~IO()
 {
     // destroy thread
-    SPDLOG_LOGGER_DEBUG("destroy thread");
+    SPDLOG_LOGGER_DEBUG(logger, "destroy thread");
     thisThread.~thread(); // thread not killed
     SPDLOG_LOGGER_DEBUG(logger, "Thread testSensorThread killed:");
 }

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "common/pch.h"
 #include "data/UOSMData.h"
-#include "helpers/Types.h"
 #include "stateMachine/InterfacingStateMachine.h"
 
 class HotFireStateMachine : public InterfacingStateMachine
@@ -19,7 +19,7 @@ class HotFireStateMachine : public InterfacingStateMachine
     void DoneEXT();
     void ServoControlEXT();
 
-    void updateHotFire(UOSMData *data);
+    void updateHotFire(UOSMData &data);
 
   private:
     void detectConnectionTimeout(const std::shared_ptr<StateData> &data);

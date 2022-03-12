@@ -1,6 +1,4 @@
-#define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
-
-#include "../helpers/Types.h"
+#include "common/pch.h"
 #include "iostream"
 #include <spdlog/sinks/systemd_sink.h>
 #include <thread>
@@ -22,8 +20,8 @@
 // Specify the minimum logging level. The specified level and up will be logged.
 // For example, if we have the level to be `info`, `warning` and `error` will be
 // logged but not `debug`.
-const auto CONSOLE_LOGGING_LEVEL = spdlog::level::debug;
-const auto FILE_LOGGING_LEVEL = spdlog::level::debug;
+const auto CONSOLE_LOGGING_LEVEL = spdlog::level::info;
+const auto FILE_LOGGING_LEVEL = spdlog::level::info;
 const auto SYSTEMD_LOGGING_LEVEL = spdlog::level::debug;
 
 void setup_logging()
@@ -60,7 +58,7 @@ void setup_logging()
 
     // Create a new logger with name 'global'
     auto logger = std::make_shared<spdlog::logger>("global", begin(sinks), end(sinks));
-    logger->set_level(spdlog::level::debug);
+    logger->set_level(spdlog::level::trace);
 
     // Register the logger we just created so we can access it from anywhere
     spdlog::register_logger(logger);
@@ -100,7 +98,7 @@ int main()
 
         data.now = now;
 
-        uOttSM.updateStateMachine(&data);
+        uOttSM.updateStateMachine(data);
 
         elapsed_ns = duration_ns(now - start);
         target_ns = duration_ns(targetUpdateDuration * count++);

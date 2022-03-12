@@ -75,6 +75,8 @@ add_library(MainLoopLib ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 
 target_include_directories(MainLoopLib PUBLIC ./src/)
 
+target_precompile_headers(MainLoopLib PUBLIC ${PROJECT_SOURCE_DIR}/src/common/pch.h)
+
 if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
 	target_include_directories(MainLoopLib PUBLIC
 			./projects/ServoControl/
