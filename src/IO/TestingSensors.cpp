@@ -11,9 +11,15 @@ void TestingSensors::initialize()
 {
     createThread = false;
 
-    std::ifstream logFile(environment::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./data/test-data.csv"));
-
+    std::ifstream logFile(environment::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./input.txt"));
     std::string line;
+
+    // CHeck if logFile exists
+    if (!logFile.is_open())
+    {
+        SPDLOG_ERROR("Could not open test file: {}", environment::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./input.txt"));
+    }
+
     while (std::getline(logFile, line))
     {
         std::stringstream lineStream(line);
@@ -139,7 +145,6 @@ SensorsData TestingSensors::getLatest()
     else
     {
         SensorsData currentData;
-
         return currentData;
     }
 }
