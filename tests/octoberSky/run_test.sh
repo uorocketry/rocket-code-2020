@@ -8,8 +8,8 @@ TEST_PATH=/tests/octoberSky/
 
 export TESTING=1
 export TARGET_UPDATE_DURATION_NS=0
-export LOG_PATH="..${TEST_PATH}output/"
-export TESTING_INPUT_FILE="..${TEST_PATH}input.txt"
+export LOG_PATH="./output/"
+export TESTING_INPUT_FILE="./input.txt"
 
 cd ../../
 ./build.sh "${1}" "MainLoop"
