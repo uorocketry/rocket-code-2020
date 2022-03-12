@@ -1,10 +1,13 @@
+#include "TestingInterface.h"
 #include "config.h"
 #include <spdlog/spdlog.h>
-#if TESTING == 1
-
-#include "TestingInterface.h"
 
 TestingInterface::TestingInterface()
+    : eventQueue(2048)
+#if USE_RADIO == 1
+      ,
+      radio(eventQueue)
+#endif
 {
     logger = spdlog::default_logger();
 }
@@ -33,12 +36,12 @@ void TestingInterface::initializeOutputs()
 
 bool TestingInterface::updateInputs()
 {
-    latestState = std::make_shared<sensorsData>(testingSensors.getLatest());
+    latestState = std::make_shared<SensorsData>(testingSensors.getLatest());
 
     return true;
 }
 
-bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
+bool TestingInterface::updateOutputs(std::shared_ptr<SensorsData> data)
 {
 #if USE_LOGGER == 1
     if (latestState->outOfData)
@@ -77,7 +80,7 @@ void TestingInterface::calibrateTelemetry()
 {
 }
 
-std::shared_ptr<sensorsData> TestingInterface::getLatest()
+std::shared_ptr<SensorsData> TestingInterface::getLatest()
 {
     return latestState;
 }
@@ -93,5 +96,3 @@ time_point TestingInterface::getCurrentTime()
         return time_point(std::chrono::duration_cast<time_point::duration>(duration_ns(0)));
     }
 }
-
-#endif
