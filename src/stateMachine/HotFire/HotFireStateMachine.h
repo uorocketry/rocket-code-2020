@@ -19,15 +19,15 @@ class HotFireStateMachine : public InterfacingStateMachine
     void DoneEXT();
     void ServoControlEXT();
 
-    void setHeater(const std::shared_ptr<sensorsData> &interfaceData, bool on);
-
     void updateHotFire(UOSMData &data);
+    void updateHeater(const std::shared_ptr<sensorsData> &interfaceData);
 
   private:
     void detectConnectionTimeout(const std::shared_ptr<sensorsData> &data);
     void detectExternEvent(const std::shared_ptr<sensorsData> &data);
 
     std::shared_ptr<spdlog::logger> logger;
+    bool heaterOn = false;
 
     // State enumeration order must match the order of state method entries
     // in the state map.
