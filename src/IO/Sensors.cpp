@@ -44,7 +44,14 @@ void Sensors::initSensors()
         }
 
 #if USE_SENSOR_MAX_31865 == 1
-        temperature = max31865.temperature(100, 430);
+        try
+        {
+            temperature = max31865.temperature(100, 430);
+        }
+        catch (const std::exception &e)
+        {
+            SPDLOG_WARN("Error reading from temperature sensor: {}", e.what());
+        }
 #endif
 
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
