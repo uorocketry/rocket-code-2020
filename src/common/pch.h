@@ -19,8 +19,10 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #include <spdlog/spdlog.h>
 
-// Boost Assert
+// Boost libraries
+#include <boost/algorithm/string/trim.hpp>
 #include <boost/assert.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/static_assert.hpp>
 
 // UoRocketry
