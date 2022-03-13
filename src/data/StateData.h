@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SensorState.h"
 #include "common/pch.h"
 #include "data/GpioData.h"
 #include "data/SBGData.h"
@@ -7,7 +8,7 @@
 #include <unordered_map>
 
 // all the informations about the rocket that the state machine will need
-struct sensorsData
+struct StateData
 {
     bool isInitialized() const;
     std::string convertToReducedString() const;
@@ -48,11 +49,15 @@ struct sensorsData
     bool arduinoProxyIsInitialized = 0;
 #endif
 
+#if USE_SENSORS
+    SensorState sensorState;
+#endif
+
 #if TESTING == 1
     bool outOfData = false;
 #endif
 
 #if USE_LOGGER == 1
-    bool loggerWorking;
+    bool loggerWorking = false;
 #endif // USE_LOGGER
 };
