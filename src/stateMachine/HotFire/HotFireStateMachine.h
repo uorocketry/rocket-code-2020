@@ -19,6 +19,8 @@ class HotFireStateMachine : public InterfacingStateMachine
     void DoneEXT();
     void ServoControlEXT();
 
+    void setHeater(const std::shared_ptr<sensorsData> &interfaceData, bool on);
+
     void updateHotFire(UOSMData &data);
 
   private:

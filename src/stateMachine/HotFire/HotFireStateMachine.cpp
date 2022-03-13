@@ -181,6 +181,22 @@ void HotFireStateMachine::ServoControlEXT() {
     END_TRANSITION_MAP
 } // clang-format on
 
+void HotFireStateMachine::setHeater(const std::shared_ptr<sensorsData> &interfaceData, bool on)
+{
+#if USE_GPIO == 1 && USE_HEATER
+    GpioData &gpioData = interfaceData->gpioData;
+
+    if (on)
+    {
+        gpioData.digitalOutputMap.insert({HEATER_NAME, HEATER_ON});
+    }
+    else
+    {
+        gpioData.digitalOutputMap.insert({HEATER_NAME, HEATER_OFF});
+    }
+#endif
+}
+
 // Code for each state. Do not put while in them. The right function according
 // to the current state will be call in the main loop.
 
@@ -191,6 +207,10 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
 
 #if USE_VENT
     interface->createNewGpioOutput(VENT_NAME, VENT_PIN);
+#endif
+
+#if USE_HEATER
+    interface->createNewGpioOutput(HEATER_NAME, HEATER_PIN);
 #endif
 
 #if USE_PWM_MAIN
@@ -764,6 +784,12 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &
         break;
     case 7:
         ReadyEXT();
+        break;
+    case 8:
+        setHeater(data, true);
+        break;
+    case 9:
+        setHeater(data, false);
         break;
     default:
         break;
