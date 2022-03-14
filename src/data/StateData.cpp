@@ -1,6 +1,6 @@
-#include "sensorsData.h"
+#include "StateData.h"
 
-bool sensorsData::isInitialized() const
+bool StateData::isInitialized() const
 {
     bool result = true;
 
@@ -43,7 +43,7 @@ bool sensorsData::isInitialized() const
  * Convert a reduced set of sensorsData variables to a comma delimited string.
  * There is NO newline character at the end of the returned string.
  */
-std::string sensorsData::convertToReducedString() const
+std::string StateData::convertToReducedString() const
 {
     std::string data;
 
@@ -116,6 +116,11 @@ std::string sensorsData::convertToReducedString() const
     data += std::to_string(loggerWorking);
     data += ",";
 #endif // USE_LOGGER
+
+#if USE_SENSOR_MAX_31865
+    data += std::to_string(sensorState.temperature);
+    data += ",";
+#endif
 
     return data;
 }

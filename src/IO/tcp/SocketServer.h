@@ -11,7 +11,7 @@
 #include <boost/circular_buffer.hpp>
 #include <chrono>
 #include <condition_variable>
-#include <data/sensorsData.h>
+#include <data/StateData.h>
 #include <iostream>
 #include <queue>
 
@@ -23,7 +23,7 @@ class SocketServer : public IO
 
     void run();
     bool isInitialized();
-    void enqueueSensorData(const sensorsData &data);
+    void enqueueSensorData(const StateData &data);
     uint64_t getLastConnectionTimestamp();
 
   private:

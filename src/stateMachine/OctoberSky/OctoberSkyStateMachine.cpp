@@ -1,6 +1,6 @@
 #include "OctoberSkyStateMachine.h"
 #include "config.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include <bitset>
 #include <cmath>
 #include <iostream>
@@ -249,7 +249,7 @@ STATE_DEFINE(OctoberSkyStateMachine, Ground, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-void OctoberSkyStateMachine::detectExternEvent(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectExternEvent(const std::shared_ptr<StateData> &data)
 {
     eventType eventNbr = data->eventNumber;
 
@@ -269,7 +269,7 @@ void OctoberSkyStateMachine::detectExternEvent(const std::shared_ptr<sensorsData
     }
 }
 
-void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<StateData> &data)
 {
 #if USE_SBG == 1
 
@@ -299,7 +299,7 @@ void OctoberSkyStateMachine::detectLaunch(const std::shared_ptr<sensorsData> &da
 #endif
 }
 
-void OctoberSkyStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectMotorBurnout(const std::shared_ptr<StateData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -331,7 +331,7 @@ void OctoberSkyStateMachine::detectMotorBurnout(const std::shared_ptr<sensorsDat
 #endif
 }
 
-void OctoberSkyStateMachine::detectTouchdown(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectTouchdown(const std::shared_ptr<StateData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -363,7 +363,7 @@ void OctoberSkyStateMachine::detectTouchdown(const std::shared_ptr<sensorsData> 
 #endif
 }
 
-void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<StateData> &data)
 {
 #if USE_SBG == 1
     // TODO: only check for apogee x seconds after launch
@@ -393,7 +393,7 @@ void OctoberSkyStateMachine::detectApogee(const std::shared_ptr<sensorsData> &da
 #endif
 }
 
-void OctoberSkyStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
+void OctoberSkyStateMachine::showInfo(const std::shared_ptr<StateData> &data)
 {
 #if USE_SBG == 1
     printf("Barometer: %f\tGps: longitude %f\t latitude %f\t altitude %f\t "
@@ -406,10 +406,10 @@ void OctoberSkyStateMachine::showInfo(const std::shared_ptr<sensorsData> &data)
 #endif
 }
 
-std::shared_ptr<sensorsData> OctoberSkyStateMachine::updateInterface(const UOSMData *smdata, States state)
+std::shared_ptr<StateData> OctoberSkyStateMachine::updateInterface(const UOSMData *smdata, States state)
 {
     interface->updateInputs();
-    std::shared_ptr<sensorsData> data = interface->getLatest();
+    std::shared_ptr<StateData> data = interface->getLatest();
 
     // If statement to prevent overwiring data from TESTING
     if (data->timeStamp == 0)

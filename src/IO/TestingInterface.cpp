@@ -33,12 +33,12 @@ void TestingInterface::initializeOutputs()
 
 bool TestingInterface::updateInputs()
 {
-    latestState = std::make_shared<sensorsData>(testingSensors.getLatest());
+    latestState = std::make_shared<StateData>(testingSensors.getLatest());
 
     return true;
 }
 
-bool TestingInterface::updateOutputs(std::shared_ptr<sensorsData> data)
+bool TestingInterface::updateOutputs(std::shared_ptr<StateData> data)
 {
 #if USE_LOGGER == 1
     if (latestState->outOfData)
@@ -77,7 +77,7 @@ void TestingInterface::calibrateTelemetry()
 {
 }
 
-std::shared_ptr<sensorsData> TestingInterface::getLatest()
+std::shared_ptr<StateData> TestingInterface::getLatest()
 {
     return latestState;
 }
