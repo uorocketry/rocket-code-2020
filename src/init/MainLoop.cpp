@@ -8,6 +8,7 @@
 #include "chrono"
 #include "data/UOSMData.h"
 #include "interface/HotFire/HotFireInterface.h"
+#include "interface/OctoberSky/OctoberSkyInterface.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/dup_filter_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
