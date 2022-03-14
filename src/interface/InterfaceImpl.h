@@ -3,16 +3,15 @@
 #include "config.h"
 #if TESTING != 1
 
-#include "EventQueue.h"
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
-#include "IO/Interface.h"
 #include "IO/Radio.h"
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
 #include "IO/gpio/Gpio.h"
 #include "IO/tcp/SocketServer.h"
-#include "Sensors.h"
+#include "Interface.h"
+#include <IO/Sensors.h>
 #include <memory>
 #include <spdlog/logger.h>
 #include <string>
