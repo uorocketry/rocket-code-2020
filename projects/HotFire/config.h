@@ -58,4 +58,12 @@
     #define USE_SENSOR_MAX_31865 1
 #endif
 
+// TODO: Remove this when USE_WIRING_Pi is eventually removed
+#if DESKTOP_COMPAT == 1
+    #ifdef USE_WIRING_Pi
+        #undef USE_WIRING_Pi
+    #endif
+    #define USE_WIRING_Pi 0
+#endif
+
 // clang-format on
