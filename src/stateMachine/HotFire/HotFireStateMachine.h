@@ -20,11 +20,12 @@ class HotFireStateMachine : public InterfacingStateMachine
     void ServoControlEXT();
 
     void updateHotFire(UOSMData &data);
-    void updateHeater(const std::shared_ptr<sensorsData> &interfaceData);
 
   private:
     void detectConnectionTimeout(const std::shared_ptr<sensorsData> &data);
     void detectExternEvent(const std::shared_ptr<sensorsData> &data);
+
+    void updateHeater(const std::shared_ptr<sensorsData> &interfaceData);
 
     std::shared_ptr<spdlog::logger> logger;
     bool heaterOn = false;
