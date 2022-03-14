@@ -1,5 +1,6 @@
 #include "Helper.h"
 
+#include <boost/lexical_cast.hpp>
 #include <cmath>
 
 namespace helper

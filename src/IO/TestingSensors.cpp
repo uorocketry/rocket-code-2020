@@ -5,6 +5,8 @@
 #include "data/sensorsData.h"
 #include "helpers/Helper.h"
 
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/lexical_cast.hpp>
 #include <fstream>
 
 void TestingSensors::run()
