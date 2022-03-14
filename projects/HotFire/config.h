@@ -5,6 +5,7 @@
 // clang-format off
 
 #define STATEMACHINE HotFireStateMachine
+#define INTERFACE HotFireInterface
 
 #ifndef USE_SBG
     #define USE_SBG 0

@@ -11,7 +11,7 @@ class Interface
   public:
     virtual void initialize() = 0;
 
-    virtual void calibrateTelemetry() = 0;
+    virtual void calibrateTelemetry(){};
 
     // to get the latest rocket state. return a pointer to latestState
     virtual std::shared_ptr<StateData> getLatest() = 0;
@@ -21,13 +21,9 @@ class Interface
 
     virtual bool updateOutputs(std::shared_ptr<StateData> data) = 0;
 
-#if USE_GPIO == 1
+    virtual void createNewGpioOutput(std::string name, int pinNbr){};
 
-    virtual void createNewGpioOutput(std::string name, int pinNbr) = 0;
-
-    virtual void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) = 0;
-
-#endif
+    virtual void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm){};
 
     virtual time_point getCurrentTime() = 0;
 };

@@ -5,9 +5,9 @@
 
 #include "helpers/Helper.h"
 
-#include "IO/InterfaceImpl.h"
 #include "chrono"
 #include "data/UOSMData.h"
+#include "interface/HotFire/HotFireInterface.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/dup_filter_sink.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
@@ -74,7 +74,7 @@ int main()
     SPDLOG_INFO("Using {}", TOSTRING(STATEMACHINE));
 
 #if TESTING != 1
-    InterfaceImpl interfaceImpl;
+    INTERFACE interfaceImpl;
 #else
     TestingInterface interfaceImpl;
 #endif
