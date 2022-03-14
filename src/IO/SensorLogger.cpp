@@ -46,14 +46,6 @@ void SensorLogger::run()
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
 
-    /*if (shouldWriteHeader)
-    {
-        std::ofstream fileStream;
-        fileStream.open(path + filename, std::ios_base::app);
-        writeHeader(fileStream);
-        fileStream.close();
-    }*/
-
     status.fileStatus = READY;
 
     bool isFirstLine = true;
@@ -69,7 +61,8 @@ void SensorLogger::run()
             // write the headers if necessary
             if (shouldWriteHeader && isFirstLine)
             {
-                writeToHeader(currentState, isFirstLine, path, filename);
+                writeToHeader(currentState, path, filename);
+                isFirstLine = false;
             }
 
             // write to file
@@ -165,14 +158,12 @@ sensorsData SensorLogger::getCurrentState()
     return logQueue.front();
 }
 
-void SensorLogger::writeToHeader(sensorsData currentState, bool &isFirstLine, std::string path, std::string filename)
+void SensorLogger::writeToHeader(sensorsData currentState, std::string path, std::string filename)
 {
     std::ofstream fileStream;
     fileStream.open(path + filename, std::ios_base::app);
     writeHeader(fileStream, currentState);
     fileStream.close();
-
-    isFirstLine = false;
 }
 
 bool SensorLogger::sendToWriteFile(std::ofstream &fileStream, sensorsData currentState, std::string path,
