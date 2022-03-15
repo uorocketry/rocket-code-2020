@@ -11,8 +11,6 @@
 namespace helper
 {
 
-std::vector<std::string> stringSplit(const std::string &text, char delimiter);
-
 const char *getEnvOrDefault(const char *envName, const char *defaultValue);
 
 uint64_t getEnvOrDefault(const char *envName, uint64_t defaultValue);

@@ -5,7 +5,7 @@
 #include "data/StateData.h"
 #include "helpers/Helper.h"
 
-#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 #include <fstream>
 
@@ -25,7 +25,8 @@ void TestingSensors::initialize()
         std::stringstream lineStream(line);
         std::string cell;
 
-        std::vector<std::string> currentRow = helper::stringSplit(line, ',');
+        std::vector<std::string> currentRow;
+        boost::split(currentRow, line, boost::is_any_of(","));
 
         // Trim all elements in currentRow
         for (auto &element : currentRow)
