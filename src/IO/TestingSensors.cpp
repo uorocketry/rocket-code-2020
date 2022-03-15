@@ -16,8 +16,8 @@ void TestingSensors::run()
 void TestingSensors::initialize()
 {
     createThread = false;
-
-    std::ifstream logFile(helper::getEnvOrDefault("TESTING_INPUT_FILE", "./data/test-data.csv"));
+    auto fileName = helper::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./data/test-data.csv");
+    std::ifstream logFile(fileName.c_str());
 
     std::string line;
     while (std::getline(logFile, line))

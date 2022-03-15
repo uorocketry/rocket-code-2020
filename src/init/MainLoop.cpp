@@ -14,6 +14,7 @@
 #include "spdlog/spdlog.h"
 #include "stateMachine/HotFire/HotFireStateMachine.h"
 #include "stateMachine/OctoberSky/OctoberSkyStateMachine.h"
+#include <boost/preprocessor/stringize.hpp>
 
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
@@ -39,7 +40,7 @@ void setup_logging()
     file_sink->set_level(FILE_LOGGING_LEVEL);
     dup_filter->add_sink(file_sink);
 
-    if (std::string(helper::getEnvOrDefault("INSIDE_SERVICE", "0")) == "0")
+    if (helper::getEnvOrDefault<std::string>("INSIDE_SERVICE", "0") == "0")
     {
         // Log to the console
         auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
@@ -71,7 +72,7 @@ int main()
 {
     setup_logging();
 
-    SPDLOG_INFO("Using {}", TOSTRING(STATEMACHINE));
+    SPDLOG_INFO("Using {}", BOOST_PP_STRINGIZE(STATEMACHINE));
 
 #if TESTING != 1
     InterfaceImpl interfaceImpl;
@@ -87,8 +88,8 @@ int main()
     start = std::chrono::steady_clock::now();
     UOSMData data = UOSMData();
 
-    const uint64_t targetUpdateDuration =
-        helper::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
+    const auto targetUpdateDuration =
+        helper::getEnvOrDefault<uint64_t>("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
     uint64_t count = 1;
     while (true)
     {
