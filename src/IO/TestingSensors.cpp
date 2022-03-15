@@ -1,5 +1,4 @@
 #include "config.h"
-#if TESTING == 1
 
 #include "TestingSensors.h"
 #include "data/StateData.h"
@@ -153,5 +152,3 @@ bool TestingSensors::isInitialized()
     // Unused when in testing mode
     return true;
 }
-
-#endif

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#if TESTING == 1
 
 #include "../data/SBGData.h"
 #include "IO.h"
@@ -21,5 +20,3 @@ class TestingSensors : public IO
   private:
     std::queue<StateData> data;
 };
-
-#endif

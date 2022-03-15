@@ -1,11 +1,9 @@
 #pragma once
 
-#include "config.h"
-#if USE_RADIO == 1
-
 #include "../data/StateData.h"
 #include "EventQueue.h"
 #include "IO.h"
+#include "config.h"
 #include <condition_variable>
 #include <mutex>
 #include <queue>
@@ -58,5 +56,3 @@ class Radio : public IO
         InitStatus wiringPiStatus = INIT;
     } status;
 };
-
-#endif

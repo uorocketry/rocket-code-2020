@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#if USE_GPIO == 1
 
 #include "IO/IO.h"
 #include "IO/gpio/DigitalOutput.h"
@@ -50,5 +49,3 @@ class Gpio : public IO
     template <typename T, typename std::enable_if<std::is_base_of<Output, T>::value>::type * = nullptr>
     std::map<std::string, int> toRawMap(std::map<std::string, T> map);
 };
-
-#endif

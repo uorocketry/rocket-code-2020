@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#if USE_SOCKET_CLIENT == 1
 
 #include "IO/EventQueue.h"
 #include "IO/IO.h"
@@ -52,5 +51,3 @@ class SocketServer : public IO
 
     uint64_t lastConnectionTimestamp = 0;
 };
-
-#endif

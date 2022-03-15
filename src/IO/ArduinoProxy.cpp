@@ -1,7 +1,5 @@
 #include "ArduinoProxy.h"
 
-#if USE_ARDUINO_PROXY == 1
-
 #include "IO/ArduinoEncoder.h"
 #include <spdlog/spdlog.h>
 #include <sys/poll.h>
@@ -173,5 +171,3 @@ int ArduinoProxy::getServoState(int pin)
         return state.first;
     }
 }
-
-#endif

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#if TESTING != 1
 
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
@@ -51,5 +50,3 @@ class OctoberSkyInterface : public Interface
     Radio radio;
     SensorLogger sensorLogger;
 };
-
-#endif

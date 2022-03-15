@@ -1,7 +1,6 @@
 #pragma once
 
 #include "config.h"
-#if TESTING != 1
 
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
@@ -55,5 +54,3 @@ class HotFireInterface : public Interface
     ArduinoProxy *arduinoProxy;
     Sensors sensors;
 };
-
-#endif

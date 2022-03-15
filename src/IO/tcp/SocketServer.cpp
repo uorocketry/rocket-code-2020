@@ -1,5 +1,4 @@
 #include "config.h"
-#if USE_SOCKET_CLIENT == 1
 
 #include "IO/IO.h"
 #include "SocketServer.h"
@@ -133,5 +132,3 @@ uint64_t SocketServer::getLastConnectionTimestamp()
 
     return lastConnectionTimestamp;
 }
-
-#endif

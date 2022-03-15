@@ -1,7 +1,5 @@
 #include "config.h"
 
-#if USE_SBG == 1
-
 #include "SBGSensor.h"
 #include <sbgDefines.h>
 
@@ -329,5 +327,3 @@ sbgData SBGSensor::getData()
     std::lock_guard<std::mutex> lockGuard(mutex);
     return data;
 }
-
-#endif
