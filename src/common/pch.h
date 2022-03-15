@@ -19,7 +19,7 @@
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 #include <spdlog/spdlog.h>
 
-// Boost Assert
+// Boost libraries
 #include <boost/assert.hpp>
 #include <boost/static_assert.hpp>
 
