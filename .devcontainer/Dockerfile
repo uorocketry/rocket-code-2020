@@ -9,4 +9,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     libboost-all-dev \
     protobuf-compiler \
     libprotobuf-dev \
-    libsystemd-dev
+    libsystemd-dev \
+    clang-format
