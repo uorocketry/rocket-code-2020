@@ -89,8 +89,9 @@ int main()
     UOSMData data = UOSMData();
 
     const auto targetUpdateDuration =
-        helper::getEnvOrDefault<uint64_t>("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
+        helper::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
     uint64_t count = 1;
+
     while (true)
     {
         // Keep in mind, this is NOT the time since unix epoch (1970), and not the
