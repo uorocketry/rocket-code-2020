@@ -1,7 +1,5 @@
 #!/bin/bash
 
 git submodule update --init
-mkdir -p build
-cd build
-cmake .. -G "${1:-Ninja}"
-cmake --build ./ --target "${2:-MainLoop}"
+cmake -B build -S . -G "${1:-Ninja}"
+cmake --build build --target "${2:-MainLoop}"

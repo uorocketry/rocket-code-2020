@@ -1,7 +1,7 @@
 #pragma once
 
+#include "common/pch.h"
 #include "data/UOSMData.h"
-#include "helpers/Types.h"
 #include "stateMachine/InterfacingStateMachine.h"
 
 class HotFireStateMachine : public InterfacingStateMachine
@@ -19,11 +19,11 @@ class HotFireStateMachine : public InterfacingStateMachine
     void DoneEXT();
     void ServoControlEXT();
 
-    void updateHotFire(UOSMData *data);
+    void updateHotFire(UOSMData &data);
 
   private:
-    void detectConnectionTimeout(const std::shared_ptr<sensorsData> &data);
-    void detectExternEvent(const std::shared_ptr<sensorsData> &data);
+    void detectConnectionTimeout(const std::shared_ptr<StateData> &data);
+    void detectExternEvent(const std::shared_ptr<StateData> &data);
 
     std::shared_ptr<spdlog::logger> logger;
 
@@ -112,7 +112,7 @@ class HotFireStateMachine : public InterfacingStateMachine
     STATE_MAP_ENTRY_ALL_EX(&ServoControl, nullptr, &EnterServoControl, nullptr)
     END_STATE_MAP_EX
 
-    std::shared_ptr<sensorsData> updateInterface(const UOSMData *smdata, States state);
+    std::shared_ptr<StateData> updateInterface(const UOSMData *smdata, States state);
 
     void logValveStatus(std::string valveName, bool status);
 };

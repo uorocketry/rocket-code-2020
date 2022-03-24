@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.12)
 
 project(RocketCode2020 C CXX)
 
+cmake_host_system_information(RESULT _memfree QUERY AVAILABLE_PHYSICAL_MEMORY)
+set_property(GLOBAL PROPERTY JOB_POOLS four_jobs=4)
+if (_memfree LESS 1000)
+	set(CMAKE_JOB_POOL_COMPILE four_jobs)
+endif()
+
 add_subdirectory(./libraries)
 
 if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
@@ -68,6 +74,8 @@ file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/src/*.cpp)
 add_library(MainLoopLib ${SRC_MAIN} ${MAIN_CONFIG_SRC})
 
 target_include_directories(MainLoopLib PUBLIC ./src/)
+
+target_precompile_headers(MainLoopLib PUBLIC ${PROJECT_SOURCE_DIR}/src/common/pch.h)
 
 if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
 	target_include_directories(MainLoopLib PUBLIC

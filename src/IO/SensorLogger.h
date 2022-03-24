@@ -3,7 +3,7 @@
 #include "config.h"
 #if USE_LOGGER == 1
 
-#include "../data/sensorsData.h"
+#include "../data/StateData.h"
 #include "IO.h"
 #include <condition_variable>
 #include <fstream>
@@ -23,7 +23,7 @@ class SensorLogger : public IO
     bool isInitialized() override;
 
     // write data to sensorsData struct and push to queue on main thread
-    void enqueueSensorData(const sensorsData &curSensorData);
+    void enqueueSensorData(const StateData &curSensorData);
 
     bool queueEmpty();
 
@@ -37,6 +37,7 @@ class SensorLogger : public IO
     static void writeHeader(std::ofstream &file, sensorsData currentState);
     static void writeData(std::ofstream &file, const sensorsData &currentState);
 
+
     static int getBootId(std::string &path);
 
     const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND =
@@ -45,7 +46,7 @@ class SensorLogger : public IO
     std::thread thisThread;
 
     // queue of sensor data to be logged
-    std::queue<sensorsData> logQueue;
+    std::queue<StateData> logQueue;
 
     std::mutex writingMutex;
     std::unique_lock<std::mutex> writingLock;

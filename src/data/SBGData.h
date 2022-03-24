@@ -21,15 +21,15 @@ struct sbgData
     float filteredXaccelerometer = -1;
     float filteredYaccelerometer = -1;
     float filteredZaccelerometer = -1;
-    uint32 solutionStatus = 0;
+    uint32_t solutionStatus = 0;
 
     // to only log
 
-    uint32 gpsPosStatus = 0;
+    uint32_t gpsPosStatus = 0;
     float gpsPosAccuracyLatitude = -1;
     float gpsPosAccuracyLongitude = -1;
     float gpsPosAccuracyAltitude = -1;
-    uint8 NumSvUsed = 0;
+    uint8_t NumSvUsed = 0;
 
     float velocityNAccuracy = -1;
     float velocityEAccuracy = -1;
@@ -39,10 +39,10 @@ struct sbgData
     float longitudeAccuracy = -1;
     float altitudeAccuracy = -1;
 
-    uint16 pressureStatus = 0;
+    uint16_t pressureStatus = 0;
     float barometricPressure = -1;
 
-    uint32 imuStatus = 0;
+    uint32_t imuStatus = 0;
     float gyroX = -1;
     float gyroY = -1;
     float gyroZ = -1;
