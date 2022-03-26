@@ -6,6 +6,11 @@
 
 #define STATEMACHINE HotFireStateMachine
 
+#if DESKTOP_COMPAT == 1
+    #define USE_SENSORS 0
+    #define USE_WIRING_Pi 0
+#endif
+
 #ifndef USE_SBG
     #define USE_SBG 0
 #endif
