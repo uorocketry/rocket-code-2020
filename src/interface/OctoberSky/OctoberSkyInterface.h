@@ -1,31 +1,29 @@
 #pragma once
 
 #include "config.h"
-#if TESTING != 1
 
-#include "EventQueue.h"
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
-#include "IO/Interface.h"
 #include "IO/Radio.h"
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
 #include "IO/gpio/Gpio.h"
 #include "IO/tcp/SocketServer.h"
-#include "Sensors.h"
+#include <IO/Sensors.h>
+#include <interface/Interface.h>
 #include <memory>
 #include <spdlog/logger.h>
 #include <string>
 
-class InterfaceImpl : public Interface
+class OctoberSkyInterface : public Interface
 {
   public:
-    InterfaceImpl();
-    ~InterfaceImpl();
+    OctoberSkyInterface();
+    ~OctoberSkyInterface();
 
     void initialize() override;
 
-    void calibrateTelemetry();
+    void calibrateTelemetry() override;
 
     // to get the latest rocket state. return a pointer to latestState
     std::shared_ptr<StateData> getLatest() override;
@@ -33,11 +31,6 @@ class InterfaceImpl : public Interface
     // loop over each sensor and update the latestState
     bool updateInputs() override;
     bool updateOutputs(std::shared_ptr<StateData> data) override;
-
-#if USE_GPIO == 1
-    void createNewGpioOutput(std::string name, int pinNbr) override;
-    void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
-#endif
 
     time_point getCurrentTime() override;
 
@@ -50,37 +43,10 @@ class InterfaceImpl : public Interface
     std::shared_ptr<StateData> latestState;
     EventQueue eventQueue;
 
-#if USE_SBG == 1
-    SBGSensor mySbgSensor;
-#endif
-
-#if USE_INPUT == 1
-    Input input;
-#endif
-
-#if USE_SOCKET_CLIENT == 1
-    SocketServer client;
-#endif
-
-#if USE_RADIO == 1
+    /**
+     * IO instances
+     */
+    SBGSensor sbgSensor;
     Radio radio;
-#endif
-
-#if USE_LOGGER == 1
     SensorLogger sensorLogger;
-#endif
-
-#if USE_GPIO == 1
-    Gpio gpio;
-#endif
-
-#if USE_ARDUINO_PROXY == 1
-    ArduinoProxy *arduinoProxy;
-#endif
-
-#if USE_SENSORS == 1
-    Sensors sensors;
-#endif
 };
-
-#endif

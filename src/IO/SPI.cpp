@@ -16,6 +16,7 @@
 SPI::SPI(const char *device, uint8_t mode, uint8_t bitsPerWord, uint32_t speed, bool lsbFirst)
     : device(device), bits(bitsPerWord), speed(speed)
 {
+#if DESKTOP_COMPAT != 1
     int ret = 0;
 
     fd = open(device, O_RDWR);
@@ -83,11 +84,14 @@ SPI::SPI(const char *device, uint8_t mode, uint8_t bitsPerWord, uint32_t speed, 
     {
         throw SPIError("Can't set max read speed hz to " + std::to_string(speed));
     }
+#endif
 }
 
 SPI::~SPI()
 {
+#if DESKTOP_COMPAT != 1
     close(fd);
+#endif
 }
 
 /*!
@@ -101,11 +105,13 @@ SPI::~SPI()
  */
 void SPI::write(uint8_t *buffer, size_t len) const
 {
+#if DESKTOP_COMPAT != 1
     auto status = ::write(fd, buffer, len);
     if (status < 0)
     {
         throw SPIError("Error writing to SPI device");
     }
+#endif
 }
 
 /*!
@@ -124,6 +130,7 @@ void SPI::write(uint8_t *buffer, size_t len) const
 void SPI::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t *read_buffer, size_t read_len,
                           uint8_t sendvalue) const
 {
+#if DESKTOP_COMPAT != 1
     struct spi_ioc_transfer xfer[2];
 
     memset(xfer, 0, sizeof xfer);
@@ -140,4 +147,5 @@ void SPI::write_then_read(const uint8_t *write_buffer, size_t write_len, uint8_t
     {
         throw SPIError("Error reading to SPI device");
     }
+#endif
 }

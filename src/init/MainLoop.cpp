@@ -1,20 +1,21 @@
 #include "common/pch.h"
-#include "iostream"
-#include <spdlog/sinks/systemd_sink.h>
-#include <thread>
-
-#include "helpers/Helper.h"
-
-#include "IO/InterfaceImpl.h"
-#include "chrono"
 #include "data/UOSMData.h"
-#include "spdlog/sinks/basic_file_sink.h"
-#include "spdlog/sinks/dup_filter_sink.h"
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/spdlog.h"
+#include "helpers/Helper.h"
+#include "interface/HotFire/HotFireInterface.h"
+#include "interface/OctoberSky/OctoberSkyInterface.h"
+#include "interface/TestingInterface.h"
 #include "stateMachine/HotFire/HotFireStateMachine.h"
 #include "stateMachine/OctoberSky/OctoberSkyStateMachine.h"
 #include <boost/preprocessor/stringize.hpp>
+
+#include <chrono>
+#include <iostream>
+#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/dup_filter_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/sinks/systemd_sink.h>
+#include <spdlog/spdlog.h>
+#include <thread>
 
 #define DEFAULT_TARGET_UPDATE_DURATION_NS (1000000000L / 30L) // in nanoseconds = 33 miliseconds = 30Hz
 
@@ -75,7 +76,7 @@ int main()
     SPDLOG_INFO("Using {}", BOOST_PP_STRINGIZE(STATEMACHINE));
 
 #if TESTING != 1
-    InterfaceImpl interfaceImpl;
+    INTERFACE interfaceImpl;
 #else
     TestingInterface interfaceImpl;
 #endif

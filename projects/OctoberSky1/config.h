@@ -3,6 +3,7 @@
 // clang-format off
 
 #define STATEMACHINE OctoberSkyStateMachine
+#define INTERFACE OctoberSkyInterface
 
 #ifndef TESTING
     #define TESTING 0

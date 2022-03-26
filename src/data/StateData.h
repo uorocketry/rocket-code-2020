@@ -17,47 +17,50 @@ struct StateData
     uint16_t currentStateNo = 0;
     eventType eventNumber = -1;
 
-#if USE_SBG == 1
+    /**
+     * SBG
+     */
     sbgData sbg;
-    bool sbgIsInitialized = 0;
-#endif
+    bool sbgIsInitialized = false;
 
-#if USE_GPIO == 1
+    /**
+     * GPIO
+     */
     GpioData gpioData;
     GpioState gpioState;
-    bool gpioIsInitialized = 0;
-#endif
+    bool gpioIsInitialized = false;
 
-#if USE_LOGGER
-    bool loggerIsInitialized = 0;
-#endif
-
-#if USE_SOCKET_CLIENT
-    bool clientIsInitialized = 0;
-    uint64_t lastActiveClientTimestamp = 0;
-#endif
-
-#if USE_INPUT
-    bool inputIsInitialized = 0;
-#endif
-
-#if USE_RADIO
-    bool radioIsInitialized = 0;
-#endif
-
-#if USE_ARDUINO_PROXY
-    bool arduinoProxyIsInitialized = 0;
-#endif
-
-#if USE_SENSORS
-    SensorState sensorState;
-#endif
-
-#if TESTING == 1
-    bool outOfData = false;
-#endif
-
-#if USE_LOGGER == 1
+    /**
+     * Logger
+     */
+    bool loggerIsInitialized = false;
     bool loggerWorking = false;
-#endif // USE_LOGGER
+
+    /**
+     * Socket Client
+     */
+    bool clientIsInitialized = false;
+    uint64_t lastActiveClientTimestamp = 0;
+
+    /**
+     * Input
+     */
+    bool inputIsInitialized = false;
+
+    /**
+     * Radio
+     */
+    bool radioIsInitialized = false;
+
+    /**
+     * Arduino Proxy
+     */
+    bool arduinoProxyIsInitialized = false;
+
+    /**
+     * Sensor
+     */
+    SensorState sensorState;
+
+    bool outOfData = false;
 };

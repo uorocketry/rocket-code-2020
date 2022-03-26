@@ -1,5 +1,4 @@
 #include "config.h"
-#if USE_RADIO == 1
 
 #include "Radio.h"
 #include "data/StateData.h"
@@ -96,5 +95,3 @@ void Radio::sendData(const StateData &currentState) const
 
     serialPrintf(fd, data.c_str());
 }
-
-#endif // USE_RADIO

@@ -1,12 +1,11 @@
 #pragma once
 
 #include "config.h"
-#if TESTING == 1
 
-#include "IO/Interface.h"
 #include "IO/Radio.h"
 #include "IO/SensorLogger.h"
 #include "IO/TestingSensors.h"
+#include "Interface.h"
 #include "data/StateData.h"
 #include <queue>
 #include <string>
@@ -27,11 +26,6 @@ class TestingInterface : public Interface
     bool updateInputs() override;
     bool updateOutputs(std::shared_ptr<StateData> data) override;
 
-#if USE_GPIO == 1
-    void createNewGpioOutput(std::string name, int pinNbr) override;
-    void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
-#endif
-
     time_point getCurrentTime() override;
 
   private:
@@ -45,13 +39,5 @@ class TestingInterface : public Interface
 
     time_point latestTime;
 
-#if USE_LOGGER == 1
     SensorLogger sensorLogger;
-#endif
-
-#if USE_RADIO == 1
-    Radio radio;
-#endif
 };
-
-#endif

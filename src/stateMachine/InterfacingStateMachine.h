@@ -1,9 +1,7 @@
 #pragma once
-#include "IO/Interface.h"
-#include "IO/InterfaceImpl.h"
-#include "IO/TestingInterface.h"
 #include "data/StateData.h"
 #include "stateMachineLib/StateMachine.h"
+#include <interface/Interface.h>
 #include <memory>
 
 class InterfacingStateMachine : public StateMachine
