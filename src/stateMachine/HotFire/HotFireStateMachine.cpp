@@ -193,6 +193,10 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
     interface->createNewGpioOutput(VENT_NAME, VENT_PIN);
 #endif
 
+#if USE_HEATER
+    interface->createNewGpioOutput(HEATER_NAME, HEATER_PIN);
+#endif
+
 #if USE_PWM_MAIN
     interface->createNewGpioPwmOutput(MAIN_NAME, MAIN_PIN, MAIN_SAFE, MAIN_SOFTPWM);
 #endif
@@ -765,6 +769,12 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
     case 7:
         ReadyEXT();
         break;
+    case 8:
+        heaterOn = true;
+        break;
+    case 9:
+        heaterOn = false;
+        break;
     default:
         break;
     }
@@ -782,5 +792,23 @@ std::shared_ptr<StateData> HotFireStateMachine::updateInterface(const UOSMData *
 
     data->currentStateNo = state;
 
+    updateHeater(data);
+
     return data;
+}
+
+void HotFireStateMachine::updateHeater(const std::shared_ptr<StateData> &interfaceData)
+{
+#if USE_GPIO == 1 && USE_HEATER
+    GpioData &gpioData = interfaceData->gpioData;
+
+    if (heaterOn)
+    {
+        gpioData.digitalOutputMap.insert({HEATER_NAME, HEATER_ON});
+    }
+    else
+    {
+        gpioData.digitalOutputMap.insert({HEATER_NAME, HEATER_OFF});
+    }
+#endif
 }

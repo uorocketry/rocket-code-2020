@@ -25,7 +25,10 @@ class HotFireStateMachine : public InterfacingStateMachine
     void detectConnectionTimeout(const std::shared_ptr<StateData> &data);
     void detectExternEvent(const std::shared_ptr<StateData> &data);
 
+    void updateHeater(const std::shared_ptr<StateData> &interfaceData);
+
     std::shared_ptr<spdlog::logger> logger;
+    bool heaterOn = false;
 
     // State enumeration order must match the order of state method entries
     // in the state map.
