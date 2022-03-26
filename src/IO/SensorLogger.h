@@ -37,7 +37,6 @@ class SensorLogger : public IO
     static void writeHeader(std::ofstream &file, StateData currentState);
     static void writeData(std::ofstream &file, const StateData &currentState);
 
-
     static int getBootId(std::string &path);
 
     const std::chrono::duration<int64_t, std::ratio<1, 1>> ONE_SECOND =
