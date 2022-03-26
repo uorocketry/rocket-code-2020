@@ -797,7 +797,7 @@ std::shared_ptr<StateData> HotFireStateMachine::updateInterface(const UOSMData *
     return data;
 }
 
-void HotFireStateMachine::updateHeater(const std::shared_ptr<sensorsData> &interfaceData)
+void HotFireStateMachine::updateHeater(const std::shared_ptr<StateData> &interfaceData)
 {
 #if USE_GPIO == 1 && USE_HEATER
     GpioData &gpioData = interfaceData->gpioData;
