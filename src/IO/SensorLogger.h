@@ -32,10 +32,10 @@ class SensorLogger : public IO
 
   private:
     // pop queue and log the data from sensorsData on logging thread
-    bool writeToFile(std::ofstream &fileStream, sensorsData currentState);
+    bool writeToFile(std::ofstream &fileStream, StateData currentState);
 
-    static void writeHeader(std::ofstream &file, sensorsData currentState);
-    static void writeData(std::ofstream &file, const sensorsData &currentState);
+    static void writeHeader(std::ofstream &file, StateData currentState);
+    static void writeData(std::ofstream &file, const StateData &currentState);
 
 
     static int getBootId(std::string &path);
@@ -52,9 +52,9 @@ class SensorLogger : public IO
     std::unique_lock<std::mutex> writingLock;
     std::condition_variable writingCondition;
 
-    sensorsData getCurrentState();
-    void writeToHeader(sensorsData currentState, std::string path, std::string filename);
-    bool sendToWriteFile(std::ofstream &fileStream, sensorsData currentState, std::string path, std::string filename);
+    StateData getCurrentState();
+    void writeToHeader(StateData currentState, std::string path, std::string filename);
+    bool sendToWriteFile(std::ofstream &fileStream, StateData currentState, std::string path, std::string filename);
     void popData();
 
     struct InitFlags

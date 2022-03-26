@@ -56,7 +56,7 @@ void SensorLogger::run()
         {
 
             // get data
-            sensorsData currentState = getCurrentState();
+            StateData currentState = getCurrentState();
 
             // write the headers if necessary
             if (shouldWriteHeader && isFirstLine)
@@ -135,7 +135,7 @@ void SensorLogger::enqueueSensorData(const StateData &curSensorData)
     writingCondition.notify_one();
 }
 
-bool SensorLogger::writeToFile(std::ofstream &fileStream, sensorsData currentState)
+bool SensorLogger::writeToFile(std::ofstream &fileStream, StateData currentState)
 {
     if (fileStream.is_open())
     {
@@ -151,13 +151,13 @@ bool SensorLogger::writeToFile(std::ofstream &fileStream, sensorsData currentSta
     }
 }
 
-sensorsData SensorLogger::getCurrentState()
+StateData SensorLogger::getCurrentState()
 {
     std::lock_guard<std::mutex> lockGuard(mutex);
     return logQueue.front();
 }
 
-void SensorLogger::writeToHeader(sensorsData currentState, std::string path, std::string filename)
+void SensorLogger::writeToHeader(StateData currentState, std::string path, std::string filename)
 {
     std::ofstream fileStream;
     fileStream.open(path + filename, std::ios_base::app);
@@ -165,7 +165,7 @@ void SensorLogger::writeToHeader(sensorsData currentState, std::string path, std
     fileStream.close();
 }
 
-bool SensorLogger::sendToWriteFile(std::ofstream &fileStream, sensorsData currentState, std::string path,
+bool SensorLogger::sendToWriteFile(std::ofstream &fileStream, StateData currentState, std::string path,
                                    std::string filename)
 {
     fileStream.open(path + filename, std::ios_base::app);
@@ -178,7 +178,7 @@ void SensorLogger::popData()
     logQueue.pop();
 }
 
-void SensorLogger::writeHeader(std::ofstream &fileStream, sensorsData currentState)
+void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState)
 {
 
     fileStream << "Timestamp (Relative),";
