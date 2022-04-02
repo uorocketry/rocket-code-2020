@@ -53,13 +53,6 @@ class Point3D : public Quaternion{
         double cj;
         double dk;
 
-        Point3D() : Quaternion(0, 0, 0, 0){
-
-            this->bi;
-            this->cj;
-            this->dk;
-        }
-
         Point3D():Quaternion(){
             this->bi = 0;
             this->cj = 0;
