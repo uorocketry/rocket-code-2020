@@ -9,20 +9,15 @@ jobs:
 
     steps:
       # Initialization
-      - name: Install SSH Key # For private submodules
-        run: mkdir $HOME/.ssh && echo "${{ secrets.SSH_KEY }}" > $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
-      - uses: actions/checkout@v2
-      - name: Force Git to use SSH
-        run: git config --global url.ssh://git@github.com/.insteadOf https://github.com/
-      - name: Checkout submodules
-        run: |
-          git submodule init
-          git submodule update
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
-      - name: Cmake Makefiles
-        run: USE_GPIO=1 cmake -B ./build -G 'Unix Makefiles'
-      - name: Run make
+      - name: CMake
+        run: USE_GPIO=1 cmake -B ./build -G 'Ninja'
+      - name: Build
         run: USE_GPIO=1 cmake --build ./build --target tests
       - name: Run Unit Tests
         run: ./build/unitTesting/tests

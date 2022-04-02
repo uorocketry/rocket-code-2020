@@ -4,9 +4,7 @@
 [submodule "libraries/Catch2"]
 	path = libraries/Catch2
 	url = https://github.com/catchorg/Catch2.git
-[submodule "libraries/sbgECom"]
-	path = libraries/sbgECom
-	url = https://github.com/uorocketry/sbgECom.git
+	branch = v2.x
 [submodule "libraries/spdlog"]
 	path = libraries/spdlog
 	url = https://github.com/gabime/spdlog.git
@@ -16,3 +14,6 @@
 [submodule "libraries/protobuf-definitions"]
 	path = libraries/protobuf-definitions
 	url = https://github.com/uorocketry/protobuf-definitions.git
+[submodule "libraries/sbgECom"]
+	path = libraries/sbgECom
+	url = https://github.com/SBG-Systems/sbgECom.git

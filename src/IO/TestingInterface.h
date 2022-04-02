@@ -3,13 +3,11 @@
 #include "config.h"
 #if TESTING == 1
 
-#include "data/sensorsData.h"
-
 #include "IO/Interface.h"
 #include "IO/Radio.h"
 #include "IO/SensorLogger.h"
 #include "IO/TestingSensors.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include <queue>
 #include <string>
 
@@ -24,10 +22,10 @@ class TestingInterface : public Interface
     void calibrateTelemetry() override;
 
     // to get the latest rocket state. return a pointer to latestState
-    std::shared_ptr<sensorsData> getLatest() override;
+    std::shared_ptr<StateData> getLatest() override;
 
     bool updateInputs() override;
-    bool updateOutputs(std::shared_ptr<sensorsData> data) override;
+    bool updateOutputs(std::shared_ptr<StateData> data) override;
 
 #if USE_GPIO == 1
     void createNewGpioOutput(std::string name, int pinNbr) override;
@@ -41,7 +39,7 @@ class TestingInterface : public Interface
 
     std::shared_ptr<spdlog::logger> logger;
 
-    std::shared_ptr<sensorsData> latestState;
+    std::shared_ptr<StateData> latestState;
 
     TestingSensors testingSensors;
 

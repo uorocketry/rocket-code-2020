@@ -2,7 +2,6 @@
 #if USE_GPIO == 1
 
 #include "Gpio.h"
-#include "data/sensorsData.h"
 
 #include "helpers/Helper.h"
 #include <iostream>

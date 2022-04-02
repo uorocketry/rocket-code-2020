@@ -2,7 +2,7 @@
 #if USE_RADIO == 1
 
 #include "Radio.h"
-#include "data/sensorsData.h"
+#include "data/StateData.h"
 #include "wiringPi.h"
 #include "wiringSerial.h"
 #include <string>
@@ -69,7 +69,7 @@ void Radio::run()
     }
 }
 
-void Radio::enqueueSensorData(const sensorsData &curSensorData)
+void Radio::enqueueSensorData(const StateData &curSensorData)
 {
     std::lock_guard<std::mutex> lockGuard(mutex);
     logQueue.push(curSensorData);
@@ -79,7 +79,7 @@ void Radio::enqueueSensorData(const sensorsData &curSensorData)
 
 void Radio::dequeueToRadio()
 {
-    sensorsData currentState;
+    StateData currentState;
     {
         std::lock_guard<std::mutex> lockGuard(mutex);
         currentState = logQueue.front();
@@ -89,7 +89,7 @@ void Radio::dequeueToRadio()
     sendData(currentState);
 }
 
-void Radio::sendData(const sensorsData &currentState) const
+void Radio::sendData(const StateData &currentState) const
 {
     auto data = currentState.convertToReducedString();
     data += "\r\n";

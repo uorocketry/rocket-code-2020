@@ -3,6 +3,7 @@
 #if USE_SBG == 1
 
 #include "SBGSensor.h"
+#include <sbgDefines.h>
 
 #include "iostream"
 
@@ -60,12 +61,12 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
         // sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]),
         // sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]));
 
-        sens->data.roll = sbgRadToDegF(pLogData->ekfEulerData.euler[0]);
-        sens->data.pitch = sbgRadToDegF(pLogData->ekfEulerData.euler[1]);
-        sens->data.yaw = sbgRadToDegF(pLogData->ekfEulerData.euler[2]);
-        sens->data.rollAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[0]);
-        sens->data.pitchAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[1]);
-        sens->data.yawAccuracy = sbgRadToDegF(pLogData->ekfEulerData.eulerStdDev[2]);
+        sens->data.roll = sbgRadToDegf(pLogData->ekfEulerData.euler[0]);
+        sens->data.pitch = sbgRadToDegf(pLogData->ekfEulerData.euler[1]);
+        sens->data.yaw = sbgRadToDegf(pLogData->ekfEulerData.euler[2]);
+        sens->data.rollAccuracy = sbgRadToDegf(pLogData->ekfEulerData.eulerStdDev[0]);
+        sens->data.pitchAccuracy = sbgRadToDegf(pLogData->ekfEulerData.eulerStdDev[1]);
+        sens->data.yawAccuracy = sbgRadToDegf(pLogData->ekfEulerData.eulerStdDev[2]);
         break;
 
     case SBG_ECOM_LOG_EKF_NAV:
@@ -91,12 +92,11 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
         // pLogData->ekfNavData.velocity[1], pLogData->ekfNavData.velocity[2]);
 
         break;
-    case SBG_ECOM_LOG_PRESSURE:
-        sens->data.barometricAltitude = pLogData->pressureData.height;
-        sens->data.relativeBarometricAltitude = pLogData->pressureData.height - sens->barometricAltitudeOffset;
-
-        sens->data.pressureStatus = pLogData->pressureData.status;
-        sens->data.barometricPressure = pLogData->pressureData.pressure;
+    case SBG_ECOM_LOG_AIR_DATA:
+        sens->data.barometricAltitude = pLogData->airData.altitude;
+        sens->data.relativeBarometricAltitude = pLogData->airData.altitude - sens->barometricAltitudeOffset;
+        sens->data.pressureStatus = pLogData->airData.status;
+        sens->data.barometricPressure = pLogData->airData.pressureAbs;
 
         break;
 
@@ -150,7 +150,7 @@ void SBGSensor::run()
     SbgEComHandle comHandle;
     SbgErrorCode errorCode;
     SbgInterface sbgInterface;
-    int32 retValue = 0;
+    int32_t retValue = 0;
     SbgEComDeviceInfo deviceInfo;
 
     //
@@ -294,7 +294,7 @@ void SBGSensor::run()
         //
         // Close the interface
         //
-        sbgInterfaceSerialDestroy(&sbgInterface);
+        sbgInterface.pDestroyFunc(&sbgInterface);
     }
     else
     {

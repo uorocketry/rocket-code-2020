@@ -4,8 +4,8 @@
 #include "IO/IO.h"
 #include "IO/TestingSensors.h"
 #include "InterfaceImpl.h"
+#include "common/pch.h"
 #include "data/UOSMData.h"
-#include "helpers/Types.h"
 #include <chrono>
 #include <iostream>
 #include <spdlog/spdlog.h>
@@ -54,6 +54,9 @@ void InterfaceImpl::initializeInputs()
 #if USE_ARDUINO_PROXY == 1
     arduinoProxy = ArduinoProxy::getInstance();
 #endif
+#if USE_SENSORS
+    sensors.initialize();
+#endif
 }
 
 void InterfaceImpl::initializeOutputs()
@@ -78,7 +81,7 @@ void InterfaceImpl::initializeOutputs()
 
 bool InterfaceImpl::updateInputs()
 {
-    latestState = std::make_shared<sensorsData>();
+    latestState = std::make_shared<StateData>();
 
     latestState->timeStamp =
         std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
@@ -119,10 +122,14 @@ bool InterfaceImpl::updateInputs()
     latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
 #endif
 
+#if USE_SENSORS
+    latestState->sensorState = sensors.getCurrentState();
+#endif
+
     return true;
 }
 
-bool InterfaceImpl::updateOutputs(std::shared_ptr<sensorsData> data)
+bool InterfaceImpl::updateOutputs(std::shared_ptr<StateData> data)
 {
 
 #if USE_GPIO == 1
@@ -163,7 +170,7 @@ void InterfaceImpl::calibrateTelemetry()
 #endif
 }
 
-std::shared_ptr<sensorsData> InterfaceImpl::getLatest()
+std::shared_ptr<StateData> InterfaceImpl::getLatest()
 {
 
 #if USE_LOGGER == 1

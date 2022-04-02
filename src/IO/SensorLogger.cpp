@@ -28,7 +28,7 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    std::string path = helper::getEnvOrDefault("LOG_PATH", "/data/");
+    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "/data/");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
@@ -112,7 +112,7 @@ int SensorLogger::getBootId(std::string &path)
     return bootId;
 }
 
-void SensorLogger::enqueueSensorData(const sensorsData &curSensorData)
+void SensorLogger::enqueueSensorData(const StateData &curSensorData)
 {
     std::lock_guard<std::mutex> lockGuard(mutex);
     logQueue.push(curSensorData);
@@ -122,7 +122,7 @@ void SensorLogger::enqueueSensorData(const sensorsData &curSensorData)
 
 void SensorLogger::dequeueToFile(std::ofstream &fileStream)
 {
-    sensorsData currentState;
+    StateData currentState;
     {
         std::lock_guard<std::mutex> lockGuard(mutex);
         currentState = logQueue.front();
@@ -179,7 +179,7 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
     fileStream.flush();
 }
 
-void SensorLogger::writeData(std::ofstream &fileStream, const sensorsData &currentState)
+void SensorLogger::writeData(std::ofstream &fileStream, const StateData &currentState)
 {
     const char *sep = ",";
 
