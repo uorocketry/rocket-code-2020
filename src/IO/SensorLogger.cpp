@@ -28,12 +28,10 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "/data/");
+    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "./sensor-data");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
-
-    int bootId = getBootId(path);
 
     writingLock = std::unique_lock<std::mutex>(writingMutex);
 
@@ -41,6 +39,8 @@ void SensorLogger::run()
     {
         boost::filesystem::create_directories(path);
     }
+
+    int bootId = getBootId(path);
 
     // bool shouldWriteHeader = !std::experimental::filesystem::exists(path +
     // filename); fileStream = std::make_shared<std::ofstream>(path + filename,
