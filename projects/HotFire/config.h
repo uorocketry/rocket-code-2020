@@ -1,10 +1,13 @@
 #pragma once
 
 #include <cstdint>
+#include <uorocketry/mavlink.h>
 
 // clang-format off
 
 #define STATEMACHINE HotFireStateMachine
+
+constexpr mavlink_system_t MAVLINK_SYSTEM = {1, 1};
 
 #if DESKTOP_COMPAT == 1
     #define USE_SENSORS 0
