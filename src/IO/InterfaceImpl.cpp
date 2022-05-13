@@ -23,7 +23,7 @@ InterfaceImpl::InterfaceImpl()
 #endif
 #if USE_RADIO == 1
       ,
-      radio(eventQueue)
+      radio(eventQueue, "/dev/ttyAMA0", 1)
 #endif
 {
     logger = spdlog::default_logger();
@@ -141,7 +141,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<StateData> data)
 #endif
 
 #if USE_RADIO == 1
-    radio.enqueueSensorData(*data);
+    radio.sendState(*data);
 #endif
 
 #if USE_SOCKET_CLIENT == 1
