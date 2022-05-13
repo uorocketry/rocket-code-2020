@@ -64,7 +64,7 @@ class InterfaceImpl : public Interface
 #endif
 
 #if USE_RADIO == 1
-    GroundStationComm<RadioMAVLink> radio;
+    std::shared_ptr<GroundStationComm<RadioMAVLink>> radio;
 #endif
 
 #if USE_LOGGER == 1

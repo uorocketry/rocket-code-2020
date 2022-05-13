@@ -89,3 +89,45 @@ void GroundStationComm<T>::receiveLoop()
         }
     }
 }
+
+template <class T>
+void GroundStationComm<T>::sink_it_(const spdlog::details::log_msg &log)
+{
+    mavlink_log_message_t mavLog;
+
+    // Convert from spdlog's level to MAVLink's
+    switch (log.level)
+    {
+    case spdlog::level::trace:
+    case spdlog::level::debug:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_DEBUG;
+        break;
+    case spdlog::level::info:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_INFO;
+        break;
+    case spdlog::level::warn:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_WARNING;
+        break;
+    case spdlog::level::err:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_ERROR;
+        break;
+    case spdlog::level::critical:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_CRITICAL;
+        break;
+    default:
+        mavLog.severity = MAV_SEVERITY::MAV_SEVERITY_INFO;
+    }
+
+    // Copy the message into the MAVLink struct, making sure we don't overflow.
+    auto length = std::min(log.payload.size(), std::size(mavLog.data));
+    mavLog.length = length;
+    memcpy(mavLog.data, log.payload.data(), length);
+
+    mavlink_message_t msg;
+    mavlink_msg_log_message_encode(MAVLINK_SYSTEM.sysid, MAVLINK_SYSTEM.compid, &msg, &mavLog);
+
+    // Queue the message.
+    std::lock_guard lock(sendingMutex);
+    sendingBuffer.push_back(msg);
+    sendingCondition.notify_all();
+}

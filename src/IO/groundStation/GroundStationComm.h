@@ -1,12 +1,14 @@
 #pragma once
 
 #include <boost/circular_buffer.hpp>
+#include <mutex>
+#include <spdlog/sinks/base_sink.h>
 
 #include "IO/EventQueue.h"
 #include "data/StateData.h"
 
 template <class T>
-class GroundStationComm
+class GroundStationComm : public spdlog::sinks::base_sink<std::mutex>
 {
   public:
     template <typename... Args>
@@ -17,7 +19,7 @@ class GroundStationComm
     {
     }
 
-    ~GroundStationComm();
+    ~GroundStationComm() override;
 
     void initialize();
     bool isInitialized();
@@ -28,6 +30,14 @@ class GroundStationComm
     void sendState(const StateData &data);
 
     //    virtual bool isInitialized() = 0;
+
+    /**
+     * Handle any logs from spdlog and send them to the ground station
+     */
+    void sink_it_(const spdlog::details::log_msg &msg) override;
+    void flush_() override
+    {
+    }
 
   private:
     void sendingLoop();
