@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(RocketCode2020 C CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 cmake_host_system_information(RESULT _memfree QUERY AVAILABLE_PHYSICAL_MEMORY)
 set_property(GLOBAL PROPERTY JOB_POOLS four_jobs=4)
