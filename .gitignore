@@ -69,7 +69,8 @@ sbgECom/projects/unix/out
 .idea
 
 # Logs
-logs
+logs/
+sensor-data/
 
 boost_1_76_0.tar.bz2
 boost_1_76_0/
