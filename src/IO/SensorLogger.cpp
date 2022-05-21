@@ -28,7 +28,7 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "/data/");
+    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "./sensor-data");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";
@@ -45,6 +45,7 @@ void SensorLogger::run()
     std::string filename = std::to_string(bootId) + ext;
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
+    
 
     status.fileStatus = READY;
 
