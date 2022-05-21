@@ -33,8 +33,6 @@ void SensorLogger::run()
     if (path.back() != '/')
         path += "/";
 
-    int bootId = getBootId(path);
-
     writingLock = std::unique_lock<std::mutex>(writingMutex);
 
     if (!boost::filesystem::exists(path))
@@ -42,6 +40,7 @@ void SensorLogger::run()
         boost::filesystem::create_directories(path);
     }
 
+    int bootId = getBootId(path);
     std::string filename = std::to_string(bootId) + ext;
     bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
     std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
