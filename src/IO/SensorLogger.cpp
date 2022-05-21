@@ -41,26 +41,40 @@ void SensorLogger::run()
     }
 
     int bootId = getBootId(path);
-
-    // bool shouldWriteHeader = !std::experimental::filesystem::exists(path +
-    // filename); fileStream = std::make_shared<std::ofstream>(path + filename,
-    // std::ios_base::app);
-
-    // if (shouldWriteHeader)
-    // {
-    // 	std::ofstream fileStream;
-    // 	fileStream.open(path + filename, std::ios_base::app);
-    // 	writeHeader(fileStream);
-    // 	fileStream.close();
-    // }
+    std::string filename = std::to_string(bootId) + ext;
+    bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
+    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
 
     status.fileStatus = READY;
-    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
+
+    bool isFirstLine = true;
+
     while (true)
     {
         if (!logQueue.empty())
         {
-            dequeueToFile(fileStream);
+
+            // get data
+            StateData currentState = getCurrentState();
+
+            // write the headers if necessary
+            if (shouldWriteHeader && isFirstLine)
+            {
+                writeToHeader(currentState, path, filename);
+                isFirstLine = false;
+            }
+
+            // write to file
+            bool successful = sendToWriteFile(fileStream, currentState, path, filename);
+
+            // pop data if writing was succesful
+            if (successful)
+            {
+                popData();
+            }
+
+            // close File Stream
+            fileStream.close();
         }
         else
         {
@@ -120,36 +134,69 @@ void SensorLogger::enqueueSensorData(const StateData &curSensorData)
     writingCondition.notify_one();
 }
 
-void SensorLogger::dequeueToFile(std::ofstream &fileStream)
+bool SensorLogger::writeToFile(std::ofstream &fileStream, StateData currentState)
 {
-    StateData currentState;
-    {
-        std::lock_guard<std::mutex> lockGuard(mutex);
-        currentState = logQueue.front();
-    }
-
     if (fileStream.is_open())
     {
         working = 1;
         writeData(fileStream, currentState);
-
-        // Pop data now that it has been successfully written
-        {
-            std::lock_guard<std::mutex> lockGuard(mutex);
-            logQueue.pop();
-        }
+        return true;
     }
     else
     {
         SPDLOG_LOGGER_ERROR(logger, "Unable to open log file.");
         working = 0;
+        return false;
     }
 }
 
-void SensorLogger::writeHeader(std::ofstream &fileStream)
+StateData SensorLogger::getCurrentState()
 {
+    std::lock_guard<std::mutex> lockGuard(mutex);
+    return logQueue.front();
+}
+
+void SensorLogger::writeToHeader(StateData currentState, std::string path, std::string filename)
+{
+    std::ofstream fileStream;
+    fileStream.open(path + filename, std::ios_base::app);
+    writeHeader(fileStream, currentState);
+    fileStream.close();
+}
+
+bool SensorLogger::sendToWriteFile(std::ofstream &fileStream, StateData currentState, std::string path,
+                                   std::string filename)
+{
+    fileStream.open(path + filename, std::ios_base::app);
+    return writeToFile(fileStream, currentState);
+}
+
+void SensorLogger::popData()
+{
+    std::lock_guard<std::mutex> lockGuard(mutex);
+    logQueue.pop();
+}
+
+void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState)
+{
+
     fileStream << "Timestamp (Relative),";
 
+    fileStream << "State Number,";
+
+#if USE_GPIO == 1
+    for (std::pair<std::string, int> output : currentState.gpioData.digitalOutputMap)
+    {
+        fileStream << output.first << ", ";
+    }
+
+    for (std::pair<std::string, int> output : currentState.gpioData.pwmOutputMap)
+    {
+        fileStream << output.first << ", ";
+    }
+#endif
+
+#if USE_SBG == 1
     fileStream << "roll,";
     fileStream << "pitch,";
     fileStream << "yaw,";
@@ -163,6 +210,7 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
     fileStream << "gpsAltitude,";
 
     fileStream << "barometricAltitude,";
+    fileStream << "relativeBarometricAltitude,";
 
     fileStream << "velocityN,";
     fileStream << "velocityE,";
@@ -174,8 +222,72 @@ void SensorLogger::writeHeader(std::ofstream &fileStream)
 
     fileStream << "solutionStatus,";
 
-    fileStream << "currentStateNo,\n";
+    fileStream << "gpsPosStatus,";
 
+    fileStream << "gpsPosAccurracyLatitude,";
+    fileStream << "gpsPosAccuracyLongitude,";
+    fileStream << "gpsPosAccuracyAltitude,";
+
+    fileStream << "NumSvUsed,";
+
+    fileStream << "velocityNAccuracy,";
+    fileStream << "velocityEAccuracy,";
+    fileStream << "velocityDAccuracy,";
+
+    fileStream << "latitudeAccuracy,";
+    fileStream << "longitudeAccuracy,";
+    fileStream << "altitudeAccuracy,";
+
+    fileStream << "pressureStatus,";
+    fileStream << "barometricPressure,";
+
+    fileStream << "imuStatus,";
+
+    fileStream << "gyroX,";
+    fileStream << "gyroY,";
+    fileStream << "gyroZ,";
+
+    fileStream << "temp,";
+
+    fileStream << "deltaVelX,";
+    fileStream << "deltaVelY,";
+    fileStream << "deltaVelZ,";
+
+    fileStream << "deltaAngleX,";
+    fileStream << "deltaAngleY,";
+    fileStream << "deltaAngleZ,";
+#endif
+
+// Initialization data
+#if USE_LOGGER
+    fileStream << "loggerInitialized, ";
+#endif
+
+#if USE_SOCKET_CLIENT
+    fileStream << "clientInitialized, ";
+    fileStream << "lastActiveClientTimestamp, ";
+#endif
+
+#if USE_SBG
+    fileStream << "sbgInitialized, ";
+#endif
+
+#if USE_INPUT
+    fileStream << "inputInitialized, ";
+#endif
+
+#if USE_RADIO
+    fileStream << "radioInitialized, ";
+#endif
+
+#if USE_GPIO
+    fileStream << "gpioInitialized, ";
+#endif
+
+#if USE_ARDUINO_PROXY
+    fileStream << "arduinoProxyInitialized, ";
+#endif
+    fileStream << "\n";
     fileStream.flush();
 }
 
