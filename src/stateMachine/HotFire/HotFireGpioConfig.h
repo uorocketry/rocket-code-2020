@@ -31,7 +31,7 @@
         #define MAIN_NAME "MAIN"
         #define MAIN_PIN 9
         #define MAIN_OPEN 180
-        #define MAIN_IGNITION 54
+        #define MAIN_IGNITION 120
         #define MAIN_CLOSE 0
         #define MAIN_SAFE 180
         #define MAIN_EVENT_ENABLE_MASK 0b1000
