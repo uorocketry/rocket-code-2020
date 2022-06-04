@@ -29,7 +29,7 @@
 
     #if USE_PWM_MAIN
         #define MAIN_NAME "MAIN"
-        #define MAIN_PIN 9
+        #define MAIN_PIN 3
         #define MAIN_OPEN 180
         #define MAIN_IGNITION 120
         #define MAIN_CLOSE 0
@@ -50,7 +50,7 @@
 
     #if USE_PWM_FILL
         #define FILL_NAME "FILL"
-        #define FILL_PIN 11
+        #define FILL_PIN 6
         #define FILL_OPEN 180
         #define FILL_CLOSE 0
         #define FILL_SAFE 180
