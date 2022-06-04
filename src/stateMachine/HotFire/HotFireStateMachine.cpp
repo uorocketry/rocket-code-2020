@@ -543,6 +543,8 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 
 #endif
 
+    detectExternEvent(interfaceData);
+
     interface->updateOutputs(interfaceData);
 }
 
