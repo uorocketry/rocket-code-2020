@@ -112,6 +112,27 @@ std::string StateData::convertToReducedString() const
     }
 #endif
 
+#if USE_SENSOR_SUITE == 1
+    data += std::to_string(sensorSuiteState.timestamp);
+    data += ",";
+    data += std::to_string(sensorSuiteState.mspTransducer);
+    data += ",";
+    data += std::to_string(sensorSuiteState.swagelockTransducer);
+    data += ",";
+    data += std::to_string(sensorSuiteState.digitalInputs);
+    data += ",";
+    data += std::to_string(sensorSuiteState.daqSampleCount);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp1);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp2);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp3);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp4);
+    data += ",";
+#endif
+
 #if USE_LOGGER == 1
     data += std::to_string(loggerWorking);
     data += ",";
