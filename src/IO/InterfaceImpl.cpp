@@ -122,8 +122,12 @@ bool InterfaceImpl::updateInputs()
     latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
 #endif
 
-#if USE_SENSORS
+#if USE_SENSORS == 1
     latestState->sensorState = sensors.getCurrentState();
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    latestState->sensorSuiteState = sensorSuite.getCurrentData();
 #endif
 
     return true;

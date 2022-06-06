@@ -62,4 +62,8 @@
     #define USE_SENSOR_MAX_31865 1
 #endif
 
+#ifndef USE_SENSOR_SUITE
+    #define USE_SENSOR_SUITE 1
+#endif
+
 // clang-format on

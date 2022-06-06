@@ -5,6 +5,7 @@
 #include "data/GpioData.h"
 #include "data/SBGData.h"
 #include "data/UOSMData.h"
+#include "data/SensorSuiteState.h"
 #include <unordered_map>
 
 // all the informations about the rocket that the state machine will need
@@ -51,6 +52,10 @@ struct StateData
 
 #if USE_SENSORS
     SensorState sensorState;
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    SensorSuiteState sensorSuiteState;
 #endif
 
 #if TESTING == 1

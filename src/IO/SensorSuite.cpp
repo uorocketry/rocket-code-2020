@@ -3,6 +3,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/regex.hpp>
+#include <boost/lexical_cast.hpp>
 #include <string>
 
 using boost::asio::ip::address;
@@ -34,5 +35,25 @@ bool SensorSuite::isInitialized()
 
         std::vector<std::string> result;
         boost::split(result, line, boost::is_any_of(","));
+
+        if (result.size() == 9) {
+            latest = result;
+        }
     }
+}
+
+SensorSuiteState SensorSuite::getCurrentData()
+{
+    int count = 0;
+    return { 
+        boost::lexical_cast<uint32_t>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++]),
+        boost::lexical_cast<uint32_t>(latest[count++]),
+        boost::lexical_cast<uint32_t>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++]),
+        boost::lexical_cast<float>(latest[count++])
+    };
 }
