@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IO.h"
-#include <boost/asio.hpp>
 #include "data/SensorSuiteState.h"
+#include <boost/asio.hpp>
 
 class SensorSuite : public IO
 {

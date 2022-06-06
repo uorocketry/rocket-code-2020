@@ -2,14 +2,14 @@
 
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/algorithm/string/split.hpp>
-#include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/regex.hpp>
 #include <string>
 
 using boost::asio::ip::address;
 using boost::asio::ip::tcp;
 
-constexpr auto SENSOR_SUITE_IP = "192.168.1.4";
+constexpr auto SENSOR_SUITE_IP = "192.168.1.250";
 
 SensorSuite::SensorSuite() = default;
 
@@ -36,7 +36,8 @@ bool SensorSuite::isInitialized()
         std::vector<std::string> result;
         boost::split(result, line, boost::is_any_of(","));
 
-        if (result.size() == 9) {
+        if (result.size() == 9)
+        {
             latest = result;
         }
     }
@@ -45,7 +46,8 @@ bool SensorSuite::isInitialized()
 SensorSuiteState SensorSuite::getCurrentData()
 {
     int count = 0;
-    return { 
+    // clang-format off
+    return {
         boost::lexical_cast<uint32_t>(latest[count++]),
         boost::lexical_cast<float>(latest[count++]),
         boost::lexical_cast<float>(latest[count++]),
@@ -56,4 +58,5 @@ SensorSuiteState SensorSuite::getCurrentData()
         boost::lexical_cast<float>(latest[count++]),
         boost::lexical_cast<float>(latest[count++])
     };
+    // clang-format on
 }

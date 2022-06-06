@@ -10,9 +10,9 @@
 #include "IO/Radio.h"
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
+#include "IO/SensorSuite.h"
 #include "IO/gpio/Gpio.h"
 #include "IO/tcp/SocketServer.h"
-#include "IO/SensorSuite.h"
 #include "Sensors.h"
 #include <memory>
 #include <spdlog/logger.h>
