@@ -258,6 +258,18 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState
     fileStream << "deltaAngleZ,";
 #endif
 
+#if USE_SENSOR_SUITE == 1
+    fileStream << "sensorSuiteTimestamp,";
+    fileStream << "mspTransducer,";
+    fileStream << "swagelockTransducer,";
+    fileStream << "digitalInputs,";
+    fileStream << "daqSampleCount,";
+    fileStream << "temp1,";
+    fileStream << "temp2,";
+    fileStream << "temp3,";
+    fileStream << "temp4,";
+#endif
+
 // Initialization data
 #if USE_LOGGER
     fileStream << "loggerInitialized, ";
@@ -372,6 +384,18 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
     fileStream << currentState.sbg.deltaAngleX << sep;
     fileStream << currentState.sbg.deltaAngleY << sep;
     fileStream << currentState.sbg.deltaAngleZ << sep;
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    fileStream << currentState.sensorSuiteState.timestamp << sep;
+    fileStream << currentState.sensorSuiteState.mspTransducer << sep;
+    fileStream << currentState.sensorSuiteState.swagelockTransducer << sep;
+    fileStream << currentState.sensorSuiteState.digitalInputs << sep;
+    fileStream << currentState.sensorSuiteState.daqSampleCount << sep;
+    fileStream << currentState.sensorSuiteState.temp1 << sep;
+    fileStream << currentState.sensorSuiteState.temp2 << sep;
+    fileStream << currentState.sensorSuiteState.temp3 << sep;
+    fileStream << currentState.sensorSuiteState.temp4 << sep;
 #endif
 
 // Initialization data
