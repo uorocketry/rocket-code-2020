@@ -60,6 +60,10 @@ if (DEFINED ENV{USE_ARDUINO_PROXY} OR USE_ARDUINO_PROXY)
     add_compile_definitions(USE_ARDUINO_PROXY=$ENV{USE_ARDUINO_PROXY})
 endif ()
 
+if (DEFINED ENV{USE_SENSORS} OR USE_SENSORS)
+    add_compile_definitions(USE_SENSORS=$ENV{USE_SENSORS})
+endif ()
+
 #-- -- -- -- -- -- -- -
 #Main executable
 #-- -- -- -- -- -- -- -
