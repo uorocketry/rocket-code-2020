@@ -26,6 +26,7 @@ class SensorLogger : public IO
     void enqueueSensorData(const StateData &curSensorData);
 
     bool queueEmpty();
+    void restartLogger();
 
   protected:
     std::mutex mutex;
@@ -50,6 +51,8 @@ class SensorLogger : public IO
     std::mutex writingMutex;
     std::unique_lock<std::mutex> writingLock;
     std::condition_variable writingCondition;
+
+    bool restartingLogger = false;
 
     StateData getCurrentState();
     void writeToHeader(StateData currentState, std::string path, std::string filename);

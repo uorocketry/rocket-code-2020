@@ -40,10 +40,9 @@ void SensorLogger::run()
         boost::filesystem::create_directories(path);
     }
 
-    int bootId = getBootId(path);
-    std::string filename = std::to_string(bootId) + ext;
-    bool shouldWriteHeader = !boost::filesystem::exists(path + filename);
-    std::ofstream fileStream{path + std::to_string(bootId) + ext, std::ios_base::ate};
+    std::string filename = std::to_string(getBootId(path)) + ext;
+    bool shouldWriteHeader = true;
+    std::ofstream fileStream{path + filename, std::ios_base::ate};
 
     status.fileStatus = READY;
 
@@ -51,6 +50,14 @@ void SensorLogger::run()
 
     while (true)
     {
+        if (restartingLogger)
+        {
+            restartingLogger = false;
+            isFirstLine = true;
+            filename = std::to_string(getBootId(path)) + ext;
+            shouldWriteHeader = true;
+        }
+
         if (!logQueue.empty())
         {
 
@@ -448,6 +455,11 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
 bool SensorLogger::queueEmpty()
 {
     return logQueue.empty();
+}
+
+void SensorLogger::restartLogger()
+{
+    restartingLogger = true;
 }
 
 #endif
