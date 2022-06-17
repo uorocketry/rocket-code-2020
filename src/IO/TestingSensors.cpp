@@ -36,11 +36,20 @@ void TestingSensors::initialize()
 
         // Will keep increasing by one for each read
         int count = 0;
+        std::cout << currentRow.size() << "\n";
 
         currentData.timeStamp = boost::lexical_cast<uint64_t>(currentRow[count++]);
 
         // Ignore the state, that's an output value
         count++;
+
+#if USE_GPIO == 1
+        // these are outputs, skip
+        count += GPIO_COUNT; //todo: * 2
+#endif
+        
+        std::cout << count << "\n";
+        std::cout << currentRow[count] << "\n";
 
 #if USE_SBG == 1
         // SBG:
@@ -106,6 +115,12 @@ void TestingSensors::initialize()
 
 #endif
 
+// #if USE_SENSOR_MAX_31865
+//         currentData.sensorState.temperature = boost::lexical_cast<float>(currentRow[count++]);
+// #endif
+
+std::cout << currentRow[count] << "\n";
+
         // Initialization data
 #if USE_LOGGER == 1
         currentData.loggerIsInitialized = boost::lexical_cast<bool>(currentRow[count++]);
@@ -113,6 +128,7 @@ void TestingSensors::initialize()
 
 #if USE_SOCKET_CLIENT == 1
         currentData.clientIsInitialized = boost::lexical_cast<bool>(currentRow[count++]);
+        currentData.lastActiveClientTimestamp = boost::lexical_cast<uint64_t>(currentRow[count++]);
 #endif
 
 #if USE_SBG == 1
@@ -129,6 +145,10 @@ void TestingSensors::initialize()
 
 #if USE_GPIO == 1
         currentData.gpioIsInitialized = boost::lexical_cast<bool>(currentRow[count++]);
+#endif
+
+#if USE_ARDUINO_PROXY == 1
+        currentData.arduinoProxyIsInitialized = boost::lexical_cast<bool>(currentRow[count++]);
 #endif
 
         data.push(currentData);
