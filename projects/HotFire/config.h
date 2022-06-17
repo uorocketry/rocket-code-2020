@@ -47,6 +47,8 @@
     #define USE_GPIO 1
 #endif
 
+#define GPIO_COUNT 5
+
 #if USE_GPIO == 1
     #ifndef USE_WIRING_Pi
         #define USE_WIRING_Pi 1

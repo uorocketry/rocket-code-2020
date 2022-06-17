@@ -258,6 +258,10 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState
     fileStream << "deltaAngleZ,";
 #endif
 
+#if USE_SENSOR_MAX_31865
+    fileStream << "temperature,";
+#endif
+
 // Initialization data
 #if USE_LOGGER
     fileStream << "loggerInitialized, ";
@@ -310,6 +314,14 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
     {
         fileStream << output.second << sep;
     }
+    // for (std::pair<std::string, int> output : currentState.gpioState.digitalStateMap)
+    // {
+    //     fileStream << output.second << sep;
+    // }
+    // for (std::pair<std::string, int> output : currentState.gpioState.pwmStateMap)
+    // {
+    //     fileStream << output.second << sep;
+    // }
 #endif
 
 #if USE_SBG == 1
@@ -373,6 +385,10 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
     fileStream << currentState.sbg.deltaAngleY << sep;
     fileStream << currentState.sbg.deltaAngleZ << sep;
 #endif
+
+// #if USE_SENSOR_MAX_31865
+    // fileStream << currentState.sensorState.temperature << sep;
+// #endif
 
 // Initialization data
 #if USE_LOGGER
