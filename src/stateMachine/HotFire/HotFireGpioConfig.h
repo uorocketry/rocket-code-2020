@@ -16,6 +16,8 @@
 
     #define USE_HEATER 1
 
+    #define USE_IGNITER 1
+
     #define EVENT_ENABLE_MASK 0b1
 
     #if USE_VENT
@@ -64,6 +66,14 @@
         #define HEATER_ON 1
         #define HEATER_OFF 0
         #define HEATER_SAFE 0
+    #endif
+
+    #if USE_IGNITER
+        #define IGNITER_NAME "IGNITER"
+        #define IGNITER_PIN 12
+        #define IGNITER_ON 1
+        #define IGNITER_OFF 0
+        #define IGNITER_EVENT_ENABLE_MASK 0b100
     #endif
 #endif
 
