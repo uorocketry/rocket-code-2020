@@ -9,11 +9,9 @@ class SensorSuite : public IO
   public:
     SensorSuite();
 
-    void initialize() override
-    {
-    }
+    void initialize() override;
 
-    [[noreturn]] void run() override;
+    void run() override;
     bool isInitialized() override;
 
     SensorSuiteState getCurrentData();
@@ -22,4 +20,6 @@ class SensorSuite : public IO
     boost::asio::io_context io_context;
 
     std::vector<std::string> latest;
+
+    void connect(boost::asio::ip::tcp::socket &socket, boost::asio::ip::tcp::endpoint &endpoint);
 };

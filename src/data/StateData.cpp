@@ -113,11 +113,13 @@ std::string StateData::convertToReducedString() const
 #endif
 
 #if USE_SENSOR_SUITE == 1
-    data += std::to_string(sensorSuiteState.timestamp);
-    data += ",";
-    data += std::to_string(sensorSuiteState.mspTransducer);
+    data += std::to_string(sensorSuiteState.msp2Transducer);
     data += ",";
     data += std::to_string(sensorSuiteState.swagelockTransducer);
+    data += ",";
+    data += std::to_string(sensorSuiteState.tankTransducer);
+    data += ",";
+    data += std::to_string(sensorSuiteState.thrustTransducer);
     data += ",";
     data += std::to_string(sensorSuiteState.digitalInputs);
     data += ",";
@@ -130,6 +132,16 @@ std::string StateData::convertToReducedString() const
     data += std::to_string(sensorSuiteState.temp3);
     data += ",";
     data += std::to_string(sensorSuiteState.temp4);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp5);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp6);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp7);
+    data += ",";
+    data += std::to_string(sensorSuiteState.temp8);
+    data += ",";
+    data += std::to_string(sensorSuiteState.timestamp);
     data += ",";
 #endif
 

@@ -77,6 +77,11 @@ void InterfaceImpl::initializeOutputs()
     SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
     arduinoProxy->initialize();
 #endif
+
+#if USE_SENSOR_SUITE
+    SPDLOG_LOGGER_INFO(logger, "Initializing Sensor Suite...");
+    sensorSuite.initialize();
+#endif
 }
 
 bool InterfaceImpl::updateInputs()
