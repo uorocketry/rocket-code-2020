@@ -52,7 +52,7 @@ class SensorLogger : public IO
     std::unique_lock<std::mutex> writingLock;
     std::condition_variable writingCondition;
 
-    bool restartingLogger = false;
+    std::atomic<bool> restartingLogger = false;
 
     StateData getCurrentState();
     void writeToHeader(StateData currentState, std::string path, std::string filename);
