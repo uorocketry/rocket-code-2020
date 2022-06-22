@@ -77,6 +77,11 @@ void InterfaceImpl::initializeOutputs()
     SPDLOG_LOGGER_INFO(logger, "Initializing Arduino Proxy...");
     arduinoProxy->initialize();
 #endif
+
+#if USE_SENSOR_SUITE
+    SPDLOG_LOGGER_INFO(logger, "Initializing Sensor Suite...");
+    sensorSuite.initialize();
+#endif
 }
 
 bool InterfaceImpl::updateInputs()
@@ -122,8 +127,12 @@ bool InterfaceImpl::updateInputs()
     latestState->arduinoProxyIsInitialized = arduinoProxy->isInitialized();
 #endif
 
-#if USE_SENSORS
+#if USE_SENSORS == 1
     latestState->sensorState = sensors.getCurrentState();
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    latestState->sensorSuiteState = sensorSuite.getCurrentData();
 #endif
 
     return true;

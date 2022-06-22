@@ -258,6 +258,24 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState
     fileStream << "deltaAngleZ,";
 #endif
 
+#if USE_SENSOR_SUITE == 1
+    fileStream << "msp2Transducer,";
+    fileStream << "swagelockTransducer,";
+    fileStream << "tankTransducer,";
+    fileStream << "thrustTransducer,";
+    fileStream << "digitalInputs,";
+    fileStream << "daqSampleCount,";
+    fileStream << "temp1,";
+    fileStream << "temp2,";
+    fileStream << "temp3,";
+    fileStream << "temp4,";
+    fileStream << "temp5,";
+    fileStream << "temp6,";
+    fileStream << "temp7,";
+    fileStream << "temp8,";
+    fileStream << "sensorSuiteTimestamp,";
+#endif
+
 // Initialization data
 #if USE_LOGGER
     fileStream << "loggerInitialized, ";
@@ -372,6 +390,24 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
     fileStream << currentState.sbg.deltaAngleX << sep;
     fileStream << currentState.sbg.deltaAngleY << sep;
     fileStream << currentState.sbg.deltaAngleZ << sep;
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    fileStream << currentState.sensorSuiteState.msp2Transducer << sep;
+    fileStream << currentState.sensorSuiteState.swagelockTransducer << sep;
+    fileStream << currentState.sensorSuiteState.tankTransducer << sep;
+    fileStream << currentState.sensorSuiteState.thrustTransducer << sep;
+    fileStream << currentState.sensorSuiteState.digitalInputs << sep;
+    fileStream << currentState.sensorSuiteState.daqSampleCount << sep;
+    fileStream << currentState.sensorSuiteState.temp1 << sep;
+    fileStream << currentState.sensorSuiteState.temp2 << sep;
+    fileStream << currentState.sensorSuiteState.temp3 << sep;
+    fileStream << currentState.sensorSuiteState.temp4 << sep;
+    fileStream << currentState.sensorSuiteState.temp5 << sep;
+    fileStream << currentState.sensorSuiteState.temp6 << sep;
+    fileStream << currentState.sensorSuiteState.temp7 << sep;
+    fileStream << currentState.sensorSuiteState.temp8 << sep;
+    fileStream << currentState.sensorSuiteState.timestamp << sep;
 #endif
 
 // Initialization data

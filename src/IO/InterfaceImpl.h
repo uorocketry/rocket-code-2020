@@ -10,6 +10,7 @@
 #include "IO/Radio.h"
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
+#include "IO/SensorSuite.h"
 #include "IO/gpio/Gpio.h"
 #include "IO/tcp/SocketServer.h"
 #include "Sensors.h"
@@ -80,6 +81,10 @@ class InterfaceImpl : public Interface
 
 #if USE_SENSORS == 1
     Sensors sensors;
+#endif
+
+#if USE_SENSOR_SUITE == 1
+    SensorSuite sensorSuite;
 #endif
 };
 
