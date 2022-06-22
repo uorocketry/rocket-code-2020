@@ -9,6 +9,7 @@
 #if DESKTOP_COMPAT == 1
     #define USE_SENSORS 0
     #define USE_WIRING_Pi 0
+    #define SKIP_INIT 1
 #endif
 
 #ifndef USE_SBG
