@@ -7,11 +7,12 @@
 #include "IO/ArduinoProxy.h"
 #include "IO/Input.h"
 #include "IO/Interface.h"
-#include "IO/Radio.h"
 #include "IO/SBGSensor.h"
 #include "IO/SensorLogger.h"
 #include "IO/SensorSuite.h"
 #include "IO/gpio/Gpio.h"
+#include "IO/groundStation/GroundStationComm.h"
+#include "IO/mavlink/RadioMAVLink.h"
 #include "IO/tcp/SocketServer.h"
 #include "Sensors.h"
 #include <memory>
@@ -68,7 +69,7 @@ class InterfaceImpl : public Interface
 #endif
 
 #if USE_RADIO == 1
-    Radio radio;
+    std::shared_ptr<GroundStationComm<RadioMAVLink>> radio;
 #endif
 
 #if USE_LOGGER == 1

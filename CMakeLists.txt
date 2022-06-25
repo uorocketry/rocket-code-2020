@@ -137,6 +137,8 @@ target_link_libraries(MainLoopLib cobs-c)
 
 target_link_libraries(MainLoopLib ${CMAKE_THREAD_LIBS_INIT})
 
+target_link_libraries(MainLoopLib mavlink)
+
 target_link_libraries(MainLoopLib i2c)
 add_executable(MainLoop ./src/init/MainLoop.cpp)
 target_link_libraries(MainLoop MainLoopLib)

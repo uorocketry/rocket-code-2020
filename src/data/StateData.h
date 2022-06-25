@@ -7,12 +7,21 @@
 #include "data/SensorSuiteState.h"
 #include "data/UOSMData.h"
 #include <unordered_map>
+#include <uorocketry/mavlink.h>
 
 // all the informations about the rocket that the state machine will need
 struct StateData
 {
     bool isInitialized() const;
     std::string convertToReducedString() const;
+
+    /**
+     * Convert the state to a MAVLink message.
+     *
+     * @param mavlinkChan the MAVLink channel that the message will be sent over.
+     * @return the MAVLink message.
+     */
+    mavlink_message_t convertToMAVLink() const;
 
     uint64_t timeStamp = 0;
     uint16_t currentStateNo = 0;

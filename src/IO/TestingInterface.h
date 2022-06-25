@@ -4,9 +4,10 @@
 #if TESTING == 1
 
 #include "IO/Interface.h"
-#include "IO/Radio.h"
 #include "IO/SensorLogger.h"
 #include "IO/TestingSensors.h"
+#include "IO/groundStation/GroundStationComm.h"
+#include "IO/mavlink/RadioMAVLink.h"
 #include "data/StateData.h"
 #include <queue>
 #include <string>
@@ -54,7 +55,7 @@ class TestingInterface : public Interface
 #endif
 
 #if USE_RADIO == 1
-    Radio radio;
+    GroundStationComm<RadioMAVLink> radio;
 #endif
 };
 

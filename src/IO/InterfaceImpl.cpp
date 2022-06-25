@@ -23,7 +23,7 @@ InterfaceImpl::InterfaceImpl()
 #endif
 #if USE_RADIO == 1
       ,
-      radio(eventQueue)
+      radio(std::make_shared<GroundStationComm<RadioMAVLink>>(eventQueue, "/dev/ttyAMA0", 1))
 #endif
 {
     logger = spdlog::default_logger();
@@ -39,6 +39,9 @@ void InterfaceImpl::initialize()
 
 void InterfaceImpl::initializeInputs()
 {
+#if USE_RADIO == 1
+    spdlog::default_logger()->sinks().push_back(radio);
+#endif
 #if USE_SBG == 1
     SPDLOG_LOGGER_INFO(logger, "Initializing SBG...");
     mySbgSensor.initialize();
@@ -67,7 +70,7 @@ void InterfaceImpl::initializeOutputs()
 #endif
 #if USE_RADIO == 1
     SPDLOG_LOGGER_INFO(logger, "Initializing RADIO...");
-    radio.initialize();
+    radio->initialize();
 #endif
 #if USE_GPIO == 1
     SPDLOG_LOGGER_INFO(logger, "Initializing GPIO...");
@@ -115,7 +118,7 @@ bool InterfaceImpl::updateInputs()
 #endif
 
 #if USE_RADIO == 1
-    latestState->radioIsInitialized = radio.isInitialized();
+    latestState->radioIsInitialized = radio->isInitialized();
 #endif
 
 #if USE_GPIO == 1
@@ -150,7 +153,7 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<StateData> data)
 #endif
 
 #if USE_RADIO == 1
-    radio.enqueueSensorData(*data);
+    radio->sendState(*data);
 #endif
 
 #if USE_SOCKET_CLIENT == 1

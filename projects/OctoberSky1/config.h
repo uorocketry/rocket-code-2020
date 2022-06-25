@@ -1,8 +1,12 @@
 #pragma once
 
+#include <uorocketry/mavlink.h>
+
 // clang-format off
 
 #define STATEMACHINE OctoberSkyStateMachine
+
+constexpr mavlink_system_t MAVLINK_SYSTEM = {1, 1};
 
 #ifndef TESTING
     #define TESTING 0

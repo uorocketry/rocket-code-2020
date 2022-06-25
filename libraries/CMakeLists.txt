@@ -58,3 +58,7 @@ target_include_directories(cobs-c PUBLIC ./cobs-c)
 # ---------------
 add_subdirectory(./protobuf-definitions)
 
+# ---------------
+# MAVLink Definitions
+# ---------------
+add_subdirectory(./mavlink)

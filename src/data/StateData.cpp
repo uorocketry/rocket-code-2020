@@ -1,5 +1,7 @@
 #include "StateData.h"
 
+#include "stateMachine/HotFire/HotFireGpioConfig.h"
+
 bool StateData::isInitialized() const
 {
     bool result = true;
@@ -156,4 +158,42 @@ std::string StateData::convertToReducedString() const
 #endif
 
     return data;
+}
+
+mavlink_message_t StateData::convertToMAVLink() const
+{
+    mavlink_hotfire_state_t data;
+
+    data.timestamp = timeStamp;
+    data.current_state = currentStateNo;
+
+#if USE_GPIO == 1
+    data.fill_cart_venting_valve_target = gpioData.digitalOutputMap.find(VENT_NAME)->second;
+    data.fill_cart_venting_valve_state = gpioState.digitalStateMap.find(VENT_NAME)->second;
+
+    data.heater_target = gpioData.digitalOutputMap.find(HEATER_NAME)->second;
+    data.heater_state = gpioState.digitalStateMap.find(HEATER_NAME)->second;
+
+    data.main_valve_target = gpioData.pwmOutputMap.find(MAIN_NAME)->second;
+    data.main_valve_state = gpioState.pwmStateMap.find(MAIN_NAME)->second;
+
+    data.pinhole_venting_valve_target = gpioData.pwmOutputMap.find(PINHOLE_NAME)->second;
+    data.pinhole_venting_valve_state = gpioState.pwmStateMap.find(PINHOLE_NAME)->second;
+
+    data.filling_valve_target = gpioData.pwmOutputMap.find(FILL_NAME)->second;
+    data.filling_valve_state = gpioState.pwmStateMap.find(FILL_NAME)->second;
+#endif
+
+#if USE_LOGGER == 1
+    data.log_status = loggerWorking;
+#endif
+
+#if USE_SENSOR_MAX_31865
+    data.temperature = sensorState.temperature;
+#endif
+
+    mavlink_message_t msg;
+    mavlink_msg_hotfire_state_encode(MAVLINK_SYSTEM.sysid, MAVLINK_SYSTEM.compid, &msg, &data);
+
+    return msg;
 }
