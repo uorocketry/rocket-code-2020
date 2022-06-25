@@ -777,6 +777,9 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
     case 9:
         heaterOn = false;
         break;
+    case 10:
+        interface->restartLogger();
+        break;
     default:
         break;
     }

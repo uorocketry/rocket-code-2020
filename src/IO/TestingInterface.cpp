@@ -94,4 +94,11 @@ time_point TestingInterface::getCurrentTime()
     }
 }
 
+#if USE_LOGGER == 1
+void TestingInterface::restartLogger()
+{
+    return; // don't do anything for now
+}
+#endif
+
 #endif

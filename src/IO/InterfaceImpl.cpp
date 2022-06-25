@@ -194,4 +194,11 @@ time_point InterfaceImpl::getCurrentTime()
     return std::chrono::steady_clock::now();
 }
 
+#if USE_LOGGER == 1
+void InterfaceImpl::restartLogger()
+{
+    sensorLogger.restartLogger();
+}
+#endif
+
 #endif

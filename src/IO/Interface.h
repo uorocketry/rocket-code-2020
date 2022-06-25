@@ -29,5 +29,9 @@ class Interface
 
 #endif
 
+#if USE_LOGGER == 1
+    virtual void restartLogger() = 0;
+#endif
+
     virtual time_point getCurrentTime() = 0;
 };

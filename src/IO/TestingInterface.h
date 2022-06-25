@@ -32,6 +32,10 @@ class TestingInterface : public Interface
     void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
 #endif
 
+#if USE_LOGGER == 1
+    virtual void restartLogger() override;
+#endif
+
     time_point getCurrentTime() override;
 
   private:
