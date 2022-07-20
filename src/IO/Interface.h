@@ -27,6 +27,9 @@ class Interface
 
     virtual void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) = 0;
 
+    virtual void createNewGpioDCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower, 
+      int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin) = 0;
+
 #endif
 
 #if USE_LOGGER == 1

@@ -100,6 +100,11 @@ std::string StateData::convertToReducedString() const
         data += std::to_string(output.second);
         data += ",";
     }
+    for (std::pair<std::string, int> output : gpioData.dcOutputMap)
+    {
+        data += std::to_string(output.second);
+        data += ",";
+    }
     for (std::pair<std::string, int> output : gpioState.digitalStateMap)
     {
         data += std::to_string(output.second);
@@ -108,6 +113,13 @@ std::string StateData::convertToReducedString() const
     for (std::pair<std::string, int> output : gpioState.pwmStateMap)
     {
         data += std::to_string(output.second);
+        data += ",";
+    }
+    for (std::pair<std::string, DCMotorState> output : gpioState.dcMotorStateMap)
+    {
+        data += std::to_string(output.second.position);
+        data += ",";
+        data += std::to_string(output.second.direction);
         data += ",";
     }
 #endif
