@@ -120,7 +120,7 @@ void ArduinoProxy::send(const RocketryProto::ArduinoIn &data)
     {
         std::lock_guard<std::mutex> lockGuard(serialMutex);
 
-        helper::SharedArray<char> encodedData = ArduinoEncoder::encode(data);
+        SharedArray<char> encodedData = ArduinoEncoder::encode(data);
 
         serialPutchar(fd, 0);
         for (int i = 0; i < encodedData.length; i++)

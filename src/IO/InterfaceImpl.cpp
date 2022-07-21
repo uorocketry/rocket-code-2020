@@ -5,6 +5,7 @@
 #include "IO/TestingSensors.h"
 #include "InterfaceImpl.h"
 #include "common/pch.h"
+#include "common/utils.h"
 #include "data/UOSMData.h"
 #include <chrono>
 #include <iostream>
@@ -88,8 +89,7 @@ bool InterfaceImpl::updateInputs()
 {
     latestState = std::make_shared<StateData>();
 
-    latestState->timeStamp =
-        std::chrono::duration_cast<time_point::duration>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    latestState->timeStamp = utils::getMonotonicTimeStamp();
 
 #if USE_SBG == 1
     latestState->sbg = mySbgSensor.getData();

@@ -12,7 +12,7 @@ TEST_CASE("Encode and decode protobuf message", "[protobuf]")
     arduinoIn.mutable_servoinit()->set_pin(1823);
     arduinoIn.mutable_servoinit()->set_safeposition(1231);
 
-    helper::SharedArray<char> encodedData = ArduinoEncoder::encode(arduinoIn);
+    SharedArray<char> encodedData = ArduinoEncoder::encode(arduinoIn);
 
     auto arduinoIn2 = ArduinoEncoder::decode<ArduinoIn>(encodedData.data.get(), encodedData.length);
 
@@ -29,7 +29,7 @@ TEST_CASE("Last byte is 0x0 when encoding protobuf message", "[protobuf]")
     arduinoIn.mutable_servoinit()->set_pin(1823);
     arduinoIn.mutable_servoinit()->set_safeposition(1231);
 
-    helper::SharedArray<char> encodedData = ArduinoEncoder::encode(arduinoIn);
+    SharedArray<char> encodedData = ArduinoEncoder::encode(arduinoIn);
 
     REQUIRE(encodedData.data.get()[encodedData.length - 1] == 0x0);
 }
