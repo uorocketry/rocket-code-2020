@@ -260,6 +260,9 @@ STATE_DEFINE(HotFireStateMachine, WaitForReady, UOSMData)
 
     detectExternEvent(interfaceData);
 
+    NoEventData eventData;
+    InternalEvent(ST_WAIT_FOR_FILLING, eventData);
+
     interface->updateOutputs(interfaceData);
 }
 
@@ -282,7 +285,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
 #if USE_IGNITER
@@ -294,7 +297,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
 #endif
 
 #if USE_PWM_FILL
