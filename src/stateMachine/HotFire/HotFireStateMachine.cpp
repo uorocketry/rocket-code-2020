@@ -32,6 +32,7 @@ void HotFireStateMachine::ReadyEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_DONE
@@ -52,6 +53,7 @@ void HotFireStateMachine::StartFillingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
@@ -72,6 +74,7 @@ void HotFireStateMachine::AbortEXT()
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(ST_ABORT_BURN)    // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(ST_ABORT_BURN)    // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
@@ -92,6 +95,7 @@ void HotFireStateMachine::StopFillingEXT()
         TRANSITION_MAP_ENTRY(ST_WAIT_FOR_IGNITION) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_DONE
@@ -112,12 +116,34 @@ void HotFireStateMachine::IgnitionEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_ABORT_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
+        END_TRANSITION_MAP
+}
+
+// IgnitionBurn external event
+void HotFireStateMachine::IgnitionBurnEXT()
+{
+    BEGIN_TRANSITION_MAP                       // - Current State -
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(ST_IGNITION_BURN) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
         END_TRANSITION_MAP
 }
 
@@ -132,6 +158,7 @@ void HotFireStateMachine::FinalVentingEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
@@ -152,6 +179,7 @@ void HotFireStateMachine::DoneEXT()
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(ST_DONE)       // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
@@ -172,6 +200,7 @@ void HotFireStateMachine::ServoControlEXT() {
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION_BURN
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FULL_BURN
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FINAL_VENTING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_DONE
@@ -442,12 +471,57 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
     EventData eventData;
     detectExternEvent(interfaceData);
-    switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000), eventData);
 
     interface->updateOutputs(interfaceData);
 }
 
 EXIT_DEFINE(HotFireStateMachine, ExitIgnition)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
+}
+
+ENTRY_DEFINE(HotFireStateMachine, EnterIgnitionBurn, UOSMData)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
+    enterNewState(ST_IGNITION);
+}
+
+STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
+{
+    interfaceData = updateInterface(&data, ST_IGNITION_BURN);
+
+#if USE_GPIO
+    GpioData &gpioData = interfaceData->gpioData;
+
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
+#if USE_PWM_MAIN
+    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_IGNITION_BURN});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+#endif
+
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+#endif
+
+#endif
+    EventData eventData;
+    detectExternEvent(interfaceData);
+    switchStatesAfterTime((ST_FULL_BURN), duration_ms(1000), eventData);
+
+    interface->updateOutputs(interfaceData);
+}
+
+EXIT_DEFINE(HotFireStateMachine, ExitIgnitionBurn)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
 }
@@ -810,27 +884,30 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
         IgnitionEXT();
         break;
     case 3:
-        FinalVentingEXT();
+        IgnitionBurnEXT();
         break;
     case 4:
-        DoneEXT();
+        FinalVentingEXT();
         break;
     case 5:
-        AbortEXT();
+        DoneEXT();
         break;
     case 6:
-        ServoControlEXT();
+        AbortEXT();
         break;
     case 7:
-        ReadyEXT();
+        ServoControlEXT();
         break;
     case 8:
-        heaterOn = true;
+        ReadyEXT();
         break;
     case 9:
-        heaterOn = false;
+        heaterOn = true;
         break;
     case 10:
+        heaterOn = false;
+        break;
+    case 11:
         interface->restartLogger();
         break;
     default:

@@ -41,7 +41,8 @@
         #define MAIN_NAME "MAIN"
         #define MAIN_PIN 3
         #define MAIN_OPEN 180
-        #define MAIN_IGNITION 120
+        #define MAIN_IGNITION 0
+        #define MAIN_IGNITION_BURN 50 // TODO: Correct value?
         #define MAIN_CLOSE 0
         #define MAIN_SAFE 180
         #define MAIN_EVENT_ENABLE_MASK 0b1000
