@@ -197,6 +197,10 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
     interface->createNewGpioOutput(HEATER_NAME, HEATER_PIN);
 #endif
 
+#if USE_IGNITER
+    interface->createNewGpioOutput(IGNITER_NAME, IGNITER_PIN);
+#endif
+
 #if USE_PWM_MAIN
     interface->createNewGpioPwmOutput(MAIN_NAME, MAIN_PIN, MAIN_SAFE, MAIN_SOFTPWM);
 #endif
@@ -281,6 +285,10 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
 #if USE_PWM_MAIN
     gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
@@ -320,6 +328,10 @@ STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 
 #if USE_VENT
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
 #endif
 
 #if USE_PWM_MAIN
@@ -363,6 +375,10 @@ STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
 #if USE_PWM_MAIN
     gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
@@ -402,6 +418,10 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 
 #if USE_VENT
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_ON});
 #endif
 
 #if USE_PWM_MAIN
@@ -446,6 +466,10 @@ STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
 #if USE_PWM_MAIN
     gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
@@ -485,6 +509,10 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 
 #if USE_VENT
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
 #endif
 
 #if USE_PWM_MAIN
@@ -529,6 +557,10 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
 #if USE_PWM_MAIN
     gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
@@ -565,6 +597,10 @@ STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
 #if USE_PWM_MAIN
     gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
@@ -599,6 +635,10 @@ STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
 
 #if USE_VENT
     gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
 #endif
 
 #if USE_PWM_MAIN
@@ -649,7 +689,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
          * 0 0 0 0 0 0
          * | | | | | ^--------- Enable bit
          * | | | | ^----------- USE_VENT
-         * | | | ^------------- USE_SV02
+         * | | | ^------------- USE_IGNITER
          * | | ^--------------- USE_PWM_MAIN
          * | ^----------------- USE_PWM_PINHOLE
          * ^------------------- USE_PWM_FILL
@@ -666,6 +706,16 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
                 gpioData.digitalOutputMap.insert({VENT_NAME, open ? VENT_OPEN : VENT_CLOSE});
 
                 logValveStatus(VENT_NAME, open);
+            }
+#endif
+
+#if USE_IGNITER == 1
+            {
+                bool open = (eventNbr & IGNITER_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.digitalOutputMap.insert({IGNITER_NAME, open ? IGNITER_ON : IGNITER_OFF});
+
+                logValveStatus(IGNITER_NAME, open);
             }
 #endif
 
