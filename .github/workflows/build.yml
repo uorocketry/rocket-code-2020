@@ -28,9 +28,7 @@ jobs:
 
     steps:
       - name: Checkout repository and submodules
-        uses: actions/checkout@v2
-        with:
-          submodules: recursive
+        uses: actions/checkout@v3
       # Build the project
       - name: Install dependencies
         run: sudo ./install-dependencies.sh
