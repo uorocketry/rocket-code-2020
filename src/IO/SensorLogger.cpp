@@ -3,9 +3,8 @@
 
 #include "SensorLogger.h"
 
-#include "helpers/Helper.h"
-
 #include "boost/filesystem.hpp"
+#include "common/utils.h"
 #include <iostream>
 #include <mutex>
 #include <spdlog/spdlog.h>
@@ -28,7 +27,7 @@ bool SensorLogger::isInitialized()
 
 void SensorLogger::run()
 {
-    auto path = helper::getEnvOrDefault<std::string>("LOG_PATH", "./sensor-data");
+    auto path = utils::getEnvOrDefault<std::string>("LOG_PATH", "./sensor-data");
     std::string ext = ".uorocketlog";
     if (path.back() != '/')
         path += "/";

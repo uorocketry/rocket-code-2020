@@ -3,10 +3,11 @@
 #include <spdlog/sinks/systemd_sink.h>
 #include <thread>
 
-#include "helpers/Helper.h"
+#include "common/FileLogFormatter.h"
 
 #include "IO/InterfaceImpl.h"
 #include "chrono"
+#include "common/FileLogFormatter.h"
 #include "data/UOSMData.h"
 #include "spdlog/sinks/basic_file_sink.h"
 #include "spdlog/sinks/dup_filter_sink.h"
@@ -38,9 +39,10 @@ void setup_logging()
     auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(
         "logs/global_" + std::to_string(unix_timestamp_x_1000) + ".log");
     file_sink->set_level(FILE_LOGGING_LEVEL);
+    file_sink->set_formatter(std::make_unique<FileLogFormatter>());
     dup_filter->add_sink(file_sink);
 
-    if (helper::getEnvOrDefault<std::string>("INSIDE_SERVICE", "0") == "0")
+    if (utils::getEnvOrDefault<std::string>("INSIDE_SERVICE", "0") == "0")
     {
         // Log to the console
         auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
@@ -89,7 +91,7 @@ int main()
     UOSMData data = UOSMData();
 
     const auto targetUpdateDuration =
-        helper::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
+        utils::getEnvOrDefault("TARGET_UPDATE_DURATION_NS", DEFAULT_TARGET_UPDATE_DURATION_NS);
     uint64_t count = 1;
 
     while (true)

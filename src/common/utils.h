@@ -2,8 +2,10 @@
 #include "common/pch.h"
 #include <boost/lexical_cast.hpp>
 
-namespace helper
+namespace utils
 {
+
+uint64_t getMonotonicTimeStamp();
 
 template <typename T>
 T getEnvOrDefault(const std::string &envName, T defaultValue)
@@ -12,11 +14,4 @@ T getEnvOrDefault(const std::string &envName, T defaultValue)
     return value ? boost::lexical_cast<T>(value) : defaultValue;
 }
 
-template <class T>
-struct SharedArray
-{
-    std::shared_ptr<T[]> data;
-    size_t length;
-};
-
-} // namespace helper
+} // namespace utils

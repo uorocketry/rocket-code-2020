@@ -6,3 +6,10 @@ using duration_ns = std::chrono::duration<int64_t, std::nano>;
 using duration_ms = std::chrono::duration<int64_t, std::milli>;
 
 using eventType = long;
+
+template <class T>
+struct SharedArray
+{
+    std::shared_ptr<T[]> data;
+    size_t length;
+};

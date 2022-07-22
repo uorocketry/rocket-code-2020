@@ -2,8 +2,8 @@
 #if TESTING == 1
 
 #include "TestingSensors.h"
+#include "common/utils.h"
 #include "data/StateData.h"
-#include "helpers/Helper.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -16,7 +16,7 @@ void TestingSensors::run()
 void TestingSensors::initialize()
 {
     createThread = false;
-    auto fileName = helper::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./data/test-data.csv");
+    auto fileName = utils::getEnvOrDefault<std::string>("TESTING_INPUT_FILE", "./data/test-data.csv");
     std::ifstream logFile(fileName.c_str());
 
     std::string line;
