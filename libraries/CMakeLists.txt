@@ -1,60 +1,85 @@
+include(FetchContent)
+
 # ---------------
 # sbgECom library
 # ---------------
+FetchContent_Declare(
+        sbgECom
+        GIT_REPOSITORY https://github.com/SBG-Systems/sbgECom.git
+        GIT_TAG        3.1.2358-stable
+        SOURCE_SUBDIR  cmake
+)
 
-file(GLOB_RECURSE SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.c)
-file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/*.c)
-file(GLOB_RECURSE SM_SRC ${PROJECT_SOURCE_DIR}/libraries/sbgECom/src/*.cpp)
-
-#
-#	Exclude platform specific files
-#
-if (NOT MSVC)
-    list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/interfaces/sbgInterfaceSerialWin.c")
-else ()
-    list(REMOVE_ITEM COMMON_SRC "${PROJECT_SOURCE_DIR}/libraries/sbgECom/common/interfaces/sbgInterfaceSerialUnix.c")
-endif()
-
-add_library(sbgECom STATIC ${SRC} ${COMMON_SRC} ${SM_SRC})
-
-if (MSVC)
-    target_link_libraries(sbgECom Ws2_32)
-endif()
-
-target_include_directories(sbgECom PUBLIC ./sbgECom/common ./sbgECom/src)
-
+FetchContent_MakeAvailable(sbgECom)
+target_include_directories(sbgECom PUBLIC ${sbgECom_SOURCE_DIR}/../common ${sbgECom_SOURCE_DIR}/../src)
 # ---------------
 # WiringPi library
 # ---------------
+FetchContent_Declare(
+        WiringPi
+        GIT_REPOSITORY https://github.com/WiringPi/WiringPi.git
+        GIT_TAG        master
+        CONFIGURE_COMMAND ""
+        BUILD_COMMAND ""
+)
 
-file(GLOB_RECURSE WIRINGPI_SRC ${PROJECT_SOURCE_DIR}/libraries/WiringPi/wiringPi/*.c)
-add_library(WiringPi STATIC ${WIRINGPI_SRC})
 
-target_include_directories(WiringPi PUBLIC ./WiringPi/wiringPi)
+FetchContent_GetProperties(WiringPi)
+if(NOT wiringpi_POPULATED)
+    FetchContent_Populate(WiringPi)
 
-# Ignore annoying warnings we can't do anything about
-set_target_properties(WiringPi PROPERTIES COMPILE_FLAGS "-w")
+    file(GLOB_RECURSE WIRINGPI_SRC ${wiringpi_SOURCE_DIR}/wiringPi/*.c)
+    add_library(WiringPi STATIC ${WIRINGPI_SRC})
+
+    target_include_directories(WiringPi PUBLIC ${wiringpi_SOURCE_DIR}/wiringPi)
+
+    # Ignore annoying warnings we can't do anything about
+    set_target_properties(WiringPi PROPERTIES COMPILE_FLAGS "-w")
+    # Bring the populated content into the build
+endif()
 
 # ---------------
 # spdlog library
 # ---------------
-
-add_subdirectory(./spdlog)
-
-# ---------------
-# Unit Testing - Catch2
-# ---------------
-
-add_subdirectory(./Catch2)
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG        v1.10.0
+)
 
 # ---------------
 # Unit Testing - Catch2
 # ---------------
-add_library(cobs-c STATIC ./cobs-c/cobs.c)
-target_include_directories(cobs-c PUBLIC ./cobs-c)
+FetchContent_Declare(
+        catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG       v3.1.0
+
+)
+
+# ---------------
+# Unit Testing - Catch2
+# ---------------
+FetchContent_Declare(
+        cobs-c
+        GIT_REPOSITORY https://github.com/cmcqueen/cobs-c.git
+        GIT_TAG       0.5.0
+)
+
+FetchContent_GetProperties(cobs-c)
+if(NOT cobs-c_POPULATED)
+    FetchContent_Populate(cobs-c)
+    add_library(cobs-c STATIC ${cobs-c_SOURCE_DIR}/cobs.c)
+    target_include_directories(cobs-c PUBLIC ${cobs-c_SOURCE_DIR})
+endif()
 
 # ---------------
 # Protobuf Definitions
 # ---------------
-add_subdirectory(./protobuf-definitions)
+FetchContent_Declare(
+        protobufDef
+        GIT_REPOSITORY https://github.com/uorocketry/protobuf-definitions.git
+        GIT_TAG       master
+)
 
+FetchContent_MakeAvailable(spdlog catch2 protobufDef)
