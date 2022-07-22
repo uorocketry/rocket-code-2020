@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./build/MainLoop
+./build/bin/MainLoop

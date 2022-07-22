@@ -10,7 +10,19 @@ jobs:
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
+
+      - name: Install Conan
+        run: pip install conan
+
+      - name: Create conan profile
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+
       - name: Install dependencies
-        run: sudo ./install-dependencies.sh
+        run: |
+          apt-fast update
+          apt-fast install ninja-build libsystemd-dev -y        
+
       - name: Run OctoberSky1 Test
-        run: cd ./tests/octoberSky/; bash ./run_test.sh
+        run: cd ./tests/octoberSky && ./run_test.sh

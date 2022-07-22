@@ -1,0 +1,10 @@
+ [requires]
+wiringpi/cci.20210727
+spdlog/1.10.0
+catch2/3.1.0
+protobuf/3.21.1
+i2c-tools/4.3
+boost/1.79.0
+
+[generators]
+cmake

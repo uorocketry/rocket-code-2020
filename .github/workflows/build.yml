@@ -29,8 +29,20 @@ jobs:
     steps:
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
-      # Build the project
+
+      - name: Install Conan
+        run: pip install conan
+
+      - name: Create conan profile
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+
       - name: Install dependencies
-        run: sudo ./install-dependencies.sh
+        run: |
+          apt-fast update
+          apt-fast install ninja-build libsystemd-dev -y
+          
+
       - name: "${{ matrix.name }}: Build"
         run: ${{ matrix.append }} ./build.sh

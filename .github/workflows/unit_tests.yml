@@ -11,11 +11,20 @@ jobs:
       # Initialization
       - name: Checkout repository and submodules
         uses: actions/checkout@v3
+
+      - name: Install Conan
+        run: pip install conan
+      - name: Create conan profile
+        run: |
+          conan profile new default --detect
+          conan profile update settings.compiler.libcxx=libstdc++11 default
+
       - name: Install dependencies
-        run: sudo ./install-dependencies.sh
-      - name: CMake
-        run: USE_GPIO=1 cmake -B ./build -G 'Ninja'
-      - name: Build
-        run: USE_GPIO=1 cmake --build ./build --target tests
-      - name: Run Unit Tests
-        run: ./build/unitTesting/tests
+        run: |
+          apt-fast update
+          apt-fast install ninja-build libsystemd-dev -y
+
+      - name: Build unit tests
+        run:  USE_GPIO=1 ./build.sh default Ninja tests
+      - name: Run Unit Testing
+        run: ./build/bin/tests

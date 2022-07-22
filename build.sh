@@ -1,4 +1,6 @@
 #!/bin/bash
 
-cmake -B build -S . -G "${1:-Ninja}"
-cmake --build build --target "${2:-MainLoop}"
+# Args: Profile Generator Target
+
+./install-conan.sh ${1} ${2}
+cmake --build build --target "${3:-MainLoop}"

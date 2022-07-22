@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./build.sh "$1" "$2" && ./run.sh
+./build.sh default "$1" "$2" "$2" && ./run.sh
