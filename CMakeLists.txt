@@ -11,63 +11,25 @@ endif ()
 
 add_subdirectory(./libraries)
 
-if (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-    add_compile_definitions(HOTFIRE_TEST=$ENV{HOTFIRE_TEST})
-endif ()
+list(APPEND CompilerFlags
+        # Flags
+        "HOTFIRE_TEST"
+        "USE_LOGGER" "USE_INPUT"
+        "USE_SOCKET_CLIENT"
+        "SKIP_INIT"
+        "TESTING"
+        "DESKTOP_COMPAT"
+        # Sensors
+        "USE_SBG"  "USE_RADIO"  "USE_WIRING_Pi"  "USE_GPIO"  "USE_ARDUINO_PROXY"  "USE_SENSORS" "USE_SENSOR_SUITE"
+        )
 
-if (DEFINED ENV{USE_LOGGER} OR USE_LOGGER)
-    add_compile_definitions(USE_LOGGER=$ENV{USE_LOGGER})
-endif ()
-
-if (DEFINED ENV{USE_SOCKET_CLIENT} OR USE_SOCKET_CLIENT)
-    add_compile_definitions(USE_SOCKET_CLIENT=$ENV{USE_SOCKET_CLIENT})
-endif ()
-
-if (DEFINED ENV{USE_INPUT} OR USE_INPUT)
-    add_compile_definitions(USE_INPUT=$ENV{USE_INPUT})
-endif ()
-
-if (DEFINED ENV{SKIP_INIT} OR SKIP_INIT)
-    add_compile_definitions(SKIP_INIT=$ENV{SKIP_INIT})
-endif ()
-
-if (DEFINED ENV{TESTING} OR TESTING)
-    add_compile_definitions(TESTING=$ENV{TESTING})
-endif ()
-
-if (DEFINED ENV{DESKTOP_COMPAT} OR DESKTOP_COMPAT)
-    add_compile_definitions(DESKTOP_COMPAT=$ENV{DESKTOP_COMPAT})
-endif ()
-
-#Sensors
-
-if (DEFINED ENV{USE_SBG} OR USE_SBG)
-    add_compile_definitions(USE_SBG=$ENV{USE_SBG})
-endif ()
-
-if (DEFINED ENV{USE_RADIO} OR USE_RADIO)
-    add_compile_definitions(USE_RADIO=$ENV{USE_RADIO})
-endif ()
-
-if (DEFINED ENV{USE_WIRING_Pi} OR USE_WIRING_Pi)
-    add_compile_definitions(USE_WIRING_Pi=$ENV{USE_WIRING_Pi})
-endif ()
-
-if (DEFINED ENV{USE_GPIO} OR USE_GPIO)
-    add_compile_definitions(USE_GPIO=$ENV{USE_GPIO})
-endif ()
-
-if (DEFINED ENV{USE_ARDUINO_PROXY} OR USE_ARDUINO_PROXY)
-    add_compile_definitions(USE_ARDUINO_PROXY=$ENV{USE_ARDUINO_PROXY})
-endif ()
-
-if (DEFINED ENV{USE_SENSORS} OR USE_SENSORS)
-    add_compile_definitions(USE_SENSORS=$ENV{USE_SENSORS})
-endif ()
-
-if (DEFINED ENV{USE_SENSOR_SUITE} OR USE_SENSOR_SUITE)
-    add_compile_definitions(USE_SENSOR_SUITE=$ENV{USE_SENSOR_SUITE})
-endif ()
+foreach(flag IN LISTS CompilerFlags)
+    if (DEFINED ENV{${flag}})
+        add_compile_definitions(${flag}=$ENV{${flag}})
+    elseif(DEFINED ${flag})
+        add_compile_definitions(${flag}=${${flag}})
+    endif ()
+endforeach()
 
 #-- -- -- -- -- -- -- -
 #Main executable
@@ -75,11 +37,11 @@ endif ()
 find_package(Threads)
 
 if (DEFINED ENV{SERVO_CONTROL} OR SERVO_CONTROL)
-    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/ServoControl/*.cpp)
+    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/ServoControl/*.*)
 elseif (DEFINED ENV{HOTFIRE_TEST} OR HOTFIRE_TEST)
-    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/*.cpp)
+    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/HotFire/**)
 else ()
-    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/*.cpp)
+    file(GLOB_RECURSE MAIN_CONFIG_SRC ${PROJECT_SOURCE_DIR}/projects/OctoberSky1/**)
 endif ()
 
 file(GLOB_RECURSE SRC_MAIN ${PROJECT_SOURCE_DIR}/src/*.cpp)
