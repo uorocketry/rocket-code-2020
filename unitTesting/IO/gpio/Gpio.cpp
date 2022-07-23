@@ -1,4 +1,4 @@
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 #define USE_GPIO 1
 #include <IO/gpio/Gpio.h>
