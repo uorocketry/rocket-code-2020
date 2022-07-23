@@ -1,6 +1,6 @@
 #include "ArduinoComm.pb.h"
 #include "IO/ArduinoEncoder.h"
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 using RocketryProto::ArduinoIn;
 

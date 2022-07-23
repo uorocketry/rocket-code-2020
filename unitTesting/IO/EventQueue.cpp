@@ -1,5 +1,5 @@
 #include <IO/EventQueue.h>
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("EventQueue push and pop", "[EventQueue]")
 {
