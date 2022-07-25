@@ -114,7 +114,7 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
         std::lock_guard<std::mutex> lockGuard(stateMutex);
 
         const auto &dcMotorState = arduinoOut.dcmotorstate();
-        dcMotorStates[{dcMotorState.motorforwardpin(), dcMotorState.motorreversepin()}] = {dcMotorState.position(), dcMotorState.direction(), std::chrono::steady_clock::now()};
+        dcMotorStates[{dcMotorState.motorforwardpin(), dcMotorState.motorreversepin()}] = {dcMotorState.position(), dcMotorState.direction(), dcMotorState.minlimitswitch(), dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
     }
     break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:

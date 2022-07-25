@@ -121,6 +121,10 @@ std::string StateData::convertToReducedString() const
         data += ",";
         data += std::to_string(output.second.direction);
         data += ",";
+        data += std::to_string(output.second.minLimitSwitch);
+        data += ",";
+        data += std::to_string(output.second.maxLimitSwitch);
+        data += ",";
     }
 #endif
 

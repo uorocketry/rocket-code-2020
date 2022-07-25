@@ -59,10 +59,10 @@ DCMotorState DCMotorOutput::getCurrentState()
     }
     catch (std::out_of_range &error)
     {
-        return {-1, 0, std::chrono::steady_clock::now()};
+        return {-1, 0, false, false, std::chrono::steady_clock::now()};
     }
 #else
-    return {-1, 0, std::chrono::steady_clock::now()};
+    return {-1, 0, false, false, std::chrono::steady_clock::now()};
 #endif
 }
 
