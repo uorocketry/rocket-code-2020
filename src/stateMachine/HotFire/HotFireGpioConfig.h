@@ -29,11 +29,11 @@
 
     #if USE_PWM_MAIN
         #define MAIN_NAME "MAIN"
-        #define MAIN_FORWARD_PIN 3
-        #define MAIN_REVERSE_PIN 9
-        #define MAIN_LIMIT_SWITCH_MIN_PIN 10
-        #define MAIN_LIMIT_SWITCH_MAX_PIN 11
-        #define MAIN_POTENTIOMETER_PIN 14
+        #define MAIN_FORWARD_PIN 9
+        #define MAIN_REVERSE_PIN 10
+        #define MAIN_LIMIT_SWITCH_MIN_PIN 7
+        #define MAIN_LIMIT_SWITCH_MAX_PIN 8
+        #define MAIN_POTENTIOMETER_PIN 0
         #define MAIN_MOTOR_POWER 255
         #define MAIN_OPEN 0
         #define MAIN_IGNITION 300
