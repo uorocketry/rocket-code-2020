@@ -31,13 +31,13 @@
         #define MAIN_NAME "MAIN"
         #define MAIN_FORWARD_PIN 9
         #define MAIN_REVERSE_PIN 10
-        #define MAIN_LIMIT_SWITCH_MIN_PIN 7
-        #define MAIN_LIMIT_SWITCH_MAX_PIN 8
+        #define MAIN_LIMIT_SWITCH_MIN_PIN 8
+        #define MAIN_LIMIT_SWITCH_MAX_PIN 7
         #define MAIN_POTENTIOMETER_PIN 0
         #define MAIN_MOTOR_POWER 255
         #define MAIN_OPEN 0
         #define MAIN_IGNITION 300
-        #define MAIN_CLOSE 1000
+        #define MAIN_CLOSE 1023
         #define MAIN_EVENT_ENABLE_MASK 0b1000
     #endif
 
