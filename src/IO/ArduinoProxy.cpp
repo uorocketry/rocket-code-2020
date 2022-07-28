@@ -24,7 +24,11 @@ void ArduinoProxy::initialize()
 {
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
+    #if DESKTOP_COMPAT == 1
     if ((fd = serialOpen("/dev/ttyACM0", 57600)) < 0)
+    #else
+    if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
+    #endif
     {
         SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
         return;
