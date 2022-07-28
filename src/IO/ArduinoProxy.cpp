@@ -29,7 +29,10 @@ void ArduinoProxy::initialize()
         SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
         return;
     }
+
+    #if DESKTOP_COMPAT == 1
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    #endif
 
     inititialized = true;
 
