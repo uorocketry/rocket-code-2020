@@ -36,7 +36,7 @@
         #define MAIN_POTENTIOMETER_PIN 0
         #define MAIN_MOTOR_POWER 255
         #define MAIN_OPEN 0
-        #define MAIN_IGNITION 300
+        #define MAIN_IGNITION 400
         #define MAIN_CLOSE 1023
         #define MAIN_EVENT_ENABLE_MASK 0b1000
     #endif
