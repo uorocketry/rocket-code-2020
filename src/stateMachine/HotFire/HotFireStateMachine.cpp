@@ -227,7 +227,7 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
 #endif
 
 #if USE_IGNITER
-    interface->createNewGpioOutput(IGNITER_NAME, IGNITER_PIN);
+    interface->createNewGpioOutput(IGNITER_NAME, IGNITER_PIN, IGNITER_OFF);
 #endif
 
 #if USE_PWM_MAIN
