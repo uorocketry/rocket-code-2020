@@ -458,7 +458,7 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
