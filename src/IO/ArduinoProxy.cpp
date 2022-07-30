@@ -5,6 +5,7 @@
 #include "IO/ArduinoEncoder.h"
 #include <spdlog/spdlog.h>
 #include <sys/poll.h>
+#include <thread>
 
 // If we haven't received a pin update in that duration, remove it from the map
 const auto pinStateTimeout = std::chrono::seconds(5);
@@ -23,11 +24,19 @@ void ArduinoProxy::initialize()
 {
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
+#if DESKTOP_COMPAT == 1
+    if ((fd = serialOpen("/dev/ttyACM0", 57600)) < 0)
+#else
     if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
+#endif
     {
         SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
         return;
     }
+
+#if DESKTOP_COMPAT == 1
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+#endif
 
     inititialized = true;
 
@@ -108,6 +117,15 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
         digitalStates[digitalState.pin()] = {digitalState.activated(), std::chrono::steady_clock::now()};
     }
     break;
+    case RocketryProto::ArduinoOut::kDcMotorState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &dcMotorState = arduinoOut.dcmotorstate();
+        dcMotorStates[{dcMotorState.motorforwardpin(), dcMotorState.motorreversepin()}] = {
+            dcMotorState.position(), dcMotorState.direction(), dcMotorState.minlimitswitch(),
+            dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
+    }
+    break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
         SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
         break;
@@ -171,6 +189,25 @@ int ArduinoProxy::getServoState(int pin)
     else
     {
         return state.first;
+    }
+}
+
+DCMotorState ArduinoProxy::getDCMotorState(int forwardPin, int reversePin)
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    auto state = dcMotorStates.at({forwardPin, reversePin});
+    auto now = std::chrono::steady_clock::now();
+
+    if (now - state.time >= pinStateTimeout)
+    {
+        dcMotorStates.erase({forwardPin, reversePin});
+        SPDLOG_ERROR("Arduino stopped reporting DC motor pin {} and {}", forwardPin, reversePin);
+        throw std::out_of_range("Pin has been removed");
+    }
+    else
+    {
+        return state;
     }
 }
 

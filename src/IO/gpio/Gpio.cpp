@@ -45,10 +45,15 @@ GpioData Gpio::setOutputs(const GpioData &data)
     {
         digitalOutputsMap.at(output.first).setValue(output.second);
     }
+    for (std::pair<std::string, int> output : data.dcOutputMap)
+    {
+        dcMotorOutputsMap.at(output.first).setValue(output.second);
+    }
 
     GpioData result;
     result.digitalOutputMap = toRawMap(digitalOutputsMap);
     result.pwmOutputMap = toRawMap(pwmOutputsMap);
+    result.dcOutputMap = toRawMap(dcMotorOutputsMap);
 
     return result;
 }
@@ -63,6 +68,13 @@ void Gpio::createNewGpioPwmOutput(const std::string &name, int pinNbr, int safeP
     pwmOutputsMap.insert({name, PwmOutput(name, pinNbr, safePosition, softPWM)});
 }
 
+void Gpio::createNewGpioDCMotorOutput(const std::string &name, int pinForward, int pinReverse, int motorPower,
+                                      int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin)
+{
+    dcMotorOutputsMap.insert({name, DCMotorOutput(name, pinForward, pinReverse, motorPower, limitSwitchMinPin,
+                                                  limitSwitchMaxPin, potentiometerPin)});
+}
+
 GpioState Gpio::getCurrentState()
 {
     GpioState state;
@@ -74,6 +86,10 @@ GpioState Gpio::getCurrentState()
     for (auto i : pwmOutputsMap)
     {
         state.pwmStateMap.insert({i.first, i.second.getCurrentState()});
+    }
+    for (auto i : dcMotorOutputsMap)
+    {
+        state.dcMotorStateMap.insert({i.first, i.second.getCurrentState()});
     }
 
     return state;
