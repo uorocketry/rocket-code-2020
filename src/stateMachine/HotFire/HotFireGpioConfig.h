@@ -22,7 +22,7 @@
 
     #if USE_VENT
         #define VENT_NAME "VENT"
-        #define VENT_PIN 8
+        #define VENT_PIN 13
         #define VENT_OPEN 1
         #define VENT_CLOSE 0
         #define VENT_SAFE 1
