@@ -4,6 +4,7 @@
 #if USE_GPIO == 1
 
 #include "IO/IO.h"
+#include "IO/gpio/DCMotor.h"
 #include "IO/gpio/DigitalOutput.h"
 #include "IO/gpio/PwmOutput.h"
 #include "data/GpioData.h"
@@ -28,8 +29,9 @@ class Gpio : public IO
     bool isInitialized() override;
 
     void createNewGpioOutput(const std::string &name, int pinNbr, int safeState);
-
     void createNewGpioPwmOutput(const std::string &name, int pinNbr, int safePosition, bool softPWM = false);
+    void createNewGpioDCMotorOutput(const std::string &name, int pinForward, int pinReverse, int motorPower,
+                                    int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin);
 
     GpioData setOutputs(const GpioData &data);
 
@@ -41,6 +43,7 @@ class Gpio : public IO
   private:
     std::map<std::string, DigitalOutput> digitalOutputsMap;
     std::map<std::string, PwmOutput> pwmOutputsMap;
+    std::map<std::string, DCMotorOutput> dcMotorOutputsMap;
 
     struct InitFlags
     {

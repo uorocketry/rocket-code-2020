@@ -170,6 +170,13 @@ void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int saf
 {
     gpio.createNewGpioPwmOutput(name, pinNbr, safePosition, softpwm);
 }
+
+void InterfaceImpl::createNewGpioDCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower,
+                                               int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin)
+{
+    gpio.createNewGpioDCMotorOutput(name, pinForward, pinReverse, motorPower, limitSwitchMinPin, limitSwitchMaxPin,
+                                    potentiometerPin);
+}
 #endif
 
 void InterfaceImpl::calibrateTelemetry()
