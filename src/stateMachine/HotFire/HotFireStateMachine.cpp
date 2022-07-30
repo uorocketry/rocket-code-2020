@@ -202,7 +202,8 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    interface->createNewGpioPwmOutput(MAIN_NAME, MAIN_PIN, MAIN_SAFE, MAIN_SOFTPWM);
+    interface->createNewGpioDCMotorOutput(MAIN_NAME, MAIN_FORWARD_PIN, MAIN_REVERSE_PIN, MAIN_MOTOR_POWER,
+                                          MAIN_LIMIT_SWITCH_MIN_PIN, MAIN_LIMIT_SWITCH_MAX_PIN, MAIN_POTENTIOMETER_PIN);
 #endif
 
 #if USE_PWM_PINHOLE
@@ -290,7 +291,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -335,7 +336,7 @@ STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -380,7 +381,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -425,7 +426,7 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -471,7 +472,7 @@ STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -516,7 +517,7 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -562,7 +563,7 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_OPEN});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -602,7 +603,7 @@ STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -642,7 +643,7 @@ STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -723,7 +724,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & MAIN_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.pwmOutputMap.insert({MAIN_NAME, open ? MAIN_OPEN : MAIN_CLOSE});
+                gpioData.dcOutputMap.insert({MAIN_NAME, open ? MAIN_OPEN : MAIN_CLOSE});
 
                 logValveStatus(MAIN_NAME, open);
             }

@@ -39,13 +39,16 @@
 
     #if USE_PWM_MAIN
         #define MAIN_NAME "MAIN"
-        #define MAIN_PIN 3
-        #define MAIN_OPEN 180
-        #define MAIN_IGNITION 120
-        #define MAIN_CLOSE 0
-        #define MAIN_SAFE 180
+        #define MAIN_FORWARD_PIN 9
+        #define MAIN_REVERSE_PIN 10
+        #define MAIN_LIMIT_SWITCH_MIN_PIN 8
+        #define MAIN_LIMIT_SWITCH_MAX_PIN 7
+        #define MAIN_POTENTIOMETER_PIN 0
+        #define MAIN_MOTOR_POWER 255
+        #define MAIN_OPEN 0
+        #define MAIN_IGNITION 400
+        #define MAIN_CLOSE 1023
         #define MAIN_EVENT_ENABLE_MASK 0b1000
-        #define MAIN_SOFTPWM true
     #endif
 
     #if USE_PWM_PINHOLE
