@@ -9,7 +9,8 @@
 #include <wiringPi.h>
 #endif
 
-DigitalOutput::DigitalOutput(const std::string &name, const int pin) : name(name), pinNbr(pin)
+DigitalOutput::DigitalOutput(const std::string &name, const int pin, const int safeState)
+    : name(name), pinNbr(pin), safeState(safeState)
 {
     logger = spdlog::default_logger();
 
@@ -20,6 +21,7 @@ DigitalOutput::DigitalOutput(const std::string &name, const int pin) : name(name
 
     RocketryProto::ArduinoIn arduinoIn;
     arduinoIn.mutable_digitalinit()->set_pin(pin);
+    arduinoIn.mutable_digitalinit()->set_safestate(safeState);
     arduinoProxy->send(arduinoIn);
 #elif USE_WIRING_Pi == 1
     pinMode(pinNbr, OUTPUT);
