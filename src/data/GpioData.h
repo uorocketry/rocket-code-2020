@@ -1,8 +1,8 @@
 #pragma once
+#include "arduino/DCMotorState.h"
 #include "config.h"
 #include <map>
 #include <string>
-#include "arduino/DCMotorState.h"
 
 struct GpioData
 {

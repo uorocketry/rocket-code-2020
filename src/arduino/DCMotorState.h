@@ -2,7 +2,8 @@
 
 #include <chrono>
 
-struct DCMotorState {
+struct DCMotorState
+{
     int position;
     int direction;
     bool minLimitSwitch;

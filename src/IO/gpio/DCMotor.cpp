@@ -8,9 +8,9 @@
 #include <utility>
 #include <wiringSerial.h>
 
-DCMotorOutput::DCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower, 
-      int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin)
-    : name(std::move(name)), pinNbrForward(pinForward), pinNbrReverse(pinReverse), motorPower(motorPower), 
+DCMotorOutput::DCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower, int limitSwitchMinPin,
+                             int limitSwitchMaxPin, int potentiometerPin)
+    : name(std::move(name)), pinNbrForward(pinForward), pinNbrReverse(pinReverse), motorPower(motorPower),
       limitSwitchMinPin(limitSwitchMinPin), limitSwitchMaxPin(limitSwitchMaxPin), potentiometerPin(potentiometerPin)
 {
     logger = spdlog::default_logger();
@@ -36,7 +36,8 @@ bool DCMotorOutput::setValue(int value)
     if (currentState != value)
     {
         currentState = value;
-        SPDLOG_LOGGER_INFO(logger, "DC Motor {} changed to {} on pin {} and {}", name, currentState, pinNbrForward, pinNbrReverse);
+        SPDLOG_LOGGER_INFO(logger, "DC Motor {} changed to {} on pin {} and {}", name, currentState, pinNbrForward,
+                           pinNbrReverse);
 
 #if USE_ARDUINO_PROXY == 1
         RocketryProto::ArduinoIn arduinoIn;

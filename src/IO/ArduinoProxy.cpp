@@ -24,19 +24,19 @@ void ArduinoProxy::initialize()
 {
     std::lock_guard<std::mutex> lockGuard(serialMutex);
 
-    #if DESKTOP_COMPAT == 1
+#if DESKTOP_COMPAT == 1
     if ((fd = serialOpen("/dev/ttyACM0", 57600)) < 0)
-    #else
+#else
     if ((fd = serialOpen("/dev/ttyAMA0", 57600)) < 0)
-    #endif
+#endif
     {
         SPDLOG_LOGGER_ERROR(logger, "Error while opening serial communication!");
         return;
     }
 
-    #if DESKTOP_COMPAT == 1
+#if DESKTOP_COMPAT == 1
     std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-    #endif
+#endif
 
     inititialized = true;
 
@@ -121,7 +121,9 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
         std::lock_guard<std::mutex> lockGuard(stateMutex);
 
         const auto &dcMotorState = arduinoOut.dcmotorstate();
-        dcMotorStates[{dcMotorState.motorforwardpin(), dcMotorState.motorreversepin()}] = {dcMotorState.position(), dcMotorState.direction(), dcMotorState.minlimitswitch(), dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
+        dcMotorStates[{dcMotorState.motorforwardpin(), dcMotorState.motorreversepin()}] = {
+            dcMotorState.position(), dcMotorState.direction(), dcMotorState.minlimitswitch(),
+            dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
     }
     break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:

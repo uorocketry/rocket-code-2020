@@ -17,8 +17,8 @@
 class DCMotorOutput : public Output
 {
   public:
-    DCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower, 
-      int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin);
+    DCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower, int limitSwitchMinPin,
+                  int limitSwitchMaxPin, int potentiometerPin);
 
     bool setValue(int value) override;
 
