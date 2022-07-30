@@ -32,8 +32,8 @@
     #if USE_IGNITER
         #define IGNITER_NAME "IGNITER"
         #define IGNITER_PIN 12
-        #define IGNITER_ON 1
-        #define IGNITER_OFF 0
+        #define IGNITER_ON 0
+        #define IGNITER_OFF 1
         #define IGNITER_EVENT_ENABLE_MASK 0b100
     #endif
 

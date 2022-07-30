@@ -884,31 +884,31 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
         IgnitionEXT();
         break;
     case 3:
-        IgnitionBurnEXT();
-        break;
-    case 4:
         FinalVentingEXT();
         break;
-    case 5:
+    case 4:
         DoneEXT();
         break;
-    case 6:
+    case 5:
         AbortEXT();
         break;
-    case 7:
+    case 6:
         ServoControlEXT();
         break;
-    case 8:
+    case 7:
         ReadyEXT();
         break;
-    case 9:
+    case 8:
         heaterOn = true;
         break;
-    case 10:
+    case 9:
         heaterOn = false;
         break;
-    case 11:
+    case 10:
         interface->restartLogger();
+        break;
+    case 11:
+        IgnitionBurnEXT();
         break;
     default:
         break;
