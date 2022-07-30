@@ -161,9 +161,9 @@ bool InterfaceImpl::updateOutputs(std::shared_ptr<StateData> data)
 }
 
 #if USE_GPIO == 1
-void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr)
+void InterfaceImpl::createNewGpioOutput(std::string name, int pinNbr, int safeState)
 {
-    gpio.createNewGpioOutput(name, pinNbr);
+    gpio.createNewGpioOutput(name, pinNbr, safeState);
 }
 
 void InterfaceImpl::createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm)

@@ -23,7 +23,7 @@ class Interface
 
 #if USE_GPIO == 1
 
-    virtual void createNewGpioOutput(std::string name, int pinNbr) = 0;
+    virtual void createNewGpioOutput(std::string name, int pinNbr, int safeState = 0) = 0;
 
     virtual void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) = 0;
 

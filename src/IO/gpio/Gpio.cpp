@@ -53,9 +53,9 @@ GpioData Gpio::setOutputs(const GpioData &data)
     return result;
 }
 
-void Gpio::createNewGpioOutput(const std::string &name, int pinNbr)
+void Gpio::createNewGpioOutput(const std::string &name, int pinNbr, int safeState)
 {
-    digitalOutputsMap.insert({name, DigitalOutput(name, pinNbr)});
+    digitalOutputsMap.insert({name, DigitalOutput(name, pinNbr, safeState)});
 }
 
 void Gpio::createNewGpioPwmOutput(const std::string &name, int pinNbr, int safePosition, bool softPWM)

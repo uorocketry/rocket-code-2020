@@ -27,7 +27,7 @@ class Gpio : public IO
 
     bool isInitialized() override;
 
-    void createNewGpioOutput(const std::string &name, int pinNbr);
+    void createNewGpioOutput(const std::string &name, int pinNbr, int safeState);
 
     void createNewGpioPwmOutput(const std::string &name, int pinNbr, int safePosition, bool softPWM = false);
 
