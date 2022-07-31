@@ -30,6 +30,8 @@ class TestingInterface : public Interface
 #if USE_GPIO == 1
     void createNewGpioOutput(std::string name, int pinNbr) override;
     void createNewGpioPwmOutput(std::string name, int pinNbr, int safePosition, bool softpwm) override;
+    void createNewGpioDCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower,
+                                    int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin) override;
 #endif
 
 #if USE_LOGGER == 1

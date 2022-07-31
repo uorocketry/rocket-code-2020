@@ -17,8 +17,8 @@ class FakeGpio : public Gpio
 
 void createOutputs(Gpio *gpio)
 {
-    gpio->createNewGpioOutput(DIGITAL_1, 1);
-    gpio->createNewGpioOutput(DIGITAL_2, 2);
+    gpio->createNewGpioOutput(DIGITAL_1, 1, 0);
+    gpio->createNewGpioOutput(DIGITAL_2, 2, 0);
 
     gpio->createNewGpioPwmOutput(PWM_1, 3, 250, false);
     gpio->createNewGpioPwmOutput(PWM_2, 4, 0, false);
