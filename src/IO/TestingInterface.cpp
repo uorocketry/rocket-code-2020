@@ -71,6 +71,11 @@ void TestingInterface::createNewGpioPwmOutput(std::string name, int pinNbr, int 
 {
     return; // don't do anything for now
 }
+void TestingInterface::createNewGpioDCMotorOutput(std::string name, int pinForward, int pinReverse, int motorPower,
+                                                  int limitSwitchMinPin, int limitSwitchMaxPin, int potentiometerPin)
+{
+    return; // don't do anything for now
+}
 #endif
 
 void TestingInterface::calibrateTelemetry()
