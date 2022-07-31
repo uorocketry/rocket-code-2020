@@ -265,12 +265,15 @@ void SensorLogger::writeHeader(std::ofstream &fileStream, StateData currentState
 #endif
 
 #if USE_SENSOR_SUITE == 1
-    fileStream << "msp2Transducer,";
-    fileStream << "swagelockTransducer,";
+    fileStream << "pressure1,";
+    fileStream << "pressure2,";
+    fileStream << "pressure3,";
+    fileStream << "pressure4,";
     fileStream << "tankTransducer,";
     fileStream << "thrustTransducer,";
     fileStream << "digitalInputs,";
     fileStream << "daqSampleCount,";
+    fileStream << "daqSampleCount2,";
     fileStream << "temp1,";
     fileStream << "temp2,";
     fileStream << "temp3,";
@@ -399,12 +402,15 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
 #endif
 
 #if USE_SENSOR_SUITE == 1
-    fileStream << currentState.sensorSuiteState.msp2Transducer << sep;
-    fileStream << currentState.sensorSuiteState.swagelockTransducer << sep;
+    fileStream << currentState.sensorSuiteState.pressure1 << sep;
+    fileStream << currentState.sensorSuiteState.pressure2 << sep;
+    fileStream << currentState.sensorSuiteState.pressure3 << sep;
+    fileStream << currentState.sensorSuiteState.pressure4 << sep;
     fileStream << currentState.sensorSuiteState.tankTransducer << sep;
     fileStream << currentState.sensorSuiteState.thrustTransducer << sep;
     fileStream << currentState.sensorSuiteState.digitalInputs << sep;
     fileStream << currentState.sensorSuiteState.daqSampleCount << sep;
+    fileStream << currentState.sensorSuiteState.daqSampleCount2 << sep;
     fileStream << currentState.sensorSuiteState.temp1 << sep;
     fileStream << currentState.sensorSuiteState.temp2 << sep;
     fileStream << currentState.sensorSuiteState.temp3 << sep;

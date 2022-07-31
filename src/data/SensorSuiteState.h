@@ -4,12 +4,18 @@
 
 struct SensorSuiteState
 {
-    float msp2Transducer = 0;
-    float swagelockTransducer = 0;
+    float pressure1 = 0;
+    float pressure2 = 0;
     float tankTransducer = 0;
     float thrustTransducer = 0;
     uint32_t digitalInputs = 0;
     uint32_t daqSampleCount = 0;
+    float pressure3 = 0;
+    float pressure4 = 0;
+    float unused1 = 0;
+    float unused2 = 0;
+    uint32_t digitalInputs2 = 0;
+    uint32_t daqSampleCount2 = 0;
     float temp1 = 0;
     float temp2 = 0;
     float temp3 = 0;
