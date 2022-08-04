@@ -526,7 +526,7 @@ EXIT_DEFINE(HotFireStateMachine, ExitIgnition)
 ENTRY_DEFINE(HotFireStateMachine, EnterIgnitionBurn, UOSMData)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
-    enterNewState(ST_IGNITION);
+    enterNewState(ST_IGNITION_BURN);
 }
 
 STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
@@ -545,7 +545,7 @@ STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.pwmOutputMap.insert({MAIN_NAME, MAIN_IGNITION_BURN});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_IGNITION_BURN});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -563,7 +563,7 @@ STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
 #endif
     EventData eventData;
     detectExternEvent(interfaceData);
-    switchStatesAfterTime((ST_FULL_BURN), duration_ms(1000), eventData);
+    switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000), eventData);
 
     interface->updateOutputs(interfaceData);
 }
