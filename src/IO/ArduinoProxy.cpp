@@ -126,6 +126,15 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
             dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
     }
     break;
+    case RocketryProto::ArduinoOut::kStepperMotorState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &state = arduinoOut.steppermotorstate();
+        stepperMotorState = {static_cast<int>(state.steppin()),   static_cast<int>(state.directionpin()),
+                             static_cast<bool>(state.minlimit()), static_cast<bool>(state.maxlimit()),
+                             static_cast<int>(state.speed()),     std::chrono::steady_clock::now()};
+    }
+    break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
         SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
         break;
@@ -209,6 +218,11 @@ DCMotorState ArduinoProxy::getDCMotorState(int forwardPin, int reversePin)
     {
         return state;
     }
+}
+
+StepperMotorState ArduinoProxy::getStepperMotorState()
+{
+    return stepperMotorState;
 }
 
 #endif

@@ -50,6 +50,11 @@ GpioData Gpio::setOutputs(const GpioData &data)
         dcMotorOutputsMap.at(output.first).setValue(output.second);
     }
 
+    if (data.stepperMotor.has_value())
+    {
+        stepperMotor.setValue(data.stepperMotor.value());
+    }
+
     GpioData result;
     result.digitalOutputMap = toRawMap(digitalOutputsMap);
     result.pwmOutputMap = toRawMap(pwmOutputsMap);

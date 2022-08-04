@@ -16,7 +16,7 @@
 
     #define USE_PWM_FILL 1
 
-    #define USE_PWM_PURGE 1
+    #define USE_PURGE 1
 
     #define USE_HEATER 1
 
@@ -73,7 +73,7 @@
         #define FILL_SOFTPWM true
     #endif
 
-    #if USE_PWM_PURGE
+    #if USE_PURGE
         #define PURGE_NAME "PURGE"
         #define PURGE_PIN 3
         #define PURGE_OPEN 180

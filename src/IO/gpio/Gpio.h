@@ -7,6 +7,7 @@
 #include "IO/gpio/DCMotor.h"
 #include "IO/gpio/DigitalOutput.h"
 #include "IO/gpio/PwmOutput.h"
+#include "StepperMotor.h"
 #include "data/GpioData.h"
 #include <condition_variable>
 #include <fstream>
@@ -44,6 +45,7 @@ class Gpio : public IO
     std::map<std::string, DigitalOutput> digitalOutputsMap;
     std::map<std::string, PwmOutput> pwmOutputsMap;
     std::map<std::string, DCMotorOutput> dcMotorOutputsMap;
+    StepperMotor stepperMotor;
 
     struct InitFlags
     {
