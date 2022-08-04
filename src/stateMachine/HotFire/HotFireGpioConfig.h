@@ -16,6 +16,8 @@
 
     #define USE_PWM_FILL 1
 
+    #define USE_PWM_PURGE 1
+
     #define USE_HEATER 1
 
     #define EVENT_ENABLE_MASK 0b1
@@ -69,6 +71,16 @@
         #define FILL_SAFE 180
         #define FILL_EVENT_ENABLE_MASK 0b100000
         #define FILL_SOFTPWM true
+    #endif
+
+    #if USE_PWM_PURGE
+        #define PURGE_NAME "PURGE"
+        #define PURGE_PIN 3
+        #define PURGE_OPEN 180
+        #define PURGE_CLOSE 0
+        #define PURGE_SAFE 0
+        #define PURGE_EVENT_ENABLE_MASK 0b1000000
+        #define PURGE_SOFTPWM true
     #endif
 
     #if USE_HEATER
