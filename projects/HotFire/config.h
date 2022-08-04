@@ -67,4 +67,8 @@
     #define USE_SENSOR_SUITE 1
 #endif
 
+#ifndef DOUBLE_SENSOR_SUITE
+    #define DOUBLE_SENSOR_SUITE 1
+#endif
+
 // clang-format on
