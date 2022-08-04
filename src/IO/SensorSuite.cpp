@@ -11,7 +11,7 @@ using boost::asio::ip::address;
 using boost::asio::ip::tcp;
 
 constexpr auto SENSOR_SUITE_IP = "192.168.1.250";
-constexpr auto SENSOR_SUITE_IP2 = "192.168.1.350";
+constexpr auto SENSOR_SUITE_IP2 = "192.168.1.200";
 constexpr auto SENSOR_SUITE_PORT = 8080;
 constexpr auto SENSOR_SUITE_PORT2 = 8080;
 constexpr auto TWO_DATAQ_DATA_LENGTH = 21;
