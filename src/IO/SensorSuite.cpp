@@ -36,12 +36,12 @@ void SensorSuite::run()
     secondConnectionThread.detach();
     #endif
 
-    startListening(SENSOR_SUITE_IP2, SENSOR_SUITE_PORT2, 1);
+    startListening(SENSOR_SUITE_IP, SENSOR_SUITE_PORT, 0);
 }
 
 void SensorSuite::runSecondListener()
 {
-    SensorSuite::startListening(SENSOR_SUITE_IP, SENSOR_SUITE_PORT, 0);
+    SensorSuite::startListening(SENSOR_SUITE_IP2, SENSOR_SUITE_PORT2, 1);
 }
 
 void SensorSuite::startListening(std::string host, int port, int index)
@@ -131,13 +131,16 @@ void SensorSuite::connect(tcp::socket &socket, tcp::endpoint &endpoint)
 SensorSuiteState SensorSuite::getCurrentData()
 {
     #if DOUBLE_SENSOR_SUITE == 1
-    if (latestOne.size() == ONE_DATAQ_DATA_LENGTH && latestTwo.size() == ONE_DATAQ_DATA_LENGTH)
+    if (latestOne.size() == ONE_DATAQ_DATA_LENGTH )
     {
         boost::trim_right(latestOne[ONE_DATAQ_DATA_LENGTH - 1]);
-        boost::trim_right(latestTwo[ONE_DATAQ_DATA_LENGTH - 1]);
+        if (latestTwo.size() == ONE_DATAQ_DATA_LENGTH)
+        {
+            boost::trim_right(latestTwo[ONE_DATAQ_DATA_LENGTH - 1]);
+        }
 
         int count1 = 0;
-        int count2 = 0;
+        int count2 = 100;
         // clang-format off
         try {
             return {
@@ -147,12 +150,12 @@ SensorSuiteState SensorSuite::getCurrentData()
                 boost::lexical_cast<float>(latestOne[count1++]),
                 boost::lexical_cast<uint32_t>(latestOne[count1++]),
                 boost::lexical_cast<uint32_t>(latestOne[count1++]),
-                boost::lexical_cast<float>(latestTwo[count2++]),
-                boost::lexical_cast<float>(latestTwo[count2++]),
-                boost::lexical_cast<float>(latestTwo[count2++]),
-                boost::lexical_cast<float>(latestTwo[count2++]),
-                boost::lexical_cast<uint32_t>(latestTwo[count2++]),
-                boost::lexical_cast<uint32_t>(latestTwo[count2++]),
+                latestTwo.size() > count2 ? boost::lexical_cast<float>(latestTwo[count2++]) : 0,
+                latestTwo.size() > count2 ? boost::lexical_cast<float>(latestTwo[count2++]) : 0,
+                latestTwo.size() > count2 ? boost::lexical_cast<float>(latestTwo[count2++]) : 0,
+                latestTwo.size() > count2 ? boost::lexical_cast<float>(latestTwo[count2++]) : 0,
+                latestTwo.size() > count2 ? boost::lexical_cast<uint32_t>(latestTwo[count2++]) : 0,
+                latestTwo.size() > count2 ? boost::lexical_cast<uint32_t>(latestTwo[count2++]) : 0,
                 boost::lexical_cast<float>(latestOne[count1++]),
                 boost::lexical_cast<float>(latestOne[count1++]),
                 boost::lexical_cast<float>(latestOne[count1++]),
