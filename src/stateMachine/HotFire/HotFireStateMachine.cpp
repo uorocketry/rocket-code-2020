@@ -563,7 +563,7 @@ STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
 #endif
     EventData eventData;
     detectExternEvent(interfaceData);
-    switchStatesAfterTime((ST_FULL_BURN), duration_ms(5000), eventData);
+    switchStatesAfterTime((ST_FULL_BURN), duration_ms(2000), eventData);
 
     interface->updateOutputs(interfaceData);
 }
