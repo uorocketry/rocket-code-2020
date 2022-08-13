@@ -1,0 +1,16 @@
+{
+    "build": { "dockerfile": "Dockerfile" },
+    "postCreateCommand": "git submodule update --init",
+    "forwardPorts": [],
+    "extensions": [
+        "ms-vscode.cpptools",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "waderyan.gitblame",
+        "github.vscode-pull-request-github",
+        "ms-vsliveshare.vsliveshare",
+        "ms-python.python",
+        "ms-python.python",
+        "notskm.clang-tidy"
+    ]
+}
