@@ -126,6 +126,9 @@ std::string StateData::convertToReducedString() const
         data += std::to_string(output.second.maxLimitSwitch);
         data += ",";
     }
+
+    data += std::to_string(gpioState.loadCellState);
+    data += ",";
 #endif
 
 #if USE_SENSOR_SUITE == 1

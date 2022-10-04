@@ -126,6 +126,13 @@ void ArduinoProxy::handleArduinoMessage(const RocketryProto::ArduinoOut &arduino
             dcMotorState.maxlimitswitch(), std::chrono::steady_clock::now()};
     }
     break;
+    case RocketryProto::ArduinoOut::kLoadCellState: {
+        std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+        const auto &state = arduinoOut.loadcellstate();
+        loadCellState = {state.value(), std::chrono::steady_clock::now()};
+    }
+    break;
     case RocketryProto::ArduinoOut::DATA_NOT_SET:
         SPDLOG_LOGGER_WARN(logger, "Data field not set in Arduino message. ");
         break;
@@ -208,6 +215,25 @@ DCMotorState ArduinoProxy::getDCMotorState(int forwardPin, int reversePin)
     else
     {
         return state;
+    }
+}
+
+int ArduinoProxy::getLoadCellState()
+{
+    std::lock_guard<std::mutex> lockGuard(stateMutex);
+
+    auto state = loadCellState;
+    auto now = std::chrono::steady_clock::now();
+
+    if (now - state.second >= pinStateTimeout)
+    {
+        loadCellState = {-1, std::chrono::steady_clock::now()};
+        SPDLOG_ERROR("Arduino stopped reporting load cell state");
+        return -1;
+    }
+    else
+    {
+        return state.first;
     }
 }
 

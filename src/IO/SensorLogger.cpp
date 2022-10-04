@@ -334,6 +334,9 @@ void SensorLogger::writeData(std::ofstream &fileStream, const StateData &current
     {
         fileStream << output.second << sep;
     }
+
+
+    fileStream << currentState.gpioState.loadCellState << sep;
 #endif
 
 #if USE_SBG == 1

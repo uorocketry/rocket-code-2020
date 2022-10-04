@@ -92,6 +92,8 @@ GpioState Gpio::getCurrentState()
         state.dcMotorStateMap.insert({i.first, i.second.getCurrentState()});
     }
 
+    state.loadCellState = loadCell.getCurrentState();
+
     return state;
 }
 
