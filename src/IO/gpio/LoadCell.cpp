@@ -20,7 +20,7 @@ LoadCell::LoadCell()
 #endif
 }
 
-int LoadCell::getCurrentState()
+uint32_t LoadCell::getCurrentState()
 {
 #if USE_ARDUINO_PROXY == 1
     try

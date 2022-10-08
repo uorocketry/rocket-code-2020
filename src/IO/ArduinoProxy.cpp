@@ -218,7 +218,7 @@ DCMotorState ArduinoProxy::getDCMotorState(int forwardPin, int reversePin)
     }
 }
 
-int ArduinoProxy::getLoadCellState()
+uint32_t ArduinoProxy::getLoadCellState()
 {
     std::lock_guard<std::mutex> lockGuard(stateMutex);
 

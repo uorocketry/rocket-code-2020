@@ -19,7 +19,7 @@ class LoadCell : public IO
   public:
     LoadCell();
 
-    int getCurrentState();
+    uint32_t getCurrentState();
     void run() override;
     bool isInitialized() override;
 
