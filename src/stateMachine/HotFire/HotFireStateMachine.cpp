@@ -243,6 +243,10 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
     interface->createNewGpioPwmOutput(FILL_NAME, FILL_PIN, FILL_SAFE, FILL_SOFTPWM);
 #endif
 
+#if USE_PURGE
+    interface->createNewGpioPwmOutput(PURGE_NAME, PURGE_PIN, PURGE_SAFE, PURGE_SOFTPWM);
+#endif
+
 #endif
     NoEventData eventData;
     InternalEvent(ST_WAIT_FOR_INIT, eventData);
@@ -312,7 +316,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForPurge, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_CLOSE;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_CLOSE});
 #endif
 
 #endif
@@ -361,7 +365,7 @@ STATE_DEFINE(HotFireStateMachine, Purge, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -410,7 +414,7 @@ STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -459,7 +463,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -508,7 +512,7 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -557,7 +561,7 @@ STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -607,7 +611,7 @@ STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -656,7 +660,7 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -706,7 +710,7 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_CLOSE;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_CLOSE});
 #endif
 
 #endif
@@ -750,7 +754,7 @@ STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -794,7 +798,7 @@ STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
 #endif
 
 #if USE_PURGE
-    gpioData.stepperMotor = PURGE_OPEN;
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -897,7 +901,7 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
             {
                 bool open = (eventNbr & PURGE_EVENT_ENABLE_MASK) > 0;
 
-                gpioData.stepperMotor = open ? PURGE_OPEN : PURGE_CLOSE;
+                gpioData.pwmOutputMap.insert({PURGE_NAME, open ? PURGE_OPEN : PURGE_CLOSE});
 
                 logValveStatus(PURGE_NAME, open);
             }
