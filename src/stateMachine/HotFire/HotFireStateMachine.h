@@ -10,11 +10,12 @@ class HotFireStateMachine : public InterfacingStateMachine
     HotFireStateMachine(Interface *anInterface);
 
     // External events taken by this state machine
-    void ReadyEXT();
+    void PurgeEXT();
     void StartFillingEXT();
     void AbortEXT();
     void StopFillingEXT();
     void IgnitionEXT();
+    void IgnitionBurnEXT();
     void FinalVentingEXT();
     void DoneEXT();
     void ServoControlEXT();
@@ -36,11 +37,12 @@ class HotFireStateMachine : public InterfacingStateMachine
     {
         ST_INIT,
         ST_WAIT_FOR_INIT,
-        ST_WAIT_FOR_READY,
-        ST_WAIT_FOR_FILLING,
+        ST_WAIT_FOR_PURGE,
+        ST_PURGE,
         ST_FILLING,
         ST_WAIT_FOR_IGNITION,
         ST_IGNITION,
+        ST_IGNITION_BURN,
         ST_FULL_BURN,
         ST_FINAL_VENTING,
         ST_DONE,
@@ -59,13 +61,13 @@ class HotFireStateMachine : public InterfacingStateMachine
     STATE_DECLARE(HotFireStateMachine, WaitForInit, UOSMData)
     EXIT_DECLARE(HotFireStateMachine, ExitWaitForInit)
     // WaitForReady
-    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForReady, UOSMData)
-    STATE_DECLARE(HotFireStateMachine, WaitForReady, UOSMData)
-    EXIT_DECLARE(HotFireStateMachine, ExitWaitForReady)
+    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForPurge, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, WaitForPurge, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitWaitForPurge)
     // WaitForFilling
-    ENTRY_DECLARE(HotFireStateMachine, EnterWaitForFilling, UOSMData)
-    STATE_DECLARE(HotFireStateMachine, WaitForFilling, UOSMData)
-    EXIT_DECLARE(HotFireStateMachine, ExitWaitForFilling)
+    ENTRY_DECLARE(HotFireStateMachine, EnterPurge, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, Purge, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitPurge)
     // Filling
     ENTRY_DECLARE(HotFireStateMachine, EnterFilling, UOSMData)
     STATE_DECLARE(HotFireStateMachine, Filling, UOSMData)
@@ -78,6 +80,10 @@ class HotFireStateMachine : public InterfacingStateMachine
     ENTRY_DECLARE(HotFireStateMachine, EnterIgnition, UOSMData)
     STATE_DECLARE(HotFireStateMachine, Ignition, UOSMData)
     EXIT_DECLARE(HotFireStateMachine, ExitIgnition)
+    // IgnitionBurn
+    ENTRY_DECLARE(HotFireStateMachine, EnterIgnitionBurn, UOSMData)
+    STATE_DECLARE(HotFireStateMachine, IgnitionBurn, UOSMData)
+    EXIT_DECLARE(HotFireStateMachine, ExitIgnitionBurn)
     // FullBurn
     ENTRY_DECLARE(HotFireStateMachine, EnterFullBurn, UOSMData)
     STATE_DECLARE(HotFireStateMachine, FullBurn, UOSMData)
@@ -102,11 +108,12 @@ class HotFireStateMachine : public InterfacingStateMachine
     BEGIN_STATE_MAP_EX
     STATE_MAP_ENTRY_ALL_EX(&Init, nullptr, nullptr, &ExitInit)
     STATE_MAP_ENTRY_ALL_EX(&WaitForInit, nullptr, &EnterWaitForInit, &ExitWaitForInit)
-    STATE_MAP_ENTRY_ALL_EX(&WaitForReady, nullptr, &EnterWaitForReady, &ExitWaitForReady)
-    STATE_MAP_ENTRY_ALL_EX(&WaitForFilling, nullptr, &EnterWaitForFilling, &ExitWaitForFilling)
+    STATE_MAP_ENTRY_ALL_EX(&WaitForPurge, nullptr, &EnterWaitForPurge, &ExitWaitForPurge)
+    STATE_MAP_ENTRY_ALL_EX(&Purge, nullptr, &EnterPurge, &ExitPurge)
     STATE_MAP_ENTRY_ALL_EX(&Filling, nullptr, &EnterFilling, &ExitFilling)
     STATE_MAP_ENTRY_ALL_EX(&WaitForIgnition, nullptr, &EnterWaitForIgnition, &ExitWaitForIgnition)
     STATE_MAP_ENTRY_ALL_EX(&Ignition, nullptr, &EnterIgnition, &ExitIgnition)
+    STATE_MAP_ENTRY_ALL_EX(&IgnitionBurn, nullptr, &EnterIgnitionBurn, &ExitIgnitionBurn)
     STATE_MAP_ENTRY_ALL_EX(&FullBurn, nullptr, &EnterFullBurn, &ExitFullBurn)
     STATE_MAP_ENTRY_ALL_EX(&FinalVenting, nullptr, &EnterFinalVenting, &ExitFinalVenting)
     STATE_MAP_ENTRY_ALL_EX(&Done, nullptr, &EnterDone, nullptr)
