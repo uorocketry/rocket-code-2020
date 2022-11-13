@@ -4,6 +4,7 @@
 
 #if USE_GPIO == 1
 
+#include "IO/IO.h"
 #include "Output.h"
 #include "arduino/DCMotorState.h"
 
