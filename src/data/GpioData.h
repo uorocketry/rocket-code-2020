@@ -16,4 +16,5 @@ struct GpioState
     std::map<std::string, int> digitalStateMap;
     std::map<std::string, int> pwmStateMap;
     std::map<std::string, DCMotorState> dcMotorStateMap;
+    uint32_t loadCellState;
 };

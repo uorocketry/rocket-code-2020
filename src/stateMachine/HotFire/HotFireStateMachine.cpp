@@ -22,22 +22,23 @@ HotFireStateMachine::HotFireStateMachine(Interface *anInterface) : InterfacingSt
 }
 
 // StartFilling external event
-void HotFireStateMachine::ReadyEXT()
+void HotFireStateMachine::PurgeEXT()
 {
-    BEGIN_TRANSITION_MAP                          // - Current State -
-    TRANSITION_MAP_ENTRY(EVENT_IGNORED)           // ST_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(ST_WAIT_FOR_FILLING) // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_WAIT_FOR_IGNITION
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_IGNITION
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FULL_BURN
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_FINAL_VENTING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_DONE
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_ABORT_BURN
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)       // ST_SERVO_CONTROL
+    BEGIN_TRANSITION_MAP                    // - Current State -
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(ST_PURGE)      // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(ST_PURGE)      // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_SERVO_CONTROL
         END_TRANSITION_MAP
 }
 
@@ -47,11 +48,12 @@ void HotFireStateMachine::StartFillingEXT()
     BEGIN_TRANSITION_MAP                    // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_PURGE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(ST_FILLING)    // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
@@ -67,11 +69,12 @@ void HotFireStateMachine::AbortEXT()
     BEGIN_TRANSITION_MAP                       // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_PURGE
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_ABORT_FILLING) // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(ST_ABORT_BURN)    // ST_IGNITION
+        TRANSITION_MAP_ENTRY(ST_ABORT_BURN)    // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(ST_ABORT_BURN)    // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
@@ -87,11 +90,12 @@ void HotFireStateMachine::StopFillingEXT()
     BEGIN_TRANSITION_MAP                           // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)            // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_PURGE
         TRANSITION_MAP_ENTRY(ST_WAIT_FOR_IGNITION) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_DONE
@@ -107,11 +111,12 @@ void HotFireStateMachine::IgnitionEXT()
     BEGIN_TRANSITION_MAP                    // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_PURGE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(ST_IGNITION)   // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
@@ -121,17 +126,39 @@ void HotFireStateMachine::IgnitionEXT()
         END_TRANSITION_MAP
 }
 
+// IgnitionBurn external event
+void HotFireStateMachine::IgnitionBurnEXT()
+{
+    BEGIN_TRANSITION_MAP                       // - Current State -
+    TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_IGNITION
+        TRANSITION_MAP_ENTRY(ST_IGNITION_BURN) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FULL_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_ABORT_BURN
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_SERVO_CONTROL
+        END_TRANSITION_MAP
+}
+
 // FinalVenting external event
 void HotFireStateMachine::FinalVentingEXT()
 {
     BEGIN_TRANSITION_MAP                       // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)        // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_PURGE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(ST_FINAL_VENTING) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED)    // ST_DONE
@@ -147,11 +174,12 @@ void HotFireStateMachine::DoneEXT()
     BEGIN_TRANSITION_MAP                    // - Current State -
     TRANSITION_MAP_ENTRY(EVENT_IGNORED)     // ST_INIT
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_INIT
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_READY
-        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_FILLING
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_PURGE
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_PURGE
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FILLING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_WAIT_FOR_IGNITION
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION
+        TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_IGNITION_BURN
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_FULL_BURN
         TRANSITION_MAP_ENTRY(ST_DONE)       // ST_FINAL_VENTING
         TRANSITION_MAP_ENTRY(EVENT_IGNORED) // ST_DONE
@@ -167,11 +195,12 @@ void HotFireStateMachine::ServoControlEXT() {
     BEGIN_TRANSITION_MAP                       // - Current State -
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_INIT
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_INIT
-    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_READY
-    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_FILLING
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_PURGE
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_PURGE
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FILLING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_WAIT_FOR_IGNITION
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION
+    TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_IGNITION_BURN
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FULL_BURN
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_FINAL_VENTING
     TRANSITION_MAP_ENTRY(ST_SERVO_CONTROL)     // ST_DONE
@@ -214,6 +243,10 @@ STATE_DEFINE(HotFireStateMachine, Init, UOSMData)
     interface->createNewGpioPwmOutput(FILL_NAME, FILL_PIN, FILL_SAFE, FILL_SOFTPWM);
 #endif
 
+#if USE_PURGE
+    interface->createNewGpioPwmOutput(PURGE_NAME, PURGE_PIN, PURGE_SAFE, PURGE_SOFTPWM);
+#endif
+
 #endif
     NoEventData eventData;
     InternalEvent(ST_WAIT_FOR_INIT, eventData);
@@ -236,7 +269,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForInit, UOSMData)
     NoEventData eventData;
     if (interfaceData->isInitialized())
     {
-        InternalEvent(ST_WAIT_FOR_READY, eventData);
+        InternalEvent(ST_WAIT_FOR_PURGE, eventData);
     }
 
     // showInfo(interfaceData);
@@ -249,35 +282,64 @@ EXIT_DEFINE(HotFireStateMachine, ExitWaitForInit)
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForInit");
 }
 
-ENTRY_DEFINE(HotFireStateMachine, EnterWaitForReady, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterWaitForPurge, UOSMData)
 {
-    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForReady");
-    enterNewState(ST_WAIT_FOR_READY);
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForPurge");
+    enterNewState(ST_WAIT_FOR_PURGE);
 }
 
-STATE_DEFINE(HotFireStateMachine, WaitForReady, UOSMData)
+STATE_DEFINE(HotFireStateMachine, WaitForPurge, UOSMData)
 {
-    interfaceData = updateInterface(&data, ST_WAIT_FOR_READY);
+    interfaceData = updateInterface(&data, ST_WAIT_FOR_PURGE);
+
+#if USE_GPIO == 1
+    GpioData &gpioData = interfaceData->gpioData;
+
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
+#if USE_PWM_MAIN
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
+#endif
+
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+#endif
+
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_CLOSE});
+#endif
+
+#endif
 
     detectExternEvent(interfaceData);
 
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(HotFireStateMachine, ExitWaitForReady)
+EXIT_DEFINE(HotFireStateMachine, ExitWaitForPurge)
 {
-    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForReady");
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForPurge");
 }
 
-ENTRY_DEFINE(HotFireStateMachine, EnterWaitForFilling, UOSMData)
+ENTRY_DEFINE(HotFireStateMachine, EnterPurge, UOSMData)
 {
-    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForFilling");
-    enterNewState(ST_WAIT_FOR_FILLING);
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterWaitForPurge");
+    enterNewState(ST_PURGE);
 }
 
-STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
+STATE_DEFINE(HotFireStateMachine, Purge, UOSMData)
 {
-    interfaceData = updateInterface(&data, ST_WAIT_FOR_FILLING);
+    interfaceData = updateInterface(&data, ST_PURGE);
 
 #if USE_GPIO == 1
     GpioData &gpioData = interfaceData->gpioData;
@@ -291,7 +353,7 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -302,6 +364,10 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
 
     detectExternEvent(interfaceData);
@@ -309,9 +375,9 @@ STATE_DEFINE(HotFireStateMachine, WaitForFilling, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(HotFireStateMachine, ExitWaitForFilling)
+EXIT_DEFINE(HotFireStateMachine, ExitPurge)
 {
-    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitWaitForFilling");
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitPurge");
 }
 
 ENTRY_DEFINE(HotFireStateMachine, EnterFilling, UOSMData)
@@ -345,6 +411,10 @@ STATE_DEFINE(HotFireStateMachine, Filling, UOSMData)
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_OPEN});
+#endif
+
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -392,6 +462,10 @@ STATE_DEFINE(HotFireStateMachine, WaitForIgnition, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
 
     detectExternEvent(interfaceData);
@@ -426,7 +500,7 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_IGNITION});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
 #endif
 
 #if USE_PWM_PINHOLE
@@ -437,6 +511,59 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
+#endif
+    EventData eventData;
+    detectExternEvent(interfaceData);
+
+    interface->updateOutputs(interfaceData);
+}
+
+EXIT_DEFINE(HotFireStateMachine, ExitIgnition)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
+}
+
+ENTRY_DEFINE(HotFireStateMachine, EnterIgnitionBurn, UOSMData)
+{
+    SPDLOG_LOGGER_INFO(logger, "HotFireSM::EnterIgnition");
+    enterNewState(ST_IGNITION_BURN);
+}
+
+STATE_DEFINE(HotFireStateMachine, IgnitionBurn, UOSMData)
+{
+    interfaceData = updateInterface(&data, ST_IGNITION_BURN);
+
+#if USE_GPIO
+    GpioData &gpioData = interfaceData->gpioData;
+
+#if USE_VENT
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+#endif
+
+#if USE_IGNITER
+    gpioData.digitalOutputMap.insert({IGNITER_NAME, IGNITER_OFF});
+#endif
+
+#if USE_PWM_MAIN
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_IGNITION_BURN});
+#endif
+
+#if USE_PWM_PINHOLE
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
+#endif
+
+#if USE_PWM_FILL
+    gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+#endif
+
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
     EventData eventData;
     detectExternEvent(interfaceData);
@@ -445,7 +572,7 @@ STATE_DEFINE(HotFireStateMachine, Ignition, UOSMData)
     interface->updateOutputs(interfaceData);
 }
 
-EXIT_DEFINE(HotFireStateMachine, ExitIgnition)
+EXIT_DEFINE(HotFireStateMachine, ExitIgnitionBurn)
 {
     SPDLOG_LOGGER_INFO(logger, "HotFireSM::ExitIgnition");
 }
@@ -483,6 +610,10 @@ STATE_DEFINE(HotFireStateMachine, FullBurn, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
 
     detectExternEvent(interfaceData);
@@ -509,7 +640,7 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
 #endif
 
 #if USE_IGNITER
@@ -517,15 +648,19 @@ STATE_DEFINE(HotFireStateMachine, FinalVenting, UOSMData)
 #endif
 
 #if USE_PWM_MAIN
-    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_CLOSE});
+    gpioData.dcOutputMap.insert({MAIN_NAME, MAIN_OPEN});
 #endif
 
 #if USE_PWM_PINHOLE
-    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_OPEN});
+    gpioData.pwmOutputMap.insert({PINHOLE_NAME, PINHOLE_CLOSE});
 #endif
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+#endif
+
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
 #endif
 
 #endif
@@ -555,7 +690,7 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
     GpioData &gpioData = interfaceData->gpioData;
 
 #if USE_VENT
-    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_CLOSE});
+    gpioData.digitalOutputMap.insert({VENT_NAME, VENT_OPEN});
 #endif
 
 #if USE_IGNITER
@@ -572,6 +707,10 @@ STATE_DEFINE(HotFireStateMachine, Done, UOSMData)
 
 #if USE_PWM_FILL
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
+#endif
+
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_CLOSE});
 #endif
 
 #endif
@@ -614,6 +753,10 @@ STATE_DEFINE(HotFireStateMachine, AbortFilling, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
 
     detectExternEvent(interfaceData);
@@ -654,6 +797,10 @@ STATE_DEFINE(HotFireStateMachine, AbortBurn, UOSMData)
     gpioData.pwmOutputMap.insert({FILL_NAME, FILL_CLOSE});
 #endif
 
+#if USE_PURGE
+    gpioData.pwmOutputMap.insert({PURGE_NAME, PURGE_OPEN});
+#endif
+
 #endif
 
     detectExternEvent(interfaceData);
@@ -687,13 +834,14 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
          * whether the valves are open/closed.
          * A '1' means to open the valve and a '0' to close it.
          *
-         * 0 0 0 0 0 0
-         * | | | | | ^--------- Enable bit
-         * | | | | ^----------- USE_VENT
-         * | | | ^------------- USE_IGNITER
-         * | | ^--------------- USE_PWM_MAIN
-         * | ^----------------- USE_PWM_PINHOLE
-         * ^------------------- USE_PWM_FILL
+         * 0 0 0 0 0 0 0
+         * | | | | | | ^--------- Enable bit
+         * | | | | | ^----------- USE_VENT
+         * | | | | ^------------- USE_IGNITER
+         * | | | ^--------------- USE_PWM_MAIN
+         * | | ^----------------- USE_PWM_PINHOLE
+         * | ^------------------- USE_PWM_FILL
+         * ^--------------------- USE_PWM_PURGE
          */
 
         bool enabled = eventNbr > 0 && (eventNbr & EVENT_ENABLE_MASK);
@@ -747,6 +895,15 @@ STATE_DEFINE(HotFireStateMachine, ServoControl, UOSMData)
                 gpioData.pwmOutputMap.insert({FILL_NAME, open ? FILL_OPEN : FILL_CLOSE});
 
                 logValveStatus(FILL_NAME, open);
+            }
+#endif
+#if USE_PURGE == 1
+            {
+                bool open = (eventNbr & PURGE_EVENT_ENABLE_MASK) > 0;
+
+                gpioData.pwmOutputMap.insert({PURGE_NAME, open ? PURGE_OPEN : PURGE_CLOSE});
+
+                logValveStatus(PURGE_NAME, open);
             }
 #endif
         }
@@ -820,7 +977,7 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
         ServoControlEXT();
         break;
     case 7:
-        ReadyEXT();
+        PurgeEXT();
         break;
     case 8:
         heaterOn = true;
@@ -830,6 +987,9 @@ void HotFireStateMachine::detectExternEvent(const std::shared_ptr<StateData> &da
         break;
     case 10:
         interface->restartLogger();
+        break;
+    case 11:
+        IgnitionBurnEXT();
         break;
     default:
         break;

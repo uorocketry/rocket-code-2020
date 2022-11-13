@@ -16,13 +16,15 @@
 
     #define USE_PWM_FILL 1
 
+    #define USE_PURGE 1
+
     #define USE_HEATER 1
 
     #define EVENT_ENABLE_MASK 0b1
 
     #if USE_VENT
         #define VENT_NAME "VENT"
-        #define VENT_PIN 8
+        #define VENT_PIN 13
         #define VENT_OPEN 1
         #define VENT_CLOSE 0
         #define VENT_SAFE 1
@@ -32,8 +34,8 @@
     #if USE_IGNITER
         #define IGNITER_NAME "IGNITER"
         #define IGNITER_PIN 12
-        #define IGNITER_ON 1
-        #define IGNITER_OFF 0
+        #define IGNITER_ON 0
+        #define IGNITER_OFF 1
         #define IGNITER_EVENT_ENABLE_MASK 0b100
     #endif
 
@@ -46,7 +48,7 @@
         #define MAIN_POTENTIOMETER_PIN 0
         #define MAIN_MOTOR_POWER 255
         #define MAIN_OPEN 0
-        #define MAIN_IGNITION 400
+        #define MAIN_IGNITION_BURN 400
         #define MAIN_CLOSE 1023
         #define MAIN_EVENT_ENABLE_MASK 0b1000
     #endif
@@ -69,6 +71,16 @@
         #define FILL_SAFE 180
         #define FILL_EVENT_ENABLE_MASK 0b100000
         #define FILL_SOFTPWM true
+    #endif
+
+    #if USE_PURGE
+        #define PURGE_NAME "PURGE"
+        #define PURGE_PIN 3
+        #define PURGE_OPEN 180
+        #define PURGE_CLOSE 0
+        #define PURGE_SAFE 0
+        #define PURGE_EVENT_ENABLE_MASK 0b1000000
+        #define PURGE_SOFTPWM true
     #endif
 
     #if USE_HEATER

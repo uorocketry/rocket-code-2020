@@ -25,6 +25,7 @@ class ArduinoProxy : IO
     bool getDigitalState(int pin);
     int getServoState(int pin);
     DCMotorState getDCMotorState(int forwardPin, int reversePin);
+    uint32_t getLoadCellState();
 
     ArduinoProxy(ArduinoProxy const &) = delete;
     void operator=(ArduinoProxy const &) = delete;
@@ -33,6 +34,7 @@ class ArduinoProxy : IO
     std::map<unsigned int, std::pair<bool, std::chrono::time_point<std::chrono::steady_clock>>> digitalStates;
     std::map<unsigned int, std::pair<int, std::chrono::time_point<std::chrono::steady_clock>>> servoStates;
     std::map<std::pair<unsigned int, unsigned int>, DCMotorState> dcMotorStates;
+    std::pair<uint32_t, std::chrono::time_point<std::chrono::steady_clock>> loadCellState;
     std::mutex stateMutex;
 
     int fd = 0;
